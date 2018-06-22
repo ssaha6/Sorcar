@@ -1,4 +1,3 @@
-#!/bin/bash
 
 # call using: sh run.sh "-a sorcar -f -t -r" "sorcar_f_t_r.txt"  
 SORCAR_OPTION=$1
@@ -62,7 +61,7 @@ date
 echo "OUTPUT=$OUTPUT"
 
 
-{  time  /usr/bin/timeout  $TIMEOUT ./Boogie.exe  /nologo /env:2 /typeEncoding:m  /mv:-  /enhancedErrorMessages:1  /z3exe:$PREFIX/../z3/bin/z3  /useArrayTheory /prover:SMTLib /noinfer /contractInfer /trace  /mlHoudini:sorcar /learnerOptions:"$SORCAR_OPTION"  $BOOGIE_OPT $PRELUDEFILE $SOURCEDIR/$file ;
+{  time  timeout  $TIMEOUT ./Boogie.exe  /nologo /env:2 /typeEncoding:m  /mv:-  /enhancedErrorMessages:1  /z3exe:$PREFIX/../z3/bin/z3  /useArrayTheory /prover:SMTLib /noinfer /contractInfer /trace  /mlHoudini:sorcar /learnerOptions:"$SORCAR_OPTION"  $BOOGIE_OPT $PRELUDEFILE $SOURCEDIR/$file ;
 }
 
 
