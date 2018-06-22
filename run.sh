@@ -4,15 +4,16 @@
 SORCAR_OPTION=$1
 OUTPUT_FILE=$2
 
-cd /home/gv/gv
+PREFIX=/home/gv/gv
+cd $PREFIX
 
-BOOGIE_DIR="boogie_horn_sorcar_false/Binaries/"
+BOOGIE_DIR="$PREFIX/boogie_horn_sorcar_false/Binaries/"
 # BOOGIE_DIR="boogie_lables/Binaries/"
 
 
 #GPUverify sources
-SOURCELIST="../../benchmarks/BenchmarksCompiled/inv_ice2files"
-SOURCEDIR="../../benchmarks/BenchmarksCompiled"
+SOURCELIST="$PREFIX/benchmarks/BenchmarksCompiled/inv_ice2files"
+SOURCEDIR="$PREFIX/benchmarks/BenchmarksCompiled"
 # PRELUDEFILE=""
 
 
@@ -46,7 +47,7 @@ BOOGIE_OPT+=" /proverOpt:OPTIMIZE_FOR_BV=true "
 
 # func() {
 
-OUTPUT="../../results/variants/$OUTPUT_FILE"
+OUTPUT="$PREFIX/results/variants/$OUTPUT_FILE"
 TIMEOUT="600s" 
 
 
@@ -61,7 +62,7 @@ date
 echo "OUTPUT=$OUTPUT"
 
 
-{  time  /usr/bin/timeout  $TIMEOUT ./Boogie.exe  /nologo /env:2 /typeEncoding:m  /mv:-  /enhancedErrorMessages:1  /z3exe:../../../z3/z3/build/z3.exe  /useArrayTheory /prover:SMTLib /noinfer /contractInfer /trace  /mlHoudini:sorcar /learnerOptions:"$SORCAR_OPTION"  $BOOGIE_OPT $PRELUDEFILE $SOURCEDIR/$file ;
+{  time  /usr/bin/timeout  $TIMEOUT ./Boogie.exe  /nologo /env:2 /typeEncoding:m  /mv:-  /enhancedErrorMessages:1  /z3exe:$PREFIX/../z3/bin/z3  /useArrayTheory /prover:SMTLib /noinfer /contractInfer /trace  /mlHoudini:sorcar /learnerOptions:"$SORCAR_OPTION"  $BOOGIE_OPT $PRELUDEFILE $SOURCEDIR/$file ;
 }
 
 
