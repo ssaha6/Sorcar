@@ -4,7 +4,7 @@
 SORCAR_OPTION=$1
 OUTPUT_FILE=$2
 
-
+cd /home/gv/gv
 
 BOOGIE_DIR="boogie_horn_sorcar_false/Binaries/"
 # BOOGIE_DIR="boogie_lables/Binaries/"
