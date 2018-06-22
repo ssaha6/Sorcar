@@ -62,17 +62,17 @@ date
 echo "OUTPUT=$OUTPUT"
 
 
-{  time  /usr/bin/timeout   $TIMEOUT ./Boogie.exe  /nologo /env:2 /typeEncoding:m  /mv:-  /enhancedErrorMessages:1  /z3exe:$PREFIX/../z3/bin/z3  /useArrayTheory /prover:SMTLib /noinfer /contractInfer /trace  /mlHoudini:sorcar /learnerOptions:"$SORCAR_OPTION"  $BOOGIE_OPT $PRELUDEFILE $SOURCEDIR/$file ;
+{  time  /usr/bin/timeout   $TIMEOUT mono ./Boogie.exe  /nologo /env:2 /typeEncoding:m  /mv:-  /enhancedErrorMessages:1  /z3exe:$PREFIX/../z3/bin/z3  /useArrayTheory /prover:SMTLib /noinfer /contractInfer /trace  /mlHoudini:sorcar /learnerOptions:"$SORCAR_OPTION"  $BOOGIE_OPT $PRELUDEFILE $SOURCEDIR/$file ;
 }
 
 
     echo "FILE:$file"
         
-    ps -aeW | grep z3.exe       | awk '{print $1}' | xargs --no-run-if-empty -I {} taskkill /F /pid {}
-    ps -aeW | grep Boogie.exe   | awk '{print $1}' | xargs --no-run-if-empty -I {} taskkill /F /pid {}
-    ps -aeW | grep timeout      | awk '{print $1}' | xargs --no-run-if-empty -I {} taskkill /F /pid {}
-    ps -aeW | grep sorcar       | awk '{print $1}' | xargs --no-run-if-empty -I {} taskkill /F /pid {}
-
+    ps -aux | grep z3           | awk '{print $2}' | xargs --no-run-if-empty -I {} kill -9 {}
+    ps -aux | grep Boogie       | awk '{print $2}' | xargs --no-run-if-empty -I {} kill -9 {}
+    ps -aux | grep timeout      | awk '{print $2}' | xargs --no-run-if-empty -I {} kill -9 {}
+    ps -aux | grep sorcar       | awk '{print $2}' | xargs --no-run-if-empty -I {} kill -9 {}
+    ps -aux | grep mono         | awk '{print $2}' | xargs --no-run-if-empty -I {} kill -9 {}  
 
 done 2>&1 | tee $OUTPUT
 
