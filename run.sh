@@ -4,7 +4,7 @@
 SORCAR_OPTION=$1
 OUTPUT_FILE=$2
 
-PREFIX=/home/gv/gv
+PREFIX="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $PREFIX
 
 BOOGIE_DIR="$PREFIX/boogie_horn_sorcar_false/Binaries/"
