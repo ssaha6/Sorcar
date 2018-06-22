@@ -303,7 +303,7 @@ namespace Microsoft.Boogie.Houdini
             }
 
             // Initialize the invariant function with "true".
-            model = Expr.True;
+            model = Expr.False;
             
         }
 
