@@ -1,0 +1,5 @@
+
+for line in $(cat cource_files); do echo  ""; echo "" ; echo ""; echo $line ; param=`head -n2  $line | tail -1 | cut -c 3-` ; all_param=" --stop-at-bpl  --math-int --time --timeout=0 --keep-temps --verbose --infer-info  $param" ; echo ${all_param}  ;  { time timeout 30s  gpuverify $all_param $line  ; } 2>&1 ;  echo $line ; done
+
+
+--stop-at-bpl  --math-int

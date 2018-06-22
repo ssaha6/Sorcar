@@ -1,0 +1,399 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [bv32]bv32, y : bv32) returns (z : bv32, A : [bv32]bv32);
+procedure _ATOMIC_OP8(x : [bv32]bv8, y : bv32) returns (z : bv8, A : [bv32]bv8);
+var {:source_name "g_idata"} {:global} $$g_idata : [bv32]bv32;
+axiom {:array_info "$$g_idata"} {:global} {:elem_width 32} {:source_name "g_idata"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$g_idata : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$g_idata : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_idata : bool;
+
+var {:source_name "g_odata"} {:global} $$g_odata : [bv32]bv32;
+axiom {:array_info "$$g_odata"} {:global} {:elem_width 32} {:source_name "g_odata"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$g_odata : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$g_odata : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_odata : bool;
+
+var {:source_name "sdata"} {:group_shared} $$sdata : [bv32]bv32;
+axiom {:array_info "$$sdata"} {:group_shared} {:elem_width 32} {:source_name "sdata"} {:source_elem_width 32} {:source_dimensions "0"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$sdata : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$sdata : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$sdata : bool;
+
+var {:source_name "retirementCount"} {:global} $$retirementCount : [bv32]bv32;
+axiom {:array_info "$$retirementCount"} {:global} {:elem_width 32} {:source_name "retirementCount"} {:source_elem_width 32} {:source_dimensions "1"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$retirementCount : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$retirementCount : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$retirementCount : bool;
+
+var {:source_name "amLast"} {:group_shared} $$_ZZ16reduceSinglePassILj128ELb1EEvPKfPfjE6amLast : [bv32]bv8;
+axiom {:array_info "$$_ZZ16reduceSinglePassILj128ELb1EEvPKfPfjE6amLast"} {:group_shared} {:elem_width 8} {:source_name "amLast"} {:source_elem_width 8} {:source_dimensions "1"} true;
+var {:race_checking} {:group_shared} {:elem_width 8} {:source_elem_width 8} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ16reduceSinglePassILj128ELb1EEvPKfPfjE6amLast : bool;
+var {:race_checking} {:group_shared} {:elem_width 8} {:source_elem_width 8} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ16reduceSinglePassILj128ELb1EEvPKfPfjE6amLast : bool;
+var {:race_checking} {:group_shared} {:elem_width 8} {:source_elem_width 8} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ16reduceSinglePassILj128ELb1EEvPKfPfjE6amLast : bool;
+
+var {:source_name "smem"} {:group_shared} $$smem : [bv32]bv32;
+axiom {:array_info "$$smem"} {:group_shared} {:elem_width 32} {:source_name "smem"} {:source_elem_width 32} {:source_dimensions "0"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$smem : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$smem : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$smem : bool;
+
+const _WATCHED_OFFSET : bv32;
+const {:group_id_x} group_id_x : bv32;
+const {:group_size_x} group_size_x : bv32;
+const {:group_size_y} group_size_y : bv32;
+const {:group_size_z} group_size_z : bv32;
+const {:local_id_x} local_id_x : bv32;
+const {:num_groups_x} num_groups_x : bv32;
+const {:num_groups_y} num_groups_y : bv32;
+const {:num_groups_z} num_groups_z : bv32;
+function FADD32(bv32, bv32) : bv32;
+function {:bvbuiltin "bvadd"} BV32_ADD(bv32, bv32) : bv32;
+function {:bvbuiltin "bvmul"} BV32_MUL(bv32, bv32) : bv32;
+function {:bvbuiltin "bvsub"} BV32_SUB(bv32, bv32) : bv32;
+function {:bvbuiltin "bvugt"} BV32_UGT(bv32, bv32) : bool;
+function {:bvbuiltin "bvult"} BV32_ULT(bv32, bv32) : bool;
+function {:bvbuiltin "zero_extend 7"} BV1_ZEXT8(bv1) : bv8;
+procedure {:source_name "reduceSinglePass<128, true>"} {:kernel} $_Z16reduceSinglePassILj128ELb1EEvPKfPfj($n:bv32)
+{
+  var $i.i.0:bv32;
+  var $mySum.i.0:bv32;
+  var $mySum.addr.i.i.0:bv32;
+  var $i.0:bv32;
+  var $mySum.0:bv32;
+  var $mySum.addr.i.0:bv32;
+  var v11:bv32;
+  var v0:bool;
+  var v9:bv32;
+  var v4:bv32;
+  var v2:bv32;
+  var v1:bv32;
+  var v7:bv32;
+  var v5:bv32;
+  var v3:bool;
+  var v8:bv32;
+  var v6:bool;
+  var v10:bv32;
+  var v12:bv32;
+  var v14:bv32;
+  var v23:bv8;
+  var v26:bv32;
+  var v28:bv32;
+  var v39:bv32;
+  var v35:bv32;
+  var v33:bv32;
+  var v37:bv32;
+  var v31:bv32;
+  var v43:bv32;
+  var v41:bv32;
+  var v19:bv32;
+  var v15:bv32;
+  var v13:bv32;
+  var v17:bv32;
+  var v16:bv32;
+  var v18:bool;
+  var v20:bool;
+  var v21:bool;
+  var v24:bool;
+  var v22:bv32;
+  var v25:bool;
+  var v27:bool;
+  var v29:bv32;
+  var v32:bv32;
+  var v30:bool;
+  var v34:bv32;
+  var v36:bv32;
+  var v38:bv32;
+  var v40:bv32;
+  var v42:bool;
+$entry:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  $i.i.0, $mySum.i.0 := BV32_ADD(BV32_MUL(group_id_x, 256bv32), local_id_x), 0bv32;
+  goto $while.cond.i;
+$while.cond.i:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  v0 := BV32_ULT($i.i.0, $n);
+  goto $truebb, $falsebb;
+$while.body.i:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  v1 := $$g_idata[$i.i.0];
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  v2 := $$g_idata[BV32_ADD($i.i.0, 128bv32)];
+  $i.i.0, $mySum.i.0 := BV32_ADD($i.i.0, BV32_MUL(256bv32, num_groups_x)), FADD32(FADD32($mySum.i.0, v1), v2);
+  goto $while.cond.i;
+$while.end.i:
+  assert {:block_sourceloc} {:sourceloc_num 5} true;
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  $$sdata[local_id_x] := $mySum.i.0;
+  call {:sourceloc_num 7} $bugle_barrier(1bv1, 1bv1);
+  v3 := BV32_ULT(local_id_x, 64bv32);
+  goto $truebb0, $falsebb0;
+$if.then.i.i:
+  assert {:block_sourceloc} {:sourceloc_num 8} true;
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  v4 := $$sdata[BV32_ADD(local_id_x, 64bv32)];
+  v5 := FADD32($mySum.i.0, v4);
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  $$sdata[local_id_x] := v5;
+  $mySum.addr.i.i.0 := v5;
+  goto $if.end.i.i;
+$if.end.i.i:
+  assert {:block_sourceloc} {:sourceloc_num 11} true;
+  call {:sourceloc_num 12} $bugle_barrier(1bv1, 1bv1);
+  v6 := BV32_ULT(local_id_x, 32bv32);
+  goto $truebb1, $falsebb1;
+$if.then.5.i.i:
+  assert {:block_sourceloc} {:sourceloc_num 13} true;
+  assert {:sourceloc} {:sourceloc_num 14} true;
+  v7 := $$sdata[BV32_ADD(local_id_x, 32bv32)];
+  v8 := FADD32($mySum.addr.i.i.0, v7);
+  assert {:sourceloc} {:sourceloc_num 15} true;
+  $$sdata[local_id_x] := v8;
+  assert {:sourceloc} {:sourceloc_num 16} true;
+  v9 := $$sdata[BV32_ADD(local_id_x, 16bv32)];
+  v10 := FADD32(v8, v9);
+  assert {:sourceloc} {:sourceloc_num 17} true;
+  $$sdata[local_id_x] := v10;
+  assert {:sourceloc} {:sourceloc_num 18} true;
+  v11 := $$sdata[BV32_ADD(local_id_x, 8bv32)];
+  v12 := FADD32(v10, v11);
+  assert {:sourceloc} {:sourceloc_num 19} true;
+  $$sdata[local_id_x] := v12;
+  assert {:sourceloc} {:sourceloc_num 20} true;
+  v13 := $$sdata[BV32_ADD(local_id_x, 4bv32)];
+  v14 := FADD32(v12, v13);
+  assert {:sourceloc} {:sourceloc_num 21} true;
+  $$sdata[local_id_x] := v14;
+  assert {:sourceloc} {:sourceloc_num 22} true;
+  v15 := $$sdata[BV32_ADD(local_id_x, 2bv32)];
+  v16 := FADD32(v14, v15);
+  assert {:sourceloc} {:sourceloc_num 23} true;
+  $$sdata[local_id_x] := v16;
+  assert {:sourceloc} {:sourceloc_num 24} true;
+  v17 := $$sdata[BV32_ADD(local_id_x, 1bv32)];
+  assert {:sourceloc} {:sourceloc_num 25} true;
+  $$sdata[local_id_x] := FADD32(v16, v17);
+  goto $_ZL11reduceBlockILj128EEvPVffj.exit.i;
+$_ZL11reduceBlockILj128EEvPVffj.exit.i:
+  assert {:block_sourceloc} {:sourceloc_num 26} true;
+  v18 := local_id_x == 0bv32;
+  goto $truebb2, $falsebb2;
+$if.then.i:
+  assert {:block_sourceloc} {:sourceloc_num 27} true;
+  assert {:sourceloc} {:sourceloc_num 28} true;
+  v19 := $$sdata[0bv32];
+  assert {:sourceloc} {:sourceloc_num 29} true;
+  $$g_odata[group_id_x] := v19;
+  goto $_ZL12reduceBlocksILj128ELb1EEvPKfPfj.exit;
+$_ZL12reduceBlocksILj128ELb1EEvPKfPfj.exit:
+  assert {:block_sourceloc} {:sourceloc_num 30} true;
+  v20 := BV32_UGT(num_groups_x, 1bv32);
+  goto $truebb3, $falsebb3;
+$if.then:
+  assert {:block_sourceloc} {:sourceloc_num 31} true;
+  call {:sourceloc_num 32} $__threadfence();
+  v21 := local_id_x == 0bv32;
+  goto $truebb4, $falsebb4;
+$if.then.2:
+  assert {:block_sourceloc} {:sourceloc_num 33} true;
+  assert {:sourceloc} {:sourceloc_num 34} true;
+  call {:atomic} {:atomic_function "__atomicInc_unsigned_int"} {:arg1 num_groups_x} {:parts 1} {:part 1} v22, $$retirementCount := _ATOMIC_OP32($$retirementCount, 0bv32);
+  assert {:sourceloc} {:sourceloc_num 35} true;
+  $$_ZZ16reduceSinglePassILj128ELb1EEvPKfPfjE6amLast[0bv32] := BV1_ZEXT8((if v22 == BV32_SUB(num_groups_x, 1bv32) then 1bv1 else 0bv1));
+  goto $if.end;
+$if.end:
+  assert {:block_sourceloc} {:sourceloc_num 36} true;
+  call {:sourceloc_num 37} $bugle_barrier(1bv1, 1bv1);
+  assert {:sourceloc} {:sourceloc_num 38} true;
+  v23 := $$_ZZ16reduceSinglePassILj128ELb1EEvPKfPfjE6amLast[0bv32];
+  v24 := v23[1:0] == 1bv1;
+  goto $truebb5, $falsebb5;
+$if.then.4:
+  assert {:block_sourceloc} {:sourceloc_num 39} true;
+  $i.0, $mySum.0 := local_id_x, 0bv32;
+  goto $while.cond;
+$while.cond:
+  assert {:block_sourceloc} {:sourceloc_num 40} true;
+  v25 := BV32_ULT($i.0, num_groups_x);
+  goto $truebb6, $falsebb6;
+$while.body:
+  assert {:block_sourceloc} {:sourceloc_num 41} true;
+  assert {:sourceloc} {:sourceloc_num 42} true;
+  v26 := $$g_odata[$i.0];
+  $i.0, $mySum.0 := BV32_ADD($i.0, 128bv32), FADD32($mySum.0, v26);
+  goto $while.cond;
+$while.end:
+  assert {:block_sourceloc} {:sourceloc_num 43} true;
+  assert {:sourceloc} {:sourceloc_num 44} true;
+  $$smem[local_id_x] := $mySum.0;
+  call {:sourceloc_num 45} $bugle_barrier(1bv1, 1bv1);
+  v27 := BV32_ULT(local_id_x, 64bv32);
+  goto $truebb7, $falsebb7;
+$if.then.i.17:
+  assert {:block_sourceloc} {:sourceloc_num 46} true;
+  assert {:sourceloc} {:sourceloc_num 47} true;
+  v28 := $$smem[BV32_ADD(local_id_x, 64bv32)];
+  v29 := FADD32($mySum.0, v28);
+  assert {:sourceloc} {:sourceloc_num 48} true;
+  $$smem[local_id_x] := v29;
+  $mySum.addr.i.0 := v29;
+  goto $if.end.i;
+$if.end.i:
+  assert {:block_sourceloc} {:sourceloc_num 49} true;
+  call {:sourceloc_num 50} $bugle_barrier(1bv1, 1bv1);
+  v30 := BV32_ULT(local_id_x, 32bv32);
+  goto $truebb8, $falsebb8;
+$if.then.5.i:
+  assert {:block_sourceloc} {:sourceloc_num 51} true;
+  assert {:sourceloc} {:sourceloc_num 52} true;
+  v31 := $$smem[BV32_ADD(local_id_x, 32bv32)];
+  v32 := FADD32($mySum.addr.i.0, v31);
+  assert {:sourceloc} {:sourceloc_num 53} true;
+  $$smem[local_id_x] := v32;
+  assert {:sourceloc} {:sourceloc_num 54} true;
+  v33 := $$smem[BV32_ADD(local_id_x, 16bv32)];
+  v34 := FADD32(v32, v33);
+  assert {:sourceloc} {:sourceloc_num 55} true;
+  $$smem[local_id_x] := v34;
+  assert {:sourceloc} {:sourceloc_num 56} true;
+  v35 := $$smem[BV32_ADD(local_id_x, 8bv32)];
+  v36 := FADD32(v34, v35);
+  assert {:sourceloc} {:sourceloc_num 57} true;
+  $$smem[local_id_x] := v36;
+  assert {:sourceloc} {:sourceloc_num 58} true;
+  v37 := $$smem[BV32_ADD(local_id_x, 4bv32)];
+  v38 := FADD32(v36, v37);
+  assert {:sourceloc} {:sourceloc_num 59} true;
+  $$smem[local_id_x] := v38;
+  assert {:sourceloc} {:sourceloc_num 60} true;
+  v39 := $$smem[BV32_ADD(local_id_x, 2bv32)];
+  v40 := FADD32(v38, v39);
+  assert {:sourceloc} {:sourceloc_num 61} true;
+  $$smem[local_id_x] := v40;
+  assert {:sourceloc} {:sourceloc_num 62} true;
+  v41 := $$smem[BV32_ADD(local_id_x, 1bv32)];
+  assert {:sourceloc} {:sourceloc_num 63} true;
+  $$smem[local_id_x] := FADD32(v40, v41);
+  goto $_ZL11reduceBlockILj128EEvPVffj.exit;
+$_ZL11reduceBlockILj128EEvPVffj.exit:
+  assert {:block_sourceloc} {:sourceloc_num 64} true;
+  v42 := local_id_x == 0bv32;
+  goto $truebb9, $falsebb9;
+$if.then.8:
+  assert {:block_sourceloc} {:sourceloc_num 65} true;
+  assert {:sourceloc} {:sourceloc_num 66} true;
+  v43 := $$smem[0bv32];
+  assert {:sourceloc} {:sourceloc_num 67} true;
+  $$g_odata[0bv32] := v43;
+  assert {:sourceloc} {:sourceloc_num 68} true;
+  $$retirementCount[0bv32] := 0bv32;
+  goto $if.end.10;
+$if.end.10:
+  assert {:block_sourceloc} {:sourceloc_num 69} true;
+  goto $if.end.11;
+$if.end.11:
+  assert {:block_sourceloc} {:sourceloc_num 70} true;
+  goto $if.end.12;
+$if.end.12:
+  assert {:block_sourceloc} {:sourceloc_num 71} true;
+  return;
+$truebb:
+  assume {:partition} v0;
+  assert {:block_sourceloc} {:sourceloc_num 72} true;
+  goto $while.body.i;
+$falsebb:
+  assume {:partition} !v0;
+  assert {:block_sourceloc} {:sourceloc_num 73} true;
+  goto $while.end.i;
+$truebb0:
+  assume {:partition} v3;
+  assert {:block_sourceloc} {:sourceloc_num 74} true;
+  goto $if.then.i.i;
+$falsebb0:
+  assume {:partition} !v3;
+  assert {:block_sourceloc} {:sourceloc_num 75} true;
+  $mySum.addr.i.i.0 := $mySum.i.0;
+  goto $if.end.i.i;
+$truebb1:
+  assume {:partition} v6;
+  assert {:block_sourceloc} {:sourceloc_num 76} true;
+  goto $if.then.5.i.i;
+$falsebb1:
+  assume {:partition} !v6;
+  assert {:block_sourceloc} {:sourceloc_num 77} true;
+  goto $_ZL11reduceBlockILj128EEvPVffj.exit.i;
+$truebb2:
+  assume {:partition} v18;
+  assert {:block_sourceloc} {:sourceloc_num 78} true;
+  goto $if.then.i;
+$falsebb2:
+  assume {:partition} !v18;
+  assert {:block_sourceloc} {:sourceloc_num 79} true;
+  goto $_ZL12reduceBlocksILj128ELb1EEvPKfPfj.exit;
+$truebb3:
+  assume {:partition} v20;
+  assert {:block_sourceloc} {:sourceloc_num 80} true;
+  goto $if.then;
+$falsebb3:
+  assume {:partition} !v20;
+  assert {:block_sourceloc} {:sourceloc_num 81} true;
+  goto $if.end.12;
+$truebb4:
+  assume {:partition} v21;
+  assert {:block_sourceloc} {:sourceloc_num 82} true;
+  goto $if.then.2;
+$falsebb4:
+  assume {:partition} !v21;
+  assert {:block_sourceloc} {:sourceloc_num 83} true;
+  goto $if.end;
+$truebb5:
+  assume {:partition} v24;
+  assert {:block_sourceloc} {:sourceloc_num 84} true;
+  goto $if.then.4;
+$falsebb5:
+  assume {:partition} !v24;
+  assert {:block_sourceloc} {:sourceloc_num 85} true;
+  goto $if.end.11;
+$truebb6:
+  assume {:partition} v25;
+  assert {:block_sourceloc} {:sourceloc_num 86} true;
+  goto $while.body;
+$falsebb6:
+  assume {:partition} !v25;
+  assert {:block_sourceloc} {:sourceloc_num 87} true;
+  goto $while.end;
+$truebb7:
+  assume {:partition} v27;
+  assert {:block_sourceloc} {:sourceloc_num 88} true;
+  goto $if.then.i.17;
+$falsebb7:
+  assume {:partition} !v27;
+  assert {:block_sourceloc} {:sourceloc_num 89} true;
+  $mySum.addr.i.0 := $mySum.0;
+  goto $if.end.i;
+$truebb8:
+  assume {:partition} v30;
+  assert {:block_sourceloc} {:sourceloc_num 90} true;
+  goto $if.then.5.i;
+$falsebb8:
+  assume {:partition} !v30;
+  assert {:block_sourceloc} {:sourceloc_num 91} true;
+  goto $_ZL11reduceBlockILj128EEvPVffj.exit;
+$truebb9:
+  assume {:partition} v42;
+  assert {:block_sourceloc} {:sourceloc_num 92} true;
+  goto $if.then.8;
+$falsebb9:
+  assume {:partition} !v42;
+  assert {:block_sourceloc} {:sourceloc_num 93} true;
+  goto $if.end.10;
+}
+procedure {:source_name "__threadfence"} $__threadfence();
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:bv1, $1:bv1);
+axiom (if group_size_y == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if group_size_z == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_y == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_z == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if group_size_x == 128bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_x == 64bv32 then 1bv1 else 0bv1) != 0bv1;

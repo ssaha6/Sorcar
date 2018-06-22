@@ -1,0 +1,137 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [bv32]bv32, y : bv32) returns (z : bv32, A : [bv32]bv32);
+var {:source_name "graph"} {:global} $$graph : [bv32]bv32;
+axiom {:array_info "$$graph"} {:global} {:elem_width 32} {:source_name "graph"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$graph : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$graph : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$graph : bool;
+
+var {:source_name "primary_block_buffer"} {:group_shared} $$_ZZ32transitive_closure_stage1_kernelPjiE20primary_block_buffer : [bv32]bv32;
+axiom {:array_info "$$_ZZ32transitive_closure_stage1_kernelPjiE20primary_block_buffer"} {:group_shared} {:elem_width 32} {:source_name "primary_block_buffer"} {:source_elem_width 32} {:source_dimensions "8,8"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*,8"} _READ_HAS_OCCURRED_$$_ZZ32transitive_closure_stage1_kernelPjiE20primary_block_buffer : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*,8"} _WRITE_HAS_OCCURRED_$$_ZZ32transitive_closure_stage1_kernelPjiE20primary_block_buffer : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*,8"} _ATOMIC_HAS_OCCURRED_$$_ZZ32transitive_closure_stage1_kernelPjiE20primary_block_buffer : bool;
+
+const _WATCHED_OFFSET : bv32;
+const {:group_size_x} group_size_x : bv32;
+const {:group_size_y} group_size_y : bv32;
+const {:group_size_z} group_size_z : bv32;
+const {:local_id_x} local_id_x : bv32;
+const {:local_id_y} local_id_y : bv32;
+const {:num_groups_x} num_groups_x : bv32;
+const {:num_groups_y} num_groups_y : bv32;
+const {:num_groups_z} num_groups_z : bv32;
+function {:bvbuiltin "bvadd"} BV32_ADD(bv32, bv32) : bv32;
+function {:bvbuiltin "bvmul"} BV32_MUL(bv32, bv32) : bv32;
+function {:bvbuiltin "bvult"} BV32_ULT(bv32, bv32) : bool;
+procedure {:source_name "transitive_closure_stage1_kernel"} {:kernel} $_Z32transitive_closure_stage1_kernelPji($passnum:bv32)
+{
+  var $k.0:bv32;
+  var v5:bool;
+  var v0:bv32;
+  var v1:bv32;
+  var v3:bool;
+  var v6:bv32;
+  var v4:bv32;
+  var v2:bv32;
+  var v8:bv32;
+  var v9:bool;
+  var v7:bool;
+  var v10:bv32;
+$entry:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  v0 := BV32_ADD(BV32_MUL($passnum, 8bv32), local_id_y);
+  v1 := BV32_ADD(BV32_MUL($passnum, 8bv32), local_id_x);
+  assert {:sourceloc} {:sourceloc_num 1} true;
+  v2 := $$graph[BV32_ADD(BV32_MUL(v0, 64bv32), v1)];
+  assert {:sourceloc} {:sourceloc_num 2} true;
+  $$_ZZ32transitive_closure_stage1_kernelPjiE20primary_block_buffer[BV32_ADD(BV32_MUL(local_id_y, 8bv32), local_id_x)] := v2;
+  call {:sourceloc_num 3} $bugle_barrier(1bv1, 1bv1);
+  $k.0 := 0bv32;
+  goto $for.cond;
+$for.cond:
+  assert {:block_sourceloc} {:sourceloc_num 4} true;
+  v3 := BV32_ULT($k.0, 8bv32);
+  goto $truebb, $falsebb;
+$for.body:
+  assert {:block_sourceloc} {:sourceloc_num 5} true;
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  v4 := $$_ZZ32transitive_closure_stage1_kernelPjiE20primary_block_buffer[BV32_ADD(BV32_MUL(local_id_y, 8bv32), local_id_x)];
+  v5 := v4 == 0bv32;
+  goto $truebb0, $falsebb0;
+$if.then:
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  v6 := $$_ZZ32transitive_closure_stage1_kernelPjiE20primary_block_buffer[BV32_ADD(BV32_MUL(local_id_y, 8bv32), $k.0)];
+  v7 := v6 != 0bv32;
+  goto $truebb1, $falsebb1;
+$land.lhs.true:
+  assert {:block_sourceloc} {:sourceloc_num 9} true;
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  v8 := $$_ZZ32transitive_closure_stage1_kernelPjiE20primary_block_buffer[BV32_ADD(BV32_MUL($k.0, 8bv32), local_id_x)];
+  v9 := v8 != 0bv32;
+  goto $truebb2, $falsebb2;
+$if.then.16:
+  assert {:block_sourceloc} {:sourceloc_num 11} true;
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  $$_ZZ32transitive_closure_stage1_kernelPjiE20primary_block_buffer[BV32_ADD(BV32_MUL(local_id_y, 8bv32), local_id_x)] := BV32_ADD(BV32_ADD(BV32_MUL($passnum, 8bv32), $k.0), 2bv32);
+  goto $if.end;
+$if.end:
+  assert {:block_sourceloc} {:sourceloc_num 13} true;
+  goto $if.end.22;
+$if.end.22:
+  assert {:block_sourceloc} {:sourceloc_num 14} true;
+  call {:sourceloc_num 15} $bugle_barrier(1bv1, 1bv1);
+  goto $for.inc;
+$for.inc:
+  assert {:block_sourceloc} {:sourceloc_num 16} true;
+  $k.0 := BV32_ADD($k.0, 1bv32);
+  goto $for.cond;
+$for.end:
+  assert {:block_sourceloc} {:sourceloc_num 17} true;
+  assert {:sourceloc} {:sourceloc_num 18} true;
+  v10 := $$_ZZ32transitive_closure_stage1_kernelPjiE20primary_block_buffer[BV32_ADD(BV32_MUL(local_id_y, 8bv32), local_id_x)];
+  assert {:sourceloc} {:sourceloc_num 19} true;
+  $$graph[BV32_ADD(BV32_MUL(v0, 64bv32), v1)] := v10;
+  return;
+$truebb:
+  assume {:partition} v3;
+  assert {:block_sourceloc} {:sourceloc_num 20} true;
+  goto $for.body;
+$falsebb:
+  assume {:partition} !v3;
+  assert {:block_sourceloc} {:sourceloc_num 21} true;
+  goto $for.end;
+$truebb0:
+  assume {:partition} v5;
+  assert {:block_sourceloc} {:sourceloc_num 22} true;
+  goto $if.then;
+$falsebb0:
+  assume {:partition} !v5;
+  assert {:block_sourceloc} {:sourceloc_num 23} true;
+  goto $if.end.22;
+$truebb1:
+  assume {:partition} v7;
+  assert {:block_sourceloc} {:sourceloc_num 24} true;
+  goto $land.lhs.true;
+$falsebb1:
+  assume {:partition} !v7;
+  assert {:block_sourceloc} {:sourceloc_num 25} true;
+  goto $if.end;
+$truebb2:
+  assume {:partition} v9;
+  assert {:block_sourceloc} {:sourceloc_num 26} true;
+  goto $if.then.16;
+$falsebb2:
+  assume {:partition} !v9;
+  assert {:block_sourceloc} {:sourceloc_num 27} true;
+  goto $if.end;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:bv1, $1:bv1);
+axiom (if group_size_z == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_z == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if group_size_x == 8bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if group_size_y == 8bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_x == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_y == 1bv32 then 1bv1 else 0bv1) != 0bv1;

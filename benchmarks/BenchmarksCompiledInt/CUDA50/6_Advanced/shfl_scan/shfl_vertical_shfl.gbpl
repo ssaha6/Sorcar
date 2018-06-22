@@ -1,0 +1,197 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "img"} {:global} $$img : [int]int;
+axiom {:array_info "$$img"} {:global} {:elem_width 32} {:source_name "img"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$img : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$img : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$img : bool;
+
+var {:source_name "sums"} {:group_shared} $$_ZZ18shfl_vertical_shflPjiiE4sums : [int]int;
+axiom {:array_info "$$_ZZ18shfl_vertical_shflPjiiE4sums"} {:group_shared} {:elem_width 32} {:source_name "sums"} {:source_elem_width 32} {:source_dimensions "32,9"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*,9"} _READ_HAS_OCCURRED_$$_ZZ18shfl_vertical_shflPjiiE4sums : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*,9"} _WRITE_HAS_OCCURRED_$$_ZZ18shfl_vertical_shflPjiiE4sums : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*,9"} _ATOMIC_HAS_OCCURRED_$$_ZZ18shfl_vertical_shflPjiiE4sums : bool;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:local_id_y} local_id_y : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SLE(x : int, y : int) : bool {
+  x <= y
+}
+function {:inline true} BV32_SLT(x : int, y : int) : bool {
+  x < y
+}
+function {:inline true} BV32_SREM(x : int, y : int) : int {
+  x mod y
+}
+function {:inline true} BV32_SUB(x : int, y : int) : int {
+  x - y
+}
+function {:inline true} BV32_UDIV(x : int, y : int) : int {
+  x div y
+}
+function {:inline true} BV32_UGE(x : int, y : int) : bool {
+  x >= y
+}
+function {:inline true} BV32_UGT(x : int, y : int) : bool {
+  x > y
+}
+function {:inline true} BV32_UREM(x : int, y : int) : int {
+  x mod y
+}
+procedure {:source_name "shfl_vertical_shfl"} {:kernel} $_Z18shfl_vertical_shflPjii($width:int, $height:int)
+requires {:sourceloc_num 0} (if $width == 1920 then 1 else 0) != 0;
+{
+  var $stepSum.0:int;
+  var $step.0:int;
+  var $partial_sum.0:int;
+  var $i.0:int;
+  var $partial_sum.1:int;
+  var $sum.0:int;
+  var v0:int;
+  var v1:bool;
+  var v2:int;
+  var v3:int;
+  var v4:int;
+  var v5:int;
+  var v6:int;
+  var v7:bool;
+  var v9:bool;
+  var v8:int;
+  var v10:bool;
+  var v11:int;
+  var v12:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  v0 := BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x);
+  assert {:sourceloc} {:sourceloc_num 2} true;
+  $$_ZZ18shfl_vertical_shflPjiiE4sums[BV32_ADD(BV32_MUL(local_id_x, 9), local_id_y)] := 0;
+  call {:sourceloc_num 3} $bugle_barrier(-1, -1);
+  $stepSum.0, $step.0 := 0, 0;
+  goto $1;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 4} true;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 5} (if (_WRITE_HAS_OCCURRED_$$img ==> BV32_UREM(BV32_UDIV(BV32_MUL(4, _WATCHED_OFFSET), 4), $width) == v0) then 1 else 0) != 0;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 6} (if (_READ_HAS_OCCURRED_$$img ==> BV32_UREM(BV32_UDIV(BV32_MUL(4, _WATCHED_OFFSET), 4), $width) == v0) then 1 else 0) != 0;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 7} (if (_WRITE_HAS_OCCURRED_$$img ==> BV32_UREM(BV32_SUB(BV32_UDIV(BV32_SUB(BV32_UDIV(BV32_MUL(4, _WATCHED_OFFSET), 4), v0), $width), local_id_y), 8) == 0) then 1 else 0) != 0;
+  v1 := BV32_SLT($step.0, 135);
+  goto $truebb, $falsebb;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 8} true;
+  v2 := BV32_MUL(BV32_ADD(local_id_y, BV32_MUL($step.0, 8)), $width);
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  v3 := $$img[BV32_ADD(v2, v0)];
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  $$_ZZ18shfl_vertical_shflPjiiE4sums[BV32_ADD(BV32_MUL(local_id_x, 9), local_id_y)] := v3;
+  call {:sourceloc_num 11} $bugle_barrier(-1, -1);
+  v4 := BV32_UREM(local_id_x, 8);
+  v5 := BV32_ADD(BV32_UDIV(local_id_x, 8), BV32_MUL(local_id_y, 4));
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  v6 := $$_ZZ18shfl_vertical_shflPjiiE4sums[BV32_ADD(BV32_MUL(v5, 9), v4)];
+  $partial_sum.0, $i.0 := v6, 1;
+  goto $3;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 13} true;
+  v7 := BV32_SLE($i.0, 8);
+  goto $truebb0, $falsebb0;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 14} true;
+  call {:sourceloc_num 15}   v8 := $_Z9__shfl_upiii($partial_sum.0, $i.0, 32);
+  v9 := BV32_UGE(BV32_SREM(v0, 8), $i.0);
+  goto $truebb1, $falsebb1;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 16} true;
+  $partial_sum.1 := BV32_ADD($partial_sum.0, v8);
+  goto $6;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 17} true;
+  goto $7;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 18} true;
+  $partial_sum.0, $i.0 := $partial_sum.1, BV32_MUL($i.0, 2);
+  goto $3;
+$8:
+  assert {:block_sourceloc} {:sourceloc_num 19} true;
+  assert {:sourceloc} {:sourceloc_num 20} true;
+  $$_ZZ18shfl_vertical_shflPjiiE4sums[BV32_ADD(BV32_MUL(v5, 9), v4)] := $partial_sum.0;
+  call {:sourceloc_num 21} $bugle_barrier(-1, -1);
+  v10 := BV32_UGT(local_id_y, 0);
+  goto $truebb2, $falsebb2;
+$9:
+  assert {:block_sourceloc} {:sourceloc_num 22} true;
+  assert {:sourceloc} {:sourceloc_num 23} true;
+  v11 := $$_ZZ18shfl_vertical_shflPjiiE4sums[BV32_ADD(BV32_MUL(local_id_x, 9), BV32_SUB(local_id_y, 1))];
+  $sum.0 := BV32_ADD(v3, v11);
+  goto $10;
+$10:
+  assert {:block_sourceloc} {:sourceloc_num 24} true;
+  assert {:sourceloc} {:sourceloc_num 25} true;
+  v12 := $$_ZZ18shfl_vertical_shflPjiiE4sums[BV32_ADD(BV32_MUL(local_id_x, 9), BV32_SUB(group_size_y, 1))];
+  call {:sourceloc_num 26} $bugle_barrier(-1, -1);
+  assert {:sourceloc} {:sourceloc_num 27} true;
+  $$img[BV32_ADD(v2, v0)] := BV32_ADD($sum.0, $stepSum.0);
+  goto $11;
+$11:
+  assert {:block_sourceloc} {:sourceloc_num 28} true;
+  $stepSum.0, $step.0 := BV32_ADD($stepSum.0, v12), BV32_ADD($step.0, 1);
+  goto $1;
+$12:
+  assert {:block_sourceloc} {:sourceloc_num 29} true;
+  return;
+$truebb:
+  assume {:partition} v1;
+  assert {:block_sourceloc} {:sourceloc_num 30} true;
+  goto $2;
+$falsebb:
+  assume {:partition} !v1;
+  assert {:block_sourceloc} {:sourceloc_num 31} true;
+  goto $12;
+$truebb0:
+  assume {:partition} v7;
+  assert {:block_sourceloc} {:sourceloc_num 32} true;
+  goto $4;
+$falsebb0:
+  assume {:partition} !v7;
+  assert {:block_sourceloc} {:sourceloc_num 33} true;
+  goto $8;
+$truebb1:
+  assume {:partition} v9;
+  assert {:block_sourceloc} {:sourceloc_num 34} true;
+  goto $5;
+$falsebb1:
+  assume {:partition} !v9;
+  assert {:block_sourceloc} {:sourceloc_num 35} true;
+  $partial_sum.1 := $partial_sum.0;
+  goto $6;
+$truebb2:
+  assume {:partition} v10;
+  assert {:block_sourceloc} {:sourceloc_num 36} true;
+  goto $9;
+$falsebb2:
+  assume {:partition} !v10;
+  assert {:block_sourceloc} {:sourceloc_num 37} true;
+  $sum.0 := v3;
+  goto $10;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:int, $1:int);
+procedure {:source_name "_Z9__shfl_upiii"} $_Z9__shfl_upiii($0:int, $1:int, $2:int) returns ($ret:int);
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 32 then 1 else 0) != 0;
+axiom (if group_size_y == 8 then 1 else 0) != 0;
+axiom (if num_groups_x == 60 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;

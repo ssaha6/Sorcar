@@ -1,0 +1,212 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "results"} {:global} $$results : [int]int;
+axiom {:array_info "$$results"} {:global} {:elem_width 32} {:source_name "results"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$results : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$results : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$results : bool;
+
+var {:source_name "rngStates"} {:global} $$rngStates : [int]int;
+axiom {:array_info "$$rngStates"} {:global} {:elem_width 32} {:source_name "rngStates"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$rngStates : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$rngStates : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$rngStates : bool;
+
+var {:source_name "localState"} $$localState : [int]int;
+axiom {:array_info "$$localState"} {:elem_width 32} {:source_name "localState"} {:source_elem_width 32} {:source_dimensions "1"} true;
+
+var {:source_name "sdata"} {:group_shared} $$sdata : [int]int;
+axiom {:array_info "$$sdata"} {:group_shared} {:elem_width 32} {:source_name "sdata"} {:source_elem_width 32} {:source_dimensions "0"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$sdata : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$sdata : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$sdata : bool;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function  BV32_LSHR(int, int) : int;
+function FADD32(int, int) : int;
+function FLT32(int, int) : bool;
+function FMUL32(int, int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_UDIV(x : int, y : int) : int {
+  x div y
+}
+function {:inline true} BV32_UGT(x : int, y : int) : bool {
+  x > y
+}
+function {:inline true} BV32_ULT(x : int, y : int) : bool {
+  x < y
+}
+procedure {:source_name "computeValue<float>"} {:kernel} $_Z12computeValueIfEvPjP17curandStateXORWOWj($numSims:int)
+{
+  var $pointsInside.0:int;
+  var $i.0:int;
+  var $pointsInside.1:int;
+  var $s.i.0:int;
+  var v0:int;
+  var v1:int;
+  var v2:bool;
+  var v3:int;
+  var v4:int;
+  var v5:int;
+  var v6:int;
+  var v7:int;
+  var v8:int;
+  var v9:int;
+  var v10:int;
+  var v11:bool;
+  var v12:bool;
+  var v13:bool;
+  var v14:int;
+  var v15:int;
+  var v16:int;
+  var v17:bool;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  v0 := BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x);
+  assert {:sourceloc} {:sourceloc_num 1} true;
+  v1 := $$rngStates[v0];
+  assert {:sourceloc} {:sourceloc_num 2} true;
+  $$localState[0] := v1;
+  $pointsInside.0, $i.0 := 0, v0;
+  goto $1;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 3} true;
+  v2 := BV32_ULT($i.0, $numSims);
+  goto $truebb, $falsebb;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 4} true;
+  call {:sourceloc_num 5}   v3 := $_Z19__bugle_random_uintv();
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  v4 := $$localState[0];
+  assert {:sourceloc} {:sourceloc_num 7} true;
+  $$localState[0] := BV32_ADD(v4, v3);
+  call {:sourceloc_num 8}   v5 := $_Z19__bugle_random_uintv();
+  call {:sourceloc_num 9}   v6 := $_Z20__bugle_random_floatv();
+  call {:sourceloc_num 10}   v7 := $_Z19__bugle_random_uintv();
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  v8 := $$localState[0];
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  $$localState[0] := BV32_ADD(v8, v7);
+  call {:sourceloc_num 13}   v9 := $_Z19__bugle_random_uintv();
+  call {:sourceloc_num 14}   v10 := $_Z20__bugle_random_floatv();
+  v11 := FLT32(FADD32(FMUL32(v6, v6), FMUL32(v10, v10)), 1065353216);
+  goto $truebb0, $falsebb0;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 15} true;
+  $pointsInside.1 := BV32_ADD($pointsInside.0, 1);
+  goto $4;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 16} true;
+  goto $5;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 17} true;
+  $pointsInside.0, $i.0 := $pointsInside.1, BV32_ADD($i.0, BV32_MUL(num_groups_x, group_size_x));
+  goto $1;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 18} true;
+  assert {:sourceloc} {:sourceloc_num 19} true;
+  $$sdata[local_id_x] := $pointsInside.0;
+  call {:sourceloc_num 20} $bugle_barrier(-1, -1);
+  $s.i.0 := BV32_UDIV(group_size_x, 2);
+  goto $7;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 21} true;
+  v12 := BV32_UGT($s.i.0, 0);
+  goto $truebb1, $falsebb1;
+$8:
+  assert {:block_sourceloc} {:sourceloc_num 22} true;
+  v13 := BV32_ULT(local_id_x, $s.i.0);
+  goto $truebb2, $falsebb2;
+$9:
+  assert {:block_sourceloc} {:sourceloc_num 23} true;
+  assert {:sourceloc} {:sourceloc_num 24} true;
+  v14 := $$sdata[BV32_ADD(local_id_x, $s.i.0)];
+  assert {:sourceloc} {:sourceloc_num 25} true;
+  v15 := $$sdata[local_id_x];
+  assert {:sourceloc} {:sourceloc_num 26} true;
+  $$sdata[local_id_x] := BV32_ADD(v15, v14);
+  goto $10;
+$10:
+  assert {:block_sourceloc} {:sourceloc_num 27} true;
+  call {:sourceloc_num 28} $bugle_barrier(-1, -1);
+  $s.i.0 := BV32_LSHR($s.i.0, 1);
+  goto $7;
+$_ZL10reduce_sumj.exit:
+  assert {:block_sourceloc} {:sourceloc_num 29} true;
+  assert {:sourceloc} {:sourceloc_num 30} true;
+  v16 := $$sdata[0];
+  v17 := local_id_x == 0;
+  goto $truebb3, $falsebb3;
+$11:
+  assert {:block_sourceloc} {:sourceloc_num 31} true;
+  assert {:sourceloc} {:sourceloc_num 32} true;
+  $$results[group_id_x] := v16;
+  goto $12;
+$12:
+  assert {:block_sourceloc} {:sourceloc_num 33} true;
+  return;
+$truebb:
+  assume {:partition} v2;
+  assert {:block_sourceloc} {:sourceloc_num 34} true;
+  goto $2;
+$falsebb:
+  assume {:partition} !v2;
+  assert {:block_sourceloc} {:sourceloc_num 35} true;
+  goto $6;
+$truebb0:
+  assume {:partition} v11;
+  assert {:block_sourceloc} {:sourceloc_num 36} true;
+  goto $3;
+$falsebb0:
+  assume {:partition} !v11;
+  assert {:block_sourceloc} {:sourceloc_num 37} true;
+  $pointsInside.1 := $pointsInside.0;
+  goto $4;
+$truebb1:
+  assume {:partition} v12;
+  assert {:block_sourceloc} {:sourceloc_num 38} true;
+  goto $8;
+$falsebb1:
+  assume {:partition} !v12;
+  assert {:block_sourceloc} {:sourceloc_num 39} true;
+  goto $_ZL10reduce_sumj.exit;
+$truebb2:
+  assume {:partition} v13;
+  assert {:block_sourceloc} {:sourceloc_num 40} true;
+  goto $9;
+$falsebb2:
+  assume {:partition} !v13;
+  assert {:block_sourceloc} {:sourceloc_num 41} true;
+  goto $10;
+$truebb3:
+  assume {:partition} v17;
+  assert {:block_sourceloc} {:sourceloc_num 42} true;
+  goto $11;
+$falsebb3:
+  assume {:partition} !v17;
+  assert {:block_sourceloc} {:sourceloc_num 43} true;
+  goto $12;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:int, $1:int);
+procedure {:source_name "_Z20__bugle_random_floatv"} $_Z20__bugle_random_floatv() returns ($ret:int);
+procedure {:source_name "_Z19__bugle_random_uintv"} $_Z19__bugle_random_uintv() returns ($ret:int);
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 128 then 1 else 0) != 0;
+axiom (if num_groups_x == 195 then 1 else 0) != 0;

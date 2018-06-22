@@ -1,0 +1,53 @@
+numbers
+
+
+ALL BPL FILES
+=====================================================================
+all_bplfiles  		640
+
+
+ALL BPL FILES WITH INV
+======================================================================
+inv_bplfiles 		298
+
+
+
+ICE2FILES (Files actually solvable)
+======================================================================
+inv_ice2files 		290 = horn_files + sing_inv_files
+
+
+originally 298 (inv_bplfiles), 
+
+manually removed(2): does not proceeds
+AMD_SDK/AESEncryptDecrypt/kernel1/kernel.bpl.ice2.bpl
+AMD_SDK/AESEncryptDecrypt/kernel2/kernel.bpl.ice2.bpl
+
+manually removed(6): non-conjunctive inv, learner throws exception
+gpgpu-sim_ispass2009/BFS/_kernel.bpl.ice2.bpl  
+parboil/bfs/BFS_kernel/_kernel.bpl.ice2.bpl
+rodinia_2.4/bfs/BFS_1/_kernel.bpl.ice2.bpl
+rodinia_2.4/particlefilter/normalize_weights_single/kernel.bpl.ice2.bpl
+rodinia_2.4/streamcluster/pgain/_kernel.bpl.ice2.bpl
+shoc/bfs/uiuc_spill/BFS_kernel_multi_block/_kernel.bpl.ice2.bpl  
+
+
+
+ICE2FILES ==> SING_INV + HORN
+======================================================================
+
+horn_files 		182
+sing_inv_files 	108
+-----------------------
+				290 completely disjoint
+
+
+
+
+convert to unified file name..
+=====================================================================
+for file in $(cat inv_ice2files); do  echo $file | sed -e 's/\//_/g' ; done > unified_file_names 
+for file in $(cat inv_ice2files); do  cp $file unified_name/`echo $file | sed -e 's/\//_/g'` ; done  
+
+
+

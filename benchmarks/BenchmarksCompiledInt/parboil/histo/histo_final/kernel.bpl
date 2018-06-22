@@ -1,0 +1,1280 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x: [int]int, y: int) returns (z$1: int, A$1: [int]int, z$2: int, A$2: [int]int);
+
+
+
+procedure _ATOMIC_OP8(x: [int]int, y: int) returns (z$1: int, A$1: [int]int, z$2: int, A$2: [int]int);
+
+
+
+axiom {:array_info "$$global_subhisto"} {:global} {:elem_width 32} {:source_name "global_subhisto"} {:source_elem_width 32} {:source_dimensions "*"} true;
+
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$global_subhisto: bool;
+
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$global_subhisto: bool;
+
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$global_subhisto: bool;
+
+var {:source_name "global_histo"} {:global} $$global_histo: [int]int;
+
+axiom {:array_info "$$global_histo"} {:global} {:elem_width 8} {:source_name "global_histo"} {:source_elem_width 32} {:source_dimensions "*"} true;
+
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$global_histo: bool;
+
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$global_histo: bool;
+
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$global_histo: bool;
+
+var {:source_name "global_overflow"} {:global} $$global_overflow: [int]int;
+
+axiom {:array_info "$$global_overflow"} {:global} {:elem_width 32} {:source_name "global_overflow"} {:source_elem_width 32} {:source_dimensions "*"} true;
+
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$global_overflow: bool;
+
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$global_overflow: bool;
+
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$global_overflow: bool;
+
+var {:source_name "final_histo"} {:global} $$final_histo: [int]int;
+
+axiom {:array_info "$$final_histo"} {:global} {:elem_width 8} {:source_name "final_histo"} {:source_elem_width 32} {:source_dimensions "*"} true;
+
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$final_histo: bool;
+
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$final_histo: bool;
+
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$final_histo: bool;
+
+const _WATCHED_OFFSET: int;
+
+const {:global_offset_x} global_offset_x: int;
+
+const {:global_offset_y} global_offset_y: int;
+
+const {:global_offset_z} global_offset_z: int;
+
+const {:group_id_x} group_id_x$1: int;
+
+const {:group_id_x} group_id_x$2: int;
+
+const {:group_size_x} group_size_x: int;
+
+const {:group_size_y} group_size_y: int;
+
+const {:group_size_z} group_size_z: int;
+
+const {:local_id_x} local_id_x$1: int;
+
+const {:local_id_x} local_id_x$2: int;
+
+const {:num_groups_x} num_groups_x: int;
+
+const {:num_groups_y} num_groups_y: int;
+
+const {:num_groups_z} num_groups_z: int;
+
+function BV_CONCAT(int, int) : int;
+
+function BV_EXTRACT(int, int, int) : int;
+
+function {:inline true} BV16_ULT(x: int, y: int) : bool
+{
+  x < y
+}
+
+function {:inline true} BV1_ZEXT32(x: int) : int
+{
+  x
+}
+
+function {:inline true} BV32_ADD(x: int, y: int) : int
+{
+  x + y
+}
+
+function {:inline true} BV32_AND(x: int, y: int) : int
+{
+  (if x == y then x else (if x == 0 || y == 0 then 0 else BV32_AND_UF(x, y)))
+}
+
+function BV32_AND_UF(int, int) : int;
+
+function {:inline true} BV32_MUL(x: int, y: int) : int
+{
+  x * y
+}
+
+function {:inline true} BV32_OR(x: int, y: int) : int
+{
+  (if x == y then x else (if x == 0 then y else (if y == 0 then x else BV32_OR_UF(x, y))))
+}
+
+function BV32_OR_UF(int, int) : int;
+
+function {:inline true} BV32_SUB(x: int, y: int) : int
+{
+  x - y
+}
+
+function {:inline true} BV32_UDIV(x: int, y: int) : int
+{
+  x div y
+}
+
+function {:inline true} BV32_ULE(x: int, y: int) : bool
+{
+  x <= y
+}
+
+function {:inline true} BV32_ULT(x: int, y: int) : bool
+{
+  x < y
+}
+
+function {:inline true} BV32_UREM(x: int, y: int) : int
+{
+  x mod y
+}
+
+procedure {:source_name "histo_final_kernel"} {:kernel} $histo_final_kernel($sm_range_min: int, $sm_range_max: int, $histo_height: int, $histo_width: int);
+  requires {:sourceloc_num 0} {:thread 1} (if $sm_range_min == 1 then 1 else 0) != 0;
+  requires {:sourceloc_num 1} {:thread 1} (if $sm_range_max == 2 then 1 else 0) != 0;
+  requires {:sourceloc_num 2} {:thread 1} (if $histo_height == 4096 then 1 else 0) != 0;
+  requires {:sourceloc_num 3} {:thread 1} (if $histo_width == 256 then 1 else 0) != 0;
+  requires !_READ_HAS_OCCURRED_$$global_subhisto && !_WRITE_HAS_OCCURRED_$$global_subhisto && !_ATOMIC_HAS_OCCURRED_$$global_subhisto;
+  requires !_READ_HAS_OCCURRED_$$global_histo && !_WRITE_HAS_OCCURRED_$$global_histo && !_ATOMIC_HAS_OCCURRED_$$global_histo;
+  requires !_READ_HAS_OCCURRED_$$global_overflow && !_WRITE_HAS_OCCURRED_$$global_overflow && !_ATOMIC_HAS_OCCURRED_$$global_overflow;
+  requires !_READ_HAS_OCCURRED_$$final_histo && !_WRITE_HAS_OCCURRED_$$final_histo && !_ATOMIC_HAS_OCCURRED_$$final_histo;
+  requires BV32_SGT(group_size_x, 0);
+  requires BV32_SGT(num_groups_x, 0);
+  requires BV32_SGE(group_id_x$1, 0);
+  requires BV32_SGE(group_id_x$2, 0);
+  requires BV32_SLT(group_id_x$1, num_groups_x);
+  requires BV32_SLT(group_id_x$2, num_groups_x);
+  requires BV32_SGE(local_id_x$1, 0);
+  requires BV32_SGE(local_id_x$2, 0);
+  requires BV32_SLT(local_id_x$1, group_size_x);
+  requires BV32_SLT(local_id_x$2, group_size_x);
+  requires BV32_SGT(group_size_y, 0);
+  requires BV32_SGT(num_groups_y, 0);
+  requires BV32_SGE(group_id_y$1, 0);
+  requires BV32_SGE(group_id_y$2, 0);
+  requires BV32_SLT(group_id_y$1, num_groups_y);
+  requires BV32_SLT(group_id_y$2, num_groups_y);
+  requires BV32_SGE(local_id_y$1, 0);
+  requires BV32_SGE(local_id_y$2, 0);
+  requires BV32_SLT(local_id_y$1, group_size_y);
+  requires BV32_SLT(local_id_y$2, group_size_y);
+  requires BV32_SGT(group_size_z, 0);
+  requires BV32_SGT(num_groups_z, 0);
+  requires BV32_SGE(group_id_z$1, 0);
+  requires BV32_SGE(group_id_z$2, 0);
+  requires BV32_SLT(group_id_z$1, num_groups_z);
+  requires BV32_SLT(group_id_z$2, num_groups_z);
+  requires BV32_SGE(local_id_z$1, 0);
+  requires BV32_SGE(local_id_z$2, 0);
+  requires BV32_SLT(local_id_z$1, group_size_z);
+  requires BV32_SLT(local_id_z$2, group_size_z);
+  requires group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 ==> local_id_x$1 != local_id_x$2 || local_id_y$1 != local_id_y$2 || local_id_z$1 != local_id_z$2;
+  modifies _READ_HAS_OCCURRED_$$global_histo, _WRITE_HAS_OCCURRED_$$global_histo, _WRITE_READ_BENIGN_FLAG_$$global_histo, _WRITE_READ_BENIGN_FLAG_$$global_histo, _WRITE_HAS_OCCURRED_$$final_histo, _WRITE_READ_BENIGN_FLAG_$$final_histo, _WRITE_READ_BENIGN_FLAG_$$final_histo, _READ_HAS_OCCURRED_$$global_overflow, _WRITE_HAS_OCCURRED_$$global_overflow, _WRITE_READ_BENIGN_FLAG_$$global_overflow, _WRITE_READ_BENIGN_FLAG_$$global_overflow;
+
+
+
+implementation {:source_name "histo_final_kernel"} {:kernel} $histo_final_kernel($sm_range_min: int, $sm_range_max: int, $histo_height: int, $histo_width: int)
+{
+  var $i.0$1: int;
+  var $i.0$2: int;
+  var $i1.0$1: int;
+  var $i1.0$2: int;
+  var $i4.0$1: int;
+  var $i4.0$2: int;
+  var v3: int;
+  var v5$1: bool;
+  var v5$2: bool;
+  var v4: int;
+  var v2$1: int;
+  var v2$2: int;
+  var v9$1: int;
+  var v9$2: int;
+  var v10$1: int;
+  var v10$2: int;
+  var v11$1: int;
+  var v11$2: int;
+  var v12$1: int;
+  var v12$2: int;
+  var v13$1: int;
+  var v13$2: int;
+  var v25$1: int;
+  var v25$2: int;
+  var v26$1: int;
+  var v26$2: int;
+  var v14$1: int;
+  var v14$2: int;
+  var v1: int;
+  var v6$1: int;
+  var v6$2: int;
+  var v7$1: int;
+  var v7$2: int;
+  var v8$1: int;
+  var v8$2: int;
+  var v18$1: bool;
+  var v18$2: bool;
+  var v19$1: int;
+  var v19$2: int;
+  var v20$1: int;
+  var v20$2: int;
+  var v21$1: int;
+  var v21$2: int;
+  var v22$1: int;
+  var v22$2: int;
+  var v23$1: int;
+  var v23$2: int;
+  var v24$1: int;
+  var v24$2: int;
+  var v0: int;
+  var v17$1: int;
+  var v17$2: int;
+  var v27$1: bool;
+  var v27$2: bool;
+  var v36$1: int;
+  var v36$2: int;
+  var v37$1: int;
+  var v37$2: int;
+  var v38$1: int;
+  var v38$2: int;
+  var v28$1: int;
+  var v28$2: int;
+  var v29$1: int;
+  var v29$2: int;
+  var v30$1: int;
+  var v30$2: int;
+  var v31$1: int;
+  var v31$2: int;
+  var v32$1: int;
+  var v32$2: int;
+  var v33$1: int;
+  var v33$2: int;
+  var v34$1: int;
+  var v34$2: int;
+  var v35$1: int;
+  var v35$2: int;
+  var v39$1: int;
+  var v39$2: int;
+  var v15$1: int;
+  var v15$2: int;
+  var v16$1: int;
+  var v16$2: int;
+  var p0$1: bool;
+  var p0$2: bool;
+  var p1$1: bool;
+  var p1$2: bool;
+  var p2$1: bool;
+  var p2$2: bool;
+  var p3$1: bool;
+  var p3$2: bool;
+  var p4$1: bool;
+  var p4$2: bool;
+  var p5$1: bool;
+  var p5$2: bool;
+  var p6$1: bool;
+  var p6$2: bool;
+  var _HAVOC_int$1: int;
+  var _HAVOC_int$2: int;
+
+
+  $0:
+    v0 := group_size_x;
+    v1 := num_groups_x;
+    v2$1 := BV32_ADD(local_id_x$1, BV32_MUL(group_id_x$1, v0));
+    v2$2 := BV32_ADD(local_id_x$2, BV32_MUL(group_id_x$2, v0));
+    v3 := BV32_MUL($sm_range_min, 24576);
+    v4 := BV32_MUL(BV32_ADD(BV32_SUB($sm_range_max, $sm_range_min), 1), 24576);
+    $i.0$1 := v2$1;
+    $i.0$2 := v2$2;
+    p0$1 := false;
+    p0$2 := false;
+    p3$1 := false;
+    p3$2 := false;
+    p5$1 := false;
+    p5$2 := false;
+    p0$1 := true;
+    p0$2 := true;
+    assume {:captureState "loop_entry_state_2_0"} true;
+    goto $1;
+
+  $1:
+    assume {:captureState "loop_head_state_2"} true;
+    assert {:tag "accessedOffsetsSatisfyPredicates"} _b20 ==> _WRITE_HAS_OCCURRED_$$final_histo ==> _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) == BV32_MUL(v2$1, 4) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) == BV32_ADD(BV32_MUL(v2$1, 4), 1) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) == BV32_ADD(BV32_MUL(v2$1, 4), 2) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) == BV32_ADD(BV32_MUL(v2$1, 4), 3) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4);
+    assert {:tag "accessedOffsetsSatisfyPredicates"} _b19 ==> _WRITE_HAS_OCCURRED_$$global_histo ==> _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) == BV32_MUL(v2$1, 8) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) == BV32_ADD(BV32_MUL(v2$1, 8), 1) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) == BV32_ADD(BV32_MUL(v2$1, 8), 2) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) == BV32_ADD(BV32_MUL(v2$1, 8), 3) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) == BV32_ADD(BV32_MUL(v2$1, 8), 4) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) == BV32_ADD(BV32_MUL(v2$1, 8), 5) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) == BV32_ADD(BV32_MUL(v2$1, 8), 6) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) == BV32_ADD(BV32_MUL(v2$1, 8), 7) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8);
+    assert {:tag "accessedOffsetsSatisfyPredicates"} _b18 ==> _READ_HAS_OCCURRED_$$global_histo ==> _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) == BV32_MUL(v2$1, 8) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) == BV32_ADD(BV32_MUL(v2$1, 8), 1) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) == BV32_ADD(BV32_MUL(v2$1, 8), 2) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) == BV32_ADD(BV32_MUL(v2$1, 8), 3) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) == BV32_ADD(BV32_MUL(v2$1, 8), 4) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) == BV32_ADD(BV32_MUL(v2$1, 8), 5) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) == BV32_ADD(BV32_MUL(v2$1, 8), 6) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) == BV32_ADD(BV32_MUL(v2$1, 8), 7) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8);
+    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 1} _b5 ==> BV32_ULT($i.0$1, BV32_UDIV(BV32_MUL($sm_range_min, 24576), 4)) ==> p0$1;
+    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 2} _b5 ==> BV32_ULT($i.0$2, BV32_UDIV(BV32_MUL($sm_range_min, 24576), 4)) ==> p0$2;
+    assert {:tag "loopBound"} {:thread 1} p0$1 ==> _b4 ==> BV32_UGE($i.0$1, v2$1);
+    assert {:tag "loopBound"} {:thread 2} p0$2 ==> _b4 ==> BV32_UGE($i.0$2, v2$2);
+    assert {:tag "loopBound"} {:thread 1} p0$1 ==> _b3 ==> BV32_ULE($i.0$1, v2$1);
+    assert {:tag "loopBound"} {:thread 2} p0$2 ==> _b3 ==> BV32_ULE($i.0$2, v2$2);
+    assert {:tag "loopBound"} {:thread 1} p0$1 ==> _b2 ==> BV32_SGE($i.0$1, v2$1);
+    assert {:tag "loopBound"} {:thread 2} p0$2 ==> _b2 ==> BV32_SGE($i.0$2, v2$2);
+    assert {:tag "loopBound"} {:thread 1} p0$1 ==> _b1 ==> BV32_SLE($i.0$1, v2$1);
+    assert {:tag "loopBound"} {:thread 2} p0$2 ==> _b1 ==> BV32_SLE($i.0$2, v2$2);
+    assert {:tag "loopCounterIsStrided"} {:thread 1} p0$1 ==> _b0 ==> $i.0$1 mod BV32_MUL(num_groups_x, group_size_x) == v2$1 mod BV32_MUL(num_groups_x, group_size_x);
+    assert {:tag "loopCounterIsStrided"} {:thread 2} p0$2 ==> _b0 ==> $i.0$2 mod BV32_MUL(num_groups_x, group_size_x) == v2$2 mod BV32_MUL(num_groups_x, group_size_x);
+    assert {:block_sourceloc} {:sourceloc_num 5} p0$1 ==> true;
+    assert {:originated_from_invariant} {:sourceloc_num 6} {:thread 1} p0$1 ==> (if BV32_UREM(BV32_SUB($i.0$1, v2$1), BV32_MUL(v1, v0)) == 0 then 1 else 0) != 0;
+    assert {:originated_from_invariant} {:sourceloc_num 6} {:thread 2} p0$2 ==> (if BV32_UREM(BV32_SUB($i.0$2, v2$2), BV32_MUL(v1, v0)) == 0 then 1 else 0) != 0;
+    assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 7} {:thread 1} (if _READ_HAS_OCCURRED_$$global_histo ==> BV32_AND(BV32_AND(BV1_ZEXT32((if BV32_ULT(v2$1, BV32_UDIV(v3, 4)) then 1 else 0)), BV1_ZEXT32((if BV32_UREM(BV32_SUB(BV32_UDIV(_WATCHED_OFFSET, 8), v2$1), BV32_MUL(v1, v0)) == 0 then 1 else 0))), BV1_ZEXT32((if BV32_ULE(BV32_UDIV(BV32_SUB(BV32_UDIV(_WATCHED_OFFSET, 8), v2$1), BV32_MUL(v1, v0)), BV32_UDIV(BV32_SUB(BV32_UDIV(v3, 4), v2$1), BV32_MUL(v1, v0))) then 1 else 0))) != 0 then 1 else 0) != 0;
+    assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 8} {:thread 1} (if _WRITE_HAS_OCCURRED_$$global_histo ==> BV32_AND(BV32_AND(BV1_ZEXT32((if BV32_ULT(v2$1, BV32_UDIV(v3, 4)) then 1 else 0)), BV1_ZEXT32((if BV32_UREM(BV32_SUB(BV32_UDIV(_WATCHED_OFFSET, 8), v2$1), BV32_MUL(v1, v0)) == 0 then 1 else 0))), BV1_ZEXT32((if BV32_ULE(BV32_UDIV(BV32_SUB(BV32_UDIV(_WATCHED_OFFSET, 8), v2$1), BV32_MUL(v1, v0)), BV32_UDIV(BV32_SUB(BV32_UDIV(v3, 4), v2$1), BV32_MUL(v1, v0))) then 1 else 0))) != 0 then 1 else 0) != 0;
+    assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 9} {:thread 1} (if _WRITE_HAS_OCCURRED_$$final_histo ==> BV32_AND(BV32_AND(BV1_ZEXT32((if BV32_ULT(v2$1, BV32_UDIV(v3, 4)) then 1 else 0)), BV1_ZEXT32((if BV32_UREM(BV32_SUB(BV32_UDIV(_WATCHED_OFFSET, 4), v2$1), BV32_MUL(v1, v0)) == 0 then 1 else 0))), BV1_ZEXT32((if BV32_ULE(BV32_UDIV(BV32_SUB(BV32_UDIV(_WATCHED_OFFSET, 4), v2$1), BV32_MUL(v1, v0)), BV32_UDIV(BV32_SUB(BV32_UDIV(v3, 4), v2$1), BV32_MUL(v1, v0))) then 1 else 0))) != 0 then 1 else 0) != 0;
+    v5$1 := (if p0$1 then BV32_ULT($i.0$1, BV32_UDIV(v3, 4)) else v5$1);
+    v5$2 := (if p0$2 then BV32_ULT($i.0$2, BV32_UDIV(v3, 4)) else v5$2);
+    p1$1 := false;
+    p1$2 := false;
+    p2$1 := false;
+    p2$2 := false;
+    p1$1 := (if p0$1 && v5$1 then v5$1 else p1$1);
+    p1$2 := (if p0$2 && v5$2 then v5$2 else p1$2);
+    p0$1 := (if p0$1 && !v5$1 then v5$1 else p0$1);
+    p0$2 := (if p0$2 && !v5$2 then v5$2 else p0$2);
+    call {:sourceloc} {:sourceloc_num 11} _LOG_READ_$$global_histo(p1$1, BV32_MUL($i.0$1, 8), $$global_histo[BV32_MUL($i.0$1, 8)]);
+    assume {:do_not_predicate} {:check_id "check_state_32"} {:captureState "check_state_32"} {:sourceloc} {:sourceloc_num 11} true;
+    call {:check_id "check_state_32"} {:sourceloc} {:sourceloc_num 11} _CHECK_READ_$$global_histo(p1$2, BV32_MUL($i.0$2, 8), $$global_histo[BV32_MUL($i.0$2, 8)]);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$global_histo"} true;
+    v6$1 := (if p1$1 then $$global_histo[BV32_MUL($i.0$1, 8)] else v6$1);
+    v6$2 := (if p1$2 then $$global_histo[BV32_MUL($i.0$2, 8)] else v6$2);
+    call {:sourceloc} {:sourceloc_num 12} _LOG_READ_$$global_histo(p1$1, BV32_ADD(BV32_MUL($i.0$1, 8), 1), $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 1)]);
+    assume {:do_not_predicate} {:check_id "check_state_33"} {:captureState "check_state_33"} {:sourceloc} {:sourceloc_num 12} true;
+    call {:check_id "check_state_33"} {:sourceloc} {:sourceloc_num 12} _CHECK_READ_$$global_histo(p1$2, BV32_ADD(BV32_MUL($i.0$2, 8), 1), $$global_histo[BV32_ADD(BV32_MUL($i.0$2, 8), 1)]);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$global_histo"} true;
+    v7$1 := (if p1$1 then $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 1)] else v7$1);
+    v7$2 := (if p1$2 then $$global_histo[BV32_ADD(BV32_MUL($i.0$2, 8), 1)] else v7$2);
+    call {:sourceloc} {:sourceloc_num 13} _LOG_READ_$$global_histo(p1$1, BV32_ADD(BV32_MUL($i.0$1, 8), 2), $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 2)]);
+    assume {:do_not_predicate} {:check_id "check_state_34"} {:captureState "check_state_34"} {:sourceloc} {:sourceloc_num 13} true;
+    call {:check_id "check_state_34"} {:sourceloc} {:sourceloc_num 13} _CHECK_READ_$$global_histo(p1$2, BV32_ADD(BV32_MUL($i.0$2, 8), 2), $$global_histo[BV32_ADD(BV32_MUL($i.0$2, 8), 2)]);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$global_histo"} true;
+    v8$1 := (if p1$1 then $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 2)] else v8$1);
+    v8$2 := (if p1$2 then $$global_histo[BV32_ADD(BV32_MUL($i.0$2, 8), 2)] else v8$2);
+    call {:sourceloc} {:sourceloc_num 14} _LOG_READ_$$global_histo(p1$1, BV32_ADD(BV32_MUL($i.0$1, 8), 3), $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 3)]);
+    assume {:do_not_predicate} {:check_id "check_state_35"} {:captureState "check_state_35"} {:sourceloc} {:sourceloc_num 14} true;
+    call {:check_id "check_state_35"} {:sourceloc} {:sourceloc_num 14} _CHECK_READ_$$global_histo(p1$2, BV32_ADD(BV32_MUL($i.0$2, 8), 3), $$global_histo[BV32_ADD(BV32_MUL($i.0$2, 8), 3)]);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$global_histo"} true;
+    v9$1 := (if p1$1 then $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 3)] else v9$1);
+    v9$2 := (if p1$2 then $$global_histo[BV32_ADD(BV32_MUL($i.0$2, 8), 3)] else v9$2);
+    call {:sourceloc} {:sourceloc_num 15} _LOG_READ_$$global_histo(p1$1, BV32_ADD(BV32_MUL($i.0$1, 8), 4), $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 4)]);
+    assume {:do_not_predicate} {:check_id "check_state_36"} {:captureState "check_state_36"} {:sourceloc} {:sourceloc_num 15} true;
+    call {:check_id "check_state_36"} {:sourceloc} {:sourceloc_num 15} _CHECK_READ_$$global_histo(p1$2, BV32_ADD(BV32_MUL($i.0$2, 8), 4), $$global_histo[BV32_ADD(BV32_MUL($i.0$2, 8), 4)]);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$global_histo"} true;
+    v10$1 := (if p1$1 then $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 4)] else v10$1);
+    v10$2 := (if p1$2 then $$global_histo[BV32_ADD(BV32_MUL($i.0$2, 8), 4)] else v10$2);
+    call {:sourceloc} {:sourceloc_num 16} _LOG_READ_$$global_histo(p1$1, BV32_ADD(BV32_MUL($i.0$1, 8), 5), $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 5)]);
+    assume {:do_not_predicate} {:check_id "check_state_37"} {:captureState "check_state_37"} {:sourceloc} {:sourceloc_num 16} true;
+    call {:check_id "check_state_37"} {:sourceloc} {:sourceloc_num 16} _CHECK_READ_$$global_histo(p1$2, BV32_ADD(BV32_MUL($i.0$2, 8), 5), $$global_histo[BV32_ADD(BV32_MUL($i.0$2, 8), 5)]);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$global_histo"} true;
+    v11$1 := (if p1$1 then $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 5)] else v11$1);
+    v11$2 := (if p1$2 then $$global_histo[BV32_ADD(BV32_MUL($i.0$2, 8), 5)] else v11$2);
+    call {:sourceloc} {:sourceloc_num 17} _LOG_READ_$$global_histo(p1$1, BV32_ADD(BV32_MUL($i.0$1, 8), 6), $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 6)]);
+    assume {:do_not_predicate} {:check_id "check_state_38"} {:captureState "check_state_38"} {:sourceloc} {:sourceloc_num 17} true;
+    call {:check_id "check_state_38"} {:sourceloc} {:sourceloc_num 17} _CHECK_READ_$$global_histo(p1$2, BV32_ADD(BV32_MUL($i.0$2, 8), 6), $$global_histo[BV32_ADD(BV32_MUL($i.0$2, 8), 6)]);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$global_histo"} true;
+    v12$1 := (if p1$1 then $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 6)] else v12$1);
+    v12$2 := (if p1$2 then $$global_histo[BV32_ADD(BV32_MUL($i.0$2, 8), 6)] else v12$2);
+    call {:sourceloc} {:sourceloc_num 18} _LOG_READ_$$global_histo(p1$1, BV32_ADD(BV32_MUL($i.0$1, 8), 7), $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 7)]);
+    assume {:do_not_predicate} {:check_id "check_state_39"} {:captureState "check_state_39"} {:sourceloc} {:sourceloc_num 18} true;
+    call {:check_id "check_state_39"} {:sourceloc} {:sourceloc_num 18} _CHECK_READ_$$global_histo(p1$2, BV32_ADD(BV32_MUL($i.0$2, 8), 7), $$global_histo[BV32_ADD(BV32_MUL($i.0$2, 8), 7)]);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$global_histo"} true;
+    v13$1 := (if p1$1 then $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 7)] else v13$1);
+    v13$2 := (if p1$2 then $$global_histo[BV32_ADD(BV32_MUL($i.0$2, 8), 7)] else v13$2);
+    call {:sourceloc} {:sourceloc_num 19} _LOG_WRITE_$$global_histo(p1$1, BV32_MUL($i.0$1, 8), 0, $$global_histo[BV32_MUL($i.0$1, 8)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$global_histo(p1$2, BV32_MUL($i.0$2, 8));
+    assume {:do_not_predicate} {:check_id "check_state_40"} {:captureState "check_state_40"} {:sourceloc} {:sourceloc_num 19} true;
+    call {:check_id "check_state_40"} {:sourceloc} {:sourceloc_num 19} _CHECK_WRITE_$$global_histo(p1$2, BV32_MUL($i.0$2, 8), 0);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$global_histo"} true;
+    $$global_histo[BV32_MUL($i.0$1, 8)] := (if p1$1 then 0 else $$global_histo[BV32_MUL($i.0$1, 8)]);
+    $$global_histo[BV32_MUL($i.0$2, 8)] := (if p1$2 then 0 else $$global_histo[BV32_MUL($i.0$2, 8)]);
+    call {:sourceloc} {:sourceloc_num 20} _LOG_WRITE_$$global_histo(p1$1, BV32_ADD(BV32_MUL($i.0$1, 8), 1), 0, $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 1)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$global_histo(p1$2, BV32_ADD(BV32_MUL($i.0$2, 8), 1));
+    assume {:do_not_predicate} {:check_id "check_state_41"} {:captureState "check_state_41"} {:sourceloc} {:sourceloc_num 20} true;
+    call {:check_id "check_state_41"} {:sourceloc} {:sourceloc_num 20} _CHECK_WRITE_$$global_histo(p1$2, BV32_ADD(BV32_MUL($i.0$2, 8), 1), 0);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$global_histo"} true;
+    $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 1)] := (if p1$1 then 0 else $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 1)]);
+    $$global_histo[BV32_ADD(BV32_MUL($i.0$2, 8), 1)] := (if p1$2 then 0 else $$global_histo[BV32_ADD(BV32_MUL($i.0$2, 8), 1)]);
+    call {:sourceloc} {:sourceloc_num 21} _LOG_WRITE_$$global_histo(p1$1, BV32_ADD(BV32_MUL($i.0$1, 8), 2), 0, $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 2)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$global_histo(p1$2, BV32_ADD(BV32_MUL($i.0$2, 8), 2));
+    assume {:do_not_predicate} {:check_id "check_state_42"} {:captureState "check_state_42"} {:sourceloc} {:sourceloc_num 21} true;
+    call {:check_id "check_state_42"} {:sourceloc} {:sourceloc_num 21} _CHECK_WRITE_$$global_histo(p1$2, BV32_ADD(BV32_MUL($i.0$2, 8), 2), 0);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$global_histo"} true;
+    $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 2)] := (if p1$1 then 0 else $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 2)]);
+    $$global_histo[BV32_ADD(BV32_MUL($i.0$2, 8), 2)] := (if p1$2 then 0 else $$global_histo[BV32_ADD(BV32_MUL($i.0$2, 8), 2)]);
+    call {:sourceloc} {:sourceloc_num 22} _LOG_WRITE_$$global_histo(p1$1, BV32_ADD(BV32_MUL($i.0$1, 8), 3), 0, $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 3)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$global_histo(p1$2, BV32_ADD(BV32_MUL($i.0$2, 8), 3));
+    assume {:do_not_predicate} {:check_id "check_state_43"} {:captureState "check_state_43"} {:sourceloc} {:sourceloc_num 22} true;
+    call {:check_id "check_state_43"} {:sourceloc} {:sourceloc_num 22} _CHECK_WRITE_$$global_histo(p1$2, BV32_ADD(BV32_MUL($i.0$2, 8), 3), 0);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$global_histo"} true;
+    $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 3)] := (if p1$1 then 0 else $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 3)]);
+    $$global_histo[BV32_ADD(BV32_MUL($i.0$2, 8), 3)] := (if p1$2 then 0 else $$global_histo[BV32_ADD(BV32_MUL($i.0$2, 8), 3)]);
+    call {:sourceloc} {:sourceloc_num 23} _LOG_WRITE_$$global_histo(p1$1, BV32_ADD(BV32_MUL($i.0$1, 8), 4), 0, $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 4)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$global_histo(p1$2, BV32_ADD(BV32_MUL($i.0$2, 8), 4));
+    assume {:do_not_predicate} {:check_id "check_state_44"} {:captureState "check_state_44"} {:sourceloc} {:sourceloc_num 23} true;
+    call {:check_id "check_state_44"} {:sourceloc} {:sourceloc_num 23} _CHECK_WRITE_$$global_histo(p1$2, BV32_ADD(BV32_MUL($i.0$2, 8), 4), 0);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$global_histo"} true;
+    $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 4)] := (if p1$1 then 0 else $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 4)]);
+    $$global_histo[BV32_ADD(BV32_MUL($i.0$2, 8), 4)] := (if p1$2 then 0 else $$global_histo[BV32_ADD(BV32_MUL($i.0$2, 8), 4)]);
+    call {:sourceloc} {:sourceloc_num 24} _LOG_WRITE_$$global_histo(p1$1, BV32_ADD(BV32_MUL($i.0$1, 8), 5), 0, $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 5)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$global_histo(p1$2, BV32_ADD(BV32_MUL($i.0$2, 8), 5));
+    assume {:do_not_predicate} {:check_id "check_state_45"} {:captureState "check_state_45"} {:sourceloc} {:sourceloc_num 24} true;
+    call {:check_id "check_state_45"} {:sourceloc} {:sourceloc_num 24} _CHECK_WRITE_$$global_histo(p1$2, BV32_ADD(BV32_MUL($i.0$2, 8), 5), 0);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$global_histo"} true;
+    $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 5)] := (if p1$1 then 0 else $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 5)]);
+    $$global_histo[BV32_ADD(BV32_MUL($i.0$2, 8), 5)] := (if p1$2 then 0 else $$global_histo[BV32_ADD(BV32_MUL($i.0$2, 8), 5)]);
+    call {:sourceloc} {:sourceloc_num 25} _LOG_WRITE_$$global_histo(p1$1, BV32_ADD(BV32_MUL($i.0$1, 8), 6), 0, $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 6)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$global_histo(p1$2, BV32_ADD(BV32_MUL($i.0$2, 8), 6));
+    assume {:do_not_predicate} {:check_id "check_state_46"} {:captureState "check_state_46"} {:sourceloc} {:sourceloc_num 25} true;
+    call {:check_id "check_state_46"} {:sourceloc} {:sourceloc_num 25} _CHECK_WRITE_$$global_histo(p1$2, BV32_ADD(BV32_MUL($i.0$2, 8), 6), 0);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$global_histo"} true;
+    $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 6)] := (if p1$1 then 0 else $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 6)]);
+    $$global_histo[BV32_ADD(BV32_MUL($i.0$2, 8), 6)] := (if p1$2 then 0 else $$global_histo[BV32_ADD(BV32_MUL($i.0$2, 8), 6)]);
+    call {:sourceloc} {:sourceloc_num 26} _LOG_WRITE_$$global_histo(p1$1, BV32_ADD(BV32_MUL($i.0$1, 8), 7), 0, $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 7)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$global_histo(p1$2, BV32_ADD(BV32_MUL($i.0$2, 8), 7));
+    assume {:do_not_predicate} {:check_id "check_state_47"} {:captureState "check_state_47"} {:sourceloc} {:sourceloc_num 26} true;
+    call {:check_id "check_state_47"} {:sourceloc} {:sourceloc_num 26} _CHECK_WRITE_$$global_histo(p1$2, BV32_ADD(BV32_MUL($i.0$2, 8), 7), 0);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$global_histo"} true;
+    $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 7)] := (if p1$1 then 0 else $$global_histo[BV32_ADD(BV32_MUL($i.0$1, 8), 7)]);
+    $$global_histo[BV32_ADD(BV32_MUL($i.0$2, 8), 7)] := (if p1$2 then 0 else $$global_histo[BV32_ADD(BV32_MUL($i.0$2, 8), 7)]);
+    v14$1 := (if p1$1 then BV_CONCAT(v7$1, v6$1) else v14$1);
+    v14$2 := (if p1$2 then BV_CONCAT(v7$2, v6$2) else v14$2);
+    v15$1 := (if p1$1 then BV_CONCAT(v9$1, v8$1) else v15$1);
+    v15$2 := (if p1$2 then BV_CONCAT(v9$2, v8$2) else v15$2);
+    v16$1 := (if p1$1 then BV_CONCAT(v11$1, v10$1) else v16$1);
+    v16$2 := (if p1$2 then BV_CONCAT(v11$2, v10$2) else v16$2);
+    v17$1 := (if p1$1 then BV_CONCAT(v13$1, v12$1) else v17$1);
+    v17$2 := (if p1$2 then BV_CONCAT(v13$2, v12$2) else v17$2);
+    call {:sourceloc} {:sourceloc_num 27} _LOG_WRITE_$$final_histo(p1$1, BV32_MUL($i.0$1, 4), BV_EXTRACT((if BV16_ULT(v14$1, 255) then v14$1 else 255), 8, 0), $$final_histo[BV32_MUL($i.0$1, 4)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$final_histo(p1$2, BV32_MUL($i.0$2, 4));
+    assume {:do_not_predicate} {:check_id "check_state_48"} {:captureState "check_state_48"} {:sourceloc} {:sourceloc_num 27} true;
+    call {:check_id "check_state_48"} {:sourceloc} {:sourceloc_num 27} _CHECK_WRITE_$$final_histo(p1$2, BV32_MUL($i.0$2, 4), BV_EXTRACT((if BV16_ULT(v14$2, 255) then v14$2 else 255), 8, 0));
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$final_histo"} true;
+    $$final_histo[BV32_MUL($i.0$1, 4)] := (if p1$1 then BV_EXTRACT((if BV16_ULT(v14$1, 255) then v14$1 else 255), 8, 0) else $$final_histo[BV32_MUL($i.0$1, 4)]);
+    $$final_histo[BV32_MUL($i.0$2, 4)] := (if p1$2 then BV_EXTRACT((if BV16_ULT(v14$2, 255) then v14$2 else 255), 8, 0) else $$final_histo[BV32_MUL($i.0$2, 4)]);
+    call {:sourceloc} {:sourceloc_num 28} _LOG_WRITE_$$final_histo(p1$1, BV32_ADD(BV32_MUL($i.0$1, 4), 1), BV_EXTRACT((if BV16_ULT(v15$1, 255) then v15$1 else 255), 8, 0), $$final_histo[BV32_ADD(BV32_MUL($i.0$1, 4), 1)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$final_histo(p1$2, BV32_ADD(BV32_MUL($i.0$2, 4), 1));
+    assume {:do_not_predicate} {:check_id "check_state_49"} {:captureState "check_state_49"} {:sourceloc} {:sourceloc_num 28} true;
+    call {:check_id "check_state_49"} {:sourceloc} {:sourceloc_num 28} _CHECK_WRITE_$$final_histo(p1$2, BV32_ADD(BV32_MUL($i.0$2, 4), 1), BV_EXTRACT((if BV16_ULT(v15$2, 255) then v15$2 else 255), 8, 0));
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$final_histo"} true;
+    $$final_histo[BV32_ADD(BV32_MUL($i.0$1, 4), 1)] := (if p1$1 then BV_EXTRACT((if BV16_ULT(v15$1, 255) then v15$1 else 255), 8, 0) else $$final_histo[BV32_ADD(BV32_MUL($i.0$1, 4), 1)]);
+    $$final_histo[BV32_ADD(BV32_MUL($i.0$2, 4), 1)] := (if p1$2 then BV_EXTRACT((if BV16_ULT(v15$2, 255) then v15$2 else 255), 8, 0) else $$final_histo[BV32_ADD(BV32_MUL($i.0$2, 4), 1)]);
+    call {:sourceloc} {:sourceloc_num 29} _LOG_WRITE_$$final_histo(p1$1, BV32_ADD(BV32_MUL($i.0$1, 4), 2), BV_EXTRACT((if BV16_ULT(v16$1, 255) then v16$1 else 255), 8, 0), $$final_histo[BV32_ADD(BV32_MUL($i.0$1, 4), 2)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$final_histo(p1$2, BV32_ADD(BV32_MUL($i.0$2, 4), 2));
+    assume {:do_not_predicate} {:check_id "check_state_50"} {:captureState "check_state_50"} {:sourceloc} {:sourceloc_num 29} true;
+    call {:check_id "check_state_50"} {:sourceloc} {:sourceloc_num 29} _CHECK_WRITE_$$final_histo(p1$2, BV32_ADD(BV32_MUL($i.0$2, 4), 2), BV_EXTRACT((if BV16_ULT(v16$2, 255) then v16$2 else 255), 8, 0));
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$final_histo"} true;
+    $$final_histo[BV32_ADD(BV32_MUL($i.0$1, 4), 2)] := (if p1$1 then BV_EXTRACT((if BV16_ULT(v16$1, 255) then v16$1 else 255), 8, 0) else $$final_histo[BV32_ADD(BV32_MUL($i.0$1, 4), 2)]);
+    $$final_histo[BV32_ADD(BV32_MUL($i.0$2, 4), 2)] := (if p1$2 then BV_EXTRACT((if BV16_ULT(v16$2, 255) then v16$2 else 255), 8, 0) else $$final_histo[BV32_ADD(BV32_MUL($i.0$2, 4), 2)]);
+    call {:sourceloc} {:sourceloc_num 30} _LOG_WRITE_$$final_histo(p1$1, BV32_ADD(BV32_MUL($i.0$1, 4), 3), BV_EXTRACT((if BV16_ULT(v17$1, 255) then v17$1 else 255), 8, 0), $$final_histo[BV32_ADD(BV32_MUL($i.0$1, 4), 3)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$final_histo(p1$2, BV32_ADD(BV32_MUL($i.0$2, 4), 3));
+    assume {:do_not_predicate} {:check_id "check_state_51"} {:captureState "check_state_51"} {:sourceloc} {:sourceloc_num 30} true;
+    call {:check_id "check_state_51"} {:sourceloc} {:sourceloc_num 30} _CHECK_WRITE_$$final_histo(p1$2, BV32_ADD(BV32_MUL($i.0$2, 4), 3), BV_EXTRACT((if BV16_ULT(v17$2, 255) then v17$2 else 255), 8, 0));
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$final_histo"} true;
+    $$final_histo[BV32_ADD(BV32_MUL($i.0$1, 4), 3)] := (if p1$1 then BV_EXTRACT((if BV16_ULT(v17$1, 255) then v17$1 else 255), 8, 0) else $$final_histo[BV32_ADD(BV32_MUL($i.0$1, 4), 3)]);
+    $$final_histo[BV32_ADD(BV32_MUL($i.0$2, 4), 3)] := (if p1$2 then BV_EXTRACT((if BV16_ULT(v17$2, 255) then v17$2 else 255), 8, 0) else $$final_histo[BV32_ADD(BV32_MUL($i.0$2, 4), 3)]);
+    $i.0$1 := (if p1$1 then BV32_ADD($i.0$1, BV32_MUL(v1, v0)) else $i.0$1);
+    $i.0$2 := (if p1$2 then BV32_ADD($i.0$2, BV32_MUL(v1, v0)) else $i.0$2);
+    p0$1 := (if p1$1 then true else p0$1);
+    p0$2 := (if p1$2 then true else p0$2);
+    goto $1.backedge, $1.tail;
+
+  $1.tail:
+    assume !p0$1 && !p0$2;
+    $i1.0$1 := BV32_ADD(BV32_UDIV(v3, 4), v2$1);
+    $i1.0$2 := BV32_ADD(BV32_UDIV(v3, 4), v2$2);
+    p3$1 := true;
+    p3$2 := true;
+    assume {:captureState "loop_entry_state_1_0"} true;
+    goto $5;
+
+  $5:
+    assume {:captureState "loop_head_state_1"} true;
+    assert {:tag "accessedOffsetsSatisfyPredicates"} _b23 ==> _WRITE_HAS_OCCURRED_$$final_histo ==> _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) == BV32_MUL(BV32_ADD(BV32_UDIV(v3, 4), v2$1), 4) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) == BV32_ADD(BV32_MUL(BV32_ADD(BV32_UDIV(v3, 4), v2$1), 4), 1) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) == BV32_ADD(BV32_MUL(BV32_ADD(BV32_UDIV(v3, 4), v2$1), 4), 2) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) == BV32_ADD(BV32_MUL(BV32_ADD(BV32_UDIV(v3, 4), v2$1), 4), 3) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4);
+    assert {:tag "accessedOffsetsSatisfyPredicates"} _b22 ==> _WRITE_HAS_OCCURRED_$$global_overflow ==> _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) == BV32_MUL(BV32_ADD(BV32_UDIV(v3, 4), v2$1), 4) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) == BV32_ADD(BV32_MUL(BV32_ADD(BV32_UDIV(v3, 4), v2$1), 4), 1) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) == BV32_ADD(BV32_MUL(BV32_ADD(BV32_UDIV(v3, 4), v2$1), 4), 2) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) == BV32_ADD(BV32_MUL(BV32_ADD(BV32_UDIV(v3, 4), v2$1), 4), 3) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4);
+    assert {:tag "accessedOffsetsSatisfyPredicates"} _b21 ==> _READ_HAS_OCCURRED_$$global_overflow ==> _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) == BV32_MUL(BV32_ADD(BV32_UDIV(v3, 4), v2$1), 4) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) == BV32_ADD(BV32_MUL(BV32_ADD(BV32_UDIV(v3, 4), v2$1), 4), 1) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) == BV32_ADD(BV32_MUL(BV32_ADD(BV32_UDIV(v3, 4), v2$1), 4), 2) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) == BV32_ADD(BV32_MUL(BV32_ADD(BV32_UDIV(v3, 4), v2$1), 4), 3) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4);
+    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 1} _b11 ==> BV32_ULT($i1.0$1, BV32_UDIV(BV32_ADD(BV32_MUL($sm_range_min, 24576), BV32_MUL(BV32_ADD(BV32_SUB($sm_range_max, $sm_range_min), 1), 24576)), 4)) ==> p3$1;
+    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 2} _b11 ==> BV32_ULT($i1.0$2, BV32_UDIV(BV32_ADD(BV32_MUL($sm_range_min, 24576), BV32_MUL(BV32_ADD(BV32_SUB($sm_range_max, $sm_range_min), 1), 24576)), 4)) ==> p3$2;
+    assert {:tag "loopBound"} {:thread 1} p3$1 ==> _b10 ==> BV32_UGE($i1.0$1, BV32_ADD(BV32_UDIV(v3, 4), v2$1));
+    assert {:tag "loopBound"} {:thread 2} p3$2 ==> _b10 ==> BV32_UGE($i1.0$2, BV32_ADD(BV32_UDIV(v3, 4), v2$2));
+    assert {:tag "loopBound"} {:thread 1} p3$1 ==> _b9 ==> BV32_ULE($i1.0$1, BV32_ADD(BV32_UDIV(v3, 4), v2$1));
+    assert {:tag "loopBound"} {:thread 2} p3$2 ==> _b9 ==> BV32_ULE($i1.0$2, BV32_ADD(BV32_UDIV(v3, 4), v2$2));
+    assert {:tag "loopBound"} {:thread 1} p3$1 ==> _b8 ==> BV32_SGE($i1.0$1, BV32_ADD(BV32_UDIV(v3, 4), v2$1));
+    assert {:tag "loopBound"} {:thread 2} p3$2 ==> _b8 ==> BV32_SGE($i1.0$2, BV32_ADD(BV32_UDIV(v3, 4), v2$2));
+    assert {:tag "loopBound"} {:thread 1} p3$1 ==> _b7 ==> BV32_SLE($i1.0$1, BV32_ADD(BV32_UDIV(v3, 4), v2$1));
+    assert {:tag "loopBound"} {:thread 2} p3$2 ==> _b7 ==> BV32_SLE($i1.0$2, BV32_ADD(BV32_UDIV(v3, 4), v2$2));
+    assert {:tag "loopCounterIsStrided"} {:thread 1} p3$1 ==> _b6 ==> $i1.0$1 mod BV32_MUL(num_groups_x, group_size_x) == BV32_ADD(BV32_UDIV(v3, 4), v2$1) mod BV32_MUL(num_groups_x, group_size_x);
+    assert {:tag "loopCounterIsStrided"} {:thread 2} p3$2 ==> _b6 ==> $i1.0$2 mod BV32_MUL(num_groups_x, group_size_x) == BV32_ADD(BV32_UDIV(v3, 4), v2$2) mod BV32_MUL(num_groups_x, group_size_x);
+    assert {:block_sourceloc} {:sourceloc_num 33} p3$1 ==> true;
+    assert {:originated_from_invariant} {:sourceloc_num 34} {:thread 1} p3$1 ==> (if BV32_UREM(BV32_SUB($i1.0$1, BV32_ADD(BV32_UDIV(v3, 4), v2$1)), BV32_MUL(v1, v0)) == 0 then 1 else 0) != 0;
+    assert {:originated_from_invariant} {:sourceloc_num 34} {:thread 2} p3$2 ==> (if BV32_UREM(BV32_SUB($i1.0$2, BV32_ADD(BV32_UDIV(v3, 4), v2$2)), BV32_MUL(v1, v0)) == 0 then 1 else 0) != 0;
+    assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 35} {:thread 1} (if _READ_HAS_OCCURRED_$$global_overflow ==> BV32_UREM(BV32_SUB(BV32_UDIV(BV32_MUL(4, _WATCHED_OFFSET), 16), BV32_ADD(BV32_UDIV(v3, 4), v2$1)), BV32_MUL(v1, v0)) == 0 then 1 else 0) != 0;
+    assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 36} {:thread 1} (if _WRITE_HAS_OCCURRED_$$global_overflow ==> BV32_UREM(BV32_SUB(BV32_UDIV(BV32_MUL(4, _WATCHED_OFFSET), 16), BV32_ADD(BV32_UDIV(v3, 4), v2$1)), BV32_MUL(v1, v0)) == 0 then 1 else 0) != 0;
+    assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 37} {:thread 1} (if _WRITE_HAS_OCCURRED_$$final_histo ==> BV32_OR(BV32_AND(BV32_AND(BV1_ZEXT32((if BV32_ULT(v2$1, BV32_UDIV(v3, 4)) then 1 else 0)), BV1_ZEXT32((if BV32_UREM(BV32_SUB(BV32_UDIV(_WATCHED_OFFSET, 4), v2$1), BV32_MUL(v1, v0)) == 0 then 1 else 0))), BV1_ZEXT32((if BV32_ULE(BV32_UDIV(BV32_SUB(BV32_UDIV(_WATCHED_OFFSET, 4), v2$1), BV32_MUL(v1, v0)), BV32_UDIV(BV32_SUB(BV32_UDIV(v3, 4), v2$1), BV32_MUL(v1, v0))) then 1 else 0))), BV32_AND(BV32_AND(BV1_ZEXT32((if BV32_ULT(BV32_ADD(BV32_UDIV(v3, 4), v2$1), BV32_UDIV(BV32_ADD(v3, v4), 4)) then 1 else 0)), BV1_ZEXT32((if BV32_UREM(BV32_SUB(BV32_UDIV(_WATCHED_OFFSET, 4), BV32_ADD(BV32_UDIV(v3, 4), v2$1)), BV32_MUL(v1, v0)) == 0 then 1 else 0))), BV1_ZEXT32((if BV32_ULE(BV32_UDIV(BV32_SUB(BV32_UDIV(_WATCHED_OFFSET, 4), BV32_ADD(BV32_UDIV(v3, 4), v2$1)), BV32_MUL(v1, v0)), BV32_UDIV(BV32_SUB(BV32_UDIV(BV32_ADD(v3, v4), 4), BV32_ADD(BV32_UDIV(v3, 4), v2$1)), BV32_MUL(v1, v0))) then 1 else 0)))) != 0 then 1 else 0) != 0;
+    v18$1 := (if p3$1 then BV32_ULT($i1.0$1, BV32_UDIV(BV32_ADD(v3, v4), 4)) else v18$1);
+    v18$2 := (if p3$2 then BV32_ULT($i1.0$2, BV32_UDIV(BV32_ADD(v3, v4), 4)) else v18$2);
+    p4$1 := false;
+    p4$2 := false;
+    p4$1 := (if p3$1 && v18$1 then v18$1 else p4$1);
+    p4$2 := (if p3$2 && v18$2 then v18$2 else p4$2);
+    p3$1 := (if p3$1 && !v18$1 then v18$1 else p3$1);
+    p3$2 := (if p3$2 && !v18$2 then v18$2 else p3$2);
+    call {:sourceloc} {:sourceloc_num 39} _LOG_READ_$$global_overflow(p4$1, BV32_MUL($i1.0$1, 4), $$global_overflow[BV32_MUL($i1.0$1, 4)]);
+    assume {:do_not_predicate} {:check_id "check_state_20"} {:captureState "check_state_20"} {:sourceloc} {:sourceloc_num 39} true;
+    call {:check_id "check_state_20"} {:sourceloc} {:sourceloc_num 39} _CHECK_READ_$$global_overflow(p4$2, BV32_MUL($i1.0$2, 4), $$global_overflow[BV32_MUL($i1.0$2, 4)]);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$global_overflow"} true;
+    v19$1 := (if p4$1 then $$global_overflow[BV32_MUL($i1.0$1, 4)] else v19$1);
+    v19$2 := (if p4$2 then $$global_overflow[BV32_MUL($i1.0$2, 4)] else v19$2);
+    call {:sourceloc} {:sourceloc_num 40} _LOG_READ_$$global_overflow(p4$1, BV32_ADD(BV32_MUL($i1.0$1, 4), 1), $$global_overflow[BV32_ADD(BV32_MUL($i1.0$1, 4), 1)]);
+    assume {:do_not_predicate} {:check_id "check_state_21"} {:captureState "check_state_21"} {:sourceloc} {:sourceloc_num 40} true;
+    call {:check_id "check_state_21"} {:sourceloc} {:sourceloc_num 40} _CHECK_READ_$$global_overflow(p4$2, BV32_ADD(BV32_MUL($i1.0$2, 4), 1), $$global_overflow[BV32_ADD(BV32_MUL($i1.0$2, 4), 1)]);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$global_overflow"} true;
+    v20$1 := (if p4$1 then $$global_overflow[BV32_ADD(BV32_MUL($i1.0$1, 4), 1)] else v20$1);
+    v20$2 := (if p4$2 then $$global_overflow[BV32_ADD(BV32_MUL($i1.0$2, 4), 1)] else v20$2);
+    call {:sourceloc} {:sourceloc_num 41} _LOG_READ_$$global_overflow(p4$1, BV32_ADD(BV32_MUL($i1.0$1, 4), 2), $$global_overflow[BV32_ADD(BV32_MUL($i1.0$1, 4), 2)]);
+    assume {:do_not_predicate} {:check_id "check_state_22"} {:captureState "check_state_22"} {:sourceloc} {:sourceloc_num 41} true;
+    call {:check_id "check_state_22"} {:sourceloc} {:sourceloc_num 41} _CHECK_READ_$$global_overflow(p4$2, BV32_ADD(BV32_MUL($i1.0$2, 4), 2), $$global_overflow[BV32_ADD(BV32_MUL($i1.0$2, 4), 2)]);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$global_overflow"} true;
+    v21$1 := (if p4$1 then $$global_overflow[BV32_ADD(BV32_MUL($i1.0$1, 4), 2)] else v21$1);
+    v21$2 := (if p4$2 then $$global_overflow[BV32_ADD(BV32_MUL($i1.0$2, 4), 2)] else v21$2);
+    call {:sourceloc} {:sourceloc_num 42} _LOG_READ_$$global_overflow(p4$1, BV32_ADD(BV32_MUL($i1.0$1, 4), 3), $$global_overflow[BV32_ADD(BV32_MUL($i1.0$1, 4), 3)]);
+    assume {:do_not_predicate} {:check_id "check_state_23"} {:captureState "check_state_23"} {:sourceloc} {:sourceloc_num 42} true;
+    call {:check_id "check_state_23"} {:sourceloc} {:sourceloc_num 42} _CHECK_READ_$$global_overflow(p4$2, BV32_ADD(BV32_MUL($i1.0$2, 4), 3), $$global_overflow[BV32_ADD(BV32_MUL($i1.0$2, 4), 3)]);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$global_overflow"} true;
+    v22$1 := (if p4$1 then $$global_overflow[BV32_ADD(BV32_MUL($i1.0$1, 4), 3)] else v22$1);
+    v22$2 := (if p4$2 then $$global_overflow[BV32_ADD(BV32_MUL($i1.0$2, 4), 3)] else v22$2);
+    call {:sourceloc} {:sourceloc_num 43} _LOG_WRITE_$$global_overflow(p4$1, BV32_MUL($i1.0$1, 4), 0, $$global_overflow[BV32_MUL($i1.0$1, 4)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$global_overflow(p4$2, BV32_MUL($i1.0$2, 4));
+    assume {:do_not_predicate} {:check_id "check_state_24"} {:captureState "check_state_24"} {:sourceloc} {:sourceloc_num 43} true;
+    call {:check_id "check_state_24"} {:sourceloc} {:sourceloc_num 43} _CHECK_WRITE_$$global_overflow(p4$2, BV32_MUL($i1.0$2, 4), 0);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$global_overflow"} true;
+    $$global_overflow[BV32_MUL($i1.0$1, 4)] := (if p4$1 then 0 else $$global_overflow[BV32_MUL($i1.0$1, 4)]);
+    $$global_overflow[BV32_MUL($i1.0$2, 4)] := (if p4$2 then 0 else $$global_overflow[BV32_MUL($i1.0$2, 4)]);
+    call {:sourceloc} {:sourceloc_num 44} _LOG_WRITE_$$global_overflow(p4$1, BV32_ADD(BV32_MUL($i1.0$1, 4), 1), 0, $$global_overflow[BV32_ADD(BV32_MUL($i1.0$1, 4), 1)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$global_overflow(p4$2, BV32_ADD(BV32_MUL($i1.0$2, 4), 1));
+    assume {:do_not_predicate} {:check_id "check_state_25"} {:captureState "check_state_25"} {:sourceloc} {:sourceloc_num 44} true;
+    call {:check_id "check_state_25"} {:sourceloc} {:sourceloc_num 44} _CHECK_WRITE_$$global_overflow(p4$2, BV32_ADD(BV32_MUL($i1.0$2, 4), 1), 0);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$global_overflow"} true;
+    $$global_overflow[BV32_ADD(BV32_MUL($i1.0$1, 4), 1)] := (if p4$1 then 0 else $$global_overflow[BV32_ADD(BV32_MUL($i1.0$1, 4), 1)]);
+    $$global_overflow[BV32_ADD(BV32_MUL($i1.0$2, 4), 1)] := (if p4$2 then 0 else $$global_overflow[BV32_ADD(BV32_MUL($i1.0$2, 4), 1)]);
+    call {:sourceloc} {:sourceloc_num 45} _LOG_WRITE_$$global_overflow(p4$1, BV32_ADD(BV32_MUL($i1.0$1, 4), 2), 0, $$global_overflow[BV32_ADD(BV32_MUL($i1.0$1, 4), 2)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$global_overflow(p4$2, BV32_ADD(BV32_MUL($i1.0$2, 4), 2));
+    assume {:do_not_predicate} {:check_id "check_state_26"} {:captureState "check_state_26"} {:sourceloc} {:sourceloc_num 45} true;
+    call {:check_id "check_state_26"} {:sourceloc} {:sourceloc_num 45} _CHECK_WRITE_$$global_overflow(p4$2, BV32_ADD(BV32_MUL($i1.0$2, 4), 2), 0);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$global_overflow"} true;
+    $$global_overflow[BV32_ADD(BV32_MUL($i1.0$1, 4), 2)] := (if p4$1 then 0 else $$global_overflow[BV32_ADD(BV32_MUL($i1.0$1, 4), 2)]);
+    $$global_overflow[BV32_ADD(BV32_MUL($i1.0$2, 4), 2)] := (if p4$2 then 0 else $$global_overflow[BV32_ADD(BV32_MUL($i1.0$2, 4), 2)]);
+    call {:sourceloc} {:sourceloc_num 46} _LOG_WRITE_$$global_overflow(p4$1, BV32_ADD(BV32_MUL($i1.0$1, 4), 3), 0, $$global_overflow[BV32_ADD(BV32_MUL($i1.0$1, 4), 3)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$global_overflow(p4$2, BV32_ADD(BV32_MUL($i1.0$2, 4), 3));
+    assume {:do_not_predicate} {:check_id "check_state_27"} {:captureState "check_state_27"} {:sourceloc} {:sourceloc_num 46} true;
+    call {:check_id "check_state_27"} {:sourceloc} {:sourceloc_num 46} _CHECK_WRITE_$$global_overflow(p4$2, BV32_ADD(BV32_MUL($i1.0$2, 4), 3), 0);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$global_overflow"} true;
+    $$global_overflow[BV32_ADD(BV32_MUL($i1.0$1, 4), 3)] := (if p4$1 then 0 else $$global_overflow[BV32_ADD(BV32_MUL($i1.0$1, 4), 3)]);
+    $$global_overflow[BV32_ADD(BV32_MUL($i1.0$2, 4), 3)] := (if p4$2 then 0 else $$global_overflow[BV32_ADD(BV32_MUL($i1.0$2, 4), 3)]);
+    havoc _HAVOC_int$1, _HAVOC_int$2;
+    v23$1 := (if p4$1 then _HAVOC_int$1 else v23$1);
+    v23$2 := (if p4$2 then _HAVOC_int$2 else v23$2);
+    havoc _HAVOC_int$1, _HAVOC_int$2;
+    v24$1 := (if p4$1 then _HAVOC_int$1 else v24$1);
+    v24$2 := (if p4$2 then _HAVOC_int$2 else v24$2);
+    havoc _HAVOC_int$1, _HAVOC_int$2;
+    v25$1 := (if p4$1 then _HAVOC_int$1 else v25$1);
+    v25$2 := (if p4$2 then _HAVOC_int$2 else v25$2);
+    havoc _HAVOC_int$1, _HAVOC_int$2;
+    v26$1 := (if p4$1 then _HAVOC_int$1 else v26$1);
+    v26$2 := (if p4$2 then _HAVOC_int$2 else v26$2);
+    call {:sourceloc} {:sourceloc_num 51} _LOG_WRITE_$$final_histo(p4$1, BV32_MUL($i1.0$1, 4), BV_EXTRACT((if BV32_ULT(v23$1, 255) then v23$1 else 255), 8, 0), $$final_histo[BV32_MUL($i1.0$1, 4)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$final_histo(p4$2, BV32_MUL($i1.0$2, 4));
+    assume {:do_not_predicate} {:check_id "check_state_28"} {:captureState "check_state_28"} {:sourceloc} {:sourceloc_num 51} true;
+    call {:check_id "check_state_28"} {:sourceloc} {:sourceloc_num 51} _CHECK_WRITE_$$final_histo(p4$2, BV32_MUL($i1.0$2, 4), BV_EXTRACT((if BV32_ULT(v23$2, 255) then v23$2 else 255), 8, 0));
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$final_histo"} true;
+    $$final_histo[BV32_MUL($i1.0$1, 4)] := (if p4$1 then BV_EXTRACT((if BV32_ULT(v23$1, 255) then v23$1 else 255), 8, 0) else $$final_histo[BV32_MUL($i1.0$1, 4)]);
+    $$final_histo[BV32_MUL($i1.0$2, 4)] := (if p4$2 then BV_EXTRACT((if BV32_ULT(v23$2, 255) then v23$2 else 255), 8, 0) else $$final_histo[BV32_MUL($i1.0$2, 4)]);
+    call {:sourceloc} {:sourceloc_num 52} _LOG_WRITE_$$final_histo(p4$1, BV32_ADD(BV32_MUL($i1.0$1, 4), 1), BV_EXTRACT((if BV32_ULT(v24$1, 255) then v24$1 else 255), 8, 0), $$final_histo[BV32_ADD(BV32_MUL($i1.0$1, 4), 1)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$final_histo(p4$2, BV32_ADD(BV32_MUL($i1.0$2, 4), 1));
+    assume {:do_not_predicate} {:check_id "check_state_29"} {:captureState "check_state_29"} {:sourceloc} {:sourceloc_num 52} true;
+    call {:check_id "check_state_29"} {:sourceloc} {:sourceloc_num 52} _CHECK_WRITE_$$final_histo(p4$2, BV32_ADD(BV32_MUL($i1.0$2, 4), 1), BV_EXTRACT((if BV32_ULT(v24$2, 255) then v24$2 else 255), 8, 0));
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$final_histo"} true;
+    $$final_histo[BV32_ADD(BV32_MUL($i1.0$1, 4), 1)] := (if p4$1 then BV_EXTRACT((if BV32_ULT(v24$1, 255) then v24$1 else 255), 8, 0) else $$final_histo[BV32_ADD(BV32_MUL($i1.0$1, 4), 1)]);
+    $$final_histo[BV32_ADD(BV32_MUL($i1.0$2, 4), 1)] := (if p4$2 then BV_EXTRACT((if BV32_ULT(v24$2, 255) then v24$2 else 255), 8, 0) else $$final_histo[BV32_ADD(BV32_MUL($i1.0$2, 4), 1)]);
+    call {:sourceloc} {:sourceloc_num 53} _LOG_WRITE_$$final_histo(p4$1, BV32_ADD(BV32_MUL($i1.0$1, 4), 2), BV_EXTRACT((if BV32_ULT(v25$1, 255) then v25$1 else 255), 8, 0), $$final_histo[BV32_ADD(BV32_MUL($i1.0$1, 4), 2)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$final_histo(p4$2, BV32_ADD(BV32_MUL($i1.0$2, 4), 2));
+    assume {:do_not_predicate} {:check_id "check_state_30"} {:captureState "check_state_30"} {:sourceloc} {:sourceloc_num 53} true;
+    call {:check_id "check_state_30"} {:sourceloc} {:sourceloc_num 53} _CHECK_WRITE_$$final_histo(p4$2, BV32_ADD(BV32_MUL($i1.0$2, 4), 2), BV_EXTRACT((if BV32_ULT(v25$2, 255) then v25$2 else 255), 8, 0));
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$final_histo"} true;
+    $$final_histo[BV32_ADD(BV32_MUL($i1.0$1, 4), 2)] := (if p4$1 then BV_EXTRACT((if BV32_ULT(v25$1, 255) then v25$1 else 255), 8, 0) else $$final_histo[BV32_ADD(BV32_MUL($i1.0$1, 4), 2)]);
+    $$final_histo[BV32_ADD(BV32_MUL($i1.0$2, 4), 2)] := (if p4$2 then BV_EXTRACT((if BV32_ULT(v25$2, 255) then v25$2 else 255), 8, 0) else $$final_histo[BV32_ADD(BV32_MUL($i1.0$2, 4), 2)]);
+    call {:sourceloc} {:sourceloc_num 54} _LOG_WRITE_$$final_histo(p4$1, BV32_ADD(BV32_MUL($i1.0$1, 4), 3), BV_EXTRACT((if BV32_ULT(v26$1, 255) then v26$1 else 255), 8, 0), $$final_histo[BV32_ADD(BV32_MUL($i1.0$1, 4), 3)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$final_histo(p4$2, BV32_ADD(BV32_MUL($i1.0$2, 4), 3));
+    assume {:do_not_predicate} {:check_id "check_state_31"} {:captureState "check_state_31"} {:sourceloc} {:sourceloc_num 54} true;
+    call {:check_id "check_state_31"} {:sourceloc} {:sourceloc_num 54} _CHECK_WRITE_$$final_histo(p4$2, BV32_ADD(BV32_MUL($i1.0$2, 4), 3), BV_EXTRACT((if BV32_ULT(v26$2, 255) then v26$2 else 255), 8, 0));
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$final_histo"} true;
+    $$final_histo[BV32_ADD(BV32_MUL($i1.0$1, 4), 3)] := (if p4$1 then BV_EXTRACT((if BV32_ULT(v26$1, 255) then v26$1 else 255), 8, 0) else $$final_histo[BV32_ADD(BV32_MUL($i1.0$1, 4), 3)]);
+    $$final_histo[BV32_ADD(BV32_MUL($i1.0$2, 4), 3)] := (if p4$2 then BV_EXTRACT((if BV32_ULT(v26$2, 255) then v26$2 else 255), 8, 0) else $$final_histo[BV32_ADD(BV32_MUL($i1.0$2, 4), 3)]);
+    $i1.0$1 := (if p4$1 then BV32_ADD($i1.0$1, BV32_MUL(v1, v0)) else $i1.0$1);
+    $i1.0$2 := (if p4$2 then BV32_ADD($i1.0$2, BV32_MUL(v1, v0)) else $i1.0$2);
+    p3$1 := (if p4$1 then true else p3$1);
+    p3$2 := (if p4$2 then true else p3$2);
+    goto $5.backedge, $5.tail;
+
+  $5.tail:
+    assume !p3$1 && !p3$2;
+    $i4.0$1 := BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1);
+    $i4.0$2 := BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$2);
+    p5$1 := true;
+    p5$2 := true;
+    assume {:captureState "loop_entry_state_0_0"} true;
+    goto $9;
+
+  $9:
+    assume {:captureState "loop_head_state_0"} true;
+    assert {:tag "accessedOffsetsSatisfyPredicates"} _b26 ==> _WRITE_HAS_OCCURRED_$$final_histo ==> _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) == BV32_MUL(BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1), 4) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) == BV32_ADD(BV32_MUL(BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1), 4), 1) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) == BV32_ADD(BV32_MUL(BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1), 4), 2) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4) == BV32_ADD(BV32_MUL(BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1), 4), 3) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 4);
+    assert {:tag "accessedOffsetsSatisfyPredicates"} _b25 ==> _WRITE_HAS_OCCURRED_$$global_histo ==> _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) == BV32_MUL(BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1), 8) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) == BV32_ADD(BV32_MUL(BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1), 8), 1) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) == BV32_ADD(BV32_MUL(BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1), 8), 2) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) == BV32_ADD(BV32_MUL(BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1), 8), 3) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) == BV32_ADD(BV32_MUL(BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1), 8), 4) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) == BV32_ADD(BV32_MUL(BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1), 8), 5) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) == BV32_ADD(BV32_MUL(BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1), 8), 6) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) == BV32_ADD(BV32_MUL(BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1), 8), 7) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8);
+    assert {:tag "accessedOffsetsSatisfyPredicates"} _b24 ==> _READ_HAS_OCCURRED_$$global_histo ==> _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) == BV32_MUL(BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1), 8) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) == BV32_ADD(BV32_MUL(BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1), 8), 1) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) == BV32_ADD(BV32_MUL(BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1), 8), 2) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) == BV32_ADD(BV32_MUL(BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1), 8), 3) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) == BV32_ADD(BV32_MUL(BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1), 8), 4) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) == BV32_ADD(BV32_MUL(BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1), 8), 5) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) == BV32_ADD(BV32_MUL(BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1), 8), 6) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) || _WATCHED_OFFSET mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8) == BV32_ADD(BV32_MUL(BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1), 8), 7) mod BV32_MUL(BV32_MUL(num_groups_x, group_size_x), 8);
+    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 1} _b17 ==> BV32_ULT($i4.0$1, BV32_UDIV(BV32_MUL($histo_height, $histo_width), 4)) ==> p5$1;
+    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 2} _b17 ==> BV32_ULT($i4.0$2, BV32_UDIV(BV32_MUL($histo_height, $histo_width), 4)) ==> p5$2;
+    assert {:tag "loopBound"} {:thread 1} p5$1 ==> _b16 ==> BV32_UGE($i4.0$1, BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1));
+    assert {:tag "loopBound"} {:thread 2} p5$2 ==> _b16 ==> BV32_UGE($i4.0$2, BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$2));
+    assert {:tag "loopBound"} {:thread 1} p5$1 ==> _b15 ==> BV32_ULE($i4.0$1, BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1));
+    assert {:tag "loopBound"} {:thread 2} p5$2 ==> _b15 ==> BV32_ULE($i4.0$2, BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$2));
+    assert {:tag "loopBound"} {:thread 1} p5$1 ==> _b14 ==> BV32_SGE($i4.0$1, BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1));
+    assert {:tag "loopBound"} {:thread 2} p5$2 ==> _b14 ==> BV32_SGE($i4.0$2, BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$2));
+    assert {:tag "loopBound"} {:thread 1} p5$1 ==> _b13 ==> BV32_SLE($i4.0$1, BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1));
+    assert {:tag "loopBound"} {:thread 2} p5$2 ==> _b13 ==> BV32_SLE($i4.0$2, BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$2));
+    assert {:tag "loopCounterIsStrided"} {:thread 1} p5$1 ==> _b12 ==> $i4.0$1 mod BV32_MUL(num_groups_x, group_size_x) == BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1) mod BV32_MUL(num_groups_x, group_size_x);
+    assert {:tag "loopCounterIsStrided"} {:thread 2} p5$2 ==> _b12 ==> $i4.0$2 mod BV32_MUL(num_groups_x, group_size_x) == BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$2) mod BV32_MUL(num_groups_x, group_size_x);
+    assert {:block_sourceloc} {:sourceloc_num 57} p5$1 ==> true;
+    assert {:originated_from_invariant} {:sourceloc_num 58} {:thread 1} p5$1 ==> (if BV32_UREM(BV32_SUB($i4.0$1, BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1)), BV32_MUL(v1, v0)) == 0 then 1 else 0) != 0;
+    assert {:originated_from_invariant} {:sourceloc_num 58} {:thread 2} p5$2 ==> (if BV32_UREM(BV32_SUB($i4.0$2, BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$2)), BV32_MUL(v1, v0)) == 0 then 1 else 0) != 0;
+    assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 59} {:thread 1} (if _READ_HAS_OCCURRED_$$global_histo ==> BV32_OR(BV32_AND(BV32_AND(BV1_ZEXT32((if BV32_ULT(v2$1, BV32_UDIV(v3, 4)) then 1 else 0)), BV1_ZEXT32((if BV32_UREM(BV32_SUB(BV32_UDIV(_WATCHED_OFFSET, 8), v2$1), BV32_MUL(v1, v0)) == 0 then 1 else 0))), BV1_ZEXT32((if BV32_ULE(BV32_UDIV(BV32_SUB(BV32_UDIV(_WATCHED_OFFSET, 8), v2$1), BV32_MUL(v1, v0)), BV32_UDIV(BV32_SUB(BV32_UDIV(v3, 4), v2$1), BV32_MUL(v1, v0))) then 1 else 0))), BV32_AND(BV1_ZEXT32((if BV32_UREM(BV32_SUB(BV32_UDIV(_WATCHED_OFFSET, 8), BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1)), BV32_MUL(v1, v0)) == 0 then 1 else 0)), BV1_ZEXT32((if BV32_ULE(BV32_UDIV(BV32_SUB(BV32_UDIV(_WATCHED_OFFSET, 8), BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1)), BV32_MUL(v1, v0)), BV32_UDIV(BV32_SUB(BV32_UDIV(BV32_MUL($histo_height, $histo_width), 4), BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1)), BV32_MUL(v1, v0))) then 1 else 0)))) != 0 then 1 else 0) != 0;
+    assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 60} {:thread 1} (if _WRITE_HAS_OCCURRED_$$global_histo ==> BV32_OR(BV32_AND(BV32_AND(BV1_ZEXT32((if BV32_ULT(v2$1, BV32_UDIV(v3, 4)) then 1 else 0)), BV1_ZEXT32((if BV32_UREM(BV32_SUB(BV32_UDIV(_WATCHED_OFFSET, 8), v2$1), BV32_MUL(v1, v0)) == 0 then 1 else 0))), BV1_ZEXT32((if BV32_ULE(BV32_UDIV(BV32_SUB(BV32_UDIV(_WATCHED_OFFSET, 8), v2$1), BV32_MUL(v1, v0)), BV32_UDIV(BV32_SUB(BV32_UDIV(v3, 4), v2$1), BV32_MUL(v1, v0))) then 1 else 0))), BV32_AND(BV1_ZEXT32((if BV32_UREM(BV32_SUB(BV32_UDIV(_WATCHED_OFFSET, 8), BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1)), BV32_MUL(v1, v0)) == 0 then 1 else 0)), BV1_ZEXT32((if BV32_ULE(BV32_UDIV(BV32_SUB(BV32_UDIV(_WATCHED_OFFSET, 8), BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1)), BV32_MUL(v1, v0)), BV32_UDIV(BV32_SUB(BV32_UDIV(BV32_MUL($histo_height, $histo_width), 4), BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1)), BV32_MUL(v1, v0))) then 1 else 0)))) != 0 then 1 else 0) != 0;
+    assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 61} {:thread 1} (if _WRITE_HAS_OCCURRED_$$final_histo ==> BV32_OR(BV32_OR(BV32_AND(BV32_AND(BV1_ZEXT32((if BV32_ULT(v2$1, BV32_UDIV(v3, 4)) then 1 else 0)), BV1_ZEXT32((if BV32_UREM(BV32_SUB(BV32_UDIV(_WATCHED_OFFSET, 4), v2$1), BV32_MUL(v1, v0)) == 0 then 1 else 0))), BV1_ZEXT32((if BV32_ULE(BV32_UDIV(BV32_SUB(BV32_UDIV(_WATCHED_OFFSET, 4), v2$1), BV32_MUL(v1, v0)), BV32_UDIV(BV32_SUB(BV32_UDIV(v3, 4), v2$1), BV32_MUL(v1, v0))) then 1 else 0))), BV32_AND(BV32_AND(BV1_ZEXT32((if BV32_ULT(BV32_ADD(BV32_UDIV(v3, 4), v2$1), BV32_UDIV(BV32_ADD(v3, v4), 4)) then 1 else 0)), BV1_ZEXT32((if BV32_UREM(BV32_SUB(BV32_UDIV(_WATCHED_OFFSET, 4), BV32_ADD(BV32_UDIV(v3, 4), v2$1)), BV32_MUL(v1, v0)) == 0 then 1 else 0))), BV1_ZEXT32((if BV32_ULE(BV32_UDIV(BV32_SUB(BV32_UDIV(_WATCHED_OFFSET, 4), BV32_ADD(BV32_UDIV(v3, 4), v2$1)), BV32_MUL(v1, v0)), BV32_UDIV(BV32_SUB(BV32_UDIV(BV32_ADD(v3, v4), 4), BV32_ADD(BV32_UDIV(v3, 4), v2$1)), BV32_MUL(v1, v0))) then 1 else 0)))), BV32_AND(BV1_ZEXT32((if BV32_UREM(BV32_SUB(BV32_UDIV(_WATCHED_OFFSET, 4), BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1)), BV32_MUL(v1, v0)) == 0 then 1 else 0)), BV1_ZEXT32((if BV32_ULE(BV32_UDIV(BV32_SUB(BV32_UDIV(_WATCHED_OFFSET, 4), BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1)), BV32_MUL(v1, v0)), BV32_UDIV(BV32_SUB(BV32_UDIV(BV32_MUL($histo_height, $histo_width), 4), BV32_ADD(BV32_UDIV(BV32_ADD(v3, v4), 4), v2$1)), BV32_MUL(v1, v0))) then 1 else 0)))) != 0 then 1 else 0) != 0;
+    v27$1 := (if p5$1 then BV32_ULT($i4.0$1, BV32_UDIV(BV32_MUL($histo_height, $histo_width), 4)) else v27$1);
+    v27$2 := (if p5$2 then BV32_ULT($i4.0$2, BV32_UDIV(BV32_MUL($histo_height, $histo_width), 4)) else v27$2);
+    p6$1 := false;
+    p6$2 := false;
+    p6$1 := (if p5$1 && v27$1 then v27$1 else p6$1);
+    p6$2 := (if p5$2 && v27$2 then v27$2 else p6$2);
+    p5$1 := (if p5$1 && !v27$1 then v27$1 else p5$1);
+    p5$2 := (if p5$2 && !v27$2 then v27$2 else p5$2);
+    call {:sourceloc} {:sourceloc_num 63} _LOG_READ_$$global_histo(p6$1, BV32_MUL($i4.0$1, 8), $$global_histo[BV32_MUL($i4.0$1, 8)]);
+    assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 63} true;
+    call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 63} _CHECK_READ_$$global_histo(p6$2, BV32_MUL($i4.0$2, 8), $$global_histo[BV32_MUL($i4.0$2, 8)]);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$global_histo"} true;
+    v28$1 := (if p6$1 then $$global_histo[BV32_MUL($i4.0$1, 8)] else v28$1);
+    v28$2 := (if p6$2 then $$global_histo[BV32_MUL($i4.0$2, 8)] else v28$2);
+    call {:sourceloc} {:sourceloc_num 64} _LOG_READ_$$global_histo(p6$1, BV32_ADD(BV32_MUL($i4.0$1, 8), 1), $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 1)]);
+    assume {:do_not_predicate} {:check_id "check_state_1"} {:captureState "check_state_1"} {:sourceloc} {:sourceloc_num 64} true;
+    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 64} _CHECK_READ_$$global_histo(p6$2, BV32_ADD(BV32_MUL($i4.0$2, 8), 1), $$global_histo[BV32_ADD(BV32_MUL($i4.0$2, 8), 1)]);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$global_histo"} true;
+    v29$1 := (if p6$1 then $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 1)] else v29$1);
+    v29$2 := (if p6$2 then $$global_histo[BV32_ADD(BV32_MUL($i4.0$2, 8), 1)] else v29$2);
+    call {:sourceloc} {:sourceloc_num 65} _LOG_READ_$$global_histo(p6$1, BV32_ADD(BV32_MUL($i4.0$1, 8), 2), $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 2)]);
+    assume {:do_not_predicate} {:check_id "check_state_2"} {:captureState "check_state_2"} {:sourceloc} {:sourceloc_num 65} true;
+    call {:check_id "check_state_2"} {:sourceloc} {:sourceloc_num 65} _CHECK_READ_$$global_histo(p6$2, BV32_ADD(BV32_MUL($i4.0$2, 8), 2), $$global_histo[BV32_ADD(BV32_MUL($i4.0$2, 8), 2)]);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$global_histo"} true;
+    v30$1 := (if p6$1 then $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 2)] else v30$1);
+    v30$2 := (if p6$2 then $$global_histo[BV32_ADD(BV32_MUL($i4.0$2, 8), 2)] else v30$2);
+    call {:sourceloc} {:sourceloc_num 66} _LOG_READ_$$global_histo(p6$1, BV32_ADD(BV32_MUL($i4.0$1, 8), 3), $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 3)]);
+    assume {:do_not_predicate} {:check_id "check_state_3"} {:captureState "check_state_3"} {:sourceloc} {:sourceloc_num 66} true;
+    call {:check_id "check_state_3"} {:sourceloc} {:sourceloc_num 66} _CHECK_READ_$$global_histo(p6$2, BV32_ADD(BV32_MUL($i4.0$2, 8), 3), $$global_histo[BV32_ADD(BV32_MUL($i4.0$2, 8), 3)]);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$global_histo"} true;
+    v31$1 := (if p6$1 then $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 3)] else v31$1);
+    v31$2 := (if p6$2 then $$global_histo[BV32_ADD(BV32_MUL($i4.0$2, 8), 3)] else v31$2);
+    call {:sourceloc} {:sourceloc_num 67} _LOG_READ_$$global_histo(p6$1, BV32_ADD(BV32_MUL($i4.0$1, 8), 4), $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 4)]);
+    assume {:do_not_predicate} {:check_id "check_state_4"} {:captureState "check_state_4"} {:sourceloc} {:sourceloc_num 67} true;
+    call {:check_id "check_state_4"} {:sourceloc} {:sourceloc_num 67} _CHECK_READ_$$global_histo(p6$2, BV32_ADD(BV32_MUL($i4.0$2, 8), 4), $$global_histo[BV32_ADD(BV32_MUL($i4.0$2, 8), 4)]);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$global_histo"} true;
+    v32$1 := (if p6$1 then $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 4)] else v32$1);
+    v32$2 := (if p6$2 then $$global_histo[BV32_ADD(BV32_MUL($i4.0$2, 8), 4)] else v32$2);
+    call {:sourceloc} {:sourceloc_num 68} _LOG_READ_$$global_histo(p6$1, BV32_ADD(BV32_MUL($i4.0$1, 8), 5), $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 5)]);
+    assume {:do_not_predicate} {:check_id "check_state_5"} {:captureState "check_state_5"} {:sourceloc} {:sourceloc_num 68} true;
+    call {:check_id "check_state_5"} {:sourceloc} {:sourceloc_num 68} _CHECK_READ_$$global_histo(p6$2, BV32_ADD(BV32_MUL($i4.0$2, 8), 5), $$global_histo[BV32_ADD(BV32_MUL($i4.0$2, 8), 5)]);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$global_histo"} true;
+    v33$1 := (if p6$1 then $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 5)] else v33$1);
+    v33$2 := (if p6$2 then $$global_histo[BV32_ADD(BV32_MUL($i4.0$2, 8), 5)] else v33$2);
+    call {:sourceloc} {:sourceloc_num 69} _LOG_READ_$$global_histo(p6$1, BV32_ADD(BV32_MUL($i4.0$1, 8), 6), $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 6)]);
+    assume {:do_not_predicate} {:check_id "check_state_6"} {:captureState "check_state_6"} {:sourceloc} {:sourceloc_num 69} true;
+    call {:check_id "check_state_6"} {:sourceloc} {:sourceloc_num 69} _CHECK_READ_$$global_histo(p6$2, BV32_ADD(BV32_MUL($i4.0$2, 8), 6), $$global_histo[BV32_ADD(BV32_MUL($i4.0$2, 8), 6)]);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$global_histo"} true;
+    v34$1 := (if p6$1 then $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 6)] else v34$1);
+    v34$2 := (if p6$2 then $$global_histo[BV32_ADD(BV32_MUL($i4.0$2, 8), 6)] else v34$2);
+    call {:sourceloc} {:sourceloc_num 70} _LOG_READ_$$global_histo(p6$1, BV32_ADD(BV32_MUL($i4.0$1, 8), 7), $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 7)]);
+    assume {:do_not_predicate} {:check_id "check_state_7"} {:captureState "check_state_7"} {:sourceloc} {:sourceloc_num 70} true;
+    call {:check_id "check_state_7"} {:sourceloc} {:sourceloc_num 70} _CHECK_READ_$$global_histo(p6$2, BV32_ADD(BV32_MUL($i4.0$2, 8), 7), $$global_histo[BV32_ADD(BV32_MUL($i4.0$2, 8), 7)]);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$global_histo"} true;
+    v35$1 := (if p6$1 then $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 7)] else v35$1);
+    v35$2 := (if p6$2 then $$global_histo[BV32_ADD(BV32_MUL($i4.0$2, 8), 7)] else v35$2);
+    call {:sourceloc} {:sourceloc_num 71} _LOG_WRITE_$$global_histo(p6$1, BV32_MUL($i4.0$1, 8), 0, $$global_histo[BV32_MUL($i4.0$1, 8)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$global_histo(p6$2, BV32_MUL($i4.0$2, 8));
+    assume {:do_not_predicate} {:check_id "check_state_8"} {:captureState "check_state_8"} {:sourceloc} {:sourceloc_num 71} true;
+    call {:check_id "check_state_8"} {:sourceloc} {:sourceloc_num 71} _CHECK_WRITE_$$global_histo(p6$2, BV32_MUL($i4.0$2, 8), 0);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$global_histo"} true;
+    $$global_histo[BV32_MUL($i4.0$1, 8)] := (if p6$1 then 0 else $$global_histo[BV32_MUL($i4.0$1, 8)]);
+    $$global_histo[BV32_MUL($i4.0$2, 8)] := (if p6$2 then 0 else $$global_histo[BV32_MUL($i4.0$2, 8)]);
+    call {:sourceloc} {:sourceloc_num 72} _LOG_WRITE_$$global_histo(p6$1, BV32_ADD(BV32_MUL($i4.0$1, 8), 1), 0, $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 1)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$global_histo(p6$2, BV32_ADD(BV32_MUL($i4.0$2, 8), 1));
+    assume {:do_not_predicate} {:check_id "check_state_9"} {:captureState "check_state_9"} {:sourceloc} {:sourceloc_num 72} true;
+    call {:check_id "check_state_9"} {:sourceloc} {:sourceloc_num 72} _CHECK_WRITE_$$global_histo(p6$2, BV32_ADD(BV32_MUL($i4.0$2, 8), 1), 0);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$global_histo"} true;
+    $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 1)] := (if p6$1 then 0 else $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 1)]);
+    $$global_histo[BV32_ADD(BV32_MUL($i4.0$2, 8), 1)] := (if p6$2 then 0 else $$global_histo[BV32_ADD(BV32_MUL($i4.0$2, 8), 1)]);
+    call {:sourceloc} {:sourceloc_num 73} _LOG_WRITE_$$global_histo(p6$1, BV32_ADD(BV32_MUL($i4.0$1, 8), 2), 0, $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 2)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$global_histo(p6$2, BV32_ADD(BV32_MUL($i4.0$2, 8), 2));
+    assume {:do_not_predicate} {:check_id "check_state_10"} {:captureState "check_state_10"} {:sourceloc} {:sourceloc_num 73} true;
+    call {:check_id "check_state_10"} {:sourceloc} {:sourceloc_num 73} _CHECK_WRITE_$$global_histo(p6$2, BV32_ADD(BV32_MUL($i4.0$2, 8), 2), 0);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$global_histo"} true;
+    $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 2)] := (if p6$1 then 0 else $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 2)]);
+    $$global_histo[BV32_ADD(BV32_MUL($i4.0$2, 8), 2)] := (if p6$2 then 0 else $$global_histo[BV32_ADD(BV32_MUL($i4.0$2, 8), 2)]);
+    call {:sourceloc} {:sourceloc_num 74} _LOG_WRITE_$$global_histo(p6$1, BV32_ADD(BV32_MUL($i4.0$1, 8), 3), 0, $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 3)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$global_histo(p6$2, BV32_ADD(BV32_MUL($i4.0$2, 8), 3));
+    assume {:do_not_predicate} {:check_id "check_state_11"} {:captureState "check_state_11"} {:sourceloc} {:sourceloc_num 74} true;
+    call {:check_id "check_state_11"} {:sourceloc} {:sourceloc_num 74} _CHECK_WRITE_$$global_histo(p6$2, BV32_ADD(BV32_MUL($i4.0$2, 8), 3), 0);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$global_histo"} true;
+    $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 3)] := (if p6$1 then 0 else $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 3)]);
+    $$global_histo[BV32_ADD(BV32_MUL($i4.0$2, 8), 3)] := (if p6$2 then 0 else $$global_histo[BV32_ADD(BV32_MUL($i4.0$2, 8), 3)]);
+    call {:sourceloc} {:sourceloc_num 75} _LOG_WRITE_$$global_histo(p6$1, BV32_ADD(BV32_MUL($i4.0$1, 8), 4), 0, $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 4)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$global_histo(p6$2, BV32_ADD(BV32_MUL($i4.0$2, 8), 4));
+    assume {:do_not_predicate} {:check_id "check_state_12"} {:captureState "check_state_12"} {:sourceloc} {:sourceloc_num 75} true;
+    call {:check_id "check_state_12"} {:sourceloc} {:sourceloc_num 75} _CHECK_WRITE_$$global_histo(p6$2, BV32_ADD(BV32_MUL($i4.0$2, 8), 4), 0);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$global_histo"} true;
+    $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 4)] := (if p6$1 then 0 else $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 4)]);
+    $$global_histo[BV32_ADD(BV32_MUL($i4.0$2, 8), 4)] := (if p6$2 then 0 else $$global_histo[BV32_ADD(BV32_MUL($i4.0$2, 8), 4)]);
+    call {:sourceloc} {:sourceloc_num 76} _LOG_WRITE_$$global_histo(p6$1, BV32_ADD(BV32_MUL($i4.0$1, 8), 5), 0, $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 5)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$global_histo(p6$2, BV32_ADD(BV32_MUL($i4.0$2, 8), 5));
+    assume {:do_not_predicate} {:check_id "check_state_13"} {:captureState "check_state_13"} {:sourceloc} {:sourceloc_num 76} true;
+    call {:check_id "check_state_13"} {:sourceloc} {:sourceloc_num 76} _CHECK_WRITE_$$global_histo(p6$2, BV32_ADD(BV32_MUL($i4.0$2, 8), 5), 0);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$global_histo"} true;
+    $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 5)] := (if p6$1 then 0 else $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 5)]);
+    $$global_histo[BV32_ADD(BV32_MUL($i4.0$2, 8), 5)] := (if p6$2 then 0 else $$global_histo[BV32_ADD(BV32_MUL($i4.0$2, 8), 5)]);
+    call {:sourceloc} {:sourceloc_num 77} _LOG_WRITE_$$global_histo(p6$1, BV32_ADD(BV32_MUL($i4.0$1, 8), 6), 0, $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 6)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$global_histo(p6$2, BV32_ADD(BV32_MUL($i4.0$2, 8), 6));
+    assume {:do_not_predicate} {:check_id "check_state_14"} {:captureState "check_state_14"} {:sourceloc} {:sourceloc_num 77} true;
+    call {:check_id "check_state_14"} {:sourceloc} {:sourceloc_num 77} _CHECK_WRITE_$$global_histo(p6$2, BV32_ADD(BV32_MUL($i4.0$2, 8), 6), 0);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$global_histo"} true;
+    $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 6)] := (if p6$1 then 0 else $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 6)]);
+    $$global_histo[BV32_ADD(BV32_MUL($i4.0$2, 8), 6)] := (if p6$2 then 0 else $$global_histo[BV32_ADD(BV32_MUL($i4.0$2, 8), 6)]);
+    call {:sourceloc} {:sourceloc_num 78} _LOG_WRITE_$$global_histo(p6$1, BV32_ADD(BV32_MUL($i4.0$1, 8), 7), 0, $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 7)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$global_histo(p6$2, BV32_ADD(BV32_MUL($i4.0$2, 8), 7));
+    assume {:do_not_predicate} {:check_id "check_state_15"} {:captureState "check_state_15"} {:sourceloc} {:sourceloc_num 78} true;
+    call {:check_id "check_state_15"} {:sourceloc} {:sourceloc_num 78} _CHECK_WRITE_$$global_histo(p6$2, BV32_ADD(BV32_MUL($i4.0$2, 8), 7), 0);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$global_histo"} true;
+    $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 7)] := (if p6$1 then 0 else $$global_histo[BV32_ADD(BV32_MUL($i4.0$1, 8), 7)]);
+    $$global_histo[BV32_ADD(BV32_MUL($i4.0$2, 8), 7)] := (if p6$2 then 0 else $$global_histo[BV32_ADD(BV32_MUL($i4.0$2, 8), 7)]);
+    v36$1 := (if p6$1 then BV_CONCAT(v29$1, v28$1) else v36$1);
+    v36$2 := (if p6$2 then BV_CONCAT(v29$2, v28$2) else v36$2);
+    v37$1 := (if p6$1 then BV_CONCAT(v31$1, v30$1) else v37$1);
+    v37$2 := (if p6$2 then BV_CONCAT(v31$2, v30$2) else v37$2);
+    v38$1 := (if p6$1 then BV_CONCAT(v33$1, v32$1) else v38$1);
+    v38$2 := (if p6$2 then BV_CONCAT(v33$2, v32$2) else v38$2);
+    v39$1 := (if p6$1 then BV_CONCAT(v35$1, v34$1) else v39$1);
+    v39$2 := (if p6$2 then BV_CONCAT(v35$2, v34$2) else v39$2);
+    call {:sourceloc} {:sourceloc_num 79} _LOG_WRITE_$$final_histo(p6$1, BV32_MUL($i4.0$1, 4), BV_EXTRACT((if BV16_ULT(v36$1, 255) then v36$1 else 255), 8, 0), $$final_histo[BV32_MUL($i4.0$1, 4)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$final_histo(p6$2, BV32_MUL($i4.0$2, 4));
+    assume {:do_not_predicate} {:check_id "check_state_16"} {:captureState "check_state_16"} {:sourceloc} {:sourceloc_num 79} true;
+    call {:check_id "check_state_16"} {:sourceloc} {:sourceloc_num 79} _CHECK_WRITE_$$final_histo(p6$2, BV32_MUL($i4.0$2, 4), BV_EXTRACT((if BV16_ULT(v36$2, 255) then v36$2 else 255), 8, 0));
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$final_histo"} true;
+    $$final_histo[BV32_MUL($i4.0$1, 4)] := (if p6$1 then BV_EXTRACT((if BV16_ULT(v36$1, 255) then v36$1 else 255), 8, 0) else $$final_histo[BV32_MUL($i4.0$1, 4)]);
+    $$final_histo[BV32_MUL($i4.0$2, 4)] := (if p6$2 then BV_EXTRACT((if BV16_ULT(v36$2, 255) then v36$2 else 255), 8, 0) else $$final_histo[BV32_MUL($i4.0$2, 4)]);
+    call {:sourceloc} {:sourceloc_num 80} _LOG_WRITE_$$final_histo(p6$1, BV32_ADD(BV32_MUL($i4.0$1, 4), 1), BV_EXTRACT((if BV16_ULT(v37$1, 255) then v37$1 else 255), 8, 0), $$final_histo[BV32_ADD(BV32_MUL($i4.0$1, 4), 1)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$final_histo(p6$2, BV32_ADD(BV32_MUL($i4.0$2, 4), 1));
+    assume {:do_not_predicate} {:check_id "check_state_17"} {:captureState "check_state_17"} {:sourceloc} {:sourceloc_num 80} true;
+    call {:check_id "check_state_17"} {:sourceloc} {:sourceloc_num 80} _CHECK_WRITE_$$final_histo(p6$2, BV32_ADD(BV32_MUL($i4.0$2, 4), 1), BV_EXTRACT((if BV16_ULT(v37$2, 255) then v37$2 else 255), 8, 0));
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$final_histo"} true;
+    $$final_histo[BV32_ADD(BV32_MUL($i4.0$1, 4), 1)] := (if p6$1 then BV_EXTRACT((if BV16_ULT(v37$1, 255) then v37$1 else 255), 8, 0) else $$final_histo[BV32_ADD(BV32_MUL($i4.0$1, 4), 1)]);
+    $$final_histo[BV32_ADD(BV32_MUL($i4.0$2, 4), 1)] := (if p6$2 then BV_EXTRACT((if BV16_ULT(v37$2, 255) then v37$2 else 255), 8, 0) else $$final_histo[BV32_ADD(BV32_MUL($i4.0$2, 4), 1)]);
+    call {:sourceloc} {:sourceloc_num 81} _LOG_WRITE_$$final_histo(p6$1, BV32_ADD(BV32_MUL($i4.0$1, 4), 2), BV_EXTRACT((if BV16_ULT(v38$1, 255) then v38$1 else 255), 8, 0), $$final_histo[BV32_ADD(BV32_MUL($i4.0$1, 4), 2)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$final_histo(p6$2, BV32_ADD(BV32_MUL($i4.0$2, 4), 2));
+    assume {:do_not_predicate} {:check_id "check_state_18"} {:captureState "check_state_18"} {:sourceloc} {:sourceloc_num 81} true;
+    call {:check_id "check_state_18"} {:sourceloc} {:sourceloc_num 81} _CHECK_WRITE_$$final_histo(p6$2, BV32_ADD(BV32_MUL($i4.0$2, 4), 2), BV_EXTRACT((if BV16_ULT(v38$2, 255) then v38$2 else 255), 8, 0));
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$final_histo"} true;
+    $$final_histo[BV32_ADD(BV32_MUL($i4.0$1, 4), 2)] := (if p6$1 then BV_EXTRACT((if BV16_ULT(v38$1, 255) then v38$1 else 255), 8, 0) else $$final_histo[BV32_ADD(BV32_MUL($i4.0$1, 4), 2)]);
+    $$final_histo[BV32_ADD(BV32_MUL($i4.0$2, 4), 2)] := (if p6$2 then BV_EXTRACT((if BV16_ULT(v38$2, 255) then v38$2 else 255), 8, 0) else $$final_histo[BV32_ADD(BV32_MUL($i4.0$2, 4), 2)]);
+    call {:sourceloc} {:sourceloc_num 82} _LOG_WRITE_$$final_histo(p6$1, BV32_ADD(BV32_MUL($i4.0$1, 4), 3), BV_EXTRACT((if BV16_ULT(v39$1, 255) then v39$1 else 255), 8, 0), $$final_histo[BV32_ADD(BV32_MUL($i4.0$1, 4), 3)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$final_histo(p6$2, BV32_ADD(BV32_MUL($i4.0$2, 4), 3));
+    assume {:do_not_predicate} {:check_id "check_state_19"} {:captureState "check_state_19"} {:sourceloc} {:sourceloc_num 82} true;
+    call {:check_id "check_state_19"} {:sourceloc} {:sourceloc_num 82} _CHECK_WRITE_$$final_histo(p6$2, BV32_ADD(BV32_MUL($i4.0$2, 4), 3), BV_EXTRACT((if BV16_ULT(v39$2, 255) then v39$2 else 255), 8, 0));
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$final_histo"} true;
+    $$final_histo[BV32_ADD(BV32_MUL($i4.0$1, 4), 3)] := (if p6$1 then BV_EXTRACT((if BV16_ULT(v39$1, 255) then v39$1 else 255), 8, 0) else $$final_histo[BV32_ADD(BV32_MUL($i4.0$1, 4), 3)]);
+    $$final_histo[BV32_ADD(BV32_MUL($i4.0$2, 4), 3)] := (if p6$2 then BV_EXTRACT((if BV16_ULT(v39$2, 255) then v39$2 else 255), 8, 0) else $$final_histo[BV32_ADD(BV32_MUL($i4.0$2, 4), 3)]);
+    $i4.0$1 := (if p6$1 then BV32_ADD($i4.0$1, BV32_MUL(v1, v0)) else $i4.0$1);
+    $i4.0$2 := (if p6$2 then BV32_ADD($i4.0$2, BV32_MUL(v1, v0)) else $i4.0$2);
+    p5$1 := (if p6$1 then true else p5$1);
+    p5$2 := (if p6$2 then true else p5$2);
+    goto $9.backedge, $9.tail;
+
+  $9.tail:
+    assume !p5$1 && !p5$2;
+    return;
+
+  $9.backedge:
+    assume {:backedge} p5$1 || p5$2;
+    assume {:captureState "loop_back_edge_state_0_0"} true;
+    goto $9;
+
+  $5.backedge:
+    assume {:backedge} p3$1 || p3$2;
+    assume {:captureState "loop_back_edge_state_1_0"} true;
+    goto $5;
+
+  $1.backedge:
+    assume {:backedge} p0$1 || p0$2;
+    assume {:captureState "loop_back_edge_state_2_0"} true;
+    goto $1;
+}
+
+
+
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+
+axiom (if group_size_x == 512 then 1 else 0) != 0;
+
+axiom (if num_groups_x == 42 then 1 else 0) != 0;
+
+axiom (if global_offset_x == 0 then 1 else 0) != 0;
+
+axiom (if global_offset_y == 0 then 1 else 0) != 0;
+
+axiom (if global_offset_z == 0 then 1 else 0) != 0;
+
+const {:local_id_y} local_id_y$1: int;
+
+const {:local_id_y} local_id_y$2: int;
+
+const {:local_id_z} local_id_z$1: int;
+
+const {:local_id_z} local_id_z$2: int;
+
+const {:group_id_y} group_id_y$1: int;
+
+const {:group_id_y} group_id_y$2: int;
+
+const {:group_id_z} group_id_z$1: int;
+
+const {:group_id_z} group_id_z$2: int;
+
+const {:existential true} _b0: bool;
+
+function {:inline true} BV32_SLE(x: int, y: int) : bool
+{
+  x <= y
+}
+
+const {:existential true} _b1: bool;
+
+function {:inline true} BV32_SGE(x: int, y: int) : bool
+{
+  x >= y
+}
+
+const {:existential true} _b2: bool;
+
+const {:existential true} _b3: bool;
+
+function {:inline true} BV32_UGE(x: int, y: int) : bool
+{
+  x >= y
+}
+
+const {:existential true} _b4: bool;
+
+const {:existential true} _b5: bool;
+
+const {:existential true} _b6: bool;
+
+const {:existential true} _b7: bool;
+
+const {:existential true} _b8: bool;
+
+const {:existential true} _b9: bool;
+
+const {:existential true} _b10: bool;
+
+const {:existential true} _b11: bool;
+
+const {:existential true} _b12: bool;
+
+const {:existential true} _b13: bool;
+
+const {:existential true} _b14: bool;
+
+const {:existential true} _b15: bool;
+
+const {:existential true} _b16: bool;
+
+const {:existential true} _b17: bool;
+
+const _WATCHED_VALUE_$$global_subhisto: int;
+
+procedure {:inline 1} _LOG_READ_$$global_subhisto(_P: bool, _offset: int, _value: int);
+  modifies _READ_HAS_OCCURRED_$$global_subhisto;
+
+
+
+implementation {:inline 1} _LOG_READ_$$global_subhisto(_P: bool, _offset: int, _value: int)
+{
+
+  log_access_entry:
+    _READ_HAS_OCCURRED_$$global_subhisto := (if _P && _TRACKING && _WATCHED_OFFSET == _offset && _WATCHED_VALUE_$$global_subhisto == _value then true else _READ_HAS_OCCURRED_$$global_subhisto);
+    return;
+}
+
+
+
+procedure _CHECK_READ_$$global_subhisto(_P: bool, _offset: int, _value: int);
+  requires {:source_name "global_subhisto"} {:array "$$global_subhisto"} {:race} {:write_read} !(_P && _WRITE_HAS_OCCURRED_$$global_subhisto && _WATCHED_OFFSET == _offset && _WRITE_READ_BENIGN_FLAG_$$global_subhisto);
+  requires {:source_name "global_subhisto"} {:array "$$global_subhisto"} {:race} {:atomic_read} !(_P && _ATOMIC_HAS_OCCURRED_$$global_subhisto && _WATCHED_OFFSET == _offset);
+
+
+
+var _WRITE_READ_BENIGN_FLAG_$$global_subhisto: bool;
+
+procedure {:inline 1} _LOG_WRITE_$$global_subhisto(_P: bool, _offset: int, _value: int, _value_old: int);
+  modifies _WRITE_HAS_OCCURRED_$$global_subhisto, _WRITE_READ_BENIGN_FLAG_$$global_subhisto;
+
+
+
+implementation {:inline 1} _LOG_WRITE_$$global_subhisto(_P: bool, _offset: int, _value: int, _value_old: int)
+{
+
+  log_access_entry:
+    _WRITE_HAS_OCCURRED_$$global_subhisto := (if _P && _TRACKING && _WATCHED_OFFSET == _offset && _WATCHED_VALUE_$$global_subhisto == _value then true else _WRITE_HAS_OCCURRED_$$global_subhisto);
+    _WRITE_READ_BENIGN_FLAG_$$global_subhisto := (if _P && _TRACKING && _WATCHED_OFFSET == _offset && _WATCHED_VALUE_$$global_subhisto == _value then _value != _value_old else _WRITE_READ_BENIGN_FLAG_$$global_subhisto);
+    return;
+}
+
+
+
+procedure _CHECK_WRITE_$$global_subhisto(_P: bool, _offset: int, _value: int);
+  requires {:source_name "global_subhisto"} {:array "$$global_subhisto"} {:race} {:write_write} !(_P && _WRITE_HAS_OCCURRED_$$global_subhisto && _WATCHED_OFFSET == _offset && _WATCHED_VALUE_$$global_subhisto != _value);
+  requires {:source_name "global_subhisto"} {:array "$$global_subhisto"} {:race} {:read_write} !(_P && _READ_HAS_OCCURRED_$$global_subhisto && _WATCHED_OFFSET == _offset && _WATCHED_VALUE_$$global_subhisto != _value);
+  requires {:source_name "global_subhisto"} {:array "$$global_subhisto"} {:race} {:atomic_write} !(_P && _ATOMIC_HAS_OCCURRED_$$global_subhisto && _WATCHED_OFFSET == _offset);
+
+
+
+procedure {:inline 1} _LOG_ATOMIC_$$global_subhisto(_P: bool, _offset: int);
+  modifies _ATOMIC_HAS_OCCURRED_$$global_subhisto;
+
+
+
+implementation {:inline 1} _LOG_ATOMIC_$$global_subhisto(_P: bool, _offset: int)
+{
+
+  log_access_entry:
+    _ATOMIC_HAS_OCCURRED_$$global_subhisto := (if _P && _TRACKING && _WATCHED_OFFSET == _offset then true else _ATOMIC_HAS_OCCURRED_$$global_subhisto);
+    return;
+}
+
+
+
+procedure _CHECK_ATOMIC_$$global_subhisto(_P: bool, _offset: int);
+  requires {:source_name "global_subhisto"} {:array "$$global_subhisto"} {:race} {:write_atomic} !(_P && _WRITE_HAS_OCCURRED_$$global_subhisto && _WATCHED_OFFSET == _offset);
+  requires {:source_name "global_subhisto"} {:array "$$global_subhisto"} {:race} {:read_atomic} !(_P && _READ_HAS_OCCURRED_$$global_subhisto && _WATCHED_OFFSET == _offset);
+
+
+
+procedure {:inline 1} _UPDATE_WRITE_READ_BENIGN_FLAG_$$global_subhisto(_P: bool, _offset: int);
+  modifies _WRITE_READ_BENIGN_FLAG_$$global_subhisto;
+
+
+
+implementation {:inline 1} _UPDATE_WRITE_READ_BENIGN_FLAG_$$global_subhisto(_P: bool, _offset: int)
+{
+
+  _UPDATE_BENIGN_FLAG:
+    _WRITE_READ_BENIGN_FLAG_$$global_subhisto := (if _P && _WRITE_HAS_OCCURRED_$$global_subhisto && _WATCHED_OFFSET == _offset then false else _WRITE_READ_BENIGN_FLAG_$$global_subhisto);
+    return;
+}
+
+
+
+const _WATCHED_VALUE_$$global_histo: int;
+
+procedure {:inline 1} _LOG_READ_$$global_histo(_P: bool, _offset: int, _value: int);
+  modifies _READ_HAS_OCCURRED_$$global_histo;
+
+
+
+implementation {:inline 1} _LOG_READ_$$global_histo(_P: bool, _offset: int, _value: int)
+{
+
+  log_access_entry:
+    _READ_HAS_OCCURRED_$$global_histo := (if _P && _TRACKING && _WATCHED_OFFSET == _offset && _WATCHED_VALUE_$$global_histo == _value then true else _READ_HAS_OCCURRED_$$global_histo);
+    return;
+}
+
+
+
+procedure _CHECK_READ_$$global_histo(_P: bool, _offset: int, _value: int);
+  requires {:source_name "global_histo"} {:array "$$global_histo"} {:race} {:write_read} !(_P && _WRITE_HAS_OCCURRED_$$global_histo && _WATCHED_OFFSET == _offset && _WRITE_READ_BENIGN_FLAG_$$global_histo);
+  requires {:source_name "global_histo"} {:array "$$global_histo"} {:race} {:atomic_read} !(_P && _ATOMIC_HAS_OCCURRED_$$global_histo && _WATCHED_OFFSET == _offset);
+
+
+
+var _WRITE_READ_BENIGN_FLAG_$$global_histo: bool;
+
+procedure {:inline 1} _LOG_WRITE_$$global_histo(_P: bool, _offset: int, _value: int, _value_old: int);
+  modifies _WRITE_HAS_OCCURRED_$$global_histo, _WRITE_READ_BENIGN_FLAG_$$global_histo;
+
+
+
+implementation {:inline 1} _LOG_WRITE_$$global_histo(_P: bool, _offset: int, _value: int, _value_old: int)
+{
+
+  log_access_entry:
+    _WRITE_HAS_OCCURRED_$$global_histo := (if _P && _TRACKING && _WATCHED_OFFSET == _offset && _WATCHED_VALUE_$$global_histo == _value then true else _WRITE_HAS_OCCURRED_$$global_histo);
+    _WRITE_READ_BENIGN_FLAG_$$global_histo := (if _P && _TRACKING && _WATCHED_OFFSET == _offset && _WATCHED_VALUE_$$global_histo == _value then _value != _value_old else _WRITE_READ_BENIGN_FLAG_$$global_histo);
+    return;
+}
+
+
+
+procedure _CHECK_WRITE_$$global_histo(_P: bool, _offset: int, _value: int);
+  requires {:source_name "global_histo"} {:array "$$global_histo"} {:race} {:write_write} !(_P && _WRITE_HAS_OCCURRED_$$global_histo && _WATCHED_OFFSET == _offset && _WATCHED_VALUE_$$global_histo != _value);
+  requires {:source_name "global_histo"} {:array "$$global_histo"} {:race} {:read_write} !(_P && _READ_HAS_OCCURRED_$$global_histo && _WATCHED_OFFSET == _offset && _WATCHED_VALUE_$$global_histo != _value);
+  requires {:source_name "global_histo"} {:array "$$global_histo"} {:race} {:atomic_write} !(_P && _ATOMIC_HAS_OCCURRED_$$global_histo && _WATCHED_OFFSET == _offset);
+
+
+
+procedure {:inline 1} _LOG_ATOMIC_$$global_histo(_P: bool, _offset: int);
+  modifies _ATOMIC_HAS_OCCURRED_$$global_histo;
+
+
+
+implementation {:inline 1} _LOG_ATOMIC_$$global_histo(_P: bool, _offset: int)
+{
+
+  log_access_entry:
+    _ATOMIC_HAS_OCCURRED_$$global_histo := (if _P && _TRACKING && _WATCHED_OFFSET == _offset then true else _ATOMIC_HAS_OCCURRED_$$global_histo);
+    return;
+}
+
+
+
+procedure _CHECK_ATOMIC_$$global_histo(_P: bool, _offset: int);
+  requires {:source_name "global_histo"} {:array "$$global_histo"} {:race} {:write_atomic} !(_P && _WRITE_HAS_OCCURRED_$$global_histo && _WATCHED_OFFSET == _offset);
+  requires {:source_name "global_histo"} {:array "$$global_histo"} {:race} {:read_atomic} !(_P && _READ_HAS_OCCURRED_$$global_histo && _WATCHED_OFFSET == _offset);
+
+
+
+procedure {:inline 1} _UPDATE_WRITE_READ_BENIGN_FLAG_$$global_histo(_P: bool, _offset: int);
+  modifies _WRITE_READ_BENIGN_FLAG_$$global_histo;
+
+
+
+implementation {:inline 1} _UPDATE_WRITE_READ_BENIGN_FLAG_$$global_histo(_P: bool, _offset: int)
+{
+
+  _UPDATE_BENIGN_FLAG:
+    _WRITE_READ_BENIGN_FLAG_$$global_histo := (if _P && _WRITE_HAS_OCCURRED_$$global_histo && _WATCHED_OFFSET == _offset then false else _WRITE_READ_BENIGN_FLAG_$$global_histo);
+    return;
+}
+
+
+
+const _WATCHED_VALUE_$$global_overflow: int;
+
+procedure {:inline 1} _LOG_READ_$$global_overflow(_P: bool, _offset: int, _value: int);
+  modifies _READ_HAS_OCCURRED_$$global_overflow;
+
+
+
+implementation {:inline 1} _LOG_READ_$$global_overflow(_P: bool, _offset: int, _value: int)
+{
+
+  log_access_entry:
+    _READ_HAS_OCCURRED_$$global_overflow := (if _P && _TRACKING && _WATCHED_OFFSET == _offset && _WATCHED_VALUE_$$global_overflow == _value then true else _READ_HAS_OCCURRED_$$global_overflow);
+    return;
+}
+
+
+
+procedure _CHECK_READ_$$global_overflow(_P: bool, _offset: int, _value: int);
+  requires {:source_name "global_overflow"} {:array "$$global_overflow"} {:race} {:write_read} !(_P && _WRITE_HAS_OCCURRED_$$global_overflow && _WATCHED_OFFSET == _offset && _WRITE_READ_BENIGN_FLAG_$$global_overflow);
+  requires {:source_name "global_overflow"} {:array "$$global_overflow"} {:race} {:atomic_read} !(_P && _ATOMIC_HAS_OCCURRED_$$global_overflow && _WATCHED_OFFSET == _offset);
+
+
+
+var _WRITE_READ_BENIGN_FLAG_$$global_overflow: bool;
+
+procedure {:inline 1} _LOG_WRITE_$$global_overflow(_P: bool, _offset: int, _value: int, _value_old: int);
+  modifies _WRITE_HAS_OCCURRED_$$global_overflow, _WRITE_READ_BENIGN_FLAG_$$global_overflow;
+
+
+
+implementation {:inline 1} _LOG_WRITE_$$global_overflow(_P: bool, _offset: int, _value: int, _value_old: int)
+{
+
+  log_access_entry:
+    _WRITE_HAS_OCCURRED_$$global_overflow := (if _P && _TRACKING && _WATCHED_OFFSET == _offset && _WATCHED_VALUE_$$global_overflow == _value then true else _WRITE_HAS_OCCURRED_$$global_overflow);
+    _WRITE_READ_BENIGN_FLAG_$$global_overflow := (if _P && _TRACKING && _WATCHED_OFFSET == _offset && _WATCHED_VALUE_$$global_overflow == _value then _value != _value_old else _WRITE_READ_BENIGN_FLAG_$$global_overflow);
+    return;
+}
+
+
+
+procedure _CHECK_WRITE_$$global_overflow(_P: bool, _offset: int, _value: int);
+  requires {:source_name "global_overflow"} {:array "$$global_overflow"} {:race} {:write_write} !(_P && _WRITE_HAS_OCCURRED_$$global_overflow && _WATCHED_OFFSET == _offset && _WATCHED_VALUE_$$global_overflow != _value);
+  requires {:source_name "global_overflow"} {:array "$$global_overflow"} {:race} {:read_write} !(_P && _READ_HAS_OCCURRED_$$global_overflow && _WATCHED_OFFSET == _offset && _WATCHED_VALUE_$$global_overflow != _value);
+  requires {:source_name "global_overflow"} {:array "$$global_overflow"} {:race} {:atomic_write} !(_P && _ATOMIC_HAS_OCCURRED_$$global_overflow && _WATCHED_OFFSET == _offset);
+
+
+
+procedure {:inline 1} _LOG_ATOMIC_$$global_overflow(_P: bool, _offset: int);
+  modifies _ATOMIC_HAS_OCCURRED_$$global_overflow;
+
+
+
+implementation {:inline 1} _LOG_ATOMIC_$$global_overflow(_P: bool, _offset: int)
+{
+
+  log_access_entry:
+    _ATOMIC_HAS_OCCURRED_$$global_overflow := (if _P && _TRACKING && _WATCHED_OFFSET == _offset then true else _ATOMIC_HAS_OCCURRED_$$global_overflow);
+    return;
+}
+
+
+
+procedure _CHECK_ATOMIC_$$global_overflow(_P: bool, _offset: int);
+  requires {:source_name "global_overflow"} {:array "$$global_overflow"} {:race} {:write_atomic} !(_P && _WRITE_HAS_OCCURRED_$$global_overflow && _WATCHED_OFFSET == _offset);
+  requires {:source_name "global_overflow"} {:array "$$global_overflow"} {:race} {:read_atomic} !(_P && _READ_HAS_OCCURRED_$$global_overflow && _WATCHED_OFFSET == _offset);
+
+
+
+procedure {:inline 1} _UPDATE_WRITE_READ_BENIGN_FLAG_$$global_overflow(_P: bool, _offset: int);
+  modifies _WRITE_READ_BENIGN_FLAG_$$global_overflow;
+
+
+
+implementation {:inline 1} _UPDATE_WRITE_READ_BENIGN_FLAG_$$global_overflow(_P: bool, _offset: int)
+{
+
+  _UPDATE_BENIGN_FLAG:
+    _WRITE_READ_BENIGN_FLAG_$$global_overflow := (if _P && _WRITE_HAS_OCCURRED_$$global_overflow && _WATCHED_OFFSET == _offset then false else _WRITE_READ_BENIGN_FLAG_$$global_overflow);
+    return;
+}
+
+
+
+const _WATCHED_VALUE_$$final_histo: int;
+
+procedure {:inline 1} _LOG_READ_$$final_histo(_P: bool, _offset: int, _value: int);
+  modifies _READ_HAS_OCCURRED_$$final_histo;
+
+
+
+implementation {:inline 1} _LOG_READ_$$final_histo(_P: bool, _offset: int, _value: int)
+{
+
+  log_access_entry:
+    _READ_HAS_OCCURRED_$$final_histo := (if _P && _TRACKING && _WATCHED_OFFSET == _offset && _WATCHED_VALUE_$$final_histo == _value then true else _READ_HAS_OCCURRED_$$final_histo);
+    return;
+}
+
+
+
+procedure _CHECK_READ_$$final_histo(_P: bool, _offset: int, _value: int);
+  requires {:source_name "final_histo"} {:array "$$final_histo"} {:race} {:write_read} !(_P && _WRITE_HAS_OCCURRED_$$final_histo && _WATCHED_OFFSET == _offset && _WRITE_READ_BENIGN_FLAG_$$final_histo);
+  requires {:source_name "final_histo"} {:array "$$final_histo"} {:race} {:atomic_read} !(_P && _ATOMIC_HAS_OCCURRED_$$final_histo && _WATCHED_OFFSET == _offset);
+
+
+
+var _WRITE_READ_BENIGN_FLAG_$$final_histo: bool;
+
+procedure {:inline 1} _LOG_WRITE_$$final_histo(_P: bool, _offset: int, _value: int, _value_old: int);
+  modifies _WRITE_HAS_OCCURRED_$$final_histo, _WRITE_READ_BENIGN_FLAG_$$final_histo;
+
+
+
+implementation {:inline 1} _LOG_WRITE_$$final_histo(_P: bool, _offset: int, _value: int, _value_old: int)
+{
+
+  log_access_entry:
+    _WRITE_HAS_OCCURRED_$$final_histo := (if _P && _TRACKING && _WATCHED_OFFSET == _offset && _WATCHED_VALUE_$$final_histo == _value then true else _WRITE_HAS_OCCURRED_$$final_histo);
+    _WRITE_READ_BENIGN_FLAG_$$final_histo := (if _P && _TRACKING && _WATCHED_OFFSET == _offset && _WATCHED_VALUE_$$final_histo == _value then _value != _value_old else _WRITE_READ_BENIGN_FLAG_$$final_histo);
+    return;
+}
+
+
+
+procedure _CHECK_WRITE_$$final_histo(_P: bool, _offset: int, _value: int);
+  requires {:source_name "final_histo"} {:array "$$final_histo"} {:race} {:write_write} !(_P && _WRITE_HAS_OCCURRED_$$final_histo && _WATCHED_OFFSET == _offset && _WATCHED_VALUE_$$final_histo != _value);
+  requires {:source_name "final_histo"} {:array "$$final_histo"} {:race} {:read_write} !(_P && _READ_HAS_OCCURRED_$$final_histo && _WATCHED_OFFSET == _offset && _WATCHED_VALUE_$$final_histo != _value);
+  requires {:source_name "final_histo"} {:array "$$final_histo"} {:race} {:atomic_write} !(_P && _ATOMIC_HAS_OCCURRED_$$final_histo && _WATCHED_OFFSET == _offset);
+
+
+
+procedure {:inline 1} _LOG_ATOMIC_$$final_histo(_P: bool, _offset: int);
+  modifies _ATOMIC_HAS_OCCURRED_$$final_histo;
+
+
+
+implementation {:inline 1} _LOG_ATOMIC_$$final_histo(_P: bool, _offset: int)
+{
+
+  log_access_entry:
+    _ATOMIC_HAS_OCCURRED_$$final_histo := (if _P && _TRACKING && _WATCHED_OFFSET == _offset then true else _ATOMIC_HAS_OCCURRED_$$final_histo);
+    return;
+}
+
+
+
+procedure _CHECK_ATOMIC_$$final_histo(_P: bool, _offset: int);
+  requires {:source_name "final_histo"} {:array "$$final_histo"} {:race} {:write_atomic} !(_P && _WRITE_HAS_OCCURRED_$$final_histo && _WATCHED_OFFSET == _offset);
+  requires {:source_name "final_histo"} {:array "$$final_histo"} {:race} {:read_atomic} !(_P && _READ_HAS_OCCURRED_$$final_histo && _WATCHED_OFFSET == _offset);
+
+
+
+procedure {:inline 1} _UPDATE_WRITE_READ_BENIGN_FLAG_$$final_histo(_P: bool, _offset: int);
+  modifies _WRITE_READ_BENIGN_FLAG_$$final_histo;
+
+
+
+implementation {:inline 1} _UPDATE_WRITE_READ_BENIGN_FLAG_$$final_histo(_P: bool, _offset: int)
+{
+
+  _UPDATE_BENIGN_FLAG:
+    _WRITE_READ_BENIGN_FLAG_$$final_histo := (if _P && _WRITE_HAS_OCCURRED_$$final_histo && _WATCHED_OFFSET == _offset then false else _WRITE_READ_BENIGN_FLAG_$$final_histo);
+    return;
+}
+
+
+
+var _TRACKING: bool;
+
+function {:inline true} BV32_SGT(x: int, y: int) : bool
+{
+  x > y
+}
+
+function {:inline true} BV32_SLT(x: int, y: int) : bool
+{
+  x < y
+}
+
+const {:existential true} _b18: bool;
+
+const {:existential true} _b19: bool;
+
+const {:existential true} _b20: bool;
+
+const {:existential true} _b21: bool;
+
+const {:existential true} _b22: bool;
+
+const {:existential true} _b23: bool;
+
+const {:existential true} _b24: bool;
+
+const {:existential true} _b25: bool;
+
+const {:existential true} _b26: bool;

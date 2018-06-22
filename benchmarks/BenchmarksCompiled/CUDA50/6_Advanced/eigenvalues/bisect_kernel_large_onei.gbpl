@@ -1,0 +1,549 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [bv32]bv32, y : bv32) returns (z : bv32, A : [bv32]bv32);
+var {:source_name "g_d"} {:global} $$g_d : [bv32]bv32;
+axiom {:array_info "$$g_d"} {:global} {:elem_width 32} {:source_name "g_d"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$g_d : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$g_d : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_d : bool;
+
+var {:source_name "g_s"} {:global} $$g_s : [bv32]bv32;
+axiom {:array_info "$$g_s"} {:global} {:elem_width 32} {:source_name "g_s"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$g_s : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$g_s : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_s : bool;
+
+var {:source_name "g_left"} {:global} $$g_left : [bv32]bv32;
+axiom {:array_info "$$g_left"} {:global} {:elem_width 32} {:source_name "g_left"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$g_left : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$g_left : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_left : bool;
+
+var {:source_name "g_right"} {:global} $$g_right : [bv32]bv32;
+axiom {:array_info "$$g_right"} {:global} {:elem_width 32} {:source_name "g_right"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$g_right : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$g_right : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_right : bool;
+
+var {:source_name "g_pos"} {:global} $$g_pos : [bv32]bv32;
+axiom {:array_info "$$g_pos"} {:global} {:elem_width 32} {:source_name "g_pos"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$g_pos : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$g_pos : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_pos : bool;
+
+var {:source_name "converged_all_threads"} {:group_shared} $$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE21converged_all_threads : [bv32]bv32;
+axiom {:array_info "$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE21converged_all_threads"} {:group_shared} {:elem_width 32} {:source_name "converged_all_threads"} {:source_elem_width 32} {:source_dimensions "1"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE21converged_all_threads : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE21converged_all_threads : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE21converged_all_threads : bool;
+
+var {:source_name "s_left_scratch"} {:group_shared} $$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch : [bv32]bv32;
+axiom {:array_info "$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch"} {:group_shared} {:elem_width 32} {:source_name "s_left_scratch"} {:source_elem_width 32} {:source_dimensions "256"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch : bool;
+
+var {:source_name "s_right_scratch"} {:group_shared} $$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch : [bv32]bv32;
+axiom {:array_info "$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch"} {:group_shared} {:elem_width 32} {:source_name "s_right_scratch"} {:source_elem_width 32} {:source_dimensions "256"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch : bool;
+
+const _WATCHED_OFFSET : bv32;
+const {:group_id_x} group_id_x : bv32;
+const {:group_size_x} group_size_x : bv32;
+const {:group_size_y} group_size_y : bv32;
+const {:group_size_z} group_size_z : bv32;
+const {:local_id_x} local_id_x : bv32;
+const {:num_groups_x} num_groups_x : bv32;
+const {:num_groups_y} num_groups_y : bv32;
+const {:num_groups_z} num_groups_z : bv32;
+function FADD32(bv32, bv32) : bv32;
+function FDIV32(bv32, bv32) : bv32;
+function FLT32(bv32, bv32) : bool;
+function FMUL32(bv32, bv32) : bv32;
+function FSUB32(bv32, bv32) : bv32;
+function {:bvbuiltin "bvadd"} BV32_ADD(bv32, bv32) : bv32;
+function {:bvbuiltin "bvmul"} BV32_MUL(bv32, bv32) : bv32;
+function {:bvbuiltin "bvsub"} BV32_SUB(bv32, bv32) : bv32;
+function {:bvbuiltin "bvult"} BV32_ULT(bv32, bv32) : bool;
+procedure {:source_name "bisectKernelLarge_OneIntervals"} {:kernel} $_Z30bisectKernelLarge_OneIntervalsPfS_jjS_S_Pjf($n:bv32, $num_intervals:bv32, $precision:bv32)
+{
+  var $left.0:bv32;
+  var $right.0:bv32;
+  var $right_count.0:bv32;
+  var $left.1:bv32;
+  var $right.1:bv32;
+  var $converged.0:bv32;
+  var $mid.0:bv32;
+  var $mid.1:bv32;
+  var $mid.i.0:bv32;
+  var $delta.i.0:bv32;
+  var $count.i.0:bv32;
+  var $rem.i.0:bv32;
+  var $i.i.0:bv32;
+  var $delta.i.2:bv32;
+  var $count.i.2:bv32;
+  var $delta.i.1:bv32;
+  var $count.i.1:bv32;
+  var $k.i.0:bv32;
+  var $cond.i:bv32;
+  var $left.4:bv32;
+  var $right.4:bv32;
+  var $converged.2:bv32;
+  var $left.2:bv32;
+  var $right.2:bv32;
+  var $cond:bv32;
+  var $cond28:bv32;
+  var $mid.i.49.0:bv32;
+  var $left.3:bv32;
+  var $right.3:bv32;
+  var $converged.1:bv32;
+  var v5:bool;
+  var v0:bv32;
+  var v1:bool;
+  var v2:bv32;
+  var v3:bv32;
+  var v4:bv32;
+  var v8:bv32;
+  var v9:bv32;
+  var v39:bv32;
+  var v40:bv32;
+  var v41:bv32;
+  var v6:bool;
+  var v10:bool;
+  var v7:bool;
+  var v11:bool;
+  var v19:bv32;
+  var v20:bv32;
+  var v18:bv32;
+  var v26:bv32;
+  var v28:bv32;
+  var v33:bv32;
+  var v34:bv32;
+  var v29:bv32;
+  var v25:bv32;
+  var v13:bv32;
+  var v14:bv32;
+  var v15:bool;
+  var v16:bool;
+  var v12:bool;
+  var v27:bool;
+  var v22:bool;
+  var v23:bool;
+  var v24:bool;
+  var v35:bool;
+  var v30:bv32;
+  var v32:bool;
+  var v31:bool;
+  var v21:bv32;
+  var v17:bool;
+  var v37:bool;
+  var v38:bool;
+  var v36:bv32;
+$entry:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  v0 := BV32_ADD(BV32_MUL(group_size_x, group_id_x), local_id_x);
+  v1 := BV32_ULT(v0, $num_intervals);
+  goto $truebb, $falsebb;
+$if.then:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  assert {:sourceloc} {:sourceloc_num 2} true;
+  v2 := $$g_left[v0];
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  v3 := $$g_right[v0];
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  v4 := $$g_pos[v0];
+  $left.0, $right.0, $right_count.0 := v2, v3, v4;
+  goto $if.end;
+$if.end:
+  assert {:block_sourceloc} {:sourceloc_num 5} true;
+  v5 := 0bv32 == local_id_x;
+  goto $truebb0, $falsebb0;
+$if.then.4:
+  assert {:block_sourceloc} {:sourceloc_num 6} true;
+  assert {:sourceloc} {:sourceloc_num 7} true;
+  $$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE21converged_all_threads[0bv32] := 0bv32;
+  goto $if.end.5;
+$if.end.5:
+  assert {:block_sourceloc} {:sourceloc_num 8} true;
+  call {:sourceloc_num 9} $bugle_barrier(1bv1, 1bv1);
+  $left.1, $right.1, $converged.0, $mid.0 := $left.0, $right.0, 0bv32, 0bv32;
+  goto $while.body;
+$while.body:
+  assert {:block_sourceloc} {:sourceloc_num 10} true;
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  $$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE21converged_all_threads[0bv32] := 1bv32;
+  v6 := BV32_ULT(v0, $num_intervals);
+  goto $truebb1, $falsebb1;
+$land.lhs.true:
+  assert {:block_sourceloc} {:sourceloc_num 12} true;
+  v7 := 0bv32 == $converged.0;
+  goto $truebb2, $falsebb2;
+$if.then.8:
+  assert {:block_sourceloc} {:sourceloc_num 13} true;
+  call {:sourceloc_num 14}   v8 := $_Z6sign_ff($left.1);
+  call {:sourceloc_num 15}   v9 := $_Z6sign_ff($right.1);
+  v10 := v8 == v9;
+  goto $truebb3, $falsebb3;
+$if.then.i:
+  assert {:block_sourceloc} {:sourceloc_num 16} true;
+  $mid.i.0 := FADD32($left.1, FMUL32(FSUB32($right.1, $left.1), 1056964608bv32));
+  goto $_ZL15computeMidpointff.exit;
+$if.else.i:
+  assert {:block_sourceloc} {:sourceloc_num 17} true;
+  $mid.i.0 := FMUL32(FADD32($left.1, $right.1), 1056964608bv32);
+  goto $_ZL15computeMidpointff.exit;
+$_ZL15computeMidpointff.exit:
+  assert {:block_sourceloc} {:sourceloc_num 18} true;
+  $mid.1 := $mid.i.0;
+  goto $if.end.9;
+$if.end.9:
+  assert {:block_sourceloc} {:sourceloc_num 19} true;
+  $delta.i.0, $count.i.0, $rem.i.0, $i.i.0 := 1065353216bv32, 0bv32, $n, 0bv32;
+  goto $for.cond.i;
+$for.cond.i:
+  assert {:block_sourceloc} {:sourceloc_num 20} true;
+  v11 := BV32_ULT($i.i.0, $n);
+  goto $truebb4, $falsebb4;
+$for.body.i:
+  assert {:block_sourceloc} {:sourceloc_num 21} true;
+  call {:sourceloc_num 22} $bugle_barrier(1bv1, 1bv1);
+  v12 := BV32_ULT(BV32_ADD($i.i.0, local_id_x), $n);
+  goto $truebb5, $falsebb5;
+$if.then.i.44:
+  assert {:block_sourceloc} {:sourceloc_num 23} true;
+  assert {:sourceloc} {:sourceloc_num 24} true;
+  v13 := $$g_d[BV32_ADD($i.i.0, local_id_x)];
+  assert {:sourceloc} {:sourceloc_num 25} true;
+  $$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch[local_id_x] := v13;
+  assert {:sourceloc} {:sourceloc_num 26} true;
+  v14 := $$g_s[BV32_ADD(BV32_ADD($i.i.0, local_id_x), 4294967295bv32)];
+  assert {:sourceloc} {:sourceloc_num 27} true;
+  $$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch[local_id_x] := v14;
+  goto $if.end.i;
+$if.end.i:
+  assert {:block_sourceloc} {:sourceloc_num 28} true;
+  call {:sourceloc_num 29} $bugle_barrier(1bv1, 1bv1);
+  v15 := BV32_ULT(v0, $num_intervals);
+  goto $truebb6, $falsebb6;
+$if.then.8.i:
+  assert {:block_sourceloc} {:sourceloc_num 30} true;
+  $delta.i.1, $count.i.1, $k.i.0 := $delta.i.0, $count.i.0, 0bv32;
+  goto $for.cond.9.i;
+$for.cond.9.i:
+  assert {:block_sourceloc} {:sourceloc_num 31} true;
+  v16 := BV32_ULT($rem.i.0, group_size_x);
+  goto $truebb7, $falsebb7;
+$cond.true.i:
+  assert {:block_sourceloc} {:sourceloc_num 32} true;
+  $cond.i := $rem.i.0;
+  goto $cond.end.i;
+$cond.false.i:
+  assert {:block_sourceloc} {:sourceloc_num 33} true;
+  $cond.i := group_size_x;
+  goto $cond.end.i;
+$cond.end.i:
+  assert {:block_sourceloc} {:sourceloc_num 34} true;
+  v17 := BV32_ULT($k.i.0, $cond.i);
+  goto $truebb8, $falsebb8;
+$for.body.12.i:
+  assert {:block_sourceloc} {:sourceloc_num 35} true;
+  assert {:sourceloc} {:sourceloc_num 36} true;
+  v18 := $$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch[$k.i.0];
+  assert {:sourceloc} {:sourceloc_num 37} true;
+  v19 := $$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch[$k.i.0];
+  assert {:sourceloc} {:sourceloc_num 38} true;
+  v20 := $$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch[$k.i.0];
+  v21 := FSUB32(FSUB32(v18, $mid.1), FDIV32(FMUL32(v19, v20), $delta.i.1));
+  $delta.i.1, $count.i.1, $k.i.0 := v21, BV32_ADD($count.i.1, (if FLT32(v21, 0bv32) then 1bv32 else 0bv32)), BV32_ADD($k.i.0, 1bv32);
+  goto $for.cond.9.i;
+$for.end.i:
+  assert {:block_sourceloc} {:sourceloc_num 39} true;
+  $delta.i.2, $count.i.2 := $delta.i.1, $count.i.1;
+  goto $if.end.20.i;
+$if.end.20.i:
+  assert {:block_sourceloc} {:sourceloc_num 40} true;
+  $delta.i.0, $count.i.0, $rem.i.0, $i.i.0 := $delta.i.2, $count.i.2, BV32_SUB($rem.i.0, group_size_x), BV32_ADD($i.i.0, group_size_x);
+  goto $for.cond.i;
+$_ZL31computeNumSmallerEigenvalsLargePfS_jfjjS_S_j.exit:
+  assert {:block_sourceloc} {:sourceloc_num 41} true;
+  call {:sourceloc_num 42} $bugle_barrier(1bv1, 1bv1);
+  v22 := BV32_ULT(v0, $num_intervals);
+  goto $truebb9, $falsebb9;
+$land.lhs.true.12:
+  assert {:block_sourceloc} {:sourceloc_num 43} true;
+  v23 := 0bv32 == $converged.0;
+  goto $truebb10, $falsebb10;
+$if.then.14:
+  assert {:block_sourceloc} {:sourceloc_num 44} true;
+  v24 := $right_count.0 == $count.i.0;
+  goto $truebb11, $falsebb11;
+$if.then.16:
+  assert {:block_sourceloc} {:sourceloc_num 45} true;
+  $left.2, $right.2 := $left.1, $mid.1;
+  goto $if.end.17;
+$if.else:
+  assert {:block_sourceloc} {:sourceloc_num 46} true;
+  $left.2, $right.2 := $mid.1, $right.1;
+  goto $if.end.17;
+$if.end.17:
+  assert {:block_sourceloc} {:sourceloc_num 47} true;
+  call {:sourceloc_num 48}   v25 := $abs($right.2);
+  call {:sourceloc_num 49}   v26 := $abs($left.2);
+  v27 := FLT32(v25, v26);
+  goto $truebb12, $falsebb12;
+$cond.true:
+  assert {:block_sourceloc} {:sourceloc_num 50} true;
+  call {:sourceloc_num 51}   v28 := $abs($left.2);
+  $cond := v28;
+  goto $cond.end;
+$cond.false:
+  assert {:block_sourceloc} {:sourceloc_num 52} true;
+  call {:sourceloc_num 53}   v29 := $abs($right.2);
+  $cond := v29;
+  goto $cond.end;
+$cond.end:
+  assert {:block_sourceloc} {:sourceloc_num 54} true;
+  v30 := FMUL32($cond, $precision);
+  v31 := FLT32($precision, v30);
+  goto $truebb13, $falsebb13;
+$cond.true.25:
+  assert {:block_sourceloc} {:sourceloc_num 55} true;
+  $cond28 := $precision;
+  goto $cond.end.27;
+$cond.false.26:
+  assert {:block_sourceloc} {:sourceloc_num 56} true;
+  $cond28 := v30;
+  goto $cond.end.27;
+$cond.end.27:
+  assert {:block_sourceloc} {:sourceloc_num 57} true;
+  v32 := FLT32(FSUB32($right.2, $left.2), $cond28);
+  goto $truebb14, $falsebb14;
+$if.then.30:
+  assert {:block_sourceloc} {:sourceloc_num 58} true;
+  call {:sourceloc_num 59}   v33 := $_Z6sign_ff($left.2);
+  call {:sourceloc_num 60}   v34 := $_Z6sign_ff($right.2);
+  v35 := v33 == v34;
+  goto $truebb15, $falsebb15;
+$if.then.i.56:
+  assert {:block_sourceloc} {:sourceloc_num 61} true;
+  $mid.i.49.0 := FADD32($left.2, FMUL32(FSUB32($right.2, $left.2), 1056964608bv32));
+  goto $_ZL15computeMidpointff.exit61;
+$if.else.i.59:
+  assert {:block_sourceloc} {:sourceloc_num 62} true;
+  $mid.i.49.0 := FMUL32(FADD32($left.2, $right.2), 1056964608bv32);
+  goto $_ZL15computeMidpointff.exit61;
+$_ZL15computeMidpointff.exit61:
+  assert {:block_sourceloc} {:sourceloc_num 63} true;
+  $left.3, $right.3, $converged.1 := $mid.i.49.0, $mid.i.49.0, 1bv32;
+  goto $if.end.33;
+$if.else.32:
+  assert {:block_sourceloc} {:sourceloc_num 64} true;
+  assert {:sourceloc} {:sourceloc_num 65} true;
+  $$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE21converged_all_threads[0bv32] := 0bv32;
+  $left.3, $right.3, $converged.1 := $left.2, $right.2, $converged.0;
+  goto $if.end.33;
+$if.end.33:
+  assert {:block_sourceloc} {:sourceloc_num 66} true;
+  $left.4, $right.4, $converged.2 := $left.3, $right.3, $converged.1;
+  goto $if.end.34;
+$if.end.34:
+  assert {:block_sourceloc} {:sourceloc_num 67} true;
+  call {:sourceloc_num 68} $bugle_barrier(1bv1, 1bv1);
+  assert {:sourceloc} {:sourceloc_num 69} true;
+  v36 := $$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE21converged_all_threads[0bv32];
+  v37 := 1bv32 == v36;
+  goto $truebb16, $falsebb16;
+$if.then.36:
+  assert {:block_sourceloc} {:sourceloc_num 70} true;
+  goto $while.end;
+$if.end.37:
+  assert {:block_sourceloc} {:sourceloc_num 71} true;
+  call {:sourceloc_num 72} $bugle_barrier(1bv1, 1bv1);
+  $left.1, $right.1, $converged.0, $mid.0 := $left.4, $right.4, $converged.2, $mid.1;
+  goto $while.body;
+$while.end:
+  assert {:block_sourceloc} {:sourceloc_num 73} true;
+  call {:sourceloc_num 74} $bugle_barrier(1bv1, 1bv1);
+  v38 := BV32_ULT(v0, $num_intervals);
+  goto $truebb17, $falsebb17;
+$if.then.39:
+  assert {:block_sourceloc} {:sourceloc_num 75} true;
+  assert {:sourceloc} {:sourceloc_num 76} true;
+  $$g_left[v0] := $left.4;
+  goto $if.end.41;
+$if.end.41:
+  assert {:block_sourceloc} {:sourceloc_num 77} true;
+  return;
+$truebb:
+  assume {:partition} v1;
+  assert {:block_sourceloc} {:sourceloc_num 78} true;
+  goto $if.then;
+$falsebb:
+  assume {:partition} !v1;
+  assert {:block_sourceloc} {:sourceloc_num 79} true;
+  havoc v39;
+  havoc v40;
+  havoc v41;
+  $left.0, $right.0, $right_count.0 := v39, v40, v41;
+  goto $if.end;
+$truebb0:
+  assume {:partition} v5;
+  assert {:block_sourceloc} {:sourceloc_num 80} true;
+  goto $if.then.4;
+$falsebb0:
+  assume {:partition} !v5;
+  assert {:block_sourceloc} {:sourceloc_num 81} true;
+  goto $if.end.5;
+$truebb1:
+  assume {:partition} v6;
+  assert {:block_sourceloc} {:sourceloc_num 82} true;
+  goto $land.lhs.true;
+$falsebb1:
+  assume {:partition} !v6;
+  assert {:block_sourceloc} {:sourceloc_num 83} true;
+  $mid.1 := $mid.0;
+  goto $if.end.9;
+$truebb2:
+  assume {:partition} v7;
+  assert {:block_sourceloc} {:sourceloc_num 84} true;
+  goto $if.then.8;
+$falsebb2:
+  assume {:partition} !v7;
+  assert {:block_sourceloc} {:sourceloc_num 85} true;
+  $mid.1 := $mid.0;
+  goto $if.end.9;
+$truebb3:
+  assume {:partition} v10;
+  assert {:block_sourceloc} {:sourceloc_num 86} true;
+  goto $if.then.i;
+$falsebb3:
+  assume {:partition} !v10;
+  assert {:block_sourceloc} {:sourceloc_num 87} true;
+  goto $if.else.i;
+$truebb4:
+  assume {:partition} v11;
+  assert {:block_sourceloc} {:sourceloc_num 88} true;
+  goto $for.body.i;
+$falsebb4:
+  assume {:partition} !v11;
+  assert {:block_sourceloc} {:sourceloc_num 89} true;
+  goto $_ZL31computeNumSmallerEigenvalsLargePfS_jfjjS_S_j.exit;
+$truebb5:
+  assume {:partition} v12;
+  assert {:block_sourceloc} {:sourceloc_num 90} true;
+  goto $if.then.i.44;
+$falsebb5:
+  assume {:partition} !v12;
+  assert {:block_sourceloc} {:sourceloc_num 91} true;
+  goto $if.end.i;
+$truebb6:
+  assume {:partition} v15;
+  assert {:block_sourceloc} {:sourceloc_num 92} true;
+  goto $if.then.8.i;
+$falsebb6:
+  assume {:partition} !v15;
+  assert {:block_sourceloc} {:sourceloc_num 93} true;
+  $delta.i.2, $count.i.2 := $delta.i.0, $count.i.0;
+  goto $if.end.20.i;
+$truebb7:
+  assume {:partition} v16;
+  assert {:block_sourceloc} {:sourceloc_num 94} true;
+  goto $cond.true.i;
+$falsebb7:
+  assume {:partition} !v16;
+  assert {:block_sourceloc} {:sourceloc_num 95} true;
+  goto $cond.false.i;
+$truebb8:
+  assume {:partition} v17;
+  assert {:block_sourceloc} {:sourceloc_num 96} true;
+  goto $for.body.12.i;
+$falsebb8:
+  assume {:partition} !v17;
+  assert {:block_sourceloc} {:sourceloc_num 97} true;
+  goto $for.end.i;
+$truebb9:
+  assume {:partition} v22;
+  assert {:block_sourceloc} {:sourceloc_num 98} true;
+  goto $land.lhs.true.12;
+$falsebb9:
+  assume {:partition} !v22;
+  assert {:block_sourceloc} {:sourceloc_num 99} true;
+  $left.4, $right.4, $converged.2 := $left.1, $right.1, $converged.0;
+  goto $if.end.34;
+$truebb10:
+  assume {:partition} v23;
+  assert {:block_sourceloc} {:sourceloc_num 100} true;
+  goto $if.then.14;
+$falsebb10:
+  assume {:partition} !v23;
+  assert {:block_sourceloc} {:sourceloc_num 101} true;
+  $left.4, $right.4, $converged.2 := $left.1, $right.1, $converged.0;
+  goto $if.end.34;
+$truebb11:
+  assume {:partition} v24;
+  assert {:block_sourceloc} {:sourceloc_num 102} true;
+  goto $if.then.16;
+$falsebb11:
+  assume {:partition} !v24;
+  assert {:block_sourceloc} {:sourceloc_num 103} true;
+  goto $if.else;
+$truebb12:
+  assume {:partition} v27;
+  assert {:block_sourceloc} {:sourceloc_num 104} true;
+  goto $cond.true;
+$falsebb12:
+  assume {:partition} !v27;
+  assert {:block_sourceloc} {:sourceloc_num 105} true;
+  goto $cond.false;
+$truebb13:
+  assume {:partition} v31;
+  assert {:block_sourceloc} {:sourceloc_num 106} true;
+  goto $cond.true.25;
+$falsebb13:
+  assume {:partition} !v31;
+  assert {:block_sourceloc} {:sourceloc_num 107} true;
+  goto $cond.false.26;
+$truebb14:
+  assume {:partition} v32;
+  assert {:block_sourceloc} {:sourceloc_num 108} true;
+  goto $if.then.30;
+$falsebb14:
+  assume {:partition} !v32;
+  assert {:block_sourceloc} {:sourceloc_num 109} true;
+  goto $if.else.32;
+$truebb15:
+  assume {:partition} v35;
+  assert {:block_sourceloc} {:sourceloc_num 110} true;
+  goto $if.then.i.56;
+$falsebb15:
+  assume {:partition} !v35;
+  assert {:block_sourceloc} {:sourceloc_num 111} true;
+  goto $if.else.i.59;
+$truebb16:
+  assume {:partition} v37;
+  assert {:block_sourceloc} {:sourceloc_num 112} true;
+  goto $if.then.36;
+$falsebb16:
+  assume {:partition} !v37;
+  assert {:block_sourceloc} {:sourceloc_num 113} true;
+  goto $if.end.37;
+$truebb17:
+  assume {:partition} v38;
+  assert {:block_sourceloc} {:sourceloc_num 114} true;
+  goto $if.then.39;
+$falsebb17:
+  assume {:partition} !v38;
+  assert {:block_sourceloc} {:sourceloc_num 115} true;
+  goto $if.end.41;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:bv1, $1:bv1);
+procedure {:source_name "abs"} $abs($0:bv32) returns ($ret:bv32);
+procedure {:source_name "_Z6sign_ff"} $_Z6sign_ff($0:bv32) returns ($ret:bv32);
+axiom (if group_size_y == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if group_size_z == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_y == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_z == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if group_size_x == 256bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_x == 1bv32 then 1bv1 else 0bv1) != 0bv1;

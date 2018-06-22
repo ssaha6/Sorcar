@@ -1,0 +1,113 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "blurimage"} {:global} $$blurimage : [int]int;
+axiom {:array_info "$$blurimage"} {:global} {:elem_width 32} {:source_name "blurimage"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$blurimage : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$blurimage : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$blurimage : bool;
+
+var {:source_name "img"} {:global} $$img : [int]int;
+axiom {:array_info "$$img"} {:global} {:elem_width 32} {:source_name "img"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$img : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$img : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$img : bool;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_id_y} group_id_y : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:local_id_y} local_id_y : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function FADD32(int, int) : int;
+function FDIV32(int, int) : int;
+function SI32_TO_FP32(int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SLE(x : int, y : int) : bool {
+  x <= y
+}
+procedure {:source_name "boxblur"} {:kernel} $_Z7boxblurPfS_ii($originX:int, $originY:int)
+{
+  var $r.0:int;
+  var $samples.0:int;
+  var $dy.0:int;
+  var $r.1:int;
+  var $samples.1:int;
+  var $dx.0:int;
+  var v0:int;
+  var v1:int;
+  var v2:bool;
+  var v3:bool;
+  var v4:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  v0 := BV32_ADD(BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x), $originX);
+  v1 := BV32_ADD(BV32_ADD(BV32_MUL(group_id_y, group_size_y), local_id_y), $originY);
+  $r.0, $samples.0, $dy.0 := 0, 0, -1;
+  goto $1;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  v2 := BV32_SLE($dy.0, 1);
+  goto $truebb, $falsebb;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  $r.1, $samples.1, $dx.0 := $r.0, $samples.0, -1;
+  goto $3;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 3} true;
+  v3 := BV32_SLE($dx.0, 1);
+  goto $truebb0, $falsebb0;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 4} true;
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  v4 := $$img[BV32_ADD(BV32_ADD(BV32_MUL(BV32_ADD(v1, $dy.0), 17), v0), $dx.0)];
+  goto $5;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 6} true;
+  $r.1, $samples.1, $dx.0 := FADD32($r.1, v4), BV32_ADD($samples.1, 1), BV32_ADD($dx.0, 1);
+  goto $3;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  goto $7;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 8} true;
+  $r.0, $samples.0, $dy.0 := $r.1, $samples.1, BV32_ADD($dy.0, 1);
+  goto $1;
+$8:
+  assert {:block_sourceloc} {:sourceloc_num 9} true;
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  $$blurimage[BV32_ADD(BV32_MUL(v1, 17), v0)] := FDIV32($r.0, SI32_TO_FP32($samples.0));
+  return;
+$truebb:
+  assume {:partition} v2;
+  assert {:block_sourceloc} {:sourceloc_num 11} true;
+  goto $2;
+$falsebb:
+  assume {:partition} !v2;
+  assert {:block_sourceloc} {:sourceloc_num 12} true;
+  goto $8;
+$truebb0:
+  assume {:partition} v3;
+  assert {:block_sourceloc} {:sourceloc_num 13} true;
+  goto $4;
+$falsebb0:
+  assume {:partition} !v3;
+  assert {:block_sourceloc} {:sourceloc_num 14} true;
+  goto $6;
+}
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 17 then 1 else 0) != 0;
+axiom (if group_size_y == 17 then 1 else 0) != 0;
+axiom (if num_groups_x == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;

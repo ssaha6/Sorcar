@@ -1,0 +1,147 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "va"} {:global} $$va : [int]int;
+axiom {:array_info "$$va"} {:global} {:elem_width 32} {:source_name "va"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$va : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$va : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$va : bool;
+
+var {:source_name "vb"} {:global} $$vb : [int]int;
+axiom {:array_info "$$vb"} {:global} {:elem_width 32} {:source_name "vb"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$vb : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$vb : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$vb : bool;
+
+var {:source_name "vresult"} {:global} $$vresult : [int]int;
+axiom {:array_info "$$vresult"} {:global} {:elem_width 32} {:source_name "vresult"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$vresult : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$vresult : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$vresult : bool;
+
+var {:source_name "localA"} {:group_shared} $$_ZZ13mxm_amp_tiledPKfS0_PfE6localA : [int]int;
+axiom {:array_info "$$_ZZ13mxm_amp_tiledPKfS0_PfE6localA"} {:group_shared} {:elem_width 32} {:source_name "localA"} {:source_elem_width 32} {:source_dimensions "16,16"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*,16"} _READ_HAS_OCCURRED_$$_ZZ13mxm_amp_tiledPKfS0_PfE6localA : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*,16"} _WRITE_HAS_OCCURRED_$$_ZZ13mxm_amp_tiledPKfS0_PfE6localA : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*,16"} _ATOMIC_HAS_OCCURRED_$$_ZZ13mxm_amp_tiledPKfS0_PfE6localA : bool;
+
+var {:source_name "localB"} {:group_shared} $$_ZZ13mxm_amp_tiledPKfS0_PfE6localB : [int]int;
+axiom {:array_info "$$_ZZ13mxm_amp_tiledPKfS0_PfE6localB"} {:group_shared} {:elem_width 32} {:source_name "localB"} {:source_elem_width 32} {:source_dimensions "16,16"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*,16"} _READ_HAS_OCCURRED_$$_ZZ13mxm_amp_tiledPKfS0_PfE6localB : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*,16"} _WRITE_HAS_OCCURRED_$$_ZZ13mxm_amp_tiledPKfS0_PfE6localB : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*,16"} _ATOMIC_HAS_OCCURRED_$$_ZZ13mxm_amp_tiledPKfS0_PfE6localB : bool;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_id_y} group_id_y : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:local_id_y} local_id_y : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function FADD32(int, int) : int;
+function FMUL32(int, int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SLT(x : int, y : int) : bool {
+  x < y
+}
+function {:inline true} BV32_ULT(x : int, y : int) : bool {
+  x < y
+}
+procedure {:source_name "mxm_amp_tiled"} {:kernel} $_Z13mxm_amp_tiledPKfS0_Pf()
+{
+  var $temp_c.0:int;
+  var $i.0:int;
+  var $temp_c.1:int;
+  var $k.0:int;
+  var v0:int;
+  var v1:int;
+  var v2:bool;
+  var v3:int;
+  var v4:int;
+  var v5:bool;
+  var v6:int;
+  var v7:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  v0 := BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x);
+  v1 := BV32_ADD(BV32_MUL(group_id_y, group_size_y), local_id_y);
+  $temp_c.0, $i.0 := 0, 0;
+  goto $1;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  v2 := BV32_SLT($i.0, 256);
+  goto $truebb, $falsebb;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  v3 := $$va[BV32_ADD(BV32_ADD(BV32_MUL(v1, 256), $i.0), local_id_x)];
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  $$_ZZ13mxm_amp_tiledPKfS0_PfE6localA[BV32_ADD(BV32_MUL(local_id_y, 16), local_id_x)] := v3;
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  v4 := $$vb[BV32_ADD(BV32_MUL(BV32_ADD($i.0, local_id_y), 256), v0)];
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  $$_ZZ13mxm_amp_tiledPKfS0_PfE6localB[BV32_ADD(BV32_MUL(local_id_y, 16), local_id_x)] := v4;
+  call {:sourceloc_num 7} $bugle_barrier(-1, -1);
+  $temp_c.1, $k.0 := $temp_c.0, 0;
+  goto $3;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 8} true;
+  v5 := BV32_ULT($k.0, 16);
+  goto $truebb0, $falsebb0;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 9} true;
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  v6 := $$_ZZ13mxm_amp_tiledPKfS0_PfE6localA[BV32_ADD(BV32_MUL(local_id_y, 16), $k.0)];
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  v7 := $$_ZZ13mxm_amp_tiledPKfS0_PfE6localB[BV32_ADD(BV32_MUL($k.0, 16), local_id_x)];
+  goto $5;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 12} true;
+  $temp_c.1, $k.0 := FADD32($temp_c.1, FMUL32(v6, v7)), BV32_ADD($k.0, 1);
+  goto $3;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 13} true;
+  call {:sourceloc_num 14} $bugle_barrier(-1, -1);
+  goto $7;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 15} true;
+  $temp_c.0, $i.0 := $temp_c.1, BV32_ADD($i.0, 16);
+  goto $1;
+$8:
+  assert {:block_sourceloc} {:sourceloc_num 16} true;
+  assert {:sourceloc} {:sourceloc_num 17} true;
+  $$vresult[BV32_ADD(BV32_MUL(v1, 256), v0)] := $temp_c.0;
+  return;
+$truebb:
+  assume {:partition} v2;
+  assert {:block_sourceloc} {:sourceloc_num 18} true;
+  goto $2;
+$falsebb:
+  assume {:partition} !v2;
+  assert {:block_sourceloc} {:sourceloc_num 19} true;
+  goto $8;
+$truebb0:
+  assume {:partition} v5;
+  assert {:block_sourceloc} {:sourceloc_num 20} true;
+  goto $4;
+$falsebb0:
+  assume {:partition} !v5;
+  assert {:block_sourceloc} {:sourceloc_num 21} true;
+  goto $6;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:int, $1:int);
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 16 then 1 else 0) != 0;
+axiom (if group_size_y == 16 then 1 else 0) != 0;
+axiom (if num_groups_x == 16 then 1 else 0) != 0;
+axiom (if num_groups_y == 16 then 1 else 0) != 0;

@@ -1,0 +1,150 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "keys"} {:global} $$keys : [int]int;
+axiom {:array_info "$$keys"} {:global} {:elem_width 32} {:source_name "keys"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$keys : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$keys : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$keys : bool;
+
+var {:source_name "input"} {:global} $$input : [int]int;
+axiom {:array_info "$$input"} {:global} {:elem_width 32} {:source_name "input"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$input : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$input : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$input : bool;
+
+var {:source_name "output"} {:global} $$output : [int]int;
+axiom {:array_info "$$output"} {:global} {:elem_width 32} {:source_name "output"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$output : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$output : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$output : bool;
+
+const _WATCHED_OFFSET : int;
+const {:global_offset_x} global_offset_x : int;
+const {:global_offset_y} global_offset_y : int;
+const {:global_offset_z} global_offset_z : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function __other_bv32(int) : int;
+function {:inline true} BV1_ZEXT32(x : int) : int {
+  x
+}
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SLT(x : int, y : int) : bool {
+  x < y
+}
+function {:inline true} BV32_UDIV(x : int, y : int) : int {
+  x div y
+}
+function {:inline true} BV32_UGE(x : int, y : int) : bool {
+  x >= y
+}
+function {:inline true} BV32_ULE(x : int, y : int) : bool {
+  x <= y
+}
+function {:inline true} BV32_ULT(x : int, y : int) : bool {
+  x < y
+}
+procedure {:source_name "binarySearch_mulkeys"} {:kernel} $binarySearch_mulkeys($numKeys:int)
+requires {:sourceloc_num 0} (if BV32_ULT($numKeys, 16777216) then 1 else 0) != 0;
+{
+  var $i.0:int;
+  var v0:int;
+  var v1:int;
+  var v2:bool;
+  var v3:int;
+  var v5:bool;
+  var v4:int;
+  var v6:int;
+  var v8:bool;
+  var v7:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  v0 := BV32_MUL(BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x), 256);
+  v1 := BV32_ADD(v0, 255);
+  assume BV1_ZEXT32((if (BV32_SLT(v0, v1) ==> BV32_ULT($$input[v0], $$input[v1])) then 1 else 0)) != 0;
+  assume BV1_ZEXT32((if (BV32_SLT(__other_bv32(v1), v0) ==> BV32_ULT($$input[__other_bv32(v1)], $$input[v0])) then 1 else 0)) != 0;
+  assume BV1_ZEXT32((if (BV32_SLT(v1, __other_bv32(v0)) ==> BV32_ULT($$input[v1], $$input[__other_bv32(v0)])) then 1 else 0)) != 0;
+  $i.0 := 0;
+  goto $1;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  assert {:originated_from_invariant} {:sourceloc_num 3} (if (_WRITE_HAS_OCCURRED_$$output ==> BV32_ULT(BV32_UDIV(BV32_MUL(4, _WATCHED_OFFSET), 4), $i.0)) then 1 else 0) != 0;
+  v2 := BV32_ULT($i.0, $numKeys);
+  goto $truebb, $falsebb;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 4} true;
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  v3 := $$keys[$i.0];
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  v4 := $$input[v0];
+  v5 := BV32_UGE(v3, v4);
+  goto $truebb0, $falsebb0;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  v6 := $$keys[$i.0];
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  v7 := $$input[v1];
+  v8 := BV32_ULE(v6, v7);
+  goto $truebb1, $falsebb1;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 10} true;
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  $$output[$i.0] := v0;
+  goto $5;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 12} true;
+  goto $6;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 13} true;
+  $i.0 := BV32_ADD($i.0, 1);
+  goto $1;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 14} true;
+  return;
+$truebb:
+  assume {:partition} v2;
+  assert {:block_sourceloc} {:sourceloc_num 15} true;
+  goto $2;
+$falsebb:
+  assume {:partition} !v2;
+  assert {:block_sourceloc} {:sourceloc_num 16} true;
+  goto $7;
+$truebb0:
+  assume {:partition} v5;
+  assert {:block_sourceloc} {:sourceloc_num 17} true;
+  goto $3;
+$falsebb0:
+  assume {:partition} !v5;
+  assert {:block_sourceloc} {:sourceloc_num 18} true;
+  goto $5;
+$truebb1:
+  assume {:partition} v8;
+  assert {:block_sourceloc} {:sourceloc_num 19} true;
+  goto $4;
+$falsebb1:
+  assume {:partition} !v8;
+  assert {:block_sourceloc} {:sourceloc_num 20} true;
+  goto $5;
+}
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 256 then 1 else 0) != 0;
+axiom (if num_groups_x == 2 then 1 else 0) != 0;
+axiom (if global_offset_x == 0 then 1 else 0) != 0;
+axiom (if global_offset_y == 0 then 1 else 0) != 0;
+axiom (if global_offset_z == 0 then 1 else 0) != 0;

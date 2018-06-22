@@ -1,0 +1,103 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "d_Output"} {:global} $$d_Output : [int]int;
+axiom {:array_info "$$d_Output"} {:global} {:elem_width 32} {:source_name "d_Output"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_Output : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_Output : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_Output : bool;
+
+var {:source_name "d_Input"} {:global} $$d_Input : [int]int;
+axiom {:array_info "$$d_Input"} {:global} {:elem_width 32} {:source_name "d_Input"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_Input : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_Input : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_Input : bool;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_id_y} group_id_y : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function FADD32(int, int) : int;
+function FSUB32(int, int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_AND(x : int, y : int) : int {
+  if x == y then x else (if x == 0 || y == 0 then 0 else BV32_AND_UF(x, y))
+}
+function BV32_AND_UF(int, int) : int;
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SHL(x : int, y : int) : int {
+  if x >= 0 && y == 1 then x*2 else BV32_SHL_UF(x,y)
+}
+function BV32_SHL_UF(int, int) : int;
+function {:inline true} BV32_SUB(x : int, y : int) : int {
+  x - y
+}
+procedure {:source_name "fwtBatch2Kernel"} {:kernel} $_Z15fwtBatch2KernelPfS_i($stride:int)
+requires {:sourceloc_num 0} (if $stride == 2048 then 1 else 0) != 0;
+{
+  var v0:int;
+  var v1:int;
+  var v2:int;
+  var v3:int;
+  var v8:int;
+  var v4:int;
+  var v5:int;
+  var v6:int;
+  var v7:int;
+  var v9:int;
+  var v10:int;
+  var v11:int;
+  var v12:int;
+  var v13:int;
+  var v14:int;
+  var v15:int;
+  var v16:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  v0 := BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x);
+  v1 := BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4);
+  v2 := BV32_MUL(group_id_y, v1);
+  v3 := BV32_MUL(group_id_y, v1);
+  v4 := BV32_AND(v0, BV32_SUB($stride, 1));
+  v5 := BV32_ADD(BV32_SHL(BV32_SUB(v0, v4), 2), v4);
+  v6 := BV32_ADD(v5, $stride);
+  v7 := BV32_ADD(v6, $stride);
+  v8 := BV32_ADD(v7, $stride);
+  assert {:sourceloc} {:sourceloc_num 2} true;
+  v9 := $$d_Input[BV32_ADD(v2, v5)];
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  v10 := $$d_Input[BV32_ADD(v2, v6)];
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  v11 := $$d_Input[BV32_ADD(v2, v7)];
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  v12 := $$d_Input[BV32_ADD(v2, v8)];
+  v13 := FADD32(v9, v11);
+  v14 := FSUB32(v9, v11);
+  v15 := FADD32(v10, v12);
+  v16 := FSUB32(v10, v12);
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  $$d_Output[BV32_ADD(v3, v5)] := FADD32(v13, v15);
+  assert {:sourceloc} {:sourceloc_num 7} true;
+  $$d_Output[BV32_ADD(v3, v6)] := FSUB32(v13, v15);
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  $$d_Output[BV32_ADD(v3, v7)] := FADD32(v14, v16);
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  $$d_Output[BV32_ADD(v3, v8)] := FSUB32(v14, v16);
+  return;
+}
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 256 then 1 else 0) != 0;
+axiom (if num_groups_x == 8192 then 1 else 0) != 0;

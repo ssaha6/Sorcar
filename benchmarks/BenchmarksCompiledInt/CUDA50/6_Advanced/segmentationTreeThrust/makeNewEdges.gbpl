@@ -1,0 +1,103 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "survivedEdgesIDs"} {:global} $$survivedEdgesIDs : [int]int;
+axiom {:array_info "$$survivedEdgesIDs"} {:global} {:elem_width 32} {:source_name "survivedEdgesIDs"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$survivedEdgesIDs : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$survivedEdgesIDs : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$survivedEdgesIDs : bool;
+
+var {:source_name "verticesMapping"} {:global} $$verticesMapping : [int]int;
+axiom {:array_info "$$verticesMapping"} {:global} {:elem_width 32} {:source_name "verticesMapping"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$verticesMapping : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$verticesMapping : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$verticesMapping : bool;
+
+var {:source_name "edges"} {:global} $$edges : [int]int;
+axiom {:array_info "$$edges"} {:global} {:elem_width 32} {:source_name "edges"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$edges : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$edges : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$edges : bool;
+
+var {:source_name "weights"} {:global} $$weights : [int]int;
+axiom {:array_info "$$weights"} {:global} {:elem_width 32} {:source_name "weights"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$weights : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$weights : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$weights : bool;
+
+var {:source_name "newEdges"} {:global} $$newEdges : [int]int;
+axiom {:array_info "$$newEdges"} {:global} {:elem_width 32} {:source_name "newEdges"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$newEdges : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$newEdges : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$newEdges : bool;
+
+var {:source_name "newWeights"} {:global} $$newWeights : [int]int;
+axiom {:array_info "$$newWeights"} {:global} {:elem_width 32} {:source_name "newWeights"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$newWeights : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$newWeights : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$newWeights : bool;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_ULT(x : int, y : int) : bool {
+  x < y
+}
+procedure {:source_name "makeNewEdges"} {:kernel} $_Z12makeNewEdgesPKjS0_S0_PKfPjPfj($edgesCount:int)
+{
+  var v0:int;
+  var v1:bool;
+  var v2:int;
+  var v3:int;
+  var v4:int;
+  var v5:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  v0 := BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x);
+  v1 := BV32_ULT(v0, $edgesCount);
+  goto $truebb, $falsebb;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  assert {:sourceloc} {:sourceloc_num 2} true;
+  v2 := $$survivedEdgesIDs[v0];
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  v3 := $$edges[v2];
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  v4 := $$verticesMapping[v3];
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  $$newEdges[v0] := v4;
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  v5 := $$weights[v2];
+  assert {:sourceloc} {:sourceloc_num 7} true;
+  $$newWeights[v0] := v5;
+  goto $2;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 8} true;
+  return;
+$truebb:
+  assume {:partition} v1;
+  assert {:block_sourceloc} {:sourceloc_num 9} true;
+  goto $1;
+$falsebb:
+  assume {:partition} !v1;
+  assert {:block_sourceloc} {:sourceloc_num 10} true;
+  goto $2;
+}
+axiom (if group_size_x == 256 then 1 else 0) != 0;
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_x == 11377 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;

@@ -1,0 +1,177 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+procedure _ATOMIC_OP8(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "g_graph_nodes"} {:global} $$g_graph_nodes : [int]int;
+axiom {:array_info "$$g_graph_nodes"} {:global} {:elem_width 32} {:source_name "g_graph_nodes"} {:source_elem_width 64} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$g_graph_nodes : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$g_graph_nodes : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_graph_nodes : bool;
+
+var {:source_name "g_graph_edges"} {:global} $$g_graph_edges : [int]int;
+axiom {:array_info "$$g_graph_edges"} {:global} {:elem_width 32} {:source_name "g_graph_edges"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$g_graph_edges : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$g_graph_edges : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_graph_edges : bool;
+
+var {:source_name "g_graph_mask"} {:global} $$g_graph_mask : [int]int;
+axiom {:array_info "$$g_graph_mask"} {:global} {:elem_width 8} {:source_name "g_graph_mask"} {:source_elem_width 8} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 8} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$g_graph_mask : bool;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 8} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$g_graph_mask : bool;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 8} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_graph_mask : bool;
+
+var {:source_name "g_updating_graph_mask"} {:global} $$g_updating_graph_mask : [int]int;
+axiom {:array_info "$$g_updating_graph_mask"} {:global} {:elem_width 8} {:source_name "g_updating_graph_mask"} {:source_elem_width 8} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 8} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$g_updating_graph_mask : bool;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 8} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$g_updating_graph_mask : bool;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 8} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_updating_graph_mask : bool;
+
+var {:source_name "g_graph_visited"} {:global} $$g_graph_visited : [int]int;
+axiom {:array_info "$$g_graph_visited"} {:global} {:elem_width 8} {:source_name "g_graph_visited"} {:source_elem_width 8} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 8} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$g_graph_visited : bool;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 8} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$g_graph_visited : bool;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 8} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_graph_visited : bool;
+
+var {:source_name "g_cost"} {:global} $$g_cost : [int]int;
+axiom {:array_info "$$g_cost"} {:global} {:elem_width 32} {:source_name "g_cost"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$g_cost : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$g_cost : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_cost : bool;
+
+const _WATCHED_OFFSET : int;
+const {:global_offset_x} global_offset_x : int;
+const {:global_offset_y} global_offset_y : int;
+const {:global_offset_z} global_offset_z : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function BV8_SEXT32(int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SLT(x : int, y : int) : bool {
+  x < y
+}
+procedure {:source_name "BFS_1"} {:kernel} $BFS_1($no_of_nodes:int)
+requires {:sourceloc_num 0} (if $no_of_nodes == 1000000 then 1 else 0) != 0;
+{
+  var $i.0:int;
+  var v0:int;
+  var v1:bool;
+  var v2:int;
+  var v3:bool;
+  var v4:int;
+  var v5:int;
+  var v6:int;
+  var v7:bool;
+  var v8:int;
+  var v10:bool;
+  var v9:int;
+  var v11:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  v0 := BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x);
+  v1 := BV32_SLT(v0, $no_of_nodes);
+  goto $truebb, $falsebb;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  v2 := $$g_graph_mask[v0];
+  v3 := BV8_SEXT32(v2) != 0;
+  goto $truebb0, $falsebb0;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 4} true;
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  $$g_graph_mask[v0] := 0;
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  v4 := $$g_graph_nodes[BV32_MUL(v0, 2)];
+  $i.0 := v4;
+  goto $3;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  v5 := $$g_graph_nodes[BV32_ADD(BV32_MUL(v0, 2), 1)];
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  v6 := $$g_graph_nodes[BV32_MUL(v0, 2)];
+  v7 := BV32_SLT($i.0, BV32_ADD(v5, v6));
+  goto $truebb1, $falsebb1;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 10} true;
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  v8 := $$g_graph_edges[$i.0];
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  v9 := $$g_graph_visited[v8];
+  v10 := v9 != 0;
+  goto $truebb2, $falsebb2;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 13} true;
+  assert {:sourceloc} {:sourceloc_num 14} true;
+  v11 := $$g_cost[v0];
+  assert {:sourceloc} {:sourceloc_num 15} true;
+  $$g_cost[v8] := BV32_ADD(v11, 1);
+  assert {:sourceloc} {:sourceloc_num 16} true;
+  $$g_updating_graph_mask[v8] := 1;
+  goto $6;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 17} true;
+  goto $7;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 18} true;
+  $i.0 := BV32_ADD($i.0, 1);
+  goto $3;
+$8:
+  assert {:block_sourceloc} {:sourceloc_num 19} true;
+  goto $9;
+$9:
+  assert {:block_sourceloc} {:sourceloc_num 20} true;
+  return;
+$truebb:
+  assume {:partition} v1;
+  assert {:block_sourceloc} {:sourceloc_num 21} true;
+  goto $1;
+$falsebb:
+  assume {:partition} !v1;
+  assert {:block_sourceloc} {:sourceloc_num 22} true;
+  goto $9;
+$truebb0:
+  assume {:partition} v3;
+  assert {:block_sourceloc} {:sourceloc_num 23} true;
+  goto $2;
+$falsebb0:
+  assume {:partition} !v3;
+  assert {:block_sourceloc} {:sourceloc_num 24} true;
+  goto $9;
+$truebb1:
+  assume {:partition} v7;
+  assert {:block_sourceloc} {:sourceloc_num 25} true;
+  goto $4;
+$falsebb1:
+  assume {:partition} !v7;
+  assert {:block_sourceloc} {:sourceloc_num 26} true;
+  goto $8;
+$truebb2:
+  assume {:partition} v10;
+  assert {:block_sourceloc} {:sourceloc_num 27} true;
+  goto $6;
+$falsebb2:
+  assume {:partition} !v10;
+  assert {:block_sourceloc} {:sourceloc_num 28} true;
+  goto $5;
+}
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 256 then 1 else 0) != 0;
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_x == 3907 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if global_offset_x == 0 then 1 else 0) != 0;
+axiom (if global_offset_y == 0 then 1 else 0) != 0;
+axiom (if global_offset_z == 0 then 1 else 0) != 0;

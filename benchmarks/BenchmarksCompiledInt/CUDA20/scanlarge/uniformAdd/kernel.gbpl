@@ -1,0 +1,104 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "g_data"} {:global} $$g_data : [int]int;
+axiom {:array_info "$$g_data"} {:global} {:elem_width 32} {:source_name "g_data"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$g_data : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$g_data : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_data : bool;
+
+var {:source_name "uniforms"} {:global} $$uniforms : [int]int;
+axiom {:array_info "$$uniforms"} {:global} {:elem_width 32} {:source_name "uniforms"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$uniforms : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$uniforms : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$uniforms : bool;
+
+var {:source_name "uni"} {:group_shared} $$_ZZ10uniformAddPfS_iiiE3uni : [int]int;
+axiom {:array_info "$$_ZZ10uniformAddPfS_iiiE3uni"} {:group_shared} {:elem_width 32} {:source_name "uni"} {:source_elem_width 32} {:source_dimensions "1"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ10uniformAddPfS_iiiE3uni : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ10uniformAddPfS_iiiE3uni : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ10uniformAddPfS_iiiE3uni : bool;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function FADD32(int, int) : int;
+function FMUL32(int, int) : int;
+function SI32_TO_FP32(int) : int;
+function {:inline true} BV1_ZEXT32(x : int) : int {
+  x
+}
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SHL(x : int, y : int) : int {
+  if x >= 0 && y == 1 then x*2 else BV32_SHL_UF(x,y)
+}
+function BV32_SHL_UF(int, int) : int;
+function {:inline true} BV32_ULT(x : int, y : int) : bool {
+  x < y
+}
+procedure {:source_name "uniformAdd"} {:kernel} $_Z10uniformAddPfS_iii($n:int, $blockOffset:int, $baseIndex:int)
+{
+  var v0:bool;
+  var v1:int;
+  var v2:int;
+  var v3:int;
+  var v4:int;
+  var v5:int;
+  var v6:int;
+  var v7:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  v0 := local_id_x == 0;
+  goto $truebb, $falsebb;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  assert {:sourceloc} {:sourceloc_num 2} true;
+  v1 := $$uniforms[BV32_ADD(group_id_x, $blockOffset)];
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  $$_ZZ10uniformAddPfS_iiiE3uni[0] := v1;
+  goto $2;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 4} true;
+  v2 := BV32_ADD(BV32_ADD(BV32_MUL(group_id_x, BV32_SHL(group_size_x, 1)), $baseIndex), local_id_x);
+  call {:sourceloc_num 5} $bugle_barrier(-1, -1);
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  v3 := $$_ZZ10uniformAddPfS_iiiE3uni[0];
+  assert {:sourceloc} {:sourceloc_num 7} true;
+  v4 := $$g_data[v2];
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  $$g_data[v2] := FADD32(v4, v3);
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  v5 := $$_ZZ10uniformAddPfS_iiiE3uni[0];
+  v6 := BV32_ADD(v2, group_size_x);
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  v7 := $$g_data[v6];
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  $$g_data[v6] := FADD32(v7, FMUL32(SI32_TO_FP32(BV1_ZEXT32((if BV32_ULT(BV32_ADD(local_id_x, group_size_x), $n) then 1 else 0))), v5));
+  return;
+$truebb:
+  assume {:partition} v0;
+  assert {:block_sourceloc} {:sourceloc_num 12} true;
+  goto $1;
+$falsebb:
+  assume {:partition} !v0;
+  assert {:block_sourceloc} {:sourceloc_num 13} true;
+  goto $2;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:int, $1:int);
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 128 then 1 else 0) != 0;
+axiom (if num_groups_x == 128 then 1 else 0) != 0;

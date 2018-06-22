@@ -1,0 +1,77 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP8(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "info"} {:global} $$info : [int]int;
+axiom {:array_info "$$info"} {:global} {:elem_width 8} {:source_name "info"} {:source_elem_width 8} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 8} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$info : bool;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 8} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$info : bool;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 8} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$info : bool;
+
+const _WATCHED_OFFSET : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function {:inline true} BV1_ZEXT32(x : int) : int {
+  x
+}
+function {:inline true} BV1_ZEXT8(x : int) : int {
+  x
+}
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SDIV(x : int, y : int) : int {
+  x div y
+}
+function {:inline true} BV32_SGE(x : int, y : int) : bool {
+  x >= y
+}
+procedure {:source_name "VoteAnyKernel3"} {:kernel} $_Z14VoteAnyKernel3Pbi($warp_size:int)
+{
+  var v1:int;
+  var v0:int;
+  var v2:int;
+  var v3:bool;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  v0 := BV32_MUL(local_id_x, 3);
+  call {:sourceloc_num 1}   v1 := $_Z3anyj(BV1_ZEXT32((if BV32_SGE(local_id_x, BV32_SDIV(BV32_MUL($warp_size, 3), 2)) then 1 else 0)));
+  assert {:sourceloc} {:sourceloc_num 2} true;
+  $$info[v0] := BV1_ZEXT8((if v1 != 0 then 1 else 0));
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  $$info[BV32_ADD(v0, 1)] := BV1_ZEXT8((if BV32_SGE(local_id_x, BV32_SDIV(BV32_MUL($warp_size, 3), 2)) then -1 else 0));
+  call {:sourceloc_num 4}   v2 := $_Z3allj(BV1_ZEXT32((if BV32_SGE(local_id_x, BV32_SDIV(BV32_MUL($warp_size, 3), 2)) then 1 else 0)));
+  v3 := v2 != 0;
+  goto $truebb, $falsebb;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 5} true;
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  $$info[BV32_ADD(v0, 2)] := 1;
+  goto $2;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  return;
+$truebb:
+  assume {:partition} v3;
+  assert {:block_sourceloc} {:sourceloc_num 8} true;
+  goto $1;
+$falsebb:
+  assume {:partition} !v3;
+  assert {:block_sourceloc} {:sourceloc_num 9} true;
+  goto $2;
+}
+procedure {:source_name "_Z3anyj"} $_Z3anyj($0:int) returns ($ret:int);
+procedure {:source_name "_Z3allj"} $_Z3allj($0:int) returns ($ret:int);
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 32 then 1 else 0) != 0;
+axiom (if num_groups_x == 1 then 1 else 0) != 0;

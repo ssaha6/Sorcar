@@ -1,0 +1,257 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "c_strel"} {:constant} $$c_strel : [int]int;
+axiom {:array_info "$$c_strel"} {:constant} {:elem_width 32} {:source_name "c_strel"} {:source_elem_width 32} {:source_dimensions "*"} true;
+
+var {:source_name "img"} {:global} $$img : [int]int;
+axiom {:array_info "$$img"} {:global} {:elem_width 32} {:source_name "img"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$img : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$img : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$img : bool;
+
+var {:source_name "dilated"} {:global} $$dilated : [int]int;
+axiom {:array_info "$$dilated"} {:global} {:elem_width 32} {:source_name "dilated"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$dilated : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$dilated : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$dilated : bool;
+
+const _WATCHED_OFFSET : int;
+const {:global_offset_x} global_offset_x : int;
+const {:global_offset_y} global_offset_y : int;
+const {:global_offset_z} global_offset_z : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function FLT32(int, int) : bool;
+function FUNO32(int, int) : bool;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SDIV(x : int, y : int) : int {
+  x div y
+}
+function {:inline true} BV32_SGE(x : int, y : int) : bool {
+  x >= y
+}
+function {:inline true} BV32_SLT(x : int, y : int) : bool {
+  x < y
+}
+function {:inline true} BV32_SREM(x : int, y : int) : int {
+  x mod y
+}
+function {:inline true} BV32_SUB(x : int, y : int) : int {
+  x - y
+}
+procedure {:source_name "dilate_kernel"} {:kernel} $dilate_kernel($img_m:int, $img_n:int, $strel_m:int, $strel_n:int)
+requires {:sourceloc_num 0} (if $img_m == 219 then 1 else 0) != 0;
+requires {:sourceloc_num 1} (if $img_n == 640 then 1 else 0) != 0;
+requires {:sourceloc_num 2} (if $strel_m == 25 then 1 else 0) != 0;
+requires {:sourceloc_num 3} (if $strel_n == 25 then 1 else 0) != 0;
+{
+  var $max.0:int;
+  var $el_i.0:int;
+  var $max.4:int;
+  var $max.1:int;
+  var $el_j.0:int;
+  var $max.3:int;
+  var $max.2:int;
+  var v2:int;
+  var v0:int;
+  var v1:int;
+  var v3:bool;
+  var v4:bool;
+  var v5:int;
+  var v6:bool;
+  var v7:bool;
+  var v8:bool;
+  var v9:int;
+  var v10:bool;
+  var v11:bool;
+  var v12:int;
+  var v13:bool;
+  var v14:int;
+  var v15:bool;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 4} true;
+  v0 := BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x);
+  v1 := BV32_SREM(v0, $img_m);
+  v2 := BV32_SDIV(v0, $img_m);
+  v3 := BV32_SLT(v2, $img_n);
+  goto $truebb, $falsebb;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 5} true;
+  $max.0, $el_i.0 := 0, 0;
+  goto $2;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 6} true;
+  v4 := BV32_SLT($el_i.0, $strel_m);
+  goto $truebb0, $falsebb0;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  v5 := BV32_ADD(BV32_SUB(v1, BV32_SDIV($strel_m, 2)), $el_i.0);
+  v6 := BV32_SGE(v5, 0);
+  goto $truebb1, $falsebb1;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 8} true;
+  v7 := BV32_SLT(v5, $img_m);
+  goto $truebb2, $falsebb2;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 9} true;
+  $max.1, $el_j.0 := $max.0, 0;
+  goto $6;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 10} true;
+  v8 := BV32_SLT($el_j.0, $strel_n);
+  goto $truebb3, $falsebb3;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 11} true;
+  v9 := BV32_ADD(BV32_SUB(v2, BV32_SDIV($strel_n, 2)), $el_j.0);
+  v10 := BV32_SGE(v9, 0);
+  goto $truebb4, $falsebb4;
+$8:
+  assert {:block_sourceloc} {:sourceloc_num 12} true;
+  v11 := BV32_SLT(v9, $img_n);
+  goto $truebb5, $falsebb5;
+$9:
+  assert {:block_sourceloc} {:sourceloc_num 13} true;
+  assert {:sourceloc} {:sourceloc_num 14} true;
+  v12 := $$c_strel[BV32_ADD(BV32_MUL($el_i.0, $strel_n), $el_j.0)];
+  v13 := (FLT32(0, v12) || FLT32(v12, 0)) || FUNO32(v12, 0);
+  goto $truebb6, $falsebb6;
+$10:
+  assert {:block_sourceloc} {:sourceloc_num 15} true;
+  assert {:sourceloc} {:sourceloc_num 16} true;
+  v14 := $$img[BV32_ADD(BV32_MUL(v9, $img_m), v5)];
+  v15 := FLT32($max.1, v14);
+  goto $truebb7, $falsebb7;
+$11:
+  assert {:block_sourceloc} {:sourceloc_num 17} true;
+  $max.2 := v14;
+  goto $12;
+$12:
+  assert {:block_sourceloc} {:sourceloc_num 18} true;
+  $max.3 := $max.2;
+  goto $13;
+$13:
+  assert {:block_sourceloc} {:sourceloc_num 19} true;
+  goto $14;
+$14:
+  assert {:block_sourceloc} {:sourceloc_num 20} true;
+  $max.1, $el_j.0 := $max.3, BV32_ADD($el_j.0, 1);
+  goto $6;
+$15:
+  assert {:block_sourceloc} {:sourceloc_num 21} true;
+  $max.4 := $max.1;
+  goto $16;
+$16:
+  assert {:block_sourceloc} {:sourceloc_num 22} true;
+  goto $17;
+$17:
+  assert {:block_sourceloc} {:sourceloc_num 23} true;
+  $max.0, $el_i.0 := $max.4, BV32_ADD($el_i.0, 1);
+  goto $2;
+$18:
+  assert {:block_sourceloc} {:sourceloc_num 24} true;
+  assert {:sourceloc} {:sourceloc_num 25} true;
+  $$dilated[BV32_ADD(BV32_MUL(v1, $img_n), v2)] := $max.0;
+  goto $19;
+$19:
+  assert {:block_sourceloc} {:sourceloc_num 26} true;
+  return;
+$truebb:
+  assume {:partition} v3;
+  assert {:block_sourceloc} {:sourceloc_num 27} true;
+  goto $1;
+$falsebb:
+  assume {:partition} !v3;
+  assert {:block_sourceloc} {:sourceloc_num 28} true;
+  goto $19;
+$truebb0:
+  assume {:partition} v4;
+  assert {:block_sourceloc} {:sourceloc_num 29} true;
+  goto $3;
+$falsebb0:
+  assume {:partition} !v4;
+  assert {:block_sourceloc} {:sourceloc_num 30} true;
+  goto $18;
+$truebb1:
+  assume {:partition} v6;
+  assert {:block_sourceloc} {:sourceloc_num 31} true;
+  goto $4;
+$falsebb1:
+  assume {:partition} !v6;
+  assert {:block_sourceloc} {:sourceloc_num 32} true;
+  $max.4 := $max.0;
+  goto $16;
+$truebb2:
+  assume {:partition} v7;
+  assert {:block_sourceloc} {:sourceloc_num 33} true;
+  goto $5;
+$falsebb2:
+  assume {:partition} !v7;
+  assert {:block_sourceloc} {:sourceloc_num 34} true;
+  $max.4 := $max.0;
+  goto $16;
+$truebb3:
+  assume {:partition} v8;
+  assert {:block_sourceloc} {:sourceloc_num 35} true;
+  goto $7;
+$falsebb3:
+  assume {:partition} !v8;
+  assert {:block_sourceloc} {:sourceloc_num 36} true;
+  goto $15;
+$truebb4:
+  assume {:partition} v10;
+  assert {:block_sourceloc} {:sourceloc_num 37} true;
+  goto $8;
+$falsebb4:
+  assume {:partition} !v10;
+  assert {:block_sourceloc} {:sourceloc_num 38} true;
+  $max.3 := $max.1;
+  goto $13;
+$truebb5:
+  assume {:partition} v11;
+  assert {:block_sourceloc} {:sourceloc_num 39} true;
+  goto $9;
+$falsebb5:
+  assume {:partition} !v11;
+  assert {:block_sourceloc} {:sourceloc_num 40} true;
+  $max.3 := $max.1;
+  goto $13;
+$truebb6:
+  assume {:partition} v13;
+  assert {:block_sourceloc} {:sourceloc_num 41} true;
+  goto $10;
+$falsebb6:
+  assume {:partition} !v13;
+  assert {:block_sourceloc} {:sourceloc_num 42} true;
+  $max.3 := $max.1;
+  goto $13;
+$truebb7:
+  assume {:partition} v15;
+  assert {:block_sourceloc} {:sourceloc_num 43} true;
+  goto $11;
+$falsebb7:
+  assume {:partition} !v15;
+  assert {:block_sourceloc} {:sourceloc_num 44} true;
+  $max.2 := $max.1;
+  goto $12;
+}
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 176 then 1 else 0) != 0;
+axiom (if num_groups_x == 797 then 1 else 0) != 0;
+axiom (if global_offset_x == 0 then 1 else 0) != 0;
+axiom (if global_offset_y == 0 then 1 else 0) != 0;
+axiom (if global_offset_z == 0 then 1 else 0) != 0;

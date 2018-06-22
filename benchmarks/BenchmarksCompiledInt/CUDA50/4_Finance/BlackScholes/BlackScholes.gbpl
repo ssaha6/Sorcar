@@ -1,0 +1,191 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "d_CallResult"} {:global} $$d_CallResult : [int]int;
+axiom {:array_info "$$d_CallResult"} {:global} {:elem_width 32} {:source_name "d_CallResult"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_CallResult : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_CallResult : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_CallResult : bool;
+
+var {:source_name "d_PutResult"} {:global} $$d_PutResult : [int]int;
+axiom {:array_info "$$d_PutResult"} {:global} {:elem_width 32} {:source_name "d_PutResult"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_PutResult : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_PutResult : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_PutResult : bool;
+
+var {:source_name "d_StockPrice"} {:global} $$d_StockPrice : [int]int;
+axiom {:array_info "$$d_StockPrice"} {:global} {:elem_width 32} {:source_name "d_StockPrice"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_StockPrice : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_StockPrice : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_StockPrice : bool;
+
+var {:source_name "d_OptionStrike"} {:global} $$d_OptionStrike : [int]int;
+axiom {:array_info "$$d_OptionStrike"} {:global} {:elem_width 32} {:source_name "d_OptionStrike"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_OptionStrike : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_OptionStrike : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_OptionStrike : bool;
+
+var {:source_name "d_OptionYears"} {:global} $$d_OptionYears : [int]int;
+axiom {:array_info "$$d_OptionYears"} {:global} {:elem_width 32} {:source_name "d_OptionYears"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_OptionYears : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_OptionYears : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_OptionYears : bool;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function FADD32(int, int) : int;
+function FDIV32(int, int) : int;
+function FLT32(int, int) : bool;
+function FMUL32(int, int) : int;
+function FSQRT32(int) : int;
+function FSUB32(int, int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SLT(x : int, y : int) : bool {
+  x < y
+}
+function {:inline true} BV32_SREM(x : int, y : int) : int {
+  x mod y
+}
+function {:inline true} BV32_UDIV(x : int, y : int) : int {
+  x div y
+}
+function {:inline true} BV32_UREM(x : int, y : int) : int {
+  x mod y
+}
+procedure {:source_name "BlackScholesGPU"} {:kernel} $_Z15BlackScholesGPUPfS_S_S_S_ffi($Riskfree:int, $Volatility:int, $optN:int)
+requires {:sourceloc_num 0} (if $optN == 4000000 then 1 else 0) != 0;
+{
+  var $opt.0:int;
+  var $cnd.i.i.0:int;
+  var $cnd.i8.i.0:int;
+  var v0:int;
+  var v1:int;
+  var v12:int;
+  var v2:bool;
+  var v3:int;
+  var v4:int;
+  var v5:int;
+  var v6:int;
+  var v7:int;
+  var v8:int;
+  var v9:int;
+  var v10:int;
+  var v11:int;
+  var v13:int;
+  var v14:bool;
+  var v15:int;
+  var v16:int;
+  var v17:int;
+  var v18:int;
+  var v19:bool;
+  var v20:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  v0 := BV32_ADD(BV32_MUL(group_size_x, group_id_x), local_id_x);
+  v1 := BV32_MUL(group_size_x, num_groups_x);
+  $opt.0 := v0;
+  goto $1;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  assert {:originated_from_invariant} {:sourceloc_num 3} (if BV32_SREM($opt.0, v1) == v0 then 1 else 0) != 0;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 4} (if (_WRITE_HAS_OCCURRED_$$d_CallResult ==> BV32_UREM(BV32_UDIV(BV32_MUL(4, _WATCHED_OFFSET), 4), v1) == v0) then 1 else 0) != 0;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 5} (if (_WRITE_HAS_OCCURRED_$$d_PutResult ==> BV32_UREM(BV32_UDIV(BV32_MUL(4, _WATCHED_OFFSET), 4), v1) == v0) then 1 else 0) != 0;
+  v2 := BV32_SLT($opt.0, $optN);
+  goto $truebb, $falsebb;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 6} true;
+  assert {:sourceloc} {:sourceloc_num 7} true;
+  v3 := $$d_StockPrice[$opt.0];
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  v4 := $$d_OptionStrike[$opt.0];
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  v5 := $$d_OptionYears[$opt.0];
+  v6 := FSQRT32(v5);
+  call {:sourceloc_num 10}   v7 := $__logf(FDIV32(v3, v4));
+  v8 := FDIV32(FADD32(v7, FMUL32(FADD32($Riskfree, FMUL32(FMUL32(1056964608, $Volatility), $Volatility)), v5)), FMUL32($Volatility, v6));
+  v9 := FSUB32(v8, FMUL32($Volatility, v6));
+  call {:sourceloc_num 11}   v10 := $fabsf(v8);
+  v11 := FDIV32(1065353216, FADD32(1065353216, FMUL32(1047344009, v10)));
+  call {:sourceloc_num 12}   v12 := $__expf(FMUL32(FMUL32(-1090519040, v8), v8));
+  v13 := FMUL32(FMUL32(1053573674, v12), FMUL32(v11, FADD32(1050904058, FMUL32(v11, FADD32(-1095331961, FMUL32(v11, FADD32(1071908728, FMUL32(v11, FADD32(-1075241238, FMUL32(v11, 1068123759))))))))));
+  v14 := FLT32(0, v8);
+  goto $truebb0, $falsebb0;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 13} true;
+  $cnd.i.i.0 := FSUB32(1065353216, v13);
+  goto $_ZL6cndGPUf.exit.i;
+$_ZL6cndGPUf.exit.i:
+  assert {:block_sourceloc} {:sourceloc_num 14} true;
+  call {:sourceloc_num 15}   v15 := $fabsf(v9);
+  v16 := FDIV32(1065353216, FADD32(1065353216, FMUL32(1047344009, v15)));
+  call {:sourceloc_num 16}   v17 := $__expf(FMUL32(FMUL32(-1090519040, v9), v9));
+  v18 := FMUL32(FMUL32(1053573674, v17), FMUL32(v16, FADD32(1050904058, FMUL32(v16, FADD32(-1095331961, FMUL32(v16, FADD32(1071908728, FMUL32(v16, FADD32(-1075241238, FMUL32(v16, 1068123759))))))))));
+  v19 := FLT32(0, v9);
+  goto $truebb1, $falsebb1;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 17} true;
+  $cnd.i8.i.0 := FSUB32(1065353216, v18);
+  goto $_ZL19BlackScholesBodyGPURfS_fffff.exit;
+$_ZL19BlackScholesBodyGPURfS_fffff.exit:
+  assert {:block_sourceloc} {:sourceloc_num 18} true;
+  call {:sourceloc_num 19}   v20 := $__expf(FMUL32(FSUB32(-2147483648, $Riskfree), v5));
+  assert {:sourceloc} {:sourceloc_num 20} true;
+  $$d_CallResult[$opt.0] := FSUB32(FMUL32(v3, $cnd.i.i.0), FMUL32(FMUL32(v4, v20), $cnd.i8.i.0));
+  assert {:sourceloc} {:sourceloc_num 21} true;
+  $$d_PutResult[$opt.0] := FSUB32(FMUL32(FMUL32(v4, v20), FSUB32(1065353216, $cnd.i8.i.0)), FMUL32(v3, FSUB32(1065353216, $cnd.i.i.0)));
+  goto $5;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 22} true;
+  $opt.0 := BV32_ADD($opt.0, v1);
+  goto $1;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 23} true;
+  return;
+$truebb:
+  assume {:partition} v2;
+  assert {:block_sourceloc} {:sourceloc_num 24} true;
+  goto $2;
+$falsebb:
+  assume {:partition} !v2;
+  assert {:block_sourceloc} {:sourceloc_num 25} true;
+  goto $6;
+$truebb0:
+  assume {:partition} v14;
+  assert {:block_sourceloc} {:sourceloc_num 26} true;
+  goto $3;
+$falsebb0:
+  assume {:partition} !v14;
+  assert {:block_sourceloc} {:sourceloc_num 27} true;
+  $cnd.i.i.0 := v13;
+  goto $_ZL6cndGPUf.exit.i;
+$truebb1:
+  assume {:partition} v19;
+  assert {:block_sourceloc} {:sourceloc_num 28} true;
+  goto $4;
+$falsebb1:
+  assume {:partition} !v19;
+  assert {:block_sourceloc} {:sourceloc_num 29} true;
+  $cnd.i8.i.0 := v18;
+  goto $_ZL19BlackScholesBodyGPURfS_fffff.exit;
+}
+procedure {:source_name "__logf"} $__logf($0:int) returns ($ret:int);
+procedure {:source_name "__expf"} $__expf($0:int) returns ($ret:int);
+procedure {:source_name "fabsf"} $fabsf($0:int) returns ($ret:int);
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 128 then 1 else 0) != 0;
+axiom (if num_groups_x == 480 then 1 else 0) != 0;

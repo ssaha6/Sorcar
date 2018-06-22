@@ -1,0 +1,755 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "d_DstKey"} {:global} $$d_DstKey : [int]int;
+axiom {:array_info "$$d_DstKey"} {:global} {:elem_width 32} {:source_name "d_DstKey"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_DstKey : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_DstKey : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_DstKey : bool;
+
+var {:source_name "d_DstVal"} {:global} $$d_DstVal : [int]int;
+axiom {:array_info "$$d_DstVal"} {:global} {:elem_width 32} {:source_name "d_DstVal"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_DstVal : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_DstVal : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_DstVal : bool;
+
+var {:source_name "d_SrcKey"} {:global} $$d_SrcKey : [int]int;
+axiom {:array_info "$$d_SrcKey"} {:global} {:elem_width 32} {:source_name "d_SrcKey"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_SrcKey : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_SrcKey : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_SrcKey : bool;
+
+var {:source_name "d_SrcVal"} {:global} $$d_SrcVal : [int]int;
+axiom {:array_info "$$d_SrcVal"} {:global} {:elem_width 32} {:source_name "d_SrcVal"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_SrcVal : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_SrcVal : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_SrcVal : bool;
+
+var {:source_name "d_LimitsA"} {:global} $$d_LimitsA : [int]int;
+axiom {:array_info "$$d_LimitsA"} {:global} {:elem_width 32} {:source_name "d_LimitsA"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_LimitsA : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_LimitsA : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_LimitsA : bool;
+
+var {:source_name "d_LimitsB"} {:global} $$d_LimitsB : [int]int;
+axiom {:array_info "$$d_LimitsB"} {:global} {:elem_width 32} {:source_name "d_LimitsB"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_LimitsB : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_LimitsB : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_LimitsB : bool;
+
+var {:source_name "startSrcA"} {:group_shared} $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcA : [int]int;
+axiom {:array_info "$$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcA"} {:group_shared} {:elem_width 32} {:source_name "startSrcA"} {:source_elem_width 32} {:source_dimensions "1"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcA : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcA : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcA : bool;
+
+var {:source_name "startSrcB"} {:group_shared} $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcB : [int]int;
+axiom {:array_info "$$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcB"} {:group_shared} {:elem_width 32} {:source_name "startSrcB"} {:source_elem_width 32} {:source_dimensions "1"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcB : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcB : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcB : bool;
+
+var {:source_name "lenSrcA"} {:group_shared} $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcA : [int]int;
+axiom {:array_info "$$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcA"} {:group_shared} {:elem_width 32} {:source_name "lenSrcA"} {:source_elem_width 32} {:source_dimensions "1"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcA : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcA : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcA : bool;
+
+var {:source_name "lenSrcB"} {:group_shared} $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcB : [int]int;
+axiom {:array_info "$$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcB"} {:group_shared} {:elem_width 32} {:source_name "lenSrcB"} {:source_elem_width 32} {:source_dimensions "1"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcB : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcB : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcB : bool;
+
+var {:source_name "startDstA"} {:group_shared} $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startDstA : [int]int;
+axiom {:array_info "$$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startDstA"} {:group_shared} {:elem_width 32} {:source_name "startDstA"} {:source_elem_width 32} {:source_dimensions "1"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startDstA : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startDstA : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startDstA : bool;
+
+var {:source_name "startDstB"} {:group_shared} $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startDstB : [int]int;
+axiom {:array_info "$$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startDstB"} {:group_shared} {:elem_width 32} {:source_name "startDstB"} {:source_elem_width 32} {:source_dimensions "1"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startDstB : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startDstB : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startDstB : bool;
+
+var {:source_name "s_key"} {:group_shared} $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_key : [int]int;
+axiom {:array_info "$$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_key"} {:group_shared} {:elem_width 32} {:source_name "s_key"} {:source_elem_width 32} {:source_dimensions "256"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_key : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_key : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_key : bool;
+
+var {:source_name "s_val"} {:group_shared} $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_val : [int]int;
+axiom {:array_info "$$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_val"} {:group_shared} {:elem_width 32} {:source_name "s_val"} {:source_elem_width 32} {:source_dimensions "256"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_val : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_val : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_val : bool;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function  BV32_LSHR(int, int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_AND(x : int, y : int) : int {
+  if x == y then x else (if x == 0 || y == 0 then 0 else BV32_AND_UF(x, y))
+}
+function BV32_AND_UF(int, int) : int;
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SUB(x : int, y : int) : int {
+  x - y
+}
+function {:inline true} BV32_UDIV(x : int, y : int) : int {
+  x div y
+}
+function {:inline true} BV32_UGT(x : int, y : int) : bool {
+  x > y
+}
+function {:inline true} BV32_ULE(x : int, y : int) : bool {
+  x <= y
+}
+function {:inline true} BV32_ULT(x : int, y : int) : bool {
+  x < y
+}
+function {:inline true} BV32_UREM(x : int, y : int) : int {
+  x mod y
+}
+procedure {:source_name "mergeElementaryIntervalsKernel<1>"} {:kernel} $_Z30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jj($stride:int, $N:int)
+requires {:sourceloc_num 0} (if BV32_AND($stride, BV32_SUB($stride, 1)) == 0 then 1 else 0) != 0;
+requires {:sourceloc_num 1} (if BV32_ULT($stride, $N) then 1 else 0) != 0;
+requires {:sourceloc_num 2} (if BV32_UGT($stride, 1) then 1 else 0) != 0;
+{
+  var $0:int;
+  var $1:int;
+  var $2:int;
+  var $3:int;
+  var $4:int;
+  var $keyA.i.0:int;
+  var $valA.i.0:int;
+  var $dstPosA.i.0:int;
+  var $.02:int;
+  var $pos.i.i.0:int;
+  var $.03:int;
+  var $5:int;
+  var $pos.i.i.1:int;
+  var $keyB.i.0:int;
+  var $valB.i.0:int;
+  var $dstPosB.i.0:int;
+  var $.0:int;
+  var $pos.i1.i.0:int;
+  var $.01:int;
+  var $6:int;
+  var $pos.i1.i.1:int;
+  var v0:int;
+  var v1:int;
+  var v2:bool;
+  var v3:bool;
+  var v4:bool;
+  var v5:bool;
+  var v6:int;
+  var v7:int;
+  var v8:int;
+  var v9:bool;
+  var v10:int;
+  var v11:bool;
+  var v12:int;
+  var v13:int;
+  var v14:int;
+  var v15:int;
+  var v16:int;
+  var v17:int;
+  var v18:int;
+  var v19:int;
+  var v20:bool;
+  var v21:int;
+  var v22:int;
+  var v23:int;
+  var v24:int;
+  var v25:int;
+  var v26:bool;
+  var v27:int;
+  var v28:int;
+  var v29:int;
+  var v30:int;
+  var v31:int;
+  var v32:int;
+  var v33:bool;
+  var v66:int;
+  var v65:int;
+  var v67:int;
+  var v34:int;
+  var v36:bool;
+  var v35:int;
+  var v37:bool;
+  var v38:bool;
+  var v39:int;
+  var v40:bool;
+  var v41:bool;
+  var v69:int;
+  var v68:int;
+  var v70:int;
+  var v42:int;
+  var v44:bool;
+  var v43:int;
+  var v45:bool;
+  var v46:bool;
+  var v47:int;
+  var v48:bool;
+  var v49:bool;
+  var v50:bool;
+  var v51:int;
+  var v52:bool;
+  var v53:int;
+  var v54:int;
+  var v55:int;
+  var v56:int;
+  var v57:int;
+  var v58:bool;
+  var v59:int;
+  var v60:int;
+  var v61:int;
+  var v62:int;
+  var v63:int;
+  var v64:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 3} true;
+  v0 := BV32_AND(group_id_x, BV32_SUB(BV32_UDIV(BV32_MUL(2, $stride), 128), 1));
+  v1 := BV32_MUL(BV32_SUB(group_id_x, v0), 128);
+  v2 := local_id_x == 0;
+  goto $truebb, $falsebb;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 4} true;
+  v3 := BV32_ULT($stride, BV32_SUB(BV32_SUB($N, v1), $stride));
+  goto $truebb0, $falsebb0;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 5} true;
+  $0 := $stride;
+  goto $4;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 6} true;
+  $0 := BV32_SUB(BV32_SUB($N, v1), $stride);
+  goto $4;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  v4 := BV32_UREM($stride, 128) == 0;
+  goto $truebb1, $falsebb1;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 8} true;
+  $1 := BV32_UDIV($stride, 128);
+  goto $_ZL14getSampleCountj.exit;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 9} true;
+  $1 := BV32_ADD(BV32_UDIV($stride, 128), 1);
+  goto $_ZL14getSampleCountj.exit;
+$_ZL14getSampleCountj.exit:
+  assert {:block_sourceloc} {:sourceloc_num 10} true;
+  v5 := BV32_UREM($0, 128) == 0;
+  goto $truebb2, $falsebb2;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 11} true;
+  $2 := BV32_UDIV($0, 128);
+  goto $_ZL14getSampleCountj.exit1;
+$8:
+  assert {:block_sourceloc} {:sourceloc_num 12} true;
+  $2 := BV32_ADD(BV32_UDIV($0, 128), 1);
+  goto $_ZL14getSampleCountj.exit1;
+$_ZL14getSampleCountj.exit1:
+  assert {:block_sourceloc} {:sourceloc_num 13} true;
+  v6 := BV32_ADD($1, $2);
+  assert {:sourceloc} {:sourceloc_num 14} true;
+  v7 := $$d_LimitsA[group_id_x];
+  assert {:sourceloc} {:sourceloc_num 15} true;
+  $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcA[0] := v7;
+  assert {:sourceloc} {:sourceloc_num 16} true;
+  v8 := $$d_LimitsB[group_id_x];
+  assert {:sourceloc} {:sourceloc_num 17} true;
+  $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcB[0] := v8;
+  v9 := BV32_ULT(BV32_ADD(v0, 1), v6);
+  goto $truebb3, $falsebb3;
+$9:
+  assert {:block_sourceloc} {:sourceloc_num 18} true;
+  assert {:sourceloc} {:sourceloc_num 19} true;
+  v10 := $$d_LimitsA[BV32_ADD(group_id_x, 1)];
+  $3 := v10;
+  goto $11;
+$10:
+  assert {:block_sourceloc} {:sourceloc_num 20} true;
+  $3 := $stride;
+  goto $11;
+$11:
+  assert {:block_sourceloc} {:sourceloc_num 21} true;
+  v11 := BV32_ULT(BV32_ADD(v0, 1), v6);
+  goto $truebb4, $falsebb4;
+$12:
+  assert {:block_sourceloc} {:sourceloc_num 22} true;
+  assert {:sourceloc} {:sourceloc_num 23} true;
+  v12 := $$d_LimitsB[BV32_ADD(group_id_x, 1)];
+  $4 := v12;
+  goto $14;
+$13:
+  assert {:block_sourceloc} {:sourceloc_num 24} true;
+  $4 := $0;
+  goto $14;
+$14:
+  assert {:block_sourceloc} {:sourceloc_num 25} true;
+  assert {:sourceloc} {:sourceloc_num 26} true;
+  v13 := $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcA[0];
+  assert {:sourceloc} {:sourceloc_num 27} true;
+  $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcA[0] := BV32_SUB($3, v13);
+  assert {:sourceloc} {:sourceloc_num 28} true;
+  v14 := $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcB[0];
+  assert {:sourceloc} {:sourceloc_num 29} true;
+  $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcB[0] := BV32_SUB($4, v14);
+  assert {:sourceloc} {:sourceloc_num 30} true;
+  v15 := $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcA[0];
+  assert {:sourceloc} {:sourceloc_num 31} true;
+  v16 := $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcB[0];
+  assert {:sourceloc} {:sourceloc_num 32} true;
+  $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startDstA[0] := BV32_ADD(v15, v16);
+  assert {:sourceloc} {:sourceloc_num 33} true;
+  v17 := $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startDstA[0];
+  assert {:sourceloc} {:sourceloc_num 34} true;
+  v18 := $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcA[0];
+  assert {:sourceloc} {:sourceloc_num 35} true;
+  $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startDstB[0] := BV32_ADD(v17, v18);
+  goto $15;
+$15:
+  assert {:block_sourceloc} {:sourceloc_num 36} true;
+  call {:sourceloc_num 37} $bugle_barrier(-1, -1);
+  assert {:sourceloc} {:sourceloc_num 38} true;
+  v19 := $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcA[0];
+  v20 := BV32_ULT(local_id_x, v19);
+  goto $truebb5, $falsebb5;
+$16:
+  assert {:block_sourceloc} {:sourceloc_num 39} true;
+  assert {:sourceloc} {:sourceloc_num 40} true;
+  v21 := $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcA[0];
+  assert {:sourceloc} {:sourceloc_num 41} true;
+  v22 := $$d_SrcKey[BV32_ADD(v1, BV32_ADD(v21, local_id_x))];
+  assert {:sourceloc} {:sourceloc_num 42} true;
+  $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_key[local_id_x] := v22;
+  assert {:sourceloc} {:sourceloc_num 43} true;
+  v23 := $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcA[0];
+  assert {:sourceloc} {:sourceloc_num 44} true;
+  v24 := $$d_SrcVal[BV32_ADD(v1, BV32_ADD(v23, local_id_x))];
+  assert {:sourceloc} {:sourceloc_num 45} true;
+  $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_val[local_id_x] := v24;
+  goto $17;
+$17:
+  assert {:block_sourceloc} {:sourceloc_num 46} true;
+  assert {:sourceloc} {:sourceloc_num 47} true;
+  v25 := $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcB[0];
+  v26 := BV32_ULT(local_id_x, v25);
+  goto $truebb6, $falsebb6;
+$18:
+  assert {:block_sourceloc} {:sourceloc_num 48} true;
+  assert {:sourceloc} {:sourceloc_num 49} true;
+  v27 := $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcB[0];
+  assert {:sourceloc} {:sourceloc_num 50} true;
+  v28 := $$d_SrcKey[BV32_ADD(v1, BV32_ADD(BV32_ADD($stride, v27), local_id_x))];
+  assert {:sourceloc} {:sourceloc_num 51} true;
+  $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_key[BV32_ADD(local_id_x, 128)] := v28;
+  assert {:sourceloc} {:sourceloc_num 52} true;
+  v29 := $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcB[0];
+  assert {:sourceloc} {:sourceloc_num 53} true;
+  v30 := $$d_SrcVal[BV32_ADD(v1, BV32_ADD(BV32_ADD($stride, v29), local_id_x))];
+  assert {:sourceloc} {:sourceloc_num 54} true;
+  $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_val[BV32_ADD(local_id_x, 128)] := v30;
+  goto $19;
+$19:
+  assert {:block_sourceloc} {:sourceloc_num 55} true;
+  call {:sourceloc_num 56} $bugle_barrier(-1, -1);
+  assert {:sourceloc} {:sourceloc_num 57} true;
+  v31 := $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcA[0];
+  assert {:sourceloc} {:sourceloc_num 58} true;
+  v32 := $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcB[0];
+  v33 := BV32_ULT(local_id_x, v31);
+  goto $truebb7, $falsebb7;
+$20:
+  assert {:block_sourceloc} {:sourceloc_num 59} true;
+  assert {:sourceloc} {:sourceloc_num 60} true;
+  v34 := $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_key[local_id_x];
+  assert {:sourceloc} {:sourceloc_num 61} true;
+  v35 := $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_val[local_id_x];
+  v36 := v32 == 0;
+  goto $truebb8, $falsebb8;
+$21:
+  assert {:block_sourceloc} {:sourceloc_num 62} true;
+  $.02 := 0;
+  goto $_ZL21binarySearchExclusiveILj1EEjjPjjj.exit.i;
+$22:
+  assert {:block_sourceloc} {:sourceloc_num 63} true;
+  $pos.i.i.0, $.03 := 0, 128;
+  goto $23;
+$23:
+  assert {:block_sourceloc} {:sourceloc_num 64} true;
+  v37 := BV32_UGT($.03, 0);
+  goto $truebb9, $falsebb9;
+$24:
+  assert {:block_sourceloc} {:sourceloc_num 65} true;
+  v38 := BV32_ULT(BV32_ADD($pos.i.i.0, $.03), v32);
+  goto $truebb10, $falsebb10;
+$25:
+  assert {:block_sourceloc} {:sourceloc_num 66} true;
+  $5 := BV32_ADD($pos.i.i.0, $.03);
+  goto $27;
+$26:
+  assert {:block_sourceloc} {:sourceloc_num 67} true;
+  $5 := v32;
+  goto $27;
+$27:
+  assert {:block_sourceloc} {:sourceloc_num 68} true;
+  assert {:sourceloc} {:sourceloc_num 69} true;
+  v39 := $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_key[BV32_ADD(128, BV32_SUB($5, 1))];
+  v40 := BV32_ULT(v39, v34);
+  goto $truebb11, $falsebb11;
+$28:
+  assert {:block_sourceloc} {:sourceloc_num 70} true;
+  $pos.i.i.1 := $5;
+  goto $29;
+$29:
+  assert {:block_sourceloc} {:sourceloc_num 71} true;
+  $pos.i.i.0, $.03 := $pos.i.i.1, BV32_LSHR($.03, 1);
+  goto $23;
+$30:
+  assert {:block_sourceloc} {:sourceloc_num 72} true;
+  $.02 := $pos.i.i.0;
+  goto $_ZL21binarySearchExclusiveILj1EEjjPjjj.exit.i;
+$_ZL21binarySearchExclusiveILj1EEjjPjjj.exit.i:
+  assert {:block_sourceloc} {:sourceloc_num 73} true;
+  $keyA.i.0, $valA.i.0, $dstPosA.i.0 := v34, v35, BV32_ADD($.02, local_id_x);
+  goto $31;
+$31:
+  assert {:block_sourceloc} {:sourceloc_num 74} true;
+  v41 := BV32_ULT(local_id_x, v32);
+  goto $truebb12, $falsebb12;
+$32:
+  assert {:block_sourceloc} {:sourceloc_num 75} true;
+  assert {:sourceloc} {:sourceloc_num 76} true;
+  v42 := $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_key[BV32_ADD(128, local_id_x)];
+  assert {:sourceloc} {:sourceloc_num 77} true;
+  v43 := $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_val[BV32_ADD(128, local_id_x)];
+  v44 := v31 == 0;
+  goto $truebb13, $falsebb13;
+$33:
+  assert {:block_sourceloc} {:sourceloc_num 78} true;
+  $.0 := 0;
+  goto $_ZL21binarySearchInclusiveILj1EEjjPjjj.exit.i;
+$34:
+  assert {:block_sourceloc} {:sourceloc_num 79} true;
+  $pos.i1.i.0, $.01 := 0, 128;
+  goto $35;
+$35:
+  assert {:block_sourceloc} {:sourceloc_num 80} true;
+  v45 := BV32_UGT($.01, 0);
+  goto $truebb14, $falsebb14;
+$36:
+  assert {:block_sourceloc} {:sourceloc_num 81} true;
+  v46 := BV32_ULT(BV32_ADD($pos.i1.i.0, $.01), v31);
+  goto $truebb15, $falsebb15;
+$37:
+  assert {:block_sourceloc} {:sourceloc_num 82} true;
+  $6 := BV32_ADD($pos.i1.i.0, $.01);
+  goto $39;
+$38:
+  assert {:block_sourceloc} {:sourceloc_num 83} true;
+  $6 := v31;
+  goto $39;
+$39:
+  assert {:block_sourceloc} {:sourceloc_num 84} true;
+  assert {:sourceloc} {:sourceloc_num 85} true;
+  v47 := $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_key[BV32_SUB($6, 1)];
+  v48 := BV32_ULE(v47, v42);
+  goto $truebb16, $falsebb16;
+$40:
+  assert {:block_sourceloc} {:sourceloc_num 86} true;
+  $pos.i1.i.1 := $6;
+  goto $41;
+$41:
+  assert {:block_sourceloc} {:sourceloc_num 87} true;
+  $pos.i1.i.0, $.01 := $pos.i1.i.1, BV32_LSHR($.01, 1);
+  goto $35;
+$42:
+  assert {:block_sourceloc} {:sourceloc_num 88} true;
+  $.0 := $pos.i1.i.0;
+  goto $_ZL21binarySearchInclusiveILj1EEjjPjjj.exit.i;
+$_ZL21binarySearchInclusiveILj1EEjjPjjj.exit.i:
+  assert {:block_sourceloc} {:sourceloc_num 89} true;
+  $keyB.i.0, $valB.i.0, $dstPosB.i.0 := v42, v43, BV32_ADD($.0, local_id_x);
+  goto $43;
+$43:
+  assert {:block_sourceloc} {:sourceloc_num 90} true;
+  call {:sourceloc_num 91} $bugle_barrier(-1, -1);
+  v49 := BV32_ULT(local_id_x, v31);
+  goto $truebb17, $falsebb17;
+$44:
+  assert {:block_sourceloc} {:sourceloc_num 92} true;
+  assert {:sourceloc} {:sourceloc_num 93} true;
+  $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_key[$dstPosA.i.0] := $keyA.i.0;
+  assert {:sourceloc} {:sourceloc_num 94} true;
+  $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_val[$dstPosA.i.0] := $valA.i.0;
+  goto $45;
+$45:
+  assert {:block_sourceloc} {:sourceloc_num 95} true;
+  v50 := BV32_ULT(local_id_x, v32);
+  goto $truebb18, $falsebb18;
+$46:
+  assert {:block_sourceloc} {:sourceloc_num 96} true;
+  assert {:sourceloc} {:sourceloc_num 97} true;
+  $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_key[$dstPosB.i.0] := $keyB.i.0;
+  assert {:sourceloc} {:sourceloc_num 98} true;
+  $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_val[$dstPosB.i.0] := $valB.i.0;
+  goto $_ZL5mergeILj1EEvPjS0_S0_S0_S0_S0_jjjj.exit;
+$_ZL5mergeILj1EEvPjS0_S0_S0_S0_S0_jjjj.exit:
+  assert {:block_sourceloc} {:sourceloc_num 99} true;
+  call {:sourceloc_num 100} $bugle_barrier(-1, -1);
+  assert {:sourceloc} {:sourceloc_num 101} true;
+  v51 := $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcA[0];
+  v52 := BV32_ULT(local_id_x, v51);
+  goto $truebb19, $falsebb19;
+$47:
+  assert {:block_sourceloc} {:sourceloc_num 102} true;
+  assert {:sourceloc} {:sourceloc_num 103} true;
+  v53 := $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_key[local_id_x];
+  assert {:sourceloc} {:sourceloc_num 104} true;
+  v54 := $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startDstA[0];
+  assert {:sourceloc} {:sourceloc_num 105} true;
+  $$d_DstKey[BV32_ADD(v1, BV32_ADD(v54, local_id_x))] := v53;
+  assert {:sourceloc} {:sourceloc_num 106} true;
+  v55 := $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_val[local_id_x];
+  assert {:sourceloc} {:sourceloc_num 107} true;
+  v56 := $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startDstA[0];
+  assert {:sourceloc} {:sourceloc_num 108} true;
+  $$d_DstVal[BV32_ADD(v1, BV32_ADD(v56, local_id_x))] := v55;
+  goto $48;
+$48:
+  assert {:block_sourceloc} {:sourceloc_num 109} true;
+  assert {:sourceloc} {:sourceloc_num 110} true;
+  v57 := $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcB[0];
+  v58 := BV32_ULT(local_id_x, v57);
+  goto $truebb20, $falsebb20;
+$49:
+  assert {:block_sourceloc} {:sourceloc_num 111} true;
+  assert {:sourceloc} {:sourceloc_num 112} true;
+  v59 := $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcA[0];
+  assert {:sourceloc} {:sourceloc_num 113} true;
+  v60 := $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_key[BV32_ADD(v59, local_id_x)];
+  assert {:sourceloc} {:sourceloc_num 114} true;
+  v61 := $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startDstB[0];
+  assert {:sourceloc} {:sourceloc_num 115} true;
+  $$d_DstKey[BV32_ADD(v1, BV32_ADD(v61, local_id_x))] := v60;
+  assert {:sourceloc} {:sourceloc_num 116} true;
+  v62 := $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcA[0];
+  assert {:sourceloc} {:sourceloc_num 117} true;
+  v63 := $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_val[BV32_ADD(v62, local_id_x)];
+  assert {:sourceloc} {:sourceloc_num 118} true;
+  v64 := $$_ZZ30mergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startDstB[0];
+  assert {:sourceloc} {:sourceloc_num 119} true;
+  $$d_DstVal[BV32_ADD(v1, BV32_ADD(v64, local_id_x))] := v63;
+  goto $50;
+$50:
+  assert {:block_sourceloc} {:sourceloc_num 120} true;
+  return;
+$truebb:
+  assume {:partition} v2;
+  assert {:block_sourceloc} {:sourceloc_num 121} true;
+  goto $1;
+$falsebb:
+  assume {:partition} !v2;
+  assert {:block_sourceloc} {:sourceloc_num 122} true;
+  goto $15;
+$truebb0:
+  assume {:partition} v3;
+  assert {:block_sourceloc} {:sourceloc_num 123} true;
+  goto $2;
+$falsebb0:
+  assume {:partition} !v3;
+  assert {:block_sourceloc} {:sourceloc_num 124} true;
+  goto $3;
+$truebb1:
+  assume {:partition} v4;
+  assert {:block_sourceloc} {:sourceloc_num 125} true;
+  goto $5;
+$falsebb1:
+  assume {:partition} !v4;
+  assert {:block_sourceloc} {:sourceloc_num 126} true;
+  goto $6;
+$truebb2:
+  assume {:partition} v5;
+  assert {:block_sourceloc} {:sourceloc_num 127} true;
+  goto $7;
+$falsebb2:
+  assume {:partition} !v5;
+  assert {:block_sourceloc} {:sourceloc_num 128} true;
+  goto $8;
+$truebb3:
+  assume {:partition} v9;
+  assert {:block_sourceloc} {:sourceloc_num 129} true;
+  goto $9;
+$falsebb3:
+  assume {:partition} !v9;
+  assert {:block_sourceloc} {:sourceloc_num 130} true;
+  goto $10;
+$truebb4:
+  assume {:partition} v11;
+  assert {:block_sourceloc} {:sourceloc_num 131} true;
+  goto $12;
+$falsebb4:
+  assume {:partition} !v11;
+  assert {:block_sourceloc} {:sourceloc_num 132} true;
+  goto $13;
+$truebb5:
+  assume {:partition} v20;
+  assert {:block_sourceloc} {:sourceloc_num 133} true;
+  goto $16;
+$falsebb5:
+  assume {:partition} !v20;
+  assert {:block_sourceloc} {:sourceloc_num 134} true;
+  goto $17;
+$truebb6:
+  assume {:partition} v26;
+  assert {:block_sourceloc} {:sourceloc_num 135} true;
+  goto $18;
+$falsebb6:
+  assume {:partition} !v26;
+  assert {:block_sourceloc} {:sourceloc_num 136} true;
+  goto $19;
+$truebb7:
+  assume {:partition} v33;
+  assert {:block_sourceloc} {:sourceloc_num 137} true;
+  goto $20;
+$falsebb7:
+  assume {:partition} !v33;
+  assert {:block_sourceloc} {:sourceloc_num 138} true;
+  havoc v65;
+  havoc v66;
+  havoc v67;
+  $keyA.i.0, $valA.i.0, $dstPosA.i.0 := v65, v66, v67;
+  goto $31;
+$truebb8:
+  assume {:partition} v36;
+  assert {:block_sourceloc} {:sourceloc_num 139} true;
+  goto $21;
+$falsebb8:
+  assume {:partition} !v36;
+  assert {:block_sourceloc} {:sourceloc_num 140} true;
+  goto $22;
+$truebb9:
+  assume {:partition} v37;
+  assert {:block_sourceloc} {:sourceloc_num 141} true;
+  goto $24;
+$falsebb9:
+  assume {:partition} !v37;
+  assert {:block_sourceloc} {:sourceloc_num 142} true;
+  goto $30;
+$truebb10:
+  assume {:partition} v38;
+  assert {:block_sourceloc} {:sourceloc_num 143} true;
+  goto $25;
+$falsebb10:
+  assume {:partition} !v38;
+  assert {:block_sourceloc} {:sourceloc_num 144} true;
+  goto $26;
+$truebb11:
+  assume {:partition} v40;
+  assert {:block_sourceloc} {:sourceloc_num 145} true;
+  goto $28;
+$falsebb11:
+  assume {:partition} !v40;
+  assert {:block_sourceloc} {:sourceloc_num 146} true;
+  $pos.i.i.1 := $pos.i.i.0;
+  goto $29;
+$truebb12:
+  assume {:partition} v41;
+  assert {:block_sourceloc} {:sourceloc_num 147} true;
+  goto $32;
+$falsebb12:
+  assume {:partition} !v41;
+  assert {:block_sourceloc} {:sourceloc_num 148} true;
+  havoc v68;
+  havoc v69;
+  havoc v70;
+  $keyB.i.0, $valB.i.0, $dstPosB.i.0 := v68, v69, v70;
+  goto $43;
+$truebb13:
+  assume {:partition} v44;
+  assert {:block_sourceloc} {:sourceloc_num 149} true;
+  goto $33;
+$falsebb13:
+  assume {:partition} !v44;
+  assert {:block_sourceloc} {:sourceloc_num 150} true;
+  goto $34;
+$truebb14:
+  assume {:partition} v45;
+  assert {:block_sourceloc} {:sourceloc_num 151} true;
+  goto $36;
+$falsebb14:
+  assume {:partition} !v45;
+  assert {:block_sourceloc} {:sourceloc_num 152} true;
+  goto $42;
+$truebb15:
+  assume {:partition} v46;
+  assert {:block_sourceloc} {:sourceloc_num 153} true;
+  goto $37;
+$falsebb15:
+  assume {:partition} !v46;
+  assert {:block_sourceloc} {:sourceloc_num 154} true;
+  goto $38;
+$truebb16:
+  assume {:partition} v48;
+  assert {:block_sourceloc} {:sourceloc_num 155} true;
+  goto $40;
+$falsebb16:
+  assume {:partition} !v48;
+  assert {:block_sourceloc} {:sourceloc_num 156} true;
+  $pos.i1.i.1 := $pos.i1.i.0;
+  goto $41;
+$truebb17:
+  assume {:partition} v49;
+  assert {:block_sourceloc} {:sourceloc_num 157} true;
+  goto $44;
+$falsebb17:
+  assume {:partition} !v49;
+  assert {:block_sourceloc} {:sourceloc_num 158} true;
+  goto $45;
+$truebb18:
+  assume {:partition} v50;
+  assert {:block_sourceloc} {:sourceloc_num 159} true;
+  goto $46;
+$falsebb18:
+  assume {:partition} !v50;
+  assert {:block_sourceloc} {:sourceloc_num 160} true;
+  goto $_ZL5mergeILj1EEvPjS0_S0_S0_S0_S0_jjjj.exit;
+$truebb19:
+  assume {:partition} v52;
+  assert {:block_sourceloc} {:sourceloc_num 161} true;
+  goto $47;
+$falsebb19:
+  assume {:partition} !v52;
+  assert {:block_sourceloc} {:sourceloc_num 162} true;
+  goto $48;
+$truebb20:
+  assume {:partition} v58;
+  assert {:block_sourceloc} {:sourceloc_num 163} true;
+  goto $49;
+$falsebb20:
+  assume {:partition} !v58;
+  assert {:block_sourceloc} {:sourceloc_num 164} true;
+  goto $50;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:int, $1:int);
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 128 then 1 else 0) != 0;
+axiom (if num_groups_x == 32768 then 1 else 0) != 0;

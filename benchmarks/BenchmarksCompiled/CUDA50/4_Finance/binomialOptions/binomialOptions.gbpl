@@ -1,0 +1,317 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [bv32]bv32, y : bv32) returns (z : bv32, A : [bv32]bv32);
+var {:source_name "d_OptionData"} {:global} $$d_OptionData : [bv32]bv32;
+axiom {:array_info "$$d_OptionData"} {:global} {:elem_width 32} {:source_name "d_OptionData"} {:source_elem_width 160} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 160} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_OptionData : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 160} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_OptionData : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 160} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_OptionData : bool;
+
+var {:source_name "d_CallValue"} {:global} $$d_CallValue : [bv32]bv32;
+axiom {:array_info "$$d_CallValue"} {:global} {:elem_width 32} {:source_name "d_CallValue"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_CallValue : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_CallValue : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_CallValue : bool;
+
+var {:source_name "d_CallBuffer"} {:global} $$d_CallBuffer : [bv32]bv32;
+axiom {:array_info "$$d_CallBuffer"} {:global} {:elem_width 32} {:source_name "d_CallBuffer"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_CallBuffer : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_CallBuffer : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_CallBuffer : bool;
+
+var {:source_name "callA"} {:group_shared} $$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callA : [bv32]bv32;
+axiom {:array_info "$$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callA"} {:group_shared} {:elem_width 32} {:source_name "callA"} {:source_elem_width 32} {:source_dimensions "257"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callA : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callA : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callA : bool;
+
+var {:source_name "callB"} {:group_shared} $$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callB : [bv32]bv32;
+axiom {:array_info "$$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callB"} {:group_shared} {:elem_width 32} {:source_name "callB"} {:source_elem_width 32} {:source_dimensions "257"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callB : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callB : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callB : bool;
+
+const _WATCHED_OFFSET : bv32;
+const {:group_id_x} group_id_x : bv32;
+const {:group_size_x} group_size_x : bv32;
+const {:group_size_y} group_size_y : bv32;
+const {:group_size_z} group_size_z : bv32;
+const {:local_id_x} local_id_x : bv32;
+const {:num_groups_x} num_groups_x : bv32;
+const {:num_groups_y} num_groups_y : bv32;
+const {:num_groups_z} num_groups_z : bv32;
+function FADD32(bv32, bv32) : bv32;
+function FLT32(bv32, bv32) : bool;
+function FMUL32(bv32, bv32) : bv32;
+function FSUB32(bv32, bv32) : bv32;
+function SI32_TO_FP32(bv32) : bv32;
+function {:bvbuiltin "bvadd"} BV32_ADD(bv32, bv32) : bv32;
+function {:bvbuiltin "bvmul"} BV32_MUL(bv32, bv32) : bv32;
+function {:bvbuiltin "bvsge"} BV32_SGE(bv32, bv32) : bool;
+function {:bvbuiltin "bvsgt"} BV32_SGT(bv32, bv32) : bool;
+function {:bvbuiltin "bvsle"} BV32_SLE(bv32, bv32) : bool;
+function {:bvbuiltin "bvslt"} BV32_SLT(bv32, bv32) : bool;
+function {:bvbuiltin "bvsub"} BV32_SUB(bv32, bv32) : bv32;
+procedure {:source_name "binomialOptionsKernel"} {:kernel} $_Z21binomialOptionsKernelP13__TOptionDataPfS1_()
+{
+  var $i.0:bv32;
+  var $cond.i:bv32;
+  var $i12.0:bv32;
+  var $c_base.0:bv32;
+  var $cond:bv32;
+  var $k.0:bv32;
+  var v6:bool;
+  var v1:bv32;
+  var v4:bv32;
+  var v2:bv32;
+  var v3:bv32;
+  var v5:bv32;
+  var v7:bv32;
+  var v15:bv32;
+  var v17:bv32;
+  var v18:bv32;
+  var v0:bv32;
+  var v9:bool;
+  var v8:bv32;
+  var v11:bool;
+  var v12:bool;
+  var v10:bool;
+  var v16:bool;
+  var v14:bool;
+  var v13:bv32;
+  var v21:bool;
+  var v23:bool;
+  var v24:bv32;
+  var v19:bv32;
+  var v20:bv32;
+  var v22:bv32;
+$entry:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  v0 := BV32_MUL(group_id_x, 2064bv32);
+  assert {:sourceloc} {:sourceloc_num 1} true;
+  v1 := $$d_OptionData[BV32_MUL(group_id_x, 5bv32)];
+  assert {:sourceloc} {:sourceloc_num 2} true;
+  v2 := $$d_OptionData[BV32_ADD(BV32_MUL(group_id_x, 5bv32), 1bv32)];
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  v3 := $$d_OptionData[BV32_ADD(BV32_MUL(group_id_x, 5bv32), 2bv32)];
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  v4 := $$d_OptionData[BV32_ADD(BV32_MUL(group_id_x, 5bv32), 3bv32)];
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  v5 := $$d_OptionData[BV32_ADD(BV32_MUL(group_id_x, 5bv32), 4bv32)];
+  $i.0 := local_id_x;
+  goto $for.cond;
+$for.cond:
+  assert {:block_sourceloc} {:sourceloc_num 6} true;
+  v6 := BV32_SLE($i.0, 2048bv32);
+  goto $truebb, $falsebb;
+$for.body:
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  call {:sourceloc_num 8}   v7 := $expf(FMUL32(v3, FSUB32(FMUL32(1073741824bv32, SI32_TO_FP32($i.0)), 1157627904bv32)));
+  v8 := FSUB32(FMUL32(v1, v7), v2);
+  v9 := FLT32(0bv32, v8);
+  goto $truebb0, $falsebb0;
+$cond.true.i:
+  assert {:block_sourceloc} {:sourceloc_num 9} true;
+  $cond.i := v8;
+  goto $_ZL15expiryCallValuefffi.exit;
+$cond.false.i:
+  assert {:block_sourceloc} {:sourceloc_num 10} true;
+  $cond.i := 0bv32;
+  goto $_ZL15expiryCallValuefffi.exit;
+$_ZL15expiryCallValuefffi.exit:
+  assert {:block_sourceloc} {:sourceloc_num 11} true;
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  $$d_CallBuffer[BV32_ADD(v0, $i.0)] := $cond.i;
+  goto $for.inc;
+$for.inc:
+  assert {:block_sourceloc} {:sourceloc_num 13} true;
+  $i.0 := BV32_ADD($i.0, 256bv32);
+  goto $for.cond;
+$for.end:
+  assert {:block_sourceloc} {:sourceloc_num 14} true;
+  $i12.0 := 2048bv32;
+  goto $for.cond.13;
+$for.cond.13:
+  assert {:block_sourceloc} {:sourceloc_num 15} true;
+  v10 := BV32_SGT($i12.0, 0bv32);
+  goto $truebb1, $falsebb1;
+$for.body.15:
+  assert {:block_sourceloc} {:sourceloc_num 16} true;
+  $c_base.0 := 0bv32;
+  goto $for.cond.16;
+$for.cond.16:
+  assert {:block_sourceloc} {:sourceloc_num 17} true;
+  v11 := BV32_SLT($c_base.0, $i12.0);
+  goto $truebb2, $falsebb2;
+$for.body.18:
+  assert {:block_sourceloc} {:sourceloc_num 18} true;
+  v12 := BV32_SLT(255bv32, BV32_SUB($i12.0, $c_base.0));
+  goto $truebb3, $falsebb3;
+$cond.true:
+  assert {:block_sourceloc} {:sourceloc_num 19} true;
+  $cond := 255bv32;
+  goto $cond.end;
+$cond.false:
+  assert {:block_sourceloc} {:sourceloc_num 20} true;
+  $cond := BV32_SUB($i12.0, $c_base.0);
+  goto $cond.end;
+$cond.end:
+  assert {:block_sourceloc} {:sourceloc_num 21} true;
+  v13 := BV32_SUB($cond, 32bv32);
+  call {:sourceloc_num 22} $bugle_barrier(1bv1, 1bv1);
+  v14 := BV32_SLE(local_id_x, $cond);
+  goto $truebb4, $falsebb4;
+$if.then:
+  assert {:block_sourceloc} {:sourceloc_num 23} true;
+  assert {:sourceloc} {:sourceloc_num 24} true;
+  v15 := $$d_CallBuffer[BV32_ADD(v0, BV32_ADD($c_base.0, local_id_x))];
+  assert {:sourceloc} {:sourceloc_num 25} true;
+  $$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callA[local_id_x] := v15;
+  goto $if.end;
+$if.end:
+  assert {:block_sourceloc} {:sourceloc_num 26} true;
+  $k.0 := BV32_SUB($cond, 1bv32);
+  goto $for.cond.27;
+$for.cond.27:
+  assert {:block_sourceloc} {:sourceloc_num 27} true;
+  v16 := BV32_SGE($k.0, v13);
+  goto $truebb5, $falsebb5;
+$for.body.29:
+  assert {:block_sourceloc} {:sourceloc_num 28} true;
+  call {:sourceloc_num 29} $bugle_barrier(1bv1, 1bv1);
+  assert {:sourceloc} {:sourceloc_num 30} true;
+  v17 := $$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callA[BV32_ADD(local_id_x, 1bv32)];
+  assert {:sourceloc} {:sourceloc_num 31} true;
+  v18 := $$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callA[local_id_x];
+  assert {:sourceloc} {:sourceloc_num 32} true;
+  $$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callB[local_id_x] := FADD32(FMUL32(v4, v17), FMUL32(v5, v18));
+  call {:sourceloc_num 33} $bugle_barrier(1bv1, 1bv1);
+  assert {:sourceloc} {:sourceloc_num 34} true;
+  v19 := $$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callB[BV32_ADD(local_id_x, 1bv32)];
+  assert {:sourceloc} {:sourceloc_num 35} true;
+  v20 := $$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callB[local_id_x];
+  assert {:sourceloc} {:sourceloc_num 36} true;
+  $$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callA[local_id_x] := FADD32(FMUL32(v4, v19), FMUL32(v5, v20));
+  $k.0 := BV32_ADD($k.0, 4294967294bv32);
+  goto $for.cond.27;
+$for.end.45:
+  assert {:block_sourceloc} {:sourceloc_num 37} true;
+  call {:sourceloc_num 38} $bugle_barrier(1bv1, 1bv1);
+  v21 := BV32_SLE(local_id_x, v13);
+  goto $truebb6, $falsebb6;
+$if.then.47:
+  assert {:block_sourceloc} {:sourceloc_num 39} true;
+  assert {:sourceloc} {:sourceloc_num 40} true;
+  v22 := $$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callA[local_id_x];
+  assert {:sourceloc} {:sourceloc_num 41} true;
+  $$d_CallBuffer[BV32_ADD(v0, BV32_ADD($c_base.0, local_id_x))] := v22;
+  goto $if.end.51;
+$if.end.51:
+  assert {:block_sourceloc} {:sourceloc_num 42} true;
+  goto $for.inc.52;
+$for.inc.52:
+  assert {:block_sourceloc} {:sourceloc_num 43} true;
+  $c_base.0 := BV32_ADD($c_base.0, 224bv32);
+  goto $for.cond.16;
+$for.end.54:
+  assert {:block_sourceloc} {:sourceloc_num 44} true;
+  goto $for.inc.55;
+$for.inc.55:
+  assert {:block_sourceloc} {:sourceloc_num 45} true;
+  $i12.0 := BV32_SUB($i12.0, 32bv32);
+  goto $for.cond.13;
+$for.end.57:
+  assert {:block_sourceloc} {:sourceloc_num 46} true;
+  v23 := local_id_x == 0bv32;
+  goto $truebb7, $falsebb7;
+$if.then.59:
+  assert {:block_sourceloc} {:sourceloc_num 47} true;
+  assert {:sourceloc} {:sourceloc_num 48} true;
+  v24 := $$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callA[0bv32];
+  assert {:sourceloc} {:sourceloc_num 49} true;
+  $$d_CallValue[group_id_x] := v24;
+  goto $if.end.61;
+$if.end.61:
+  assert {:block_sourceloc} {:sourceloc_num 50} true;
+  return;
+$truebb:
+  assume {:partition} v6;
+  assert {:block_sourceloc} {:sourceloc_num 51} true;
+  goto $for.body;
+$falsebb:
+  assume {:partition} !v6;
+  assert {:block_sourceloc} {:sourceloc_num 52} true;
+  goto $for.end;
+$truebb0:
+  assume {:partition} v9;
+  assert {:block_sourceloc} {:sourceloc_num 53} true;
+  goto $cond.true.i;
+$falsebb0:
+  assume {:partition} !v9;
+  assert {:block_sourceloc} {:sourceloc_num 54} true;
+  goto $cond.false.i;
+$truebb1:
+  assume {:partition} v10;
+  assert {:block_sourceloc} {:sourceloc_num 55} true;
+  goto $for.body.15;
+$falsebb1:
+  assume {:partition} !v10;
+  assert {:block_sourceloc} {:sourceloc_num 56} true;
+  goto $for.end.57;
+$truebb2:
+  assume {:partition} v11;
+  assert {:block_sourceloc} {:sourceloc_num 57} true;
+  goto $for.body.18;
+$falsebb2:
+  assume {:partition} !v11;
+  assert {:block_sourceloc} {:sourceloc_num 58} true;
+  goto $for.end.54;
+$truebb3:
+  assume {:partition} v12;
+  assert {:block_sourceloc} {:sourceloc_num 59} true;
+  goto $cond.true;
+$falsebb3:
+  assume {:partition} !v12;
+  assert {:block_sourceloc} {:sourceloc_num 60} true;
+  goto $cond.false;
+$truebb4:
+  assume {:partition} v14;
+  assert {:block_sourceloc} {:sourceloc_num 61} true;
+  goto $if.then;
+$falsebb4:
+  assume {:partition} !v14;
+  assert {:block_sourceloc} {:sourceloc_num 62} true;
+  goto $if.end;
+$truebb5:
+  assume {:partition} v16;
+  assert {:block_sourceloc} {:sourceloc_num 63} true;
+  goto $for.body.29;
+$falsebb5:
+  assume {:partition} !v16;
+  assert {:block_sourceloc} {:sourceloc_num 64} true;
+  goto $for.end.45;
+$truebb6:
+  assume {:partition} v21;
+  assert {:block_sourceloc} {:sourceloc_num 65} true;
+  goto $if.then.47;
+$falsebb6:
+  assume {:partition} !v21;
+  assert {:block_sourceloc} {:sourceloc_num 66} true;
+  goto $if.end.51;
+$truebb7:
+  assume {:partition} v23;
+  assert {:block_sourceloc} {:sourceloc_num 67} true;
+  goto $if.then.59;
+$falsebb7:
+  assume {:partition} !v23;
+  assert {:block_sourceloc} {:sourceloc_num 68} true;
+  goto $if.end.61;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:bv1, $1:bv1);
+procedure {:source_name "expf"} $expf($0:bv32) returns ($ret:bv32);
+axiom (if group_size_y == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if group_size_z == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_y == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_z == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if group_size_x == 256bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_x == 512bv32 then 1bv1 else 0bv1) != 0bv1;

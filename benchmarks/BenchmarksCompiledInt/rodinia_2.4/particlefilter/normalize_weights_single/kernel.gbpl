@@ -1,0 +1,250 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "weights"} {:global} $$weights : [int]int;
+axiom {:array_info "$$weights"} {:global} {:elem_width 32} {:source_name "weights"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$weights : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$weights : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$weights : bool;
+
+var {:source_name "partial_sums"} {:global} $$partial_sums : [int]int;
+axiom {:array_info "$$partial_sums"} {:global} {:elem_width 32} {:source_name "partial_sums"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$partial_sums : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$partial_sums : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$partial_sums : bool;
+
+var {:source_name "CDF"} {:global} $$CDF : [int]int;
+axiom {:array_info "$$CDF"} {:global} {:elem_width 32} {:source_name "CDF"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$CDF : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$CDF : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$CDF : bool;
+
+var {:source_name "u"} {:global} $$u : [int]int;
+axiom {:array_info "$$u"} {:global} {:elem_width 32} {:source_name "u"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$u : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$u : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$u : bool;
+
+var {:source_name "seed"} {:global} $$seed : [int]int;
+axiom {:array_info "$$seed"} {:global} {:elem_width 32} {:source_name "seed"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$seed : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$seed : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$seed : bool;
+
+var {:source_name "sumWeights"} {:group_shared} $$normalize_weights_kernel.sumWeights : [int]int;
+axiom {:array_info "$$normalize_weights_kernel.sumWeights"} {:group_shared} {:elem_width 32} {:source_name "sumWeights"} {:source_elem_width 32} {:source_dimensions "1"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$normalize_weights_kernel.sumWeights : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$normalize_weights_kernel.sumWeights : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$normalize_weights_kernel.sumWeights : bool;
+
+var {:source_name "u1"} {:group_shared} $$normalize_weights_kernel.u1 : [int]int;
+axiom {:array_info "$$normalize_weights_kernel.u1"} {:group_shared} {:elem_width 32} {:source_name "u1"} {:source_elem_width 32} {:source_dimensions "1"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$normalize_weights_kernel.u1 : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$normalize_weights_kernel.u1 : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$normalize_weights_kernel.u1 : bool;
+
+const _WATCHED_OFFSET : int;
+const {:global_offset_x} global_offset_x : int;
+const {:global_offset_y} global_offset_y : int;
+const {:global_offset_z} global_offset_z : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function FABS32(int) : int;
+function FADD32(int, int) : int;
+function FDIV32(int, int) : int;
+function FMUL32(int, int) : int;
+function SI32_TO_FP32(int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SLT(x : int, y : int) : bool {
+  x < y
+}
+function {:inline true} BV32_SREM(x : int, y : int) : int {
+  x mod y
+}
+function {:inline true} BV32_SUB(x : int, y : int) : int {
+  x - y
+}
+procedure {:source_name "normalize_weights_kernel"} {:kernel} $normalize_weights_kernel($Nparticles:int)
+requires {:sourceloc_num 0} (if $Nparticles == 400000 then 1 else 0) != 0;
+{
+  var $x.i.0:int;
+  var v0:int;
+  var v1:int;
+  var v2:bool;
+  var v3:int;
+  var v4:bool;
+  var v5:int;
+  var v6:int;
+  var v7:bool;
+  var v8:int;
+  var v9:bool;
+  var v10:int;
+  var v11:int;
+  var v12:int;
+  var v13:int;
+  var v14:bool;
+  var v15:int;
+  var v16:bool;
+  var v17:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  v0 := BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x);
+  v1 := local_id_x;
+  v2 := 0 == v1;
+  goto $truebb, $falsebb;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  v3 := $$partial_sums[0];
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  $$normalize_weights_kernel.sumWeights[0] := v3;
+  goto $2;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 5} true;
+  call {:sourceloc_num 6} $bugle_barrier(-1, 0);
+  v4 := BV32_SLT(v0, $Nparticles);
+  goto $truebb0, $falsebb0;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  v5 := $$weights[v0];
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  v6 := $$normalize_weights_kernel.sumWeights[0];
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  $$weights[v0] := FDIV32(v5, v6);
+  goto $4;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 11} true;
+  call {:sourceloc_num 12} $bugle_barrier(0, -1);
+  v7 := v0 == 0;
+  goto $truebb1, $falsebb1;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 13} true;
+  assert {:sourceloc} {:sourceloc_num 14} true;
+  v8 := $$weights[0];
+  assert {:sourceloc} {:sourceloc_num 15} true;
+  $$CDF[0] := v8;
+  $x.i.0 := 1;
+  goto $6;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 16} true;
+  v9 := BV32_SLT($x.i.0, $Nparticles);
+  goto $truebb2, $falsebb2;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 17} true;
+  assert {:sourceloc} {:sourceloc_num 18} true;
+  v10 := $$weights[$x.i.0];
+  assert {:sourceloc} {:sourceloc_num 19} true;
+  v11 := $$CDF[BV32_SUB($x.i.0, 1)];
+  assert {:sourceloc} {:sourceloc_num 20} true;
+  $$CDF[$x.i.0] := FADD32(v10, v11);
+  $x.i.0 := BV32_ADD($x.i.0, 1);
+  goto $6;
+$cdfCalc.exit:
+  assert {:block_sourceloc} {:sourceloc_num 21} true;
+  assert {:sourceloc} {:sourceloc_num 22} true;
+  v12 := $$seed[v0];
+  assert {:sourceloc} {:sourceloc_num 23} true;
+  $$seed[v0] := BV32_SREM(BV32_ADD(BV32_MUL(1103515245, v12), 12345), 2147483647);
+  assert {:sourceloc} {:sourceloc_num 24} true;
+  v13 := $$seed[v0];
+  assert {:sourceloc} {:sourceloc_num 25} true;
+  $$u[0] := FMUL32(FDIV32(1065353216, SI32_TO_FP32($Nparticles)), FABS32(FDIV32(SI32_TO_FP32(v13), SI32_TO_FP32(2147483647))));
+  goto $8;
+$8:
+  assert {:block_sourceloc} {:sourceloc_num 26} true;
+  call {:sourceloc_num 27} $bugle_barrier(0, -1);
+  v14 := 0 == v1;
+  goto $truebb3, $falsebb3;
+$9:
+  assert {:block_sourceloc} {:sourceloc_num 28} true;
+  assert {:sourceloc} {:sourceloc_num 29} true;
+  v15 := $$u[0];
+  assert {:sourceloc} {:sourceloc_num 30} true;
+  $$normalize_weights_kernel.u1[0] := v15;
+  goto $10;
+$10:
+  assert {:block_sourceloc} {:sourceloc_num 31} true;
+  call {:sourceloc_num 32} $bugle_barrier(-1, 0);
+  v16 := BV32_SLT(v0, $Nparticles);
+  goto $truebb4, $falsebb4;
+$11:
+  assert {:block_sourceloc} {:sourceloc_num 33} true;
+  assert {:sourceloc} {:sourceloc_num 34} true;
+  v17 := $$normalize_weights_kernel.u1[0];
+  assert {:sourceloc} {:sourceloc_num 35} true;
+  $$u[v0] := FADD32(v17, FDIV32(SI32_TO_FP32(v0), SI32_TO_FP32($Nparticles)));
+  goto $12;
+$12:
+  assert {:block_sourceloc} {:sourceloc_num 36} true;
+  return;
+$truebb:
+  assume {:partition} v2;
+  assert {:block_sourceloc} {:sourceloc_num 37} true;
+  goto $1;
+$falsebb:
+  assume {:partition} !v2;
+  assert {:block_sourceloc} {:sourceloc_num 38} true;
+  goto $2;
+$truebb0:
+  assume {:partition} v4;
+  assert {:block_sourceloc} {:sourceloc_num 39} true;
+  goto $3;
+$falsebb0:
+  assume {:partition} !v4;
+  assert {:block_sourceloc} {:sourceloc_num 40} true;
+  goto $4;
+$truebb1:
+  assume {:partition} v7;
+  assert {:block_sourceloc} {:sourceloc_num 41} true;
+  goto $5;
+$falsebb1:
+  assume {:partition} !v7;
+  assert {:block_sourceloc} {:sourceloc_num 42} true;
+  goto $8;
+$truebb2:
+  assume {:partition} v9;
+  assert {:block_sourceloc} {:sourceloc_num 43} true;
+  goto $7;
+$falsebb2:
+  assume {:partition} !v9;
+  assert {:block_sourceloc} {:sourceloc_num 44} true;
+  goto $cdfCalc.exit;
+$truebb3:
+  assume {:partition} v14;
+  assert {:block_sourceloc} {:sourceloc_num 45} true;
+  goto $9;
+$falsebb3:
+  assume {:partition} !v14;
+  assert {:block_sourceloc} {:sourceloc_num 46} true;
+  goto $10;
+$truebb4:
+  assume {:partition} v16;
+  assert {:block_sourceloc} {:sourceloc_num 47} true;
+  goto $11;
+$falsebb4:
+  assume {:partition} !v16;
+  assert {:block_sourceloc} {:sourceloc_num 48} true;
+  goto $12;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:int, $1:int);
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 512 then 1 else 0) != 0;
+axiom (if num_groups_x == 782 then 1 else 0) != 0;
+axiom (if global_offset_x == 0 then 1 else 0) != 0;
+axiom (if global_offset_y == 0 then 1 else 0) != 0;
+axiom (if global_offset_z == 0 then 1 else 0) != 0;

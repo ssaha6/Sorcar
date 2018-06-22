@@ -1,0 +1,128 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [bv32]bv32, y : bv32) returns (z : bv32, A : [bv32]bv32);
+var {:source_name "d_clocks"} {:global} $$d_clocks : [bv32]bv32;
+axiom {:array_info "$$d_clocks"} {:global} {:elem_width 32} {:source_name "d_clocks"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_clocks : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_clocks : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_clocks : bool;
+
+var {:source_name "s_clocks"} {:group_shared} $$_ZZ3sumPjiE8s_clocks : [bv32]bv32;
+axiom {:array_info "$$_ZZ3sumPjiE8s_clocks"} {:group_shared} {:elem_width 32} {:source_name "s_clocks"} {:source_elem_width 32} {:source_dimensions "32"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ3sumPjiE8s_clocks : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ3sumPjiE8s_clocks : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ3sumPjiE8s_clocks : bool;
+
+const _WATCHED_OFFSET : bv32;
+const {:group_size_x} group_size_x : bv32;
+const {:group_size_y} group_size_y : bv32;
+const {:group_size_z} group_size_z : bv32;
+const {:local_id_x} local_id_x : bv32;
+const {:num_groups_x} num_groups_x : bv32;
+const {:num_groups_y} num_groups_y : bv32;
+const {:num_groups_z} num_groups_z : bv32;
+function {:bvbuiltin "bvadd"} BV32_ADD(bv32, bv32) : bv32;
+function {:bvbuiltin "bvsdiv"} BV32_SDIV(bv32, bv32) : bv32;
+function {:bvbuiltin "bvsgt"} BV32_SGT(bv32, bv32) : bool;
+function {:bvbuiltin "bvslt"} BV32_SLT(bv32, bv32) : bool;
+function {:bvbuiltin "bvult"} BV32_ULT(bv32, bv32) : bool;
+procedure {:source_name "sum"} {:kernel} $_Z3sumPji($N:bv32)
+{
+  var $my_sum.0:bv32;
+  var $i.0:bv32;
+  var $i3.0:bv32;
+  var v3:bool;
+  var v0:bool;
+  var v2:bool;
+  var v1:bv32;
+  var v4:bv32;
+  var v5:bv32;
+  var v6:bv32;
+$entry:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  $my_sum.0, $i.0 := 0bv32, local_id_x;
+  goto $for.cond;
+$for.cond:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  v0 := BV32_SLT($i.0, $N);
+  goto $truebb, $falsebb;
+$for.body:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  v1 := $$d_clocks[$i.0];
+  goto $for.inc;
+$for.inc:
+  assert {:block_sourceloc} {:sourceloc_num 4} true;
+  $my_sum.0, $i.0 := BV32_ADD($my_sum.0, v1), BV32_ADD($i.0, group_size_x);
+  goto $for.cond;
+$for.end:
+  assert {:block_sourceloc} {:sourceloc_num 5} true;
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  $$_ZZ3sumPjiE8s_clocks[local_id_x] := $my_sum.0;
+  call {:sourceloc_num 7} $bugle_barrier(1bv1, 1bv1);
+  $i3.0 := 16bv32;
+  goto $for.cond.4;
+$for.cond.4:
+  assert {:block_sourceloc} {:sourceloc_num 8} true;
+  v2 := BV32_SGT($i3.0, 0bv32);
+  goto $truebb0, $falsebb0;
+$for.body.6:
+  assert {:block_sourceloc} {:sourceloc_num 9} true;
+  v3 := BV32_ULT(local_id_x, $i3.0);
+  goto $truebb1, $falsebb1;
+$if.then:
+  assert {:block_sourceloc} {:sourceloc_num 10} true;
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  v4 := $$_ZZ3sumPjiE8s_clocks[BV32_ADD(local_id_x, $i3.0)];
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  v5 := $$_ZZ3sumPjiE8s_clocks[local_id_x];
+  assert {:sourceloc} {:sourceloc_num 13} true;
+  $$_ZZ3sumPjiE8s_clocks[local_id_x] := BV32_ADD(v5, v4);
+  goto $if.end;
+$if.end:
+  assert {:block_sourceloc} {:sourceloc_num 14} true;
+  call {:sourceloc_num 15} $bugle_barrier(1bv1, 1bv1);
+  goto $for.inc.12;
+$for.inc.12:
+  assert {:block_sourceloc} {:sourceloc_num 16} true;
+  $i3.0 := BV32_SDIV($i3.0, 2bv32);
+  goto $for.cond.4;
+$for.end.13:
+  assert {:block_sourceloc} {:sourceloc_num 17} true;
+  assert {:sourceloc} {:sourceloc_num 18} true;
+  v6 := $$_ZZ3sumPjiE8s_clocks[0bv32];
+  assert {:sourceloc} {:sourceloc_num 19} true;
+  $$d_clocks[0bv32] := v6;
+  return;
+$truebb:
+  assume {:partition} v0;
+  assert {:block_sourceloc} {:sourceloc_num 20} true;
+  goto $for.body;
+$falsebb:
+  assume {:partition} !v0;
+  assert {:block_sourceloc} {:sourceloc_num 21} true;
+  goto $for.end;
+$truebb0:
+  assume {:partition} v2;
+  assert {:block_sourceloc} {:sourceloc_num 22} true;
+  goto $for.body.6;
+$falsebb0:
+  assume {:partition} !v2;
+  assert {:block_sourceloc} {:sourceloc_num 23} true;
+  goto $for.end.13;
+$truebb1:
+  assume {:partition} v3;
+  assert {:block_sourceloc} {:sourceloc_num 24} true;
+  goto $if.then;
+$falsebb1:
+  assume {:partition} !v3;
+  assert {:block_sourceloc} {:sourceloc_num 25} true;
+  goto $if.end;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:bv1, $1:bv1);
+axiom (if group_size_y == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if group_size_z == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_y == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_z == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if group_size_x == 32bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_x == 1bv32 then 1bv1 else 0bv1) != 0bv1;

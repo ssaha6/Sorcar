@@ -1,0 +1,39 @@
+Exception ToString:===================System.NullReferenceException: Object reference not set to an instance of an object
+  at GPUVerify.RaceInstrumenter+ComponentVisitor.<VisitNAryExpr>m__1 (Microsoft.Boogie.Expr t) [0x00000] in <filename unknown>:0 
+  at System.Linq.Enumerable.All[Expr] (IEnumerable`1 source, System.Func`2 predicate) [0x00000] in <filename unknown>:0 
+  at GPUVerify.RaceInstrumenter+ComponentVisitor.VisitNAryExpr (Microsoft.Boogie.NAryExpr node) [0x00000] in <filename unknown>:0 
+  at Microsoft.Boogie.NAryExpr.StdDispatch (Microsoft.Boogie.StandardVisitor visitor) [0x00000] in <filename unknown>:0 
+  at Microsoft.Boogie.StandardVisitor.Visit (Microsoft.Boogie.Absy node) [0x00000] in <filename unknown>:0 
+  at Microsoft.Boogie.StandardVisitor.VisitExpr (Microsoft.Boogie.Expr node) [0x00000] in <filename unknown>:0 
+  at Microsoft.Boogie.StandardVisitor.VisitExprSeq (IList`1 exprSeq) [0x00000] in <filename unknown>:0 
+  at Microsoft.Boogie.StandardVisitor.VisitNAryExpr (Microsoft.Boogie.NAryExpr node) [0x00000] in <filename unknown>:0 
+  at GPUVerify.RaceInstrumenter+ComponentVisitor.VisitNAryExpr (Microsoft.Boogie.NAryExpr node) [0x00000] in <filename unknown>:0 
+  at Microsoft.Boogie.NAryExpr.StdDispatch (Microsoft.Boogie.StandardVisitor visitor) [0x00000] in <filename unknown>:0 
+  at Microsoft.Boogie.StandardVisitor.Visit (Microsoft.Boogie.Absy node) [0x00000] in <filename unknown>:0 
+  at Microsoft.Boogie.StandardVisitor.VisitExpr (Microsoft.Boogie.Expr node) [0x00000] in <filename unknown>:0 
+  at Microsoft.Boogie.StandardVisitor.VisitExprSeq (IList`1 exprSeq) [0x00000] in <filename unknown>:0 
+  at Microsoft.Boogie.StandardVisitor.VisitNAryExpr (Microsoft.Boogie.NAryExpr node) [0x00000] in <filename unknown>:0 
+  at GPUVerify.RaceInstrumenter+ComponentVisitor.VisitNAryExpr (Microsoft.Boogie.NAryExpr node) [0x00000] in <filename unknown>:0 
+  at Microsoft.Boogie.NAryExpr.StdDispatch (Microsoft.Boogie.StandardVisitor visitor) [0x00000] in <filename unknown>:0 
+  at Microsoft.Boogie.StandardVisitor.Visit (Microsoft.Boogie.Absy node) [0x00000] in <filename unknown>:0 
+  at Microsoft.Boogie.StandardVisitor.VisitExpr (Microsoft.Boogie.Expr node) [0x00000] in <filename unknown>:0 
+  at Microsoft.Boogie.StandardVisitor.VisitExprSeq (IList`1 exprSeq) [0x00000] in <filename unknown>:0 
+  at Microsoft.Boogie.StandardVisitor.VisitNAryExpr (Microsoft.Boogie.NAryExpr node) [0x00000] in <filename unknown>:0 
+  at GPUVerify.RaceInstrumenter+ComponentVisitor.VisitNAryExpr (Microsoft.Boogie.NAryExpr node) [0x00000] in <filename unknown>:0 
+  at Microsoft.Boogie.NAryExpr.StdDispatch (Microsoft.Boogie.StandardVisitor visitor) [0x00000] in <filename unknown>:0 
+  at Microsoft.Boogie.StandardVisitor.Visit (Microsoft.Boogie.Absy node) [0x00000] in <filename unknown>:0 
+  at Microsoft.Boogie.StandardVisitor.VisitExpr (Microsoft.Boogie.Expr node) [0x00000] in <filename unknown>:0 
+  at Microsoft.Boogie.StandardVisitor.VisitExprSeq (IList`1 exprSeq) [0x00000] in <filename unknown>:0 
+  at Microsoft.Boogie.StandardVisitor.VisitNAryExpr (Microsoft.Boogie.NAryExpr node) [0x00000] in <filename unknown>:0 
+  at GPUVerify.RaceInstrumenter+ComponentVisitor.VisitNAryExpr (Microsoft.Boogie.NAryExpr node) [0x00000] in <filename unknown>:0 
+  at Microsoft.Boogie.NAryExpr.StdDispatch (Microsoft.Boogie.StandardVisitor visitor) [0x00000] in <filename unknown>:0 
+  at Microsoft.Boogie.StandardVisitor.Visit (Microsoft.Boogie.Absy node) [0x00000] in <filename unknown>:0 
+  at GPUVerify.RaceInstrumenter.AddComponentBreakingCandidateInvariants (Microsoft.Boogie.Implementation impl, IRegion region, Microsoft.Boogie.Variable v, GPUVerify.AccessType Access) [0x00000] in <filename unknown>:0 
+  at GPUVerify.RaceInstrumenter.AddRaceCheckingCandidateInvariants (Microsoft.Boogie.Implementation impl, IRegion region) [0x00000] in <filename unknown>:0 
+  at GPUVerify.LoopInvariantGenerator.AddCandidateInvariants (System.Collections.Generic.HashSet`1 LocalVars, Microsoft.Boogie.Implementation Impl) [0x00000] in <filename unknown>:0 
+  at GPUVerify.LoopInvariantGenerator.PostInstrument () [0x00000] in <filename unknown>:0 
+  at GPUVerify.LoopInvariantGenerator.PostInstrument (GPUVerify.GPUVerifier verifier, Microsoft.Boogie.Implementation Impl) [0x00000] in <filename unknown>:0 
+  at GPUVerify.GPUVerifier.ComputeInvariant () [0x00000] in <filename unknown>:0 
+  at GPUVerify.GPUVerifier.doit () [0x00000] in <filename unknown>:0 
+  at GPUVerify.GPUVerify.parseProcessOutput () [0x00000] in <filename unknown>:0 
+  at GPUVerify.GPUVerify.Main (System.String[] args) [0x00000] in <filename unknown>:0 

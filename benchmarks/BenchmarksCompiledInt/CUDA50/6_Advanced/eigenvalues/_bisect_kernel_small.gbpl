@@ -1,0 +1,1217 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "g_d"} {:global} $$g_d : [int]int;
+axiom {:array_info "$$g_d"} {:global} {:elem_width 32} {:source_name "g_d"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$g_d : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$g_d : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_d : bool;
+
+var {:source_name "g_s"} {:global} $$g_s : [int]int;
+axiom {:array_info "$$g_s"} {:global} {:elem_width 32} {:source_name "g_s"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$g_s : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$g_s : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_s : bool;
+
+var {:source_name "g_left"} {:global} $$g_left : [int]int;
+axiom {:array_info "$$g_left"} {:global} {:elem_width 32} {:source_name "g_left"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$g_left : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$g_left : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_left : bool;
+
+var {:source_name "g_right"} {:global} $$g_right : [int]int;
+axiom {:array_info "$$g_right"} {:global} {:elem_width 32} {:source_name "g_right"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$g_right : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$g_right : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_right : bool;
+
+var {:source_name "g_left_count"} {:global} $$g_left_count : [int]int;
+axiom {:array_info "$$g_left_count"} {:global} {:elem_width 32} {:source_name "g_left_count"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$g_left_count : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$g_left_count : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_left_count : bool;
+
+var {:source_name "g_right_count"} {:global} $$g_right_count : [int]int;
+axiom {:array_info "$$g_right_count"} {:global} {:elem_width 32} {:source_name "g_right_count"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$g_right_count : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$g_right_count : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_right_count : bool;
+
+var {:source_name "s_compaction_list"} {:group_shared} $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE17s_compaction_list : [int]int;
+axiom {:array_info "$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE17s_compaction_list"} {:group_shared} {:elem_width 32} {:source_name "s_compaction_list"} {:source_elem_width 32} {:source_dimensions "513"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE17s_compaction_list : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE17s_compaction_list : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE17s_compaction_list : bool;
+
+var {:source_name "s_left"} {:group_shared} $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE6s_left : [int]int;
+axiom {:array_info "$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE6s_left"} {:group_shared} {:elem_width 32} {:source_name "s_left"} {:source_elem_width 32} {:source_dimensions "512"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE6s_left : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE6s_left : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE6s_left : bool;
+
+var {:source_name "s_right"} {:group_shared} $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE7s_right : [int]int;
+axiom {:array_info "$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE7s_right"} {:group_shared} {:elem_width 32} {:source_name "s_right"} {:source_elem_width 32} {:source_dimensions "512"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE7s_right : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE7s_right : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE7s_right : bool;
+
+var {:source_name "s_left_count"} {:group_shared} $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE12s_left_count : [int]int;
+axiom {:array_info "$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE12s_left_count"} {:group_shared} {:elem_width 32} {:source_name "s_left_count"} {:source_elem_width 32} {:source_dimensions "512"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE12s_left_count : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE12s_left_count : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE12s_left_count : bool;
+
+var {:source_name "s_right_count"} {:group_shared} $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE13s_right_count : [int]int;
+axiom {:array_info "$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE13s_right_count"} {:group_shared} {:elem_width 32} {:source_name "s_right_count"} {:source_elem_width 32} {:source_dimensions "512"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE13s_right_count : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE13s_right_count : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE13s_right_count : bool;
+
+var {:source_name "compact_second_chunk"} {:group_shared} $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE20compact_second_chunk : [int]int;
+axiom {:array_info "$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE20compact_second_chunk"} {:group_shared} {:elem_width 32} {:source_name "compact_second_chunk"} {:source_elem_width 32} {:source_dimensions "1"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE20compact_second_chunk : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE20compact_second_chunk : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE20compact_second_chunk : bool;
+
+var {:source_name "num_threads_active"} {:group_shared} $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE18num_threads_active : [int]int;
+axiom {:array_info "$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE18num_threads_active"} {:group_shared} {:elem_width 32} {:source_name "num_threads_active"} {:source_elem_width 32} {:source_dimensions "1"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE18num_threads_active : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE18num_threads_active : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE18num_threads_active : bool;
+
+var {:source_name "num_threads_compaction"} {:group_shared} $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE22num_threads_compaction : [int]int;
+axiom {:array_info "$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE22num_threads_compaction"} {:group_shared} {:elem_width 32} {:source_name "num_threads_compaction"} {:source_elem_width 32} {:source_dimensions "1"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE22num_threads_compaction : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE22num_threads_compaction : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE22num_threads_compaction : bool;
+
+var {:source_name "all_threads_converged"} {:group_shared} $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE21all_threads_converged : [int]int;
+axiom {:array_info "$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE21all_threads_converged"} {:group_shared} {:elem_width 32} {:source_name "all_threads_converged"} {:source_elem_width 32} {:source_dimensions "1"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE21all_threads_converged : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE21all_threads_converged : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE21all_threads_converged : bool;
+
+const _WATCHED_OFFSET : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function  BV32_ASHR(int, int) : int;
+function  BV32_LSHR(int, int) : int;
+function FADD32(int, int) : int;
+function FDIV32(int, int) : int;
+function FEQ32(int, int) : bool;
+function FEQ64(int, int) : bool;
+function FLT32(int, int) : bool;
+function FLT64(int, int) : bool;
+function FMUL32(int, int) : int;
+function FP32_CONV64(int) : int;
+function FSUB32(int, int) : int;
+function FUNO32(int, int) : bool;
+function SI32_TO_FP32(int) : int;
+function {:inline true} BV1_ZEXT32(x : int) : int {
+  x
+}
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_AND(x : int, y : int) : int {
+  if x == y then x else (if x == 0 || y == 0 then 0 else BV32_AND_UF(x, y))
+}
+function BV32_AND_UF(int, int) : int;
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SGT(x : int, y : int) : bool {
+  x > y
+}
+function {:inline true} BV32_SHL(x : int, y : int) : int {
+  if x >= 0 && y == 1 then x*2 else BV32_SHL_UF(x,y)
+}
+function BV32_SHL_UF(int, int) : int;
+function {:inline true} BV32_SUB(x : int, y : int) : int {
+  x - y
+}
+function {:inline true} BV32_UGT(x : int, y : int) : bool {
+  x > y
+}
+function {:inline true} BV32_ULT(x : int, y : int) : bool {
+  x < y
+}
+procedure {:source_name "bisectKernel"} {:kernel} $_Z12bisectKernelPfS_jS_S_PjS0_ffjjf($n:int, $lg:int, $ug:int, $lg_eig_count:int, $ug_eig_count:int, $epsilon:int)
+{
+  var $mid.0:int;
+  var $right_count.0:int;
+  var $left_count.0:int;
+  var $right.0:int;
+  var $left.0:int;
+  var $mid.2:int;
+  var $right_count.1:int;
+  var $left_count.1:int;
+  var $right.1:int;
+  var $left.1:int;
+  var $mid.i.i.0:int;
+  var $mid.1:int;
+  var $count.i.1:int;
+  var $delta.i.0:int;
+  var $count.i.0:int;
+  var $k.i.0:int;
+  var $mid_count.2:int;
+  var $mid.5:int;
+  var $is_active_second.3:int;
+  var $0:int;
+  var $1:int;
+  var $mid.i.i.i.0:int;
+  var $is_active_second.0:int;
+  var $2:int;
+  var $3:int;
+  var $mid.i.i1.i.0:int;
+  var $4:int;
+  var $5:int;
+  var $mid.i.i7.i.0:int;
+  var $mid_count.1:int;
+  var $mid.4:int;
+  var $is_active_second.2:int;
+  var $mid_count.0:int;
+  var $mid.3:int;
+  var $is_active_second.1:int;
+  var $offset.i.0:int;
+  var $d.i.0:int;
+  var $offset.i.1:int;
+  var $d1.i.0:int;
+  var $.0:int;
+  var v95:bool;
+  var v98:int;
+  var v99:int;
+  var v100:bool;
+  var v96:int;
+  var v97:int;
+  var v0:bool;
+  var v1:int;
+  var v2:bool;
+  var v3:int;
+  var v4:int;
+  var v5:int;
+  var v6:int;
+  var v7:bool;
+  var v8:int;
+  var v9:int;
+  var v10:bool;
+  var v11:bool;
+  var v12:int;
+  var v15:bool;
+  var v13:bool;
+  var v14:int;
+  var v16:int;
+  var v17:int;
+  var v18:bool;
+  var v19:bool;
+  var v20:bool;
+  var v21:int;
+  var v22:int;
+  var v23:int;
+  var v24:int;
+  var v25:int;
+  var v26:bool;
+  var v27:bool;
+  var v28:int;
+  var v29:bool;
+  var v30:bool;
+  var v31:int;
+  var v32:int;
+  var v33:int;
+  var v34:bool;
+  var v35:int;
+  var v36:int;
+  var v37:int;
+  var v38:int;
+  var v39:bool;
+  var v40:bool;
+  var v41:int;
+  var v42:int;
+  var v43:bool;
+  var v44:bool;
+  var v45:int;
+  var v46:int;
+  var v47:int;
+  var v48:bool;
+  var v49:int;
+  var v50:int;
+  var v51:int;
+  var v52:int;
+  var v53:bool;
+  var v54:bool;
+  var v55:int;
+  var v56:int;
+  var v57:bool;
+  var v58:int;
+  var v59:int;
+  var v60:int;
+  var v61:bool;
+  var v62:int;
+  var v63:int;
+  var v64:int;
+  var v65:int;
+  var v66:bool;
+  var v67:bool;
+  var v68:int;
+  var v69:int;
+  var v70:bool;
+  var v71:int;
+  var v72:int;
+  var v73:bool;
+  var v74:int;
+  var v75:int;
+  var v76:bool;
+  var v77:int;
+  var v78:bool;
+  var v79:bool;
+  var v80:int;
+  var v81:int;
+  var v82:int;
+  var v83:bool;
+  var v84:int;
+  var v85:bool;
+  var v87:int;
+  var v86:int;
+  var v88:int;
+  var v89:int;
+  var v90:int;
+  var v91:bool;
+  var v92:bool;
+  var v93:int;
+  var v94:int;
+  var v101:int;
+  var v102:int;
+  var v103:int;
+  var v104:bool;
+  var v105:int;
+  var v106:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  assert {:sourceloc} {:sourceloc_num 1} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE17s_compaction_list[local_id_x] := 0;
+  assert {:sourceloc} {:sourceloc_num 2} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE6s_left[local_id_x] := 0;
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE7s_right[local_id_x] := 0;
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE12s_left_count[local_id_x] := 0;
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE13s_right_count[local_id_x] := 0;
+  call {:sourceloc_num 6} $bugle_barrier(-1, -1);
+  v0 := 0 == local_id_x;
+  goto $truebb, $falsebb;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE6s_left[0] := $lg;
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE7s_right[0] := $ug;
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE12s_left_count[0] := $lg_eig_count;
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE13s_right_count[0] := $ug_eig_count;
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE20compact_second_chunk[0] := 0;
+  assert {:sourceloc} {:sourceloc_num 13} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE18num_threads_active[0] := 1;
+  assert {:sourceloc} {:sourceloc_num 14} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE22num_threads_compaction[0] := 1;
+  goto $2;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 15} true;
+  $mid.0, $right_count.0, $left_count.0, $right.0, $left.0 := 0, 0, 0, 0, 0;
+  goto $3;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 16} true;
+  assert {:sourceloc} {:sourceloc_num 17} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE21all_threads_converged[0] := 1;
+  call {:sourceloc_num 18} $bugle_barrier(-1, -1);
+  assert {:sourceloc} {:sourceloc_num 19} true;
+  v1 := $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE18num_threads_active[0];
+  v2 := BV32_ULT(local_id_x, v1);
+  goto $truebb0, $falsebb0;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 20} true;
+  assert {:sourceloc} {:sourceloc_num 21} true;
+  v3 := $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE6s_left[local_id_x];
+  assert {:sourceloc} {:sourceloc_num 22} true;
+  v4 := $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE7s_right[local_id_x];
+  assert {:sourceloc} {:sourceloc_num 23} true;
+  v5 := $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE12s_left_count[local_id_x];
+  assert {:sourceloc} {:sourceloc_num 24} true;
+  v6 := $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE13s_right_count[local_id_x];
+  v7 := (FLT32(v4, v3) || FLT32(v3, v4)) || FUNO32(v3, v4);
+  goto $truebb1, $falsebb1;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 25} true;
+  call {:sourceloc_num 26}   v8 := $_Z6sign_ff(v3);
+  call {:sourceloc_num 27}   v9 := $_Z6sign_ff(v4);
+  v10 := v8 == v9;
+  goto $truebb2, $falsebb2;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 28} true;
+  $mid.i.i.0 := FADD32(v3, FMUL32(FSUB32(v4, v3), 1056964608));
+  goto $_ZL15computeMidpointff.exit.i;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 29} true;
+  $mid.i.i.0 := FMUL32(FADD32(v3, v4), 1056964608);
+  goto $_ZL15computeMidpointff.exit.i;
+$_ZL15computeMidpointff.exit.i:
+  assert {:block_sourceloc} {:sourceloc_num 30} true;
+  assert {:sourceloc} {:sourceloc_num 31} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE21all_threads_converged[0] := 0;
+  $mid.1 := $mid.i.i.0;
+  goto $11;
+$8:
+  assert {:block_sourceloc} {:sourceloc_num 32} true;
+  v11 := BV32_UGT(BV32_SUB(v6, v5), 1);
+  goto $truebb3, $falsebb3;
+$9:
+  assert {:block_sourceloc} {:sourceloc_num 33} true;
+  assert {:sourceloc} {:sourceloc_num 34} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE21all_threads_converged[0] := 0;
+  goto $10;
+$10:
+  assert {:block_sourceloc} {:sourceloc_num 35} true;
+  $mid.1 := $mid.0;
+  goto $11;
+$11:
+  assert {:block_sourceloc} {:sourceloc_num 36} true;
+  $mid.2, $right_count.1, $left_count.1, $right.1, $left.1 := $mid.1, v6, v5, v4, v3;
+  goto $_ZL23subdivideActiveIntervalIjEvjPfS0_PT_S2_jRfS3_RjS4_S3_S4_.exit;
+$_ZL23subdivideActiveIntervalIjEvjPfS0_PT_S2_jRfS3_RjS4_S3_S4_.exit:
+  assert {:block_sourceloc} {:sourceloc_num 37} true;
+  call {:sourceloc_num 38} $bugle_barrier(-1, -1);
+  assert {:sourceloc} {:sourceloc_num 39} true;
+  v12 := $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE21all_threads_converged[0];
+  v13 := 1 == v12;
+  goto $truebb4, $falsebb4;
+$12:
+  assert {:block_sourceloc} {:sourceloc_num 40} true;
+  goto $81;
+$13:
+  assert {:block_sourceloc} {:sourceloc_num 41} true;
+  call {:sourceloc_num 42} $bugle_barrier(-1, -1);
+  assert {:sourceloc} {:sourceloc_num 43} true;
+  v14 := $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE18num_threads_active[0];
+  call {:sourceloc_num 44} $bugle_barrier(-1, -1);
+  v15 := BV32_ULT(local_id_x, $n);
+  goto $truebb5, $falsebb5;
+$14:
+  assert {:block_sourceloc} {:sourceloc_num 45} true;
+  assert {:sourceloc} {:sourceloc_num 46} true;
+  v16 := $$g_d[local_id_x];
+  assert {:sourceloc} {:sourceloc_num 47} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE6s_left[local_id_x] := v16;
+  assert {:sourceloc} {:sourceloc_num 48} true;
+  v17 := $$g_s[BV32_ADD(local_id_x, -1)];
+  assert {:sourceloc} {:sourceloc_num 49} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE7s_right[local_id_x] := v17;
+  goto $15;
+$15:
+  assert {:block_sourceloc} {:sourceloc_num 50} true;
+  call {:sourceloc_num 51} $bugle_barrier(-1, -1);
+  v18 := BV32_ULT(local_id_x, v14);
+  goto $truebb6, $falsebb6;
+$16:
+  assert {:block_sourceloc} {:sourceloc_num 52} true;
+  v19 := 0 == BV1_ZEXT32((if FEQ32($left.1, $right.1) then 1 else 0));
+  goto $truebb7, $falsebb7;
+$17:
+  assert {:block_sourceloc} {:sourceloc_num 53} true;
+  $delta.i.0, $count.i.0, $k.i.0 := 1065353216, 0, 0;
+  goto $18;
+$18:
+  assert {:block_sourceloc} {:sourceloc_num 54} true;
+  v20 := BV32_ULT($k.i.0, $n);
+  goto $truebb8, $falsebb8;
+$19:
+  assert {:block_sourceloc} {:sourceloc_num 55} true;
+  assert {:sourceloc} {:sourceloc_num 56} true;
+  v21 := $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE6s_left[$k.i.0];
+  assert {:sourceloc} {:sourceloc_num 57} true;
+  v22 := $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE7s_right[$k.i.0];
+  assert {:sourceloc} {:sourceloc_num 58} true;
+  v23 := $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE7s_right[$k.i.0];
+  v24 := FSUB32(FSUB32(v21, $mid.2), FDIV32(FMUL32(v22, v23), $delta.i.0));
+  $delta.i.0, $count.i.0, $k.i.0 := v24, BV32_ADD($count.i.0, (if FLT32(v24, 0) then 1 else 0)), BV32_ADD($k.i.0, 1);
+  goto $18;
+$20:
+  assert {:block_sourceloc} {:sourceloc_num 59} true;
+  $count.i.1 := $count.i.0;
+  goto $_ZL26computeNumSmallerEigenvalsPfS_jfjjS_S_j.exit;
+$_ZL26computeNumSmallerEigenvalsPfS_jfjjS_S_j.exit:
+  assert {:block_sourceloc} {:sourceloc_num 60} true;
+  call {:sourceloc_num 61} $bugle_barrier(-1, -1);
+  assert {:sourceloc} {:sourceloc_num 62} true;
+  v25 := $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE18num_threads_active[0];
+  v26 := BV32_ULT(local_id_x, v25);
+  goto $truebb9, $falsebb9;
+$21:
+  assert {:block_sourceloc} {:sourceloc_num 63} true;
+  v27 := (FLT32($right.1, $left.1) || FLT32($left.1, $right.1)) || FUNO32($left.1, $right.1);
+  goto $truebb10, $falsebb10;
+$22:
+  assert {:block_sourceloc} {:sourceloc_num 64} true;
+  assert {:sourceloc} {:sourceloc_num 65} true;
+  v28 := $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE18num_threads_active[0];
+  v29 := $left_count.1 != $count.i.1;
+  goto $truebb11, $falsebb11;
+$23:
+  assert {:block_sourceloc} {:sourceloc_num 66} true;
+  v30 := $count.i.1 != $right_count.1;
+  goto $truebb12, $falsebb12;
+$24:
+  assert {:block_sourceloc} {:sourceloc_num 67} true;
+  assert {:sourceloc} {:sourceloc_num 68} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE12s_left_count[local_id_x] := $left_count.1;
+  assert {:sourceloc} {:sourceloc_num 69} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE13s_right_count[local_id_x] := $count.i.1;
+  call {:sourceloc_num 70}   v31 := $abs(FSUB32($mid.2, $left.1));
+  call {:sourceloc_num 71}   v32 := $abs($left.1);
+  call {:sourceloc_num 72}   v33 := $abs($mid.2);
+  v34 := FLT32(v32, v33);
+  goto $truebb13, $falsebb13;
+$25:
+  assert {:block_sourceloc} {:sourceloc_num 73} true;
+  call {:sourceloc_num 74}   v35 := $abs($mid.2);
+  $0 := v35;
+  goto $27;
+$26:
+  assert {:block_sourceloc} {:sourceloc_num 75} true;
+  call {:sourceloc_num 76}   v36 := $abs($left.1);
+  $0 := v36;
+  goto $27;
+$27:
+  assert {:block_sourceloc} {:sourceloc_num 77} true;
+  v37 := FMUL32($0, $epsilon);
+  v38 := FP32_CONV64(v31);
+  v39 := FLT64(4063729574967324274, FP32_CONV64(v37));
+  goto $truebb14, $falsebb14;
+$28:
+  assert {:block_sourceloc} {:sourceloc_num 78} true;
+  $1 := FP32_CONV64(v37);
+  goto $30;
+$29:
+  assert {:block_sourceloc} {:sourceloc_num 79} true;
+  $1 := 4063729574967324274;
+  goto $30;
+$30:
+  assert {:block_sourceloc} {:sourceloc_num 80} true;
+  v40 := FEQ64(v38, $1) || FLT64(v38, $1);
+  goto $truebb15, $falsebb15;
+$31:
+  assert {:block_sourceloc} {:sourceloc_num 81} true;
+  call {:sourceloc_num 82}   v41 := $_Z6sign_ff($left.1);
+  call {:sourceloc_num 83}   v42 := $_Z6sign_ff($mid.2);
+  v43 := v41 == v42;
+  goto $truebb16, $falsebb16;
+$32:
+  assert {:block_sourceloc} {:sourceloc_num 84} true;
+  $mid.i.i.i.0 := FADD32($left.1, FMUL32(FSUB32($mid.2, $left.1), 1056964608));
+  goto $_ZL15computeMidpointff.exit.i.i;
+$33:
+  assert {:block_sourceloc} {:sourceloc_num 85} true;
+  $mid.i.i.i.0 := FMUL32(FADD32($left.1, $mid.2), 1056964608);
+  goto $_ZL15computeMidpointff.exit.i.i;
+$_ZL15computeMidpointff.exit.i.i:
+  assert {:block_sourceloc} {:sourceloc_num 86} true;
+  assert {:sourceloc} {:sourceloc_num 87} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE6s_left[local_id_x] := $mid.i.i.i.0;
+  assert {:sourceloc} {:sourceloc_num 88} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE7s_right[local_id_x] := $mid.i.i.i.0;
+  goto $_ZL13storeIntervalIjjEvjPfS0_PT0_S2_ffT_S3_f.exit.i;
+$34:
+  assert {:block_sourceloc} {:sourceloc_num 89} true;
+  assert {:sourceloc} {:sourceloc_num 90} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE6s_left[local_id_x] := $left.1;
+  assert {:sourceloc} {:sourceloc_num 91} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE7s_right[local_id_x] := $mid.2;
+  goto $_ZL13storeIntervalIjjEvjPfS0_PT0_S2_ffT_S3_f.exit.i;
+$_ZL13storeIntervalIjjEvjPfS0_PT0_S2_ffT_S3_f.exit.i:
+  assert {:block_sourceloc} {:sourceloc_num 92} true;
+  assert {:sourceloc} {:sourceloc_num 93} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE17s_compaction_list[BV32_ADD(1, local_id_x)] := 1;
+  assert {:sourceloc} {:sourceloc_num 94} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE20compact_second_chunk[0] := 1;
+  $is_active_second.0 := 1;
+  goto $_ZL22storeNonEmptyIntervalsIjjEvjjPfS0_PT0_S2_fffT_S3_S3_fRjS2_S4_.exit;
+$35:
+  assert {:block_sourceloc} {:sourceloc_num 95} true;
+  assert {:sourceloc} {:sourceloc_num 96} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE17s_compaction_list[BV32_ADD(1, local_id_x)] := 0;
+  v44 := $left_count.1 != $count.i.1;
+  goto $truebb17, $falsebb17;
+$36:
+  assert {:block_sourceloc} {:sourceloc_num 97} true;
+  assert {:sourceloc} {:sourceloc_num 98} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE12s_left_count[local_id_x] := $left_count.1;
+  assert {:sourceloc} {:sourceloc_num 99} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE13s_right_count[local_id_x] := $count.i.1;
+  call {:sourceloc_num 100}   v45 := $abs(FSUB32($mid.2, $left.1));
+  call {:sourceloc_num 101}   v46 := $abs($left.1);
+  call {:sourceloc_num 102}   v47 := $abs($mid.2);
+  v48 := FLT32(v46, v47);
+  goto $truebb18, $falsebb18;
+$37:
+  assert {:block_sourceloc} {:sourceloc_num 103} true;
+  call {:sourceloc_num 104}   v49 := $abs($mid.2);
+  $2 := v49;
+  goto $39;
+$38:
+  assert {:block_sourceloc} {:sourceloc_num 105} true;
+  call {:sourceloc_num 106}   v50 := $abs($left.1);
+  $2 := v50;
+  goto $39;
+$39:
+  assert {:block_sourceloc} {:sourceloc_num 107} true;
+  v51 := FMUL32($2, $epsilon);
+  v52 := FP32_CONV64(v45);
+  v53 := FLT64(4063729574967324274, FP32_CONV64(v51));
+  goto $truebb19, $falsebb19;
+$40:
+  assert {:block_sourceloc} {:sourceloc_num 108} true;
+  $3 := FP32_CONV64(v51);
+  goto $42;
+$41:
+  assert {:block_sourceloc} {:sourceloc_num 109} true;
+  $3 := 4063729574967324274;
+  goto $42;
+$42:
+  assert {:block_sourceloc} {:sourceloc_num 110} true;
+  v54 := FEQ64(v52, $3) || FLT64(v52, $3);
+  goto $truebb20, $falsebb20;
+$43:
+  assert {:block_sourceloc} {:sourceloc_num 111} true;
+  call {:sourceloc_num 112}   v55 := $_Z6sign_ff($left.1);
+  call {:sourceloc_num 113}   v56 := $_Z6sign_ff($mid.2);
+  v57 := v55 == v56;
+  goto $truebb21, $falsebb21;
+$44:
+  assert {:block_sourceloc} {:sourceloc_num 114} true;
+  $mid.i.i1.i.0 := FADD32($left.1, FMUL32(FSUB32($mid.2, $left.1), 1056964608));
+  goto $_ZL15computeMidpointff.exit.i5.i;
+$45:
+  assert {:block_sourceloc} {:sourceloc_num 115} true;
+  $mid.i.i1.i.0 := FMUL32(FADD32($left.1, $mid.2), 1056964608);
+  goto $_ZL15computeMidpointff.exit.i5.i;
+$_ZL15computeMidpointff.exit.i5.i:
+  assert {:block_sourceloc} {:sourceloc_num 116} true;
+  assert {:sourceloc} {:sourceloc_num 117} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE6s_left[local_id_x] := $mid.i.i1.i.0;
+  assert {:sourceloc} {:sourceloc_num 118} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE7s_right[local_id_x] := $mid.i.i1.i.0;
+  goto $_ZL13storeIntervalIjjEvjPfS0_PT0_S2_ffT_S3_f.exit6.i;
+$46:
+  assert {:block_sourceloc} {:sourceloc_num 119} true;
+  assert {:sourceloc} {:sourceloc_num 120} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE6s_left[local_id_x] := $left.1;
+  assert {:sourceloc} {:sourceloc_num 121} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE7s_right[local_id_x] := $mid.2;
+  goto $_ZL13storeIntervalIjjEvjPfS0_PT0_S2_ffT_S3_f.exit6.i;
+$_ZL13storeIntervalIjjEvjPfS0_PT0_S2_ffT_S3_f.exit6.i:
+  assert {:block_sourceloc} {:sourceloc_num 122} true;
+  goto $58;
+$47:
+  assert {:block_sourceloc} {:sourceloc_num 123} true;
+  assert {:sourceloc} {:sourceloc_num 124} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE12s_left_count[local_id_x] := $count.i.1;
+  assert {:sourceloc} {:sourceloc_num 125} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE13s_right_count[local_id_x] := $right_count.1;
+  call {:sourceloc_num 126}   v58 := $abs(FSUB32($right.1, $mid.2));
+  call {:sourceloc_num 127}   v59 := $abs($mid.2);
+  call {:sourceloc_num 128}   v60 := $abs($right.1);
+  v61 := FLT32(v59, v60);
+  goto $truebb22, $falsebb22;
+$48:
+  assert {:block_sourceloc} {:sourceloc_num 129} true;
+  call {:sourceloc_num 130}   v62 := $abs($right.1);
+  $4 := v62;
+  goto $50;
+$49:
+  assert {:block_sourceloc} {:sourceloc_num 131} true;
+  call {:sourceloc_num 132}   v63 := $abs($mid.2);
+  $4 := v63;
+  goto $50;
+$50:
+  assert {:block_sourceloc} {:sourceloc_num 133} true;
+  v64 := FMUL32($4, $epsilon);
+  v65 := FP32_CONV64(v58);
+  v66 := FLT64(4063729574967324274, FP32_CONV64(v64));
+  goto $truebb23, $falsebb23;
+$51:
+  assert {:block_sourceloc} {:sourceloc_num 134} true;
+  $5 := FP32_CONV64(v64);
+  goto $53;
+$52:
+  assert {:block_sourceloc} {:sourceloc_num 135} true;
+  $5 := 4063729574967324274;
+  goto $53;
+$53:
+  assert {:block_sourceloc} {:sourceloc_num 136} true;
+  v67 := FEQ64(v65, $5) || FLT64(v65, $5);
+  goto $truebb24, $falsebb24;
+$54:
+  assert {:block_sourceloc} {:sourceloc_num 137} true;
+  call {:sourceloc_num 138}   v68 := $_Z6sign_ff($mid.2);
+  call {:sourceloc_num 139}   v69 := $_Z6sign_ff($right.1);
+  v70 := v68 == v69;
+  goto $truebb25, $falsebb25;
+$55:
+  assert {:block_sourceloc} {:sourceloc_num 140} true;
+  $mid.i.i7.i.0 := FADD32($mid.2, FMUL32(FSUB32($right.1, $mid.2), 1056964608));
+  goto $_ZL15computeMidpointff.exit.i11.i;
+$56:
+  assert {:block_sourceloc} {:sourceloc_num 141} true;
+  $mid.i.i7.i.0 := FMUL32(FADD32($mid.2, $right.1), 1056964608);
+  goto $_ZL15computeMidpointff.exit.i11.i;
+$_ZL15computeMidpointff.exit.i11.i:
+  assert {:block_sourceloc} {:sourceloc_num 142} true;
+  assert {:sourceloc} {:sourceloc_num 143} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE6s_left[local_id_x] := $mid.i.i7.i.0;
+  assert {:sourceloc} {:sourceloc_num 144} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE7s_right[local_id_x] := $mid.i.i7.i.0;
+  goto $_ZL13storeIntervalIjjEvjPfS0_PT0_S2_ffT_S3_f.exit12.i;
+$57:
+  assert {:block_sourceloc} {:sourceloc_num 145} true;
+  assert {:sourceloc} {:sourceloc_num 146} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE6s_left[local_id_x] := $mid.2;
+  assert {:sourceloc} {:sourceloc_num 147} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE7s_right[local_id_x] := $right.1;
+  goto $_ZL13storeIntervalIjjEvjPfS0_PT0_S2_ffT_S3_f.exit12.i;
+$_ZL13storeIntervalIjjEvjPfS0_PT0_S2_ffT_S3_f.exit12.i:
+  assert {:block_sourceloc} {:sourceloc_num 148} true;
+  goto $58;
+$58:
+  assert {:block_sourceloc} {:sourceloc_num 149} true;
+  $is_active_second.0 := 0;
+  goto $_ZL22storeNonEmptyIntervalsIjjEvjjPfS0_PT0_S2_fffT_S3_S3_fRjS2_S4_.exit;
+$_ZL22storeNonEmptyIntervalsIjjEvjjPfS0_PT0_S2_fffT_S3_S3_fRjS2_S4_.exit:
+  assert {:block_sourceloc} {:sourceloc_num 150} true;
+  $mid_count.1, $mid.4, $is_active_second.2 := $count.i.1, $mid.2, $is_active_second.0;
+  goto $62;
+$59:
+  assert {:block_sourceloc} {:sourceloc_num 151} true;
+  assert {:sourceloc} {:sourceloc_num 152} true;
+  v71 := $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE18num_threads_active[0];
+  v72 := BV32_SUB($right_count.1, $left_count.1);
+  v73 := 1 == v72;
+  goto $truebb26, $falsebb26;
+$60:
+  assert {:block_sourceloc} {:sourceloc_num 153} true;
+  assert {:sourceloc} {:sourceloc_num 154} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE6s_left[local_id_x] := $left.1;
+  assert {:sourceloc} {:sourceloc_num 155} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE7s_right[local_id_x] := $right.1;
+  assert {:sourceloc} {:sourceloc_num 156} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE12s_left_count[local_id_x] := $left_count.1;
+  assert {:sourceloc} {:sourceloc_num 157} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE13s_right_count[local_id_x] := $right_count.1;
+  assert {:sourceloc} {:sourceloc_num 158} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE17s_compaction_list[BV32_ADD(1, local_id_x)] := 0;
+  $mid_count.0, $mid.3, $is_active_second.1 := $count.i.1, $mid.2, 0;
+  goto $_ZL22storeIntervalConvergedIjjEvPfS0_PT_S2_RfS3_S3_RT0_S5_S5_S2_RjjS6_.exit;
+$61:
+  assert {:block_sourceloc} {:sourceloc_num 159} true;
+  v74 := BV32_ADD($left_count.1, BV32_LSHR(v72, 1));
+  assert {:sourceloc} {:sourceloc_num 160} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE6s_left[local_id_x] := $left.1;
+  assert {:sourceloc} {:sourceloc_num 161} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE7s_right[local_id_x] := $right.1;
+  assert {:sourceloc} {:sourceloc_num 162} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE12s_left_count[local_id_x] := $left_count.1;
+  assert {:sourceloc} {:sourceloc_num 163} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE13s_right_count[local_id_x] := v74;
+  assert {:sourceloc} {:sourceloc_num 164} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE17s_compaction_list[BV32_ADD(1, local_id_x)] := 1;
+  assert {:sourceloc} {:sourceloc_num 165} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE20compact_second_chunk[0] := 1;
+  $mid_count.0, $mid.3, $is_active_second.1 := v74, $left.1, 1;
+  goto $_ZL22storeIntervalConvergedIjjEvPfS0_PT_S2_RfS3_S3_RT0_S5_S5_S2_RjjS6_.exit;
+$_ZL22storeIntervalConvergedIjjEvPfS0_PT_S2_RfS3_S3_RT0_S5_S5_S2_RjjS6_.exit:
+  assert {:block_sourceloc} true;
+  $mid_count.1, $mid.4, $is_active_second.2 := $mid_count.0, $mid.3, $is_active_second.1;
+  goto $62;
+$62:
+  assert {:block_sourceloc} {:sourceloc_num 166} true;
+  $mid_count.2, $mid.5, $is_active_second.3 := $mid_count.1, $mid.4, $is_active_second.2;
+  goto $63;
+$63:
+  assert {:block_sourceloc} {:sourceloc_num 167} true;
+  call {:sourceloc_num 168} $bugle_barrier(-1, -1);
+  assert {:sourceloc} {:sourceloc_num 169} true;
+  v75 := $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE20compact_second_chunk[0];
+  v76 := BV32_UGT(v75, 0);
+  goto $truebb27, $falsebb27;
+$64:
+  assert {:block_sourceloc} {:sourceloc_num 170} true;
+  assert {:sourceloc} {:sourceloc_num 171} true;
+  v77 := $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE22num_threads_compaction[0];
+  $offset.i.0, $d.i.0 := 1, BV32_LSHR(v77, 1);
+  goto $65;
+$65:
+  assert {:block_sourceloc} {:sourceloc_num 172} true;
+  v78 := BV32_SGT($d.i.0, 0);
+  goto $truebb28, $falsebb28;
+$66:
+  assert {:block_sourceloc} {:sourceloc_num 173} true;
+  call {:sourceloc_num 174} $bugle_barrier(-1, -1);
+  v79 := BV32_ULT(local_id_x, $d.i.0);
+  goto $truebb29, $falsebb29;
+$67:
+  assert {:block_sourceloc} {:sourceloc_num 175} true;
+  v80 := BV32_SUB(BV32_MUL($offset.i.0, BV32_ADD(BV32_MUL(2, local_id_x), 2)), 1);
+  assert {:sourceloc} {:sourceloc_num 176} true;
+  v81 := $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE17s_compaction_list[BV32_ADD(1, v80)];
+  assert {:sourceloc} {:sourceloc_num 177} true;
+  v82 := $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE17s_compaction_list[BV32_ADD(1, BV32_SUB(BV32_MUL($offset.i.0, BV32_ADD(BV32_MUL(2, local_id_x), 1)), 1))];
+  assert {:sourceloc} {:sourceloc_num 178} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE17s_compaction_list[BV32_ADD(1, v80)] := BV32_ADD(v81, v82);
+  goto $68;
+$68:
+  assert {:block_sourceloc} {:sourceloc_num 179} true;
+  $offset.i.0, $d.i.0 := BV32_SHL($offset.i.0, 1), BV32_ASHR($d.i.0, 1);
+  goto $65;
+$69:
+  assert {:block_sourceloc} {:sourceloc_num 180} true;
+  $offset.i.1, $d1.i.0 := $offset.i.0, 2;
+  goto $70;
+$70:
+  assert {:block_sourceloc} {:sourceloc_num 181} true;
+  v83 := BV32_ULT($d1.i.0, v77);
+  goto $truebb30, $falsebb30;
+$71:
+  assert {:block_sourceloc} {:sourceloc_num 182} true;
+  v84 := BV32_LSHR($offset.i.1, 1);
+  call {:sourceloc_num 183} $bugle_barrier(-1, -1);
+  v85 := BV32_ULT(local_id_x, BV32_SUB($d1.i.0, 1));
+  goto $truebb31, $falsebb31;
+$72:
+  assert {:block_sourceloc} {:sourceloc_num 184} true;
+  v86 := BV32_SUB(BV32_MUL(v84, BV32_ADD(local_id_x, 1)), 1);
+  v87 := BV32_ADD(v86, BV32_LSHR(v84, 1));
+  assert {:sourceloc} {:sourceloc_num 185} true;
+  v88 := $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE17s_compaction_list[BV32_ADD(1, v87)];
+  assert {:sourceloc} {:sourceloc_num 186} true;
+  v89 := $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE17s_compaction_list[BV32_ADD(1, v86)];
+  assert {:sourceloc} {:sourceloc_num 187} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE17s_compaction_list[BV32_ADD(1, v87)] := BV32_ADD(v88, v89);
+  goto $73;
+$73:
+  assert {:block_sourceloc} {:sourceloc_num 188} true;
+  $offset.i.1, $d1.i.0 := v84, BV32_SHL($d1.i.0, 1);
+  goto $70;
+$_ZL23createIndicesCompactionIjEvPT_j.exit:
+  assert {:block_sourceloc} {:sourceloc_num 189} true;
+  call {:sourceloc_num 190} $bugle_barrier(-1, -1);
+  assert {:sourceloc} {:sourceloc_num 191} true;
+  v90 := $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE18num_threads_active[0];
+  v91 := BV32_ULT(local_id_x, v90);
+  goto $truebb32, $falsebb32;
+$74:
+  assert {:block_sourceloc} {:sourceloc_num 192} true;
+  v92 := 1 == $is_active_second.3;
+  goto $truebb33, $falsebb33;
+$75:
+  assert {:block_sourceloc} {:sourceloc_num 193} true;
+  assert {:sourceloc} {:sourceloc_num 194} true;
+  v93 := $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE17s_compaction_list[local_id_x];
+  v94 := BV32_ADD(v90, v93);
+  assert {:sourceloc} {:sourceloc_num 195} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE6s_left[v94] := $mid.5;
+  assert {:sourceloc} {:sourceloc_num 196} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE7s_right[v94] := $right.1;
+  assert {:sourceloc} {:sourceloc_num 197} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE12s_left_count[v94] := $mid_count.2;
+  assert {:sourceloc} {:sourceloc_num 198} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE13s_right_count[v94] := $right_count.1;
+  goto $_ZL16compactIntervalsIjEvPfS0_PT_S2_ffjjS2_jj.exit;
+$_ZL16compactIntervalsIjEvPfS0_PT_S2_ffjjS2_jj.exit:
+  assert {:block_sourceloc} {:sourceloc_num 199} true;
+  goto $76;
+$76:
+  assert {:block_sourceloc} {:sourceloc_num 200} true;
+  call {:sourceloc_num 201} $bugle_barrier(-1, -1);
+  v95 := 0 == local_id_x;
+  goto $truebb34, $falsebb34;
+$77:
+  assert {:block_sourceloc} {:sourceloc_num 202} true;
+  assert {:sourceloc} {:sourceloc_num 203} true;
+  v96 := $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE18num_threads_active[0];
+  assert {:sourceloc} {:sourceloc_num 204} true;
+  v97 := $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE17s_compaction_list[v96];
+  assert {:sourceloc} {:sourceloc_num 205} true;
+  v98 := $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE18num_threads_active[0];
+  assert {:sourceloc} {:sourceloc_num 206} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE18num_threads_active[0] := BV32_ADD(v98, v97);
+  assert {:sourceloc} {:sourceloc_num 207} true;
+  v99 := $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE18num_threads_active[0];
+  v100 := 0 == BV32_AND(v99, BV32_SUB(v99, 1));
+  goto $truebb35, $falsebb35;
+$78:
+  assert {:block_sourceloc} {:sourceloc_num 208} true;
+  $.0 := v99;
+  goto $_ZL8ceilPow2i.exit;
+$79:
+  assert {:block_sourceloc} {:sourceloc_num 209} true;
+  v101 := FP32_CONV64(SI32_TO_FP32(v99));
+  call {:sourceloc_num 210}   v102 := $__bugle_frexp_exp(v101);
+  call {:sourceloc_num 211}   v103 := $__bugle_frexp_frac(v101);
+  $.0 := BV32_SHL(1, v102);
+  goto $_ZL8ceilPow2i.exit;
+$_ZL8ceilPow2i.exit:
+  assert {:block_sourceloc} {:sourceloc_num 212} true;
+  assert {:sourceloc} {:sourceloc_num 213} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE22num_threads_compaction[0] := $.0;
+  assert {:sourceloc} {:sourceloc_num 214} true;
+  $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE20compact_second_chunk[0] := 0;
+  goto $80;
+$80:
+  assert {:block_sourceloc} {:sourceloc_num 215} true;
+  call {:sourceloc_num 216} $bugle_barrier(-1, -1);
+  $mid.0, $right_count.0, $left_count.0, $right.0, $left.0 := $mid.5, $right_count.1, $left_count.1, $right.1, $left.1;
+  goto $3;
+$81:
+  assert {:block_sourceloc} {:sourceloc_num 217} true;
+  call {:sourceloc_num 218} $bugle_barrier(-1, -1);
+  v104 := BV32_ULT(local_id_x, $n);
+  goto $truebb36, $falsebb36;
+$82:
+  assert {:block_sourceloc} {:sourceloc_num 219} true;
+  assert {:sourceloc} {:sourceloc_num 220} true;
+  v105 := $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE6s_left[local_id_x];
+  assert {:sourceloc} {:sourceloc_num 221} true;
+  $$g_left[local_id_x] := v105;
+  assert {:sourceloc} {:sourceloc_num 222} true;
+  v106 := $$_ZZ12bisectKernelPfS_jS_S_PjS0_ffjjfE12s_left_count[local_id_x];
+  assert {:sourceloc} {:sourceloc_num 223} true;
+  $$g_left_count[local_id_x] := v106;
+  goto $83;
+$83:
+  assert {:block_sourceloc} {:sourceloc_num 224} true;
+  return;
+$truebb:
+  assume {:partition} v0;
+  assert {:block_sourceloc} {:sourceloc_num 225} true;
+  goto $1;
+$falsebb:
+  assume {:partition} !v0;
+  assert {:block_sourceloc} {:sourceloc_num 226} true;
+  goto $2;
+$truebb0:
+  assume {:partition} v2;
+  assert {:block_sourceloc} {:sourceloc_num 227} true;
+  goto $4;
+$falsebb0:
+  assume {:partition} !v2;
+  assert {:block_sourceloc} {:sourceloc_num 228} true;
+  $mid.2, $right_count.1, $left_count.1, $right.1, $left.1 := $mid.0, $right_count.0, $left_count.0, $right.0, $left.0;
+  goto $_ZL23subdivideActiveIntervalIjEvjPfS0_PT_S2_jRfS3_RjS4_S3_S4_.exit;
+$truebb1:
+  assume {:partition} v7;
+  assert {:block_sourceloc} {:sourceloc_num 229} true;
+  goto $5;
+$falsebb1:
+  assume {:partition} !v7;
+  assert {:block_sourceloc} {:sourceloc_num 230} true;
+  goto $8;
+$truebb2:
+  assume {:partition} v10;
+  assert {:block_sourceloc} {:sourceloc_num 231} true;
+  goto $6;
+$falsebb2:
+  assume {:partition} !v10;
+  assert {:block_sourceloc} {:sourceloc_num 232} true;
+  goto $7;
+$truebb3:
+  assume {:partition} v11;
+  assert {:block_sourceloc} {:sourceloc_num 233} true;
+  goto $9;
+$falsebb3:
+  assume {:partition} !v11;
+  assert {:block_sourceloc} {:sourceloc_num 234} true;
+  goto $10;
+$truebb4:
+  assume {:partition} v13;
+  assert {:block_sourceloc} {:sourceloc_num 235} true;
+  goto $12;
+$falsebb4:
+  assume {:partition} !v13;
+  assert {:block_sourceloc} {:sourceloc_num 236} true;
+  goto $13;
+$truebb5:
+  assume {:partition} v15;
+  assert {:block_sourceloc} {:sourceloc_num 237} true;
+  goto $14;
+$falsebb5:
+  assume {:partition} !v15;
+  assert {:block_sourceloc} {:sourceloc_num 238} true;
+  goto $15;
+$truebb6:
+  assume {:partition} v18;
+  assert {:block_sourceloc} {:sourceloc_num 239} true;
+  goto $16;
+$falsebb6:
+  assume {:partition} !v18;
+  assert {:block_sourceloc} {:sourceloc_num 240} true;
+  $count.i.1 := 0;
+  goto $_ZL26computeNumSmallerEigenvalsPfS_jfjjS_S_j.exit;
+$truebb7:
+  assume {:partition} v19;
+  assert {:block_sourceloc} {:sourceloc_num 241} true;
+  goto $17;
+$falsebb7:
+  assume {:partition} !v19;
+  assert {:block_sourceloc} {:sourceloc_num 242} true;
+  $count.i.1 := 0;
+  goto $_ZL26computeNumSmallerEigenvalsPfS_jfjjS_S_j.exit;
+$truebb8:
+  assume {:partition} v20;
+  assert {:block_sourceloc} {:sourceloc_num 243} true;
+  goto $19;
+$falsebb8:
+  assume {:partition} !v20;
+  assert {:block_sourceloc} {:sourceloc_num 244} true;
+  goto $20;
+$truebb9:
+  assume {:partition} v26;
+  assert {:block_sourceloc} {:sourceloc_num 245} true;
+  goto $21;
+$falsebb9:
+  assume {:partition} !v26;
+  assert {:block_sourceloc} {:sourceloc_num 246} true;
+  $mid_count.2, $mid.5, $is_active_second.3 := $count.i.1, $mid.2, 0;
+  goto $63;
+$truebb10:
+  assume {:partition} v27;
+  assert {:block_sourceloc} {:sourceloc_num 247} true;
+  goto $22;
+$falsebb10:
+  assume {:partition} !v27;
+  assert {:block_sourceloc} {:sourceloc_num 248} true;
+  goto $59;
+$truebb11:
+  assume {:partition} v29;
+  assert {:block_sourceloc} {:sourceloc_num 249} true;
+  goto $23;
+$falsebb11:
+  assume {:partition} !v29;
+  assert {:block_sourceloc} {:sourceloc_num 250} true;
+  goto $35;
+$truebb12:
+  assume {:partition} v30;
+  assert {:block_sourceloc} {:sourceloc_num 251} true;
+  goto $24;
+$falsebb12:
+  assume {:partition} !v30;
+  assert {:block_sourceloc} {:sourceloc_num 252} true;
+  goto $35;
+$truebb13:
+  assume {:partition} v34;
+  assert {:block_sourceloc} {:sourceloc_num 253} true;
+  goto $25;
+$falsebb13:
+  assume {:partition} !v34;
+  assert {:block_sourceloc} {:sourceloc_num 254} true;
+  goto $26;
+$truebb14:
+  assume {:partition} v39;
+  assert {:block_sourceloc} {:sourceloc_num 255} true;
+  goto $28;
+$falsebb14:
+  assume {:partition} !v39;
+  assert {:block_sourceloc} {:sourceloc_num 256} true;
+  goto $29;
+$truebb15:
+  assume {:partition} v40;
+  assert {:block_sourceloc} {:sourceloc_num 257} true;
+  goto $31;
+$falsebb15:
+  assume {:partition} !v40;
+  assert {:block_sourceloc} {:sourceloc_num 258} true;
+  goto $34;
+$truebb16:
+  assume {:partition} v43;
+  assert {:block_sourceloc} {:sourceloc_num 259} true;
+  goto $32;
+$falsebb16:
+  assume {:partition} !v43;
+  assert {:block_sourceloc} {:sourceloc_num 260} true;
+  goto $33;
+$truebb17:
+  assume {:partition} v44;
+  assert {:block_sourceloc} {:sourceloc_num 261} true;
+  goto $36;
+$falsebb17:
+  assume {:partition} !v44;
+  assert {:block_sourceloc} {:sourceloc_num 262} true;
+  goto $47;
+$truebb18:
+  assume {:partition} v48;
+  assert {:block_sourceloc} {:sourceloc_num 263} true;
+  goto $37;
+$falsebb18:
+  assume {:partition} !v48;
+  assert {:block_sourceloc} {:sourceloc_num 264} true;
+  goto $38;
+$truebb19:
+  assume {:partition} v53;
+  assert {:block_sourceloc} {:sourceloc_num 265} true;
+  goto $40;
+$falsebb19:
+  assume {:partition} !v53;
+  assert {:block_sourceloc} {:sourceloc_num 266} true;
+  goto $41;
+$truebb20:
+  assume {:partition} v54;
+  assert {:block_sourceloc} {:sourceloc_num 267} true;
+  goto $43;
+$falsebb20:
+  assume {:partition} !v54;
+  assert {:block_sourceloc} {:sourceloc_num 268} true;
+  goto $46;
+$truebb21:
+  assume {:partition} v57;
+  assert {:block_sourceloc} {:sourceloc_num 269} true;
+  goto $44;
+$falsebb21:
+  assume {:partition} !v57;
+  assert {:block_sourceloc} {:sourceloc_num 270} true;
+  goto $45;
+$truebb22:
+  assume {:partition} v61;
+  assert {:block_sourceloc} {:sourceloc_num 271} true;
+  goto $48;
+$falsebb22:
+  assume {:partition} !v61;
+  assert {:block_sourceloc} {:sourceloc_num 272} true;
+  goto $49;
+$truebb23:
+  assume {:partition} v66;
+  assert {:block_sourceloc} {:sourceloc_num 273} true;
+  goto $51;
+$falsebb23:
+  assume {:partition} !v66;
+  assert {:block_sourceloc} {:sourceloc_num 274} true;
+  goto $52;
+$truebb24:
+  assume {:partition} v67;
+  assert {:block_sourceloc} {:sourceloc_num 275} true;
+  goto $54;
+$falsebb24:
+  assume {:partition} !v67;
+  assert {:block_sourceloc} {:sourceloc_num 276} true;
+  goto $57;
+$truebb25:
+  assume {:partition} v70;
+  assert {:block_sourceloc} {:sourceloc_num 277} true;
+  goto $55;
+$falsebb25:
+  assume {:partition} !v70;
+  assert {:block_sourceloc} {:sourceloc_num 278} true;
+  goto $56;
+$truebb26:
+  assume {:partition} v73;
+  assert {:block_sourceloc} {:sourceloc_num 279} true;
+  goto $60;
+$falsebb26:
+  assume {:partition} !v73;
+  assert {:block_sourceloc} {:sourceloc_num 280} true;
+  goto $61;
+$truebb27:
+  assume {:partition} v76;
+  assert {:block_sourceloc} {:sourceloc_num 281} true;
+  goto $64;
+$falsebb27:
+  assume {:partition} !v76;
+  assert {:block_sourceloc} {:sourceloc_num 282} true;
+  goto $76;
+$truebb28:
+  assume {:partition} v78;
+  assert {:block_sourceloc} {:sourceloc_num 283} true;
+  goto $66;
+$falsebb28:
+  assume {:partition} !v78;
+  assert {:block_sourceloc} {:sourceloc_num 284} true;
+  goto $69;
+$truebb29:
+  assume {:partition} v79;
+  assert {:block_sourceloc} {:sourceloc_num 285} true;
+  goto $67;
+$falsebb29:
+  assume {:partition} !v79;
+  assert {:block_sourceloc} {:sourceloc_num 286} true;
+  goto $68;
+$truebb30:
+  assume {:partition} v83;
+  assert {:block_sourceloc} {:sourceloc_num 287} true;
+  goto $71;
+$falsebb30:
+  assume {:partition} !v83;
+  assert {:block_sourceloc} {:sourceloc_num 288} true;
+  goto $_ZL23createIndicesCompactionIjEvPT_j.exit;
+$truebb31:
+  assume {:partition} v85;
+  assert {:block_sourceloc} {:sourceloc_num 289} true;
+  goto $72;
+$falsebb31:
+  assume {:partition} !v85;
+  assert {:block_sourceloc} {:sourceloc_num 290} true;
+  goto $73;
+$truebb32:
+  assume {:partition} v91;
+  assert {:block_sourceloc} {:sourceloc_num 291} true;
+  goto $74;
+$falsebb32:
+  assume {:partition} !v91;
+  assert {:block_sourceloc} {:sourceloc_num 292} true;
+  goto $_ZL16compactIntervalsIjEvPfS0_PT_S2_ffjjS2_jj.exit;
+$truebb33:
+  assume {:partition} v92;
+  assert {:block_sourceloc} {:sourceloc_num 293} true;
+  goto $75;
+$falsebb33:
+  assume {:partition} !v92;
+  assert {:block_sourceloc} {:sourceloc_num 294} true;
+  goto $_ZL16compactIntervalsIjEvPfS0_PT_S2_ffjjS2_jj.exit;
+$truebb34:
+  assume {:partition} v95;
+  assert {:block_sourceloc} {:sourceloc_num 295} true;
+  goto $77;
+$falsebb34:
+  assume {:partition} !v95;
+  assert {:block_sourceloc} {:sourceloc_num 296} true;
+  goto $80;
+$truebb35:
+  assume {:partition} v100;
+  assert {:block_sourceloc} {:sourceloc_num 297} true;
+  goto $78;
+$falsebb35:
+  assume {:partition} !v100;
+  assert {:block_sourceloc} {:sourceloc_num 298} true;
+  goto $79;
+$truebb36:
+  assume {:partition} v104;
+  assert {:block_sourceloc} {:sourceloc_num 299} true;
+  goto $82;
+$falsebb36:
+  assume {:partition} !v104;
+  assert {:block_sourceloc} {:sourceloc_num 300} true;
+  goto $83;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:int, $1:int);
+procedure {:source_name "abs"} $abs($0:int) returns ($ret:int);
+procedure {:source_name "_Z6sign_ff"} $_Z6sign_ff($0:int) returns ($ret:int);
+procedure {:source_name "__bugle_frexp_exp"} $__bugle_frexp_exp($0:int) returns ($ret:int);
+procedure {:source_name "__bugle_frexp_frac"} $__bugle_frexp_frac($0:int) returns ($ret:int);
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 512 then 1 else 0) != 0;
+axiom (if num_groups_x == 1 then 1 else 0) != 0;

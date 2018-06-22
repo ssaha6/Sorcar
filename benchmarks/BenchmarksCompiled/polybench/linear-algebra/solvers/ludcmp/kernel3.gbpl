@@ -1,0 +1,175 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP64(x : [bv32]bv64, y : bv32) returns (z : bv64, A : [bv32]bv64);
+var {:source_name "A"} {:global} $$A : [bv32]bv64;
+axiom {:array_info "$$A"} {:global} {:elem_width 64} {:source_name "A"} {:source_elem_width 64} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 64} {:source_elem_width 64} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$A : bool;
+var {:race_checking} {:global} {:elem_width 64} {:source_elem_width 64} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$A : bool;
+var {:race_checking} {:global} {:elem_width 64} {:source_elem_width 64} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$A : bool;
+
+var {:source_name "w"} {:global} $$w : [bv32]bv64;
+axiom {:array_info "$$w"} {:global} {:elem_width 64} {:source_name "w"} {:source_elem_width 64} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 64} {:source_elem_width 64} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$w : bool;
+var {:race_checking} {:global} {:elem_width 64} {:source_elem_width 64} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$w : bool;
+var {:race_checking} {:global} {:elem_width 64} {:source_elem_width 64} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$w : bool;
+
+var {:source_name "private_A_0"} $$private_A_0 : [bv32]bv64;
+axiom {:array_info "$$private_A_0"} {:elem_width 64} {:source_name "private_A_0"} {:source_elem_width 64} {:source_dimensions "1,1"} true;
+
+const _WATCHED_OFFSET : bv32;
+const {:global_offset_x} global_offset_x : bv32;
+const {:global_offset_y} global_offset_y : bv32;
+const {:global_offset_z} global_offset_z : bv32;
+const {:group_id_x} group_id_x : bv32;
+const {:group_size_x} group_size_x : bv32;
+const {:group_size_y} group_size_y : bv32;
+const {:group_size_z} group_size_z : bv32;
+const {:local_id_x} local_id_x : bv32;
+const {:num_groups_x} num_groups_x : bv32;
+const {:num_groups_y} num_groups_y : bv32;
+const {:num_groups_z} num_groups_z : bv32;
+function FMUL64(bv64, bv64) : bv64;
+function FSUB64(bv64, bv64) : bv64;
+function {:bvbuiltin "bvadd"} BV32_ADD(bv32, bv32) : bv32;
+function {:bvbuiltin "bvadd"} BV64_ADD(bv64, bv64) : bv64;
+function {:bvbuiltin "bvand"} BV32_AND(bv32, bv32) : bv32;
+function {:bvbuiltin "bvmul"} BV32_MUL(bv32, bv32) : bv32;
+function {:bvbuiltin "bvmul"} BV64_MUL(bv64, bv64) : bv64;
+function {:bvbuiltin "bvor"} BV32_OR(bv32, bv32) : bv32;
+function {:bvbuiltin "bvsdiv"} BV64_SDIV(bv64, bv64) : bv64;
+function {:bvbuiltin "bvsge"} BV64_SGE(bv64, bv64) : bool;
+function {:bvbuiltin "bvsle"} BV32_SLE(bv32, bv32) : bool;
+function {:bvbuiltin "bvsle"} BV64_SLE(bv64, bv64) : bool;
+function {:bvbuiltin "bvslt"} BV64_SLT(bv64, bv64) : bool;
+function {:bvbuiltin "bvsrem"} BV64_SREM(bv64, bv64) : bv64;
+function {:bvbuiltin "bvsub"} BV64_SUB(bv64, bv64) : bv64;
+function {:bvbuiltin "bvudiv"} BV32_UDIV(bv32, bv32) : bv32;
+function {:bvbuiltin "bvuge"} BV32_UGE(bv32, bv32) : bool;
+function {:bvbuiltin "bvurem"} BV32_UREM(bv32, bv32) : bv32;
+function {:bvbuiltin "sign_extend 32"} BV32_SEXT64(bv32) : bv64;
+function {:bvbuiltin "zero_extend 31"} BV1_ZEXT32(bv1) : bv32;
+function {:bvbuiltin "zero_extend 32"} BV32_ZEXT64(bv32) : bv64;
+procedure {:source_name "kernel3"} {:kernel} $kernel3($n:bv32, $c0:bv64)
+requires {:sourceloc_num 0} (if $n == 256bv32 then 1bv1 else 0bv1) != 0bv1;
+requires {:sourceloc_num 1} (if BV32_AND(BV32_AND(BV1_ZEXT32((if BV32_SLE($n, 2147483647bv32) then 1bv1 else 0bv1)), BV1_ZEXT32((if BV64_SGE(BV32_SEXT64($n), BV64_ADD($c0, 1bv64)) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV64_SGE($c0, 0bv64) then 1bv1 else 0bv1))) != 0bv32 then 1bv1 else 0bv1) != 0bv1;
+requires {:procedure_wide_invariant} {:do_not_predicate} {:sourceloc_num 2} (if (_WRITE_HAS_OCCURRED_$$A ==> BV32_AND(BV32_AND(BV32_AND(BV32_AND(BV32_AND(BV1_ZEXT32((if BV64_SGE(BV64_ADD(BV64_MUL(32bv64, BV32_ZEXT64(group_id_x)), BV32_ZEXT64(local_id_x)), 0bv64) then 1bv1 else 0bv1)), BV1_ZEXT32((if BV64_SLE(BV64_ADD(BV64_MUL(32bv64, BV32_ZEXT64(group_id_x)), BV32_ZEXT64(local_id_x)), 1048575bv64) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV32_UGE($n, BV32_ADD(BV32_UREM(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $n), 1bv32)) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV32_UGE(BV32_UREM(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $n), BV32_UREM(BV32_UDIV(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $n), $n)) then 1bv1 else 0bv1))), BV1_ZEXT32((if $c0 == BV32_ZEXT64(BV32_UREM(BV32_UDIV(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $n), $n)) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV64_SREM(BV64_SUB(BV64_ADD(BV64_MUL(32bv64, BV32_ZEXT64(group_id_x)), BV32_ZEXT64(local_id_x)), BV32_ZEXT64(BV32_UREM(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $n))), 1048576bv64) == 0bv64 then 1bv1 else 0bv1))) != 0bv32) then 1bv1 else 0bv1) != 0bv1;
+requires {:procedure_wide_invariant} {:do_not_predicate} {:sourceloc_num 3} (if (_READ_HAS_OCCURRED_$$A ==> BV32_OR(BV32_AND(BV32_AND(BV32_AND(BV1_ZEXT32((if BV32_UGE(BV32_UREM(BV32_UDIV(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $n), $n), BV32_ADD(BV32_UREM(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $n), 1bv32)) then 1bv1 else 0bv1)), BV1_ZEXT32((if BV32_UGE(BV32_UREM(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $n), 0bv32) then 1bv1 else 0bv1))), BV1_ZEXT32((if $c0 == BV32_ZEXT64(BV32_UREM(BV32_UDIV(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $n), $n)) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV64_SGE(BV32_SEXT64($n), BV64_ADD(BV64_ADD(BV64_SREM(BV64_ADD(BV64_ADD(BV64_MUL(32bv64, BV32_ZEXT64(group_id_x)), BV32_ZEXT64(local_id_x)), BV32_ZEXT64(BV32_MUL(1048575bv32, BV32_UREM(BV32_UDIV(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $n), $n)))), 1048576bv64), BV32_ZEXT64(BV32_UREM(BV32_UDIV(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $n), $n))), 1bv64)) then 1bv1 else 0bv1))), BV32_AND(BV32_AND(BV32_AND(BV32_AND(BV32_AND(BV32_AND(BV1_ZEXT32((if BV64_SGE(BV64_ADD(BV64_MUL(32bv64, BV32_ZEXT64(group_id_x)), BV32_ZEXT64(local_id_x)), 0bv64) then 1bv1 else 0bv1)), BV1_ZEXT32((if BV64_SLE(BV64_ADD(BV64_MUL(32bv64, BV32_ZEXT64(group_id_x)), BV32_ZEXT64(local_id_x)), 1048575bv64) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV32_UGE(BV32_UREM(BV32_UDIV(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $n), $n), 0bv32) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV32_UGE($n, BV32_ADD(BV32_UREM(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $n), 1bv32)) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV64_SGE($c0, BV32_ZEXT64(BV32_UREM(BV32_UDIV(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $n), $n))) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV64_SGE(BV32_ZEXT64(BV32_UREM(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $n)), $c0) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV64_SREM(BV64_SUB(BV64_ADD(BV64_MUL(32bv64, BV32_ZEXT64(group_id_x)), BV32_ZEXT64(local_id_x)), BV32_ZEXT64(BV32_UREM(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $n))), 1048576bv64) == 0bv64 then 1bv1 else 0bv1)))) != 0bv32) then 1bv1 else 0bv1) != 0bv1;
+{
+  var $c1.0:bv64;
+  var $private_w.0:bv64;
+  var $c3.0:bv64;
+  var v0:bv64;
+  var v1:bv64;
+  var v5:bv64;
+  var v6:bv64;
+  var v8:bv64;
+  var v10:bv64;
+  var v9:bv64;
+  var v3:bool;
+  var v2:bool;
+  var v4:bool;
+  var v7:bool;
+$entry:
+  assert {:block_sourceloc} {:sourceloc_num 4} true;
+  v0 := BV32_ZEXT64(group_id_x);
+  v1 := BV32_ZEXT64(local_id_x);
+  $c1.0 := BV64_ADD(BV64_MUL(32bv64, v0), BV64_MUL(1048576bv64, BV64_SDIV(BV64_ADD(BV64_ADD(BV64_MUL(18446744073709551584bv64, v0), $c0), 1048544bv64), 1048576bv64)));
+  goto $for.cond;
+$for.cond:
+  assert {:block_sourceloc} {:sourceloc_num 5} true;
+  v2 := BV64_SLT($c1.0, BV32_SEXT64($n));
+  goto $truebb, $falsebb;
+$for.body:
+  assert {:block_sourceloc} {:sourceloc_num 6} true;
+  v3 := BV64_SGE(BV32_SEXT64($n), BV64_ADD(BV64_ADD(v1, $c1.0), 1bv64));
+  goto $truebb0, $falsebb0;
+$land.lhs.true:
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  v4 := BV64_SGE(BV64_ADD(v1, $c1.0), $c0);
+  goto $truebb1, $falsebb1;
+$if.then:
+  assert {:block_sourceloc} {:sourceloc_num 8} true;
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  v5 := $$A[BV64_ADD(BV64_MUL($c0, BV32_SEXT64($n)), BV64_ADD(v1, $c1.0))[32:0]];
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  $$private_A_0[0bv32] := v5;
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  v6 := $$private_A_0[0bv32];
+  $private_w.0, $c3.0 := v6, 1bv64;
+  goto $for.cond.35;
+$for.cond.35:
+  assert {:block_sourceloc} {:sourceloc_num 12} true;
+  v7 := BV64_SLE($c3.0, $c0);
+  goto $truebb2, $falsebb2;
+$for.body.38:
+  assert {:block_sourceloc} {:sourceloc_num 13} true;
+  assert {:sourceloc} {:sourceloc_num 14} true;
+  v8 := $$A[BV64_ADD(BV64_MUL($c0, BV32_SEXT64($n)), BV64_SUB($c3.0, 1bv64))[32:0]];
+  assert {:sourceloc} {:sourceloc_num 15} true;
+  v9 := $$A[BV64_ADD(BV64_MUL(BV64_SUB($c3.0, 1bv64), BV32_SEXT64($n)), BV64_ADD(v1, $c1.0))[32:0]];
+  goto $for.inc;
+$for.inc:
+  assert {:block_sourceloc} {:sourceloc_num 16} true;
+  $private_w.0, $c3.0 := FSUB64($private_w.0, FMUL64(v8, v9)), BV64_ADD($c3.0, 1bv64);
+  goto $for.cond.35;
+$for.end:
+  assert {:block_sourceloc} {:sourceloc_num 17} true;
+  assert {:sourceloc} {:sourceloc_num 18} true;
+  $$private_A_0[0bv32] := $private_w.0;
+  assert {:sourceloc} {:sourceloc_num 19} true;
+  v10 := $$private_A_0[0bv32];
+  assert {:sourceloc} {:sourceloc_num 20} true;
+  $$A[BV64_ADD(BV64_MUL($c0, BV32_SEXT64($n)), BV64_ADD(v1, $c1.0))[32:0]] := v10;
+  goto $if.end;
+$if.end:
+  assert {:block_sourceloc} {:sourceloc_num 21} true;
+  goto $for.inc.64;
+$for.inc.64:
+  assert {:block_sourceloc} {:sourceloc_num 22} true;
+  $c1.0 := BV64_ADD($c1.0, 1048576bv64);
+  goto $for.cond;
+$for.end.66:
+  assert {:block_sourceloc} {:sourceloc_num 23} true;
+  return;
+$truebb:
+  assume {:partition} v2;
+  assert {:block_sourceloc} {:sourceloc_num 24} true;
+  goto $for.body;
+$falsebb:
+  assume {:partition} !v2;
+  assert {:block_sourceloc} {:sourceloc_num 25} true;
+  goto $for.end.66;
+$truebb0:
+  assume {:partition} v3;
+  assert {:block_sourceloc} {:sourceloc_num 26} true;
+  goto $land.lhs.true;
+$falsebb0:
+  assume {:partition} !v3;
+  assert {:block_sourceloc} {:sourceloc_num 27} true;
+  goto $if.end;
+$truebb1:
+  assume {:partition} v4;
+  assert {:block_sourceloc} {:sourceloc_num 28} true;
+  goto $if.then;
+$falsebb1:
+  assume {:partition} !v4;
+  assert {:block_sourceloc} {:sourceloc_num 29} true;
+  goto $if.end;
+$truebb2:
+  assume {:partition} v7;
+  assert {:block_sourceloc} {:sourceloc_num 30} true;
+  goto $for.body.38;
+$falsebb2:
+  assume {:partition} !v7;
+  assert {:block_sourceloc} {:sourceloc_num 31} true;
+  goto $for.end;
+}
+axiom (if group_size_y == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if group_size_z == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_y == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_z == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if group_size_x == 32bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_x == 8bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if global_offset_x == 0bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if global_offset_y == 0bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if global_offset_z == 0bv32 then 1bv1 else 0bv1) != 0bv1;

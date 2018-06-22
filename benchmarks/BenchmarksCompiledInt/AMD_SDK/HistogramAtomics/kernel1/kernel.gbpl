@@ -1,0 +1,350 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "Image"} {:global} $$Image : [int]int;
+axiom {:array_info "$$Image"} {:global} {:elem_width 32} {:source_name "Image"} {:source_elem_width 128} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$Image : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$Image : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$Image : bool;
+
+var {:source_name "Histogram"} {:global} $$Histogram : [int]int;
+axiom {:array_info "$$Histogram"} {:global} {:elem_width 32} {:source_name "Histogram"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$Histogram : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$Histogram : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$Histogram : bool;
+
+var {:source_name "subhists"} {:group_shared} $$histogramKernel.subhists : [int]int;
+axiom {:array_info "$$histogramKernel.subhists"} {:group_shared} {:elem_width 32} {:source_name "subhists"} {:source_elem_width 32} {:source_dimensions "4096"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$histogramKernel.subhists : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$histogramKernel.subhists : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$histogramKernel.subhists : bool;
+
+const _WATCHED_OFFSET : int;
+const {:global_offset_x} global_offset_x : int;
+const {:global_offset_y} global_offset_y : int;
+const {:global_offset_z} global_offset_z : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function  BV32_LSHR(int, int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_AND(x : int, y : int) : int {
+  if x == y then x else (if x == 0 || y == 0 then 0 else BV32_AND_UF(x, y))
+}
+function BV32_AND_UF(int, int) : int;
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SDIV(x : int, y : int) : int {
+  x div y
+}
+function {:inline true} BV32_UDIV(x : int, y : int) : int {
+  x div y
+}
+function {:inline true} BV32_UGT(x : int, y : int) : bool {
+  x > y
+}
+function {:inline true} BV32_ULT(x : int, y : int) : bool {
+  x < y
+}
+function {:inline true} BV32_UREM(x : int, y : int) : int {
+  x mod y
+}
+procedure {:source_name "histogramKernel"} {:kernel} $histogramKernel($n4VectorsPerThread:int)
+{
+  var $0:int;
+  var $1:int;
+  var $2:int;
+  var $i.0:int;
+  var $idx.0:int;
+  var $i.1:int;
+  var $idx.1:int;
+  var $i.2:int;
+  var $bin.0:int;
+  var v0:int;
+  var v1:int;
+  var v2:bool;
+  var v3:bool;
+  var v4:int;
+  var v5:bool;
+  var v6:bool;
+  var v7:bool;
+  var v8:bool;
+  var v9:int;
+  var v10:int;
+  var v11:int;
+  var v12:int;
+  var v13:int;
+  var v14:int;
+  var v15:int;
+  var v24:int;
+  var v16:int;
+  var v18:int;
+  var v17:int;
+  var v19:int;
+  var v20:int;
+  var v21:int;
+  var v22:int;
+  var v23:int;
+  var v36:int;
+  var v25:int;
+  var v26:int;
+  var v27:int;
+  var v28:int;
+  var v29:int;
+  var v30:int;
+  var v31:int;
+  var v32:int;
+  var v33:int;
+  var v34:int;
+  var v35:int;
+  var v37:bool;
+  var v38:bool;
+  var v39:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  v0 := local_id_x;
+  v1 := BV32_UREM(v0, 16);
+  v2 := BV32_ULT(1, BV32_UDIV(group_size_x, 4096));
+  goto $truebb, $falsebb;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  $0 := 1;
+  goto $3;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  $0 := BV32_UDIV(group_size_x, 4096);
+  goto $3;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 3} true;
+  v3 := BV32_UGT(1, BV32_UDIV($0, 4096));
+  goto $truebb0, $falsebb0;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 4} true;
+  $1 := 1;
+  goto $6;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 5} true;
+  $1 := BV32_UDIV($0, 4096);
+  goto $6;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 6} true;
+  v4 := BV32_UDIV(4096, $1);
+  v5 := BV32_ULT(group_size_x, v4);
+  goto $truebb1, $falsebb1;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  $2 := group_size_x;
+  goto $9;
+$8:
+  assert {:block_sourceloc} {:sourceloc_num 8} true;
+  $2 := v4;
+  goto $9;
+$9:
+  assert {:block_sourceloc} {:sourceloc_num 9} true;
+  v6 := BV32_ULT(v0, $2);
+  goto $truebb2, $falsebb2;
+$10:
+  assert {:block_sourceloc} {:sourceloc_num 10} true;
+  $i.0, $idx.0 := 0, v0;
+  goto $11;
+$11:
+  assert {:block_sourceloc} {:sourceloc_num 11} true;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 12} (if (_WRITE_HAS_OCCURRED_$$histogramKernel.subhists ==> BV32_UREM(BV32_UDIV(BV32_MUL(4, _WATCHED_OFFSET), 16), $2) == v0) then 1 else 0) != 0;
+  assert {:originated_from_invariant} {:sourceloc_num 13} (if BV32_UREM($idx.0, $2) == v0 then 1 else 0) != 0;
+  v7 := BV32_ULT($i.0, BV32_UDIV(BV32_UDIV(4096, $2), 4));
+  goto $truebb3, $falsebb3;
+$12:
+  assert {:block_sourceloc} {:sourceloc_num 14} true;
+  assert {:sourceloc} {:sourceloc_num 15} true;
+  $$histogramKernel.subhists[BV32_MUL($idx.0, 4)] := 0;
+  assert {:sourceloc} {:sourceloc_num 16} true;
+  $$histogramKernel.subhists[BV32_ADD(BV32_MUL($idx.0, 4), 1)] := 0;
+  assert {:sourceloc} {:sourceloc_num 17} true;
+  $$histogramKernel.subhists[BV32_ADD(BV32_MUL($idx.0, 4), 2)] := 0;
+  assert {:sourceloc} {:sourceloc_num 18} true;
+  $$histogramKernel.subhists[BV32_ADD(BV32_MUL($idx.0, 4), 3)] := 0;
+  goto $13;
+$13:
+  assert {:block_sourceloc} {:sourceloc_num 19} true;
+  $i.0, $idx.0 := BV32_ADD($i.0, 1), BV32_ADD($idx.0, $2);
+  goto $11;
+$14:
+  assert {:block_sourceloc} {:sourceloc_num 20} true;
+  goto $15;
+$15:
+  assert {:block_sourceloc} {:sourceloc_num 21} true;
+  call {:sourceloc_num 22} $bugle_barrier(-1, 0);
+  $i.1, $idx.1 := 0, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x);
+  goto $16;
+$16:
+  assert {:block_sourceloc} {:sourceloc_num 23} true;
+  v8 := BV32_ULT($i.1, $n4VectorsPerThread);
+  goto $truebb4, $falsebb4;
+$17:
+  assert {:block_sourceloc} {:sourceloc_num 24} true;
+  assert {:sourceloc} {:sourceloc_num 25} true;
+  v9 := $$Image[BV32_MUL($idx.1, 4)];
+  assert {:sourceloc} {:sourceloc_num 26} true;
+  v10 := $$Image[BV32_ADD(BV32_MUL($idx.1, 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 27} true;
+  v11 := $$Image[BV32_ADD(BV32_MUL($idx.1, 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 28} true;
+  v12 := $$Image[BV32_ADD(BV32_MUL($idx.1, 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 29} true;
+  call {:atomic} {:atomic_function "__bugle_atomic_inc_local_uint"} {:parts 1} {:part 1} v13, $$histogramKernel.subhists := _ATOMIC_OP32($$histogramKernel.subhists, BV32_SDIV(BV32_MUL(BV32_ADD(BV32_MUL(BV32_AND(v9, 255), 16), v1), 4), 4));
+  assert {:sourceloc} {:sourceloc_num 30} true;
+  call {:atomic} {:atomic_function "__bugle_atomic_inc_local_uint"} {:parts 1} {:part 1} v14, $$histogramKernel.subhists := _ATOMIC_OP32($$histogramKernel.subhists, BV32_SDIV(BV32_MUL(BV32_ADD(BV32_MUL(BV32_AND(v10, 255), 16), v1), 4), 4));
+  assert {:sourceloc} {:sourceloc_num 31} true;
+  call {:atomic} {:atomic_function "__bugle_atomic_inc_local_uint"} {:parts 1} {:part 1} v15, $$histogramKernel.subhists := _ATOMIC_OP32($$histogramKernel.subhists, BV32_SDIV(BV32_MUL(BV32_ADD(BV32_MUL(BV32_AND(v11, 255), 16), v1), 4), 4));
+  assert {:sourceloc} {:sourceloc_num 32} true;
+  call {:atomic} {:atomic_function "__bugle_atomic_inc_local_uint"} {:parts 1} {:part 1} v16, $$histogramKernel.subhists := _ATOMIC_OP32($$histogramKernel.subhists, BV32_SDIV(BV32_MUL(BV32_ADD(BV32_MUL(BV32_AND(v12, 255), 16), v1), 4), 4));
+  v17 := BV32_LSHR(v9, 8);
+  v18 := BV32_LSHR(v10, 8);
+  v19 := BV32_LSHR(v11, 8);
+  v20 := BV32_LSHR(v12, 8);
+  assert {:sourceloc} {:sourceloc_num 33} true;
+  call {:atomic} {:atomic_function "__bugle_atomic_inc_local_uint"} {:parts 1} {:part 1} v21, $$histogramKernel.subhists := _ATOMIC_OP32($$histogramKernel.subhists, BV32_SDIV(BV32_MUL(BV32_ADD(BV32_MUL(BV32_AND(v17, 255), 16), v1), 4), 4));
+  assert {:sourceloc} {:sourceloc_num 34} true;
+  call {:atomic} {:atomic_function "__bugle_atomic_inc_local_uint"} {:parts 1} {:part 1} v22, $$histogramKernel.subhists := _ATOMIC_OP32($$histogramKernel.subhists, BV32_SDIV(BV32_MUL(BV32_ADD(BV32_MUL(BV32_AND(v18, 255), 16), v1), 4), 4));
+  assert {:sourceloc} {:sourceloc_num 35} true;
+  call {:atomic} {:atomic_function "__bugle_atomic_inc_local_uint"} {:parts 1} {:part 1} v23, $$histogramKernel.subhists := _ATOMIC_OP32($$histogramKernel.subhists, BV32_SDIV(BV32_MUL(BV32_ADD(BV32_MUL(BV32_AND(v19, 255), 16), v1), 4), 4));
+  assert {:sourceloc} {:sourceloc_num 36} true;
+  call {:atomic} {:atomic_function "__bugle_atomic_inc_local_uint"} {:parts 1} {:part 1} v24, $$histogramKernel.subhists := _ATOMIC_OP32($$histogramKernel.subhists, BV32_SDIV(BV32_MUL(BV32_ADD(BV32_MUL(BV32_AND(v20, 255), 16), v1), 4), 4));
+  v25 := BV32_LSHR(v17, 8);
+  v26 := BV32_LSHR(v18, 8);
+  v27 := BV32_LSHR(v19, 8);
+  v28 := BV32_LSHR(v20, 8);
+  assert {:sourceloc} {:sourceloc_num 37} true;
+  call {:atomic} {:atomic_function "__bugle_atomic_inc_local_uint"} {:parts 1} {:part 1} v29, $$histogramKernel.subhists := _ATOMIC_OP32($$histogramKernel.subhists, BV32_SDIV(BV32_MUL(BV32_ADD(BV32_MUL(BV32_AND(v25, 255), 16), v1), 4), 4));
+  assert {:sourceloc} {:sourceloc_num 38} true;
+  call {:atomic} {:atomic_function "__bugle_atomic_inc_local_uint"} {:parts 1} {:part 1} v30, $$histogramKernel.subhists := _ATOMIC_OP32($$histogramKernel.subhists, BV32_SDIV(BV32_MUL(BV32_ADD(BV32_MUL(BV32_AND(v26, 255), 16), v1), 4), 4));
+  assert {:sourceloc} {:sourceloc_num 39} true;
+  call {:atomic} {:atomic_function "__bugle_atomic_inc_local_uint"} {:parts 1} {:part 1} v31, $$histogramKernel.subhists := _ATOMIC_OP32($$histogramKernel.subhists, BV32_SDIV(BV32_MUL(BV32_ADD(BV32_MUL(BV32_AND(v27, 255), 16), v1), 4), 4));
+  assert {:sourceloc} {:sourceloc_num 40} true;
+  call {:atomic} {:atomic_function "__bugle_atomic_inc_local_uint"} {:parts 1} {:part 1} v32, $$histogramKernel.subhists := _ATOMIC_OP32($$histogramKernel.subhists, BV32_SDIV(BV32_MUL(BV32_ADD(BV32_MUL(BV32_AND(v28, 255), 16), v1), 4), 4));
+  assert {:sourceloc} {:sourceloc_num 41} true;
+  call {:atomic} {:atomic_function "__bugle_atomic_inc_local_uint"} {:parts 1} {:part 1} v33, $$histogramKernel.subhists := _ATOMIC_OP32($$histogramKernel.subhists, BV32_SDIV(BV32_MUL(BV32_ADD(BV32_MUL(BV32_AND(BV32_LSHR(v25, 8), 255), 16), v1), 4), 4));
+  assert {:sourceloc} {:sourceloc_num 42} true;
+  call {:atomic} {:atomic_function "__bugle_atomic_inc_local_uint"} {:parts 1} {:part 1} v34, $$histogramKernel.subhists := _ATOMIC_OP32($$histogramKernel.subhists, BV32_SDIV(BV32_MUL(BV32_ADD(BV32_MUL(BV32_AND(BV32_LSHR(v26, 8), 255), 16), v1), 4), 4));
+  assert {:sourceloc} {:sourceloc_num 43} true;
+  call {:atomic} {:atomic_function "__bugle_atomic_inc_local_uint"} {:parts 1} {:part 1} v35, $$histogramKernel.subhists := _ATOMIC_OP32($$histogramKernel.subhists, BV32_SDIV(BV32_MUL(BV32_ADD(BV32_MUL(BV32_AND(BV32_LSHR(v27, 8), 255), 16), v1), 4), 4));
+  assert {:sourceloc} {:sourceloc_num 44} true;
+  call {:atomic} {:atomic_function "__bugle_atomic_inc_local_uint"} {:parts 1} {:part 1} v36, $$histogramKernel.subhists := _ATOMIC_OP32($$histogramKernel.subhists, BV32_SDIV(BV32_MUL(BV32_ADD(BV32_MUL(BV32_AND(BV32_LSHR(v28, 8), 255), 16), v1), 4), 4));
+  goto $18;
+$18:
+  assert {:block_sourceloc} {:sourceloc_num 45} true;
+  $i.1, $idx.1 := BV32_ADD($i.1, 1), BV32_ADD($idx.1, BV32_MUL(group_size_x, num_groups_x));
+  goto $16;
+$19:
+  assert {:block_sourceloc} {:sourceloc_num 46} true;
+  call {:sourceloc_num 47} $bugle_barrier(-1, 0);
+  v37 := BV32_ULT(v0, 256);
+  goto $truebb5, $falsebb5;
+$20:
+  assert {:block_sourceloc} {:sourceloc_num 48} true;
+  $i.2, $bin.0 := 0, 0;
+  goto $21;
+$21:
+  assert {:block_sourceloc} {:sourceloc_num 49} true;
+  v38 := BV32_ULT($i.2, 16);
+  goto $truebb6, $falsebb6;
+$22:
+  assert {:block_sourceloc} {:sourceloc_num 50} true;
+  assert {:sourceloc} {:sourceloc_num 51} true;
+  v39 := $$histogramKernel.subhists[BV32_ADD(BV32_MUL(v0, 16), $i.2)];
+  goto $23;
+$23:
+  assert {:block_sourceloc} {:sourceloc_num 52} true;
+  $i.2, $bin.0 := BV32_ADD($i.2, 1), BV32_ADD($bin.0, v39);
+  goto $21;
+$24:
+  assert {:block_sourceloc} {:sourceloc_num 53} true;
+  assert {:sourceloc} {:sourceloc_num 54} true;
+  $$Histogram[BV32_ADD(BV32_MUL(group_id_x, 256), v0)] := $bin.0;
+  goto $25;
+$25:
+  assert {:block_sourceloc} {:sourceloc_num 55} true;
+  return;
+$truebb:
+  assume {:partition} v2;
+  assert {:block_sourceloc} {:sourceloc_num 56} true;
+  goto $1;
+$falsebb:
+  assume {:partition} !v2;
+  assert {:block_sourceloc} {:sourceloc_num 57} true;
+  goto $2;
+$truebb0:
+  assume {:partition} v3;
+  assert {:block_sourceloc} {:sourceloc_num 58} true;
+  goto $4;
+$falsebb0:
+  assume {:partition} !v3;
+  assert {:block_sourceloc} {:sourceloc_num 59} true;
+  goto $5;
+$truebb1:
+  assume {:partition} v5;
+  assert {:block_sourceloc} {:sourceloc_num 60} true;
+  goto $7;
+$falsebb1:
+  assume {:partition} !v5;
+  assert {:block_sourceloc} {:sourceloc_num 61} true;
+  goto $8;
+$truebb2:
+  assume {:partition} v6;
+  assert {:block_sourceloc} {:sourceloc_num 62} true;
+  goto $10;
+$falsebb2:
+  assume {:partition} !v6;
+  assert {:block_sourceloc} {:sourceloc_num 63} true;
+  goto $15;
+$truebb3:
+  assume {:partition} v7;
+  assert {:block_sourceloc} {:sourceloc_num 64} true;
+  goto $12;
+$falsebb3:
+  assume {:partition} !v7;
+  assert {:block_sourceloc} {:sourceloc_num 65} true;
+  goto $14;
+$truebb4:
+  assume {:partition} v8;
+  assert {:block_sourceloc} {:sourceloc_num 66} true;
+  goto $17;
+$falsebb4:
+  assume {:partition} !v8;
+  assert {:block_sourceloc} {:sourceloc_num 67} true;
+  goto $19;
+$truebb5:
+  assume {:partition} v37;
+  assert {:block_sourceloc} {:sourceloc_num 68} true;
+  goto $20;
+$falsebb5:
+  assume {:partition} !v37;
+  assert {:block_sourceloc} {:sourceloc_num 69} true;
+  goto $25;
+$truebb6:
+  assume {:partition} v38;
+  assert {:block_sourceloc} {:sourceloc_num 70} true;
+  goto $22;
+$falsebb6:
+  assume {:partition} !v38;
+  assert {:block_sourceloc} {:sourceloc_num 71} true;
+  goto $24;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:int, $1:int);
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 128 then 1 else 0) != 0;
+axiom (if num_groups_x == 2 then 1 else 0) != 0;
+axiom (if global_offset_x == 0 then 1 else 0) != 0;
+axiom (if global_offset_y == 0 then 1 else 0) != 0;
+axiom (if global_offset_z == 0 then 1 else 0) != 0;

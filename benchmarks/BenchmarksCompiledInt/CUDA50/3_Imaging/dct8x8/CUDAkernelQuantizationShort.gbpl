@@ -1,0 +1,86 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP16(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "SrcDst"} {:global} $$SrcDst : [int]int;
+axiom {:array_info "$$SrcDst"} {:global} {:elem_width 16} {:source_name "SrcDst"} {:source_elem_width 16} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 16} {:source_elem_width 16} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$SrcDst : bool;
+var {:race_checking} {:global} {:elem_width 16} {:source_elem_width 16} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$SrcDst : bool;
+var {:race_checking} {:global} {:elem_width 16} {:source_elem_width 16} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$SrcDst : bool;
+
+var {:source_name "Q"} {:constant} $$Q : [int]int;
+axiom {:array_info "$$Q"} {:constant} {:elem_width 16} {:source_name "Q"} {:source_elem_width 16} {:source_dimensions "64"} true;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_id_y} group_id_y : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:local_id_y} local_id_y : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function  BV32_ASHR(int, int) : int;
+function BV16_SEXT32(int) : int;
+function BV_EXTRACT(int, int, int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SDIV(x : int, y : int) : int {
+  x div y
+}
+function {:inline true} BV32_SLT(x : int, y : int) : bool {
+  x < y
+}
+function {:inline true} BV32_SUB(x : int, y : int) : int {
+  x - y
+}
+procedure {:source_name "CUDAkernelQuantizationShort"} {:kernel} $_Z27CUDAkernelQuantizationShortPsi($Stride:int)
+requires {:sourceloc_num 0} (if $Stride == 512 then 1 else 0) != 0;
+{
+  var $curCoef.0:int;
+  var v0:int;
+  var v1:int;
+  var v2:bool;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  assert {:sourceloc} {:sourceloc_num 2} true;
+  v0 := $$SrcDst[BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_y, 8), local_id_y), $Stride), BV32_ADD(BV32_MUL(group_id_x, 8), local_id_x))];
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  v1 := $$Q[BV32_ADD(BV32_MUL(local_id_y, 8), local_id_x)];
+  v2 := BV32_SLT(BV16_SEXT32(v0), 0);
+  goto $truebb, $falsebb;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 4} true;
+  $curCoef.0 := BV_EXTRACT(BV32_SUB(0, BV16_SEXT32(BV_EXTRACT(BV32_SDIV(BV16_SEXT32(BV_EXTRACT(BV32_ADD(BV16_SEXT32(BV_EXTRACT(BV32_SUB(0, BV16_SEXT32(v0)), 16, 0)), BV32_ASHR(BV16_SEXT32(v1), 1)), 16, 0)), BV16_SEXT32(v1)), 16, 0))), 16, 0);
+  goto $3;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 5} true;
+  $curCoef.0 := BV_EXTRACT(BV32_SDIV(BV16_SEXT32(BV_EXTRACT(BV32_ADD(BV16_SEXT32(v0), BV32_ASHR(BV16_SEXT32(v1), 1)), 16, 0)), BV16_SEXT32(v1)), 16, 0);
+  goto $3;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 6} true;
+  call {:sourceloc_num 7} $bugle_barrier(-1, -1);
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  $$SrcDst[BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_y, 8), local_id_y), $Stride), BV32_ADD(BV32_MUL(group_id_x, 8), local_id_x))] := BV_EXTRACT(BV32_MUL(BV16_SEXT32($curCoef.0), BV16_SEXT32(v1)), 16, 0);
+  return;
+$truebb:
+  assume {:partition} v2;
+  assert {:block_sourceloc} {:sourceloc_num 9} true;
+  goto $1;
+$falsebb:
+  assume {:partition} !v2;
+  assert {:block_sourceloc} {:sourceloc_num 10} true;
+  goto $2;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:int, $1:int);
+axiom (if group_size_x == 8 then 1 else 0) != 0;
+axiom (if group_size_y == 8 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_x == 64 then 1 else 0) != 0;
+axiom (if num_groups_y == 64 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;

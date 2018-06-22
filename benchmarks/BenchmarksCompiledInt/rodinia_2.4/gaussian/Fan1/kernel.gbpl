@@ -1,0 +1,102 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "m_dev"} {:global} $$m_dev : [int]int;
+axiom {:array_info "$$m_dev"} {:global} {:elem_width 32} {:source_name "m_dev"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$m_dev : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$m_dev : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$m_dev : bool;
+
+var {:source_name "a_dev"} {:global} $$a_dev : [int]int;
+axiom {:array_info "$$a_dev"} {:global} {:elem_width 32} {:source_name "a_dev"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$a_dev : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$a_dev : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$a_dev : bool;
+
+var {:source_name "b_dev"} {:global} $$b_dev : [int]int;
+axiom {:array_info "$$b_dev"} {:global} {:elem_width 32} {:source_name "b_dev"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$b_dev : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$b_dev : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$b_dev : bool;
+
+const _WATCHED_OFFSET : int;
+const {:global_offset_x} global_offset_x : int;
+const {:global_offset_y} global_offset_y : int;
+const {:global_offset_z} global_offset_z : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function FDIV32(int, int) : int;
+function {:inline true} BV1_ZEXT32(x : int) : int {
+  x
+}
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_AND(x : int, y : int) : int {
+  if x == y then x else (if x == 0 || y == 0 then 0 else BV32_AND_UF(x, y))
+}
+function BV32_AND_UF(int, int) : int;
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SGE(x : int, y : int) : bool {
+  x >= y
+}
+function {:inline true} BV32_SLE(x : int, y : int) : bool {
+  x <= y
+}
+function {:inline true} BV32_SLT(x : int, y : int) : bool {
+  x < y
+}
+function {:inline true} BV32_SUB(x : int, y : int) : int {
+  x - y
+}
+procedure {:source_name "Fan1"} {:kernel} $Fan1($size:int, $t:int)
+requires {:sourceloc_num 0} (if $size == 256 then 1 else 0) != 0;
+requires {:sourceloc_num 1} (if BV32_AND(BV1_ZEXT32((if BV32_SGE($t, 0) then 1 else 0)), BV1_ZEXT32((if BV32_SLE($t, 254) then 1 else 0))) != 0 then 1 else 0) != 0;
+{
+  var v0:int;
+  var v1:bool;
+  var v2:int;
+  var v3:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  v0 := BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x);
+  v1 := BV32_SLT(v0, BV32_SUB(BV32_SUB($size, 1), $t));
+  goto $truebb, $falsebb;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 3} true;
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  v2 := $$a_dev[BV32_ADD(BV32_MUL($size, BV32_ADD(BV32_ADD(v0, $t), 1)), $t)];
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  v3 := $$a_dev[BV32_ADD(BV32_MUL($size, $t), $t)];
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  $$m_dev[BV32_ADD(BV32_MUL($size, BV32_ADD(BV32_ADD(v0, $t), 1)), $t)] := FDIV32(v2, v3);
+  goto $2;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  return;
+$truebb:
+  assume {:partition} v1;
+  assert {:block_sourceloc} {:sourceloc_num 8} true;
+  goto $1;
+$falsebb:
+  assume {:partition} !v1;
+  assert {:block_sourceloc} {:sourceloc_num 9} true;
+  goto $2;
+}
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 256 then 1 else 0) != 0;
+axiom (if num_groups_x == 1 then 1 else 0) != 0;
+axiom (if global_offset_x == 0 then 1 else 0) != 0;
+axiom (if global_offset_y == 0 then 1 else 0) != 0;
+axiom (if global_offset_z == 0 then 1 else 0) != 0;

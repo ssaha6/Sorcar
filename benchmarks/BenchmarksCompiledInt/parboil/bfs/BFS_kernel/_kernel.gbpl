@@ -1,0 +1,340 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "q1"} {:global} $$q1 : [int]int;
+axiom {:array_info "$$q1"} {:global} {:elem_width 32} {:source_name "q1"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$q1 : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$q1 : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$q1 : bool;
+
+var {:source_name "q2"} {:global} $$q2 : [int]int;
+axiom {:array_info "$$q2"} {:global} {:elem_width 32} {:source_name "q2"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$q2 : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$q2 : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$q2 : bool;
+
+var {:source_name "g_graph_nodes"} {:global} $$g_graph_nodes : [int]int;
+axiom {:array_info "$$g_graph_nodes"} {:global} {:elem_width 32} {:source_name "g_graph_nodes"} {:source_elem_width 64} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$g_graph_nodes : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$g_graph_nodes : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_graph_nodes : bool;
+
+var {:source_name "g_graph_edges"} {:global} $$g_graph_edges : [int]int;
+axiom {:array_info "$$g_graph_edges"} {:global} {:elem_width 32} {:source_name "g_graph_edges"} {:source_elem_width 64} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$g_graph_edges : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$g_graph_edges : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_graph_edges : bool;
+
+var {:source_name "g_color"} {:global} $$g_color : [int]int;
+axiom {:array_info "$$g_color"} {:global} {:elem_width 32} {:source_name "g_color"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$g_color : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$g_color : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_color : bool;
+
+var {:source_name "g_cost"} {:global} $$g_cost : [int]int;
+axiom {:array_info "$$g_cost"} {:global} {:elem_width 32} {:source_name "g_cost"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$g_cost : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$g_cost : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_cost : bool;
+
+var {:source_name "tail"} {:global} $$tail : [int]int;
+axiom {:array_info "$$tail"} {:global} {:elem_width 32} {:source_name "tail"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$tail : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$tail : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$tail : bool;
+
+var {:source_name "local_q_tail"} {:group_shared} $$local_q_tail : [int]int;
+axiom {:array_info "$$local_q_tail"} {:group_shared} {:elem_width 32} {:source_name "local_q_tail"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$local_q_tail : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$local_q_tail : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$local_q_tail : bool;
+
+var {:source_name "local_q"} {:group_shared} $$local_q : [int]int;
+axiom {:array_info "$$local_q"} {:group_shared} {:elem_width 32} {:source_name "local_q"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$local_q : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$local_q : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$local_q : bool;
+
+var {:source_name "shift"} {:group_shared} $$shift : [int]int;
+axiom {:array_info "$$shift"} {:group_shared} {:elem_width 32} {:source_name "shift"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$shift : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$shift : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$shift : bool;
+
+var {:source_name "cur_node"} $$cur_node : [int]int;
+axiom {:array_info "$$cur_node"} {:elem_width 32} {:source_name "cur_node"} {:source_elem_width 64} {:source_dimensions "1"} true;
+
+var {:source_name "cur_edge"} $$cur_edge : [int]int;
+axiom {:array_info "$$cur_edge"} {:elem_width 32} {:source_name "cur_edge"} {:source_elem_width 64} {:source_dimensions "1"} true;
+
+const _WATCHED_OFFSET : int;
+const {:global_offset_x} global_offset_x : int;
+const {:global_offset_y} global_offset_y : int;
+const {:global_offset_z} global_offset_z : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SDIV(x : int, y : int) : int {
+  x div y
+}
+function {:inline true} BV32_SGT(x : int, y : int) : bool {
+  x > y
+}
+function {:inline true} BV32_SLT(x : int, y : int) : bool {
+  x < y
+}
+procedure {:source_name "BFS_kernel"} {:kernel} $BFS_kernel($no_of_nodes:int, $gray_shade:int, $k:int)
+{
+  var $i.0:int;
+  var $local_shift.0:int;
+  var v0:bool;
+  var v1:int;
+  var v2:bool;
+  var v3:int;
+  var v4:int;
+  var v5:int;
+  var v6:int;
+  var v7:int;
+  var v8:int;
+  var v9:int;
+  var v10:bool;
+  var v11:int;
+  var v12:int;
+  var v13:int;
+  var v14:int;
+  var v15:int;
+  var v16:int;
+  var v17:bool;
+  var v18:int;
+  var v19:bool;
+  var v20:int;
+  var v21:bool;
+  var v22:int;
+  var v23:bool;
+  var v24:int;
+  var v25:int;
+  var v26:int;
+  var v27:bool;
+  var v28:int;
+  var v29:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  v0 := local_id_x == 0;
+  goto $truebb, $falsebb;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  assert {:sourceloc} {:sourceloc_num 2} true;
+  $$local_q_tail[0] := 0;
+  goto $2;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 3} true;
+  call {:sourceloc_num 4} $bugle_barrier(-1, 0);
+  v1 := BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x);
+  v2 := BV32_SLT(v1, $no_of_nodes);
+  goto $truebb0, $falsebb0;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 5} true;
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  v3 := $$q1[v1];
+  assert {:sourceloc} {:sourceloc_num 7} true;
+  $$g_color[v3] := 16677221;
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  v4 := $$g_cost[v3];
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  v5 := $$g_graph_nodes[BV32_MUL(v3, 2)];
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  $$cur_node[0] := v5;
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  v6 := $$g_graph_nodes[BV32_ADD(BV32_MUL(v3, 2), 1)];
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  $$cur_node[1] := v6;
+  assert {:sourceloc} {:sourceloc_num 13} true;
+  v7 := $$cur_node[0];
+  $i.0 := v7;
+  goto $4;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 14} true;
+  assert {:sourceloc} {:sourceloc_num 15} true;
+  v8 := $$cur_node[1];
+  assert {:sourceloc} {:sourceloc_num 16} true;
+  v9 := $$cur_node[0];
+  v10 := BV32_SLT($i.0, BV32_ADD(v8, v9));
+  goto $truebb1, $falsebb1;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 17} true;
+  assert {:sourceloc} {:sourceloc_num 18} true;
+  v11 := $$g_graph_edges[BV32_MUL($i.0, 2)];
+  assert {:sourceloc} {:sourceloc_num 19} true;
+  $$cur_edge[0] := v11;
+  assert {:sourceloc} {:sourceloc_num 20} true;
+  v12 := $$g_graph_edges[BV32_ADD(BV32_MUL($i.0, 2), 1)];
+  assert {:sourceloc} {:sourceloc_num 21} true;
+  $$cur_edge[1] := v12;
+  assert {:sourceloc} {:sourceloc_num 22} true;
+  v13 := $$cur_edge[0];
+  assert {:sourceloc} {:sourceloc_num 23} true;
+  v14 := $$cur_edge[1];
+  v15 := BV32_ADD(v14, v4);
+  assert {:sourceloc} {:sourceloc_num 24} true;
+  call {:atomic} {:atomic_function "__bugle_atomic_min_global_int"} {:arg1 v15} {:parts 1} {:part 1} v16, $$g_cost := _ATOMIC_OP32($$g_cost, BV32_SDIV(BV32_MUL(v13, 4), 4));
+  v17 := BV32_SGT(v16, v15);
+  goto $truebb2, $falsebb2;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 25} true;
+  assert {:sourceloc} {:sourceloc_num 26} true;
+  v18 := $$g_color[v13];
+  v19 := BV32_SGT(v18, 16677216);
+  goto $truebb3, $falsebb3;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 27} true;
+  assert {:sourceloc} {:sourceloc_num 28} true;
+  call {:atomic} {:atomic_function "__bugle_atomic_xchg_global_int"} {:arg1 $gray_shade} {:parts 1} {:part 1} v20, $$g_color := _ATOMIC_OP32($$g_color, BV32_SDIV(BV32_MUL(v13, 4), 4));
+  v21 := v20 != $gray_shade;
+  goto $truebb4, $falsebb4;
+$8:
+  assert {:block_sourceloc} {:sourceloc_num 29} true;
+  assert {:sourceloc} {:sourceloc_num 30} true;
+  call {:atomic} {:atomic_function "__bugle_atomic_add_local_int"} {:arg1 1} {:parts 1} {:part 1} v22, $$local_q_tail := _ATOMIC_OP32($$local_q_tail, 0);
+  assert {:sourceloc} {:sourceloc_num 31} true;
+  $$local_q[v22] := v13;
+  goto $9;
+$9:
+  assert {:block_sourceloc} {:sourceloc_num 32} true;
+  goto $10;
+$10:
+  assert {:block_sourceloc} {:sourceloc_num 33} true;
+  goto $11;
+$11:
+  assert {:block_sourceloc} {:sourceloc_num 34} true;
+  goto $12;
+$12:
+  assert {:block_sourceloc} {:sourceloc_num 35} true;
+  $i.0 := BV32_ADD($i.0, 1);
+  goto $4;
+$13:
+  assert {:block_sourceloc} {:sourceloc_num 36} true;
+  goto $14;
+$14:
+  assert {:block_sourceloc} {:sourceloc_num 37} true;
+  call {:sourceloc_num 38} $bugle_barrier(-1, 0);
+  v23 := local_id_x == 0;
+  goto $truebb5, $falsebb5;
+$15:
+  assert {:block_sourceloc} {:sourceloc_num 39} true;
+  assert {:sourceloc} {:sourceloc_num 40} true;
+  v24 := $$local_q_tail[0];
+  assert {:sourceloc} {:sourceloc_num 41} true;
+  call {:atomic} {:atomic_function "__bugle_atomic_add_global_int"} {:arg1 v24} {:parts 1} {:part 1} v25, $$tail := _ATOMIC_OP32($$tail, 0);
+  assert {:sourceloc} {:sourceloc_num 42} true;
+  $$shift[0] := v25;
+  goto $16;
+$16:
+  assert {:block_sourceloc} {:sourceloc_num 43} true;
+  call {:sourceloc_num 44} $bugle_barrier(-1, 0);
+  $local_shift.0 := local_id_x;
+  goto $17;
+$17:
+  assert {:block_sourceloc} {:sourceloc_num 45} true;
+  assert {:sourceloc} {:sourceloc_num 46} true;
+  v26 := $$local_q_tail[0];
+  v27 := BV32_SLT($local_shift.0, v26);
+  goto $truebb6, $falsebb6;
+$18:
+  assert {:block_sourceloc} {:sourceloc_num 47} true;
+  assert {:sourceloc} {:sourceloc_num 48} true;
+  v28 := $$local_q[$local_shift.0];
+  assert {:sourceloc} {:sourceloc_num 49} true;
+  v29 := $$shift[0];
+  assert {:sourceloc} {:sourceloc_num 50} true;
+  $$q2[BV32_ADD(v29, $local_shift.0)] := v28;
+  $local_shift.0 := BV32_ADD($local_shift.0, group_size_x);
+  goto $17;
+$19:
+  assert {:block_sourceloc} {:sourceloc_num 51} true;
+  return;
+$truebb:
+  assume {:partition} v0;
+  assert {:block_sourceloc} {:sourceloc_num 52} true;
+  goto $1;
+$falsebb:
+  assume {:partition} !v0;
+  assert {:block_sourceloc} {:sourceloc_num 53} true;
+  goto $2;
+$truebb0:
+  assume {:partition} v2;
+  assert {:block_sourceloc} {:sourceloc_num 54} true;
+  goto $3;
+$falsebb0:
+  assume {:partition} !v2;
+  assert {:block_sourceloc} {:sourceloc_num 55} true;
+  goto $14;
+$truebb1:
+  assume {:partition} v10;
+  assert {:block_sourceloc} {:sourceloc_num 56} true;
+  goto $5;
+$falsebb1:
+  assume {:partition} !v10;
+  assert {:block_sourceloc} {:sourceloc_num 57} true;
+  goto $13;
+$truebb2:
+  assume {:partition} v17;
+  assert {:block_sourceloc} {:sourceloc_num 58} true;
+  goto $6;
+$falsebb2:
+  assume {:partition} !v17;
+  assert {:block_sourceloc} {:sourceloc_num 59} true;
+  goto $11;
+$truebb3:
+  assume {:partition} v19;
+  assert {:block_sourceloc} {:sourceloc_num 60} true;
+  goto $7;
+$falsebb3:
+  assume {:partition} !v19;
+  assert {:block_sourceloc} {:sourceloc_num 61} true;
+  goto $10;
+$truebb4:
+  assume {:partition} v21;
+  assert {:block_sourceloc} {:sourceloc_num 62} true;
+  goto $8;
+$falsebb4:
+  assume {:partition} !v21;
+  assert {:block_sourceloc} {:sourceloc_num 63} true;
+  goto $9;
+$truebb5:
+  assume {:partition} v23;
+  assert {:block_sourceloc} {:sourceloc_num 64} true;
+  goto $15;
+$falsebb5:
+  assume {:partition} !v23;
+  assert {:block_sourceloc} {:sourceloc_num 65} true;
+  goto $16;
+$truebb6:
+  assume {:partition} v27;
+  assert {:block_sourceloc} {:sourceloc_num 66} true;
+  goto $18;
+$falsebb6:
+  assume {:partition} !v27;
+  assert {:block_sourceloc} {:sourceloc_num 67} true;
+  goto $19;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:int, $1:int);
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 256 then 1 else 0) != 0;
+axiom (if num_groups_x == 4 then 1 else 0) != 0;
+axiom (if global_offset_x == 0 then 1 else 0) != 0;
+axiom (if global_offset_y == 0 then 1 else 0) != 0;
+axiom (if global_offset_z == 0 then 1 else 0) != 0;

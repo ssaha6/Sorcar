@@ -1,0 +1,59 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "g_data"} {:global} $$g_data : [int]int;
+axiom {:array_info "$$g_data"} {:global} {:elem_width 32} {:source_name "g_data"} {:source_elem_width 64} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$g_data : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$g_data : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_data : bool;
+
+var {:source_name "data"} $$data : [int]int;
+axiom {:array_info "$$data"} {:elem_width 32} {:source_name "data"} {:source_elem_width 64} {:source_dimensions "1"} true;
+
+const _WATCHED_OFFSET : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SUB(x : int, y : int) : int {
+  x - y
+}
+procedure {:source_name "kernel2"} {:kernel} $_Z7kernel2P4int2()
+{
+  var v0:int;
+  var v1:int;
+  var v2:int;
+  var v3:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  assert {:sourceloc} {:sourceloc_num 1} true;
+  v0 := $$g_data[BV32_MUL(local_id_x, 2)];
+  assert {:sourceloc} {:sourceloc_num 2} true;
+  $$data[0] := v0;
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  v1 := $$g_data[BV32_ADD(BV32_MUL(local_id_x, 2), 1)];
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  $$data[1] := v1;
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  v2 := $$data[0];
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  v3 := $$data[1];
+  assert {:sourceloc} {:sourceloc_num 7} true;
+  $$g_data[BV32_MUL(local_id_x, 2)] := BV32_SUB(v2, v3);
+  return;
+}
+axiom (if group_size_x == 16 then 1 else 0) != 0;
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_x == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;

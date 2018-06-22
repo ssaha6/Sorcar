@@ -1,0 +1,132 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [bv32]bv32, y : bv32) returns (z : bv32, A : [bv32]bv32);
+var {:source_name "isums"} {:global} $$isums : [bv32]bv32;
+axiom {:array_info "$$isums"} {:global} {:elem_width 32} {:source_name "isums"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$isums : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$isums : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$isums : bool;
+
+var {:source_name "lmem"} {:group_shared} $$lmem : [bv32]bv32;
+axiom {:array_info "$$lmem"} {:group_shared} {:elem_width 32} {:source_name "lmem"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$lmem : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$lmem : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$lmem : bool;
+
+const _WATCHED_OFFSET : bv32;
+const {:global_offset_x} global_offset_x : bv32;
+const {:global_offset_y} global_offset_y : bv32;
+const {:global_offset_z} global_offset_z : bv32;
+const {:group_size_x} group_size_x : bv32;
+const {:group_size_y} group_size_y : bv32;
+const {:group_size_z} group_size_z : bv32;
+const {:local_id_x} local_id_x : bv32;
+const {:num_groups_x} num_groups_x : bv32;
+const {:num_groups_y} num_groups_y : bv32;
+const {:num_groups_z} num_groups_z : bv32;
+function FADD32(bv32, bv32) : bv32;
+function {:bvbuiltin "bvadd"} BV32_ADD(bv32, bv32) : bv32;
+function {:bvbuiltin "bvmul"} BV32_MUL(bv32, bv32) : bv32;
+function {:bvbuiltin "bvsub"} BV32_SUB(bv32, bv32) : bv32;
+function {:bvbuiltin "bvult"} BV32_ULT(bv32, bv32) : bool;
+procedure {:source_name "top_scan"} {:kernel} $top_scan($n:bv32)
+requires {:sourceloc_num 0} (if $n == 64bv32 then 1bv1 else 0bv1) != 0bv1;
+{
+  var $val.0:bv32;
+  var $i.i.0:bv32;
+  var v0:bool;
+  var v1:bv32;
+  var v7:bv32;
+  var v6:bv32;
+  var v5:bv32;
+  var v2:bv32;
+  var v4:bool;
+  var v8:bool;
+  var v3:bv32;
+$entry:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  v0 := BV32_ULT(local_id_x, $n);
+  goto $truebb, $falsebb;
+$if.then:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  v1 := $$isums[local_id_x];
+  $val.0 := v1;
+  goto $if.end;
+$if.end:
+  assert {:block_sourceloc} {:sourceloc_num 4} true;
+  v2 := local_id_x;
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  $$lmem[v2] := 0bv32;
+  v3 := BV32_ADD(v2, group_size_x);
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  $$lmem[v3] := $val.0;
+  call {:sourceloc_num 7} $bugle_barrier(1bv1, 0bv1);
+  $i.i.0 := 1bv32;
+  goto $for.cond.i;
+$for.cond.i:
+  assert {:block_sourceloc} {:sourceloc_num 8} true;
+  v4 := BV32_ULT($i.i.0, group_size_x);
+  goto $truebb0, $falsebb0;
+$for.body.i:
+  assert {:block_sourceloc} {:sourceloc_num 9} true;
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  v5 := $$lmem[BV32_SUB(v3, $i.i.0)];
+  call {:sourceloc_num 11} $bugle_barrier(1bv1, 0bv1);
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  v6 := $$lmem[v3];
+  assert {:sourceloc} {:sourceloc_num 13} true;
+  $$lmem[v3] := FADD32(v6, v5);
+  call {:sourceloc_num 14} $bugle_barrier(1bv1, 0bv1);
+  $i.i.0 := BV32_MUL($i.i.0, 2bv32);
+  goto $for.cond.i;
+$scanLocalMem.exit:
+  assert {:block_sourceloc} {:sourceloc_num 15} true;
+  assert {:sourceloc} {:sourceloc_num 16} true;
+  v7 := $$lmem[BV32_SUB(v3, 1bv32)];
+  v8 := BV32_ULT(local_id_x, $n);
+  goto $truebb1, $falsebb1;
+$if.then.6:
+  assert {:block_sourceloc} {:sourceloc_num 17} true;
+  assert {:sourceloc} {:sourceloc_num 18} true;
+  $$isums[local_id_x] := v7;
+  goto $if.end.9;
+$if.end.9:
+  assert {:block_sourceloc} {:sourceloc_num 19} true;
+  return;
+$truebb:
+  assume {:partition} v0;
+  assert {:block_sourceloc} {:sourceloc_num 20} true;
+  goto $if.then;
+$falsebb:
+  assume {:partition} !v0;
+  assert {:block_sourceloc} {:sourceloc_num 21} true;
+  $val.0 := 0bv32;
+  goto $if.end;
+$truebb0:
+  assume {:partition} v4;
+  assert {:block_sourceloc} {:sourceloc_num 22} true;
+  goto $for.body.i;
+$falsebb0:
+  assume {:partition} !v4;
+  assert {:block_sourceloc} {:sourceloc_num 23} true;
+  goto $scanLocalMem.exit;
+$truebb1:
+  assume {:partition} v8;
+  assert {:block_sourceloc} {:sourceloc_num 24} true;
+  goto $if.then.6;
+$falsebb1:
+  assume {:partition} !v8;
+  assert {:block_sourceloc} {:sourceloc_num 25} true;
+  goto $if.end.9;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:bv1, $1:bv1);
+axiom (if group_size_y == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if group_size_z == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_y == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_z == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if group_size_x == 256bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_x == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if global_offset_x == 0bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if global_offset_y == 0bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if global_offset_z == 0bv32 then 1bv1 else 0bv1) != 0bv1;

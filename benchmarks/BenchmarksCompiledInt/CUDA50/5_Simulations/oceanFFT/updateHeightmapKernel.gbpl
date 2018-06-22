@@ -1,0 +1,61 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "heightMap"} {:global} $$heightMap : [int]int;
+axiom {:array_info "$$heightMap"} {:global} {:elem_width 32} {:source_name "heightMap"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$heightMap : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$heightMap : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$heightMap : bool;
+
+var {:source_name "ht"} {:global} $$ht : [int]int;
+axiom {:array_info "$$ht"} {:global} {:elem_width 32} {:source_name "ht"} {:source_elem_width 64} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$ht : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$ht : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$ht : bool;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_id_y} group_id_y : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:local_id_y} local_id_y : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function FMUL32(int, int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_AND(x : int, y : int) : int {
+  if x == y then x else (if x == 0 || y == 0 then 0 else BV32_AND_UF(x, y))
+}
+function BV32_AND_UF(int, int) : int;
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+procedure {:source_name "updateHeightmapKernel"} {:kernel} $_Z21updateHeightmapKernelPfP6float2j($width:int)
+requires {:sourceloc_num 0} (if $width == 256 then 1 else 0) != 0;
+{
+  var v0:int;
+  var v1:int;
+  var v2:int;
+  var v3:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  v0 := BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x);
+  v1 := BV32_ADD(BV32_MUL(group_id_y, group_size_y), local_id_y);
+  v2 := BV32_ADD(BV32_MUL(v1, $width), v0);
+  assert {:sourceloc} {:sourceloc_num 2} true;
+  v3 := $$ht[BV32_MUL(v2, 2)];
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  $$heightMap[v2] := FMUL32(v3, (if BV32_AND(BV32_ADD(v0, v1), 1) != 0 then -1082130432 else 1065353216));
+  return;
+}
+axiom (if group_size_x == 8 then 1 else 0) != 0;
+axiom (if group_size_y == 8 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_x == 32 then 1 else 0) != 0;
+axiom (if num_groups_y == 32 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;

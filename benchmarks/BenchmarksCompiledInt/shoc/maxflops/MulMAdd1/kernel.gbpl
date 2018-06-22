@@ -1,0 +1,196 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP64(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "data"} {:global} $$data : [int]int;
+axiom {:array_info "$$data"} {:global} {:elem_width 64} {:source_name "data"} {:source_elem_width 64} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 64} {:source_elem_width 64} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$data : bool;
+var {:race_checking} {:global} {:elem_width 64} {:source_elem_width 64} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$data : bool;
+var {:race_checking} {:global} {:elem_width 64} {:source_elem_width 64} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$data : bool;
+
+const _WATCHED_OFFSET : int;
+const {:global_offset_x} global_offset_x : int;
+const {:global_offset_y} global_offset_y : int;
+const {:global_offset_z} global_offset_z : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function FADD64(int, int) : int;
+function FMUL64(int, int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SLT(x : int, y : int) : bool {
+  x < y
+}
+procedure {:source_name "MulMAdd1"} {:kernel} $MulMAdd1($nIters:int)
+{
+  var $s0.0:int;
+  var $j.0:int;
+  var v55:int;
+  var v56:int;
+  var v57:int;
+  var v1:int;
+  var v2:bool;
+  var v3:int;
+  var v4:int;
+  var v0:int;
+  var v5:int;
+  var v6:int;
+  var v7:int;
+  var v8:int;
+  var v9:int;
+  var v10:int;
+  var v11:int;
+  var v12:int;
+  var v13:int;
+  var v14:int;
+  var v15:int;
+  var v16:int;
+  var v17:int;
+  var v18:int;
+  var v19:int;
+  var v20:int;
+  var v21:int;
+  var v22:int;
+  var v23:int;
+  var v24:int;
+  var v25:int;
+  var v26:int;
+  var v27:int;
+  var v28:int;
+  var v29:int;
+  var v30:int;
+  var v31:int;
+  var v32:int;
+  var v33:int;
+  var v34:int;
+  var v35:int;
+  var v36:int;
+  var v37:int;
+  var v38:int;
+  var v39:int;
+  var v40:int;
+  var v41:int;
+  var v42:int;
+  var v43:int;
+  var v44:int;
+  var v45:int;
+  var v46:int;
+  var v47:int;
+  var v48:int;
+  var v49:int;
+  var v50:int;
+  var v51:int;
+  var v52:int;
+  var v53:int;
+  var v54:int;
+  var v58:int;
+  var v59:int;
+  var v60:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  v0 := BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x);
+  assert {:sourceloc} {:sourceloc_num 1} true;
+  v1 := $$data[v0];
+  $s0.0, $j.0 := FADD64(v1, 0), 0;
+  goto $1;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  v2 := BV32_SLT($j.0, $nIters);
+  goto $truebb, $falsebb;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 3} true;
+  v3 := FMUL64(FADD64(FMUL64(-4623305305659277312, $s0.0), 4615626668101337088), $s0.0);
+  v4 := FMUL64(FADD64(FMUL64(-4623305305659277312, v3), 4615626668101337088), v3);
+  v5 := FMUL64(FADD64(FMUL64(-4623305305659277312, v4), 4615626668101337088), v4);
+  v6 := FMUL64(FADD64(FMUL64(-4623305305659277312, v5), 4615626668101337088), v5);
+  v7 := FMUL64(FADD64(FMUL64(-4623305305659277312, v6), 4615626668101337088), v6);
+  v8 := FMUL64(FADD64(FMUL64(-4623305305659277312, v7), 4615626668101337088), v7);
+  v9 := FMUL64(FADD64(FMUL64(-4623305305659277312, v8), 4615626668101337088), v8);
+  v10 := FMUL64(FADD64(FMUL64(-4623305305659277312, v9), 4615626668101337088), v9);
+  v11 := FMUL64(FADD64(FMUL64(-4623305305659277312, v10), 4615626668101337088), v10);
+  v12 := FMUL64(FADD64(FMUL64(-4623305305659277312, v11), 4615626668101337088), v11);
+  v13 := FMUL64(FADD64(FMUL64(-4623305305659277312, v12), 4615626668101337088), v12);
+  v14 := FMUL64(FADD64(FMUL64(-4623305305659277312, v13), 4615626668101337088), v13);
+  v15 := FMUL64(FADD64(FMUL64(-4623305305659277312, v14), 4615626668101337088), v14);
+  v16 := FMUL64(FADD64(FMUL64(-4623305305659277312, v15), 4615626668101337088), v15);
+  v17 := FMUL64(FADD64(FMUL64(-4623305305659277312, v16), 4615626668101337088), v16);
+  v18 := FMUL64(FADD64(FMUL64(-4623305305659277312, v17), 4615626668101337088), v17);
+  v19 := FMUL64(FADD64(FMUL64(-4623305305659277312, v18), 4615626668101337088), v18);
+  v20 := FMUL64(FADD64(FMUL64(-4623305305659277312, v19), 4615626668101337088), v19);
+  v21 := FMUL64(FADD64(FMUL64(-4623305305659277312, v20), 4615626668101337088), v20);
+  v22 := FMUL64(FADD64(FMUL64(-4623305305659277312, v21), 4615626668101337088), v21);
+  v23 := FMUL64(FADD64(FMUL64(-4623305305659277312, v22), 4615626668101337088), v22);
+  v24 := FMUL64(FADD64(FMUL64(-4623305305659277312, v23), 4615626668101337088), v23);
+  v25 := FMUL64(FADD64(FMUL64(-4623305305659277312, v24), 4615626668101337088), v24);
+  v26 := FMUL64(FADD64(FMUL64(-4623305305659277312, v25), 4615626668101337088), v25);
+  v27 := FMUL64(FADD64(FMUL64(-4623305305659277312, v26), 4615626668101337088), v26);
+  v28 := FMUL64(FADD64(FMUL64(-4623305305659277312, v27), 4615626668101337088), v27);
+  v29 := FMUL64(FADD64(FMUL64(-4623305305659277312, v28), 4615626668101337088), v28);
+  v30 := FMUL64(FADD64(FMUL64(-4623305305659277312, v29), 4615626668101337088), v29);
+  v31 := FMUL64(FADD64(FMUL64(-4623305305659277312, v30), 4615626668101337088), v30);
+  v32 := FMUL64(FADD64(FMUL64(-4623305305659277312, v31), 4615626668101337088), v31);
+  v33 := FMUL64(FADD64(FMUL64(-4623305305659277312, v32), 4615626668101337088), v32);
+  v34 := FMUL64(FADD64(FMUL64(-4623305305659277312, v33), 4615626668101337088), v33);
+  v35 := FMUL64(FADD64(FMUL64(-4623305305659277312, v34), 4615626668101337088), v34);
+  v36 := FMUL64(FADD64(FMUL64(-4623305305659277312, v35), 4615626668101337088), v35);
+  v37 := FMUL64(FADD64(FMUL64(-4623305305659277312, v36), 4615626668101337088), v36);
+  v38 := FMUL64(FADD64(FMUL64(-4623305305659277312, v37), 4615626668101337088), v37);
+  v39 := FMUL64(FADD64(FMUL64(-4623305305659277312, v38), 4615626668101337088), v38);
+  v40 := FMUL64(FADD64(FMUL64(-4623305305659277312, v39), 4615626668101337088), v39);
+  v41 := FMUL64(FADD64(FMUL64(-4623305305659277312, v40), 4615626668101337088), v40);
+  v42 := FMUL64(FADD64(FMUL64(-4623305305659277312, v41), 4615626668101337088), v41);
+  v43 := FMUL64(FADD64(FMUL64(-4623305305659277312, v42), 4615626668101337088), v42);
+  v44 := FMUL64(FADD64(FMUL64(-4623305305659277312, v43), 4615626668101337088), v43);
+  v45 := FMUL64(FADD64(FMUL64(-4623305305659277312, v44), 4615626668101337088), v44);
+  v46 := FMUL64(FADD64(FMUL64(-4623305305659277312, v45), 4615626668101337088), v45);
+  v47 := FMUL64(FADD64(FMUL64(-4623305305659277312, v46), 4615626668101337088), v46);
+  v48 := FMUL64(FADD64(FMUL64(-4623305305659277312, v47), 4615626668101337088), v47);
+  v49 := FMUL64(FADD64(FMUL64(-4623305305659277312, v48), 4615626668101337088), v48);
+  v50 := FMUL64(FADD64(FMUL64(-4623305305659277312, v49), 4615626668101337088), v49);
+  v51 := FMUL64(FADD64(FMUL64(-4623305305659277312, v50), 4615626668101337088), v50);
+  v52 := FMUL64(FADD64(FMUL64(-4623305305659277312, v51), 4615626668101337088), v51);
+  v53 := FMUL64(FADD64(FMUL64(-4623305305659277312, v52), 4615626668101337088), v52);
+  v54 := FMUL64(FADD64(FMUL64(-4623305305659277312, v53), 4615626668101337088), v53);
+  v55 := FMUL64(FADD64(FMUL64(-4623305305659277312, v54), 4615626668101337088), v54);
+  v56 := FMUL64(FADD64(FMUL64(-4623305305659277312, v55), 4615626668101337088), v55);
+  v57 := FMUL64(FADD64(FMUL64(-4623305305659277312, v56), 4615626668101337088), v56);
+  v58 := FMUL64(FADD64(FMUL64(-4623305305659277312, v57), 4615626668101337088), v57);
+  v59 := FMUL64(FADD64(FMUL64(-4623305305659277312, v58), 4615626668101337088), v58);
+  v60 := FMUL64(FADD64(FMUL64(-4623305305659277312, v59), 4615626668101337088), v59);
+  goto $3;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 4} true;
+  $s0.0, $j.0 := FMUL64(FADD64(FMUL64(-4623305305659277312, v60), 4615626668101337088), v60), BV32_ADD($j.0, 1);
+  goto $1;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 5} true;
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  $$data[v0] := $s0.0;
+  return;
+$truebb:
+  assume {:partition} v2;
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  goto $2;
+$falsebb:
+  assume {:partition} !v2;
+  assert {:block_sourceloc} {:sourceloc_num 8} true;
+  goto $4;
+}
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 128 then 1 else 0) != 0;
+axiom (if num_groups_x == 16384 then 1 else 0) != 0;
+axiom (if global_offset_x == 0 then 1 else 0) != 0;
+axiom (if global_offset_y == 0 then 1 else 0) != 0;
+axiom (if global_offset_z == 0 then 1 else 0) != 0;

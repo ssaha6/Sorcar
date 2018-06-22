@@ -1,0 +1,103 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "energygrid"} {:global} $$energygrid : [int]int;
+axiom {:array_info "$$energygrid"} {:global} {:elem_width 32} {:source_name "energygrid"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$energygrid : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$energygrid : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$energygrid : bool;
+
+var {:source_name "atominfo"} {:constant} $$atominfo : [int]int;
+axiom {:array_info "$$atominfo"} {:constant} {:elem_width 32} {:source_name "atominfo"} {:source_elem_width 128} {:source_dimensions "1"} true;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_id_y} group_id_y : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:local_id_y} local_id_y : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function FADD32(int, int) : int;
+function FDIV32(int, int) : int;
+function FMUL32(int, int) : int;
+function FSQRT32(int) : int;
+function FSUB32(int, int) : int;
+function UI32_TO_FP32(int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SLT(x : int, y : int) : bool {
+  x < y
+}
+procedure {:source_name "cenergy"} {:kernel} $_Z7cenergyifPf($numatoms:int, $gridspacing:int)
+{
+  var $atomid.0:int;
+  var $energyval.0:int;
+  var v0:int;
+  var v1:int;
+  var v2:int;
+  var v3:bool;
+  var v4:int;
+  var v5:int;
+  var v6:int;
+  var v7:int;
+  var v8:int;
+  var v9:int;
+  var v10:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  v0 := BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x);
+  v1 := BV32_ADD(BV32_MUL(group_id_y, group_size_y), local_id_y);
+  v2 := BV32_ADD(BV32_MUL(BV32_MUL(num_groups_x, group_size_x), v1), v0);
+  $atomid.0, $energyval.0 := 0, 0;
+  goto $1;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  v3 := BV32_SLT($atomid.0, $numatoms);
+  goto $truebb, $falsebb;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  v4 := $$atominfo[BV32_MUL($atomid.0, 4)];
+  v5 := FSUB32(FMUL32($gridspacing, UI32_TO_FP32(v0)), v4);
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  v6 := $$atominfo[BV32_ADD(BV32_MUL($atomid.0, 4), 1)];
+  v7 := FSUB32(FMUL32($gridspacing, UI32_TO_FP32(v1)), v6);
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  v8 := $$atominfo[BV32_ADD(BV32_MUL($atomid.0, 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  v9 := $$atominfo[BV32_ADD(BV32_MUL($atomid.0, 4), 3)];
+  goto $3;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  $atomid.0, $energyval.0 := BV32_ADD($atomid.0, 1), FADD32($energyval.0, FMUL32(v9, FDIV32(1065353216, FSQRT32(FADD32(FADD32(FMUL32(v5, v5), FMUL32(v7, v7)), v8)))));
+  goto $1;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 8} true;
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  v10 := $$energygrid[v2];
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  $$energygrid[v2] := FADD32(v10, $energyval.0);
+  return;
+$truebb:
+  assume {:partition} v3;
+  assert {:block_sourceloc} {:sourceloc_num 11} true;
+  goto $2;
+$falsebb:
+  assume {:partition} !v3;
+  assert {:block_sourceloc} {:sourceloc_num 12} true;
+  goto $4;
+}
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 16 then 1 else 0) != 0;
+axiom (if group_size_y == 8 then 1 else 0) != 0;
+axiom (if num_groups_x == 4 then 1 else 0) != 0;

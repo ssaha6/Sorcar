@@ -1,0 +1,197 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "d_directions"} {:global} $$d_directions : [int]int;
+axiom {:array_info "$$d_directions"} {:global} {:elem_width 32} {:source_name "d_directions"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_directions : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_directions : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_directions : bool;
+
+var {:source_name "d_output"} {:global} $$d_output : [int]int;
+axiom {:array_info "$$d_output"} {:global} {:elem_width 32} {:source_name "d_output"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_output : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_output : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_output : bool;
+
+var {:source_name "v"} {:group_shared} $$_ZZ15sobolGPU_kerneljjPjPfE1v : [int]int;
+axiom {:array_info "$$_ZZ15sobolGPU_kerneljjPjPfE1v"} {:group_shared} {:elem_width 32} {:source_name "v"} {:source_elem_width 32} {:source_dimensions "32"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ15sobolGPU_kerneljjPjPfE1v : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ15sobolGPU_kerneljjPjPfE1v : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ15sobolGPU_kerneljjPjPfE1v : bool;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_id_y} group_id_y : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function  BV32_ASHR(int, int) : int;
+function  BV32_LSHR(int, int) : int;
+function FMUL32(int, int) : int;
+function UI32_TO_FP32(int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_AND(x : int, y : int) : int {
+  if x == y then x else (if x == 0 || y == 0 then 0 else BV32_AND_UF(x, y))
+}
+function BV32_AND_UF(int, int) : int;
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_OR(x : int, y : int) : int {
+  if x == y then x else (if x == 0 then y else (if y == 0 then x else BV32_OR_UF(x, y)))
+}
+function BV32_OR_UF(int, int) : int;
+function {:inline true} BV32_SUB(x : int, y : int) : int {
+  x - y
+}
+function {:inline true} BV32_ULT(x : int, y : int) : bool {
+  x < y
+}
+function {:inline true} BV32_XOR(x : int, y : int) : int {
+  if x == y then 0 else (if x == 0 then y else (if y == 0 then x else BV32_XOR_UF(x, y)))
+}
+function BV32_XOR_UF(int, int) : int;
+procedure BV32_CTLZ(val : int, isZeroUndef : bool) returns (count : int);
+procedure {:source_name "sobolGPU_kernel"} {:kernel} $_Z15sobolGPU_kerneljjPjPf($n_vectors:int, $n_dimensions:int)
+requires {:sourceloc_num 0} (if $n_vectors == 100000 then 1 else 0) != 0;
+requires {:sourceloc_num 1} (if $n_dimensions == 100 then 1 else 0) != 0;
+{
+  var $g.0:int;
+  var $X.0:int;
+  var $k.0:int;
+  var $X.1:int;
+  var $i.0:int;
+  var v1:int;
+  var v0:int;
+  var v2:bool;
+  var v3:int;
+  var v4:int;
+  var v5:int;
+  var v6:int;
+  var v7:bool;
+  var v8:int;
+  var v9:bool;
+  var v10:int;
+  var v11:int;
+  var v12:bool;
+  var v13:int;
+  var v14:int;
+  var v15:int;
+  var v16:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  v0 := BV32_MUL(32, group_id_y);
+  v1 := BV32_MUL($n_vectors, group_id_y);
+  v2 := BV32_ULT(local_id_x, 32);
+  goto $truebb, $falsebb;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 3} true;
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  v3 := $$d_directions[BV32_ADD(v0, local_id_x)];
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  $$_ZZ15sobolGPU_kerneljjPjPfE1v[local_id_x] := v3;
+  goto $2;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 6} true;
+  call {:sourceloc_num 7} $bugle_barrier(-1, -1);
+  v4 := BV32_ADD(local_id_x, BV32_MUL(group_id_x, group_size_x));
+  v5 := BV32_MUL(num_groups_x, group_size_x);
+  $g.0, $X.0, $k.0 := BV32_XOR(v4, BV32_ASHR(v4, 1)), 0, 0;
+  goto $3;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 8} true;
+  call v6 := BV32_CTLZ(BV32_AND(v5, BV32_SUB(0, v5)), false);
+  v7 := BV32_ULT($k.0, BV32_SUB(BV32_SUB(32, v6), 1));
+  goto $truebb0, $falsebb0;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 9} true;
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  v8 := $$_ZZ15sobolGPU_kerneljjPjPfE1v[$k.0];
+  goto $5;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 11} true;
+  $g.0, $X.0, $k.0 := BV32_LSHR($g.0, 1), BV32_XOR($X.0, BV32_AND(BV32_SUB(0, BV32_AND($g.0, 1)), v8)), BV32_ADD($k.0, 1);
+  goto $3;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 12} true;
+  v9 := BV32_ULT(v4, $n_vectors);
+  goto $truebb1, $falsebb1;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 13} true;
+  assert {:sourceloc} {:sourceloc_num 14} true;
+  $$d_output[BV32_ADD(v1, v4)] := FMUL32(UI32_TO_FP32($X.0), 796917760);
+  goto $8;
+$8:
+  assert {:block_sourceloc} {:sourceloc_num 15} true;
+  call v10 := BV32_CTLZ(BV32_AND(v5, BV32_SUB(0, v5)), false);
+  assert {:sourceloc} {:sourceloc_num 16} true;
+  v11 := $$_ZZ15sobolGPU_kerneljjPjPfE1v[BV32_SUB(BV32_SUB(32, v10), 2)];
+  $X.1, $i.0 := $X.0, BV32_ADD(v4, v5);
+  goto $9;
+$9:
+  assert {:block_sourceloc} {:sourceloc_num 17} true;
+  v12 := BV32_ULT($i.0, $n_vectors);
+  goto $truebb2, $falsebb2;
+$10:
+  assert {:block_sourceloc} {:sourceloc_num 18} true;
+  v13 := BV32_XOR(BV32_OR(BV32_SUB($i.0, v5), BV32_SUB(v5, 1)), -1);
+  call v14 := BV32_CTLZ(BV32_AND(v13, BV32_SUB(0, v13)), false);
+  assert {:sourceloc} {:sourceloc_num 19} true;
+  v15 := $$_ZZ15sobolGPU_kerneljjPjPfE1v[BV32_SUB(BV32_SUB(32, v14), 1)];
+  v16 := BV32_XOR($X.1, BV32_XOR(v11, v15));
+  assert {:sourceloc} {:sourceloc_num 20} true;
+  $$d_output[BV32_ADD(v1, $i.0)] := FMUL32(UI32_TO_FP32(v16), 796917760);
+  goto $11;
+$11:
+  assert {:block_sourceloc} {:sourceloc_num 21} true;
+  $X.1, $i.0 := v16, BV32_ADD($i.0, v5);
+  goto $9;
+$12:
+  assert {:block_sourceloc} {:sourceloc_num 22} true;
+  return;
+$truebb:
+  assume {:partition} v2;
+  assert {:block_sourceloc} {:sourceloc_num 23} true;
+  goto $1;
+$falsebb:
+  assume {:partition} !v2;
+  assert {:block_sourceloc} {:sourceloc_num 24} true;
+  goto $2;
+$truebb0:
+  assume {:partition} v7;
+  assert {:block_sourceloc} {:sourceloc_num 25} true;
+  goto $4;
+$falsebb0:
+  assume {:partition} !v7;
+  assert {:block_sourceloc} {:sourceloc_num 26} true;
+  goto $6;
+$truebb1:
+  assume {:partition} v9;
+  assert {:block_sourceloc} {:sourceloc_num 27} true;
+  goto $7;
+$falsebb1:
+  assume {:partition} !v9;
+  assert {:block_sourceloc} {:sourceloc_num 28} true;
+  goto $8;
+$truebb2:
+  assume {:partition} v12;
+  assert {:block_sourceloc} {:sourceloc_num 29} true;
+  goto $10;
+$falsebb2:
+  assume {:partition} !v12;
+  assert {:block_sourceloc} {:sourceloc_num 30} true;
+  goto $12;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:int, $1:int);
+axiom (if group_size_x == 64 then 1 else 0) != 0;
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_x == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 100 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;

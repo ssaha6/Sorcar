@@ -1,0 +1,175 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "data"} {:global} $$data : [int]int;
+axiom {:array_info "$$data"} {:global} {:elem_width 32} {:source_name "data"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$data : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$data : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$data : bool;
+
+var {:source_name "s_data"} {:group_shared} $$scan_inter2_kernel.s_data : [int]int;
+axiom {:array_info "$$scan_inter2_kernel.s_data"} {:group_shared} {:elem_width 32} {:source_name "s_data"} {:source_elem_width 32} {:source_dimensions "544"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$scan_inter2_kernel.s_data : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$scan_inter2_kernel.s_data : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$scan_inter2_kernel.s_data : bool;
+
+const _WATCHED_OFFSET : int;
+const {:global_offset_x} global_offset_x : int;
+const {:global_offset_y} global_offset_y : int;
+const {:global_offset_z} global_offset_z : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function  BV32_LSHR(int, int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_AND(x : int, y : int) : int {
+  if x == y then x else (if x == 0 || y == 0 then 0 else BV32_AND_UF(x, y))
+}
+function BV32_AND_UF(int, int) : int;
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SUB(x : int, y : int) : int {
+  x - y
+}
+function {:inline true} BV32_ULE(x : int, y : int) : bool {
+  x <= y
+}
+function {:inline true} BV32_ULT(x : int, y : int) : bool {
+  x < y
+}
+procedure {:source_name "scan_inter2_kernel"} {:kernel} $scan_inter2_kernel($iter:int)
+requires {:sourceloc_num 0} (if $iter == 1 then 1 else 0) != 0;
+{
+  var $stride.0:int;
+  var $d.0:int;
+  var v16:int;
+  var v0:int;
+  var v1:int;
+  var v2:int;
+  var v3:int;
+  var v4:int;
+  var v5:int;
+  var v6:int;
+  var v10:int;
+  var v7:int;
+  var v8:int;
+  var v9:int;
+  var v11:int;
+  var v12:bool;
+  var v13:int;
+  var v14:bool;
+  var v15:int;
+  var v17:int;
+  var v18:int;
+  var v19:int;
+  var v20:int;
+  var v21:int;
+  var v22:int;
+  var v23:int;
+  var v24:int;
+  var v25:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  v0 := local_id_x;
+  v1 := BV32_SUB(BV32_ADD(BV32_MUL(BV32_MUL(2, $iter), BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x)), $iter), 1);
+  v2 := BV32_ADD(v1, $iter);
+  v3 := BV32_MUL(2, v0);
+  v4 := BV32_MUL(2, v0);
+  v5 := BV32_ADD(v4, 1);
+  v6 := BV32_ADD(4, v3);
+  v7 := BV32_ADD(v3, BV32_LSHR(BV32_LSHR(v3, BV32_AND((if BV32_ULT(v6, 24) then v6 else 24), 31)), 8));
+  v8 := BV32_ADD(v4, 5);
+  v9 := BV32_ADD(v5, BV32_LSHR(BV32_LSHR(v5, BV32_AND((if BV32_ULT(v8, 24) then v8 else 24), 31)), 8));
+  assert {:sourceloc} {:sourceloc_num 2} true;
+  v10 := $$data[v1];
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  $$scan_inter2_kernel.s_data[v7] := v10;
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  v11 := $$data[v2];
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  $$scan_inter2_kernel.s_data[v9] := v11;
+  $stride.0, $d.0 := BV32_MUL(group_size_x, 2), 1;
+  goto $1;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 6} true;
+  v12 := BV32_ULE($d.0, group_size_x);
+  goto $truebb, $falsebb;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  v13 := BV32_LSHR($stride.0, 1);
+  call {:sourceloc_num 8} $bugle_barrier(-1, 0);
+  v14 := BV32_ULT(v0, $d.0);
+  goto $truebb0, $falsebb0;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 9} true;
+  v15 := BV32_SUB(BV32_ADD(BV32_MUL(BV32_MUL(2, v13), v0), v13), 1);
+  v16 := BV32_ADD(v15, v13);
+  v17 := BV32_ADD(4, v15);
+  v18 := BV32_ADD(v15, BV32_LSHR(BV32_LSHR(v15, BV32_AND((if BV32_ULT(v17, 24) then v17 else 24), 31)), 8));
+  v19 := BV32_ADD(4, v16);
+  v20 := BV32_ADD(v16, BV32_LSHR(BV32_LSHR(v16, BV32_AND((if BV32_ULT(v19, 24) then v19 else 24), 31)), 8));
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  v21 := $$scan_inter2_kernel.s_data[v18];
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  v22 := $$scan_inter2_kernel.s_data[v20];
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  $$scan_inter2_kernel.s_data[v18] := v22;
+  assert {:sourceloc} {:sourceloc_num 13} true;
+  v23 := $$scan_inter2_kernel.s_data[v20];
+  assert {:sourceloc} {:sourceloc_num 14} true;
+  $$scan_inter2_kernel.s_data[v20] := BV32_ADD(v23, v21);
+  goto $4;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 15} true;
+  goto $5;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 16} true;
+  $stride.0, $d.0 := v13, BV32_MUL($d.0, 2);
+  goto $1;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 17} true;
+  call {:sourceloc_num 18} $bugle_barrier(-1, 0);
+  assert {:sourceloc} {:sourceloc_num 19} true;
+  v24 := $$scan_inter2_kernel.s_data[v7];
+  assert {:sourceloc} {:sourceloc_num 20} true;
+  $$data[v1] := v24;
+  assert {:sourceloc} {:sourceloc_num 21} true;
+  v25 := $$scan_inter2_kernel.s_data[v9];
+  assert {:sourceloc} {:sourceloc_num 22} true;
+  $$data[v2] := v25;
+  return;
+$truebb:
+  assume {:partition} v12;
+  assert {:block_sourceloc} {:sourceloc_num 23} true;
+  goto $2;
+$falsebb:
+  assume {:partition} !v12;
+  assert {:block_sourceloc} {:sourceloc_num 24} true;
+  goto $6;
+$truebb0:
+  assume {:partition} v14;
+  assert {:block_sourceloc} {:sourceloc_num 25} true;
+  goto $3;
+$falsebb0:
+  assume {:partition} !v14;
+  assert {:block_sourceloc} {:sourceloc_num 26} true;
+  goto $4;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:int, $1:int);
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 128 then 1 else 0) != 0;
+axiom (if num_groups_x == 256 then 1 else 0) != 0;
+axiom (if global_offset_x == 0 then 1 else 0) != 0;
+axiom (if global_offset_y == 0 then 1 else 0) != 0;
+axiom (if global_offset_z == 0 then 1 else 0) != 0;

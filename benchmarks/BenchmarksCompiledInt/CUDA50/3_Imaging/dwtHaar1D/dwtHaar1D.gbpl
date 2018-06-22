@@ -1,0 +1,212 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "id"} {:global} $$id : [int]int;
+axiom {:array_info "$$id"} {:global} {:elem_width 32} {:source_name "id"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$id : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$id : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$id : bool;
+
+var {:source_name "od"} {:global} $$od : [int]int;
+axiom {:array_info "$$od"} {:global} {:elem_width 32} {:source_name "od"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$od : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$od : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$od : bool;
+
+var {:source_name "approx_final"} {:global} $$approx_final : [int]int;
+axiom {:array_info "$$approx_final"} {:global} {:elem_width 32} {:source_name "approx_final"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$approx_final : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$approx_final : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$approx_final : bool;
+
+var {:source_name "shared"} {:group_shared} $$shared : [int]int;
+axiom {:array_info "$$shared"} {:group_shared} {:elem_width 32} {:source_name "shared"} {:source_elem_width 32} {:source_dimensions "0"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$shared : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$shared : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$shared : bool;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function  BV32_ASHR(int, int) : int;
+function  BV32_LSHR(int, int) : int;
+function FADD32(int, int) : int;
+function FMUL32(int, int) : int;
+function FSUB32(int, int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SHL(x : int, y : int) : int {
+  if x >= 0 && y == 1 then x*2 else BV32_SHL_UF(x,y)
+}
+function BV32_SHL_UF(int, int) : int;
+function {:inline true} BV32_SUB(x : int, y : int) : int {
+  x - y
+}
+function {:inline true} BV32_UGT(x : int, y : int) : bool {
+  x > y
+}
+function {:inline true} BV32_ULT(x : int, y : int) : bool {
+  x < y
+}
+procedure {:source_name "dwtHaar1D"} {:kernel} $_Z9dwtHaar1DPfS_S_jji($dlevels:int, $slength_step_half:int, $bdim:int)
+requires {:sourceloc_num 0} (if $slength_step_half == 2048 then 1 else 0) != 0;
+requires {:sourceloc_num 1} (if $bdim == 512 then 1 else 0) != 0;
+{
+  var $offset_neighbor.0:int;
+  var $num_threads.0:int;
+  var $idata0.0:int;
+  var $i.0:int;
+  var $offset_neighbor.1:int;
+  var $num_threads.1:int;
+  var $idata0.1:int;
+  var v0:int;
+  var v1:int;
+  var v2:int;
+  var v3:int;
+  var v4:int;
+  var v5:bool;
+  var v6:bool;
+  var v7:bool;
+  var v8:int;
+  var v9:int;
+  var v10:int;
+  var v11:int;
+  var v12:int;
+  var v13:int;
+  var v14:int;
+  var v15:bool;
+  var v16:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  v0 := BV32_ADD(BV32_MUL(group_id_x, BV32_MUL(2, $bdim)), local_id_x);
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  v1 := $$id[v0];
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  $$shared[local_id_x] := v1;
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  v2 := $$id[BV32_ADD(v0, $bdim)];
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  $$shared[BV32_ADD(local_id_x, $bdim)] := v2;
+  call {:sourceloc_num 7} $bugle_barrier(-1, -1);
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  v3 := $$shared[BV32_MUL(2, local_id_x)];
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  v4 := $$shared[BV32_ADD(BV32_MUL(2, local_id_x), 1)];
+  call {:sourceloc_num 10} $bugle_barrier(-1, -1);
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  $$od[BV32_ADD(BV32_ADD(BV32_MUL(group_id_x, $bdim), local_id_x), $slength_step_half)] := FMUL32(FSUB32(v3, v4), 1060439283);
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  $$shared[BV32_ADD(local_id_x, BV32_ASHR(local_id_x, 4))] := FMUL32(FADD32(v3, v4), 1060439283);
+  call {:sourceloc_num 13} $bugle_barrier(-1, -1);
+  v5 := BV32_UGT($dlevels, 1);
+  goto $truebb, $falsebb;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 14} true;
+  $offset_neighbor.0, $num_threads.0, $idata0.0, $i.0 := 1, BV32_ASHR($bdim, 1), BV32_MUL(local_id_x, 2), 1;
+  goto $2;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 15} true;
+  assert {:originated_from_invariant} {:sourceloc_num 16} (if (BV32_ULT(local_id_x, $num_threads.0) ==> $num_threads.0 == BV32_ASHR($bdim, $i.0)) then 1 else 0) != 0;
+  assert {:originated_from_invariant} {:sourceloc_num 17} (if (BV32_ULT(local_id_x, $num_threads.0) ==> $offset_neighbor.0 == BV32_SHL(1, BV32_SUB($i.0, 1))) then 1 else 0) != 0;
+  assert {:originated_from_invariant} {:sourceloc_num 18} (if (BV32_ULT(local_id_x, $num_threads.0) ==> $idata0.0 == BV32_SHL(local_id_x, $i.0)) then 1 else 0) != 0;
+  v6 := BV32_ULT($i.0, $dlevels);
+  goto $truebb0, $falsebb0;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 19} true;
+  v7 := BV32_ULT(local_id_x, $num_threads.0);
+  goto $truebb1, $falsebb1;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 20} true;
+  v8 := BV32_ADD($idata0.0, $offset_neighbor.0);
+  v9 := BV32_ADD($idata0.0, BV32_LSHR($idata0.0, 4));
+  v10 := BV32_ADD(v8, BV32_LSHR(v8, 4));
+  assert {:sourceloc} {:sourceloc_num 21} true;
+  v11 := $$shared[v9];
+  assert {:sourceloc} {:sourceloc_num 22} true;
+  v12 := $$shared[v10];
+  assert {:sourceloc} {:sourceloc_num 23} true;
+  $$od[BV32_ADD(BV32_ADD(BV32_MUL($num_threads.0, num_groups_x), BV32_MUL(group_id_x, $num_threads.0)), local_id_x)] := FMUL32(FSUB32(v11, v12), 1060439283);
+  assert {:sourceloc} {:sourceloc_num 24} true;
+  v13 := $$shared[v9];
+  assert {:sourceloc} {:sourceloc_num 25} true;
+  v14 := $$shared[v10];
+  assert {:sourceloc} {:sourceloc_num 26} true;
+  $$shared[v9] := FMUL32(FADD32(v13, v14), 1060439283);
+  $offset_neighbor.1, $num_threads.1, $idata0.1 := BV32_SHL($offset_neighbor.0, 1), BV32_LSHR($num_threads.0, 1), BV32_SHL($idata0.0, 1);
+  goto $5;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 27} true;
+  call {:sourceloc_num 28} $bugle_barrier(-1, -1);
+  goto $6;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 29} true;
+  $offset_neighbor.0, $num_threads.0, $idata0.0, $i.0 := $offset_neighbor.1, $num_threads.1, $idata0.1, BV32_ADD($i.0, 1);
+  goto $2;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 30} true;
+  v15 := 0 == local_id_x;
+  goto $truebb2, $falsebb2;
+$8:
+  assert {:block_sourceloc} {:sourceloc_num 31} true;
+  assert {:sourceloc} {:sourceloc_num 32} true;
+  v16 := $$shared[0];
+  assert {:sourceloc} {:sourceloc_num 33} true;
+  $$approx_final[group_id_x] := v16;
+  goto $9;
+$9:
+  assert {:block_sourceloc} {:sourceloc_num 34} true;
+  goto $10;
+$10:
+  assert {:block_sourceloc} {:sourceloc_num 35} true;
+  return;
+$truebb:
+  assume {:partition} v5;
+  assert {:block_sourceloc} {:sourceloc_num 36} true;
+  goto $1;
+$falsebb:
+  assume {:partition} !v5;
+  assert {:block_sourceloc} {:sourceloc_num 37} true;
+  goto $10;
+$truebb0:
+  assume {:partition} v6;
+  assert {:block_sourceloc} {:sourceloc_num 38} true;
+  goto $3;
+$falsebb0:
+  assume {:partition} !v6;
+  assert {:block_sourceloc} {:sourceloc_num 39} true;
+  goto $7;
+$truebb1:
+  assume {:partition} v7;
+  assert {:block_sourceloc} {:sourceloc_num 40} true;
+  goto $4;
+$falsebb1:
+  assume {:partition} !v7;
+  assert {:block_sourceloc} {:sourceloc_num 41} true;
+  $offset_neighbor.1, $num_threads.1, $idata0.1 := $offset_neighbor.0, $num_threads.0, $idata0.0;
+  goto $5;
+$truebb2:
+  assume {:partition} v15;
+  assert {:block_sourceloc} {:sourceloc_num 42} true;
+  goto $8;
+$falsebb2:
+  assume {:partition} !v15;
+  assert {:block_sourceloc} {:sourceloc_num 43} true;
+  goto $9;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:int, $1:int);
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 512 then 1 else 0) != 0;
+axiom (if num_groups_x == 1 then 1 else 0) != 0;

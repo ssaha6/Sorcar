@@ -1,0 +1,231 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+procedure _ATOMIC_OP8(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "paths"} {:global} $$paths : [int]int;
+axiom {:array_info "$$paths"} {:global} {:elem_width 32} {:source_name "paths"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$paths : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$paths : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$paths : bool;
+
+var {:source_name "rngStates"} {:global} $$rngStates : [int]int;
+axiom {:array_info "$$rngStates"} {:global} {:elem_width 32} {:source_name "rngStates"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$rngStates : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$rngStates : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$rngStates : bool;
+
+var {:source_name "option"} {:global} $$option : [int]int;
+axiom {:array_info "$$option"} {:global} {:elem_width 8} {:source_name "option"} {:source_elem_width 288} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 288} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$option : bool;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 288} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$option : bool;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 288} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$option : bool;
+
+var {:source_name "localState"} $$localState : [int]int;
+axiom {:array_info "$$localState"} {:elem_width 32} {:source_name "localState"} {:source_elem_width 32} {:source_dimensions "1"} true;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function BV_CONCAT(int, int) : int;
+function FADD32(int, int) : int;
+function FMUL32(int, int) : int;
+function FMUL64(int, int) : int;
+function FP32_CONV64(int) : int;
+function FP64_CONV32(int) : int;
+function FSQRT64(int) : int;
+function FSUB32(int, int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SUB(x : int, y : int) : int {
+  x - y
+}
+function {:inline true} BV32_UDIV(x : int, y : int) : int {
+  x div y
+}
+function {:inline true} BV32_ULT(x : int, y : int) : bool {
+  x < y
+}
+function {:inline true} BV32_UREM(x : int, y : int) : int {
+  x mod y
+}
+procedure {:source_name "generatePaths<float>"} {:kernel} $_Z13generatePathsIfEvPT_P17curandStateXORWOWPK11AsianOptionIS0_Ejj($numSims:int, $numTimesteps:int)
+requires {:sourceloc_num 0} (if $numSims == 100000 then 1 else 0) != 0;
+requires {:sourceloc_num 1} (if $numTimesteps == 87 then 1 else 0) != 0;
+{
+  var $i.0:int;
+  var $output.0:int;
+  var $s.0:int;
+  var $t.0:int;
+  var v27:bool;
+  var v7:int;
+  var v8:int;
+  var v9:int;
+  var v1:int;
+  var v22:int;
+  var v23:int;
+  var v24:int;
+  var v21:int;
+  var v28:bool;
+  var v33:int;
+  var v34:int;
+  var v29:int;
+  var v30:int;
+  var v10:int;
+  var v11:int;
+  var v12:int;
+  var v4:int;
+  var v5:int;
+  var v26:int;
+  var v31:int;
+  var v32:int;
+  var v25:int;
+  var v18:int;
+  var v19:int;
+  var v20:int;
+  var v14:int;
+  var v15:int;
+  var v16:int;
+  var v17:int;
+  var v13:int;
+  var v6:int;
+  var v0:int;
+  var v2:int;
+  var v3:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  v0 := BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x);
+  v1 := BV32_MUL(num_groups_x, group_size_x);
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  v2 := $$option[8];
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  v3 := $$option[9];
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  v4 := $$option[10];
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  v5 := $$option[11];
+  assert {:sourceloc} {:sourceloc_num 7} true;
+  v6 := $$option[12];
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  v7 := $$option[13];
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  v8 := $$option[14];
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  v9 := $$option[15];
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  v10 := $$option[12];
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  v11 := $$option[13];
+  assert {:sourceloc} {:sourceloc_num 13} true;
+  v12 := $$option[14];
+  assert {:sourceloc} {:sourceloc_num 14} true;
+  v13 := $$option[15];
+  assert {:sourceloc} {:sourceloc_num 15} true;
+  v14 := $$option[20];
+  assert {:sourceloc} {:sourceloc_num 16} true;
+  v15 := $$option[21];
+  assert {:sourceloc} {:sourceloc_num 17} true;
+  v16 := $$option[22];
+  assert {:sourceloc} {:sourceloc_num 18} true;
+  v17 := $$option[23];
+  assert {:sourceloc} {:sourceloc_num 19} true;
+  v18 := $$option[12];
+  assert {:sourceloc} {:sourceloc_num 20} true;
+  v19 := $$option[13];
+  assert {:sourceloc} {:sourceloc_num 21} true;
+  v20 := $$option[14];
+  assert {:sourceloc} {:sourceloc_num 22} true;
+  v21 := $$option[15];
+  assert {:sourceloc} {:sourceloc_num 23} true;
+  v22 := $$option[20];
+  assert {:sourceloc} {:sourceloc_num 24} true;
+  v23 := $$option[21];
+  assert {:sourceloc} {:sourceloc_num 25} true;
+  v24 := $$option[22];
+  assert {:sourceloc} {:sourceloc_num 26} true;
+  v25 := $$option[23];
+  assert {:sourceloc} {:sourceloc_num 27} true;
+  v26 := $$rngStates[v0];
+  assert {:sourceloc} {:sourceloc_num 28} true;
+  $$localState[0] := v26;
+  $i.0 := v0;
+  goto $1;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 29} true;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 30} (if BV32_UREM($i.0, v1) == v0 then 1 else 0) != 0;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 31} (if (_WRITE_HAS_OCCURRED_$$paths ==> BV32_UREM(BV32_UREM(BV32_UDIV(BV32_MUL(4, _WATCHED_OFFSET), 4), $numSims), v1) == v0) then 1 else 0) != 0;
+  v27 := BV32_ULT($i.0, $numSims);
+  goto $truebb, $falsebb;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 32} true;
+  $output.0, $s.0, $t.0 := $i.0, 1065353216, 0;
+  goto $3;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 33} true;
+  assert {:originated_from_invariant} {:sourceloc_num 34} (if BV32_SUB(BV32_UDIV(BV32_MUL($output.0, 4), 4), $i.0) == BV32_MUL($t.0, $numSims) then 1 else 0) != 0;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 35} (if (_WRITE_HAS_OCCURRED_$$paths ==> BV32_UREM(BV32_UREM(BV32_UDIV(BV32_MUL(4, _WATCHED_OFFSET), 4), $numSims), v1) == v0) then 1 else 0) != 0;
+  v28 := BV32_ULT($t.0, $numTimesteps);
+  goto $truebb0, $falsebb0;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 36} true;
+  call {:sourceloc_num 37}   v29 := $_Z19__bugle_random_uintv();
+  assert {:sourceloc} {:sourceloc_num 38} true;
+  v30 := $$localState[0];
+  assert {:sourceloc} {:sourceloc_num 39} true;
+  $$localState[0] := BV32_ADD(v30, v29);
+  call {:sourceloc_num 40}   v31 := $_Z19__bugle_random_uintv();
+  call {:sourceloc_num 41}   v32 := $_Z20__bugle_random_floatv();
+  call {:sourceloc_num 42}   v33 := $expf(FADD32(FMUL32(FSUB32(BV_CONCAT(BV_CONCAT(BV_CONCAT(v5, v4), v3), v2), FMUL32(FMUL32(1056964608, BV_CONCAT(BV_CONCAT(BV_CONCAT(v9, v8), v7), v6)), BV_CONCAT(BV_CONCAT(BV_CONCAT(v13, v12), v11), v10))), BV_CONCAT(BV_CONCAT(BV_CONCAT(v17, v16), v15), v14)), FMUL32(FP64_CONV32(FMUL64(FP32_CONV64(BV_CONCAT(BV_CONCAT(BV_CONCAT(v21, v20), v19), v18)), FSQRT64(FP32_CONV64(BV_CONCAT(BV_CONCAT(BV_CONCAT(v25, v24), v23), v22))))), v32)));
+  v34 := FMUL32($s.0, v33);
+  assert {:sourceloc} {:sourceloc_num 43} true;
+  $$paths[$output.0] := v34;
+  goto $5;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 44} true;
+  $output.0, $s.0, $t.0 := BV32_ADD($output.0, $numSims), v34, BV32_ADD($t.0, 1);
+  goto $3;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 45} true;
+  goto $7;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 46} true;
+  $i.0 := BV32_ADD($i.0, v1);
+  goto $1;
+$8:
+  assert {:block_sourceloc} {:sourceloc_num 47} true;
+  return;
+$truebb:
+  assume {:partition} v27;
+  assert {:block_sourceloc} {:sourceloc_num 48} true;
+  goto $2;
+$falsebb:
+  assume {:partition} !v27;
+  assert {:block_sourceloc} {:sourceloc_num 49} true;
+  goto $8;
+$truebb0:
+  assume {:partition} v28;
+  assert {:block_sourceloc} {:sourceloc_num 50} true;
+  goto $4;
+$falsebb0:
+  assume {:partition} !v28;
+  assert {:block_sourceloc} {:sourceloc_num 51} true;
+  goto $6;
+}
+procedure {:source_name "expf"} $expf($0:int) returns ($ret:int);
+procedure {:source_name "_Z20__bugle_random_floatv"} $_Z20__bugle_random_floatv() returns ($ret:int);
+procedure {:source_name "_Z19__bugle_random_uintv"} $_Z19__bugle_random_uintv() returns ($ret:int);
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 128 then 1 else 0) != 0;
+axiom (if num_groups_x == 195 then 1 else 0) != 0;

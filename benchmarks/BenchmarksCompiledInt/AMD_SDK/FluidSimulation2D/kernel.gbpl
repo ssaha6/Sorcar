@@ -1,0 +1,636 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP64(x : [int]int, y : int) returns (z : int, A : [int]int);
+procedure _ATOMIC_OP8(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "if0"} {:global} $$if0 : [int]int;
+axiom {:array_info "$$if0"} {:global} {:elem_width 64} {:source_name "if0"} {:source_elem_width 64} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 64} {:source_elem_width 64} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$if0 : bool;
+var {:race_checking} {:global} {:elem_width 64} {:source_elem_width 64} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$if0 : bool;
+var {:race_checking} {:global} {:elem_width 64} {:source_elem_width 64} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$if0 : bool;
+
+var {:source_name "of0"} {:global} $$of0 : [int]int;
+axiom {:array_info "$$of0"} {:global} {:elem_width 64} {:source_name "of0"} {:source_elem_width 64} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 64} {:source_elem_width 64} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$of0 : bool;
+var {:race_checking} {:global} {:elem_width 64} {:source_elem_width 64} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$of0 : bool;
+var {:race_checking} {:global} {:elem_width 64} {:source_elem_width 64} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$of0 : bool;
+
+var {:source_name "if1234"} {:global} $$if1234 : [int]int;
+axiom {:array_info "$$if1234"} {:global} {:elem_width 64} {:source_name "if1234"} {:source_elem_width 256} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 64} {:source_elem_width 256} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$if1234 : bool;
+var {:race_checking} {:global} {:elem_width 64} {:source_elem_width 256} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$if1234 : bool;
+var {:race_checking} {:global} {:elem_width 64} {:source_elem_width 256} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$if1234 : bool;
+
+var {:source_name "of1234"} {:global} $$of1234 : [int]int;
+axiom {:array_info "$$of1234"} {:global} {:elem_width 64} {:source_name "of1234"} {:source_elem_width 256} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 64} {:source_elem_width 256} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$of1234 : bool;
+var {:race_checking} {:global} {:elem_width 64} {:source_elem_width 256} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$of1234 : bool;
+var {:race_checking} {:global} {:elem_width 64} {:source_elem_width 256} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$of1234 : bool;
+
+var {:source_name "if5678"} {:global} $$if5678 : [int]int;
+axiom {:array_info "$$if5678"} {:global} {:elem_width 64} {:source_name "if5678"} {:source_elem_width 256} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 64} {:source_elem_width 256} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$if5678 : bool;
+var {:race_checking} {:global} {:elem_width 64} {:source_elem_width 256} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$if5678 : bool;
+var {:race_checking} {:global} {:elem_width 64} {:source_elem_width 256} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$if5678 : bool;
+
+var {:source_name "of5678"} {:global} $$of5678 : [int]int;
+axiom {:array_info "$$of5678"} {:global} {:elem_width 64} {:source_name "of5678"} {:source_elem_width 256} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 64} {:source_elem_width 256} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$of5678 : bool;
+var {:race_checking} {:global} {:elem_width 64} {:source_elem_width 256} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$of5678 : bool;
+var {:race_checking} {:global} {:elem_width 64} {:source_elem_width 256} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$of5678 : bool;
+
+var {:source_name "type"} {:global} $$type : [int]int;
+axiom {:array_info "$$type"} {:global} {:elem_width 8} {:source_name "type"} {:source_elem_width 8} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 8} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$type : bool;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 8} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$type : bool;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 8} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$type : bool;
+
+var {:source_name "weight"} {:constant} $$weight : [int]int;
+axiom {:array_info "$$weight"} {:constant} {:elem_width 64} {:source_name "weight"} {:source_elem_width 64} {:source_dimensions "*"} true;
+
+var {:source_name "velocityBuffer"} {:global} $$velocityBuffer : [int]int;
+axiom {:array_info "$$velocityBuffer"} {:global} {:elem_width 64} {:source_name "velocityBuffer"} {:source_elem_width 128} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 64} {:source_elem_width 128} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$velocityBuffer : bool;
+var {:race_checking} {:global} {:elem_width 64} {:source_elem_width 128} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$velocityBuffer : bool;
+var {:race_checking} {:global} {:elem_width 64} {:source_elem_width 128} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$velocityBuffer : bool;
+
+const _WATCHED_OFFSET : int;
+const {:global_offset_x} global_offset_x : int;
+const {:global_offset_y} global_offset_y : int;
+const {:global_offset_z} global_offset_z : int;
+const {:group_id_x} group_id_x : int;
+const {:group_id_y} group_id_y : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:local_id_y} local_id_y : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function BV_CONCAT(int, int) : int;
+function BV_EXTRACT(int, int, int) : int;
+function FADD64(int, int) : int;
+function FDIV64(int, int) : int;
+function FMUL64(int, int) : int;
+function FP64_TO_SI32(int) : int;
+function FSUB64(int, int) : int;
+function {:inline true} BV1_ZEXT32(x : int) : int {
+  x
+}
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SUB(x : int, y : int) : int {
+  x - y
+}
+function {:inline true} BV32_UGT(x : int, y : int) : bool {
+  x > y
+}
+function {:inline true} BV32_ULT(x : int, y : int) : bool {
+  x < y
+}
+procedure {:source_name "lbm"} {:kernel} $lbm($dirX:int, $dirY:int, $omega:int)
+{
+  var $f0.0:int;
+  var $f1234.0:int;
+  var $f5678.0:int;
+  var $u.0:int;
+  var v1:int;
+  var v2:int;
+  var v3:int;
+  var v0:int;
+  var v4:int;
+  var v5:int;
+  var v6:int;
+  var v7:int;
+  var v8:int;
+  var v9:int;
+  var v10:int;
+  var v11:int;
+  var v12:int;
+  var v13:int;
+  var v14:bool;
+  var v15:int;
+  var v16:int;
+  var v17:int;
+  var v18:int;
+  var v19:int;
+  var v20:int;
+  var v21:int;
+  var v22:int;
+  var v23:int;
+  var v24:int;
+  var v25:int;
+  var v26:int;
+  var v27:int;
+  var v28:int;
+  var v29:int;
+  var v30:int;
+  var v31:int;
+  var v32:int;
+  var v33:int;
+  var v34:int;
+  var v35:int;
+  var v36:int;
+  var v37:int;
+  var v38:int;
+  var v39:int;
+  var v40:int;
+  var v41:int;
+  var v42:int;
+  var v43:int;
+  var v44:int;
+  var v45:int;
+  var v46:int;
+  var v47:int;
+  var v48:int;
+  var v49:int;
+  var v50:int;
+  var v51:int;
+  var v52:int;
+  var v53:int;
+  var v62:int;
+  var v54:int;
+  var v55:int;
+  var v56:int;
+  var v59:int;
+  var v57:int;
+  var v58:int;
+  var v60:int;
+  var v61:int;
+  var v63:int;
+  var v64:int;
+  var v65:int;
+  var v66:bool;
+  var v67:int;
+  var v68:int;
+  var v69:int;
+  var v70:int;
+  var v71:bool;
+  var v72:int;
+  var v73:int;
+  var v74:int;
+  var v75:int;
+  var v76:bool;
+  var v77:int;
+  var v78:int;
+  var v79:int;
+  var v80:int;
+  var v98:bool;
+  var v81:bool;
+  var v82:int;
+  var v83:int;
+  var v84:int;
+  var v85:int;
+  var v86:bool;
+  var v87:bool;
+  var v88:int;
+  var v89:int;
+  var v90:int;
+  var v91:int;
+  var v92:bool;
+  var v93:bool;
+  var v94:int;
+  var v95:int;
+  var v96:int;
+  var v97:int;
+  var v99:bool;
+  var v100:int;
+  var v101:int;
+  var v102:int;
+  var v103:int;
+  var v104:bool;
+  var v105:bool;
+  var v106:int;
+  var v107:int;
+  var v108:int;
+  var v109:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  v0 := BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x);
+  v1 := BV32_ADD(BV32_MUL(group_id_y, group_size_y), local_id_y);
+  v2 := BV32_MUL(group_size_x, num_groups_x);
+  v3 := BV32_ADD(v0, BV32_MUL(v2, v1));
+  assert {:sourceloc} {:sourceloc_num 1} true;
+  v4 := $$if0[v3];
+  assert {:sourceloc} {:sourceloc_num 2} true;
+  v5 := $$if1234[BV32_MUL(v3, 4)];
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  v6 := $$if1234[BV32_ADD(BV32_MUL(v3, 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  v7 := $$if1234[BV32_ADD(BV32_MUL(v3, 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  v8 := $$if1234[BV32_ADD(BV32_MUL(v3, 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  v9 := $$if5678[BV32_MUL(v3, 4)];
+  assert {:sourceloc} {:sourceloc_num 7} true;
+  v10 := $$if5678[BV32_ADD(BV32_MUL(v3, 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  v11 := $$if5678[BV32_ADD(BV32_MUL(v3, 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  v12 := $$if5678[BV32_ADD(BV32_MUL(v3, 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  v13 := $$type[v3];
+  v14 := BV_EXTRACT(v13, 1, 0) == 1;
+  goto $truebb, $falsebb;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 11} true;
+  $f0.0, $f1234.0, $f5678.0, $u.0 := v4, BV_CONCAT(BV_CONCAT(BV_CONCAT(v6, v5), v8), v7), BV_CONCAT(BV_CONCAT(BV_CONCAT(v10, v9), v12), v11), 0;
+  goto $3;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 12} true;
+  v15 := FADD64(FADD64(FADD64(FADD64(v5, v9), FADD64(v7, v11)), FADD64(FADD64(v6, v10), FADD64(v8, v12))), v4);
+  v16 := BV_EXTRACT($dirX, 64, 0);
+  v17 := BV_EXTRACT($dirX, 128, 64);
+  v18 := BV_EXTRACT($dirX, 192, 128);
+  v19 := BV_EXTRACT($dirX, 256, 192);
+  v20 := BV_EXTRACT($dirX, 320, 256);
+  v21 := BV_EXTRACT($dirX, 384, 320);
+  v22 := BV_EXTRACT($dirX, 448, 384);
+  v23 := BV_EXTRACT($dirX, 512, 448);
+  v24 := FDIV64(FADD64(FADD64(FMUL64(v8, v19), FADD64(FMUL64(v7, v18), FADD64(FMUL64(v5, v16), FMUL64(v6, v17)))), FADD64(FMUL64(v12, v23), FADD64(FMUL64(v11, v22), FADD64(FMUL64(v9, v20), FMUL64(v10, v21))))), v15);
+  v25 := BV_EXTRACT($dirY, 64, 0);
+  v26 := BV_EXTRACT($dirY, 128, 64);
+  v27 := BV_EXTRACT($dirY, 192, 128);
+  v28 := BV_EXTRACT($dirY, 256, 192);
+  v29 := BV_EXTRACT($dirY, 320, 256);
+  v30 := BV_EXTRACT($dirY, 384, 320);
+  v31 := BV_EXTRACT($dirY, 448, 384);
+  v32 := BV_EXTRACT($dirY, 512, 448);
+  v33 := FDIV64(FADD64(FADD64(FMUL64(v8, v28), FADD64(FMUL64(v7, v27), FADD64(FMUL64(v5, v25), FMUL64(v6, v26)))), FADD64(FMUL64(v12, v32), FADD64(FMUL64(v11, v31), FADD64(FMUL64(v9, v29), FMUL64(v10, v30))))), v15);
+  assert {:sourceloc} {:sourceloc_num 13} true;
+  v34 := $$weight[0];
+  v35 := FADD64(FMUL64(0, v24), FMUL64(0, v33));
+  assert {:sourceloc} {:sourceloc_num 14} true;
+  v36 := $$weight[1];
+  v37 := FADD64(FMUL64(BV_EXTRACT($dirX, 64, 0), v24), FMUL64(BV_EXTRACT($dirY, 64, 0), v33));
+  assert {:sourceloc} {:sourceloc_num 15} true;
+  v38 := $$weight[2];
+  v39 := FADD64(FMUL64(BV_EXTRACT($dirX, 128, 64), v24), FMUL64(BV_EXTRACT($dirY, 128, 64), v33));
+  assert {:sourceloc} {:sourceloc_num 16} true;
+  v40 := $$weight[3];
+  v41 := FADD64(FMUL64(BV_EXTRACT($dirX, 192, 128), v24), FMUL64(BV_EXTRACT($dirY, 192, 128), v33));
+  assert {:sourceloc} {:sourceloc_num 17} true;
+  v42 := $$weight[4];
+  v43 := FADD64(FMUL64(BV_EXTRACT($dirX, 256, 192), v24), FMUL64(BV_EXTRACT($dirY, 256, 192), v33));
+  assert {:sourceloc} {:sourceloc_num 18} true;
+  v44 := $$weight[5];
+  v45 := FADD64(FMUL64(BV_EXTRACT($dirX, 320, 256), v24), FMUL64(BV_EXTRACT($dirY, 320, 256), v33));
+  assert {:sourceloc} {:sourceloc_num 19} true;
+  v46 := $$weight[6];
+  v47 := FADD64(FMUL64(BV_EXTRACT($dirX, 384, 320), v24), FMUL64(BV_EXTRACT($dirY, 384, 320), v33));
+  assert {:sourceloc} {:sourceloc_num 20} true;
+  v48 := $$weight[7];
+  v49 := FADD64(FMUL64(BV_EXTRACT($dirX, 448, 384), v24), FMUL64(BV_EXTRACT($dirY, 448, 384), v33));
+  assert {:sourceloc} {:sourceloc_num 21} true;
+  v50 := $$weight[8];
+  v51 := FADD64(FMUL64(BV_EXTRACT($dirX, 512, 448), v24), FMUL64(BV_EXTRACT($dirY, 512, 448), v33));
+  v52 := FSUB64(4607182418800017408, $omega);
+  v53 := FSUB64(4607182418800017408, $omega);
+  $f0.0, $f1234.0, $f5678.0, $u.0 := FADD64(FMUL64(FSUB64(4607182418800017408, $omega), v4), FMUL64($omega, FMUL64(FMUL64(v15, v34), FADD64(FMUL64(-4613937818241073152, FADD64(FMUL64(v24, v24), FMUL64(v33, v33))), FADD64(FMUL64(FMUL64(4616752568008179712, v35), v35), FADD64(FMUL64(4613937818241073152, v35), 4607182418800017408)))))), BV_CONCAT(BV_CONCAT(BV_CONCAT(FADD64(FMUL64(v52, v8), FMUL64($omega, FMUL64(FMUL64(v15, v42), FADD64(FMUL64(-4613937818241073152, FADD64(FMUL64(v24, v24), FMUL64(v33, v33))), FADD64(FMUL64(FMUL64(4616752568008179712, v43), v43), FADD64(FMUL64(4613937818241073152, v43), 4607182418800017408)))))), FADD64(FMUL64(v52, v7), FMUL64($omega, FMUL64(FMUL64(v15, v40), FADD64(FMUL64(-4613937818241073152, FADD64(FMUL64(v24, v24), FMUL64(v33, v33))), FADD64(FMUL64(FMUL64(4616752568008179712, v41), v41), FADD64(FMUL64(4613937818241073152, v41), 4607182418800017408))))))), FADD64(FMUL64(v52, v6), FMUL64($omega, FMUL64(FMUL64(v15, v38), FADD64(FMUL64(-4613937818241073152, FADD64(FMUL64(v24, v24), FMUL64(v33, v33))), FADD64(FMUL64(FMUL64(4616752568008179712, v39), v39), FADD64(FMUL64(4613937818241073152, v39), 4607182418800017408))))))), FADD64(FMUL64(v52, v5), FMUL64($omega, FMUL64(FMUL64(v15, v36), FADD64(FMUL64(-4613937818241073152, FADD64(FMUL64(v24, v24), FMUL64(v33, v33))), FADD64(FMUL64(FMUL64(4616752568008179712, v37), v37), FADD64(FMUL64(4613937818241073152, v37), 4607182418800017408))))))), BV_CONCAT(BV_CONCAT(BV_CONCAT(FADD64(FMUL64(v53, v12), FMUL64($omega, FMUL64(FMUL64(v15, v50), FADD64(FMUL64(-4613937818241073152, FADD64(FMUL64(v24, v24), FMUL64(v33, v33))), FADD64(FMUL64(FMUL64(4616752568008179712, v51), v51), FADD64(FMUL64(4613937818241073152, v51), 4607182418800017408)))))), FADD64(FMUL64(v53, v11), FMUL64($omega, FMUL64(FMUL64(v15, v48), FADD64(FMUL64(-4613937818241073152, FADD64(FMUL64(v24, v24), FMUL64(v33, v33))), FADD64(FMUL64(FMUL64(4616752568008179712, v49), v49), FADD64(FMUL64(4613937818241073152, v49), 4607182418800017408))))))), FADD64(FMUL64(v53, v10), FMUL64($omega, FMUL64(FMUL64(v15, v46), FADD64(FMUL64(-4613937818241073152, FADD64(FMUL64(v24, v24), FMUL64(v33, v33))), FADD64(FMUL64(FMUL64(4616752568008179712, v47), v47), FADD64(FMUL64(4613937818241073152, v47), 4607182418800017408))))))), FADD64(FMUL64(v53, v9), FMUL64($omega, FMUL64(FMUL64(v15, v44), FADD64(FMUL64(-4613937818241073152, FADD64(FMUL64(v24, v24), FMUL64(v33, v33))), FADD64(FMUL64(FMUL64(4616752568008179712, v45), v45), FADD64(FMUL64(4613937818241073152, v45), 4607182418800017408))))))), BV_CONCAT(v33, v24);
+  goto $3;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 22} true;
+  assert {:sourceloc} {:sourceloc_num 23} true;
+  $$velocityBuffer[BV32_MUL(v3, 2)] := BV_EXTRACT($u.0, 64, 0);
+  assert {:sourceloc} {:sourceloc_num 24} true;
+  $$velocityBuffer[BV32_ADD(BV32_MUL(v3, 2), 1)] := BV_EXTRACT($u.0, 128, 64);
+  v54 := BV32_ADD(BV32_ADD(v0, FP64_TO_SI32(BV_EXTRACT($dirX, 64, 0))), BV32_MUL(v2, BV32_ADD(v1, FP64_TO_SI32(BV_EXTRACT($dirY, 64, 0)))));
+  v55 := BV32_ADD(BV32_ADD(v0, FP64_TO_SI32(BV_EXTRACT($dirX, 128, 64))), BV32_MUL(v2, BV32_ADD(v1, FP64_TO_SI32(BV_EXTRACT($dirY, 128, 64)))));
+  v56 := BV32_ADD(BV32_ADD(v0, FP64_TO_SI32(BV_EXTRACT($dirX, 192, 128))), BV32_MUL(v2, BV32_ADD(v1, FP64_TO_SI32(BV_EXTRACT($dirY, 192, 128)))));
+  v57 := BV32_ADD(BV32_ADD(v0, FP64_TO_SI32(BV_EXTRACT($dirX, 256, 192))), BV32_MUL(v2, BV32_ADD(v1, FP64_TO_SI32(BV_EXTRACT($dirY, 256, 192)))));
+  v58 := BV32_ADD(BV32_ADD(v0, FP64_TO_SI32(BV_EXTRACT($dirX, 320, 256))), BV32_MUL(v2, BV32_ADD(v1, FP64_TO_SI32(BV_EXTRACT($dirY, 320, 256)))));
+  v59 := BV32_ADD(BV32_ADD(v0, FP64_TO_SI32(BV_EXTRACT($dirX, 384, 320))), BV32_MUL(v2, BV32_ADD(v1, FP64_TO_SI32(BV_EXTRACT($dirY, 384, 320)))));
+  v60 := BV32_ADD(BV32_ADD(v0, FP64_TO_SI32(BV_EXTRACT($dirX, 448, 384))), BV32_MUL(v2, BV32_ADD(v1, FP64_TO_SI32(BV_EXTRACT($dirY, 448, 384)))));
+  v61 := BV32_ADD(BV32_ADD(v0, FP64_TO_SI32(BV_EXTRACT($dirX, 512, 448))), BV32_MUL(v2, BV32_ADD(v1, FP64_TO_SI32(BV_EXTRACT($dirY, 512, 448)))));
+  assert {:sourceloc} {:sourceloc_num 25} true;
+  $$of0[v3] := $f0.0;
+  v62 := BV1_ZEXT32((if BV32_ULT(v0, BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1)) then 1 else 0));
+  v63 := BV1_ZEXT32((if BV32_UGT(v1, 0) then 1 else 0));
+  v64 := BV1_ZEXT32((if BV32_UGT(v0, 0) then 1 else 0));
+  v65 := BV1_ZEXT32((if BV32_ULT(v1, BV32_SUB(BV32_MUL(group_size_y, num_groups_y), 1)) then 1 else 0));
+  v66 := v62 != 0;
+  goto $truebb0, $falsebb0;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 26} true;
+  assert {:sourceloc} {:sourceloc_num 27} true;
+  v67 := $$of1234[BV32_MUL(v54, 4)];
+  assert {:sourceloc} {:sourceloc_num 28} true;
+  v68 := $$of1234[BV32_ADD(BV32_MUL(v54, 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 29} true;
+  v69 := $$of1234[BV32_ADD(BV32_MUL(v54, 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 30} true;
+  v70 := $$of1234[BV32_ADD(BV32_MUL(v54, 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 31} true;
+  $$of1234[BV32_MUL(v54, 4)] := BV_EXTRACT($f1234.0, 64, 0);
+  assert {:sourceloc} {:sourceloc_num 32} true;
+  $$of1234[BV32_ADD(BV32_MUL(v54, 4), 1)] := v68;
+  assert {:sourceloc} {:sourceloc_num 33} true;
+  $$of1234[BV32_ADD(BV32_MUL(v54, 4), 2)] := v69;
+  assert {:sourceloc} {:sourceloc_num 34} true;
+  $$of1234[BV32_ADD(BV32_MUL(v54, 4), 3)] := v70;
+  goto $5;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 35} true;
+  call {:sourceloc_num 36} $bugle_barrier(0, -1);
+  v71 := v65 != 0;
+  goto $truebb1, $falsebb1;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 37} true;
+  assert {:sourceloc} {:sourceloc_num 38} true;
+  v72 := $$of1234[BV32_MUL(v55, 4)];
+  assert {:sourceloc} {:sourceloc_num 39} true;
+  v73 := $$of1234[BV32_ADD(BV32_MUL(v55, 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 40} true;
+  v74 := $$of1234[BV32_ADD(BV32_MUL(v55, 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 41} true;
+  v75 := $$of1234[BV32_ADD(BV32_MUL(v55, 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 42} true;
+  $$of1234[BV32_MUL(v55, 4)] := v72;
+  assert {:sourceloc} {:sourceloc_num 43} true;
+  $$of1234[BV32_ADD(BV32_MUL(v55, 4), 1)] := BV_EXTRACT($f1234.0, 128, 64);
+  assert {:sourceloc} {:sourceloc_num 44} true;
+  $$of1234[BV32_ADD(BV32_MUL(v55, 4), 2)] := v74;
+  assert {:sourceloc} {:sourceloc_num 45} true;
+  $$of1234[BV32_ADD(BV32_MUL(v55, 4), 3)] := v75;
+  goto $7;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 46} true;
+  call {:sourceloc_num 47} $bugle_barrier(0, -1);
+  v76 := v64 != 0;
+  goto $truebb2, $falsebb2;
+$8:
+  assert {:block_sourceloc} {:sourceloc_num 48} true;
+  assert {:sourceloc} {:sourceloc_num 49} true;
+  v77 := $$of1234[BV32_MUL(v56, 4)];
+  assert {:sourceloc} {:sourceloc_num 50} true;
+  v78 := $$of1234[BV32_ADD(BV32_MUL(v56, 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 51} true;
+  v79 := $$of1234[BV32_ADD(BV32_MUL(v56, 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 52} true;
+  v80 := $$of1234[BV32_ADD(BV32_MUL(v56, 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 53} true;
+  $$of1234[BV32_MUL(v56, 4)] := v77;
+  assert {:sourceloc} {:sourceloc_num 54} true;
+  $$of1234[BV32_ADD(BV32_MUL(v56, 4), 1)] := v78;
+  assert {:sourceloc} {:sourceloc_num 55} true;
+  $$of1234[BV32_ADD(BV32_MUL(v56, 4), 2)] := BV_EXTRACT($f1234.0, 192, 128);
+  assert {:sourceloc} {:sourceloc_num 56} true;
+  $$of1234[BV32_ADD(BV32_MUL(v56, 4), 3)] := v80;
+  goto $9;
+$9:
+  assert {:block_sourceloc} {:sourceloc_num 57} true;
+  call {:sourceloc_num 58} $bugle_barrier(0, -1);
+  v81 := v63 != 0;
+  goto $truebb3, $falsebb3;
+$10:
+  assert {:block_sourceloc} {:sourceloc_num 59} true;
+  assert {:sourceloc} {:sourceloc_num 60} true;
+  v82 := $$of1234[BV32_MUL(v57, 4)];
+  assert {:sourceloc} {:sourceloc_num 61} true;
+  v83 := $$of1234[BV32_ADD(BV32_MUL(v57, 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 62} true;
+  v84 := $$of1234[BV32_ADD(BV32_MUL(v57, 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 63} true;
+  v85 := $$of1234[BV32_ADD(BV32_MUL(v57, 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 64} true;
+  $$of1234[BV32_MUL(v57, 4)] := v82;
+  assert {:sourceloc} {:sourceloc_num 65} true;
+  $$of1234[BV32_ADD(BV32_MUL(v57, 4), 1)] := v83;
+  assert {:sourceloc} {:sourceloc_num 66} true;
+  $$of1234[BV32_ADD(BV32_MUL(v57, 4), 2)] := v84;
+  assert {:sourceloc} {:sourceloc_num 67} true;
+  $$of1234[BV32_ADD(BV32_MUL(v57, 4), 3)] := BV_EXTRACT($f1234.0, 256, 192);
+  goto $11;
+$11:
+  assert {:block_sourceloc} {:sourceloc_num 68} true;
+  v86 := v62 != 0;
+  goto $truebb4, $falsebb4;
+$12:
+  assert {:block_sourceloc} {:sourceloc_num 69} true;
+  v87 := v65 != 0;
+  goto $truebb5, $falsebb5;
+$13:
+  assert {:block_sourceloc} {:sourceloc_num 70} true;
+  assert {:sourceloc} {:sourceloc_num 71} true;
+  v88 := $$of5678[BV32_MUL(v58, 4)];
+  assert {:sourceloc} {:sourceloc_num 72} true;
+  v89 := $$of5678[BV32_ADD(BV32_MUL(v58, 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 73} true;
+  v90 := $$of5678[BV32_ADD(BV32_MUL(v58, 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 74} true;
+  v91 := $$of5678[BV32_ADD(BV32_MUL(v58, 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 75} true;
+  $$of5678[BV32_MUL(v58, 4)] := BV_EXTRACT($f5678.0, 64, 0);
+  assert {:sourceloc} {:sourceloc_num 76} true;
+  $$of5678[BV32_ADD(BV32_MUL(v58, 4), 1)] := v89;
+  assert {:sourceloc} {:sourceloc_num 77} true;
+  $$of5678[BV32_ADD(BV32_MUL(v58, 4), 2)] := v90;
+  assert {:sourceloc} {:sourceloc_num 78} true;
+  $$of5678[BV32_ADD(BV32_MUL(v58, 4), 3)] := v91;
+  goto $14;
+$14:
+  assert {:block_sourceloc} {:sourceloc_num 79} true;
+  call {:sourceloc_num 80} $bugle_barrier(0, -1);
+  v92 := v65 != 0;
+  goto $truebb6, $falsebb6;
+$15:
+  assert {:block_sourceloc} {:sourceloc_num 81} true;
+  v93 := v64 != 0;
+  goto $truebb7, $falsebb7;
+$16:
+  assert {:block_sourceloc} {:sourceloc_num 82} true;
+  assert {:sourceloc} {:sourceloc_num 83} true;
+  v94 := $$of5678[BV32_MUL(v59, 4)];
+  assert {:sourceloc} {:sourceloc_num 84} true;
+  v95 := $$of5678[BV32_ADD(BV32_MUL(v59, 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 85} true;
+  v96 := $$of5678[BV32_ADD(BV32_MUL(v59, 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 86} true;
+  v97 := $$of5678[BV32_ADD(BV32_MUL(v59, 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 87} true;
+  $$of5678[BV32_MUL(v59, 4)] := v94;
+  assert {:sourceloc} {:sourceloc_num 88} true;
+  $$of5678[BV32_ADD(BV32_MUL(v59, 4), 1)] := BV_EXTRACT($f5678.0, 128, 64);
+  assert {:sourceloc} {:sourceloc_num 89} true;
+  $$of5678[BV32_ADD(BV32_MUL(v59, 4), 2)] := v96;
+  assert {:sourceloc} {:sourceloc_num 90} true;
+  $$of5678[BV32_ADD(BV32_MUL(v59, 4), 3)] := v97;
+  goto $17;
+$17:
+  assert {:block_sourceloc} {:sourceloc_num 91} true;
+  call {:sourceloc_num 92} $bugle_barrier(0, -1);
+  v98 := v64 != 0;
+  goto $truebb8, $falsebb8;
+$18:
+  assert {:block_sourceloc} {:sourceloc_num 93} true;
+  v99 := v63 != 0;
+  goto $truebb9, $falsebb9;
+$19:
+  assert {:block_sourceloc} {:sourceloc_num 94} true;
+  assert {:sourceloc} {:sourceloc_num 95} true;
+  v100 := $$of5678[BV32_MUL(v60, 4)];
+  assert {:sourceloc} {:sourceloc_num 96} true;
+  v101 := $$of5678[BV32_ADD(BV32_MUL(v60, 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 97} true;
+  v102 := $$of5678[BV32_ADD(BV32_MUL(v60, 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 98} true;
+  v103 := $$of5678[BV32_ADD(BV32_MUL(v60, 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 99} true;
+  $$of5678[BV32_MUL(v60, 4)] := v100;
+  assert {:sourceloc} {:sourceloc_num 100} true;
+  $$of5678[BV32_ADD(BV32_MUL(v60, 4), 1)] := v101;
+  assert {:sourceloc} {:sourceloc_num 101} true;
+  $$of5678[BV32_ADD(BV32_MUL(v60, 4), 2)] := BV_EXTRACT($f5678.0, 192, 128);
+  assert {:sourceloc} {:sourceloc_num 102} true;
+  $$of5678[BV32_ADD(BV32_MUL(v60, 4), 3)] := v103;
+  goto $20;
+$20:
+  assert {:block_sourceloc} {:sourceloc_num 103} true;
+  call {:sourceloc_num 104} $bugle_barrier(0, -1);
+  v104 := v63 != 0;
+  goto $truebb10, $falsebb10;
+$21:
+  assert {:block_sourceloc} {:sourceloc_num 105} true;
+  v105 := v62 != 0;
+  goto $truebb11, $falsebb11;
+$22:
+  assert {:block_sourceloc} {:sourceloc_num 106} true;
+  assert {:sourceloc} {:sourceloc_num 107} true;
+  v106 := $$of5678[BV32_MUL(v61, 4)];
+  assert {:sourceloc} {:sourceloc_num 108} true;
+  v107 := $$of5678[BV32_ADD(BV32_MUL(v61, 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 109} true;
+  v108 := $$of5678[BV32_ADD(BV32_MUL(v61, 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 110} true;
+  v109 := $$of5678[BV32_ADD(BV32_MUL(v61, 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 111} true;
+  $$of5678[BV32_MUL(v61, 4)] := v106;
+  assert {:sourceloc} {:sourceloc_num 112} true;
+  $$of5678[BV32_ADD(BV32_MUL(v61, 4), 1)] := v107;
+  assert {:sourceloc} {:sourceloc_num 113} true;
+  $$of5678[BV32_ADD(BV32_MUL(v61, 4), 2)] := v108;
+  assert {:sourceloc} {:sourceloc_num 114} true;
+  $$of5678[BV32_ADD(BV32_MUL(v61, 4), 3)] := BV_EXTRACT($f5678.0, 256, 192);
+  goto $23;
+$23:
+  assert {:block_sourceloc} {:sourceloc_num 115} true;
+  return;
+$truebb:
+  assume {:partition} v14;
+  assert {:block_sourceloc} {:sourceloc_num 116} true;
+  goto $1;
+$falsebb:
+  assume {:partition} !v14;
+  assert {:block_sourceloc} {:sourceloc_num 117} true;
+  goto $2;
+$truebb0:
+  assume {:partition} v66;
+  assert {:block_sourceloc} {:sourceloc_num 118} true;
+  goto $4;
+$falsebb0:
+  assume {:partition} !v66;
+  assert {:block_sourceloc} {:sourceloc_num 119} true;
+  goto $5;
+$truebb1:
+  assume {:partition} v71;
+  assert {:block_sourceloc} {:sourceloc_num 120} true;
+  goto $6;
+$falsebb1:
+  assume {:partition} !v71;
+  assert {:block_sourceloc} {:sourceloc_num 121} true;
+  goto $7;
+$truebb2:
+  assume {:partition} v76;
+  assert {:block_sourceloc} {:sourceloc_num 122} true;
+  goto $8;
+$falsebb2:
+  assume {:partition} !v76;
+  assert {:block_sourceloc} {:sourceloc_num 123} true;
+  goto $9;
+$truebb3:
+  assume {:partition} v81;
+  assert {:block_sourceloc} {:sourceloc_num 124} true;
+  goto $10;
+$falsebb3:
+  assume {:partition} !v81;
+  assert {:block_sourceloc} {:sourceloc_num 125} true;
+  goto $11;
+$truebb4:
+  assume {:partition} v86;
+  assert {:block_sourceloc} {:sourceloc_num 126} true;
+  goto $12;
+$falsebb4:
+  assume {:partition} !v86;
+  assert {:block_sourceloc} {:sourceloc_num 127} true;
+  goto $14;
+$truebb5:
+  assume {:partition} v87;
+  assert {:block_sourceloc} {:sourceloc_num 128} true;
+  goto $13;
+$falsebb5:
+  assume {:partition} !v87;
+  assert {:block_sourceloc} {:sourceloc_num 129} true;
+  goto $14;
+$truebb6:
+  assume {:partition} v92;
+  assert {:block_sourceloc} {:sourceloc_num 130} true;
+  goto $15;
+$falsebb6:
+  assume {:partition} !v92;
+  assert {:block_sourceloc} {:sourceloc_num 131} true;
+  goto $17;
+$truebb7:
+  assume {:partition} v93;
+  assert {:block_sourceloc} {:sourceloc_num 132} true;
+  goto $16;
+$falsebb7:
+  assume {:partition} !v93;
+  assert {:block_sourceloc} {:sourceloc_num 133} true;
+  goto $17;
+$truebb8:
+  assume {:partition} v98;
+  assert {:block_sourceloc} {:sourceloc_num 134} true;
+  goto $18;
+$falsebb8:
+  assume {:partition} !v98;
+  assert {:block_sourceloc} {:sourceloc_num 135} true;
+  goto $20;
+$truebb9:
+  assume {:partition} v99;
+  assert {:block_sourceloc} {:sourceloc_num 136} true;
+  goto $19;
+$falsebb9:
+  assume {:partition} !v99;
+  assert {:block_sourceloc} {:sourceloc_num 137} true;
+  goto $20;
+$truebb10:
+  assume {:partition} v104;
+  assert {:block_sourceloc} {:sourceloc_num 138} true;
+  goto $21;
+$falsebb10:
+  assume {:partition} !v104;
+  assert {:block_sourceloc} {:sourceloc_num 139} true;
+  goto $23;
+$truebb11:
+  assume {:partition} v105;
+  assert {:block_sourceloc} {:sourceloc_num 140} true;
+  goto $22;
+$falsebb11:
+  assume {:partition} !v105;
+  assert {:block_sourceloc} {:sourceloc_num 141} true;
+  goto $23;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:int, $1:int);
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 256 then 1 else 0) != 0;
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_x == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 256 then 1 else 0) != 0;
+axiom (if global_offset_x == 0 then 1 else 0) != 0;
+axiom (if global_offset_y == 0 then 1 else 0) != 0;
+axiom (if global_offset_z == 0 then 1 else 0) != 0;

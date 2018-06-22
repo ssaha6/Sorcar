@@ -1,0 +1,120 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [bv32]bv32, y : bv32) returns (z : bv32, A : [bv32]bv32);
+var {:source_name "d_Output"} {:global} $$d_Output : [bv32]bv32;
+axiom {:array_info "$$d_Output"} {:global} {:elem_width 32} {:source_name "d_Output"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_Output : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_Output : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_Output : bool;
+
+var {:source_name "c_Table"} {:constant} $$_ZL7c_Table : [bv32]bv32;
+axiom {:array_info "$$_ZL7c_Table"} {:constant} {:elem_width 32} {:source_name "c_Table"} {:source_elem_width 32} {:source_dimensions "3,31"} true;
+
+const _WATCHED_OFFSET : bv32;
+const {:group_id_x} group_id_x : bv32;
+const {:group_size_x} group_size_x : bv32;
+const {:group_size_y} group_size_y : bv32;
+const {:group_size_z} group_size_z : bv32;
+const {:local_id_x} local_id_x : bv32;
+const {:local_id_y} local_id_y : bv32;
+const {:num_groups_x} num_groups_x : bv32;
+const {:num_groups_y} num_groups_y : bv32;
+const {:num_groups_z} num_groups_z : bv32;
+function FMUL32(bv32, bv32) : bv32;
+function UI32_TO_FP32(bv32) : bv32;
+function {:bvbuiltin "bvadd"} BV32_ADD(bv32, bv32) : bv32;
+function {:bvbuiltin "bvand"} BV32_AND(bv32, bv32) : bv32;
+function {:bvbuiltin "bvlshr"} BV32_LSHR(bv32, bv32) : bv32;
+function {:bvbuiltin "bvmul"} BV32_MUL(bv32, bv32) : bv32;
+function {:bvbuiltin "bvslt"} BV32_SLT(bv32, bv32) : bool;
+function {:bvbuiltin "bvult"} BV32_ULT(bv32, bv32) : bool;
+function {:bvbuiltin "bvxor"} BV32_XOR(bv32, bv32) : bv32;
+procedure {:source_name "quasirandomGeneratorKernel"} {:kernel} $_Z26quasirandomGeneratorKernelPfjj($seed:bv32, $N:bv32)
+requires {:sourceloc_num 0} (if $N == 1048576bv32 then 1bv1 else 0bv1) != 0bv1;
+{
+  var $pos.0:bv32;
+  var $result.0:bv32;
+  var $data.0:bv32;
+  var $bit.0:bv32;
+  var $result.1:bv32;
+  var v0:bool;
+  var v1:bool;
+  var v2:bool;
+  var v3:bv32;
+$entry:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  $pos.0 := BV32_ADD(BV32_MUL(group_size_x, group_id_x), local_id_x);
+  goto $for.cond;
+$for.cond:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  v0 := BV32_ULT($pos.0, $N);
+  goto $truebb, $falsebb;
+$for.body:
+  assert {:block_sourceloc} {:sourceloc_num 3} true;
+  $result.0, $data.0, $bit.0 := 0bv32, BV32_ADD($seed, $pos.0), 0bv32;
+  goto $for.cond.5;
+$for.cond.5:
+  assert {:block_sourceloc} {:sourceloc_num 4} true;
+  v1 := BV32_SLT($bit.0, 31bv32);
+  goto $truebb0, $falsebb0;
+$for.body.7:
+  assert {:block_sourceloc} {:sourceloc_num 5} true;
+  v2 := BV32_AND($data.0, 1bv32) != 0bv32;
+  goto $truebb1, $falsebb1;
+$if.then:
+  assert {:block_sourceloc} {:sourceloc_num 6} true;
+  assert {:sourceloc} {:sourceloc_num 7} true;
+  v3 := $$_ZL7c_Table[BV32_ADD(BV32_MUL(local_id_y, 31bv32), $bit.0)];
+  $result.1 := BV32_XOR($result.0, v3);
+  goto $if.end;
+$if.end:
+  assert {:block_sourceloc} {:sourceloc_num 8} true;
+  goto $for.inc;
+$for.inc:
+  assert {:block_sourceloc} {:sourceloc_num 9} true;
+  $result.0, $data.0, $bit.0 := $result.1, BV32_LSHR($data.0, 1bv32), BV32_ADD($bit.0, 1bv32);
+  goto $for.cond.5;
+$for.end:
+  assert {:block_sourceloc} {:sourceloc_num 10} true;
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  $$d_Output[BV32_ADD(BV32_MUL(local_id_y, $N), $pos.0)] := FMUL32(UI32_TO_FP32(BV32_ADD($result.0, 1bv32)), 805306368bv32);
+  goto $for.inc.13;
+$for.inc.13:
+  assert {:block_sourceloc} {:sourceloc_num 12} true;
+  $pos.0 := BV32_ADD($pos.0, BV32_MUL(group_size_x, num_groups_x));
+  goto $for.cond;
+$for.end.15:
+  assert {:block_sourceloc} {:sourceloc_num 13} true;
+  return;
+$truebb:
+  assume {:partition} v0;
+  assert {:block_sourceloc} {:sourceloc_num 14} true;
+  goto $for.body;
+$falsebb:
+  assume {:partition} !v0;
+  assert {:block_sourceloc} {:sourceloc_num 15} true;
+  goto $for.end.15;
+$truebb0:
+  assume {:partition} v1;
+  assert {:block_sourceloc} {:sourceloc_num 16} true;
+  goto $for.body.7;
+$falsebb0:
+  assume {:partition} !v1;
+  assert {:block_sourceloc} {:sourceloc_num 17} true;
+  goto $for.end;
+$truebb1:
+  assume {:partition} v2;
+  assert {:block_sourceloc} {:sourceloc_num 18} true;
+  goto $if.then;
+$falsebb1:
+  assume {:partition} !v2;
+  assert {:block_sourceloc} {:sourceloc_num 19} true;
+  $result.1 := $result.0;
+  goto $if.end;
+}
+axiom (if num_groups_y == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_z == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if group_size_x == 128bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if group_size_y == 3bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if group_size_z == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_x == 128bv32 then 1bv1 else 0bv1) != 0bv1;

@@ -1,0 +1,206 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "Layer2_Neurons_GPU"} {:global} $$Layer2_Neurons_GPU : [int]int;
+axiom {:array_info "$$Layer2_Neurons_GPU"} {:global} {:elem_width 32} {:source_name "Layer2_Neurons_GPU"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$Layer2_Neurons_GPU : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$Layer2_Neurons_GPU : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$Layer2_Neurons_GPU : bool;
+
+var {:source_name "Layer2_Weights_GPU"} {:global} $$Layer2_Weights_GPU : [int]int;
+axiom {:array_info "$$Layer2_Weights_GPU"} {:global} {:elem_width 32} {:source_name "Layer2_Weights_GPU"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$Layer2_Weights_GPU : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$Layer2_Weights_GPU : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$Layer2_Weights_GPU : bool;
+
+var {:source_name "Layer3_Neurons_GPU"} {:global} $$Layer3_Neurons_GPU : [int]int;
+axiom {:array_info "$$Layer3_Neurons_GPU"} {:global} {:elem_width 32} {:source_name "Layer3_Neurons_GPU"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$Layer3_Neurons_GPU : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$Layer3_Neurons_GPU : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$Layer3_Neurons_GPU : bool;
+
+var {:source_name "kernelTemplate2"} {:constant} $$kernelTemplate2 : [int]int;
+axiom {:array_info "$$kernelTemplate2"} {:constant} {:elem_width 32} {:source_name "kernelTemplate2"} {:source_elem_width 32} {:source_dimensions "25"} true;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_id_y} group_id_y : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:local_id_y} local_id_y : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function FADD32(int, int) : int;
+function FMUL32(int, int) : int;
+function FMUL64(int, int) : int;
+function FP32_CONV64(int) : int;
+function FP64_CONV32(int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SLT(x : int, y : int) : bool {
+  x < y
+}
+procedure {:source_name "executeSecondLayer"} {:kernel} $_Z18executeSecondLayerPfS_S_()
+{
+  var $result.0:int;
+  var $result.1:int;
+  var $i.0:int;
+  var v0:int;
+  var v1:int;
+  var v2:int;
+  var v3:int;
+  var v4:int;
+  var v5:bool;
+  var v6:bool;
+  var v7:bool;
+  var v8:int;
+  var v9:bool;
+  var v10:int;
+  var v11:int;
+  var v12:int;
+  var v13:int;
+  var v14:int;
+  var v15:int;
+  var v16:int;
+  var v17:int;
+  var v18:int;
+  var v19:int;
+  var v20:int;
+  var v21:int;
+  var v22:int;
+  var v23:int;
+  var v24:int;
+  var v25:int;
+  var v26:int;
+  var v27:int;
+  var v28:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  v0 := BV32_MUL(BV32_MUL(group_id_x, 26), 6);
+  v1 := BV32_MUL(local_id_x, 2);
+  v2 := BV32_MUL(local_id_y, 2);
+  assert {:sourceloc} {:sourceloc_num 1} true;
+  v3 := $$Layer2_Weights_GPU[v0];
+  v4 := FADD32(0, v3);
+  v5 := group_id_x == 1;
+  goto $truebb, $falsebb;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  v6 := local_id_x == 0;
+  goto $truebb0, $falsebb0;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 3} true;
+  v7 := local_id_y == 0;
+  goto $truebb1, $falsebb1;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 4} true;
+  $result.0 := FADD32(v4, 0);
+  goto $4;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 5} true;
+  v8 := BV32_ADD(v0, 1);
+  $result.1, $i.0 := $result.0, 0;
+  goto $5;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 6} true;
+  v9 := BV32_SLT($i.0, 25);
+  goto $truebb2, $falsebb2;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  v10 := $$kernelTemplate2[$i.0];
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  v11 := $$Layer2_Neurons_GPU[BV32_ADD(BV32_ADD(BV32_ADD(v1, BV32_MUL(13, v2)), v10), BV32_MUL(1014, group_id_y))];
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  v12 := $$Layer2_Weights_GPU[BV32_ADD(v8, BV32_MUL($i.0, 6))];
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  v13 := $$kernelTemplate2[$i.0];
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  v14 := $$Layer2_Neurons_GPU[BV32_ADD(BV32_ADD(BV32_ADD(BV32_ADD(169, v1), BV32_MUL(13, v2)), v13), BV32_MUL(1014, group_id_y))];
+  assert {:sourceloc} {:sourceloc_num 13} true;
+  v15 := $$Layer2_Weights_GPU[BV32_ADD(BV32_ADD(v8, BV32_MUL($i.0, 6)), 1)];
+  assert {:sourceloc} {:sourceloc_num 14} true;
+  v16 := $$kernelTemplate2[$i.0];
+  assert {:sourceloc} {:sourceloc_num 15} true;
+  v17 := $$Layer2_Neurons_GPU[BV32_ADD(BV32_ADD(BV32_ADD(BV32_ADD(338, v1), BV32_MUL(13, v2)), v16), BV32_MUL(1014, group_id_y))];
+  assert {:sourceloc} {:sourceloc_num 16} true;
+  v18 := $$Layer2_Weights_GPU[BV32_ADD(BV32_ADD(v8, BV32_MUL($i.0, 6)), 2)];
+  assert {:sourceloc} {:sourceloc_num 17} true;
+  v19 := $$kernelTemplate2[$i.0];
+  assert {:sourceloc} {:sourceloc_num 18} true;
+  v20 := $$Layer2_Neurons_GPU[BV32_ADD(BV32_ADD(BV32_ADD(BV32_ADD(507, v1), BV32_MUL(13, v2)), v19), BV32_MUL(1014, group_id_y))];
+  assert {:sourceloc} {:sourceloc_num 19} true;
+  v21 := $$Layer2_Weights_GPU[BV32_ADD(BV32_ADD(v8, BV32_MUL($i.0, 6)), 3)];
+  assert {:sourceloc} {:sourceloc_num 20} true;
+  v22 := $$kernelTemplate2[$i.0];
+  assert {:sourceloc} {:sourceloc_num 21} true;
+  v23 := $$Layer2_Neurons_GPU[BV32_ADD(BV32_ADD(BV32_ADD(BV32_ADD(676, v1), BV32_MUL(13, v2)), v22), BV32_MUL(1014, group_id_y))];
+  assert {:sourceloc} {:sourceloc_num 22} true;
+  v24 := $$Layer2_Weights_GPU[BV32_ADD(BV32_ADD(v8, BV32_MUL($i.0, 6)), 4)];
+  assert {:sourceloc} {:sourceloc_num 23} true;
+  v25 := $$kernelTemplate2[$i.0];
+  assert {:sourceloc} {:sourceloc_num 24} true;
+  v26 := $$Layer2_Neurons_GPU[BV32_ADD(BV32_ADD(BV32_ADD(BV32_ADD(845, v1), BV32_MUL(13, v2)), v25), BV32_MUL(1014, group_id_y))];
+  assert {:sourceloc} {:sourceloc_num 25} true;
+  v27 := $$Layer2_Weights_GPU[BV32_ADD(BV32_ADD(v8, BV32_MUL($i.0, 6)), 5)];
+  goto $7;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 26} true;
+  $result.1, $i.0 := FADD32(FADD32(FADD32(FADD32(FADD32(FADD32($result.1, FMUL32(v11, v12)), FMUL32(v14, v15)), FMUL32(v17, v18)), FMUL32(v20, v21)), FMUL32(v23, v24)), FMUL32(v26, v27)), BV32_ADD($i.0, 1);
+  goto $5;
+$8:
+  assert {:block_sourceloc} {:sourceloc_num 27} true;
+  call {:sourceloc_num 28}   v28 := $tanhf(FP64_CONV32(FMUL64(4604180019078461075, FP32_CONV64($result.1))));
+  assert {:sourceloc} {:sourceloc_num 29} true;
+  $$Layer3_Neurons_GPU[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(25, group_id_x), BV32_MUL(local_id_y, 5)), local_id_x), BV32_MUL(1250, group_id_y))] := FP64_CONV32(FMUL64(4610406545773251946, FP32_CONV64(v28)));
+  return;
+$truebb:
+  assume {:partition} v5;
+  assert {:block_sourceloc} {:sourceloc_num 30} true;
+  goto $1;
+$falsebb:
+  assume {:partition} !v5;
+  assert {:block_sourceloc} {:sourceloc_num 31} true;
+  $result.0 := v4;
+  goto $4;
+$truebb0:
+  assume {:partition} v6;
+  assert {:block_sourceloc} {:sourceloc_num 32} true;
+  goto $2;
+$falsebb0:
+  assume {:partition} !v6;
+  assert {:block_sourceloc} {:sourceloc_num 33} true;
+  $result.0 := v4;
+  goto $4;
+$truebb1:
+  assume {:partition} v7;
+  assert {:block_sourceloc} {:sourceloc_num 34} true;
+  goto $3;
+$falsebb1:
+  assume {:partition} !v7;
+  assert {:block_sourceloc} {:sourceloc_num 35} true;
+  $result.0 := v4;
+  goto $4;
+$truebb2:
+  assume {:partition} v9;
+  assert {:block_sourceloc} {:sourceloc_num 36} true;
+  goto $6;
+$falsebb2:
+  assume {:partition} !v9;
+  assert {:block_sourceloc} {:sourceloc_num 37} true;
+  goto $8;
+}
+procedure {:source_name "tanhf"} $tanhf($0:int) returns ($ret:int);
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 5 then 1 else 0) != 0;
+axiom (if group_size_y == 5 then 1 else 0) != 0;
+axiom (if num_groups_x == 50 then 1 else 0) != 0;
+axiom (if num_groups_y == 10 then 1 else 0) != 0;

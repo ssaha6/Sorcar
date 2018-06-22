@@ -1,0 +1,87 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "d_locations"} {:global} $$d_locations : [int]int;
+axiom {:array_info "$$d_locations"} {:global} {:elem_width 32} {:source_name "d_locations"} {:source_elem_width 64} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_locations : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_locations : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_locations : bool;
+
+var {:source_name "d_distances"} {:global} $$d_distances : [int]int;
+axiom {:array_info "$$d_distances"} {:global} {:elem_width 32} {:source_name "d_distances"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_distances : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_distances : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_distances : bool;
+
+const _WATCHED_OFFSET : int;
+const {:global_offset_x} global_offset_x : int;
+const {:global_offset_y} global_offset_y : int;
+const {:global_offset_z} global_offset_z : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function FADD32(int, int) : int;
+function FMUL32(int, int) : int;
+function FSQRT32(int) : int;
+function FSUB32(int, int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SLT(x : int, y : int) : bool {
+  x < y
+}
+procedure {:source_name "NearestNeighbor"} {:kernel} $NearestNeighbor($numRecords:int, $lat:int, $lng:int)
+{
+  var v0:int;
+  var v1:bool;
+  var v2:int;
+  var v3:int;
+  var v4:int;
+  var v5:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  v0 := BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x);
+  v1 := BV32_SLT(v0, $numRecords);
+  goto $truebb, $falsebb;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  assert {:sourceloc} {:sourceloc_num 2} true;
+  v2 := $$d_locations[BV32_MUL(v0, 2)];
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  v3 := $$d_locations[BV32_MUL(v0, 2)];
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  v4 := $$d_locations[BV32_ADD(BV32_MUL(v0, 2), 1)];
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  v5 := $$d_locations[BV32_ADD(BV32_MUL(v0, 2), 1)];
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  $$d_distances[v0] := FSQRT32(FADD32(FMUL32(FSUB32($lat, v2), FSUB32($lat, v3)), FMUL32(FSUB32($lng, v4), FSUB32($lng, v5))));
+  goto $2;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  return;
+$truebb:
+  assume {:partition} v1;
+  assert {:block_sourceloc} {:sourceloc_num 8} true;
+  goto $1;
+$falsebb:
+  assume {:partition} !v1;
+  assert {:block_sourceloc} {:sourceloc_num 9} true;
+  goto $2;
+}
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 892 then 1 else 0) != 0;
+axiom (if num_groups_x == 48 then 1 else 0) != 0;
+axiom (if global_offset_x == 0 then 1 else 0) != 0;
+axiom (if global_offset_y == 0 then 1 else 0) != 0;
+axiom (if global_offset_z == 0 then 1 else 0) != 0;

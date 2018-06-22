@@ -1,0 +1,452 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "d_OptionData"} {:global} $$d_OptionData : [int]int;
+axiom {:array_info "$$d_OptionData"} {:global} {:elem_width 32} {:source_name "d_OptionData"} {:source_elem_width 128} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_OptionData : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_OptionData : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_OptionData : bool;
+
+var {:source_name "d_CallValue"} {:global} $$d_CallValue : [int]int;
+axiom {:array_info "$$d_CallValue"} {:global} {:elem_width 32} {:source_name "d_CallValue"} {:source_elem_width 64} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_CallValue : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_CallValue : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_CallValue : bool;
+
+var {:source_name "rngStates"} {:global} $$rngStates : [int]int;
+axiom {:array_info "$$rngStates"} {:global} {:elem_width 32} {:source_name "rngStates"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$rngStates : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$rngStates : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$rngStates : bool;
+
+var {:source_name "localState"} $$localState : [int]int;
+axiom {:array_info "$$localState"} {:elem_width 32} {:source_name "localState"} {:source_elem_width 32} {:source_dimensions "1"} true;
+
+var {:source_name "sumCall"} $$sumCall : [int]int;
+axiom {:array_info "$$sumCall"} {:elem_width 32} {:source_name "sumCall"} {:source_elem_width 64} {:source_dimensions "1"} true;
+
+var {:source_name "t"} $$t : [int]int;
+axiom {:array_info "$$t"} {:elem_width 32} {:source_name "t"} {:source_elem_width 64} {:source_dimensions "1"} true;
+
+var {:source_name "s_SumCall"} {:group_shared} $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE9s_SumCall : [int]int;
+axiom {:array_info "$$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE9s_SumCall"} {:group_shared} {:elem_width 32} {:source_name "s_SumCall"} {:source_elem_width 32} {:source_dimensions "256"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE9s_SumCall : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE9s_SumCall : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE9s_SumCall : bool;
+
+var {:source_name "s_Sum2Call"} {:group_shared} $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call : [int]int;
+axiom {:array_info "$$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call"} {:group_shared} {:elem_width 32} {:source_name "s_Sum2Call"} {:source_elem_width 32} {:source_dimensions "256"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call : bool;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function FADD32(int, int) : int;
+function FLT32(int, int) : bool;
+function FMUL32(int, int) : int;
+function FSUB32(int, int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SLT(x : int, y : int) : bool {
+  x < y
+}
+procedure {:source_name "MonteCarloOneBlockPerOption"} {:kernel} $_Z27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWi($pathN:int)
+{
+  var $iSum.0:int;
+  var $i.0:int;
+  var $0:int;
+  var $pos.i.0:int;
+  var v0:int;
+  var v4:int;
+  var v1:int;
+  var v2:int;
+  var v3:int;
+  var v5:int;
+  var v6:bool;
+  var v7:bool;
+  var v8:int;
+  var v9:int;
+  var v10:int;
+  var v11:int;
+  var v12:int;
+  var v13:int;
+  var v14:bool;
+  var v15:int;
+  var v16:int;
+  var v17:int;
+  var v18:int;
+  var v19:int;
+  var v20:bool;
+  var v21:bool;
+  var v22:int;
+  var v23:int;
+  var v24:int;
+  var v25:int;
+  var v26:bool;
+  var v27:int;
+  var v28:int;
+  var v29:int;
+  var v30:int;
+  var v31:bool;
+  var v32:int;
+  var v33:int;
+  var v34:int;
+  var v35:int;
+  var v36:int;
+  var v37:int;
+  var v38:int;
+  var v39:int;
+  var v40:int;
+  var v41:int;
+  var v42:int;
+  var v43:int;
+  var v44:int;
+  var v45:int;
+  var v46:int;
+  var v47:int;
+  var v48:int;
+  var v49:int;
+  var v50:int;
+  var v51:int;
+  var v52:int;
+  var v53:int;
+  var v54:int;
+  var v55:int;
+  var v56:bool;
+  var v57:int;
+  var v58:int;
+  var v59:int;
+  var v60:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  assert {:sourceloc} {:sourceloc_num 1} true;
+  v0 := $$d_OptionData[BV32_MUL(group_id_x, 4)];
+  assert {:sourceloc} {:sourceloc_num 2} true;
+  v1 := $$d_OptionData[BV32_ADD(BV32_MUL(group_id_x, 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  v2 := $$d_OptionData[BV32_ADD(BV32_MUL(group_id_x, 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  v3 := $$d_OptionData[BV32_ADD(BV32_MUL(group_id_x, 4), 3)];
+  v4 := BV32_ADD(local_id_x, BV32_MUL(group_id_x, group_size_x));
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  v5 := $$rngStates[v4];
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  $$localState[0] := v5;
+  $iSum.0 := local_id_x;
+  goto $1;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  v6 := BV32_SLT($iSum.0, 256);
+  goto $truebb, $falsebb;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 8} true;
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  $$sumCall[0] := 0;
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  $$sumCall[1] := 0;
+  $i.0 := $iSum.0;
+  goto $3;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 11} true;
+  v7 := BV32_SLT($i.0, $pathN);
+  goto $truebb0, $falsebb0;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 12} true;
+  call {:sourceloc_num 13}   v8 := $_Z19__bugle_random_uintv();
+  assert {:sourceloc} {:sourceloc_num 14} true;
+  v9 := $$localState[0];
+  assert {:sourceloc} {:sourceloc_num 15} true;
+  $$localState[0] := BV32_ADD(v9, v8);
+  call {:sourceloc_num 16}   v10 := $_Z19__bugle_random_uintv();
+  call {:sourceloc_num 17}   v11 := $_Z20__bugle_random_floatv();
+  call {:sourceloc_num 18}   v12 := $__expf(FADD32(v2, FMUL32(v3, v11)));
+  v13 := FSUB32(FMUL32(v0, v12), v1);
+  v14 := FLT32(0, v13);
+  goto $truebb1, $falsebb1;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 19} true;
+  $0 := v13;
+  goto $_ZL12endCallValuefffff.exit;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 20} true;
+  $0 := 0;
+  goto $_ZL12endCallValuefffff.exit;
+$_ZL12endCallValuefffff.exit:
+  assert {:block_sourceloc} {:sourceloc_num 21} true;
+  assert {:sourceloc} {:sourceloc_num 22} true;
+  v15 := $$sumCall[0];
+  assert {:sourceloc} {:sourceloc_num 23} true;
+  $$sumCall[0] := FADD32(v15, $0);
+  assert {:sourceloc} {:sourceloc_num 24} true;
+  v16 := $$sumCall[1];
+  assert {:sourceloc} {:sourceloc_num 25} true;
+  $$sumCall[1] := FADD32(v16, FMUL32($0, $0));
+  goto $7;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 26} true;
+  $i.0 := BV32_ADD($i.0, 256);
+  goto $3;
+$8:
+  assert {:block_sourceloc} {:sourceloc_num 27} true;
+  assert {:sourceloc} {:sourceloc_num 28} true;
+  v17 := $$sumCall[0];
+  assert {:sourceloc} {:sourceloc_num 29} true;
+  $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE9s_SumCall[$iSum.0] := v17;
+  assert {:sourceloc} {:sourceloc_num 30} true;
+  v18 := $$sumCall[1];
+  assert {:sourceloc} {:sourceloc_num 31} true;
+  $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[$iSum.0] := v18;
+  goto $9;
+$9:
+  assert {:block_sourceloc} {:sourceloc_num 32} true;
+  $iSum.0 := BV32_ADD($iSum.0, group_size_x);
+  goto $1;
+$10:
+  assert {:block_sourceloc} {:sourceloc_num 33} true;
+  assert {:sourceloc} {:sourceloc_num 34} true;
+  v19 := $$localState[0];
+  assert {:sourceloc} {:sourceloc_num 35} true;
+  $$rngStates[v4] := v19;
+  $pos.i.0 := local_id_x;
+  goto $11;
+$11:
+  assert {:block_sourceloc} {:sourceloc_num 36} true;
+  v20 := BV32_SLT($pos.i.0, 256);
+  goto $truebb2, $falsebb2;
+$12:
+  assert {:block_sourceloc} {:sourceloc_num 37} true;
+  call {:sourceloc_num 38} $bugle_barrier(-1, -1);
+  v21 := BV32_SLT($pos.i.0, 128);
+  goto $truebb3, $falsebb3;
+$13:
+  assert {:block_sourceloc} {:sourceloc_num 39} true;
+  assert {:sourceloc} {:sourceloc_num 40} true;
+  v22 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE9s_SumCall[BV32_ADD($pos.i.0, 128)];
+  assert {:sourceloc} {:sourceloc_num 41} true;
+  v23 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE9s_SumCall[$pos.i.0];
+  assert {:sourceloc} {:sourceloc_num 42} true;
+  $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE9s_SumCall[$pos.i.0] := FADD32(v23, v22);
+  assert {:sourceloc} {:sourceloc_num 43} true;
+  v24 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[BV32_ADD($pos.i.0, 128)];
+  assert {:sourceloc} {:sourceloc_num 44} true;
+  v25 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[$pos.i.0];
+  assert {:sourceloc} {:sourceloc_num 45} true;
+  $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[$pos.i.0] := FADD32(v25, v24);
+  goto $14;
+$14:
+  assert {:block_sourceloc} {:sourceloc_num 46} true;
+  call {:sourceloc_num 47} $bugle_barrier(-1, -1);
+  v26 := BV32_SLT($pos.i.0, 64);
+  goto $truebb4, $falsebb4;
+$15:
+  assert {:block_sourceloc} {:sourceloc_num 48} true;
+  assert {:sourceloc} {:sourceloc_num 49} true;
+  v27 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE9s_SumCall[BV32_ADD($pos.i.0, 64)];
+  assert {:sourceloc} {:sourceloc_num 50} true;
+  v28 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE9s_SumCall[$pos.i.0];
+  assert {:sourceloc} {:sourceloc_num 51} true;
+  $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE9s_SumCall[$pos.i.0] := FADD32(v28, v27);
+  assert {:sourceloc} {:sourceloc_num 52} true;
+  v29 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[BV32_ADD($pos.i.0, 64)];
+  assert {:sourceloc} {:sourceloc_num 53} true;
+  v30 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[$pos.i.0];
+  assert {:sourceloc} {:sourceloc_num 54} true;
+  $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[$pos.i.0] := FADD32(v30, v29);
+  goto $16;
+$16:
+  assert {:block_sourceloc} {:sourceloc_num 55} true;
+  call {:sourceloc_num 56} $bugle_barrier(-1, -1);
+  v31 := BV32_SLT($pos.i.0, 32);
+  goto $truebb5, $falsebb5;
+$17:
+  assert {:block_sourceloc} {:sourceloc_num 57} true;
+  assert {:sourceloc} {:sourceloc_num 58} true;
+  v32 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE9s_SumCall[BV32_ADD($pos.i.0, 32)];
+  assert {:sourceloc} {:sourceloc_num 59} true;
+  v33 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE9s_SumCall[$pos.i.0];
+  assert {:sourceloc} {:sourceloc_num 60} true;
+  $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE9s_SumCall[$pos.i.0] := FADD32(v33, v32);
+  assert {:sourceloc} {:sourceloc_num 61} true;
+  v34 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[BV32_ADD($pos.i.0, 32)];
+  assert {:sourceloc} {:sourceloc_num 62} true;
+  v35 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[$pos.i.0];
+  assert {:sourceloc} {:sourceloc_num 63} true;
+  $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[$pos.i.0] := FADD32(v35, v34);
+  assert {:sourceloc} {:sourceloc_num 64} true;
+  v36 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE9s_SumCall[BV32_ADD($pos.i.0, 16)];
+  assert {:sourceloc} {:sourceloc_num 65} true;
+  v37 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE9s_SumCall[$pos.i.0];
+  assert {:sourceloc} {:sourceloc_num 66} true;
+  $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE9s_SumCall[$pos.i.0] := FADD32(v37, v36);
+  assert {:sourceloc} {:sourceloc_num 67} true;
+  v38 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[BV32_ADD($pos.i.0, 16)];
+  assert {:sourceloc} {:sourceloc_num 68} true;
+  v39 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[$pos.i.0];
+  assert {:sourceloc} {:sourceloc_num 69} true;
+  $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[$pos.i.0] := FADD32(v39, v38);
+  assert {:sourceloc} {:sourceloc_num 70} true;
+  v40 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE9s_SumCall[BV32_ADD($pos.i.0, 8)];
+  assert {:sourceloc} {:sourceloc_num 71} true;
+  v41 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE9s_SumCall[$pos.i.0];
+  assert {:sourceloc} {:sourceloc_num 72} true;
+  $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE9s_SumCall[$pos.i.0] := FADD32(v41, v40);
+  assert {:sourceloc} {:sourceloc_num 73} true;
+  v42 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[BV32_ADD($pos.i.0, 8)];
+  assert {:sourceloc} {:sourceloc_num 74} true;
+  v43 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[$pos.i.0];
+  assert {:sourceloc} {:sourceloc_num 75} true;
+  $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[$pos.i.0] := FADD32(v43, v42);
+  assert {:sourceloc} {:sourceloc_num 76} true;
+  v44 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE9s_SumCall[BV32_ADD($pos.i.0, 4)];
+  assert {:sourceloc} {:sourceloc_num 77} true;
+  v45 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE9s_SumCall[$pos.i.0];
+  assert {:sourceloc} {:sourceloc_num 78} true;
+  $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE9s_SumCall[$pos.i.0] := FADD32(v45, v44);
+  assert {:sourceloc} {:sourceloc_num 79} true;
+  v46 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[BV32_ADD($pos.i.0, 4)];
+  assert {:sourceloc} {:sourceloc_num 80} true;
+  v47 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[$pos.i.0];
+  assert {:sourceloc} {:sourceloc_num 81} true;
+  $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[$pos.i.0] := FADD32(v47, v46);
+  assert {:sourceloc} {:sourceloc_num 82} true;
+  v48 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE9s_SumCall[BV32_ADD($pos.i.0, 2)];
+  assert {:sourceloc} {:sourceloc_num 83} true;
+  v49 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE9s_SumCall[$pos.i.0];
+  assert {:sourceloc} {:sourceloc_num 84} true;
+  $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE9s_SumCall[$pos.i.0] := FADD32(v49, v48);
+  assert {:sourceloc} {:sourceloc_num 85} true;
+  v50 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[BV32_ADD($pos.i.0, 2)];
+  assert {:sourceloc} {:sourceloc_num 86} true;
+  v51 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[$pos.i.0];
+  assert {:sourceloc} {:sourceloc_num 87} true;
+  $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[$pos.i.0] := FADD32(v51, v50);
+  assert {:sourceloc} {:sourceloc_num 88} true;
+  v52 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE9s_SumCall[BV32_ADD($pos.i.0, 1)];
+  assert {:sourceloc} {:sourceloc_num 89} true;
+  v53 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE9s_SumCall[$pos.i.0];
+  assert {:sourceloc} {:sourceloc_num 90} true;
+  $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE9s_SumCall[$pos.i.0] := FADD32(v53, v52);
+  assert {:sourceloc} {:sourceloc_num 91} true;
+  v54 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[BV32_ADD($pos.i.0, 1)];
+  assert {:sourceloc} {:sourceloc_num 92} true;
+  v55 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[$pos.i.0];
+  assert {:sourceloc} {:sourceloc_num 93} true;
+  $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[$pos.i.0] := FADD32(v55, v54);
+  goto $_ZL18sumReduceSharedMemIfLj256EEvPVT_S2_i.exit.i;
+$_ZL18sumReduceSharedMemIfLj256EEvPVT_S2_i.exit.i:
+  assert {:block_sourceloc} {:sourceloc_num 94} true;
+  $pos.i.0 := BV32_ADD($pos.i.0, 256);
+  goto $11;
+$_ZL9sumReduceIfLi256ELi256EEvPT_S1_.exit:
+  assert {:block_sourceloc} {:sourceloc_num 95} true;
+  v56 := local_id_x == 0;
+  goto $truebb6, $falsebb6;
+$18:
+  assert {:block_sourceloc} {:sourceloc_num 96} true;
+  assert {:sourceloc} {:sourceloc_num 97} true;
+  v57 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE9s_SumCall[0];
+  assert {:sourceloc} {:sourceloc_num 98} true;
+  $$t[0] := v57;
+  assert {:sourceloc} {:sourceloc_num 99} true;
+  v58 := $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[0];
+  assert {:sourceloc} {:sourceloc_num 100} true;
+  $$t[1] := v58;
+  assert {:sourceloc} {:sourceloc_num 101} true;
+  v59 := $$t[0];
+  assert {:sourceloc} {:sourceloc_num 102} true;
+  $$d_CallValue[BV32_MUL(group_id_x, 2)] := v59;
+  assert {:sourceloc} {:sourceloc_num 103} true;
+  v60 := $$t[1];
+  assert {:sourceloc} {:sourceloc_num 104} true;
+  $$d_CallValue[BV32_ADD(BV32_MUL(group_id_x, 2), 1)] := v60;
+  goto $19;
+$19:
+  assert {:block_sourceloc} {:sourceloc_num 105} true;
+  return;
+$truebb:
+  assume {:partition} v6;
+  assert {:block_sourceloc} {:sourceloc_num 106} true;
+  goto $2;
+$falsebb:
+  assume {:partition} !v6;
+  assert {:block_sourceloc} {:sourceloc_num 107} true;
+  goto $10;
+$truebb0:
+  assume {:partition} v7;
+  assert {:block_sourceloc} {:sourceloc_num 108} true;
+  goto $4;
+$falsebb0:
+  assume {:partition} !v7;
+  assert {:block_sourceloc} {:sourceloc_num 109} true;
+  goto $8;
+$truebb1:
+  assume {:partition} v14;
+  assert {:block_sourceloc} {:sourceloc_num 110} true;
+  goto $5;
+$falsebb1:
+  assume {:partition} !v14;
+  assert {:block_sourceloc} {:sourceloc_num 111} true;
+  goto $6;
+$truebb2:
+  assume {:partition} v20;
+  assert {:block_sourceloc} {:sourceloc_num 112} true;
+  goto $12;
+$falsebb2:
+  assume {:partition} !v20;
+  assert {:block_sourceloc} {:sourceloc_num 113} true;
+  goto $_ZL9sumReduceIfLi256ELi256EEvPT_S1_.exit;
+$truebb3:
+  assume {:partition} v21;
+  assert {:block_sourceloc} {:sourceloc_num 114} true;
+  goto $13;
+$falsebb3:
+  assume {:partition} !v21;
+  assert {:block_sourceloc} {:sourceloc_num 115} true;
+  goto $14;
+$truebb4:
+  assume {:partition} v26;
+  assert {:block_sourceloc} {:sourceloc_num 116} true;
+  goto $15;
+$falsebb4:
+  assume {:partition} !v26;
+  assert {:block_sourceloc} {:sourceloc_num 117} true;
+  goto $16;
+$truebb5:
+  assume {:partition} v31;
+  assert {:block_sourceloc} {:sourceloc_num 118} true;
+  goto $17;
+$falsebb5:
+  assume {:partition} !v31;
+  assert {:block_sourceloc} {:sourceloc_num 119} true;
+  goto $_ZL18sumReduceSharedMemIfLj256EEvPVT_S2_i.exit.i;
+$truebb6:
+  assume {:partition} v56;
+  assert {:block_sourceloc} {:sourceloc_num 120} true;
+  goto $18;
+$falsebb6:
+  assume {:partition} !v56;
+  assert {:block_sourceloc} {:sourceloc_num 121} true;
+  goto $19;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:int, $1:int);
+procedure {:source_name "_Z20__bugle_random_floatv"} $_Z20__bugle_random_floatv() returns ($ret:int);
+procedure {:source_name "_Z19__bugle_random_uintv"} $_Z19__bugle_random_uintv() returns ($ret:int);
+procedure {:source_name "__expf"} $__expf($0:int) returns ($ret:int);
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 256 then 1 else 0) != 0;
+axiom (if num_groups_x == 256 then 1 else 0) != 0;

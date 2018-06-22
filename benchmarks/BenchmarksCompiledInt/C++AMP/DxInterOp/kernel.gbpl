@@ -1,0 +1,67 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "data_refY"} {:global} $$data_refY : [int]int;
+axiom {:array_info "$$data_refY"} {:global} {:elem_width 32} {:source_name "data_refY"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$data_refY : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$data_refY : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$data_refY : bool;
+
+var {:source_name "data_refX"} {:global} $$data_refX : [int]int;
+axiom {:array_info "$$data_refX"} {:global} {:elem_width 32} {:source_name "data_refX"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$data_refX : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$data_refX : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$data_refX : bool;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function FADD64(int, int) : int;
+function FCOS64(int) : int;
+function FMUL64(int, int) : int;
+function FP32_CONV64(int) : int;
+function FP64_CONV32(int) : int;
+function FSIN64(int) : int;
+function FSUB64(int, int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+procedure {:source_name "run"} {:kernel} $_Z3runPfS_()
+{
+  var v0:int;
+  var v1:int;
+  var v2:int;
+  var v3:int;
+  var v4:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  v0 := BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x);
+  assert {:sourceloc} {:sourceloc_num 1} true;
+  v1 := $$data_refY[v0];
+  assert {:sourceloc} {:sourceloc_num 2} true;
+  v2 := $$data_refX[v0];
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  $$data_refY[v0] := FP64_CONV32(FSUB64(FMUL64(FP32_CONV64(v1), FCOS64(4569220451632414720)), FMUL64(FP32_CONV64(v2), FSIN64(4569220451632414720))));
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  v3 := $$data_refY[v0];
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  v4 := $$data_refX[v0];
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  $$data_refX[v0] := FP64_CONV32(FADD64(FMUL64(FP32_CONV64(v3), FSIN64(4569220451632414720)), FMUL64(FP32_CONV64(v4), FCOS64(4569220451632414720))));
+  return;
+}
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 1024 then 1 else 0) != 0;
+axiom (if num_groups_x == 128 then 1 else 0) != 0;

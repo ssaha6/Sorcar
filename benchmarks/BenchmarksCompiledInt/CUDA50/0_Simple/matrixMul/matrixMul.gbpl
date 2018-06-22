@@ -1,0 +1,151 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "C"} {:global} $$C : [int]int;
+axiom {:array_info "$$C"} {:global} {:elem_width 32} {:source_name "C"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$C : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$C : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$C : bool;
+
+var {:source_name "A"} {:global} $$A : [int]int;
+axiom {:array_info "$$A"} {:global} {:elem_width 32} {:source_name "A"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$A : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$A : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$A : bool;
+
+var {:source_name "B"} {:global} $$B : [int]int;
+axiom {:array_info "$$B"} {:global} {:elem_width 32} {:source_name "B"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$B : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$B : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$B : bool;
+
+var {:source_name "As"} {:group_shared} $$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2As : [int]int;
+axiom {:array_info "$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2As"} {:group_shared} {:elem_width 32} {:source_name "As"} {:source_elem_width 32} {:source_dimensions "32,32"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*,32"} _READ_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2As : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*,32"} _WRITE_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2As : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*,32"} _ATOMIC_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2As : bool;
+
+var {:source_name "Bs"} {:group_shared} $$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2Bs : [int]int;
+axiom {:array_info "$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2Bs"} {:group_shared} {:elem_width 32} {:source_name "Bs"} {:source_elem_width 32} {:source_dimensions "32,32"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*,32"} _READ_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2Bs : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*,32"} _WRITE_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2Bs : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*,32"} _ATOMIC_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2Bs : bool;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_id_y} group_id_y : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:local_id_y} local_id_y : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function FADD32(int, int) : int;
+function FMUL32(int, int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SLE(x : int, y : int) : bool {
+  x <= y
+}
+function {:inline true} BV32_SLT(x : int, y : int) : bool {
+  x < y
+}
+function {:inline true} BV32_SUB(x : int, y : int) : int {
+  x - y
+}
+procedure {:source_name "matrixMulCUDA<32>"} {:kernel} $_Z13matrixMulCUDAILi32EEvPfS0_S0_ii($wA:int, $wB:int)
+requires {:sourceloc_num 0} (if $wA == 320 then 1 else 0) != 0;
+requires {:sourceloc_num 1} (if $wB == 640 then 1 else 0) != 0;
+{
+  var $Csub.0:int;
+  var $a.0:int;
+  var $b.0:int;
+  var $Csub.1:int;
+  var $k.0:int;
+  var v0:int;
+  var v1:bool;
+  var v2:int;
+  var v3:int;
+  var v4:bool;
+  var v5:int;
+  var v6:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  v0 := BV32_MUL(BV32_MUL($wA, 32), group_id_y);
+  $Csub.0, $a.0, $b.0 := 0, v0, BV32_MUL(32, group_id_x);
+  goto $1;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 3} true;
+  v1 := BV32_SLE($a.0, BV32_SUB(BV32_ADD(v0, $wA), 1));
+  goto $truebb, $falsebb;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 4} true;
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  v2 := $$A[BV32_ADD(BV32_ADD($a.0, BV32_MUL($wA, local_id_y)), local_id_x)];
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  $$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2As[BV32_ADD(BV32_MUL(local_id_y, 32), local_id_x)] := v2;
+  assert {:sourceloc} {:sourceloc_num 7} true;
+  v3 := $$B[BV32_ADD(BV32_ADD($b.0, BV32_MUL($wB, local_id_y)), local_id_x)];
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  $$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2Bs[BV32_ADD(BV32_MUL(local_id_y, 32), local_id_x)] := v3;
+  call {:sourceloc_num 9} $bugle_barrier(-1, -1);
+  $Csub.1, $k.0 := $Csub.0, 0;
+  goto $3;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 10} true;
+  v4 := BV32_SLT($k.0, 32);
+  goto $truebb0, $falsebb0;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 11} true;
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  v5 := $$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2As[BV32_ADD(BV32_MUL(local_id_y, 32), $k.0)];
+  assert {:sourceloc} {:sourceloc_num 13} true;
+  v6 := $$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2Bs[BV32_ADD(BV32_MUL($k.0, 32), local_id_x)];
+  goto $5;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 14} true;
+  $Csub.1, $k.0 := FADD32($Csub.1, FMUL32(v5, v6)), BV32_ADD($k.0, 1);
+  goto $3;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 15} true;
+  call {:sourceloc_num 16} $bugle_barrier(-1, -1);
+  goto $7;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 17} true;
+  $Csub.0, $a.0, $b.0 := $Csub.1, BV32_ADD($a.0, 32), BV32_ADD($b.0, BV32_MUL(32, $wB));
+  goto $1;
+$8:
+  assert {:block_sourceloc} {:sourceloc_num 18} true;
+  assert {:sourceloc} {:sourceloc_num 19} true;
+  $$C[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL($wB, 32), group_id_y), BV32_MUL(32, group_id_x)), BV32_MUL($wB, local_id_y)), local_id_x)] := $Csub.0;
+  return;
+$truebb:
+  assume {:partition} v1;
+  assert {:block_sourceloc} {:sourceloc_num 20} true;
+  goto $2;
+$falsebb:
+  assume {:partition} !v1;
+  assert {:block_sourceloc} {:sourceloc_num 21} true;
+  goto $8;
+$truebb0:
+  assume {:partition} v4;
+  assert {:block_sourceloc} {:sourceloc_num 22} true;
+  goto $4;
+$falsebb0:
+  assume {:partition} !v4;
+  assert {:block_sourceloc} {:sourceloc_num 23} true;
+  goto $6;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:int, $1:int);
+axiom (if group_size_x == 32 then 1 else 0) != 0;
+axiom (if group_size_y == 32 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_x == 20 then 1 else 0) != 0;
+axiom (if num_groups_y == 10 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;

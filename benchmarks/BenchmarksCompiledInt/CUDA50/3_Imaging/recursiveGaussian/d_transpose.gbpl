@@ -1,0 +1,133 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "odata"} {:global} $$odata : [int]int;
+axiom {:array_info "$$odata"} {:global} {:elem_width 32} {:source_name "odata"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$odata : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$odata : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$odata : bool;
+
+var {:source_name "idata"} {:global} $$idata : [int]int;
+axiom {:array_info "$$idata"} {:global} {:elem_width 32} {:source_name "idata"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$idata : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$idata : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$idata : bool;
+
+var {:source_name "block"} {:group_shared} $$_ZZ11d_transposePjS_iiE5block : [int]int;
+axiom {:array_info "$$_ZZ11d_transposePjS_iiE5block"} {:group_shared} {:elem_width 32} {:source_name "block"} {:source_elem_width 32} {:source_dimensions "16,17"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*,17"} _READ_HAS_OCCURRED_$$_ZZ11d_transposePjS_iiE5block : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*,17"} _WRITE_HAS_OCCURRED_$$_ZZ11d_transposePjS_iiE5block : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*,17"} _ATOMIC_HAS_OCCURRED_$$_ZZ11d_transposePjS_iiE5block : bool;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_id_y} group_id_y : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:local_id_y} local_id_y : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_ULT(x : int, y : int) : bool {
+  x < y
+}
+procedure {:source_name "d_transpose"} {:kernel} $_Z11d_transposePjS_ii($width:int, $height:int)
+requires {:sourceloc_num 0} (if $width == 512 then 1 else 0) != 0;
+requires {:sourceloc_num 1} (if $height == 512 then 1 else 0) != 0;
+{
+  var v0:int;
+  var v1:int;
+  var v2:bool;
+  var v3:bool;
+  var v4:int;
+  var v6:int;
+  var v5:int;
+  var v7:bool;
+  var v8:bool;
+  var v9:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  v0 := BV32_ADD(BV32_MUL(group_id_x, 16), local_id_x);
+  v1 := BV32_ADD(BV32_MUL(group_id_y, 16), local_id_y);
+  v2 := BV32_ULT(v0, $width);
+  goto $truebb, $falsebb;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 3} true;
+  v3 := BV32_ULT(v1, $height);
+  goto $truebb0, $falsebb0;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 4} true;
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  v4 := $$idata[BV32_ADD(BV32_MUL(v1, $width), v0)];
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  $$_ZZ11d_transposePjS_iiE5block[BV32_ADD(BV32_MUL(local_id_y, 17), local_id_x)] := v4;
+  goto $3;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  call {:sourceloc_num 8} $bugle_barrier(-1, -1);
+  v5 := BV32_ADD(BV32_MUL(group_id_y, 16), local_id_x);
+  v6 := BV32_ADD(BV32_MUL(group_id_x, 16), local_id_y);
+  v7 := BV32_ULT(v5, $height);
+  goto $truebb1, $falsebb1;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 9} true;
+  v8 := BV32_ULT(v6, $width);
+  goto $truebb2, $falsebb2;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 10} true;
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  v9 := $$_ZZ11d_transposePjS_iiE5block[BV32_ADD(BV32_MUL(local_id_x, 17), local_id_y)];
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  $$odata[BV32_ADD(BV32_MUL(v6, $height), v5)] := v9;
+  goto $6;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 13} true;
+  return;
+$truebb:
+  assume {:partition} v2;
+  assert {:block_sourceloc} {:sourceloc_num 14} true;
+  goto $1;
+$falsebb:
+  assume {:partition} !v2;
+  assert {:block_sourceloc} {:sourceloc_num 15} true;
+  goto $3;
+$truebb0:
+  assume {:partition} v3;
+  assert {:block_sourceloc} {:sourceloc_num 16} true;
+  goto $2;
+$falsebb0:
+  assume {:partition} !v3;
+  assert {:block_sourceloc} {:sourceloc_num 17} true;
+  goto $3;
+$truebb1:
+  assume {:partition} v7;
+  assert {:block_sourceloc} {:sourceloc_num 18} true;
+  goto $4;
+$falsebb1:
+  assume {:partition} !v7;
+  assert {:block_sourceloc} {:sourceloc_num 19} true;
+  goto $6;
+$truebb2:
+  assume {:partition} v8;
+  assert {:block_sourceloc} {:sourceloc_num 20} true;
+  goto $5;
+$falsebb2:
+  assume {:partition} !v8;
+  assert {:block_sourceloc} {:sourceloc_num 21} true;
+  goto $6;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:int, $1:int);
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 16 then 1 else 0) != 0;
+axiom (if group_size_y == 16 then 1 else 0) != 0;
+axiom (if num_groups_x == 32 then 1 else 0) != 0;
+axiom (if num_groups_y == 32 then 1 else 0) != 0;

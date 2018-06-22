@@ -1,0 +1,15 @@
+# This is an Sorcar option file example.
+# You have to specify all of the following options:
+#
+# algorithm = houdini | sorcar_all | sorcar_greedy | sorcar_sat   (which variant to use)
+# houdini_first_round = true | false                              (whether to use houdini in the first round)
+# reset_R = true | false                                          (whether to reset R between rounds)
+# alternate = true | false                                        (whether to alternate between Houdini and Sorcar)
+
+algorithm = houdini
+
+houdini_first_round = false
+
+reset_R = false 
+
+alternate = false

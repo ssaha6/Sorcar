@@ -1,0 +1,146 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "d_Dst"} {:global} $$d_Dst : [int]int;
+axiom {:array_info "$$d_Dst"} {:global} {:elem_width 32} {:source_name "d_Dst"} {:source_elem_width 64} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_Dst : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_Dst : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_Dst : bool;
+
+var {:source_name "d_Src"} {:global} $$d_Src : [int]int;
+axiom {:array_info "$$d_Src"} {:global} {:elem_width 32} {:source_name "d_Src"} {:source_elem_width 64} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_Src : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_Src : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_Src : bool;
+
+var {:source_name "t.i"} $$t.i : [int]int;
+axiom {:array_info "$$t.i"} {:elem_width 32} {:source_name "t.i"} {:source_elem_width 64} {:source_dimensions "1"} true;
+
+var {:source_name "a"} $$a : [int]int;
+axiom {:array_info "$$a"} {:elem_width 32} {:source_name "a"} {:source_elem_width 64} {:source_dimensions "1"} true;
+
+var {:source_name "b"} $$b : [int]int;
+axiom {:array_info "$$b"} {:elem_width 32} {:source_name "b"} {:source_elem_width 64} {:source_dimensions "1"} true;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function FADD32(int, int) : int;
+function FMUL32(int, int) : int;
+function FSUB32(int, int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SGE(x : int, y : int) : bool {
+  x >= y
+}
+procedure {:source_name "modulateAndNormalize_kernel"} {:kernel} $_Z27modulateAndNormalize_kernelP6float2S0_if($dataSize:int, $c:int)
+{
+  var v0:int;
+  var v1:bool;
+  var v2:int;
+  var v3:int;
+  var v4:int;
+  var v5:int;
+  var v6:int;
+  var v7:int;
+  var v8:int;
+  var v9:int;
+  var v10:int;
+  var v11:int;
+  var v12:int;
+  var v13:int;
+  var v14:int;
+  var v15:int;
+  var v16:int;
+  var v17:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  v0 := BV32_ADD(BV32_MUL(group_size_x, group_id_x), local_id_x);
+  v1 := BV32_SGE(v0, $dataSize);
+  goto $truebb, $falsebb;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  goto $3;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  v2 := $$d_Src[BV32_MUL(v0, 2)];
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  $$a[0] := v2;
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  v3 := $$d_Src[BV32_ADD(BV32_MUL(v0, 2), 1)];
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  $$a[1] := v3;
+  assert {:sourceloc} {:sourceloc_num 7} true;
+  v4 := $$d_Dst[BV32_MUL(v0, 2)];
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  $$b[0] := v4;
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  v5 := $$d_Dst[BV32_ADD(BV32_MUL(v0, 2), 1)];
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  $$b[1] := v5;
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  v6 := $$a[0];
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  v7 := $$b[0];
+  assert {:sourceloc} {:sourceloc_num 13} true;
+  v8 := $$a[1];
+  assert {:sourceloc} {:sourceloc_num 14} true;
+  v9 := $$b[1];
+  assert {:sourceloc} {:sourceloc_num 15} true;
+  $$t.i[0] := FMUL32($c, FSUB32(FMUL32(v6, v7), FMUL32(v8, v9)));
+  assert {:sourceloc} {:sourceloc_num 16} true;
+  v10 := $$a[1];
+  assert {:sourceloc} {:sourceloc_num 17} true;
+  v11 := $$b[0];
+  assert {:sourceloc} {:sourceloc_num 18} true;
+  v12 := $$a[0];
+  assert {:sourceloc} {:sourceloc_num 19} true;
+  v13 := $$b[1];
+  assert {:sourceloc} {:sourceloc_num 20} true;
+  $$t.i[1] := FMUL32($c, FADD32(FMUL32(v10, v11), FMUL32(v12, v13)));
+  assert {:sourceloc} {:sourceloc_num 21} true;
+  v14 := $$t.i[0];
+  assert {:sourceloc} {:sourceloc_num 22} true;
+  $$a[0] := v14;
+  assert {:sourceloc} {:sourceloc_num 23} true;
+  v15 := $$t.i[1];
+  assert {:sourceloc} {:sourceloc_num 24} true;
+  $$a[1] := v15;
+  assert {:sourceloc} {:sourceloc_num 25} true;
+  v16 := $$a[0];
+  assert {:sourceloc} {:sourceloc_num 26} true;
+  $$d_Dst[BV32_MUL(v0, 2)] := v16;
+  assert {:sourceloc} {:sourceloc_num 27} true;
+  v17 := $$a[1];
+  assert {:sourceloc} {:sourceloc_num 28} true;
+  $$d_Dst[BV32_ADD(BV32_MUL(v0, 2), 1)] := v17;
+  goto $3;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 29} true;
+  return;
+$truebb:
+  assume {:partition} v1;
+  assert {:block_sourceloc} {:sourceloc_num 30} true;
+  goto $1;
+$falsebb:
+  assume {:partition} !v1;
+  assert {:block_sourceloc} {:sourceloc_num 31} true;
+  goto $2;
+}
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 256 then 1 else 0) != 0;
+axiom (if num_groups_x == 8320 then 1 else 0) != 0;

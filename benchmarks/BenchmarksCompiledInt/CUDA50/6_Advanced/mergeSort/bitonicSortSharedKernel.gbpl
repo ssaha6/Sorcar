@@ -1,0 +1,314 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "d_DstKey"} {:global} $$d_DstKey : [int]int;
+axiom {:array_info "$$d_DstKey"} {:global} {:elem_width 32} {:source_name "d_DstKey"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_DstKey : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_DstKey : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_DstKey : bool;
+
+var {:source_name "d_DstVal"} {:global} $$d_DstVal : [int]int;
+axiom {:array_info "$$d_DstVal"} {:global} {:elem_width 32} {:source_name "d_DstVal"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_DstVal : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_DstVal : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_DstVal : bool;
+
+var {:source_name "d_SrcKey"} {:global} $$d_SrcKey : [int]int;
+axiom {:array_info "$$d_SrcKey"} {:global} {:elem_width 32} {:source_name "d_SrcKey"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_SrcKey : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_SrcKey : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_SrcKey : bool;
+
+var {:source_name "d_SrcVal"} {:global} $$d_SrcVal : [int]int;
+axiom {:array_info "$$d_SrcVal"} {:global} {:elem_width 32} {:source_name "d_SrcVal"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_SrcVal : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_SrcVal : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_SrcVal : bool;
+
+var {:source_name "s_key"} {:group_shared} $$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_key : [int]int;
+axiom {:array_info "$$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_key"} {:group_shared} {:elem_width 32} {:source_name "s_key"} {:source_elem_width 32} {:source_dimensions "1024"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_key : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_key : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_key : bool;
+
+var {:source_name "s_val"} {:group_shared} $$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_val : [int]int;
+axiom {:array_info "$$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_val"} {:group_shared} {:elem_width 32} {:source_name "s_val"} {:source_elem_width 32} {:source_dimensions "1024"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_val : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_val : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_val : bool;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function  BV32_LSHR(int, int) : int;
+function {:inline true} BV1_ZEXT32(x : int) : int {
+  x
+}
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_AND(x : int, y : int) : int {
+  if x == y then x else (if x == 0 || y == 0 then 0 else BV32_AND_UF(x, y))
+}
+function BV32_AND_UF(int, int) : int;
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SHL(x : int, y : int) : int {
+  if x >= 0 && y == 1 then x*2 else BV32_SHL_UF(x,y)
+}
+function BV32_SHL_UF(int, int) : int;
+function {:inline true} BV32_SUB(x : int, y : int) : int {
+  x - y
+}
+function {:inline true} BV32_UDIV(x : int, y : int) : int {
+  x div y
+}
+function {:inline true} BV32_UGT(x : int, y : int) : bool {
+  x > y
+}
+function {:inline true} BV32_ULT(x : int, y : int) : bool {
+  x < y
+}
+procedure {:source_name "bitonicSortSharedKernel"} {:kernel} $_Z23bitonicSortSharedKernelPjS_S_S_jj($arrayLength:int, $sortDir:int)
+requires {:sourceloc_num 0} (if BV32_AND($arrayLength, BV1_ZEXT32((if BV32_SUB($arrayLength, 1) == 0 then 1 else 0))) != 0 then 1 else 0) != 0;
+{
+  var $size.0:int;
+  var $stride.0:int;
+  var $stride1.0:int;
+  var v0:int;
+  var v1:int;
+  var v2:int;
+  var v3:int;
+  var v4:int;
+  var v5:int;
+  var v6:int;
+  var v7:int;
+  var v8:bool;
+  var v9:bool;
+  var v10:int;
+  var v11:int;
+  var v15:bool;
+  var v12:int;
+  var v13:int;
+  var v14:int;
+  var v16:int;
+  var v17:int;
+  var v18:int;
+  var v19:int;
+  var v20:bool;
+  var v21:int;
+  var v22:int;
+  var v26:bool;
+  var v23:int;
+  var v24:int;
+  var v25:int;
+  var v27:int;
+  var v28:int;
+  var v29:int;
+  var v30:int;
+  var v31:int;
+  var v32:int;
+  var v33:int;
+  var v34:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  v0 := BV32_ADD(BV32_MUL(group_id_x, 1024), local_id_x);
+  v1 := BV32_ADD(BV32_MUL(group_id_x, 1024), local_id_x);
+  v2 := BV32_ADD(BV32_MUL(group_id_x, 1024), local_id_x);
+  v3 := BV32_ADD(BV32_MUL(group_id_x, 1024), local_id_x);
+  assert {:sourceloc} {:sourceloc_num 2} true;
+  v4 := $$d_SrcKey[v0];
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  $$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_key[local_id_x] := v4;
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  v5 := $$d_SrcVal[v1];
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  $$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_val[local_id_x] := v5;
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  v6 := $$d_SrcKey[BV32_ADD(v0, 512)];
+  assert {:sourceloc} {:sourceloc_num 7} true;
+  $$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_key[BV32_ADD(local_id_x, 512)] := v6;
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  v7 := $$d_SrcVal[BV32_ADD(v1, 512)];
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  $$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_val[BV32_ADD(local_id_x, 512)] := v7;
+  $size.0 := 2;
+  goto $1;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 10} true;
+  v8 := BV32_ULT($size.0, $arrayLength);
+  goto $truebb, $falsebb;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 11} true;
+  $stride.0 := BV32_UDIV($size.0, 2);
+  goto $3;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 12} true;
+  v9 := BV32_UGT($stride.0, 0);
+  goto $truebb0, $falsebb0;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 13} true;
+  call {:sourceloc_num 14} $bugle_barrier(-1, -1);
+  v10 := BV32_SUB(BV32_MUL(2, local_id_x), BV32_AND(local_id_x, BV32_SUB($stride.0, 1)));
+  v11 := BV32_ADD(v10, $stride.0);
+  v12 := BV32_ADD(v10, $stride.0);
+  assert {:sourceloc} {:sourceloc_num 15} true;
+  v13 := $$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_key[v10];
+  assert {:sourceloc} {:sourceloc_num 16} true;
+  v14 := $$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_key[v11];
+  v15 := BV1_ZEXT32((if BV32_UGT(v13, v14) then 1 else 0)) == BV1_ZEXT32((if BV32_AND(local_id_x, BV32_UDIV($size.0, 2)) != 0 then 1 else 0));
+  goto $truebb1, $falsebb1;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 17} true;
+  assert {:sourceloc} {:sourceloc_num 18} true;
+  v16 := $$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_key[v10];
+  assert {:sourceloc} {:sourceloc_num 19} true;
+  v17 := $$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_key[v11];
+  assert {:sourceloc} {:sourceloc_num 20} true;
+  $$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_key[v10] := v17;
+  assert {:sourceloc} {:sourceloc_num 21} true;
+  $$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_key[v11] := v16;
+  assert {:sourceloc} {:sourceloc_num 22} true;
+  v18 := $$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_val[v10];
+  assert {:sourceloc} {:sourceloc_num 23} true;
+  v19 := $$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_val[v12];
+  assert {:sourceloc} {:sourceloc_num 24} true;
+  $$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_val[v10] := v19;
+  assert {:sourceloc} {:sourceloc_num 25} true;
+  $$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_val[v12] := v18;
+  goto $_ZL10ComparatorRjS_S_S_j.exit;
+$_ZL10ComparatorRjS_S_S_j.exit:
+  assert {:block_sourceloc} {:sourceloc_num 26} true;
+  goto $6;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 27} true;
+  $stride.0 := BV32_LSHR($stride.0, 1);
+  goto $3;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 28} true;
+  goto $8;
+$8:
+  assert {:block_sourceloc} {:sourceloc_num 29} true;
+  $size.0 := BV32_SHL($size.0, 1);
+  goto $1;
+$9:
+  assert {:block_sourceloc} {:sourceloc_num 30} true;
+  $stride1.0 := BV32_UDIV($arrayLength, 2);
+  goto $10;
+$10:
+  assert {:block_sourceloc} {:sourceloc_num 31} true;
+  v20 := BV32_UGT($stride1.0, 0);
+  goto $truebb2, $falsebb2;
+$11:
+  assert {:block_sourceloc} {:sourceloc_num 32} true;
+  call {:sourceloc_num 33} $bugle_barrier(-1, -1);
+  v21 := BV32_SUB(BV32_MUL(2, local_id_x), BV32_AND(local_id_x, BV32_SUB($stride1.0, 1)));
+  v22 := BV32_ADD(v21, $stride1.0);
+  v23 := BV32_ADD(v21, $stride1.0);
+  assert {:sourceloc} {:sourceloc_num 34} true;
+  v24 := $$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_key[v21];
+  assert {:sourceloc} {:sourceloc_num 35} true;
+  v25 := $$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_key[v22];
+  v26 := BV1_ZEXT32((if BV32_UGT(v24, v25) then 1 else 0)) == $sortDir;
+  goto $truebb3, $falsebb3;
+$12:
+  assert {:block_sourceloc} {:sourceloc_num 36} true;
+  assert {:sourceloc} {:sourceloc_num 37} true;
+  v27 := $$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_key[v21];
+  assert {:sourceloc} {:sourceloc_num 38} true;
+  v28 := $$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_key[v22];
+  assert {:sourceloc} {:sourceloc_num 39} true;
+  $$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_key[v21] := v28;
+  assert {:sourceloc} {:sourceloc_num 40} true;
+  $$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_key[v22] := v27;
+  assert {:sourceloc} {:sourceloc_num 41} true;
+  v29 := $$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_val[v21];
+  assert {:sourceloc} {:sourceloc_num 42} true;
+  v30 := $$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_val[v23];
+  assert {:sourceloc} {:sourceloc_num 43} true;
+  $$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_val[v21] := v30;
+  assert {:sourceloc} {:sourceloc_num 44} true;
+  $$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_val[v23] := v29;
+  goto $_ZL10ComparatorRjS_S_S_j.exit4;
+$_ZL10ComparatorRjS_S_S_j.exit4:
+  assert {:block_sourceloc} {:sourceloc_num 45} true;
+  goto $13;
+$13:
+  assert {:block_sourceloc} {:sourceloc_num 46} true;
+  $stride1.0 := BV32_LSHR($stride1.0, 1);
+  goto $10;
+$14:
+  assert {:block_sourceloc} {:sourceloc_num 47} true;
+  call {:sourceloc_num 48} $bugle_barrier(-1, -1);
+  assert {:sourceloc} {:sourceloc_num 49} true;
+  v31 := $$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_key[local_id_x];
+  assert {:sourceloc} {:sourceloc_num 50} true;
+  $$d_DstKey[v2] := v31;
+  assert {:sourceloc} {:sourceloc_num 51} true;
+  v32 := $$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_val[local_id_x];
+  assert {:sourceloc} {:sourceloc_num 52} true;
+  $$d_DstVal[v3] := v32;
+  assert {:sourceloc} {:sourceloc_num 53} true;
+  v33 := $$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_key[BV32_ADD(local_id_x, 512)];
+  assert {:sourceloc} {:sourceloc_num 54} true;
+  $$d_DstKey[BV32_ADD(v2, 512)] := v33;
+  assert {:sourceloc} {:sourceloc_num 55} true;
+  v34 := $$_ZZ23bitonicSortSharedKernelPjS_S_S_jjE5s_val[BV32_ADD(local_id_x, 512)];
+  assert {:sourceloc} {:sourceloc_num 56} true;
+  $$d_DstVal[BV32_ADD(v3, 512)] := v34;
+  return;
+$truebb:
+  assume {:partition} v8;
+  assert {:block_sourceloc} {:sourceloc_num 57} true;
+  goto $2;
+$falsebb:
+  assume {:partition} !v8;
+  assert {:block_sourceloc} {:sourceloc_num 58} true;
+  goto $9;
+$truebb0:
+  assume {:partition} v9;
+  assert {:block_sourceloc} {:sourceloc_num 59} true;
+  goto $4;
+$falsebb0:
+  assume {:partition} !v9;
+  assert {:block_sourceloc} {:sourceloc_num 60} true;
+  goto $7;
+$truebb1:
+  assume {:partition} v15;
+  assert {:block_sourceloc} {:sourceloc_num 61} true;
+  goto $5;
+$falsebb1:
+  assume {:partition} !v15;
+  assert {:block_sourceloc} {:sourceloc_num 62} true;
+  goto $_ZL10ComparatorRjS_S_S_j.exit;
+$truebb2:
+  assume {:partition} v20;
+  assert {:block_sourceloc} {:sourceloc_num 63} true;
+  goto $11;
+$falsebb2:
+  assume {:partition} !v20;
+  assert {:block_sourceloc} {:sourceloc_num 64} true;
+  goto $14;
+$truebb3:
+  assume {:partition} v26;
+  assert {:block_sourceloc} {:sourceloc_num 65} true;
+  goto $12;
+$falsebb3:
+  assume {:partition} !v26;
+  assert {:block_sourceloc} {:sourceloc_num 66} true;
+  goto $_ZL10ComparatorRjS_S_S_j.exit4;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:int, $1:int);
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 512 then 1 else 0) != 0;
+axiom (if num_groups_x == 8 then 1 else 0) != 0;

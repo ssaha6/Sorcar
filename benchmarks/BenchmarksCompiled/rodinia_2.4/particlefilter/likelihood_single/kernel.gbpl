@@ -1,0 +1,499 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [bv32]bv32, y : bv32) returns (z : bv32, A : [bv32]bv32);
+procedure _ATOMIC_OP8(x : [bv32]bv8, y : bv32) returns (z : bv8, A : [bv32]bv8);
+var {:source_name "arrayX"} {:global} $$arrayX : [bv32]bv32;
+axiom {:array_info "$$arrayX"} {:global} {:elem_width 32} {:source_name "arrayX"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$arrayX : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$arrayX : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$arrayX : bool;
+
+var {:source_name "arrayY"} {:global} $$arrayY : [bv32]bv32;
+axiom {:array_info "$$arrayY"} {:global} {:elem_width 32} {:source_name "arrayY"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$arrayY : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$arrayY : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$arrayY : bool;
+
+var {:source_name "xj"} {:global} $$xj : [bv32]bv32;
+axiom {:array_info "$$xj"} {:global} {:elem_width 32} {:source_name "xj"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$xj : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$xj : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$xj : bool;
+
+var {:source_name "yj"} {:global} $$yj : [bv32]bv32;
+axiom {:array_info "$$yj"} {:global} {:elem_width 32} {:source_name "yj"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$yj : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$yj : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$yj : bool;
+
+var {:source_name "CDF"} {:global} $$CDF : [bv32]bv32;
+axiom {:array_info "$$CDF"} {:global} {:elem_width 32} {:source_name "CDF"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$CDF : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$CDF : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$CDF : bool;
+
+var {:source_name "ind"} {:global} $$ind : [bv32]bv32;
+axiom {:array_info "$$ind"} {:global} {:elem_width 32} {:source_name "ind"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$ind : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$ind : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$ind : bool;
+
+var {:source_name "objxy"} {:global} $$objxy : [bv32]bv32;
+axiom {:array_info "$$objxy"} {:global} {:elem_width 32} {:source_name "objxy"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$objxy : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$objxy : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$objxy : bool;
+
+var {:source_name "likelihood"} {:global} $$likelihood : [bv32]bv32;
+axiom {:array_info "$$likelihood"} {:global} {:elem_width 32} {:source_name "likelihood"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$likelihood : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$likelihood : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$likelihood : bool;
+
+var {:source_name "I"} {:global} $$I : [bv32]bv8;
+axiom {:array_info "$$I"} {:global} {:elem_width 8} {:source_name "I"} {:source_elem_width 8} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 8} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$I : bool;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 8} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$I : bool;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 8} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$I : bool;
+
+var {:source_name "u"} {:global} $$u : [bv32]bv32;
+axiom {:array_info "$$u"} {:global} {:elem_width 32} {:source_name "u"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$u : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$u : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$u : bool;
+
+var {:source_name "weights"} {:global} $$weights : [bv32]bv32;
+axiom {:array_info "$$weights"} {:global} {:elem_width 32} {:source_name "weights"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$weights : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$weights : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$weights : bool;
+
+var {:source_name "seed"} {:global} $$seed : [bv32]bv32;
+axiom {:array_info "$$seed"} {:global} {:elem_width 32} {:source_name "seed"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$seed : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$seed : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$seed : bool;
+
+var {:source_name "partial_sums"} {:global} $$partial_sums : [bv32]bv32;
+axiom {:array_info "$$partial_sums"} {:global} {:elem_width 32} {:source_name "partial_sums"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$partial_sums : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$partial_sums : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$partial_sums : bool;
+
+var {:source_name "buffer"} {:group_shared} $$buffer : [bv32]bv32;
+axiom {:array_info "$$buffer"} {:group_shared} {:elem_width 32} {:source_name "buffer"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$buffer : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$buffer : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$buffer : bool;
+
+const _WATCHED_OFFSET : bv32;
+const {:global_offset_x} global_offset_x : bv32;
+const {:global_offset_y} global_offset_y : bv32;
+const {:global_offset_z} global_offset_z : bv32;
+const {:group_id_x} group_id_x : bv32;
+const {:group_size_x} group_size_x : bv32;
+const {:group_size_y} group_size_y : bv32;
+const {:group_size_z} group_size_z : bv32;
+const {:local_id_x} local_id_x : bv32;
+const {:num_groups_x} num_groups_x : bv32;
+const {:num_groups_y} num_groups_y : bv32;
+const {:num_groups_z} num_groups_z : bv32;
+function FABS32(bv32) : bv32;
+function FADD32(bv32, bv32) : bv32;
+function FADD64(bv64, bv64) : bv64;
+function FCOS32(bv32) : bv32;
+function FDIV32(bv32, bv32) : bv32;
+function FDIV64(bv64, bv64) : bv64;
+function FEXP32(bv32) : bv32;
+function FLOG32(bv32) : bv32;
+function FLT32(bv32, bv32) : bool;
+function FMUL32(bv32, bv32) : bv32;
+function FMUL64(bv64, bv64) : bv64;
+function FP32_CONV64(bv32) : bv64;
+function FP32_TO_SI32(bv32) : bv32;
+function FP64_CONV32(bv64) : bv32;
+function FPOW32(bv32, bv32) : bv32;
+function FSQRT32(bv32) : bv32;
+function FSUB32(bv32, bv32) : bv32;
+function FSUB64(bv64, bv64) : bv64;
+function SI32_TO_FP32(bv32) : bv32;
+function {:bvbuiltin "bvadd"} BV32_ADD(bv32, bv32) : bv32;
+function {:bvbuiltin "bvlshr"} BV32_LSHR(bv32, bv32) : bv32;
+function {:bvbuiltin "bvmul"} BV32_MUL(bv32, bv32) : bv32;
+function {:bvbuiltin "bvsge"} BV32_SGE(bv32, bv32) : bool;
+function {:bvbuiltin "bvsgt"} BV32_SGT(bv32, bv32) : bool;
+function {:bvbuiltin "bvslt"} BV32_SLT(bv32, bv32) : bool;
+function {:bvbuiltin "bvsrem"} BV32_SREM(bv32, bv32) : bv32;
+function {:bvbuiltin "bvsub"} BV32_SUB(bv32, bv32) : bv32;
+function {:bvbuiltin "bvudiv"} BV32_UDIV(bv32, bv32) : bv32;
+function {:bvbuiltin "bvugt"} BV32_UGT(bv32, bv32) : bool;
+function {:bvbuiltin "bvult"} BV32_ULT(bv32, bv32) : bool;
+function {:bvbuiltin "zero_extend 24"} BV8_ZEXT32(bv8) : bv32;
+procedure {:source_name "likelihood_kernel"} {:kernel} $likelihood_kernel($Nparticles:bv32, $countOnes:bv32, $max_size:bv32, $k:bv32, $IszY:bv32, $Nfr:bv32)
+requires {:sourceloc_num 0} (if $Nparticles == 400000bv32 then 1bv1 else 0bv1) != 0bv1;
+requires {:sourceloc_num 1} (if $countOnes == 69bv32 then 1bv1 else 0bv1) != 0bv1;
+{
+  var $y.0:bv32;
+  var $retval.i.0:bv32;
+  var $retval.i.173.0:bv32;
+  var $likelihoodSum.i.0:bv32;
+  var $x.i.0:bv32;
+  var $s.0:bv32;
+  var v0:bv32;
+  var v1:bv32;
+  var v2:bv32;
+  var v3:bool;
+  var v36:bv32;
+  var v27:bv32;
+  var v31:bv8;
+  var v32:bv32;
+  var v33:bv8;
+  var v30:bv32;
+  var v35:bv32;
+  var v34:bv32;
+  var v4:bv32;
+  var v12:bv32;
+  var v5:bv32;
+  var v7:bv32;
+  var v8:bv32;
+  var v10:bv32;
+  var v9:bv32;
+  var v6:bv32;
+  var v11:bv32;
+  var v15:bv32;
+  var v14:bv32;
+  var v13:bv32;
+  var v18:bv32;
+  var v21:bv32;
+  var v25:bv32;
+  var v22:bv32;
+  var v16:bool;
+  var v23:bv32;
+  var v24:bool;
+  var v26:bv32;
+  var v28:bool;
+  var v19:bv32;
+  var v20:bool;
+  var v17:bool;
+  var v43:bool;
+  var v39:bool;
+  var v40:bool;
+  var v29:bool;
+  var v37:bool;
+  var v44:bv32;
+  var v41:bv32;
+  var v38:bv32;
+  var v42:bv32;
+$entry:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  v0 := group_id_x;
+  v1 := local_id_x;
+  v2 := BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x);
+  v3 := BV32_SLT(v2, $Nparticles);
+  goto $truebb, $falsebb;
+$if.then:
+  assert {:block_sourceloc} {:sourceloc_num 3} true;
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  v4 := $$xj[v2];
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  $$arrayX[v2] := v4;
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  v5 := $$yj[v2];
+  assert {:sourceloc} {:sourceloc_num 7} true;
+  $$arrayY[v2] := v5;
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  $$weights[v2] := FDIV32(1065353216bv32, SI32_TO_FP32($Nparticles));
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  v6 := $$arrayX[v2];
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  v7 := $$seed[v2];
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  $$seed[v2] := BV32_SREM(BV32_ADD(BV32_MUL(1103515245bv32, v7), 12345bv32), 2147483647bv32);
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  v8 := $$seed[v2];
+  assert {:sourceloc} {:sourceloc_num 13} true;
+  v9 := $$seed[v2];
+  assert {:sourceloc} {:sourceloc_num 14} true;
+  $$seed[v2] := BV32_SREM(BV32_ADD(BV32_MUL(1103515245bv32, v9), 12345bv32), 2147483647bv32);
+  assert {:sourceloc} {:sourceloc_num 15} true;
+  v10 := $$seed[v2];
+  assert {:sourceloc} {:sourceloc_num 16} true;
+  $$arrayX[v2] := FP64_CONV32(FADD64(FADD64(FP32_CONV64(v6), 4607182418800017408bv64), FMUL64(4617315517961601024bv64, FP32_CONV64(FMUL32(FSQRT32(FMUL32(3221225472bv32, FLOG32(FABS32(FDIV32(SI32_TO_FP32(v8), SI32_TO_FP32(2147483647bv32)))))), FCOS32(FMUL32(FMUL32(1073741824bv32, 1078530011bv32), FABS32(FDIV32(SI32_TO_FP32(v10), SI32_TO_FP32(2147483647bv32))))))))));
+  assert {:sourceloc} {:sourceloc_num 17} true;
+  v11 := $$arrayY[v2];
+  assert {:sourceloc} {:sourceloc_num 18} true;
+  v12 := $$seed[v2];
+  assert {:sourceloc} {:sourceloc_num 19} true;
+  $$seed[v2] := BV32_SREM(BV32_ADD(BV32_MUL(1103515245bv32, v12), 12345bv32), 2147483647bv32);
+  assert {:sourceloc} {:sourceloc_num 20} true;
+  v13 := $$seed[v2];
+  assert {:sourceloc} {:sourceloc_num 21} true;
+  v14 := $$seed[v2];
+  assert {:sourceloc} {:sourceloc_num 22} true;
+  $$seed[v2] := BV32_SREM(BV32_ADD(BV32_MUL(1103515245bv32, v14), 12345bv32), 2147483647bv32);
+  assert {:sourceloc} {:sourceloc_num 23} true;
+  v15 := $$seed[v2];
+  assert {:sourceloc} {:sourceloc_num 24} true;
+  $$arrayY[v2] := FP64_CONV32(FADD64(FSUB64(FP32_CONV64(v11), 4611686018427387904bv64), FMUL64(4611686018427387904bv64, FP32_CONV64(FMUL32(FSQRT32(FMUL32(3221225472bv32, FLOG32(FABS32(FDIV32(SI32_TO_FP32(v13), SI32_TO_FP32(2147483647bv32)))))), FCOS32(FMUL32(FMUL32(1073741824bv32, 1078530011bv32), FABS32(FDIV32(SI32_TO_FP32(v15), SI32_TO_FP32(2147483647bv32))))))))));
+  goto $if.end;
+$if.end:
+  assert {:block_sourceloc} {:sourceloc_num 25} true;
+  call {:sourceloc_num 26} $bugle_barrier(0bv1, 1bv1);
+  v16 := BV32_SLT(v2, $Nparticles);
+  goto $truebb0, $falsebb0;
+$if.then.27:
+  assert {:block_sourceloc} {:sourceloc_num 27} true;
+  $y.0 := 0bv32;
+  goto $for.cond;
+$for.cond:
+  assert {:block_sourceloc} {:sourceloc_num 28} true;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 29} (if (_WRITE_HAS_OCCURRED_$$ind ==> BV32_ULT(BV32_SUB(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), BV32_MUL(v2, $countOnes)), $countOnes)) then 1bv1 else 0bv1) != 0bv1;
+  v17 := BV32_SLT($y.0, $countOnes);
+  goto $truebb1, $falsebb1;
+$for.body:
+  assert {:block_sourceloc} {:sourceloc_num 30} true;
+  assert {:sourceloc} {:sourceloc_num 31} true;
+  v18 := $$arrayX[v2];
+  v19 := FP32_TO_SI32(v18);
+  v20 := FLT32(FSUB32(v18, SI32_TO_FP32(v19)), 1056964608bv32);
+  goto $truebb2, $falsebb2;
+$if.then.i:
+  assert {:block_sourceloc} {:sourceloc_num 32} true;
+  $retval.i.0 := SI32_TO_FP32(v19);
+  goto $dev_round_float.exit;
+$if.else.i:
+  assert {:block_sourceloc} {:sourceloc_num 33} true;
+  $retval.i.0 := SI32_TO_FP32(v19);
+  goto $dev_round_float.exit;
+$dev_round_float.exit:
+  assert {:block_sourceloc} {:sourceloc_num 34} true;
+  assert {:sourceloc} {:sourceloc_num 35} true;
+  v21 := $$objxy[BV32_ADD(BV32_MUL($y.0, 2bv32), 1bv32)];
+  assert {:sourceloc} {:sourceloc_num 36} true;
+  v22 := $$arrayY[v2];
+  v23 := FP32_TO_SI32(v22);
+  v24 := FLT32(FSUB32(v22, SI32_TO_FP32(v23)), 1056964608bv32);
+  goto $truebb3, $falsebb3;
+$if.then.i.181:
+  assert {:block_sourceloc} {:sourceloc_num 37} true;
+  $retval.i.173.0 := SI32_TO_FP32(v23);
+  goto $dev_round_float.exit185;
+$if.else.i.184:
+  assert {:block_sourceloc} {:sourceloc_num 38} true;
+  $retval.i.173.0 := SI32_TO_FP32(v23);
+  goto $dev_round_float.exit185;
+$dev_round_float.exit185:
+  assert {:block_sourceloc} {:sourceloc_num 39} true;
+  assert {:sourceloc} {:sourceloc_num 40} true;
+  v25 := $$objxy[BV32_MUL($y.0, 2bv32)];
+  v26 := BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(FP32_TO_SI32(FADD32($retval.i.0, SI32_TO_FP32(v21))), $IszY), $Nfr), BV32_MUL(FP32_TO_SI32(FADD32($retval.i.173.0, SI32_TO_FP32(v25))), $Nfr)), $k);
+  assert {:sourceloc} {:sourceloc_num 41} true;
+  $$ind[BV32_ADD(BV32_MUL(v2, $countOnes), $y.0)] := (if BV32_SGT(v26, 0bv32) then v26 else BV32_SUB(0bv32, v26));
+  assert {:sourceloc} {:sourceloc_num 42} true;
+  v27 := $$ind[BV32_ADD(BV32_MUL(v2, $countOnes), $y.0)];
+  v28 := BV32_SGE(v27, $max_size);
+  goto $truebb4, $falsebb4;
+$if.then.67:
+  assert {:block_sourceloc} {:sourceloc_num 43} true;
+  assert {:sourceloc} {:sourceloc_num 44} true;
+  $$ind[BV32_ADD(BV32_MUL(v2, $countOnes), $y.0)] := 0bv32;
+  goto $if.end.71;
+$if.end.71:
+  assert {:block_sourceloc} {:sourceloc_num 45} true;
+  goto $for.inc;
+$for.inc:
+  assert {:block_sourceloc} {:sourceloc_num 46} true;
+  $y.0 := BV32_ADD($y.0, 1bv32);
+  goto $for.cond;
+$for.end:
+  assert {:block_sourceloc} {:sourceloc_num 47} true;
+  $likelihoodSum.i.0, $x.i.0 := 0bv32, 0bv32;
+  goto $for.cond.i;
+$for.cond.i:
+  assert {:block_sourceloc} {:sourceloc_num 48} true;
+  v29 := BV32_SLT($x.i.0, $countOnes);
+  goto $truebb5, $falsebb5;
+$for.body.i:
+  assert {:block_sourceloc} {:sourceloc_num 49} true;
+  assert {:sourceloc} {:sourceloc_num 50} true;
+  v30 := $$ind[BV32_ADD(BV32_MUL(v2, $countOnes), $x.i.0)];
+  assert {:sourceloc} {:sourceloc_num 51} true;
+  v31 := $$I[v30];
+  assert {:sourceloc} {:sourceloc_num 52} true;
+  v32 := $$ind[BV32_ADD(BV32_MUL(v2, $countOnes), $x.i.0)];
+  assert {:sourceloc} {:sourceloc_num 53} true;
+  v33 := $$I[v32];
+  $likelihoodSum.i.0, $x.i.0 := FP64_CONV32(FADD64(FP32_CONV64($likelihoodSum.i.0), FDIV64(FP32_CONV64(FSUB32(FPOW32(SI32_TO_FP32(BV32_SUB(BV8_ZEXT32(v31), 100bv32)), 1073741824bv32), FPOW32(SI32_TO_FP32(BV32_SUB(BV8_ZEXT32(v33), 228bv32)), 1073741824bv32))), 4632233691727265792bv64))), BV32_ADD($x.i.0, 1bv32);
+  goto $for.cond.i;
+$calcLikelihoodSum.exit:
+  assert {:block_sourceloc} {:sourceloc_num 54} true;
+  assert {:sourceloc} {:sourceloc_num 55} true;
+  $$likelihood[v2] := $likelihoodSum.i.0;
+  assert {:sourceloc} {:sourceloc_num 56} true;
+  v34 := $$likelihood[v2];
+  assert {:sourceloc} {:sourceloc_num 57} true;
+  $$likelihood[v2] := FSUB32(FDIV32(v34, SI32_TO_FP32($countOnes)), 1133903872bv32);
+  assert {:sourceloc} {:sourceloc_num 58} true;
+  v35 := $$weights[v2];
+  assert {:sourceloc} {:sourceloc_num 59} true;
+  v36 := $$likelihood[v2];
+  assert {:sourceloc} {:sourceloc_num 60} true;
+  $$weights[v2] := FMUL32(v35, FEXP32(FMUL32(v36, 1069066811bv32)));
+  goto $if.end.84;
+$if.end.84:
+  assert {:block_sourceloc} {:sourceloc_num 61} true;
+  assert {:sourceloc} {:sourceloc_num 62} true;
+  $$buffer[v1] := 0bv32;
+  call {:sourceloc_num 63} $bugle_barrier(1bv1, 1bv1);
+  v37 := BV32_SLT(v2, $Nparticles);
+  goto $truebb6, $falsebb6;
+$if.then.88:
+  assert {:block_sourceloc} {:sourceloc_num 64} true;
+  assert {:sourceloc} {:sourceloc_num 65} true;
+  v38 := $$weights[v2];
+  assert {:sourceloc} {:sourceloc_num 66} true;
+  $$buffer[v1] := v38;
+  goto $if.end.91;
+$if.end.91:
+  assert {:block_sourceloc} {:sourceloc_num 67} true;
+  call {:sourceloc_num 68} $bugle_barrier(1bv1, 0bv1);
+  $s.0 := BV32_UDIV(group_size_x, 2bv32);
+  goto $for.cond.93;
+$for.cond.93:
+  assert {:block_sourceloc} {:sourceloc_num 69} true;
+  v39 := BV32_UGT($s.0, 0bv32);
+  goto $truebb7, $falsebb7;
+$for.body.96:
+  assert {:block_sourceloc} {:sourceloc_num 70} true;
+  v40 := BV32_ULT(v1, $s.0);
+  goto $truebb8, $falsebb8;
+$if.then.99:
+  assert {:block_sourceloc} {:sourceloc_num 71} true;
+  assert {:sourceloc} {:sourceloc_num 72} true;
+  v41 := $$buffer[BV32_ADD(v1, $s.0)];
+  assert {:sourceloc} {:sourceloc_num 73} true;
+  v42 := $$buffer[v1];
+  assert {:sourceloc} {:sourceloc_num 74} true;
+  $$buffer[v1] := FADD32(v42, v41);
+  goto $if.end.104;
+$if.end.104:
+  assert {:block_sourceloc} {:sourceloc_num 75} true;
+  call {:sourceloc_num 76} $bugle_barrier(1bv1, 0bv1);
+  goto $for.inc.105;
+$for.inc.105:
+  assert {:block_sourceloc} {:sourceloc_num 77} true;
+  $s.0 := BV32_LSHR($s.0, 1bv32);
+  goto $for.cond.93;
+$for.end.106:
+  assert {:block_sourceloc} {:sourceloc_num 78} true;
+  v43 := v1 == 0bv32;
+  goto $truebb9, $falsebb9;
+$if.then.109:
+  assert {:block_sourceloc} {:sourceloc_num 79} true;
+  assert {:sourceloc} {:sourceloc_num 80} true;
+  v44 := $$buffer[0bv32];
+  assert {:sourceloc} {:sourceloc_num 81} true;
+  $$partial_sums[v0] := v44;
+  goto $if.end.112;
+$if.end.112:
+  assert {:block_sourceloc} {:sourceloc_num 82} true;
+  return;
+$truebb:
+  assume {:partition} v3;
+  assert {:block_sourceloc} {:sourceloc_num 83} true;
+  goto $if.then;
+$falsebb:
+  assume {:partition} !v3;
+  assert {:block_sourceloc} {:sourceloc_num 84} true;
+  goto $if.end;
+$truebb0:
+  assume {:partition} v16;
+  assert {:block_sourceloc} {:sourceloc_num 85} true;
+  goto $if.then.27;
+$falsebb0:
+  assume {:partition} !v16;
+  assert {:block_sourceloc} {:sourceloc_num 86} true;
+  goto $if.end.84;
+$truebb1:
+  assume {:partition} v17;
+  assert {:block_sourceloc} {:sourceloc_num 87} true;
+  goto $for.body;
+$falsebb1:
+  assume {:partition} !v17;
+  assert {:block_sourceloc} {:sourceloc_num 88} true;
+  goto $for.end;
+$truebb2:
+  assume {:partition} v20;
+  assert {:block_sourceloc} {:sourceloc_num 89} true;
+  goto $if.then.i;
+$falsebb2:
+  assume {:partition} !v20;
+  assert {:block_sourceloc} {:sourceloc_num 90} true;
+  goto $if.else.i;
+$truebb3:
+  assume {:partition} v24;
+  assert {:block_sourceloc} {:sourceloc_num 91} true;
+  goto $if.then.i.181;
+$falsebb3:
+  assume {:partition} !v24;
+  assert {:block_sourceloc} {:sourceloc_num 92} true;
+  goto $if.else.i.184;
+$truebb4:
+  assume {:partition} v28;
+  assert {:block_sourceloc} {:sourceloc_num 93} true;
+  goto $if.then.67;
+$falsebb4:
+  assume {:partition} !v28;
+  assert {:block_sourceloc} {:sourceloc_num 94} true;
+  goto $if.end.71;
+$truebb5:
+  assume {:partition} v29;
+  assert {:block_sourceloc} {:sourceloc_num 95} true;
+  goto $for.body.i;
+$falsebb5:
+  assume {:partition} !v29;
+  assert {:block_sourceloc} {:sourceloc_num 96} true;
+  goto $calcLikelihoodSum.exit;
+$truebb6:
+  assume {:partition} v37;
+  assert {:block_sourceloc} {:sourceloc_num 97} true;
+  goto $if.then.88;
+$falsebb6:
+  assume {:partition} !v37;
+  assert {:block_sourceloc} {:sourceloc_num 98} true;
+  goto $if.end.91;
+$truebb7:
+  assume {:partition} v39;
+  assert {:block_sourceloc} {:sourceloc_num 99} true;
+  goto $for.body.96;
+$falsebb7:
+  assume {:partition} !v39;
+  assert {:block_sourceloc} {:sourceloc_num 100} true;
+  goto $for.end.106;
+$truebb8:
+  assume {:partition} v40;
+  assert {:block_sourceloc} {:sourceloc_num 101} true;
+  goto $if.then.99;
+$falsebb8:
+  assume {:partition} !v40;
+  assert {:block_sourceloc} {:sourceloc_num 102} true;
+  goto $if.end.104;
+$truebb9:
+  assume {:partition} v43;
+  assert {:block_sourceloc} {:sourceloc_num 103} true;
+  goto $if.then.109;
+$falsebb9:
+  assume {:partition} !v43;
+  assert {:block_sourceloc} {:sourceloc_num 104} true;
+  goto $if.end.112;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:bv1, $1:bv1);
+axiom (if group_size_y == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if group_size_z == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_y == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_z == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if group_size_x == 512bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_x == 782bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if global_offset_x == 0bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if global_offset_y == 0bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if global_offset_z == 0bv32 then 1bv1 else 0bv1) != 0bv1;

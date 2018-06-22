@@ -1,0 +1,145 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "theArray"} {:global} $$theArray : [int]int;
+axiom {:array_info "$$theArray"} {:global} {:elem_width 32} {:source_name "theArray"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$theArray : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$theArray : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$theArray : bool;
+
+const _WATCHED_OFFSET : int;
+const {:global_offset_x} global_offset_x : int;
+const {:global_offset_y} global_offset_y : int;
+const {:global_offset_z} global_offset_z : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_AND(x : int, y : int) : int {
+  if x == y then x else (if x == 0 || y == 0 then 0 else BV32_AND_UF(x, y))
+}
+function BV32_AND_UF(int, int) : int;
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SHL(x : int, y : int) : int {
+  if x >= 0 && y == 1 then x*2 else BV32_SHL_UF(x,y)
+}
+function BV32_SHL_UF(int, int) : int;
+function {:inline true} BV32_SUB(x : int, y : int) : int {
+  x - y
+}
+function {:inline true} BV32_UDIV(x : int, y : int) : int {
+  x div y
+}
+function {:inline true} BV32_UGT(x : int, y : int) : bool {
+  x > y
+}
+function {:inline true} BV32_UREM(x : int, y : int) : int {
+  x mod y
+}
+procedure {:source_name "bitonicSort"} {:kernel} $bitonicSort($stage:int, $passOfStage:int, $width:int, $direction:int)
+{
+  var $sortIncreasing.0:int;
+  var $greater.0:int;
+  var $lesser.0:int;
+  var v0:int;
+  var v1:int;
+  var v2:int;
+  var v3:int;
+  var v4:int;
+  var v5:int;
+  var v6:bool;
+  var v7:bool;
+  var v8:bool;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  v0 := BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x);
+  v1 := BV32_SHL(1, BV32_AND(BV32_SUB($stage, $passOfStage), 31));
+  v2 := BV32_ADD(BV32_UREM(v0, v1), BV32_MUL(BV32_UDIV(v0, v1), BV32_MUL(2, v1)));
+  v3 := BV32_ADD(v2, v1);
+  assert {:sourceloc} {:sourceloc_num 1} true;
+  v4 := $$theArray[v2];
+  assert {:sourceloc} {:sourceloc_num 2} true;
+  v5 := $$theArray[v3];
+  v6 := BV32_UREM(BV32_UDIV(v0, BV32_SHL(1, BV32_AND($stage, 31))), 2) == 1;
+  goto $truebb, $falsebb;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 3} true;
+  $sortIncreasing.0 := BV32_SUB(1, $direction);
+  goto $2;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 4} true;
+  v7 := BV32_UGT(v4, v5);
+  goto $truebb0, $falsebb0;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 5} true;
+  $greater.0, $lesser.0 := v4, v5;
+  goto $5;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 6} true;
+  $greater.0, $lesser.0 := v5, v4;
+  goto $5;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  v8 := $sortIncreasing.0 != 0;
+  goto $truebb1, $falsebb1;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 8} true;
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  $$theArray[v2] := $lesser.0;
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  $$theArray[v3] := $greater.0;
+  goto $8;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 11} true;
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  $$theArray[v2] := $greater.0;
+  assert {:sourceloc} {:sourceloc_num 13} true;
+  $$theArray[v3] := $lesser.0;
+  goto $8;
+$8:
+  assert {:block_sourceloc} {:sourceloc_num 14} true;
+  return;
+$truebb:
+  assume {:partition} v6;
+  assert {:block_sourceloc} {:sourceloc_num 15} true;
+  goto $1;
+$falsebb:
+  assume {:partition} !v6;
+  assert {:block_sourceloc} {:sourceloc_num 16} true;
+  $sortIncreasing.0 := $direction;
+  goto $2;
+$truebb0:
+  assume {:partition} v7;
+  assert {:block_sourceloc} {:sourceloc_num 17} true;
+  goto $3;
+$falsebb0:
+  assume {:partition} !v7;
+  assert {:block_sourceloc} {:sourceloc_num 18} true;
+  goto $4;
+$truebb1:
+  assume {:partition} v8;
+  assert {:block_sourceloc} {:sourceloc_num 19} true;
+  goto $6;
+$falsebb1:
+  assume {:partition} !v8;
+  assert {:block_sourceloc} {:sourceloc_num 20} true;
+  goto $7;
+}
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 512 then 1 else 0) != 0;
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_x == 16 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if global_offset_x == 0 then 1 else 0) != 0;
+axiom (if global_offset_y == 0 then 1 else 0) != 0;
+axiom (if global_offset_z == 0 then 1 else 0) != 0;

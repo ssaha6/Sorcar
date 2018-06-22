@@ -1,0 +1,149 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [bv32]bv32, y : bv32) returns (z : bv32, A : [bv32]bv32);
+procedure _ATOMIC_OP8(x : [bv32]bv8, y : bv32) returns (z : bv8, A : [bv32]bv8);
+var {:source_name "input"} {:global} $$input : [bv32]bv32;
+axiom {:array_info "$$input"} {:global} {:elem_width 32} {:source_name "input"} {:source_elem_width 64} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$input : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$input : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$input : bool;
+
+var {:source_name "sm_mappings"} {:global} $$sm_mappings : [bv32]bv8;
+axiom {:array_info "$$sm_mappings"} {:global} {:elem_width 8} {:source_name "sm_mappings"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$sm_mappings : bool;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$sm_mappings : bool;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$sm_mappings : bool;
+
+const _WATCHED_OFFSET : bv32;
+const {:global_offset_x} global_offset_x : bv32;
+const {:global_offset_y} global_offset_y : bv32;
+const {:global_offset_z} global_offset_z : bv32;
+const {:group_id_x} group_id_x : bv32;
+const {:group_size_x} group_size_x : bv32;
+const {:group_size_y} group_size_y : bv32;
+const {:group_size_z} group_size_z : bv32;
+const {:local_id_x} local_id_x : bv32;
+const {:num_groups_x} num_groups_x : bv32;
+const {:num_groups_y} num_groups_y : bv32;
+const {:num_groups_z} num_groups_z : bv32;
+function {:bvbuiltin "bvadd"} BV32_ADD(bv32, bv32) : bv32;
+function {:bvbuiltin "bvand"} BV32_AND(bv32, bv32) : bv32;
+function {:bvbuiltin "bvlshr"} BV32_LSHR(bv32, bv32) : bv32;
+function {:bvbuiltin "bvmul"} BV32_MUL(bv32, bv32) : bv32;
+function {:bvbuiltin "bvor"} BV32_OR(bv32, bv32) : bv32;
+function {:bvbuiltin "bvslt"} BV32_SLT(bv32, bv32) : bool;
+function {:bvbuiltin "bvsub"} BV32_SUB(bv32, bv32) : bv32;
+function {:bvbuiltin "bvudiv"} BV32_UDIV(bv32, bv32) : bv32;
+function {:bvbuiltin "bvult"} BV32_ULT(bv32, bv32) : bool;
+function {:bvbuiltin "bvurem"} BV32_UREM(bv32, bv32) : bv32;
+function {:bvbuiltin "bvxor"} BV1_XOR(bv1, bv1) : bv1;
+function {:bvbuiltin "zero_extend 24"} BV8_ZEXT32(bv8) : bv32;
+function {:bvbuiltin "zero_extend 31"} BV1_ZEXT32(bv1) : bv32;
+procedure {:source_name "histo_intermediates_kernel"} {:kernel} $histo_intermediates_kernel($height:bv32, $width:bv32, $input_pitch:bv32)
+requires {:sourceloc_num 0} (if $width == 996bv32 then 1bv1 else 0bv1) != 0bv1;
+{
+  var $0:bv1;
+  var $load_bin.0:bv32;
+  var $store.0:bv32;
+  var $i.0:bv32;
+  var v3:bool;
+  var v5:bv32;
+  var v6:bv32;
+  var v1:bv32;
+  var v0:bv32;
+  var v4:bool;
+  var v7:bool;
+  var v2:bv32;
+$entry:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  v0 := local_id_x;
+  v1 := group_size_x;
+  v2 := BV32_MUL(16bv32, group_id_x);
+  v3 := BV32_UREM($width, 2bv32) != 0bv32;
+  goto $truebb, $falsebb;
+$land.rhs:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  $0 := (if v0 == BV32_SUB(v1, 1bv32) then 1bv1 else 0bv1);
+  goto $land.end;
+$land.end:
+  assert {:block_sourceloc} {:sourceloc_num 3} true;
+  $load_bin.0, $store.0, $i.0 := BV32_ADD(BV32_MUL(BV32_MUL(v2, $input_pitch), 2bv32), BV32_MUL(v0, 2bv32)), BV32_ADD(BV32_MUL(v2, $width), v0), 0bv32;
+  goto $for.cond;
+$for.cond:
+  assert {:block_sourceloc} {:sourceloc_num 4} true;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 5} (if (_WRITE_HAS_OCCURRED_$$sm_mappings ==> BV32_OR(BV32_AND(BV1_ZEXT32((if BV32_UREM(BV32_SUB(BV32_UDIV(_WATCHED_OFFSET, 4bv32), BV32_ADD(BV32_MUL(v2, $width), v0)), $width) == 0bv32 then 1bv1 else 0bv1)), BV1_ZEXT32((if BV32_ULT(BV32_UDIV(BV32_SUB(BV32_UDIV(_WATCHED_OFFSET, 4bv32), BV32_ADD(BV32_MUL(v2, $width), v0)), $width), 16bv32) then 1bv1 else 0bv1))), BV1_ZEXT32((if (BV1_XOR($0, 1bv1) == 1bv1 ==> BV32_AND(BV1_ZEXT32((if BV32_UREM(BV32_SUB(BV32_UDIV(_WATCHED_OFFSET, 4bv32), BV32_ADD(BV32_ADD(BV32_MUL(v2, $width), v0), v1)), $width) == 0bv32 then 1bv1 else 0bv1)), BV1_ZEXT32((if BV32_ULT(BV32_UDIV(BV32_SUB(BV32_UDIV(_WATCHED_OFFSET, 4bv32), BV32_ADD(BV32_ADD(BV32_MUL(v2, $width), v0), v1)), $width), 16bv32) then 1bv1 else 0bv1))) != 0bv32) then 1bv1 else 0bv1))) != 0bv32) then 1bv1 else 0bv1) != 0bv1;
+  assert {:originated_from_invariant} {:sourceloc_num 6} (if $store.0 == BV32_ADD(BV32_ADD(BV32_MUL(v2, $width), v0), BV32_MUL($i.0, $width)) then 1bv1 else 0bv1) != 0bv1;
+  v4 := BV32_SLT($i.0, 16bv32);
+  goto $truebb0, $falsebb0;
+$for.body:
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  v5 := $$input[$load_bin.0];
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  v6 := $$input[BV32_ADD($load_bin.0, 1bv32)];
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  $$sm_mappings[BV32_MUL($store.0, 4bv32)] := BV32_UDIV(v5, 24576bv32)[8:0];
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  $$sm_mappings[BV32_ADD(BV32_MUL($store.0, 4bv32), 1bv32)] := BV32_UREM(BV32_LSHR(v5, 10bv32), 24bv32)[8:0];
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  $$sm_mappings[BV32_ADD(BV32_MUL($store.0, 4bv32), 2bv32)] := BV32_UREM(BV32_LSHR(v5, 2bv32), 256bv32)[8:0];
+  assert {:sourceloc} {:sourceloc_num 13} true;
+  $$sm_mappings[BV32_ADD(BV32_MUL($store.0, 4bv32), 3bv32)] := BV32_MUL(BV8_ZEXT32(BV32_UREM(v5, 4bv32)[8:0]), 8bv32)[8:0];
+  v7 := $0 == 1bv1;
+  goto $truebb1, $falsebb1;
+$if.then:
+  assert {:block_sourceloc} {:sourceloc_num 14} true;
+  assert {:sourceloc} {:sourceloc_num 15} true;
+  $$sm_mappings[BV32_MUL(BV32_ADD($store.0, v1), 4bv32)] := BV32_UDIV(v6, 24576bv32)[8:0];
+  assert {:sourceloc} {:sourceloc_num 16} true;
+  $$sm_mappings[BV32_ADD(BV32_MUL(BV32_ADD($store.0, v1), 4bv32), 1bv32)] := BV32_UREM(BV32_LSHR(v6, 10bv32), 24bv32)[8:0];
+  assert {:sourceloc} {:sourceloc_num 17} true;
+  $$sm_mappings[BV32_ADD(BV32_MUL(BV32_ADD($store.0, v1), 4bv32), 2bv32)] := BV32_UREM(BV32_LSHR(v6, 2bv32), 256bv32)[8:0];
+  assert {:sourceloc} {:sourceloc_num 18} true;
+  $$sm_mappings[BV32_ADD(BV32_MUL(BV32_ADD($store.0, v1), 4bv32), 3bv32)] := BV32_MUL(BV8_ZEXT32(BV32_UREM(v6, 4bv32)[8:0]), 8bv32)[8:0];
+  goto $if.end;
+$if.end:
+  assert {:block_sourceloc} {:sourceloc_num 19} true;
+  goto $for.inc;
+$for.inc:
+  assert {:block_sourceloc} {:sourceloc_num 20} true;
+  $load_bin.0, $store.0, $i.0 := BV32_ADD($load_bin.0, BV32_MUL($input_pitch, 2bv32)), BV32_ADD($store.0, $width), BV32_ADD($i.0, 1bv32);
+  goto $for.cond;
+$for.end:
+  assert {:block_sourceloc} {:sourceloc_num 21} true;
+  return;
+$truebb:
+  assume {:partition} v3;
+  assert {:block_sourceloc} {:sourceloc_num 22} true;
+  goto $land.rhs;
+$falsebb:
+  assume {:partition} !v3;
+  assert {:block_sourceloc} {:sourceloc_num 23} true;
+  $0 := 0bv1;
+  goto $land.end;
+$truebb0:
+  assume {:partition} v4;
+  assert {:block_sourceloc} {:sourceloc_num 24} true;
+  goto $for.body;
+$falsebb0:
+  assume {:partition} !v4;
+  assert {:block_sourceloc} {:sourceloc_num 25} true;
+  goto $for.end;
+$truebb1:
+  assume {:partition} v7;
+  assert {:block_sourceloc} {:sourceloc_num 26} true;
+  goto $if.end;
+$falsebb1:
+  assume {:partition} !v7;
+  assert {:block_sourceloc} {:sourceloc_num 27} true;
+  goto $if.then;
+}
+axiom (if group_size_y == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if group_size_z == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_y == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_z == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if group_size_x == 498bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_x == 65bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if global_offset_x == 0bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if global_offset_y == 0bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if global_offset_z == 0bv32 then 1bv1 else 0bv1) != 0bv1;

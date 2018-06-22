@@ -1,0 +1,383 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "matrixA"} {:global} $$matrixA : [int]int;
+axiom {:array_info "$$matrixA"} {:global} {:elem_width 32} {:source_name "matrixA"} {:source_elem_width 128} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$matrixA : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$matrixA : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$matrixA : bool;
+
+var {:source_name "matrixB"} {:global} $$matrixB : [int]int;
+axiom {:array_info "$$matrixB"} {:global} {:elem_width 32} {:source_name "matrixB"} {:source_elem_width 128} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$matrixB : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$matrixB : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$matrixB : bool;
+
+var {:source_name "matrixC"} {:global} $$matrixC : [int]int;
+axiom {:array_info "$$matrixC"} {:global} {:elem_width 32} {:source_name "matrixC"} {:source_elem_width 128} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$matrixC : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$matrixC : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$matrixC : bool;
+
+var {:source_name "blockA"} {:group_shared} $$blockA : [int]int;
+axiom {:array_info "$$blockA"} {:group_shared} {:elem_width 32} {:source_name "blockA"} {:source_elem_width 128} {:source_dimensions "*"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$blockA : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$blockA : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$blockA : bool;
+
+const _WATCHED_OFFSET : int;
+const {:global_offset_x} global_offset_x : int;
+const {:global_offset_y} global_offset_y : int;
+const {:global_offset_z} global_offset_z : int;
+const {:group_id_x} group_id_x : int;
+const {:group_id_y} group_id_y : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:local_id_y} local_id_y : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function  BV32_ASHR(int, int) : int;
+function BV_CONCAT(int, int) : int;
+function BV_EXTRACT(int, int, int) : int;
+function FADD32(int, int) : int;
+function FMUL32(int, int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SDIV(x : int, y : int) : int {
+  x div y
+}
+function {:inline true} BV32_SHL(x : int, y : int) : int {
+  if x >= 0 && y == 1 then x*2 else BV32_SHL_UF(x,y)
+}
+function BV32_SHL_UF(int, int) : int;
+function {:inline true} BV32_UDIV(x : int, y : int) : int {
+  x div y
+}
+function {:inline true} BV32_ULT(x : int, y : int) : bool {
+  x < y
+}
+procedure {:source_name "mmmKernel_local"} {:kernel} $mmmKernel_local($widthA:int)
+{
+  var $sum0.0:int;
+  var $sum1.0:int;
+  var $sum2.0:int;
+  var $sum3.0:int;
+  var $i.0:int;
+  var $sum0.1:int;
+  var $sum1.1:int;
+  var $sum2.1:int;
+  var $sum3.1:int;
+  var $j.0:int;
+  var v0:int;
+  var v13:int;
+  var v14:int;
+  var v15:int;
+  var v16:int;
+  var v1:int;
+  var v2:int;
+  var v3:bool;
+  var v4:int;
+  var v5:int;
+  var v6:int;
+  var v7:int;
+  var v8:int;
+  var v9:int;
+  var v10:int;
+  var v11:int;
+  var v12:int;
+  var v17:int;
+  var v18:int;
+  var v19:int;
+  var v20:int;
+  var v21:int;
+  var v22:bool;
+  var v23:int;
+  var v24:int;
+  var v25:int;
+  var v26:int;
+  var v27:int;
+  var v28:int;
+  var v29:int;
+  var v30:int;
+  var v31:int;
+  var v32:int;
+  var v33:int;
+  var v34:int;
+  var v35:int;
+  var v36:int;
+  var v37:int;
+  var v38:int;
+  var v39:int;
+  var v40:int;
+  var v41:int;
+  var v42:int;
+  var v43:int;
+  var v44:int;
+  var v45:int;
+  var v46:int;
+  var v47:int;
+  var v48:int;
+  var v49:int;
+  var v50:int;
+  var v51:int;
+  var v52:int;
+  var v53:int;
+  var v54:int;
+  var v55:int;
+  var v56:int;
+  var v57:int;
+  var v58:int;
+  var v59:int;
+  var v60:int;
+  var v61:int;
+  var v62:int;
+  var v63:int;
+  var v64:int;
+  var v65:int;
+  var v66:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  v0 := BV32_ADD(local_id_x, BV32_MUL(group_size_x, BV32_SHL(local_id_y, 2)));
+  v1 := BV32_ADD(BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x), BV32_MUL(BV32_SHL(BV32_ADD(BV32_MUL(group_id_y, group_size_y), local_id_y), 2), BV32_MUL(group_size_x, num_groups_x)));
+  v2 := BV32_SDIV($widthA, 4);
+  $sum0.0, $sum1.0, $sum2.0, $sum3.0, $i.0 := 0, 0, 0, 0, 0;
+  goto $1;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  v3 := BV32_ULT($i.0, BV32_UDIV(v2, group_size_x));
+  goto $truebb, $falsebb;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  v4 := BV32_ADD(BV32_ADD(BV32_MUL($i.0, group_size_x), local_id_x), BV32_MUL(BV32_SHL(BV32_ADD(BV32_MUL(group_id_y, group_size_y), local_id_y), 2), v2));
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  v5 := $$matrixA[BV32_MUL(v4, 4)];
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  v6 := $$matrixA[BV32_ADD(BV32_MUL(v4, 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  v7 := $$matrixA[BV32_ADD(BV32_MUL(v4, 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  v8 := $$matrixA[BV32_ADD(BV32_MUL(v4, 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 7} true;
+  $$blockA[BV32_MUL(v0, 4)] := v5;
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  $$blockA[BV32_ADD(BV32_MUL(v0, 4), 1)] := v6;
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  $$blockA[BV32_ADD(BV32_MUL(v0, 4), 2)] := v7;
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  $$blockA[BV32_ADD(BV32_MUL(v0, 4), 3)] := v8;
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  v9 := $$matrixA[BV32_MUL(BV32_ADD(v4, v2), 4)];
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  v10 := $$matrixA[BV32_ADD(BV32_MUL(BV32_ADD(v4, v2), 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 13} true;
+  v11 := $$matrixA[BV32_ADD(BV32_MUL(BV32_ADD(v4, v2), 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 14} true;
+  v12 := $$matrixA[BV32_ADD(BV32_MUL(BV32_ADD(v4, v2), 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 15} true;
+  $$blockA[BV32_MUL(BV32_ADD(v0, group_size_x), 4)] := v9;
+  assert {:sourceloc} {:sourceloc_num 16} true;
+  $$blockA[BV32_ADD(BV32_MUL(BV32_ADD(v0, group_size_x), 4), 1)] := v10;
+  assert {:sourceloc} {:sourceloc_num 17} true;
+  $$blockA[BV32_ADD(BV32_MUL(BV32_ADD(v0, group_size_x), 4), 2)] := v11;
+  assert {:sourceloc} {:sourceloc_num 18} true;
+  $$blockA[BV32_ADD(BV32_MUL(BV32_ADD(v0, group_size_x), 4), 3)] := v12;
+  assert {:sourceloc} {:sourceloc_num 19} true;
+  v13 := $$matrixA[BV32_MUL(BV32_ADD(v4, BV32_MUL(2, v2)), 4)];
+  assert {:sourceloc} {:sourceloc_num 20} true;
+  v14 := $$matrixA[BV32_ADD(BV32_MUL(BV32_ADD(v4, BV32_MUL(2, v2)), 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 21} true;
+  v15 := $$matrixA[BV32_ADD(BV32_MUL(BV32_ADD(v4, BV32_MUL(2, v2)), 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 22} true;
+  v16 := $$matrixA[BV32_ADD(BV32_MUL(BV32_ADD(v4, BV32_MUL(2, v2)), 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 23} true;
+  $$blockA[BV32_MUL(BV32_ADD(v0, BV32_MUL(2, group_size_x)), 4)] := v13;
+  assert {:sourceloc} {:sourceloc_num 24} true;
+  $$blockA[BV32_ADD(BV32_MUL(BV32_ADD(v0, BV32_MUL(2, group_size_x)), 4), 1)] := v14;
+  assert {:sourceloc} {:sourceloc_num 25} true;
+  $$blockA[BV32_ADD(BV32_MUL(BV32_ADD(v0, BV32_MUL(2, group_size_x)), 4), 2)] := v15;
+  assert {:sourceloc} {:sourceloc_num 26} true;
+  $$blockA[BV32_ADD(BV32_MUL(BV32_ADD(v0, BV32_MUL(2, group_size_x)), 4), 3)] := v16;
+  assert {:sourceloc} {:sourceloc_num 27} true;
+  v17 := $$matrixA[BV32_MUL(BV32_ADD(v4, BV32_MUL(3, v2)), 4)];
+  assert {:sourceloc} {:sourceloc_num 28} true;
+  v18 := $$matrixA[BV32_ADD(BV32_MUL(BV32_ADD(v4, BV32_MUL(3, v2)), 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 29} true;
+  v19 := $$matrixA[BV32_ADD(BV32_MUL(BV32_ADD(v4, BV32_MUL(3, v2)), 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 30} true;
+  v20 := $$matrixA[BV32_ADD(BV32_MUL(BV32_ADD(v4, BV32_MUL(3, v2)), 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 31} true;
+  $$blockA[BV32_MUL(BV32_ADD(v0, BV32_MUL(3, group_size_x)), 4)] := v17;
+  assert {:sourceloc} {:sourceloc_num 32} true;
+  $$blockA[BV32_ADD(BV32_MUL(BV32_ADD(v0, BV32_MUL(3, group_size_x)), 4), 1)] := v18;
+  assert {:sourceloc} {:sourceloc_num 33} true;
+  $$blockA[BV32_ADD(BV32_MUL(BV32_ADD(v0, BV32_MUL(3, group_size_x)), 4), 2)] := v19;
+  assert {:sourceloc} {:sourceloc_num 34} true;
+  $$blockA[BV32_ADD(BV32_MUL(BV32_ADD(v0, BV32_MUL(3, group_size_x)), 4), 3)] := v20;
+  call {:sourceloc_num 35} $bugle_barrier(-1, 0);
+  v21 := BV32_ADD(BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x), BV32_MUL(BV32_SHL(BV32_MUL($i.0, group_size_x), 2), BV32_MUL(group_size_x, num_groups_x)));
+  $sum0.1, $sum1.1, $sum2.1, $sum3.1, $j.0 := $sum0.0, $sum1.0, $sum2.0, $sum3.0, 0;
+  goto $3;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 36} true;
+  v22 := BV32_ULT($j.0, BV32_MUL(group_size_x, 4));
+  goto $truebb0, $falsebb0;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 37} true;
+  assert {:sourceloc} {:sourceloc_num 38} true;
+  v23 := $$blockA[BV32_MUL(BV32_ADD(BV32_ASHR($j.0, 2), BV32_MUL(BV32_MUL(local_id_y, 4), group_size_x)), 4)];
+  assert {:sourceloc} {:sourceloc_num 39} true;
+  v24 := $$blockA[BV32_ADD(BV32_MUL(BV32_ADD(BV32_ASHR($j.0, 2), BV32_MUL(BV32_MUL(local_id_y, 4), group_size_x)), 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 40} true;
+  v25 := $$blockA[BV32_ADD(BV32_MUL(BV32_ADD(BV32_ASHR($j.0, 2), BV32_MUL(BV32_MUL(local_id_y, 4), group_size_x)), 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 41} true;
+  v26 := $$blockA[BV32_ADD(BV32_MUL(BV32_ADD(BV32_ASHR($j.0, 2), BV32_MUL(BV32_MUL(local_id_y, 4), group_size_x)), 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 42} true;
+  v27 := $$blockA[BV32_MUL(BV32_ADD(BV32_ASHR($j.0, 2), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y, 4), 1), group_size_x)), 4)];
+  assert {:sourceloc} {:sourceloc_num 43} true;
+  v28 := $$blockA[BV32_ADD(BV32_MUL(BV32_ADD(BV32_ASHR($j.0, 2), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y, 4), 1), group_size_x)), 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 44} true;
+  v29 := $$blockA[BV32_ADD(BV32_MUL(BV32_ADD(BV32_ASHR($j.0, 2), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y, 4), 1), group_size_x)), 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 45} true;
+  v30 := $$blockA[BV32_ADD(BV32_MUL(BV32_ADD(BV32_ASHR($j.0, 2), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y, 4), 1), group_size_x)), 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 46} true;
+  v31 := $$blockA[BV32_MUL(BV32_ADD(BV32_ASHR($j.0, 2), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y, 4), 2), group_size_x)), 4)];
+  assert {:sourceloc} {:sourceloc_num 47} true;
+  v32 := $$blockA[BV32_ADD(BV32_MUL(BV32_ADD(BV32_ASHR($j.0, 2), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y, 4), 2), group_size_x)), 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 48} true;
+  v33 := $$blockA[BV32_ADD(BV32_MUL(BV32_ADD(BV32_ASHR($j.0, 2), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y, 4), 2), group_size_x)), 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 49} true;
+  v34 := $$blockA[BV32_ADD(BV32_MUL(BV32_ADD(BV32_ASHR($j.0, 2), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y, 4), 2), group_size_x)), 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 50} true;
+  v35 := $$blockA[BV32_MUL(BV32_ADD(BV32_ASHR($j.0, 2), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y, 4), 3), group_size_x)), 4)];
+  assert {:sourceloc} {:sourceloc_num 51} true;
+  v36 := $$blockA[BV32_ADD(BV32_MUL(BV32_ADD(BV32_ASHR($j.0, 2), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y, 4), 3), group_size_x)), 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 52} true;
+  v37 := $$blockA[BV32_ADD(BV32_MUL(BV32_ADD(BV32_ASHR($j.0, 2), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y, 4), 3), group_size_x)), 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 53} true;
+  v38 := $$blockA[BV32_ADD(BV32_MUL(BV32_ADD(BV32_ASHR($j.0, 2), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y, 4), 3), group_size_x)), 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 54} true;
+  v39 := $$matrixB[BV32_MUL(BV32_ADD(v21, BV32_MUL($j.0, BV32_MUL(group_size_x, num_groups_x))), 4)];
+  assert {:sourceloc} {:sourceloc_num 55} true;
+  v40 := $$matrixB[BV32_ADD(BV32_MUL(BV32_ADD(v21, BV32_MUL($j.0, BV32_MUL(group_size_x, num_groups_x))), 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 56} true;
+  v41 := $$matrixB[BV32_ADD(BV32_MUL(BV32_ADD(v21, BV32_MUL($j.0, BV32_MUL(group_size_x, num_groups_x))), 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 57} true;
+  v42 := $$matrixB[BV32_ADD(BV32_MUL(BV32_ADD(v21, BV32_MUL($j.0, BV32_MUL(group_size_x, num_groups_x))), 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 58} true;
+  v43 := $$matrixB[BV32_MUL(BV32_ADD(v21, BV32_MUL(BV32_ADD($j.0, 1), BV32_MUL(group_size_x, num_groups_x))), 4)];
+  assert {:sourceloc} {:sourceloc_num 59} true;
+  v44 := $$matrixB[BV32_ADD(BV32_MUL(BV32_ADD(v21, BV32_MUL(BV32_ADD($j.0, 1), BV32_MUL(group_size_x, num_groups_x))), 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 60} true;
+  v45 := $$matrixB[BV32_ADD(BV32_MUL(BV32_ADD(v21, BV32_MUL(BV32_ADD($j.0, 1), BV32_MUL(group_size_x, num_groups_x))), 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 61} true;
+  v46 := $$matrixB[BV32_ADD(BV32_MUL(BV32_ADD(v21, BV32_MUL(BV32_ADD($j.0, 1), BV32_MUL(group_size_x, num_groups_x))), 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 62} true;
+  v47 := $$matrixB[BV32_MUL(BV32_ADD(v21, BV32_MUL(BV32_ADD($j.0, 2), BV32_MUL(group_size_x, num_groups_x))), 4)];
+  assert {:sourceloc} {:sourceloc_num 63} true;
+  v48 := $$matrixB[BV32_ADD(BV32_MUL(BV32_ADD(v21, BV32_MUL(BV32_ADD($j.0, 2), BV32_MUL(group_size_x, num_groups_x))), 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 64} true;
+  v49 := $$matrixB[BV32_ADD(BV32_MUL(BV32_ADD(v21, BV32_MUL(BV32_ADD($j.0, 2), BV32_MUL(group_size_x, num_groups_x))), 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 65} true;
+  v50 := $$matrixB[BV32_ADD(BV32_MUL(BV32_ADD(v21, BV32_MUL(BV32_ADD($j.0, 2), BV32_MUL(group_size_x, num_groups_x))), 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 66} true;
+  v51 := $$matrixB[BV32_MUL(BV32_ADD(v21, BV32_MUL(BV32_ADD($j.0, 3), BV32_MUL(group_size_x, num_groups_x))), 4)];
+  assert {:sourceloc} {:sourceloc_num 67} true;
+  v52 := $$matrixB[BV32_ADD(BV32_MUL(BV32_ADD(v21, BV32_MUL(BV32_ADD($j.0, 3), BV32_MUL(group_size_x, num_groups_x))), 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 68} true;
+  v53 := $$matrixB[BV32_ADD(BV32_MUL(BV32_ADD(v21, BV32_MUL(BV32_ADD($j.0, 3), BV32_MUL(group_size_x, num_groups_x))), 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 69} true;
+  v54 := $$matrixB[BV32_ADD(BV32_MUL(BV32_ADD(v21, BV32_MUL(BV32_ADD($j.0, 3), BV32_MUL(group_size_x, num_groups_x))), 4), 3)];
+  v55 := BV_EXTRACT($sum0.1, 64, 32);
+  v56 := BV_EXTRACT($sum0.1, 96, 64);
+  v57 := BV_EXTRACT($sum0.1, 128, 96);
+  v58 := BV_EXTRACT($sum1.1, 64, 32);
+  v59 := BV_EXTRACT($sum1.1, 96, 64);
+  v60 := BV_EXTRACT($sum1.1, 128, 96);
+  v61 := BV_EXTRACT($sum2.1, 64, 32);
+  v62 := BV_EXTRACT($sum2.1, 96, 64);
+  v63 := BV_EXTRACT($sum2.1, 128, 96);
+  v64 := BV_EXTRACT($sum3.1, 64, 32);
+  v65 := BV_EXTRACT($sum3.1, 96, 64);
+  v66 := BV_EXTRACT($sum3.1, 128, 96);
+  goto $5;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 70} true;
+  $sum0.1, $sum1.1, $sum2.1, $sum3.1, $j.0 := BV_CONCAT(BV_CONCAT(BV_CONCAT(FADD32(v57, FADD32(FMUL32(v26, v54), FADD32(FMUL32(v25, v50), FADD32(FMUL32(v23, v42), FMUL32(v24, v46))))), FADD32(v56, FADD32(FMUL32(v26, v53), FADD32(FMUL32(v25, v49), FADD32(FMUL32(v23, v41), FMUL32(v24, v45)))))), FADD32(v55, FADD32(FMUL32(v26, v52), FADD32(FMUL32(v25, v48), FADD32(FMUL32(v23, v40), FMUL32(v24, v44)))))), FADD32(BV_EXTRACT($sum0.1, 32, 0), FADD32(FMUL32(v26, v51), FADD32(FMUL32(v25, v47), FADD32(FMUL32(v23, v39), FMUL32(v24, v43)))))), BV_CONCAT(BV_CONCAT(BV_CONCAT(FADD32(v60, FADD32(FMUL32(v30, v54), FADD32(FMUL32(v29, v50), FADD32(FMUL32(v27, v42), FMUL32(v28, v46))))), FADD32(v59, FADD32(FMUL32(v30, v53), FADD32(FMUL32(v29, v49), FADD32(FMUL32(v27, v41), FMUL32(v28, v45)))))), FADD32(v58, FADD32(FMUL32(v30, v52), FADD32(FMUL32(v29, v48), FADD32(FMUL32(v27, v40), FMUL32(v28, v44)))))), FADD32(BV_EXTRACT($sum1.1, 32, 0), FADD32(FMUL32(v30, v51), FADD32(FMUL32(v29, v47), FADD32(FMUL32(v27, v39), FMUL32(v28, v43)))))), BV_CONCAT(BV_CONCAT(BV_CONCAT(FADD32(v63, FADD32(FMUL32(v34, v54), FADD32(FMUL32(v33, v50), FADD32(FMUL32(v31, v42), FMUL32(v32, v46))))), FADD32(v62, FADD32(FMUL32(v34, v53), FADD32(FMUL32(v33, v49), FADD32(FMUL32(v31, v41), FMUL32(v32, v45)))))), FADD32(v61, FADD32(FMUL32(v34, v52), FADD32(FMUL32(v33, v48), FADD32(FMUL32(v31, v40), FMUL32(v32, v44)))))), FADD32(BV_EXTRACT($sum2.1, 32, 0), FADD32(FMUL32(v34, v51), FADD32(FMUL32(v33, v47), FADD32(FMUL32(v31, v39), FMUL32(v32, v43)))))), BV_CONCAT(BV_CONCAT(BV_CONCAT(FADD32(v66, FADD32(FMUL32(v38, v54), FADD32(FMUL32(v37, v50), FADD32(FMUL32(v35, v42), FMUL32(v36, v46))))), FADD32(v65, FADD32(FMUL32(v38, v53), FADD32(FMUL32(v37, v49), FADD32(FMUL32(v35, v41), FMUL32(v36, v45)))))), FADD32(v64, FADD32(FMUL32(v38, v52), FADD32(FMUL32(v37, v48), FADD32(FMUL32(v35, v40), FMUL32(v36, v44)))))), FADD32(BV_EXTRACT($sum3.1, 32, 0), FADD32(FMUL32(v38, v51), FADD32(FMUL32(v37, v47), FADD32(FMUL32(v35, v39), FMUL32(v36, v43)))))), BV32_ADD($j.0, 4);
+  goto $3;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 71} true;
+  call {:sourceloc_num 72} $bugle_barrier(-1, 0);
+  goto $7;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 73} true;
+  $sum0.0, $sum1.0, $sum2.0, $sum3.0, $i.0 := $sum0.1, $sum1.1, $sum2.1, $sum3.1, BV32_ADD($i.0, 1);
+  goto $1;
+$8:
+  assert {:block_sourceloc} {:sourceloc_num 74} true;
+  assert {:sourceloc} {:sourceloc_num 75} true;
+  $$matrixC[BV32_MUL(v1, 4)] := BV_EXTRACT($sum0.0, 32, 0);
+  assert {:sourceloc} {:sourceloc_num 76} true;
+  $$matrixC[BV32_ADD(BV32_MUL(v1, 4), 1)] := BV_EXTRACT($sum0.0, 64, 32);
+  assert {:sourceloc} {:sourceloc_num 77} true;
+  $$matrixC[BV32_ADD(BV32_MUL(v1, 4), 2)] := BV_EXTRACT($sum0.0, 96, 64);
+  assert {:sourceloc} {:sourceloc_num 78} true;
+  $$matrixC[BV32_ADD(BV32_MUL(v1, 4), 3)] := BV_EXTRACT($sum0.0, 128, 96);
+  assert {:sourceloc} {:sourceloc_num 79} true;
+  $$matrixC[BV32_MUL(BV32_ADD(v1, BV32_MUL(group_size_x, num_groups_x)), 4)] := BV_EXTRACT($sum1.0, 32, 0);
+  assert {:sourceloc} {:sourceloc_num 80} true;
+  $$matrixC[BV32_ADD(BV32_MUL(BV32_ADD(v1, BV32_MUL(group_size_x, num_groups_x)), 4), 1)] := BV_EXTRACT($sum1.0, 64, 32);
+  assert {:sourceloc} {:sourceloc_num 81} true;
+  $$matrixC[BV32_ADD(BV32_MUL(BV32_ADD(v1, BV32_MUL(group_size_x, num_groups_x)), 4), 2)] := BV_EXTRACT($sum1.0, 96, 64);
+  assert {:sourceloc} {:sourceloc_num 82} true;
+  $$matrixC[BV32_ADD(BV32_MUL(BV32_ADD(v1, BV32_MUL(group_size_x, num_groups_x)), 4), 3)] := BV_EXTRACT($sum1.0, 128, 96);
+  assert {:sourceloc} {:sourceloc_num 83} true;
+  $$matrixC[BV32_MUL(BV32_ADD(v1, BV32_MUL(2, BV32_MUL(group_size_x, num_groups_x))), 4)] := BV_EXTRACT($sum2.0, 32, 0);
+  assert {:sourceloc} {:sourceloc_num 84} true;
+  $$matrixC[BV32_ADD(BV32_MUL(BV32_ADD(v1, BV32_MUL(2, BV32_MUL(group_size_x, num_groups_x))), 4), 1)] := BV_EXTRACT($sum2.0, 64, 32);
+  assert {:sourceloc} {:sourceloc_num 85} true;
+  $$matrixC[BV32_ADD(BV32_MUL(BV32_ADD(v1, BV32_MUL(2, BV32_MUL(group_size_x, num_groups_x))), 4), 2)] := BV_EXTRACT($sum2.0, 96, 64);
+  assert {:sourceloc} {:sourceloc_num 86} true;
+  $$matrixC[BV32_ADD(BV32_MUL(BV32_ADD(v1, BV32_MUL(2, BV32_MUL(group_size_x, num_groups_x))), 4), 3)] := BV_EXTRACT($sum2.0, 128, 96);
+  assert {:sourceloc} {:sourceloc_num 87} true;
+  $$matrixC[BV32_MUL(BV32_ADD(v1, BV32_MUL(3, BV32_MUL(group_size_x, num_groups_x))), 4)] := BV_EXTRACT($sum3.0, 32, 0);
+  assert {:sourceloc} {:sourceloc_num 88} true;
+  $$matrixC[BV32_ADD(BV32_MUL(BV32_ADD(v1, BV32_MUL(3, BV32_MUL(group_size_x, num_groups_x))), 4), 1)] := BV_EXTRACT($sum3.0, 64, 32);
+  assert {:sourceloc} {:sourceloc_num 89} true;
+  $$matrixC[BV32_ADD(BV32_MUL(BV32_ADD(v1, BV32_MUL(3, BV32_MUL(group_size_x, num_groups_x))), 4), 2)] := BV_EXTRACT($sum3.0, 96, 64);
+  assert {:sourceloc} {:sourceloc_num 90} true;
+  $$matrixC[BV32_ADD(BV32_MUL(BV32_ADD(v1, BV32_MUL(3, BV32_MUL(group_size_x, num_groups_x))), 4), 3)] := BV_EXTRACT($sum3.0, 128, 96);
+  return;
+$truebb:
+  assume {:partition} v3;
+  assert {:block_sourceloc} {:sourceloc_num 91} true;
+  goto $2;
+$falsebb:
+  assume {:partition} !v3;
+  assert {:block_sourceloc} {:sourceloc_num 92} true;
+  goto $8;
+$truebb0:
+  assume {:partition} v22;
+  assert {:block_sourceloc} {:sourceloc_num 93} true;
+  goto $4;
+$falsebb0:
+  assume {:partition} !v22;
+  assert {:block_sourceloc} {:sourceloc_num 94} true;
+  goto $6;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:int, $1:int);
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 8 then 1 else 0) != 0;
+axiom (if group_size_y == 8 then 1 else 0) != 0;
+axiom (if num_groups_x == 4 then 1 else 0) != 0;
+axiom (if num_groups_y == 4 then 1 else 0) != 0;
+axiom (if global_offset_x == 0 then 1 else 0) != 0;
+axiom (if global_offset_y == 0 then 1 else 0) != 0;
+axiom (if global_offset_z == 0 then 1 else 0) != 0;

@@ -1,0 +1,158 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "d_Histogram"} {:global} $$d_Histogram : [int]int;
+axiom {:array_info "$$d_Histogram"} {:global} {:elem_width 32} {:source_name "d_Histogram"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_Histogram : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_Histogram : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_Histogram : bool;
+
+var {:source_name "d_PartialHistograms"} {:global} $$d_PartialHistograms : [int]int;
+axiom {:array_info "$$d_PartialHistograms"} {:global} {:elem_width 32} {:source_name "d_PartialHistograms"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_PartialHistograms : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_PartialHistograms : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_PartialHistograms : bool;
+
+var {:source_name "data"} {:group_shared} $$_ZZ22mergeHistogram64KernelPjS_jE4data : [int]int;
+axiom {:array_info "$$_ZZ22mergeHistogram64KernelPjS_jE4data"} {:group_shared} {:elem_width 32} {:source_name "data"} {:source_elem_width 32} {:source_dimensions "64"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ22mergeHistogram64KernelPjS_jE4data : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ22mergeHistogram64KernelPjS_jE4data : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ22mergeHistogram64KernelPjS_jE4data : bool;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function  BV32_LSHR(int, int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_UGT(x : int, y : int) : bool {
+  x > y
+}
+function {:inline true} BV32_ULT(x : int, y : int) : bool {
+  x < y
+}
+procedure {:source_name "mergeHistogram64Kernel"} {:kernel} $_Z22mergeHistogram64KernelPjS_j($blockN:int)
+{
+  var $sum.0:int;
+  var $i.0:int;
+  var $stride.0:int;
+  var v0:bool;
+  var v1:int;
+  var v2:bool;
+  var v3:bool;
+  var v4:int;
+  var v5:int;
+  var v6:bool;
+  var v7:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  $sum.0, $i.0 := 0, local_id_x;
+  goto $1;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  v0 := BV32_ULT($i.0, $blockN);
+  goto $truebb, $falsebb;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  v1 := $$d_PartialHistograms[BV32_ADD(group_id_x, BV32_MUL($i.0, 64))];
+  goto $3;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 4} true;
+  $sum.0, $i.0 := BV32_ADD($sum.0, v1), BV32_ADD($i.0, 64);
+  goto $1;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 5} true;
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  $$_ZZ22mergeHistogram64KernelPjS_jE4data[local_id_x] := $sum.0;
+  $stride.0 := 32;
+  goto $5;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  v2 := BV32_UGT($stride.0, 0);
+  goto $truebb0, $falsebb0;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 8} true;
+  call {:sourceloc_num 9} $bugle_barrier(-1, -1);
+  v3 := BV32_ULT(local_id_x, $stride.0);
+  goto $truebb1, $falsebb1;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 10} true;
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  v4 := $$_ZZ22mergeHistogram64KernelPjS_jE4data[BV32_ADD(local_id_x, $stride.0)];
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  v5 := $$_ZZ22mergeHistogram64KernelPjS_jE4data[local_id_x];
+  assert {:sourceloc} {:sourceloc_num 13} true;
+  $$_ZZ22mergeHistogram64KernelPjS_jE4data[local_id_x] := BV32_ADD(v5, v4);
+  goto $8;
+$8:
+  assert {:block_sourceloc} {:sourceloc_num 14} true;
+  goto $9;
+$9:
+  assert {:block_sourceloc} {:sourceloc_num 15} true;
+  $stride.0 := BV32_LSHR($stride.0, 1);
+  goto $5;
+$10:
+  assert {:block_sourceloc} {:sourceloc_num 16} true;
+  v6 := local_id_x == 0;
+  goto $truebb2, $falsebb2;
+$11:
+  assert {:block_sourceloc} {:sourceloc_num 17} true;
+  assert {:sourceloc} {:sourceloc_num 18} true;
+  v7 := $$_ZZ22mergeHistogram64KernelPjS_jE4data[0];
+  assert {:sourceloc} {:sourceloc_num 19} true;
+  $$d_Histogram[group_id_x] := v7;
+  goto $12;
+$12:
+  assert {:block_sourceloc} {:sourceloc_num 20} true;
+  return;
+$truebb:
+  assume {:partition} v0;
+  assert {:block_sourceloc} {:sourceloc_num 21} true;
+  goto $2;
+$falsebb:
+  assume {:partition} !v0;
+  assert {:block_sourceloc} {:sourceloc_num 22} true;
+  goto $4;
+$truebb0:
+  assume {:partition} v2;
+  assert {:block_sourceloc} {:sourceloc_num 23} true;
+  goto $6;
+$falsebb0:
+  assume {:partition} !v2;
+  assert {:block_sourceloc} {:sourceloc_num 24} true;
+  goto $10;
+$truebb1:
+  assume {:partition} v3;
+  assert {:block_sourceloc} {:sourceloc_num 25} true;
+  goto $7;
+$falsebb1:
+  assume {:partition} !v3;
+  assert {:block_sourceloc} {:sourceloc_num 26} true;
+  goto $8;
+$truebb2:
+  assume {:partition} v6;
+  assert {:block_sourceloc} {:sourceloc_num 27} true;
+  goto $11;
+$falsebb2:
+  assume {:partition} !v6;
+  assert {:block_sourceloc} {:sourceloc_num 28} true;
+  goto $12;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:int, $1:int);
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 64 then 1 else 0) != 0;
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_x == 64 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;

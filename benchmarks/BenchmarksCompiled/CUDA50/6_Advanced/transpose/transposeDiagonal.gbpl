@@ -1,0 +1,175 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [bv32]bv32, y : bv32) returns (z : bv32, A : [bv32]bv32);
+var {:source_name "odata"} {:global} $$odata : [bv32]bv32;
+axiom {:array_info "$$odata"} {:global} {:elem_width 32} {:source_name "odata"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$odata : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$odata : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$odata : bool;
+
+var {:source_name "idata"} {:global} $$idata : [bv32]bv32;
+axiom {:array_info "$$idata"} {:global} {:elem_width 32} {:source_name "idata"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$idata : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$idata : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$idata : bool;
+
+var {:source_name "tile"} {:group_shared} $$_ZZ17transposeDiagonalPfS_iiiE4tile : [bv32]bv32;
+axiom {:array_info "$$_ZZ17transposeDiagonalPfS_iiiE4tile"} {:group_shared} {:elem_width 32} {:source_name "tile"} {:source_elem_width 32} {:source_dimensions "16,17"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*,17"} _READ_HAS_OCCURRED_$$_ZZ17transposeDiagonalPfS_iiiE4tile : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*,17"} _WRITE_HAS_OCCURRED_$$_ZZ17transposeDiagonalPfS_iiiE4tile : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*,17"} _ATOMIC_HAS_OCCURRED_$$_ZZ17transposeDiagonalPfS_iiiE4tile : bool;
+
+const _WATCHED_OFFSET : bv32;
+const {:group_id_x} group_id_x : bv32;
+const {:group_id_y} group_id_y : bv32;
+const {:group_size_x} group_size_x : bv32;
+const {:group_size_y} group_size_y : bv32;
+const {:group_size_z} group_size_z : bv32;
+const {:local_id_x} local_id_x : bv32;
+const {:local_id_y} local_id_y : bv32;
+const {:num_groups_x} num_groups_x : bv32;
+const {:num_groups_y} num_groups_y : bv32;
+const {:num_groups_z} num_groups_z : bv32;
+function {:bvbuiltin "bvadd"} BV32_ADD(bv32, bv32) : bv32;
+function {:bvbuiltin "bvmul"} BV32_MUL(bv32, bv32) : bv32;
+function {:bvbuiltin "bvslt"} BV32_SLT(bv32, bv32) : bool;
+function {:bvbuiltin "bvudiv"} BV32_UDIV(bv32, bv32) : bv32;
+function {:bvbuiltin "bvurem"} BV32_UREM(bv32, bv32) : bv32;
+procedure {:source_name "transposeDiagonal"} {:kernel} $_Z17transposeDiagonalPfS_iii($width:bv32, $height:bv32, $nreps:bv32)
+requires {:sourceloc_num 0} (if $width == 1024bv32 then 1bv1 else 0bv1) != 0bv1;
+requires {:sourceloc_num 1} (if $height == 1024bv32 then 1bv1 else 0bv1) != 0bv1;
+requires {:sourceloc_num 2} (if $nreps == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+{
+  var $blockIdx_x.0:bv32;
+  var $blockIdx_y.0:bv32;
+  var $r.0:bv32;
+  var $i.0:bv32;
+  var $i57.0:bv32;
+  var v5:bv32;
+  var v0:bool;
+  var v2:bv32;
+  var v1:bv32;
+  var v3:bool;
+  var v4:bool;
+  var v7:bv32;
+  var v6:bool;
+$entry:
+  assert {:block_sourceloc} {:sourceloc_num 3} true;
+  v0 := $width == $height;
+  goto $truebb, $falsebb;
+$if.then:
+  assert {:block_sourceloc} {:sourceloc_num 4} true;
+  $blockIdx_x.0, $blockIdx_y.0 := BV32_UREM(BV32_ADD(group_id_x, group_id_y), num_groups_x), group_id_x;
+  goto $if.end;
+$if.else:
+  assert {:block_sourceloc} {:sourceloc_num 5} true;
+  v1 := BV32_ADD(group_id_x, BV32_MUL(num_groups_x, group_id_y));
+  v2 := BV32_UREM(v1, num_groups_y);
+  $blockIdx_x.0, $blockIdx_y.0 := BV32_UREM(BV32_ADD(BV32_UDIV(v1, num_groups_y), v2), num_groups_x), v2;
+  goto $if.end;
+$if.end:
+  assert {:block_sourceloc} {:sourceloc_num 6} true;
+  $r.0 := 0bv32;
+  goto $for.cond;
+$for.cond:
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  assert {:originated_from_invariant} {:sourceloc_num 8} (if (_WRITE_HAS_OCCURRED_$$odata ==> BV32_UREM(BV32_UREM(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), $height), 16bv32) == local_id_x) then 1bv1 else 0bv1) != 0bv1;
+  assert {:originated_from_invariant} {:sourceloc_num 9} (if (_WRITE_HAS_OCCURRED_$$odata ==> BV32_UREM(BV32_UDIV(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), $height), 16bv32) == local_id_y) then 1bv1 else 0bv1) != 0bv1;
+  assert {:originated_from_invariant} {:sourceloc_num 10} (if (_WRITE_HAS_OCCURRED_$$odata ==> BV32_UDIV(BV32_UDIV(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), $height), 16bv32) == $blockIdx_x.0) then 1bv1 else 0bv1) != 0bv1;
+  assert {:originated_from_invariant} {:sourceloc_num 11} (if (_WRITE_HAS_OCCURRED_$$odata ==> BV32_UDIV(BV32_UREM(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), $height), 16bv32) == $blockIdx_y.0) then 1bv1 else 0bv1) != 0bv1;
+  v3 := BV32_SLT($r.0, $nreps);
+  goto $truebb0, $falsebb0;
+$for.body:
+  assert {:block_sourceloc} {:sourceloc_num 12} true;
+  $i.0 := 0bv32;
+  goto $for.cond.48;
+$for.cond.48:
+  assert {:block_sourceloc} {:sourceloc_num 13} true;
+  v4 := BV32_SLT($i.0, 16bv32);
+  goto $truebb1, $falsebb1;
+$for.body.50:
+  assert {:block_sourceloc} {:sourceloc_num 14} true;
+  assert {:sourceloc} {:sourceloc_num 15} true;
+  v5 := $$idata[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL($blockIdx_x.0, 16bv32), local_id_x), BV32_MUL(BV32_ADD(BV32_MUL($blockIdx_y.0, 16bv32), local_id_y), $width)), BV32_MUL($i.0, $width))];
+  assert {:sourceloc} {:sourceloc_num 16} true;
+  $$_ZZ17transposeDiagonalPfS_iiiE4tile[BV32_ADD(BV32_MUL(BV32_ADD(local_id_y, $i.0), 17bv32), local_id_x)] := v5;
+  goto $for.inc;
+$for.inc:
+  assert {:block_sourceloc} {:sourceloc_num 17} true;
+  $i.0 := BV32_ADD($i.0, 16bv32);
+  goto $for.cond.48;
+$for.end:
+  assert {:block_sourceloc} {:sourceloc_num 18} true;
+  call {:sourceloc_num 19} $bugle_barrier(1bv1, 1bv1);
+  $i57.0 := 0bv32;
+  goto $for.cond.58;
+$for.cond.58:
+  assert {:block_sourceloc} {:sourceloc_num 20} true;
+  assert {:originated_from_invariant} {:sourceloc_num 21} (if (_WRITE_HAS_OCCURRED_$$odata ==> BV32_UREM(BV32_UREM(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), $height), 16bv32) == local_id_x) then 1bv1 else 0bv1) != 0bv1;
+  assert {:originated_from_invariant} {:sourceloc_num 22} (if (_WRITE_HAS_OCCURRED_$$odata ==> BV32_UREM(BV32_UDIV(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), $height), 16bv32) == local_id_y) then 1bv1 else 0bv1) != 0bv1;
+  assert {:originated_from_invariant} {:sourceloc_num 23} (if (_WRITE_HAS_OCCURRED_$$odata ==> BV32_UDIV(BV32_UDIV(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), $height), 16bv32) == $blockIdx_x.0) then 1bv1 else 0bv1) != 0bv1;
+  assert {:originated_from_invariant} {:sourceloc_num 24} (if (_WRITE_HAS_OCCURRED_$$odata ==> BV32_UDIV(BV32_UREM(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), $height), 16bv32) == $blockIdx_y.0) then 1bv1 else 0bv1) != 0bv1;
+  v6 := BV32_SLT($i57.0, 16bv32);
+  goto $truebb2, $falsebb2;
+$for.body.88:
+  assert {:block_sourceloc} {:sourceloc_num 25} true;
+  assert {:sourceloc} {:sourceloc_num 26} true;
+  v7 := $$_ZZ17transposeDiagonalPfS_iiiE4tile[BV32_ADD(BV32_MUL(local_id_x, 17bv32), BV32_ADD(local_id_y, $i57.0))];
+  assert {:sourceloc} {:sourceloc_num 27} true;
+  $$odata[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL($blockIdx_y.0, 16bv32), local_id_x), BV32_MUL(BV32_ADD(BV32_MUL($blockIdx_x.0, 16bv32), local_id_y), $height)), BV32_MUL($i57.0, $height))] := v7;
+  goto $for.inc.95;
+$for.inc.95:
+  assert {:block_sourceloc} {:sourceloc_num 28} true;
+  $i57.0 := BV32_ADD($i57.0, 16bv32);
+  goto $for.cond.58;
+$for.end.97:
+  assert {:block_sourceloc} {:sourceloc_num 29} true;
+  call {:sourceloc_num 30} $bugle_barrier(1bv1, 1bv1);
+  goto $for.inc.98;
+$for.inc.98:
+  assert {:block_sourceloc} {:sourceloc_num 31} true;
+  $r.0 := BV32_ADD($r.0, 1bv32);
+  goto $for.cond;
+$for.end.99:
+  assert {:block_sourceloc} {:sourceloc_num 32} true;
+  return;
+$truebb:
+  assume {:partition} v0;
+  assert {:block_sourceloc} {:sourceloc_num 33} true;
+  goto $if.then;
+$falsebb:
+  assume {:partition} !v0;
+  assert {:block_sourceloc} {:sourceloc_num 34} true;
+  goto $if.else;
+$truebb0:
+  assume {:partition} v3;
+  assert {:block_sourceloc} {:sourceloc_num 35} true;
+  goto $for.body;
+$falsebb0:
+  assume {:partition} !v3;
+  assert {:block_sourceloc} {:sourceloc_num 36} true;
+  goto $for.end.99;
+$truebb1:
+  assume {:partition} v4;
+  assert {:block_sourceloc} {:sourceloc_num 37} true;
+  goto $for.body.50;
+$falsebb1:
+  assume {:partition} !v4;
+  assert {:block_sourceloc} {:sourceloc_num 38} true;
+  goto $for.end;
+$truebb2:
+  assume {:partition} v6;
+  assert {:block_sourceloc} {:sourceloc_num 39} true;
+  goto $for.body.88;
+$falsebb2:
+  assume {:partition} !v6;
+  assert {:block_sourceloc} {:sourceloc_num 40} true;
+  goto $for.end.97;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:bv1, $1:bv1);
+axiom (if group_size_z == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_z == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if group_size_x == 16bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if group_size_y == 16bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_x == 64bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_y == 64bv32 then 1bv1 else 0bv1) != 0bv1;

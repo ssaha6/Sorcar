@@ -1,0 +1,149 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [bv32]bv32, y : bv32) returns (z : bv32, A : [bv32]bv32);
+var {:source_name "d_Buf"} {:global} $$d_Buf : [bv32]bv32;
+axiom {:array_info "$$d_Buf"} {:global} {:elem_width 32} {:source_name "d_Buf"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_Buf : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_Buf : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_Buf : bool;
+
+var {:source_name "d_Dst"} {:global} $$d_Dst : [bv32]bv32;
+axiom {:array_info "$$d_Dst"} {:global} {:elem_width 32} {:source_name "d_Dst"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_Dst : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_Dst : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_Dst : bool;
+
+var {:source_name "d_Src"} {:global} $$d_Src : [bv32]bv32;
+axiom {:array_info "$$d_Src"} {:global} {:elem_width 32} {:source_name "d_Src"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_Src : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_Src : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_Src : bool;
+
+var {:source_name "s_Data"} {:group_shared} $$_ZZ20scanExclusiveShared2PjS_S_jjE6s_Data : [bv32]bv32;
+axiom {:array_info "$$_ZZ20scanExclusiveShared2PjS_S_jjE6s_Data"} {:group_shared} {:elem_width 32} {:source_name "s_Data"} {:source_elem_width 32} {:source_dimensions "512"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ20scanExclusiveShared2PjS_S_jjE6s_Data : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ20scanExclusiveShared2PjS_S_jjE6s_Data : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ20scanExclusiveShared2PjS_S_jjE6s_Data : bool;
+
+const _WATCHED_OFFSET : bv32;
+const {:group_id_x} group_id_x : bv32;
+const {:group_size_x} group_size_x : bv32;
+const {:group_size_y} group_size_y : bv32;
+const {:group_size_z} group_size_z : bv32;
+const {:local_id_x} local_id_x : bv32;
+const {:num_groups_x} num_groups_x : bv32;
+const {:num_groups_y} num_groups_y : bv32;
+const {:num_groups_z} num_groups_z : bv32;
+function {:bvbuiltin "bvadd"} BV32_ADD(bv32, bv32) : bv32;
+function {:bvbuiltin "bvand"} BV32_AND(bv32, bv32) : bv32;
+function {:bvbuiltin "bvmul"} BV32_MUL(bv32, bv32) : bv32;
+function {:bvbuiltin "bvor"} BV32_OR(bv32, bv32) : bv32;
+function {:bvbuiltin "bvshl"} BV32_SHL(bv32, bv32) : bv32;
+function {:bvbuiltin "bvsub"} BV32_SUB(bv32, bv32) : bv32;
+function {:bvbuiltin "bvudiv"} BV32_UDIV(bv32, bv32) : bv32;
+function {:bvbuiltin "bvult"} BV32_ULT(bv32, bv32) : bool;
+function {:bvbuiltin "zero_extend 31"} BV1_ZEXT32(bv1) : bv32;
+procedure {:source_name "scanExclusiveShared2"} {:kernel} $_Z20scanExclusiveShared2PjS_S_jj($N:bv32, $arrayLength:bv32)
+requires {:sourceloc_num 0} (if $N == 6656bv32 then 1bv1 else 0bv1) != 0bv1;
+requires {:sourceloc_num 1} (if BV32_AND($arrayLength, BV32_SUB($arrayLength, 1bv32)) == 0bv32 then 1bv1 else 0bv1) != 0bv1;
+{
+  var $idata.0:bv32;
+  var $offset.i.i.0:bv32;
+  var v2:bv32;
+  var v3:bv32;
+  var v7:bv32;
+  var v9:bv32;
+  var v8:bv32;
+  var v1:bool;
+  var v4:bv32;
+  var v5:bv32;
+  var v0:bv32;
+  var v6:bool;
+  var v10:bool;
+$entry:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  v0 := BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x);
+  v1 := BV32_ULT(v0, $N);
+  goto $truebb, $falsebb;
+$if.then:
+  assert {:block_sourceloc} {:sourceloc_num 3} true;
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  v2 := $$d_Dst[BV32_ADD(1023bv32, BV32_MUL(1024bv32, v0))];
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  v3 := $$d_Src[BV32_ADD(1023bv32, BV32_MUL(1024bv32, v0))];
+  $idata.0 := BV32_ADD(v2, v3);
+  goto $if.end;
+$if.end:
+  assert {:block_sourceloc} {:sourceloc_num 6} true;
+  v4 := BV32_SUB(BV32_MUL(2bv32, local_id_x), BV32_AND(local_id_x, BV32_SUB($arrayLength, 1bv32)));
+  assert {:sourceloc} {:sourceloc_num 7} true;
+  $$_ZZ20scanExclusiveShared2PjS_S_jjE6s_Data[v4] := 0bv32;
+  v5 := BV32_ADD(v4, $arrayLength);
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  $$_ZZ20scanExclusiveShared2PjS_S_jjE6s_Data[v5] := $idata.0;
+  $offset.i.i.0 := 1bv32;
+  goto $for.cond.i.i;
+$for.cond.i.i:
+  assert {:block_sourceloc} {:sourceloc_num 9} true;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 10} (if (_WRITE_HAS_OCCURRED_$$_ZZ20scanExclusiveShared2PjS_S_jjE6s_Data ==> BV32_OR(BV1_ZEXT32((if BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32) == v5 then 1bv1 else 0bv1)), BV1_ZEXT32((if BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32) == BV32_SUB(v5, $arrayLength) then 1bv1 else 0bv1))) != 0bv32) then 1bv1 else 0bv1) != 0bv1;
+  v6 := BV32_ULT($offset.i.i.0, $arrayLength);
+  goto $truebb0, $falsebb0;
+$for.body.i.i:
+  assert {:block_sourceloc} {:sourceloc_num 11} true;
+  call {:sourceloc_num 12} $bugle_barrier(1bv1, 1bv1);
+  assert {:sourceloc} {:sourceloc_num 13} true;
+  v7 := $$_ZZ20scanExclusiveShared2PjS_S_jjE6s_Data[v5];
+  assert {:sourceloc} {:sourceloc_num 14} true;
+  v8 := $$_ZZ20scanExclusiveShared2PjS_S_jjE6s_Data[BV32_SUB(v5, $offset.i.i.0)];
+  call {:sourceloc_num 15} $bugle_barrier(1bv1, 1bv1);
+  assert {:sourceloc} {:sourceloc_num 16} true;
+  $$_ZZ20scanExclusiveShared2PjS_S_jjE6s_Data[v5] := BV32_ADD(v7, v8);
+  $offset.i.i.0 := BV32_SHL($offset.i.i.0, 1bv32);
+  goto $for.cond.i.i;
+$_ZL14scan1ExclusivejPVjj.exit:
+  assert {:block_sourceloc} {:sourceloc_num 17} true;
+  assert {:sourceloc} {:sourceloc_num 18} true;
+  v9 := $$_ZZ20scanExclusiveShared2PjS_S_jjE6s_Data[v5];
+  v10 := BV32_ULT(v0, $N);
+  goto $truebb1, $falsebb1;
+$if.then.10:
+  assert {:block_sourceloc} {:sourceloc_num 19} true;
+  assert {:sourceloc} {:sourceloc_num 20} true;
+  $$d_Buf[v0] := BV32_SUB(v9, $idata.0);
+  goto $if.end.12;
+$if.end.12:
+  assert {:block_sourceloc} {:sourceloc_num 21} true;
+  return;
+$truebb:
+  assume {:partition} v1;
+  assert {:block_sourceloc} {:sourceloc_num 22} true;
+  goto $if.then;
+$falsebb:
+  assume {:partition} !v1;
+  assert {:block_sourceloc} {:sourceloc_num 23} true;
+  $idata.0 := 0bv32;
+  goto $if.end;
+$truebb0:
+  assume {:partition} v6;
+  assert {:block_sourceloc} {:sourceloc_num 24} true;
+  goto $for.body.i.i;
+$falsebb0:
+  assume {:partition} !v6;
+  assert {:block_sourceloc} {:sourceloc_num 25} true;
+  goto $_ZL14scan1ExclusivejPVjj.exit;
+$truebb1:
+  assume {:partition} v10;
+  assert {:block_sourceloc} {:sourceloc_num 26} true;
+  goto $if.then.10;
+$falsebb1:
+  assume {:partition} !v10;
+  assert {:block_sourceloc} {:sourceloc_num 27} true;
+  goto $if.end.12;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:bv1, $1:bv1);
+axiom (if group_size_y == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if group_size_z == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_y == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_z == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if group_size_x == 256bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_x == 26bv32 then 1bv1 else 0bv1) != 0bv1;

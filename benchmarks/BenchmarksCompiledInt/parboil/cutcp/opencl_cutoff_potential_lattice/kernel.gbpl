@@ -1,0 +1,434 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "binBaseAddr"} {:global} $$binBaseAddr : [int]int;
+axiom {:array_info "$$binBaseAddr"} {:global} {:elem_width 32} {:source_name "binBaseAddr"} {:source_elem_width 128} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$binBaseAddr : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$binBaseAddr : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$binBaseAddr : bool;
+
+var {:source_name "regionZeroAddr"} {:global} $$regionZeroAddr : [int]int;
+axiom {:array_info "$$regionZeroAddr"} {:global} {:elem_width 32} {:source_name "regionZeroAddr"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$regionZeroAddr : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$regionZeroAddr : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$regionZeroAddr : bool;
+
+var {:source_name "NbrListLen"} {:constant} $$NbrListLen : [int]int;
+axiom {:array_info "$$NbrListLen"} {:constant} {:elem_width 32} {:source_name "NbrListLen"} {:source_elem_width 32} {:source_dimensions "*"} true;
+
+var {:source_name "NbrList"} {:constant} $$NbrList : [int]int;
+axiom {:array_info "$$NbrList"} {:constant} {:elem_width 32} {:source_name "NbrList"} {:source_elem_width 128} {:source_dimensions "*"} true;
+
+var {:source_name "myBinIndex"} {:group_shared} $$opencl_cutoff_potential_lattice.myBinIndex : [int]int;
+axiom {:array_info "$$opencl_cutoff_potential_lattice.myBinIndex"} {:group_shared} {:elem_width 32} {:source_name "myBinIndex"} {:source_elem_width 128} {:source_dimensions "1"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.myBinIndex : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.myBinIndex : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.myBinIndex : bool;
+
+var {:source_name "AtomBinCache"} {:group_shared} $$opencl_cutoff_potential_lattice.AtomBinCache : [int]int;
+axiom {:array_info "$$opencl_cutoff_potential_lattice.AtomBinCache"} {:group_shared} {:elem_width 32} {:source_name "AtomBinCache"} {:source_elem_width 32} {:source_dimensions "1024"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache : bool;
+
+const _WATCHED_OFFSET : int;
+const {:global_offset_x} global_offset_x : int;
+const {:global_offset_y} global_offset_y : int;
+const {:global_offset_z} global_offset_z : int;
+const {:group_id_x} group_id_x : int;
+const {:group_id_y} group_id_y : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:local_id_y} local_id_y : int;
+const {:local_id_z} local_id_z : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function  BV32_ASHR(int, int) : int;
+function  BV32_LSHR(int, int) : int;
+function FADD32(int, int) : int;
+function FDIV32(int, int) : int;
+function FEQ32(int, int) : bool;
+function FFLOOR32(int) : int;
+function FLT32(int, int) : bool;
+function FMUL32(int, int) : int;
+function FP32_TO_SI32(int) : int;
+function FSQRT32(int) : int;
+function FSUB32(int, int) : int;
+function SI32_TO_FP32(int) : int;
+function UI32_TO_FP32(int) : int;
+function __other_bv32(int) : int;
+function {:inline true} BV1_ZEXT32(x : int) : int {
+  x
+}
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_AND(x : int, y : int) : int {
+  if x == y then x else (if x == 0 || y == 0 then 0 else BV32_AND_UF(x, y))
+}
+function BV32_AND_UF(int, int) : int;
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_OR(x : int, y : int) : int {
+  if x == y then x else (if x == 0 then y else (if y == 0 then x else BV32_OR_UF(x, y)))
+}
+function BV32_OR_UF(int, int) : int;
+function {:inline true} BV32_SGT(x : int, y : int) : bool {
+  x > y
+}
+function {:inline true} BV32_SLT(x : int, y : int) : bool {
+  x < y
+}
+function {:inline true} BV32_SUB(x : int, y : int) : int {
+  x - y
+}
+function {:inline true} BV32_UDIV(x : int, y : int) : int {
+  x div y
+}
+function {:inline true} BV32_UREM(x : int, y : int) : int {
+  x mod y
+}
+procedure {:source_name "opencl_cutoff_potential_lattice"} {:kernel} $opencl_cutoff_potential_lattice($binDim_x:int, $binDim_y:int, $offset:int, $h:int, $cutoff2:int, $inv_cutoff2:int, $zRegionIndex:int)
+requires {:sourceloc_num 0} (if $$NbrListLen[0] == __other_bv32($$NbrListLen[0]) then 1 else 0) != 0;
+requires {:sourceloc_num 1} (if FEQ32($h, 1056964608) then 1 else 0) != 0;
+{
+  var $nbrid.0:int;
+  var $totalbins.0:int;
+  var $numbins.0:int;
+  var $energy.0:int;
+  var $nbrid.1:int;
+  var $bincnt.0:int;
+  var $0:int;
+  var $numbins.1:int;
+  var $energy.1:int;
+  var $bincnt.1:int;
+  var $energy.2:int;
+  var $i1.0:int;
+  var $energy.3:int;
+  var v0:int;
+  var v1:int;
+  var v2:int;
+  var v3:int;
+  var v4:int;
+  var v5:int;
+  var v6:int;
+  var v7:bool;
+  var v8:int;
+  var v9:bool;
+  var v10:int;
+  var v11:bool;
+  var v12:int;
+  var v13:int;
+  var v14:int;
+  var v15:int;
+  var v16:int;
+  var v17:int;
+  var v18:int;
+  var v19:int;
+  var v20:int;
+  var v21:int;
+  var v22:int;
+  var v23:int;
+  var v34:int;
+  var v24:int;
+  var v25:int;
+  var v26:int;
+  var v27:int;
+  var v28:int;
+  var v29:int;
+  var v30:int;
+  var v31:int;
+  var v32:int;
+  var v33:int;
+  var v35:int;
+  var v36:int;
+  var v37:int;
+  var v38:int;
+  var v39:int;
+  var v40:int;
+  var v41:int;
+  var v42:bool;
+  var v43:int;
+  var v44:bool;
+  var v45:bool;
+  var v46:int;
+  var v47:int;
+  var v48:int;
+  var v49:int;
+  var v50:bool;
+  var v51:int;
+  var v52:bool;
+  var v53:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  v0 := BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(local_id_z, 8), local_id_y), 8), local_id_x);
+  v1 := BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL($zRegionIndex, num_groups_y), group_id_y), BV32_LSHR(num_groups_x, 2)), BV32_LSHR(group_id_x, 2)), 512);
+  v2 := BV32_MUL(BV32_AND(group_id_x, 3), 128);
+  v3 := FMUL32(UI32_TO_FP32(BV32_ADD(BV32_MUL(8, BV32_LSHR(group_id_x, 2)), local_id_x)), $h);
+  v4 := FMUL32(UI32_TO_FP32(BV32_ADD(BV32_MUL(8, group_id_y), local_id_y)), $h);
+  v5 := FMUL32(UI32_TO_FP32(BV32_ADD(BV32_ADD(BV32_MUL(8, $zRegionIndex), BV32_MUL(2, BV32_AND(group_id_x, 3))), local_id_z)), $h);
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  $$opencl_cutoff_potential_lattice.myBinIndex[0] := FP32_TO_SI32(FFLOOR32(FMUL32(FMUL32(UI32_TO_FP32(BV32_ADD(BV32_MUL(8, BV32_LSHR(group_id_x, 2)), 4)), $h), 1048576000)));
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  $$opencl_cutoff_potential_lattice.myBinIndex[1] := FP32_TO_SI32(FFLOOR32(FMUL32(FMUL32(UI32_TO_FP32(BV32_ADD(BV32_MUL(8, group_id_y), 4)), $h), 1048576000)));
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  $$opencl_cutoff_potential_lattice.myBinIndex[2] := FP32_TO_SI32(FFLOOR32(FMUL32(FMUL32(SI32_TO_FP32(BV32_ADD(BV32_MUL(8, $zRegionIndex), 4)), $h), 1048576000)));
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  $$opencl_cutoff_potential_lattice.myBinIndex[3] := 0;
+  $nbrid.0, $totalbins.0, $numbins.0, $energy.0 := BV32_ASHR(v0, 4), 0, 32, 0;
+  goto $1;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  v6 := $$NbrListLen[0];
+  v7 := BV32_SLT($totalbins.0, v6);
+  goto $truebb, $falsebb;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 9} true;
+  v8 := BV32_MUL(32, BV32_ASHR(v0, 4));
+  $nbrid.1, $bincnt.0 := $nbrid.0, 0;
+  goto $3;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 10} true;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 11} (if (_WRITE_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache ==> BV32_OR(BV1_ZEXT32((if BV32_UREM(BV32_SUB(BV32_UDIV(BV32_MUL(4, _WATCHED_OFFSET), 4), BV32_ADD(v8, BV32_AND(v0, 15))), 256) == 0 then 1 else 0)), BV1_ZEXT32((if BV32_UREM(BV32_SUB(BV32_UDIV(BV32_MUL(4, _WATCHED_OFFSET), 4), BV32_ADD(BV32_ADD(v8, BV32_AND(v0, 15)), 16)), 256) == 0 then 1 else 0))) != 0) then 1 else 0) != 0;
+  v9 := BV32_SLT($bincnt.0, 4);
+  goto $truebb0, $falsebb0;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 12} true;
+  assert {:sourceloc} {:sourceloc_num 13} true;
+  v10 := $$NbrListLen[0];
+  $0 := (if BV32_SLT($nbrid.1, v10) then 1 else 0);
+  goto $5;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 14} true;
+  v11 := $0 == 1;
+  goto $truebb1, $falsebb1;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 15} true;
+  assert {:sourceloc} {:sourceloc_num 16} true;
+  v12 := $$opencl_cutoff_potential_lattice.myBinIndex[0];
+  assert {:sourceloc} {:sourceloc_num 17} true;
+  v13 := $$opencl_cutoff_potential_lattice.myBinIndex[1];
+  assert {:sourceloc} {:sourceloc_num 18} true;
+  v14 := $$opencl_cutoff_potential_lattice.myBinIndex[2];
+  assert {:sourceloc} {:sourceloc_num 19} true;
+  v15 := $$opencl_cutoff_potential_lattice.myBinIndex[3];
+  assert {:sourceloc} {:sourceloc_num 20} true;
+  v16 := $$NbrList[BV32_MUL($nbrid.1, 4)];
+  assert {:sourceloc} {:sourceloc_num 21} true;
+  v17 := $$NbrList[BV32_ADD(BV32_MUL($nbrid.1, 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 22} true;
+  v18 := $$NbrList[BV32_ADD(BV32_MUL($nbrid.1, 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 23} true;
+  v19 := $$NbrList[BV32_ADD(BV32_MUL($nbrid.1, 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 24} true;
+  v20 := $$opencl_cutoff_potential_lattice.myBinIndex[0];
+  assert {:sourceloc} {:sourceloc_num 25} true;
+  v21 := $$opencl_cutoff_potential_lattice.myBinIndex[1];
+  assert {:sourceloc} {:sourceloc_num 26} true;
+  v22 := $$opencl_cutoff_potential_lattice.myBinIndex[2];
+  assert {:sourceloc} {:sourceloc_num 27} true;
+  v23 := $$opencl_cutoff_potential_lattice.myBinIndex[3];
+  assert {:sourceloc} {:sourceloc_num 28} true;
+  v24 := $$NbrList[BV32_MUL($nbrid.1, 4)];
+  assert {:sourceloc} {:sourceloc_num 29} true;
+  v25 := $$NbrList[BV32_ADD(BV32_MUL($nbrid.1, 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 30} true;
+  v26 := $$NbrList[BV32_ADD(BV32_MUL($nbrid.1, 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 31} true;
+  v27 := $$NbrList[BV32_ADD(BV32_MUL($nbrid.1, 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 32} true;
+  v28 := $$opencl_cutoff_potential_lattice.myBinIndex[0];
+  assert {:sourceloc} {:sourceloc_num 33} true;
+  v29 := $$opencl_cutoff_potential_lattice.myBinIndex[1];
+  assert {:sourceloc} {:sourceloc_num 34} true;
+  v30 := $$opencl_cutoff_potential_lattice.myBinIndex[2];
+  assert {:sourceloc} {:sourceloc_num 35} true;
+  v31 := $$opencl_cutoff_potential_lattice.myBinIndex[3];
+  assert {:sourceloc} {:sourceloc_num 36} true;
+  v32 := $$NbrList[BV32_MUL($nbrid.1, 4)];
+  assert {:sourceloc} {:sourceloc_num 37} true;
+  v33 := $$NbrList[BV32_ADD(BV32_MUL($nbrid.1, 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 38} true;
+  v34 := $$NbrList[BV32_ADD(BV32_MUL($nbrid.1, 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 39} true;
+  v35 := $$NbrList[BV32_ADD(BV32_MUL($nbrid.1, 4), 3)];
+  v36 := BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(v30, v34), $binDim_y), BV32_ADD(v21, v25)), $binDim_x), BV32_ADD(v12, v16)), 32);
+  v37 := BV32_AND(v0, 15);
+  v38 := BV32_ADD(v8, BV32_MUL(BV32_MUL($bincnt.0, 8), 32));
+  assert {:sourceloc} {:sourceloc_num 40} true;
+  v39 := $$binBaseAddr[BV32_ADD(BV32_ADD(BV32_MUL($offset, 4), v36), v37)];
+  assert {:sourceloc} {:sourceloc_num 41} true;
+  $$opencl_cutoff_potential_lattice.AtomBinCache[BV32_ADD(v38, v37)] := v39;
+  assert {:sourceloc} {:sourceloc_num 42} true;
+  v40 := $$binBaseAddr[BV32_ADD(BV32_ADD(BV32_MUL($offset, 4), v36), BV32_ADD(v37, 16))];
+  assert {:sourceloc} {:sourceloc_num 43} true;
+  $$opencl_cutoff_potential_lattice.AtomBinCache[BV32_ADD(BV32_ADD(v38, v37), 16)] := v40;
+  goto $7;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 44} true;
+  $nbrid.1, $bincnt.0 := BV32_ADD($nbrid.1, 8), BV32_ADD($bincnt.0, 1);
+  goto $3;
+$8:
+  assert {:block_sourceloc} {:sourceloc_num 45} true;
+  call {:sourceloc_num 46} $bugle_barrier(-1, -1);
+  assert {:sourceloc} {:sourceloc_num 47} true;
+  v41 := $$NbrListLen[0];
+  v42 := BV32_SGT(BV32_ADD($totalbins.0, 32), v41);
+  goto $truebb2, $falsebb2;
+$9:
+  assert {:block_sourceloc} {:sourceloc_num 48} true;
+  assert {:sourceloc} {:sourceloc_num 49} true;
+  v43 := $$NbrListLen[0];
+  $numbins.1 := BV32_SUB(v43, $totalbins.0);
+  goto $10;
+$10:
+  assert {:block_sourceloc} {:sourceloc_num 50} true;
+  $energy.1, $bincnt.1 := $energy.0, 0;
+  goto $11;
+$11:
+  assert {:block_sourceloc} {:sourceloc_num 51} true;
+  v44 := BV32_SLT($bincnt.1, $numbins.1);
+  goto $truebb3, $falsebb3;
+$12:
+  assert {:block_sourceloc} {:sourceloc_num 52} true;
+  $energy.2, $i1.0 := $energy.1, 0;
+  goto $13;
+$13:
+  assert {:block_sourceloc} {:sourceloc_num 53} true;
+  v45 := BV32_SLT($i1.0, 8);
+  goto $truebb4, $falsebb4;
+$14:
+  assert {:block_sourceloc} {:sourceloc_num 54} true;
+  assert {:sourceloc} {:sourceloc_num 55} true;
+  v46 := $$opencl_cutoff_potential_lattice.AtomBinCache[BV32_ADD(BV32_MUL($bincnt.1, 32), BV32_MUL($i1.0, 4))];
+  assert {:sourceloc} {:sourceloc_num 56} true;
+  v47 := $$opencl_cutoff_potential_lattice.AtomBinCache[BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1, 32), BV32_MUL($i1.0, 4)), 1)];
+  assert {:sourceloc} {:sourceloc_num 57} true;
+  v48 := $$opencl_cutoff_potential_lattice.AtomBinCache[BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1, 32), BV32_MUL($i1.0, 4)), 2)];
+  assert {:sourceloc} {:sourceloc_num 58} true;
+  v49 := $$opencl_cutoff_potential_lattice.AtomBinCache[BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1, 32), BV32_MUL($i1.0, 4)), 3)];
+  v50 := FEQ32(0, v49);
+  goto $truebb5, $falsebb5;
+$15:
+  assert {:block_sourceloc} {:sourceloc_num 59} true;
+  goto $20;
+$16:
+  assert {:block_sourceloc} {:sourceloc_num 60} true;
+  v51 := FADD32(FMUL32(FSUB32(v48, v5), FSUB32(v48, v5)), FADD32(FMUL32(FSUB32(v46, v3), FSUB32(v46, v3)), FMUL32(FSUB32(v47, v4), FSUB32(v47, v4))));
+  v52 := FLT32(v51, $cutoff2);
+  goto $truebb6, $falsebb6;
+$17:
+  assert {:block_sourceloc} {:sourceloc_num 61} true;
+  v53 := FADD32(FMUL32(FSUB32(-2147483648, v51), $inv_cutoff2), 1065353216);
+  $energy.3 := FADD32($energy.2, FMUL32(FMUL32(FMUL32(v49, FDIV32(1065353216, FSQRT32(v51))), v53), v53));
+  goto $18;
+$18:
+  assert {:block_sourceloc} {:sourceloc_num 62} true;
+  goto $19;
+$19:
+  assert {:block_sourceloc} {:sourceloc_num 63} true;
+  $energy.2, $i1.0 := $energy.3, BV32_ADD($i1.0, 1);
+  goto $13;
+$20:
+  assert {:block_sourceloc} {:sourceloc_num 64} true;
+  goto $21;
+$21:
+  assert {:block_sourceloc} {:sourceloc_num 65} true;
+  $energy.1, $bincnt.1 := $energy.2, BV32_ADD($bincnt.1, 1);
+  goto $11;
+$22:
+  assert {:block_sourceloc} {:sourceloc_num 66} true;
+  call {:sourceloc_num 67} $bugle_barrier(-1, -1);
+  goto $23;
+$23:
+  assert {:block_sourceloc} {:sourceloc_num 68} true;
+  $nbrid.0, $totalbins.0, $numbins.0, $energy.0 := $nbrid.1, BV32_ADD($totalbins.0, $numbins.1), $numbins.1, $energy.1;
+  goto $1;
+$24:
+  assert {:block_sourceloc} {:sourceloc_num 69} true;
+  assert {:sourceloc} {:sourceloc_num 70} true;
+  $$regionZeroAddr[BV32_ADD(BV32_ADD(v1, v2), v0)] := $energy.0;
+  return;
+$truebb:
+  assume {:partition} v7;
+  assert {:block_sourceloc} {:sourceloc_num 71} true;
+  goto $2;
+$falsebb:
+  assume {:partition} !v7;
+  assert {:block_sourceloc} {:sourceloc_num 72} true;
+  goto $24;
+$truebb0:
+  assume {:partition} v9;
+  assert {:block_sourceloc} {:sourceloc_num 73} true;
+  goto $4;
+$falsebb0:
+  assume {:partition} !v9;
+  assert {:block_sourceloc} {:sourceloc_num 74} true;
+  $0 := 0;
+  goto $5;
+$truebb1:
+  assume {:partition} v11;
+  assert {:block_sourceloc} {:sourceloc_num 75} true;
+  goto $6;
+$falsebb1:
+  assume {:partition} !v11;
+  assert {:block_sourceloc} {:sourceloc_num 76} true;
+  goto $8;
+$truebb2:
+  assume {:partition} v42;
+  assert {:block_sourceloc} {:sourceloc_num 77} true;
+  goto $9;
+$falsebb2:
+  assume {:partition} !v42;
+  assert {:block_sourceloc} {:sourceloc_num 78} true;
+  $numbins.1 := $numbins.0;
+  goto $10;
+$truebb3:
+  assume {:partition} v44;
+  assert {:block_sourceloc} {:sourceloc_num 79} true;
+  goto $12;
+$falsebb3:
+  assume {:partition} !v44;
+  assert {:block_sourceloc} {:sourceloc_num 80} true;
+  goto $22;
+$truebb4:
+  assume {:partition} v45;
+  assert {:block_sourceloc} {:sourceloc_num 81} true;
+  goto $14;
+$falsebb4:
+  assume {:partition} !v45;
+  assert {:block_sourceloc} {:sourceloc_num 82} true;
+  goto $20;
+$truebb5:
+  assume {:partition} v50;
+  assert {:block_sourceloc} {:sourceloc_num 83} true;
+  goto $15;
+$falsebb5:
+  assume {:partition} !v50;
+  assert {:block_sourceloc} {:sourceloc_num 84} true;
+  goto $16;
+$truebb6:
+  assume {:partition} v52;
+  assert {:block_sourceloc} {:sourceloc_num 85} true;
+  goto $17;
+$falsebb6:
+  assume {:partition} !v52;
+  assert {:block_sourceloc} {:sourceloc_num 86} true;
+  $energy.3 := $energy.2;
+  goto $18;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:int, $1:int);
+axiom (if group_size_x == 8 then 1 else 0) != 0;
+axiom (if group_size_y == 8 then 1 else 0) != 0;
+axiom (if group_size_z == 2 then 1 else 0) != 0;
+axiom (if num_groups_x == 44 then 1 else 0) != 0;
+axiom (if num_groups_y == 11 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if global_offset_x == 0 then 1 else 0) != 0;
+axiom (if global_offset_y == 0 then 1 else 0) != 0;
+axiom (if global_offset_z == 0 then 1 else 0) != 0;

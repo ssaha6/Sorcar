@@ -1,0 +1,613 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "d_DstKey"} {:global} $$d_DstKey : [int]int;
+axiom {:array_info "$$d_DstKey"} {:global} {:elem_width 32} {:source_name "d_DstKey"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_DstKey : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_DstKey : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_DstKey : bool;
+
+var {:source_name "d_DstVal"} {:global} $$d_DstVal : [int]int;
+axiom {:array_info "$$d_DstVal"} {:global} {:elem_width 32} {:source_name "d_DstVal"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_DstVal : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_DstVal : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_DstVal : bool;
+
+var {:source_name "d_SrcKey"} {:global} $$d_SrcKey : [int]int;
+axiom {:array_info "$$d_SrcKey"} {:global} {:elem_width 32} {:source_name "d_SrcKey"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_SrcKey : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_SrcKey : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_SrcKey : bool;
+
+var {:source_name "d_SrcVal"} {:global} $$d_SrcVal : [int]int;
+axiom {:array_info "$$d_SrcVal"} {:global} {:elem_width 32} {:source_name "d_SrcVal"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_SrcVal : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_SrcVal : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_SrcVal : bool;
+
+var {:source_name "d_LimitsA"} {:global} $$d_LimitsA : [int]int;
+axiom {:array_info "$$d_LimitsA"} {:global} {:elem_width 32} {:source_name "d_LimitsA"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_LimitsA : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_LimitsA : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_LimitsA : bool;
+
+var {:source_name "d_LimitsB"} {:global} $$d_LimitsB : [int]int;
+axiom {:array_info "$$d_LimitsB"} {:global} {:elem_width 32} {:source_name "d_LimitsB"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_LimitsB : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_LimitsB : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_LimitsB : bool;
+
+var {:source_name "startSrcA"} {:group_shared} $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcA : [int]int;
+axiom {:array_info "$$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcA"} {:group_shared} {:elem_width 32} {:source_name "startSrcA"} {:source_elem_width 32} {:source_dimensions "1"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcA : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcA : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcA : bool;
+
+var {:source_name "startSrcB"} {:group_shared} $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcB : [int]int;
+axiom {:array_info "$$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcB"} {:group_shared} {:elem_width 32} {:source_name "startSrcB"} {:source_elem_width 32} {:source_dimensions "1"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcB : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcB : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcB : bool;
+
+var {:source_name "startDst"} {:group_shared} $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE8startDst : [int]int;
+axiom {:array_info "$$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE8startDst"} {:group_shared} {:elem_width 32} {:source_name "startDst"} {:source_elem_width 32} {:source_dimensions "1"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE8startDst : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE8startDst : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE8startDst : bool;
+
+var {:source_name "lenSrcA"} {:group_shared} $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcA : [int]int;
+axiom {:array_info "$$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcA"} {:group_shared} {:elem_width 32} {:source_name "lenSrcA"} {:source_elem_width 32} {:source_dimensions "1"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcA : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcA : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcA : bool;
+
+var {:source_name "lenSrcB"} {:group_shared} $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcB : [int]int;
+axiom {:array_info "$$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcB"} {:group_shared} {:elem_width 32} {:source_name "lenSrcB"} {:source_elem_width 32} {:source_dimensions "1"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcB : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcB : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcB : bool;
+
+var {:source_name "s_inf"} {:group_shared} $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_inf : [int]int;
+axiom {:array_info "$$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_inf"} {:group_shared} {:elem_width 32} {:source_name "s_inf"} {:source_elem_width 32} {:source_dimensions "256"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_inf : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_inf : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_inf : bool;
+
+var {:source_name "s_key"} {:group_shared} $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_key : [int]int;
+axiom {:array_info "$$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_key"} {:group_shared} {:elem_width 32} {:source_name "s_key"} {:source_elem_width 32} {:source_dimensions "256"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_key : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_key : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_key : bool;
+
+var {:source_name "s_val"} {:group_shared} $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_val : [int]int;
+axiom {:array_info "$$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_val"} {:group_shared} {:elem_width 32} {:source_name "s_val"} {:source_elem_width 32} {:source_dimensions "256"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_val : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_val : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_val : bool;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function  BV32_LSHR(int, int) : int;
+function {:inline true} BV1_ZEXT32(x : int) : int {
+  x
+}
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_AND(x : int, y : int) : int {
+  if x == y then x else (if x == 0 || y == 0 then 0 else BV32_AND_UF(x, y))
+}
+function BV32_AND_UF(int, int) : int;
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SUB(x : int, y : int) : int {
+  x - y
+}
+function {:inline true} BV32_UDIV(x : int, y : int) : int {
+  x div y
+}
+function {:inline true} BV32_UGT(x : int, y : int) : bool {
+  x > y
+}
+function {:inline true} BV32_ULT(x : int, y : int) : bool {
+  x < y
+}
+function {:inline true} BV32_UREM(x : int, y : int) : int {
+  x mod y
+}
+procedure {:source_name "bitonicMergeElementaryIntervalsKernel<1>"} {:kernel} $_Z37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jj($stride:int, $N:int)
+requires {:sourceloc_num 0} (if BV32_AND($stride, BV32_SUB($stride, 1)) == 0 then 1 else 0) != 0;
+requires {:sourceloc_num 1} (if BV32_ULT($stride, $N) then 1 else 0) != 0;
+requires {:sourceloc_num 2} (if BV32_UGT($stride, 1) then 1 else 0) != 0;
+{
+  var $0:int;
+  var $1:int;
+  var $2:int;
+  var $3:int;
+  var $stride1.0:int;
+  var v51:int;
+  var v0:int;
+  var v1:int;
+  var v2:bool;
+  var v3:bool;
+  var v4:bool;
+  var v5:int;
+  var v6:int;
+  var v7:int;
+  var v8:int;
+  var v9:int;
+  var v10:bool;
+  var v11:int;
+  var v12:bool;
+  var v13:int;
+  var v14:int;
+  var v15:int;
+  var v16:int;
+  var v17:bool;
+  var v18:int;
+  var v19:int;
+  var v20:int;
+  var v21:int;
+  var v22:int;
+  var v23:bool;
+  var v24:int;
+  var v25:int;
+  var v26:int;
+  var v27:int;
+  var v28:bool;
+  var v29:int;
+  var v30:int;
+  var v31:int;
+  var v32:int;
+  var v33:int;
+  var v34:bool;
+  var v35:int;
+  var v36:bool;
+  var v37:int;
+  var v38:int;
+  var v39:bool;
+  var v40:int;
+  var v41:bool;
+  var v42:int;
+  var v43:bool;
+  var v44:int;
+  var v45:int;
+  var v46:int;
+  var v47:int;
+  var v48:int;
+  var v49:int;
+  var v50:int;
+  var v52:int;
+  var v53:bool;
+  var v54:int;
+  var v55:int;
+  var v56:int;
+  var v57:bool;
+  var v58:int;
+  var v59:int;
+  var v60:int;
+  var v61:int;
+  var v62:int;
+  var v63:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 3} true;
+  v0 := BV32_AND(group_id_x, BV32_SUB(BV32_UDIV(BV32_MUL(2, $stride), 128), 1));
+  v1 := BV32_MUL(BV32_SUB(group_id_x, v0), 128);
+  v2 := local_id_x == 0;
+  goto $truebb, $falsebb;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 4} true;
+  v3 := BV32_ULT($stride, BV32_SUB(BV32_SUB($N, v1), $stride));
+  goto $truebb0, $falsebb0;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 5} true;
+  $0 := $stride;
+  goto $4;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 6} true;
+  $0 := BV32_SUB(BV32_SUB($N, v1), $stride);
+  goto $4;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  v4 := BV32_UREM($0, 128) == 0;
+  goto $truebb1, $falsebb1;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 8} true;
+  $1 := BV32_UDIV($0, 128);
+  goto $_ZL14getSampleCountj.exit;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 9} true;
+  $1 := BV32_ADD(BV32_UDIV($0, 128), 1);
+  goto $_ZL14getSampleCountj.exit;
+$_ZL14getSampleCountj.exit:
+  assert {:block_sourceloc} {:sourceloc_num 10} true;
+  v5 := BV32_ADD(BV32_UDIV($stride, 128), $1);
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  v6 := $$d_LimitsA[group_id_x];
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcA[0] := v6;
+  assert {:sourceloc} {:sourceloc_num 13} true;
+  v7 := $$d_LimitsB[group_id_x];
+  assert {:sourceloc} {:sourceloc_num 14} true;
+  $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcB[0] := v7;
+  assert {:sourceloc} {:sourceloc_num 15} true;
+  v8 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcA[0];
+  assert {:sourceloc} {:sourceloc_num 16} true;
+  v9 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcB[0];
+  assert {:sourceloc} {:sourceloc_num 17} true;
+  $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE8startDst[0] := BV32_ADD(v8, v9);
+  v10 := BV32_ULT(BV32_ADD(v0, 1), v5);
+  goto $truebb2, $falsebb2;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 18} true;
+  assert {:sourceloc} {:sourceloc_num 19} true;
+  v11 := $$d_LimitsA[BV32_ADD(group_id_x, 1)];
+  $2 := v11;
+  goto $9;
+$8:
+  assert {:block_sourceloc} {:sourceloc_num 20} true;
+  $2 := $stride;
+  goto $9;
+$9:
+  assert {:block_sourceloc} {:sourceloc_num 21} true;
+  v12 := BV32_ULT(BV32_ADD(v0, 1), v5);
+  goto $truebb3, $falsebb3;
+$10:
+  assert {:block_sourceloc} {:sourceloc_num 22} true;
+  assert {:sourceloc} {:sourceloc_num 23} true;
+  v13 := $$d_LimitsB[BV32_ADD(group_id_x, 1)];
+  $3 := v13;
+  goto $12;
+$11:
+  assert {:block_sourceloc} {:sourceloc_num 24} true;
+  $3 := $0;
+  goto $12;
+$12:
+  assert {:block_sourceloc} {:sourceloc_num 25} true;
+  assert {:sourceloc} {:sourceloc_num 26} true;
+  v14 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcA[0];
+  assert {:sourceloc} {:sourceloc_num 27} true;
+  $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcA[0] := BV32_SUB($2, v14);
+  assert {:sourceloc} {:sourceloc_num 28} true;
+  v15 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcB[0];
+  assert {:sourceloc} {:sourceloc_num 29} true;
+  $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcB[0] := BV32_SUB($3, v15);
+  goto $13;
+$13:
+  assert {:block_sourceloc} {:sourceloc_num 30} true;
+  assert {:sourceloc} {:sourceloc_num 31} true;
+  $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_inf[local_id_x] := 1;
+  assert {:sourceloc} {:sourceloc_num 32} true;
+  $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_inf[BV32_ADD(local_id_x, 128)] := 1;
+  call {:sourceloc_num 33} $bugle_barrier(-1, -1);
+  assert {:sourceloc} {:sourceloc_num 34} true;
+  v16 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcA[0];
+  v17 := BV32_ULT(local_id_x, v16);
+  goto $truebb4, $falsebb4;
+$14:
+  assert {:block_sourceloc} {:sourceloc_num 35} true;
+  assert {:sourceloc} {:sourceloc_num 36} true;
+  v18 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcA[0];
+  assert {:sourceloc} {:sourceloc_num 37} true;
+  v19 := $$d_SrcKey[BV32_ADD(v1, BV32_ADD(v18, local_id_x))];
+  assert {:sourceloc} {:sourceloc_num 38} true;
+  $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_key[local_id_x] := v19;
+  assert {:sourceloc} {:sourceloc_num 39} true;
+  v20 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcA[0];
+  assert {:sourceloc} {:sourceloc_num 40} true;
+  v21 := $$d_SrcVal[BV32_ADD(v1, BV32_ADD(v20, local_id_x))];
+  assert {:sourceloc} {:sourceloc_num 41} true;
+  $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_val[local_id_x] := v21;
+  assert {:sourceloc} {:sourceloc_num 42} true;
+  $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_inf[local_id_x] := 0;
+  goto $15;
+$15:
+  assert {:block_sourceloc} {:sourceloc_num 43} true;
+  assert {:sourceloc} {:sourceloc_num 44} true;
+  v22 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcB[0];
+  v23 := BV32_ULT(local_id_x, v22);
+  goto $truebb5, $falsebb5;
+$16:
+  assert {:block_sourceloc} {:sourceloc_num 45} true;
+  assert {:sourceloc} {:sourceloc_num 46} true;
+  v24 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcB[0];
+  assert {:sourceloc} {:sourceloc_num 47} true;
+  v25 := $$d_SrcKey[BV32_ADD(v1, BV32_ADD(BV32_ADD($stride, v24), local_id_x))];
+  assert {:sourceloc} {:sourceloc_num 48} true;
+  $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_key[BV32_SUB(255, local_id_x)] := v25;
+  assert {:sourceloc} {:sourceloc_num 49} true;
+  v26 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE9startSrcB[0];
+  assert {:sourceloc} {:sourceloc_num 50} true;
+  v27 := $$d_SrcVal[BV32_ADD(v1, BV32_ADD(BV32_ADD($stride, v26), local_id_x))];
+  assert {:sourceloc} {:sourceloc_num 51} true;
+  $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_val[BV32_SUB(255, local_id_x)] := v27;
+  assert {:sourceloc} {:sourceloc_num 52} true;
+  $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_inf[BV32_SUB(255, local_id_x)] := 0;
+  goto $17;
+$17:
+  assert {:block_sourceloc} {:sourceloc_num 53} true;
+  $stride1.0 := 128;
+  goto $18;
+$18:
+  assert {:block_sourceloc} {:sourceloc_num 54} true;
+  v28 := BV32_UGT($stride1.0, 0);
+  goto $truebb6, $falsebb6;
+$19:
+  assert {:block_sourceloc} {:sourceloc_num 55} true;
+  call {:sourceloc_num 56} $bugle_barrier(-1, -1);
+  v29 := BV32_SUB(BV32_MUL(2, local_id_x), BV32_AND(local_id_x, BV32_SUB($stride1.0, 1)));
+  v30 := BV32_ADD(v29, $stride1.0);
+  v31 := BV32_ADD(v29, $stride1.0);
+  v32 := BV32_ADD(v29, $stride1.0);
+  assert {:sourceloc} {:sourceloc_num 57} true;
+  v33 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_inf[v29];
+  v34 := v33 != 0;
+  goto $truebb7, $falsebb7;
+$20:
+  assert {:block_sourceloc} {:sourceloc_num 58} true;
+  assert {:sourceloc} {:sourceloc_num 59} true;
+  v35 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_inf[v32];
+  v36 := v35 != 0;
+  goto $truebb8, $falsebb8;
+$21:
+  assert {:block_sourceloc} {:sourceloc_num 60} true;
+  assert {:sourceloc} {:sourceloc_num 61} true;
+  v37 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_key[v29];
+  assert {:sourceloc} {:sourceloc_num 62} true;
+  v38 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_key[v30];
+  v39 := BV1_ZEXT32((if BV32_UGT(v37, v38) then 1 else 0)) == 1;
+  goto $truebb9, $falsebb9;
+$22:
+  assert {:block_sourceloc} {:sourceloc_num 63} true;
+  goto $truebb10, $falsebb10;
+$23:
+  assert {:block_sourceloc} {:sourceloc_num 64} true;
+  assert {:sourceloc} {:sourceloc_num 65} true;
+  v40 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_inf[v29];
+  v41 := v40 == 1;
+  goto $truebb11, $falsebb11;
+$24:
+  assert {:block_sourceloc} {:sourceloc_num 66} true;
+  goto $truebb12, $falsebb12;
+$25:
+  assert {:block_sourceloc} {:sourceloc_num 67} true;
+  assert {:sourceloc} {:sourceloc_num 68} true;
+  v42 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_inf[v32];
+  v43 := v42 == 1;
+  goto $truebb13, $falsebb13;
+$26:
+  assert {:block_sourceloc} {:sourceloc_num 69} true;
+  assert {:sourceloc} {:sourceloc_num 70} true;
+  v44 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_key[v29];
+  assert {:sourceloc} {:sourceloc_num 71} true;
+  v45 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_key[v30];
+  assert {:sourceloc} {:sourceloc_num 72} true;
+  $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_key[v29] := v45;
+  assert {:sourceloc} {:sourceloc_num 73} true;
+  $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_key[v30] := v44;
+  assert {:sourceloc} {:sourceloc_num 74} true;
+  v46 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_val[v29];
+  assert {:sourceloc} {:sourceloc_num 75} true;
+  v47 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_val[v31];
+  assert {:sourceloc} {:sourceloc_num 76} true;
+  $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_val[v29] := v47;
+  assert {:sourceloc} {:sourceloc_num 77} true;
+  $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_val[v31] := v46;
+  assert {:sourceloc} {:sourceloc_num 78} true;
+  v48 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_inf[v29];
+  assert {:sourceloc} {:sourceloc_num 79} true;
+  v49 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_inf[v32];
+  assert {:sourceloc} {:sourceloc_num 80} true;
+  $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_inf[v29] := v49;
+  assert {:sourceloc} {:sourceloc_num 81} true;
+  $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_inf[v32] := v48;
+  goto $_ZL18ComparatorExtendedILj1EEvRjS0_S0_S0_S0_S0_j.exit;
+$_ZL18ComparatorExtendedILj1EEvRjS0_S0_S0_S0_S0_j.exit:
+  assert {:block_sourceloc} {:sourceloc_num 82} true;
+  goto $27;
+$27:
+  assert {:block_sourceloc} {:sourceloc_num 83} true;
+  $stride1.0 := BV32_LSHR($stride1.0, 1);
+  goto $18;
+$28:
+  assert {:block_sourceloc} {:sourceloc_num 84} true;
+  call {:sourceloc_num 85} $bugle_barrier(-1, -1);
+  assert {:sourceloc} {:sourceloc_num 86} true;
+  v50 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE8startDst[0];
+  assert {:sourceloc} {:sourceloc_num 87} true;
+  v51 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE8startDst[0];
+  assert {:sourceloc} {:sourceloc_num 88} true;
+  v52 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcA[0];
+  v53 := BV32_ULT(local_id_x, v52);
+  goto $truebb14, $falsebb14;
+$29:
+  assert {:block_sourceloc} {:sourceloc_num 89} true;
+  assert {:sourceloc} {:sourceloc_num 90} true;
+  v54 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_key[local_id_x];
+  assert {:sourceloc} {:sourceloc_num 91} true;
+  $$d_DstKey[BV32_ADD(BV32_ADD(v1, v50), local_id_x)] := v54;
+  assert {:sourceloc} {:sourceloc_num 92} true;
+  v55 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_val[local_id_x];
+  assert {:sourceloc} {:sourceloc_num 93} true;
+  $$d_DstVal[BV32_ADD(BV32_ADD(v1, v51), local_id_x)] := v55;
+  goto $30;
+$30:
+  assert {:block_sourceloc} {:sourceloc_num 94} true;
+  assert {:sourceloc} {:sourceloc_num 95} true;
+  v56 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcB[0];
+  v57 := BV32_ULT(local_id_x, v56);
+  goto $truebb15, $falsebb15;
+$31:
+  assert {:block_sourceloc} {:sourceloc_num 96} true;
+  assert {:sourceloc} {:sourceloc_num 97} true;
+  v58 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcA[0];
+  assert {:sourceloc} {:sourceloc_num 98} true;
+  v59 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_key[BV32_ADD(v58, local_id_x)];
+  assert {:sourceloc} {:sourceloc_num 99} true;
+  v60 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcA[0];
+  assert {:sourceloc} {:sourceloc_num 100} true;
+  $$d_DstKey[BV32_ADD(BV32_ADD(v1, v50), BV32_ADD(v60, local_id_x))] := v59;
+  assert {:sourceloc} {:sourceloc_num 101} true;
+  v61 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcA[0];
+  assert {:sourceloc} {:sourceloc_num 102} true;
+  v62 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE5s_val[BV32_ADD(v61, local_id_x)];
+  assert {:sourceloc} {:sourceloc_num 103} true;
+  v63 := $$_ZZ37bitonicMergeElementaryIntervalsKernelILj1EEvPjS0_S0_S0_S0_S0_jjE7lenSrcA[0];
+  assert {:sourceloc} {:sourceloc_num 104} true;
+  $$d_DstVal[BV32_ADD(BV32_ADD(v1, v51), BV32_ADD(v63, local_id_x))] := v62;
+  goto $32;
+$32:
+  assert {:block_sourceloc} {:sourceloc_num 105} true;
+  return;
+$truebb:
+  assume {:partition} v2;
+  assert {:block_sourceloc} {:sourceloc_num 106} true;
+  goto $1;
+$falsebb:
+  assume {:partition} !v2;
+  assert {:block_sourceloc} {:sourceloc_num 107} true;
+  goto $13;
+$truebb0:
+  assume {:partition} v3;
+  assert {:block_sourceloc} {:sourceloc_num 108} true;
+  goto $2;
+$falsebb0:
+  assume {:partition} !v3;
+  assert {:block_sourceloc} {:sourceloc_num 109} true;
+  goto $3;
+$truebb1:
+  assume {:partition} v4;
+  assert {:block_sourceloc} {:sourceloc_num 110} true;
+  goto $5;
+$falsebb1:
+  assume {:partition} !v4;
+  assert {:block_sourceloc} {:sourceloc_num 111} true;
+  goto $6;
+$truebb2:
+  assume {:partition} v10;
+  assert {:block_sourceloc} {:sourceloc_num 112} true;
+  goto $7;
+$falsebb2:
+  assume {:partition} !v10;
+  assert {:block_sourceloc} {:sourceloc_num 113} true;
+  goto $8;
+$truebb3:
+  assume {:partition} v12;
+  assert {:block_sourceloc} {:sourceloc_num 114} true;
+  goto $10;
+$falsebb3:
+  assume {:partition} !v12;
+  assert {:block_sourceloc} {:sourceloc_num 115} true;
+  goto $11;
+$truebb4:
+  assume {:partition} v17;
+  assert {:block_sourceloc} {:sourceloc_num 116} true;
+  goto $14;
+$falsebb4:
+  assume {:partition} !v17;
+  assert {:block_sourceloc} {:sourceloc_num 117} true;
+  goto $15;
+$truebb5:
+  assume {:partition} v23;
+  assert {:block_sourceloc} {:sourceloc_num 118} true;
+  goto $16;
+$falsebb5:
+  assume {:partition} !v23;
+  assert {:block_sourceloc} {:sourceloc_num 119} true;
+  goto $17;
+$truebb6:
+  assume {:partition} v28;
+  assert {:block_sourceloc} {:sourceloc_num 120} true;
+  goto $19;
+$falsebb6:
+  assume {:partition} !v28;
+  assert {:block_sourceloc} {:sourceloc_num 121} true;
+  goto $28;
+$truebb7:
+  assume {:partition} v34;
+  assert {:block_sourceloc} {:sourceloc_num 122} true;
+  goto $22;
+$falsebb7:
+  assume {:partition} !v34;
+  assert {:block_sourceloc} {:sourceloc_num 123} true;
+  goto $20;
+$truebb8:
+  assume {:partition} v36;
+  assert {:block_sourceloc} {:sourceloc_num 124} true;
+  goto $22;
+$falsebb8:
+  assume {:partition} !v36;
+  assert {:block_sourceloc} {:sourceloc_num 125} true;
+  goto $21;
+$truebb9:
+  assume {:partition} v39;
+  assert {:block_sourceloc} {:sourceloc_num 126} true;
+  goto $26;
+$falsebb9:
+  assume {:partition} !v39;
+  assert {:block_sourceloc} {:sourceloc_num 127} true;
+  goto $22;
+$truebb10:
+  assume {:partition} true;
+  assert {:block_sourceloc} {:sourceloc_num 128} true;
+  goto $23;
+$falsebb10:
+  assume {:partition} false;
+  assert {:block_sourceloc} {:sourceloc_num 129} true;
+  goto $24;
+$truebb11:
+  assume {:partition} v41;
+  assert {:block_sourceloc} {:sourceloc_num 130} true;
+  goto $26;
+$falsebb11:
+  assume {:partition} !v41;
+  assert {:block_sourceloc} {:sourceloc_num 131} true;
+  goto $24;
+$truebb12:
+  assume {:partition} false;
+  assert {:block_sourceloc} {:sourceloc_num 132} true;
+  goto $25;
+$falsebb12:
+  assume {:partition} true;
+  assert {:block_sourceloc} {:sourceloc_num 133} true;
+  goto $_ZL18ComparatorExtendedILj1EEvRjS0_S0_S0_S0_S0_j.exit;
+$truebb13:
+  assume {:partition} v43;
+  assert {:block_sourceloc} {:sourceloc_num 134} true;
+  goto $26;
+$falsebb13:
+  assume {:partition} !v43;
+  assert {:block_sourceloc} {:sourceloc_num 135} true;
+  goto $_ZL18ComparatorExtendedILj1EEvRjS0_S0_S0_S0_S0_j.exit;
+$truebb14:
+  assume {:partition} v53;
+  assert {:block_sourceloc} {:sourceloc_num 136} true;
+  goto $29;
+$falsebb14:
+  assume {:partition} !v53;
+  assert {:block_sourceloc} {:sourceloc_num 137} true;
+  goto $30;
+$truebb15:
+  assume {:partition} v57;
+  assert {:block_sourceloc} {:sourceloc_num 138} true;
+  goto $31;
+$falsebb15:
+  assume {:partition} !v57;
+  assert {:block_sourceloc} {:sourceloc_num 139} true;
+  goto $32;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:int, $1:int);
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 128 then 1 else 0) != 0;
+axiom (if num_groups_x == 8 then 1 else 0) != 0;

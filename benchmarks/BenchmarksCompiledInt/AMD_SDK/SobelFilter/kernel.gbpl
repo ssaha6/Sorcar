@@ -1,0 +1,293 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP8(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "inputImage"} {:global} $$inputImage : [int]int;
+axiom {:array_info "$$inputImage"} {:global} {:elem_width 8} {:source_name "inputImage"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$inputImage : bool;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$inputImage : bool;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$inputImage : bool;
+
+var {:source_name "outputImage"} {:global} $$outputImage : [int]int;
+axiom {:array_info "$$outputImage"} {:global} {:elem_width 8} {:source_name "outputImage"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$outputImage : bool;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$outputImage : bool;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$outputImage : bool;
+
+const _WATCHED_OFFSET : int;
+const {:global_offset_x} global_offset_x : int;
+const {:global_offset_y} global_offset_y : int;
+const {:global_offset_z} global_offset_z : int;
+const {:group_id_x} group_id_x : int;
+const {:group_id_y} group_id_y : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:local_id_y} local_id_y : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function FADD32(int, int) : int;
+function FDIV32(int, int) : int;
+function FMUL32(int, int) : int;
+function FP32_TO_UI8(int) : int;
+function FSQRT32(int) : int;
+function FSUB32(int, int) : int;
+function UI8_TO_FP32(int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SUB(x : int, y : int) : int {
+  x - y
+}
+function {:inline true} BV32_UGE(x : int, y : int) : bool {
+  x >= y
+}
+function {:inline true} BV32_ULT(x : int, y : int) : bool {
+  x < y
+}
+procedure {:source_name "sobel_filter"} {:kernel} $sobel_filter()
+{
+  var v1:int;
+  var v2:int;
+  var v0:int;
+  var v3:int;
+  var v4:bool;
+  var v5:bool;
+  var v6:bool;
+  var v7:bool;
+  var v8:int;
+  var v9:int;
+  var v10:int;
+  var v11:int;
+  var v12:int;
+  var v13:int;
+  var v14:int;
+  var v15:int;
+  var v16:int;
+  var v17:int;
+  var v18:int;
+  var v19:int;
+  var v20:int;
+  var v21:int;
+  var v22:int;
+  var v23:int;
+  var v24:int;
+  var v25:int;
+  var v26:int;
+  var v27:int;
+  var v28:int;
+  var v29:int;
+  var v30:int;
+  var v31:int;
+  var v32:int;
+  var v33:int;
+  var v34:int;
+  var v35:int;
+  var v36:int;
+  var v37:int;
+  var v38:int;
+  var v39:int;
+  var v40:int;
+  var v41:int;
+  var v42:int;
+  var v43:int;
+  var v44:int;
+  var v45:int;
+  var v46:int;
+  var v47:int;
+  var v48:int;
+  var v49:int;
+  var v50:int;
+  var v51:int;
+  var v52:int;
+  var v53:int;
+  var v54:int;
+  var v55:int;
+  var v56:int;
+  var v57:int;
+  var v58:int;
+  var v59:int;
+  var v60:int;
+  var v61:int;
+  var v62:int;
+  var v63:int;
+  var v64:int;
+  var v65:int;
+  var v66:int;
+  var v67:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  v0 := BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x);
+  v1 := BV32_ADD(BV32_MUL(group_id_y, group_size_y), local_id_y);
+  v2 := BV32_MUL(group_size_x, num_groups_x);
+  v3 := BV32_ADD(v0, BV32_MUL(v1, v2));
+  v4 := BV32_UGE(v0, 1);
+  goto $truebb, $falsebb;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  v5 := BV32_ULT(v0, BV32_SUB(v2, 1));
+  goto $truebb0, $falsebb0;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  v6 := BV32_UGE(v1, 1);
+  goto $truebb1, $falsebb1;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 3} true;
+  v7 := BV32_ULT(v1, BV32_SUB(BV32_MUL(group_size_y, num_groups_y), 1));
+  goto $truebb2, $falsebb2;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 4} true;
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  v8 := $$inputImage[BV32_MUL(BV32_SUB(BV32_SUB(v3, 1), v2), 4)];
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  v9 := $$inputImage[BV32_ADD(BV32_MUL(BV32_SUB(BV32_SUB(v3, 1), v2), 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 7} true;
+  v10 := $$inputImage[BV32_ADD(BV32_MUL(BV32_SUB(BV32_SUB(v3, 1), v2), 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  v11 := $$inputImage[BV32_ADD(BV32_MUL(BV32_SUB(BV32_SUB(v3, 1), v2), 4), 3)];
+  v12 := UI8_TO_FP32(v8);
+  v13 := UI8_TO_FP32(v9);
+  v14 := UI8_TO_FP32(v10);
+  v15 := UI8_TO_FP32(v11);
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  v16 := $$inputImage[BV32_MUL(BV32_SUB(v3, v2), 4)];
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  v17 := $$inputImage[BV32_ADD(BV32_MUL(BV32_SUB(v3, v2), 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  v18 := $$inputImage[BV32_ADD(BV32_MUL(BV32_SUB(v3, v2), 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  v19 := $$inputImage[BV32_ADD(BV32_MUL(BV32_SUB(v3, v2), 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 13} true;
+  v20 := $$inputImage[BV32_MUL(BV32_SUB(BV32_ADD(v3, 1), v2), 4)];
+  assert {:sourceloc} {:sourceloc_num 14} true;
+  v21 := $$inputImage[BV32_ADD(BV32_MUL(BV32_SUB(BV32_ADD(v3, 1), v2), 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 15} true;
+  v22 := $$inputImage[BV32_ADD(BV32_MUL(BV32_SUB(BV32_ADD(v3, 1), v2), 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 16} true;
+  v23 := $$inputImage[BV32_ADD(BV32_MUL(BV32_SUB(BV32_ADD(v3, 1), v2), 4), 3)];
+  v24 := UI8_TO_FP32(v20);
+  v25 := UI8_TO_FP32(v21);
+  v26 := UI8_TO_FP32(v22);
+  v27 := UI8_TO_FP32(v23);
+  assert {:sourceloc} {:sourceloc_num 17} true;
+  v28 := $$inputImage[BV32_MUL(BV32_SUB(v3, 1), 4)];
+  assert {:sourceloc} {:sourceloc_num 18} true;
+  v29 := $$inputImage[BV32_ADD(BV32_MUL(BV32_SUB(v3, 1), 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 19} true;
+  v30 := $$inputImage[BV32_ADD(BV32_MUL(BV32_SUB(v3, 1), 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 20} true;
+  v31 := $$inputImage[BV32_ADD(BV32_MUL(BV32_SUB(v3, 1), 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 21} true;
+  v32 := $$inputImage[BV32_MUL(v3, 4)];
+  assert {:sourceloc} {:sourceloc_num 22} true;
+  v33 := $$inputImage[BV32_ADD(BV32_MUL(v3, 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 23} true;
+  v34 := $$inputImage[BV32_ADD(BV32_MUL(v3, 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 24} true;
+  v35 := $$inputImage[BV32_ADD(BV32_MUL(v3, 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 25} true;
+  v36 := $$inputImage[BV32_MUL(BV32_ADD(v3, 1), 4)];
+  assert {:sourceloc} {:sourceloc_num 26} true;
+  v37 := $$inputImage[BV32_ADD(BV32_MUL(BV32_ADD(v3, 1), 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 27} true;
+  v38 := $$inputImage[BV32_ADD(BV32_MUL(BV32_ADD(v3, 1), 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 28} true;
+  v39 := $$inputImage[BV32_ADD(BV32_MUL(BV32_ADD(v3, 1), 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 29} true;
+  v40 := $$inputImage[BV32_MUL(BV32_ADD(BV32_SUB(v3, 1), v2), 4)];
+  assert {:sourceloc} {:sourceloc_num 30} true;
+  v41 := $$inputImage[BV32_ADD(BV32_MUL(BV32_ADD(BV32_SUB(v3, 1), v2), 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 31} true;
+  v42 := $$inputImage[BV32_ADD(BV32_MUL(BV32_ADD(BV32_SUB(v3, 1), v2), 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 32} true;
+  v43 := $$inputImage[BV32_ADD(BV32_MUL(BV32_ADD(BV32_SUB(v3, 1), v2), 4), 3)];
+  v44 := UI8_TO_FP32(v40);
+  v45 := UI8_TO_FP32(v41);
+  v46 := UI8_TO_FP32(v42);
+  v47 := UI8_TO_FP32(v43);
+  assert {:sourceloc} {:sourceloc_num 33} true;
+  v48 := $$inputImage[BV32_MUL(BV32_ADD(v3, v2), 4)];
+  assert {:sourceloc} {:sourceloc_num 34} true;
+  v49 := $$inputImage[BV32_ADD(BV32_MUL(BV32_ADD(v3, v2), 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 35} true;
+  v50 := $$inputImage[BV32_ADD(BV32_MUL(BV32_ADD(v3, v2), 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 36} true;
+  v51 := $$inputImage[BV32_ADD(BV32_MUL(BV32_ADD(v3, v2), 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 37} true;
+  v52 := $$inputImage[BV32_MUL(BV32_ADD(BV32_ADD(v3, 1), v2), 4)];
+  assert {:sourceloc} {:sourceloc_num 38} true;
+  v53 := $$inputImage[BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(v3, 1), v2), 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 39} true;
+  v54 := $$inputImage[BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(v3, 1), v2), 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 40} true;
+  v55 := $$inputImage[BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(v3, 1), v2), 4), 3)];
+  v56 := UI8_TO_FP32(v52);
+  v57 := UI8_TO_FP32(v53);
+  v58 := UI8_TO_FP32(v54);
+  v59 := UI8_TO_FP32(v55);
+  v60 := FSUB32(FSUB32(FSUB32(FADD32(FADD32(FMUL32(1073741824, UI8_TO_FP32(v16)), v12), v24), v44), FMUL32(1073741824, UI8_TO_FP32(v48))), v56);
+  v61 := FSUB32(FSUB32(FSUB32(FADD32(FADD32(FMUL32(1073741824, UI8_TO_FP32(v17)), v13), v25), v45), FMUL32(1073741824, UI8_TO_FP32(v49))), v57);
+  v62 := FSUB32(FSUB32(FSUB32(FADD32(FADD32(FMUL32(1073741824, UI8_TO_FP32(v18)), v14), v26), v46), FMUL32(1073741824, UI8_TO_FP32(v50))), v58);
+  v63 := FSUB32(FSUB32(FSUB32(FADD32(FADD32(FMUL32(1073741824, UI8_TO_FP32(v19)), v15), v27), v47), FMUL32(1073741824, UI8_TO_FP32(v51))), v59);
+  v64 := FSUB32(FADD32(FSUB32(FADD32(FSUB32(v12, v24), FMUL32(1073741824, UI8_TO_FP32(v28))), FMUL32(1073741824, UI8_TO_FP32(v36))), v44), v56);
+  v65 := FSUB32(FADD32(FSUB32(FADD32(FSUB32(v13, v25), FMUL32(1073741824, UI8_TO_FP32(v29))), FMUL32(1073741824, UI8_TO_FP32(v37))), v45), v57);
+  v66 := FSUB32(FADD32(FSUB32(FADD32(FSUB32(v14, v26), FMUL32(1073741824, UI8_TO_FP32(v30))), FMUL32(1073741824, UI8_TO_FP32(v38))), v46), v58);
+  v67 := FSUB32(FADD32(FSUB32(FADD32(FSUB32(v15, v27), FMUL32(1073741824, UI8_TO_FP32(v31))), FMUL32(1073741824, UI8_TO_FP32(v39))), v47), v59);
+  assert {:sourceloc} {:sourceloc_num 41} true;
+  $$outputImage[BV32_MUL(v3, 4)] := FP32_TO_UI8(FDIV32(FSQRT32(FADD32(FMUL32(v60, v60), FMUL32(v64, v64))), 1073741824));
+  assert {:sourceloc} {:sourceloc_num 42} true;
+  $$outputImage[BV32_ADD(BV32_MUL(v3, 4), 1)] := FP32_TO_UI8(FDIV32(FSQRT32(FADD32(FMUL32(v61, v61), FMUL32(v65, v65))), 1073741824));
+  assert {:sourceloc} {:sourceloc_num 43} true;
+  $$outputImage[BV32_ADD(BV32_MUL(v3, 4), 2)] := FP32_TO_UI8(FDIV32(FSQRT32(FADD32(FMUL32(v62, v62), FMUL32(v66, v66))), 1073741824));
+  assert {:sourceloc} {:sourceloc_num 44} true;
+  $$outputImage[BV32_ADD(BV32_MUL(v3, 4), 3)] := FP32_TO_UI8(FDIV32(FSQRT32(FADD32(FMUL32(v63, v63), FMUL32(v67, v67))), 1073741824));
+  goto $5;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 45} true;
+  return;
+$truebb:
+  assume {:partition} v4;
+  assert {:block_sourceloc} {:sourceloc_num 46} true;
+  goto $1;
+$falsebb:
+  assume {:partition} !v4;
+  assert {:block_sourceloc} {:sourceloc_num 47} true;
+  goto $5;
+$truebb0:
+  assume {:partition} v5;
+  assert {:block_sourceloc} {:sourceloc_num 48} true;
+  goto $2;
+$falsebb0:
+  assume {:partition} !v5;
+  assert {:block_sourceloc} {:sourceloc_num 49} true;
+  goto $5;
+$truebb1:
+  assume {:partition} v6;
+  assert {:block_sourceloc} {:sourceloc_num 50} true;
+  goto $3;
+$falsebb1:
+  assume {:partition} !v6;
+  assert {:block_sourceloc} {:sourceloc_num 51} true;
+  goto $5;
+$truebb2:
+  assume {:partition} v7;
+  assert {:block_sourceloc} {:sourceloc_num 52} true;
+  goto $4;
+$falsebb2:
+  assume {:partition} !v7;
+  assert {:block_sourceloc} {:sourceloc_num 53} true;
+  goto $5;
+}
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 256 then 1 else 0) != 0;
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_x == 2 then 1 else 0) != 0;
+axiom (if num_groups_y == 512 then 1 else 0) != 0;
+axiom (if global_offset_x == 0 then 1 else 0) != 0;
+axiom (if global_offset_y == 0 then 1 else 0) != 0;
+axiom (if global_offset_z == 0 then 1 else 0) != 0;

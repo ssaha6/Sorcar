@@ -1,0 +1,210 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "th"} {:global} $$th : [int]int;
+axiom {:array_info "$$th"} {:global} {:elem_width 32} {:source_name "th"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$th : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$th : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$th : bool;
+
+var {:source_name "pii"} {:global} $$pii : [int]int;
+axiom {:array_info "$$pii"} {:global} {:elem_width 32} {:source_name "pii"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$pii : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$pii : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$pii : bool;
+
+var {:source_name "q"} {:global} $$q : [int]int;
+axiom {:array_info "$$q"} {:global} {:elem_width 32} {:source_name "q"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$q : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$q : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$q : bool;
+
+var {:source_name "qc"} {:global} $$qc : [int]int;
+axiom {:array_info "$$qc"} {:global} {:elem_width 32} {:source_name "qc"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$qc : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$qc : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$qc : bool;
+
+var {:source_name "qi"} {:global} $$qi : [int]int;
+axiom {:array_info "$$qi"} {:global} {:elem_width 32} {:source_name "qi"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$qi : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$qi : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$qi : bool;
+
+var {:source_name "qr"} {:global} $$qr : [int]int;
+axiom {:array_info "$$qr"} {:global} {:elem_width 32} {:source_name "qr"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$qr : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$qr : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$qr : bool;
+
+var {:source_name "qs"} {:global} $$qs : [int]int;
+axiom {:array_info "$$qs"} {:global} {:elem_width 32} {:source_name "qs"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$qs : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$qs : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$qs : bool;
+
+var {:source_name "den"} {:global} $$den : [int]int;
+axiom {:array_info "$$den"} {:global} {:elem_width 32} {:source_name "den"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$den : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$den : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$den : bool;
+
+var {:source_name "p"} {:global} $$p : [int]int;
+axiom {:array_info "$$p"} {:global} {:elem_width 32} {:source_name "p"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$p : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$p : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$p : bool;
+
+var {:source_name "delz"} {:global} $$delz : [int]int;
+axiom {:array_info "$$delz"} {:global} {:elem_width 32} {:source_name "delz"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$delz : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$delz : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$delz : bool;
+
+var {:source_name "rain"} {:global} $$rain : [int]int;
+axiom {:array_info "$$rain"} {:global} {:elem_width 32} {:source_name "rain"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$rain : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$rain : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$rain : bool;
+
+var {:source_name "rainncv"} {:global} $$rainncv : [int]int;
+axiom {:array_info "$$rainncv"} {:global} {:elem_width 32} {:source_name "rainncv"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$rainncv : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$rainncv : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$rainncv : bool;
+
+var {:source_name "sr"} {:global} $$sr : [int]int;
+axiom {:array_info "$$sr"} {:global} {:elem_width 32} {:source_name "sr"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$sr : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$sr : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$sr : bool;
+
+var {:source_name "snow"} {:global} $$snow : [int]int;
+axiom {:array_info "$$snow"} {:global} {:elem_width 32} {:source_name "snow"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$snow : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$snow : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$snow : bool;
+
+var {:source_name "snowncv"} {:global} $$snowncv : [int]int;
+axiom {:array_info "$$snowncv"} {:global} {:elem_width 32} {:source_name "snowncv"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$snowncv : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$snowncv : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$snowncv : bool;
+
+var {:source_name "retvals"} {:global} $$retvals : [int]int;
+axiom {:array_info "$$retvals"} {:global} {:elem_width 32} {:source_name "retvals"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$retvals : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$retvals : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$retvals : bool;
+
+var {:source_name "t"} $$t : [int]int;
+axiom {:array_info "$$t"} {:elem_width 32} {:source_name "t"} {:source_elem_width 32} {:source_dimensions "28"} true;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_id_y} group_id_y : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:local_id_y} local_id_y : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function FMUL32(int, int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SLE(x : int, y : int) : bool {
+  x <= y
+}
+function {:inline true} BV32_SUB(x : int, y : int) : int {
+  x - y
+}
+function {:inline true} BV32_ULT(x : int, y : int) : bool {
+  x < y
+}
+procedure {:source_name "wsm5_gpu"} {:kernel} $_Z8wsm5_gpuPfS_S_S_S_S_S_S_S_S_S_S_S_S_S_fS_iiiiiiiiiiiiiiiiii($delt:int, $ids:int, $ide:int, $jds:int, $jde:int, $kds:int, $kde:int, $ims:int, $ime:int, $jms:int, $jme:int, $kms:int, $kme:int, $ips:int, $ipe:int, $jps:int, $jpe:int, $kps:int, $kpe:int)
+{
+  var $k.0:int;
+  var v0:bool;
+  var v1:bool;
+  var v2:int;
+  var v3:int;
+  var v4:int;
+  var v5:bool;
+  var v6:int;
+  var v7:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  v0 := BV32_ULT(BV32_SUB(BV32_ADD(BV32_ADD(local_id_x, BV32_MUL(group_id_x, group_size_x)), $ips), $ims), BV32_ADD(BV32_SUB($ide, $ids), 1));
+  goto $truebb, $falsebb;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  v1 := BV32_ULT(BV32_SUB(BV32_ADD(BV32_ADD(local_id_y, BV32_MUL(group_id_y, group_size_y)), $jps), $jms), BV32_ADD(BV32_SUB($jde, $jds), 1));
+  goto $truebb0, $falsebb0;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  call {:sourceloc_num 3}   v2 := $pow(4778730805012725760, 4599676419421066581);
+  call {:sourceloc_num 4}   v3 := $pow(4608443426566832126, 4608683618675807573);
+  call {:sourceloc_num 5}   v4 := $pow(4557750909289998844, 4620693217682128896);
+  $k.0 := BV32_SUB($kps, 1);
+  goto $3;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 6} true;
+  v5 := BV32_SLE($k.0, BV32_SUB($kpe, 1));
+  goto $truebb1, $falsebb1;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  v6 := $$th[BV32_ADD(BV32_ADD(BV32_SUB(BV32_ADD(BV32_ADD(local_id_x, BV32_MUL(group_id_x, group_size_x)), $ips), $ims), BV32_MUL($k.0, BV32_ADD(BV32_SUB($ime, $ims), 1))), BV32_MUL(BV32_SUB(BV32_ADD(BV32_ADD(local_id_y, BV32_MUL(group_id_y, group_size_y)), $jps), $jms), BV32_MUL(BV32_ADD(BV32_SUB($ime, $ims), 1), BV32_ADD(BV32_SUB($kme, $kms), 1))))];
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  v7 := $$pii[BV32_ADD(BV32_ADD(BV32_SUB(BV32_ADD(BV32_ADD(local_id_x, BV32_MUL(group_id_x, group_size_x)), $ips), $ims), BV32_MUL($k.0, BV32_ADD(BV32_SUB($ime, $ims), 1))), BV32_MUL(BV32_SUB(BV32_ADD(BV32_ADD(local_id_y, BV32_MUL(group_id_y, group_size_y)), $jps), $jms), BV32_MUL(BV32_ADD(BV32_SUB($ime, $ims), 1), BV32_ADD(BV32_SUB($kme, $kms), 1))))];
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  $$t[$k.0] := FMUL32(v6, v7);
+  goto $5;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 11} true;
+  $k.0 := BV32_ADD($k.0, 1);
+  goto $3;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 12} true;
+  goto $7;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 13} true;
+  return;
+$truebb:
+  assume {:partition} v0;
+  assert {:block_sourceloc} {:sourceloc_num 14} true;
+  goto $1;
+$falsebb:
+  assume {:partition} !v0;
+  assert {:block_sourceloc} {:sourceloc_num 15} true;
+  goto $7;
+$truebb0:
+  assume {:partition} v1;
+  assert {:block_sourceloc} {:sourceloc_num 16} true;
+  goto $2;
+$falsebb0:
+  assume {:partition} !v1;
+  assert {:block_sourceloc} {:sourceloc_num 17} true;
+  goto $7;
+$truebb1:
+  assume {:partition} v5;
+  assert {:block_sourceloc} {:sourceloc_num 18} true;
+  goto $4;
+$falsebb1:
+  assume {:partition} !v5;
+  assert {:block_sourceloc} {:sourceloc_num 19} true;
+  goto $6;
+}
+procedure {:source_name "pow"} $pow($0:int, $1:int) returns ($ret:int);
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 32 then 1 else 0) != 0;
+axiom (if num_groups_x == 1 then 1 else 0) != 0;

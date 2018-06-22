@@ -1,0 +1,83 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+procedure _ATOMIC_OP8(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "angles"} {:global} $$angles : [int]int;
+axiom {:array_info "$$angles"} {:global} {:elem_width 32} {:source_name "angles"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$angles : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$angles : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$angles : bool;
+
+var {:source_name "scannedAngles"} {:global} $$scannedAngles : [int]int;
+axiom {:array_info "$$scannedAngles"} {:global} {:elem_width 32} {:source_name "scannedAngles"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$scannedAngles : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$scannedAngles : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$scannedAngles : bool;
+
+var {:source_name "visibilities"} {:global} $$visibilities : [int]int;
+axiom {:array_info "$$visibilities"} {:global} {:elem_width 8} {:source_name "visibilities"} {:source_elem_width 8} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 8} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$visibilities : bool;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 8} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$visibilities : bool;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 8} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$visibilities : bool;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function FEQ32(int, int) : bool;
+function FLT32(int, int) : bool;
+function {:inline true} BV1_ZEXT8(x : int) : int {
+  x
+}
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_ULT(x : int, y : int) : bool {
+  x < y
+}
+procedure {:source_name "computeVisibilities_kernel"} {:kernel} $_Z26computeVisibilities_kernelPKfS0_iPh($numAngles:int)
+{
+  var v0:int;
+  var v1:bool;
+  var v2:int;
+  var v3:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  v0 := BV32_ADD(BV32_MUL(group_size_x, group_id_x), local_id_x);
+  v1 := BV32_ULT(v0, $numAngles);
+  goto $truebb, $falsebb;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  assert {:sourceloc} {:sourceloc_num 2} true;
+  v2 := $$scannedAngles[v0];
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  v3 := $$angles[v0];
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  $$visibilities[v0] := BV1_ZEXT8((if FEQ32(v2, v3) || FLT32(v2, v3) then 1 else 0));
+  goto $2;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 5} true;
+  return;
+$truebb:
+  assume {:partition} v1;
+  assert {:block_sourceloc} {:sourceloc_num 6} true;
+  goto $1;
+$falsebb:
+  assume {:partition} !v1;
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  goto $2;
+}
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 256 then 1 else 0) != 0;
+axiom (if num_groups_x == 40 then 1 else 0) != 0;

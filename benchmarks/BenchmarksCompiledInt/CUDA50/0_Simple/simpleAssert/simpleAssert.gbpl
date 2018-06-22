@@ -1,0 +1,33 @@
+type _SIZE_T_TYPE = bv32;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SLT(x : int, y : int) : bool {
+  x < y
+}
+procedure {:source_name "testKernel"} {:kernel} $_Z10testKerneli($N:int)
+{
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  assert {:sourceloc_num 1} (if BV32_SLT(BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x), $N) then 1 else 0) != 0;
+  return;
+}
+axiom (if group_size_x == 32 then 1 else 0) != 0;
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_x == 2 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;

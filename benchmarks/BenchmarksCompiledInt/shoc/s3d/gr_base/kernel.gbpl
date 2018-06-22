@@ -1,0 +1,268 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "P"} {:global} $$P : [int]int;
+axiom {:array_info "$$P"} {:global} {:elem_width 32} {:source_name "P"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$P : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$P : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$P : bool;
+
+var {:source_name "T"} {:global} $$T : [int]int;
+axiom {:array_info "$$T"} {:global} {:elem_width 32} {:source_name "T"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$T : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$T : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$T : bool;
+
+var {:source_name "Y"} {:global} $$Y : [int]int;
+axiom {:array_info "$$Y"} {:global} {:elem_width 32} {:source_name "Y"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$Y : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$Y : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$Y : bool;
+
+var {:source_name "C"} {:global} $$C : [int]int;
+axiom {:array_info "$$C"} {:global} {:elem_width 32} {:source_name "C"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$C : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$C : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$C : bool;
+
+const _WATCHED_OFFSET : int;
+const {:global_offset_x} global_offset_x : int;
+const {:global_offset_y} global_offset_y : int;
+const {:global_offset_z} global_offset_z : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function FADD32(int, int) : int;
+function FDIV32(int, int) : int;
+function FLT32(int, int) : bool;
+function FMUL32(int, int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SUB(x : int, y : int) : int {
+  x - y
+}
+function {:inline true} BV32_UDIV(x : int, y : int) : int {
+  x div y
+}
+function {:inline true} BV32_ULE(x : int, y : int) : bool {
+  x <= y
+}
+function {:inline true} BV32_UREM(x : int, y : int) : int {
+  x mod y
+}
+procedure {:source_name "gr_base"} {:kernel} $gr_base($TCONV:int, $PCONV:int)
+{
+  var $k.0:int;
+  var v0:int;
+  var v1:int;
+  var v2:int;
+  var v3:int;
+  var v4:int;
+  var v5:int;
+  var v6:int;
+  var v7:int;
+  var v14:int;
+  var v8:int;
+  var v9:int;
+  var v10:int;
+  var v11:int;
+  var v12:int;
+  var v13:int;
+  var v29:int;
+  var v15:int;
+  var v16:int;
+  var v17:int;
+  var v18:int;
+  var v19:int;
+  var v20:int;
+  var v21:int;
+  var v22:int;
+  var v23:int;
+  var v24:int;
+  var v25:int;
+  var v26:int;
+  var v27:int;
+  var v28:int;
+  var v30:int;
+  var v31:int;
+  var v32:int;
+  var v33:int;
+  var v34:int;
+  var v35:int;
+  var v36:int;
+  var v37:int;
+  var v38:int;
+  var v39:int;
+  var v40:int;
+  var v41:int;
+  var v42:int;
+  var v43:int;
+  var v44:int;
+  var v45:int;
+  var v46:bool;
+  var v47:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  assert {:sourceloc} {:sourceloc_num 1} true;
+  v0 := $$T[BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x)];
+  assert {:sourceloc} {:sourceloc_num 2} true;
+  v1 := $$P[BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x)];
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  v2 := $$Y[BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x)];
+  v3 := FMUL32(v2, 1056831951);
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  $$C[BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x)] := v3;
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  v4 := $$Y[BV32_ADD(13824, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))];
+  v5 := FMUL32(v4, 1065220559);
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  $$C[BV32_ADD(13824, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))] := v5;
+  assert {:sourceloc} {:sourceloc_num 7} true;
+  v6 := $$Y[BV32_ADD(27648, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))];
+  v7 := FMUL32(v6, 1031799099);
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  $$C[BV32_ADD(27648, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))] := v7;
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  v8 := $$Y[BV32_ADD(41472, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))];
+  v9 := FMUL32(v8, 1023410490);
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  $$C[BV32_ADD(41472, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))] := v9;
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  v10 := $$Y[BV32_ADD(55296, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))];
+  v11 := FMUL32(v10, 1030805046);
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  $$C[BV32_ADD(55296, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))] := v11;
+  assert {:sourceloc} {:sourceloc_num 13} true;
+  v12 := $$Y[BV32_ADD(69120, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))];
+  v13 := FMUL32(v12, 1029921950);
+  assert {:sourceloc} {:sourceloc_num 14} true;
+  $$C[BV32_ADD(69120, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))] := v13;
+  assert {:sourceloc} {:sourceloc_num 15} true;
+  v14 := $$Y[BV32_ADD(82944, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))];
+  v15 := FMUL32(v14, 1022898438);
+  assert {:sourceloc} {:sourceloc_num 16} true;
+  $$C[BV32_ADD(82944, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))] := v15;
+  assert {:sourceloc} {:sourceloc_num 17} true;
+  v16 := $$Y[BV32_ADD(96768, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))];
+  v17 := FMUL32(v16, 1022416438);
+  assert {:sourceloc} {:sourceloc_num 18} true;
+  $$C[BV32_ADD(96768, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))] := v17;
+  assert {:sourceloc} {:sourceloc_num 19} true;
+  v18 := $$Y[BV32_ADD(110592, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))];
+  v19 := FMUL32(v18, 1032337159);
+  assert {:sourceloc} {:sourceloc_num 20} true;
+  $$C[BV32_ADD(110592, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))] := v19;
+  assert {:sourceloc} {:sourceloc_num 21} true;
+  v20 := $$Y[BV32_ADD(124416, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))];
+  v21 := FMUL32(v20, 1031753785);
+  assert {:sourceloc} {:sourceloc_num 22} true;
+  $$C[BV32_ADD(124416, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))] := v21;
+  assert {:sourceloc} {:sourceloc_num 23} true;
+  v22 := $$Y[BV32_ADD(138240, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))];
+  v23 := FMUL32(v22, 1024604938);
+  assert {:sourceloc} {:sourceloc_num 24} true;
+  $$C[BV32_ADD(138240, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))] := v23;
+  assert {:sourceloc} {:sourceloc_num 25} true;
+  v24 := $$Y[BV32_ADD(152064, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))];
+  v25 := FMUL32(v24, 1018831813);
+  assert {:sourceloc} {:sourceloc_num 26} true;
+  $$C[BV32_ADD(152064, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))] := v25;
+  assert {:sourceloc} {:sourceloc_num 27} true;
+  v26 := $$Y[BV32_ADD(165888, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))];
+  v27 := FMUL32(v26, 1023961522);
+  assert {:sourceloc} {:sourceloc_num 28} true;
+  $$C[BV32_ADD(165888, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))] := v27;
+  assert {:sourceloc} {:sourceloc_num 29} true;
+  v28 := $$Y[BV32_ADD(179712, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))];
+  v29 := FMUL32(v28, 1025330846);
+  assert {:sourceloc} {:sourceloc_num 30} true;
+  $$C[BV32_ADD(179712, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))] := v29;
+  assert {:sourceloc} {:sourceloc_num 31} true;
+  v30 := $$Y[BV32_ADD(193536, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))];
+  v31 := FMUL32(v30, 1024590033);
+  assert {:sourceloc} {:sourceloc_num 32} true;
+  $$C[BV32_ADD(193536, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))] := v31;
+  assert {:sourceloc} {:sourceloc_num 33} true;
+  v32 := $$Y[BV32_ADD(207360, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))];
+  v33 := FMUL32(v32, 1023948551);
+  assert {:sourceloc} {:sourceloc_num 34} true;
+  $$C[BV32_ADD(207360, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))] := v33;
+  assert {:sourceloc} {:sourceloc_num 35} true;
+  v34 := $$Y[BV32_ADD(221184, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))];
+  v35 := FMUL32(v34, 1019717903);
+  assert {:sourceloc} {:sourceloc_num 36} true;
+  $$C[BV32_ADD(221184, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))] := v35;
+  assert {:sourceloc} {:sourceloc_num 37} true;
+  v36 := $$Y[BV32_ADD(235008, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))];
+  v37 := FMUL32(v36, 1019404155);
+  assert {:sourceloc} {:sourceloc_num 38} true;
+  $$C[BV32_ADD(235008, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))] := v37;
+  assert {:sourceloc} {:sourceloc_num 39} true;
+  v38 := $$Y[BV32_ADD(248832, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))];
+  v39 := FMUL32(v38, 1018819731);
+  assert {:sourceloc} {:sourceloc_num 40} true;
+  $$C[BV32_ADD(248832, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))] := v39;
+  assert {:sourceloc} {:sourceloc_num 41} true;
+  v40 := $$Y[BV32_ADD(262656, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))];
+  v41 := FMUL32(v40, 1019704004);
+  assert {:sourceloc} {:sourceloc_num 42} true;
+  $$C[BV32_ADD(262656, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))] := v41;
+  assert {:sourceloc} {:sourceloc_num 43} true;
+  v42 := $$Y[BV32_ADD(276480, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))];
+  v43 := FMUL32(v42, 1019390914);
+  assert {:sourceloc} {:sourceloc_num 44} true;
+  $$C[BV32_ADD(276480, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))] := v43;
+  assert {:sourceloc} {:sourceloc_num 45} true;
+  v44 := $$Y[BV32_ADD(290304, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))];
+  v45 := FMUL32(v44, 1024603963);
+  assert {:sourceloc} {:sourceloc_num 46} true;
+  $$C[BV32_ADD(290304, BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))] := v45;
+  $k.0 := 1;
+  goto $1;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 47} true;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 48} (if (_WRITE_HAS_OCCURRED_$$C ==> BV32_UREM(BV32_UDIV(BV32_MUL(4, _WATCHED_OFFSET), 4), 13824) == BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x)) then 1 else 0) != 0;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 49} (if (_READ_HAS_OCCURRED_$$C ==> BV32_UREM(BV32_UDIV(BV32_MUL(4, _WATCHED_OFFSET), 4), 13824) == BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x)) then 1 else 0) != 0;
+  v46 := BV32_ULE($k.0, 22);
+  goto $truebb, $falsebb;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 50} true;
+  assert {:sourceloc} {:sourceloc_num 51} true;
+  v47 := $$C[BV32_ADD(BV32_MUL(BV32_SUB($k.0, 1), 13824), BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))];
+  assert {:sourceloc} {:sourceloc_num 52} true;
+  $$C[BV32_ADD(BV32_MUL(BV32_SUB($k.0, 1), 13824), BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x))] := FMUL32((if FLT32(v47, 8388608) then 8388608 else v47), FMUL32(FMUL32(v1, $PCONV), FDIV32(1065353216, FMUL32(FMUL32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(0, v3), v5), v7), v9), v11), v13), v15), v17), v19), v21), v23), v25), v27), v29), v31), v33), v35), v37), v39), v41), v43), v45), FMUL32(v0, $TCONV)), 1285461554))));
+  goto $3;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 53} true;
+  $k.0 := BV32_ADD($k.0, 1);
+  goto $1;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 54} true;
+  return;
+$truebb:
+  assume {:partition} v46;
+  assert {:block_sourceloc} {:sourceloc_num 55} true;
+  goto $2;
+$falsebb:
+  assume {:partition} !v46;
+  assert {:block_sourceloc} {:sourceloc_num 56} true;
+  goto $4;
+}
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 128 then 1 else 0) != 0;
+axiom (if num_groups_x == 108 then 1 else 0) != 0;
+axiom (if global_offset_x == 0 then 1 else 0) != 0;
+axiom (if global_offset_y == 0 then 1 else 0) != 0;
+axiom (if global_offset_z == 0 then 1 else 0) != 0;

@@ -1,0 +1,114 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "output"} {:global} $$output : [int]int;
+axiom {:array_info "$$output"} {:global} {:elem_width 32} {:source_name "output"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$output : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$output : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$output : bool;
+
+const _WATCHED_OFFSET : int;
+const {:global_offset_x} global_offset_x : int;
+const {:global_offset_y} global_offset_y : int;
+const {:global_offset_z} global_offset_z : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function SI32_TO_FP32(int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_AND(x : int, y : int) : int {
+  if x == y then x else (if x == 0 || y == 0 then 0 else BV32_AND_UF(x, y))
+}
+function BV32_AND_UF(int, int) : int;
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SLT(x : int, y : int) : bool {
+  x < y
+}
+function {:inline true} BV32_SUB(x : int, y : int) : int {
+  x - y
+}
+procedure {:source_name "writeGlobalMemoryUnit"} {:kernel} $writeGlobalMemoryUnit($size:int)
+requires {:sourceloc_num 0} (if $size == 16777216 then 1 else 0) != 0;
+{
+  var $j.0:int;
+  var $s.0:int;
+  var v0:int;
+  var v1:bool;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  v0 := BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x);
+  $j.0, $s.0 := 0, BV32_MUL(v0, 1024);
+  goto $1;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  v1 := BV32_SLT($j.0, 512);
+  goto $truebb, $falsebb;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 3} true;
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  $$output[BV32_AND($s.0, BV32_SUB($size, 1))] := SI32_TO_FP32(v0);
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  $$output[BV32_AND(BV32_ADD($s.0, 1), BV32_SUB($size, 1))] := SI32_TO_FP32(v0);
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  $$output[BV32_AND(BV32_ADD($s.0, 2), BV32_SUB($size, 1))] := SI32_TO_FP32(v0);
+  assert {:sourceloc} {:sourceloc_num 7} true;
+  $$output[BV32_AND(BV32_ADD($s.0, 3), BV32_SUB($size, 1))] := SI32_TO_FP32(v0);
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  $$output[BV32_AND(BV32_ADD($s.0, 4), BV32_SUB($size, 1))] := SI32_TO_FP32(v0);
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  $$output[BV32_AND(BV32_ADD($s.0, 5), BV32_SUB($size, 1))] := SI32_TO_FP32(v0);
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  $$output[BV32_AND(BV32_ADD($s.0, 6), BV32_SUB($size, 1))] := SI32_TO_FP32(v0);
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  $$output[BV32_AND(BV32_ADD($s.0, 7), BV32_SUB($size, 1))] := SI32_TO_FP32(v0);
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  $$output[BV32_AND(BV32_ADD($s.0, 8), BV32_SUB($size, 1))] := SI32_TO_FP32(v0);
+  assert {:sourceloc} {:sourceloc_num 13} true;
+  $$output[BV32_AND(BV32_ADD($s.0, 9), BV32_SUB($size, 1))] := SI32_TO_FP32(v0);
+  assert {:sourceloc} {:sourceloc_num 14} true;
+  $$output[BV32_AND(BV32_ADD($s.0, 10), BV32_SUB($size, 1))] := SI32_TO_FP32(v0);
+  assert {:sourceloc} {:sourceloc_num 15} true;
+  $$output[BV32_AND(BV32_ADD($s.0, 11), BV32_SUB($size, 1))] := SI32_TO_FP32(v0);
+  assert {:sourceloc} {:sourceloc_num 16} true;
+  $$output[BV32_AND(BV32_ADD($s.0, 12), BV32_SUB($size, 1))] := SI32_TO_FP32(v0);
+  assert {:sourceloc} {:sourceloc_num 17} true;
+  $$output[BV32_AND(BV32_ADD($s.0, 13), BV32_SUB($size, 1))] := SI32_TO_FP32(v0);
+  assert {:sourceloc} {:sourceloc_num 18} true;
+  $$output[BV32_AND(BV32_ADD($s.0, 14), BV32_SUB($size, 1))] := SI32_TO_FP32(v0);
+  assert {:sourceloc} {:sourceloc_num 19} true;
+  $$output[BV32_AND(BV32_ADD($s.0, 15), BV32_SUB($size, 1))] := SI32_TO_FP32(v0);
+  goto $3;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 20} true;
+  $j.0, $s.0 := BV32_ADD($j.0, 1), BV32_AND(BV32_ADD($s.0, 16), BV32_SUB($size, 1));
+  goto $1;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 21} true;
+  return;
+$truebb:
+  assume {:partition} v1;
+  assert {:block_sourceloc} {:sourceloc_num 22} true;
+  goto $2;
+$falsebb:
+  assume {:partition} !v1;
+  assert {:block_sourceloc} {:sourceloc_num 23} true;
+  goto $4;
+}
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 256 then 1 else 0) != 0;
+axiom (if num_groups_x == 40 then 1 else 0) != 0;
+axiom (if global_offset_x == 0 then 1 else 0) != 0;
+axiom (if global_offset_y == 0 then 1 else 0) != 0;
+axiom (if global_offset_z == 0 then 1 else 0) != 0;

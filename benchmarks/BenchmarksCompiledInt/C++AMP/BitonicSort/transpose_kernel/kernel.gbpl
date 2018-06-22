@@ -1,0 +1,63 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "data_in"} {:global} $$data_in : [int]int;
+axiom {:array_info "$$data_in"} {:global} {:elem_width 32} {:source_name "data_in"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$data_in : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$data_in : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$data_in : bool;
+
+var {:source_name "data_out"} {:global} $$data_out : [int]int;
+axiom {:array_info "$$data_out"} {:global} {:elem_width 32} {:source_name "data_out"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$data_out : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$data_out : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$data_out : bool;
+
+var {:source_name "transpose_shared_data"} {:group_shared} $$_ZZ16transpose_kernelPfS_jjE21transpose_shared_data : [int]int;
+axiom {:array_info "$$_ZZ16transpose_kernelPfS_jjE21transpose_shared_data"} {:group_shared} {:elem_width 32} {:source_name "transpose_shared_data"} {:source_elem_width 32} {:source_dimensions "16,16"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*,16"} _READ_HAS_OCCURRED_$$_ZZ16transpose_kernelPfS_jjE21transpose_shared_data : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*,16"} _WRITE_HAS_OCCURRED_$$_ZZ16transpose_kernelPfS_jjE21transpose_shared_data : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*,16"} _ATOMIC_HAS_OCCURRED_$$_ZZ16transpose_kernelPfS_jjE21transpose_shared_data : bool;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_id_y} group_id_y : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:local_id_y} local_id_y : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+procedure {:source_name "transpose_kernel"} {:kernel} $_Z16transpose_kernelPfS_jj($width:int, $height:int)
+requires {:sourceloc_num 0} (if $width == 512 then 1 else 0) != 0;
+{
+  var v0:int;
+  var v1:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  assert {:sourceloc} {:sourceloc_num 2} true;
+  v0 := $$data_in[BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_size_y, group_id_y), local_id_y), $width), BV32_ADD(BV32_MUL(group_size_x, group_id_x), local_id_x))];
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  $$_ZZ16transpose_kernelPfS_jjE21transpose_shared_data[BV32_ADD(BV32_MUL(local_id_y, 16), local_id_x)] := v0;
+  call {:sourceloc_num 4} $bugle_barrier(-1, -1);
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  v1 := $$_ZZ16transpose_kernelPfS_jjE21transpose_shared_data[BV32_ADD(BV32_MUL(local_id_y, 16), local_id_x)];
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  $$data_out[BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_size_x, group_id_x), local_id_x), $width), BV32_ADD(BV32_MUL(group_size_y, group_id_y), local_id_y))] := v1;
+  return;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:int, $1:int);
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 16 then 1 else 0) != 0;
+axiom (if group_size_y == 16 then 1 else 0) != 0;
+axiom (if num_groups_x == 32 then 1 else 0) != 0;
+axiom (if num_groups_y == 32 then 1 else 0) != 0;

@@ -1,0 +1,278 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "d_C"} {:global} $$d_C : [int]int;
+axiom {:array_info "$$d_C"} {:global} {:elem_width 32} {:source_name "d_C"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_C : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_C : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_C : bool;
+
+var {:source_name "d_A"} {:global} $$d_A : [int]int;
+axiom {:array_info "$$d_A"} {:global} {:elem_width 32} {:source_name "d_A"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_A : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_A : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_A : bool;
+
+var {:source_name "d_B"} {:global} $$d_B : [int]int;
+axiom {:array_info "$$d_B"} {:global} {:elem_width 32} {:source_name "d_B"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_B : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_B : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_B : bool;
+
+var {:source_name "accumResult"} {:group_shared} $$_ZZ13scalarProdGPUPfS_S_iiE11accumResult : [int]int;
+axiom {:array_info "$$_ZZ13scalarProdGPUPfS_S_iiE11accumResult"} {:group_shared} {:elem_width 32} {:source_name "accumResult"} {:source_elem_width 32} {:source_dimensions "1024"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ13scalarProdGPUPfS_S_iiE11accumResult : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ13scalarProdGPUPfS_S_iiE11accumResult : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ13scalarProdGPUPfS_S_iiE11accumResult : bool;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function  BV32_ASHR(int, int) : int;
+function FADD32(int, int) : int;
+function FMUL32(int, int) : int;
+function {:inline true} BV1_XOR(x : int, y : int) : int {
+  if (x == 1 || x == -1) && (y == 1 || y == -1) then 0 else (
+    if (x == 1 || x == -1) && y == 0 then 1 else (
+      if x == 0 && (y == 1 || y == -1) then 1 else (
+        if x == y then 0 else BV1_XOR_UF(x, y))))
+}
+function BV1_XOR_UF(int, int) : int;
+function {:inline true} BV1_ZEXT32(x : int) : int {
+  x
+}
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_AND(x : int, y : int) : int {
+  if x == y then x else (if x == 0 || y == 0 then 0 else BV32_AND_UF(x, y))
+}
+function BV32_AND_UF(int, int) : int;
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_OR(x : int, y : int) : int {
+  if x == y then x else (if x == 0 then y else (if y == 0 then x else BV32_OR_UF(x, y)))
+}
+function BV32_OR_UF(int, int) : int;
+function {:inline true} BV32_SGT(x : int, y : int) : bool {
+  x > y
+}
+function {:inline true} BV32_SLE(x : int, y : int) : bool {
+  x <= y
+}
+function {:inline true} BV32_SLT(x : int, y : int) : bool {
+  x < y
+}
+function {:inline true} BV32_SUB(x : int, y : int) : int {
+  x - y
+}
+function {:inline true} BV32_UDIV(x : int, y : int) : int {
+  x div y
+}
+function {:inline true} BV32_ULT(x : int, y : int) : bool {
+  x < y
+}
+function {:inline true} BV32_UREM(x : int, y : int) : int {
+  x mod y
+}
+procedure {:source_name "scalarProdGPU"} {:kernel} $_Z13scalarProdGPUPfS_S_ii($vectorN:int, $elementN:int)
+requires {:sourceloc_num 0} (if $vectorN == 65536 then 1 else 0) != 0;
+requires {:sourceloc_num 1} (if $elementN == 65536 then 1 else 0) != 0;
+{
+  var $vec.0:int;
+  var $iAccum.0:int;
+  var $sum.0:int;
+  var $pos.0:int;
+  var $stride.0:int;
+  var $iAccum1.0:int;
+  var v10:bool;
+  var v0:bool;
+  var v1:int;
+  var v2:bool;
+  var v3:bool;
+  var v4:int;
+  var v5:int;
+  var v6:bool;
+  var v7:bool;
+  var v8:int;
+  var v9:int;
+  var v11:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  $vec.0 := group_id_x;
+  goto $1;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 3} true;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 4} (if (_WRITE_HAS_OCCURRED_$$d_C ==> local_id_x == 0) then 1 else 0) != 0;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 5} (if (_READ_HAS_OCCURRED_$$_ZZ13scalarProdGPUPfS_S_iiE11accumResult ==> local_id_x == 0) then 1 else 0) != 0;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 6} (if (_READ_HAS_OCCURRED_$$_ZZ13scalarProdGPUPfS_S_iiE11accumResult ==> BV32_OR(BV1_ZEXT32((if BV32_UDIV(BV32_MUL(4, _WATCHED_OFFSET), 4) == 0 then 1 else 0)), BV1_ZEXT32((if BV32_UDIV(BV32_MUL(4, _WATCHED_OFFSET), 4) == 1 then 1 else 0))) != 0) then 1 else 0) != 0;
+  v0 := BV32_SLT($vec.0, $vectorN);
+  goto $truebb, $falsebb;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  v1 := BV32_MUL($elementN, $vec.0);
+  $iAccum.0 := local_id_x;
+  goto $3;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 8} true;
+  v2 := BV32_SLT($iAccum.0, 1024);
+  goto $truebb0, $falsebb0;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 9} true;
+  $sum.0, $pos.0 := 0, BV32_ADD(v1, $iAccum.0);
+  goto $5;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 10} true;
+  v3 := BV32_SLT($pos.0, BV32_ADD(v1, $elementN));
+  goto $truebb1, $falsebb1;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 11} true;
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  v4 := $$d_A[$pos.0];
+  assert {:sourceloc} {:sourceloc_num 13} true;
+  v5 := $$d_B[$pos.0];
+  goto $7;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 14} true;
+  $sum.0, $pos.0 := FADD32($sum.0, FMUL32(v4, v5)), BV32_ADD($pos.0, 1024);
+  goto $5;
+$8:
+  assert {:block_sourceloc} {:sourceloc_num 15} true;
+  assert {:sourceloc} {:sourceloc_num 16} true;
+  $$_ZZ13scalarProdGPUPfS_S_iiE11accumResult[$iAccum.0] := $sum.0;
+  goto $9;
+$9:
+  assert {:block_sourceloc} {:sourceloc_num 17} true;
+  $iAccum.0 := BV32_ADD($iAccum.0, group_size_x);
+  goto $3;
+$10:
+  assert {:block_sourceloc} {:sourceloc_num 18} true;
+  $stride.0 := 512;
+  goto $11;
+$11:
+  assert {:block_sourceloc} {:sourceloc_num 19} true;
+  assert {:originated_from_invariant} {:sourceloc_num 20} (if BV32_AND($stride.0, BV32_SUB($stride.0, 1)) == 0 then 1 else 0) != 0;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 21} (if (BV32_SLT($vec.0, $vectorN) ==> BV32_AND(BV1_ZEXT32((if BV32_SLE(0, $stride.0) then 1 else 0)), BV1_ZEXT32((if BV32_SLE($stride.0, 512) then 1 else 0))) != 0) then 1 else 0) != 0;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 22} (if (BV32_AND(BV32_AND(BV1_ZEXT32((if BV32_SLT($vec.0, $vectorN) then 1 else 0)), BV1_ZEXT32(BV1_XOR((if $stride.0 != 0 then 1 else 0), -1))), BV1_ZEXT32((if _READ_HAS_OCCURRED_$$_ZZ13scalarProdGPUPfS_S_iiE11accumResult then 1 else 0))) != 0 ==> local_id_x == 0) then 1 else 0) != 0;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 23} (if (BV32_AND(BV32_AND(BV1_ZEXT32((if BV32_SLT($vec.0, $vectorN) then 1 else 0)), BV1_ZEXT32(BV1_XOR((if $stride.0 != 0 then 1 else 0), -1))), BV1_ZEXT32((if _READ_HAS_OCCURRED_$$_ZZ13scalarProdGPUPfS_S_iiE11accumResult then 1 else 0))) != 0 ==> BV32_OR(BV1_ZEXT32((if BV32_UDIV(BV32_MUL(4, _WATCHED_OFFSET), 4) == 0 then 1 else 0)), BV1_ZEXT32((if BV32_UDIV(BV32_MUL(4, _WATCHED_OFFSET), 4) == 1 then 1 else 0))) != 0) then 1 else 0) != 0;
+  v6 := BV32_SGT($stride.0, 0);
+  goto $truebb2, $falsebb2;
+$12:
+  assert {:block_sourceloc} {:sourceloc_num 24} true;
+  call {:sourceloc_num 25} $bugle_barrier(-1, -1);
+  $iAccum1.0 := local_id_x;
+  goto $13;
+$13:
+  assert {:block_sourceloc} {:sourceloc_num 26} true;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 27} (if (BV32_AND(BV1_ZEXT32((if BV32_SLT($vec.0, $vectorN) then 1 else 0)), BV1_ZEXT32((if $stride.0 != 0 then 1 else 0))) != 0 ==> (_READ_HAS_OCCURRED_$$_ZZ13scalarProdGPUPfS_S_iiE11accumResult ==> BV32_OR(BV1_ZEXT32((if BV32_UREM(BV32_UDIV(BV32_MUL(4, _WATCHED_OFFSET), 4), group_size_x) == local_id_x then 1 else 0)), BV1_ZEXT32((if BV32_UREM(BV32_SUB(BV32_UDIV(BV32_MUL(4, _WATCHED_OFFSET), 4), $stride.0), group_size_x) == local_id_x then 1 else 0))) != 0)) then 1 else 0) != 0;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 28} (if (BV32_AND(BV1_ZEXT32((if BV32_SLT($vec.0, $vectorN) then 1 else 0)), BV1_ZEXT32((if $stride.0 != 0 then 1 else 0))) != 0 ==> (_READ_HAS_OCCURRED_$$_ZZ13scalarProdGPUPfS_S_iiE11accumResult ==> BV32_ULT(BV32_UDIV(BV32_MUL(4, _WATCHED_OFFSET), 4), BV32_MUL(2, $stride.0)))) then 1 else 0) != 0;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 29} (if (BV32_AND(BV1_ZEXT32((if BV32_SLT($vec.0, $vectorN) then 1 else 0)), BV1_ZEXT32((if $stride.0 != 0 then 1 else 0))) != 0 ==> (_WRITE_HAS_OCCURRED_$$_ZZ13scalarProdGPUPfS_S_iiE11accumResult ==> BV32_ULT(local_id_x, $stride.0))) then 1 else 0) != 0;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 30} (if (BV32_AND(BV1_ZEXT32((if BV32_SLT($vec.0, $vectorN) then 1 else 0)), BV1_ZEXT32((if $stride.0 != 0 then 1 else 0))) != 0 ==> (_READ_HAS_OCCURRED_$$_ZZ13scalarProdGPUPfS_S_iiE11accumResult ==> BV32_ULT(local_id_x, $stride.0))) then 1 else 0) != 0;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 31} (if (BV32_AND(BV32_AND(BV1_ZEXT32((if BV32_SLT($vec.0, $vectorN) then 1 else 0)), BV1_ZEXT32(BV1_XOR((if $stride.0 != 0 then 1 else 0), -1))), BV1_ZEXT32((if _READ_HAS_OCCURRED_$$_ZZ13scalarProdGPUPfS_S_iiE11accumResult then 1 else 0))) != 0 ==> local_id_x == 0) then 1 else 0) != 0;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 32} (if (BV32_AND(BV32_AND(BV1_ZEXT32((if BV32_SLT($vec.0, $vectorN) then 1 else 0)), BV1_ZEXT32(BV1_XOR((if $stride.0 != 0 then 1 else 0), -1))), BV1_ZEXT32((if _READ_HAS_OCCURRED_$$_ZZ13scalarProdGPUPfS_S_iiE11accumResult then 1 else 0))) != 0 ==> BV32_OR(BV1_ZEXT32((if BV32_UDIV(BV32_MUL(4, _WATCHED_OFFSET), 4) == 0 then 1 else 0)), BV1_ZEXT32((if BV32_UDIV(BV32_MUL(4, _WATCHED_OFFSET), 4) == 1 then 1 else 0))) != 0) then 1 else 0) != 0;
+  v7 := BV32_SLT($iAccum1.0, $stride.0);
+  goto $truebb3, $falsebb3;
+$14:
+  assert {:block_sourceloc} {:sourceloc_num 33} true;
+  assert {:sourceloc} {:sourceloc_num 34} true;
+  v8 := $$_ZZ13scalarProdGPUPfS_S_iiE11accumResult[BV32_ADD($stride.0, $iAccum1.0)];
+  assert {:sourceloc} {:sourceloc_num 35} true;
+  v9 := $$_ZZ13scalarProdGPUPfS_S_iiE11accumResult[$iAccum1.0];
+  assert {:sourceloc} {:sourceloc_num 36} true;
+  $$_ZZ13scalarProdGPUPfS_S_iiE11accumResult[$iAccum1.0] := FADD32(v9, v8);
+  goto $15;
+$15:
+  assert {:block_sourceloc} {:sourceloc_num 37} true;
+  $iAccum1.0 := BV32_ADD($iAccum1.0, group_size_x);
+  goto $13;
+$16:
+  assert {:block_sourceloc} {:sourceloc_num 38} true;
+  goto $17;
+$17:
+  assert {:block_sourceloc} {:sourceloc_num 39} true;
+  $stride.0 := BV32_ASHR($stride.0, 1);
+  goto $11;
+$18:
+  assert {:block_sourceloc} {:sourceloc_num 40} true;
+  v10 := local_id_x == 0;
+  goto $truebb4, $falsebb4;
+$19:
+  assert {:block_sourceloc} {:sourceloc_num 41} true;
+  assert {:sourceloc} {:sourceloc_num 42} true;
+  v11 := $$_ZZ13scalarProdGPUPfS_S_iiE11accumResult[0];
+  assert {:sourceloc} {:sourceloc_num 43} true;
+  $$d_C[$vec.0] := v11;
+  goto $20;
+$20:
+  assert {:block_sourceloc} {:sourceloc_num 44} true;
+  goto $21;
+$21:
+  assert {:block_sourceloc} {:sourceloc_num 45} true;
+  $vec.0 := BV32_ADD($vec.0, num_groups_x);
+  goto $1;
+$22:
+  assert {:block_sourceloc} {:sourceloc_num 46} true;
+  return;
+$truebb:
+  assume {:partition} v0;
+  assert {:block_sourceloc} {:sourceloc_num 47} true;
+  goto $2;
+$falsebb:
+  assume {:partition} !v0;
+  assert {:block_sourceloc} {:sourceloc_num 48} true;
+  goto $22;
+$truebb0:
+  assume {:partition} v2;
+  assert {:block_sourceloc} {:sourceloc_num 49} true;
+  goto $4;
+$falsebb0:
+  assume {:partition} !v2;
+  assert {:block_sourceloc} {:sourceloc_num 50} true;
+  goto $10;
+$truebb1:
+  assume {:partition} v3;
+  assert {:block_sourceloc} {:sourceloc_num 51} true;
+  goto $6;
+$falsebb1:
+  assume {:partition} !v3;
+  assert {:block_sourceloc} {:sourceloc_num 52} true;
+  goto $8;
+$truebb2:
+  assume {:partition} v6;
+  assert {:block_sourceloc} {:sourceloc_num 53} true;
+  goto $12;
+$falsebb2:
+  assume {:partition} !v6;
+  assert {:block_sourceloc} {:sourceloc_num 54} true;
+  goto $18;
+$truebb3:
+  assume {:partition} v7;
+  assert {:block_sourceloc} {:sourceloc_num 55} true;
+  goto $14;
+$falsebb3:
+  assume {:partition} !v7;
+  assert {:block_sourceloc} {:sourceloc_num 56} true;
+  goto $16;
+$truebb4:
+  assume {:partition} v10;
+  assert {:block_sourceloc} {:sourceloc_num 57} true;
+  goto $19;
+$falsebb4:
+  assume {:partition} !v10;
+  assert {:block_sourceloc} {:sourceloc_num 58} true;
+  goto $20;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:int, $1:int);
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 256 then 1 else 0) != 0;
+axiom (if num_groups_x == 128 then 1 else 0) != 0;

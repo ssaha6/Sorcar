@@ -1,0 +1,516 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "g_img0"} {:global} $$g_img0 : [int]int;
+axiom {:array_info "$$g_img0"} {:global} {:elem_width 32} {:source_name "g_img0"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$g_img0 : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$g_img0 : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_img0 : bool;
+
+var {:source_name "g_img1"} {:global} $$g_img1 : [int]int;
+axiom {:array_info "$$g_img1"} {:global} {:elem_width 32} {:source_name "g_img1"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$g_img1 : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$g_img1 : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_img1 : bool;
+
+var {:source_name "g_odata"} {:global} $$g_odata : [int]int;
+axiom {:array_info "$$g_odata"} {:global} {:elem_width 32} {:source_name "g_odata"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$g_odata : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$g_odata : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_odata : bool;
+
+var {:source_name "imLeftA"} $$imLeftA : [int]int;
+axiom {:array_info "$$imLeftA"} {:elem_width 32} {:source_name "imLeftA"} {:source_elem_width 32} {:source_dimensions "3"} true;
+
+var {:source_name "imLeftB"} $$imLeftB : [int]int;
+axiom {:array_info "$$imLeftB"} {:elem_width 32} {:source_name "imLeftB"} {:source_elem_width 32} {:source_dimensions "3"} true;
+
+var {:source_name ""} $$0 : [int]int;
+axiom {:array_info "$$0"} {:elem_width 32} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
+
+var {:source_name ""} $$1 : [int]int;
+axiom {:array_info "$$1"} {:elem_width 32} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
+
+var {:source_name ""} $$2 : [int]int;
+axiom {:array_info "$$2"} {:elem_width 32} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
+
+var {:source_name ""} $$3 : [int]int;
+axiom {:array_info "$$3"} {:elem_width 32} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
+
+var {:source_name "tex2Dleft"} {:global} $$tex2Dleft : [int]int;
+axiom {:array_info "$$tex2Dleft"} {:global} {:elem_width 32} {:source_name "tex2Dleft"} {:source_elem_width 96} {:source_dimensions "1"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 96} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$tex2Dleft : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 96} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$tex2Dleft : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 96} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$tex2Dleft : bool;
+
+var {:source_name "diff"} {:group_shared} $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff : [int]int;
+axiom {:array_info "$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff"} {:group_shared} {:elem_width 32} {:source_name "diff"} {:source_elem_width 32} {:source_dimensions "24,48"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*,48"} _READ_HAS_OCCURRED_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*,48"} _WRITE_HAS_OCCURRED_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*,48"} _ATOMIC_HAS_OCCURRED_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff : bool;
+
+var {:source_name "tex2Dright"} {:global} $$tex2Dright : [int]int;
+axiom {:array_info "$$tex2Dright"} {:global} {:elem_width 32} {:source_name "tex2Dright"} {:source_elem_width 96} {:source_dimensions "1"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 96} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$tex2Dright : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 96} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$tex2Dright : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 96} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$tex2Dright : bool;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_id_y} group_id_y : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:local_id_y} local_id_y : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function SI32_TO_FP32(int) : int;
+function {:inline true} BV1_ZEXT32(x : int) : int {
+  x
+}
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_OR(x : int, y : int) : int {
+  if x == y then x else (if x == 0 then y else (if y == 0 then x else BV32_OR_UF(x, y)))
+}
+function BV32_OR_UF(int, int) : int;
+function {:inline true} BV32_SLE(x : int, y : int) : bool {
+  x <= y
+}
+function {:inline true} BV32_SLT(x : int, y : int) : bool {
+  x < y
+}
+function {:inline true} BV32_SUB(x : int, y : int) : int {
+  x - y
+}
+function {:inline true} BV32_UDIV(x : int, y : int) : int {
+  x div y
+}
+function {:inline true} BV32_ULT(x : int, y : int) : bool {
+  x < y
+}
+function {:inline true} BV32_UREM(x : int, y : int) : int {
+  x mod y
+}
+procedure {:source_name "stereoDisparityKernel"} {:kernel} $_Z21stereoDisparityKernelPjS_S_iiii($w:int, $h:int, $minDisparity:int, $maxDisparity:int)
+requires {:sourceloc_num 0} (if $w == 640 then 1 else 0) != 0;
+{
+  var $i.0:int;
+  var $bestCost.0:int;
+  var $bestDisparity.0:int;
+  var $d.0:int;
+  var $i1.0:int;
+  var $i3.0:int;
+  var $j.0:int;
+  var $cost.0:int;
+  var $i6.0:int;
+  var $cost.1:int;
+  var $i7.0:int;
+  var $bestCost.1:int;
+  var $bestDisparity.1:int;
+  var v0:int;
+  var v1:int;
+  var v2:int;
+  var v3:int;
+  var v4:bool;
+  var v5:int;
+  var v6:int;
+  var v7:int;
+  var v8:int;
+  var v9:int;
+  var v10:int;
+  var v11:int;
+  var v12:int;
+  var v13:int;
+  var v14:int;
+  var v15:int;
+  var v16:int;
+  var v17:int;
+  var v18:int;
+  var v19:int;
+  var v20:bool;
+  var v21:bool;
+  var v22:int;
+  var v23:int;
+  var v24:int;
+  var v25:int;
+  var v26:int;
+  var v27:int;
+  var v28:int;
+  var v29:int;
+  var v30:int;
+  var v31:int;
+  var v32:bool;
+  var v33:int;
+  var v34:bool;
+  var v35:int;
+  var v36:int;
+  var v37:int;
+  var v38:int;
+  var v39:int;
+  var v40:int;
+  var v41:int;
+  var v42:int;
+  var v43:int;
+  var v44:bool;
+  var v45:int;
+  var v46:bool;
+  var v47:int;
+  var v48:bool;
+  var v49:int;
+  var v50:bool;
+  var v51:bool;
+  var v52:bool;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  v0 := BV32_ADD(BV32_MUL(group_size_x, group_id_x), local_id_x);
+  v1 := BV32_ADD(BV32_MUL(group_size_y, group_id_y), local_id_y);
+  v2 := BV32_ADD(local_id_x, 8);
+  v3 := BV32_ADD(local_id_y, 8);
+  $i.0 := 0;
+  goto $1;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  v4 := BV32_SLT($i.0, 3);
+  goto $truebb, $falsebb;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 3} true;
+  v5 := BV32_ADD(-8, BV32_MUL($i.0, 8));
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  v6 := $$tex2Dleft[0];
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  $$0[0] := v6;
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  v7 := $$tex2Dleft[1];
+  assert {:sourceloc} {:sourceloc_num 7} true;
+  $$0[1] := v7;
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  v8 := $$tex2Dleft[2];
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  $$0[2] := v8;
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  v9 := $$0[0];
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  v10 := $$0[1];
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  v11 := $$0[2];
+  call {:sourceloc_num 13}   v12 := $_Z5tex2DIjET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(v9, v10, v11, SI32_TO_FP32(BV32_SUB(v0, 8)), SI32_TO_FP32(BV32_ADD(v1, v5)));
+  assert {:sourceloc} {:sourceloc_num 14} true;
+  $$imLeftA[$i.0] := v12;
+  assert {:sourceloc} {:sourceloc_num 15} true;
+  v13 := $$tex2Dleft[0];
+  assert {:sourceloc} {:sourceloc_num 16} true;
+  $$1[0] := v13;
+  assert {:sourceloc} {:sourceloc_num 17} true;
+  v14 := $$tex2Dleft[1];
+  assert {:sourceloc} {:sourceloc_num 18} true;
+  $$1[1] := v14;
+  assert {:sourceloc} {:sourceloc_num 19} true;
+  v15 := $$tex2Dleft[2];
+  assert {:sourceloc} {:sourceloc_num 20} true;
+  $$1[2] := v15;
+  assert {:sourceloc} {:sourceloc_num 21} true;
+  v16 := $$1[0];
+  assert {:sourceloc} {:sourceloc_num 22} true;
+  v17 := $$1[1];
+  assert {:sourceloc} {:sourceloc_num 23} true;
+  v18 := $$1[2];
+  call {:sourceloc_num 24}   v19 := $_Z5tex2DIjET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(v16, v17, v18, SI32_TO_FP32(BV32_ADD(BV32_SUB(v0, 8), 32)), SI32_TO_FP32(BV32_ADD(v1, v5)));
+  assert {:sourceloc} {:sourceloc_num 25} true;
+  $$imLeftB[$i.0] := v19;
+  goto $3;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 26} true;
+  $i.0 := BV32_ADD($i.0, 1);
+  goto $1;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 27} true;
+  $bestCost.0, $bestDisparity.0, $d.0 := 9999999, 0, $minDisparity;
+  goto $5;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 28} true;
+  v20 := BV32_SLE($d.0, $maxDisparity);
+  goto $truebb0, $falsebb0;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 29} true;
+  $i1.0 := 0;
+  goto $7;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 30} true;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 31} (if (_WRITE_HAS_OCCURRED_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff ==> BV32_UREM(BV32_UDIV(BV32_MUL(4, _WATCHED_OFFSET), 4), 48) == BV32_SUB(v2, 8)) then 1 else 0) != 0;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 32} (if (_WRITE_HAS_OCCURRED_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff ==> BV32_UREM(BV32_ADD(BV32_SUB(BV32_UDIV(BV32_UDIV(BV32_MUL(4, _WATCHED_OFFSET), 4), 48), v3), 8), 8) == 0) then 1 else 0) != 0;
+  v21 := BV32_SLT($i1.0, 3);
+  goto $truebb1, $falsebb1;
+$8:
+  assert {:block_sourceloc} {:sourceloc_num 33} true;
+  v22 := BV32_ADD(-8, BV32_MUL($i1.0, 8));
+  assert {:sourceloc} {:sourceloc_num 34} true;
+  v23 := $$imLeftA[$i1.0];
+  assert {:sourceloc} {:sourceloc_num 35} true;
+  v24 := $$tex2Dright[0];
+  assert {:sourceloc} {:sourceloc_num 36} true;
+  $$2[0] := v24;
+  assert {:sourceloc} {:sourceloc_num 37} true;
+  v25 := $$tex2Dright[1];
+  assert {:sourceloc} {:sourceloc_num 38} true;
+  $$2[1] := v25;
+  assert {:sourceloc} {:sourceloc_num 39} true;
+  v26 := $$tex2Dright[2];
+  assert {:sourceloc} {:sourceloc_num 40} true;
+  $$2[2] := v26;
+  assert {:sourceloc} {:sourceloc_num 41} true;
+  v27 := $$2[0];
+  assert {:sourceloc} {:sourceloc_num 42} true;
+  v28 := $$2[1];
+  assert {:sourceloc} {:sourceloc_num 43} true;
+  v29 := $$2[2];
+  call {:sourceloc_num 44}   v30 := $_Z5tex2DIjET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(v27, v28, v29, SI32_TO_FP32(BV32_ADD(BV32_SUB(v0, 8), $d.0)), SI32_TO_FP32(BV32_ADD(v1, v22)));
+  call {:sourceloc_num 45}   v31 := $_ZL7__usad4jjj(v23, v30, 0);
+  assert {:sourceloc} {:sourceloc_num 46} true;
+  $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[BV32_ADD(BV32_MUL(BV32_ADD(v3, v22), 48), BV32_SUB(v2, 8))] := v31;
+  goto $9;
+$9:
+  assert {:block_sourceloc} {:sourceloc_num 47} true;
+  $i1.0 := BV32_ADD($i1.0, 1);
+  goto $7;
+$10:
+  assert {:block_sourceloc} {:sourceloc_num 48} true;
+  $i3.0 := 0;
+  goto $11;
+$11:
+  assert {:block_sourceloc} {:sourceloc_num 49} true;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 50} (if (_WRITE_HAS_OCCURRED_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff ==> BV32_OR(BV1_ZEXT32((if BV32_UREM(BV32_UDIV(BV32_MUL(4, _WATCHED_OFFSET), 4), 48) == BV32_ADD(BV32_SUB(v2, 8), 32) then 1 else 0)), BV1_ZEXT32((if BV32_UREM(BV32_UDIV(BV32_MUL(4, _WATCHED_OFFSET), 4), 48) == BV32_SUB(v2, 8) then 1 else 0))) != 0) then 1 else 0) != 0;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 51} (if (_WRITE_HAS_OCCURRED_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff ==> BV32_UREM(BV32_ADD(BV32_SUB(BV32_UDIV(BV32_UDIV(BV32_MUL(4, _WATCHED_OFFSET), 4), 48), v3), 8), 8) == 0) then 1 else 0) != 0;
+  v32 := BV32_SLT($i3.0, 3);
+  goto $truebb2, $falsebb2;
+$12:
+  assert {:block_sourceloc} {:sourceloc_num 52} true;
+  v33 := BV32_ADD(-8, BV32_MUL($i3.0, 8));
+  v34 := BV32_ULT(local_id_x, 16);
+  goto $truebb3, $falsebb3;
+$13:
+  assert {:block_sourceloc} {:sourceloc_num 53} true;
+  assert {:sourceloc} {:sourceloc_num 54} true;
+  v35 := $$imLeftB[$i3.0];
+  assert {:sourceloc} {:sourceloc_num 55} true;
+  v36 := $$tex2Dright[0];
+  assert {:sourceloc} {:sourceloc_num 56} true;
+  $$3[0] := v36;
+  assert {:sourceloc} {:sourceloc_num 57} true;
+  v37 := $$tex2Dright[1];
+  assert {:sourceloc} {:sourceloc_num 58} true;
+  $$3[1] := v37;
+  assert {:sourceloc} {:sourceloc_num 59} true;
+  v38 := $$tex2Dright[2];
+  assert {:sourceloc} {:sourceloc_num 60} true;
+  $$3[2] := v38;
+  assert {:sourceloc} {:sourceloc_num 61} true;
+  v39 := $$3[0];
+  assert {:sourceloc} {:sourceloc_num 62} true;
+  v40 := $$3[1];
+  assert {:sourceloc} {:sourceloc_num 63} true;
+  v41 := $$3[2];
+  call {:sourceloc_num 64}   v42 := $_Z5tex2DIjET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(v39, v40, v41, SI32_TO_FP32(BV32_ADD(BV32_ADD(BV32_SUB(v0, 8), 32), $d.0)), SI32_TO_FP32(BV32_ADD(v1, v33)));
+  call {:sourceloc_num 65}   v43 := $_ZL7__usad4jjj(v35, v42, 0);
+  assert {:sourceloc} {:sourceloc_num 66} true;
+  $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[BV32_ADD(BV32_MUL(BV32_ADD(v3, v33), 48), BV32_ADD(BV32_SUB(v2, 8), 32))] := v43;
+  goto $14;
+$14:
+  assert {:block_sourceloc} {:sourceloc_num 67} true;
+  goto $15;
+$15:
+  assert {:block_sourceloc} {:sourceloc_num 68} true;
+  $i3.0 := BV32_ADD($i3.0, 1);
+  goto $11;
+$16:
+  assert {:block_sourceloc} {:sourceloc_num 69} true;
+  call {:sourceloc_num 70} $bugle_barrier(-1, -1);
+  $j.0 := 0;
+  goto $17;
+$17:
+  assert {:block_sourceloc} {:sourceloc_num 71} true;
+  v44 := BV32_SLT($j.0, 3);
+  goto $truebb4, $falsebb4;
+$18:
+  assert {:block_sourceloc} {:sourceloc_num 72} true;
+  v45 := BV32_ADD(-8, BV32_MUL($j.0, 8));
+  $cost.0, $i6.0 := 0, -8;
+  goto $19;
+$19:
+  assert {:block_sourceloc} {:sourceloc_num 73} true;
+  v46 := BV32_SLE($i6.0, 8);
+  goto $truebb5, $falsebb5;
+$20:
+  assert {:block_sourceloc} {:sourceloc_num 74} true;
+  assert {:sourceloc} {:sourceloc_num 75} true;
+  v47 := $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[BV32_ADD(BV32_MUL(BV32_ADD(v3, v45), 48), BV32_ADD(v2, $i6.0))];
+  goto $21;
+$21:
+  assert {:block_sourceloc} {:sourceloc_num 76} true;
+  $cost.0, $i6.0 := BV32_ADD($cost.0, v47), BV32_ADD($i6.0, 1);
+  goto $19;
+$22:
+  assert {:block_sourceloc} {:sourceloc_num 77} true;
+  call {:sourceloc_num 78} $bugle_barrier(-1, -1);
+  assert {:sourceloc} {:sourceloc_num 79} true;
+  $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[BV32_ADD(BV32_MUL(BV32_ADD(v3, v45), 48), v2)] := $cost.0;
+  call {:sourceloc_num 80} $bugle_barrier(-1, -1);
+  goto $23;
+$23:
+  assert {:block_sourceloc} {:sourceloc_num 81} true;
+  $j.0 := BV32_ADD($j.0, 1);
+  goto $17;
+$24:
+  assert {:block_sourceloc} {:sourceloc_num 82} true;
+  $cost.1, $i7.0 := 0, -8;
+  goto $25;
+$25:
+  assert {:block_sourceloc} {:sourceloc_num 83} true;
+  v48 := BV32_SLE($i7.0, 8);
+  goto $truebb6, $falsebb6;
+$26:
+  assert {:block_sourceloc} {:sourceloc_num 84} true;
+  assert {:sourceloc} {:sourceloc_num 85} true;
+  v49 := $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[BV32_ADD(BV32_MUL(BV32_ADD(v3, $i7.0), 48), v2)];
+  goto $27;
+$27:
+  assert {:block_sourceloc} {:sourceloc_num 86} true;
+  $cost.1, $i7.0 := BV32_ADD($cost.1, v49), BV32_ADD($i7.0, 1);
+  goto $25;
+$28:
+  assert {:block_sourceloc} {:sourceloc_num 87} true;
+  v50 := BV32_ULT($cost.1, $bestCost.0);
+  goto $truebb7, $falsebb7;
+$29:
+  assert {:block_sourceloc} {:sourceloc_num 88} true;
+  $bestCost.1, $bestDisparity.1 := $cost.1, BV32_ADD($d.0, 8);
+  goto $30;
+$30:
+  assert {:block_sourceloc} {:sourceloc_num 89} true;
+  call {:sourceloc_num 90} $bugle_barrier(-1, -1);
+  goto $31;
+$31:
+  assert {:block_sourceloc} {:sourceloc_num 91} true;
+  $bestCost.0, $bestDisparity.0, $d.0 := $bestCost.1, $bestDisparity.1, BV32_ADD($d.0, 1);
+  goto $5;
+$32:
+  assert {:block_sourceloc} {:sourceloc_num 92} true;
+  v51 := BV32_SLT(v1, $h);
+  goto $truebb8, $falsebb8;
+$33:
+  assert {:block_sourceloc} {:sourceloc_num 93} true;
+  v52 := BV32_SLT(v0, $w);
+  goto $truebb9, $falsebb9;
+$34:
+  assert {:block_sourceloc} {:sourceloc_num 94} true;
+  assert {:sourceloc} {:sourceloc_num 95} true;
+  $$g_odata[BV32_ADD(BV32_MUL(v1, $w), v0)] := $bestDisparity.0;
+  goto $35;
+$35:
+  assert {:block_sourceloc} {:sourceloc_num 96} true;
+  return;
+$truebb:
+  assume {:partition} v4;
+  assert {:block_sourceloc} {:sourceloc_num 97} true;
+  goto $2;
+$falsebb:
+  assume {:partition} !v4;
+  assert {:block_sourceloc} {:sourceloc_num 98} true;
+  goto $4;
+$truebb0:
+  assume {:partition} v20;
+  assert {:block_sourceloc} {:sourceloc_num 99} true;
+  goto $6;
+$falsebb0:
+  assume {:partition} !v20;
+  assert {:block_sourceloc} {:sourceloc_num 100} true;
+  goto $32;
+$truebb1:
+  assume {:partition} v21;
+  assert {:block_sourceloc} {:sourceloc_num 101} true;
+  goto $8;
+$falsebb1:
+  assume {:partition} !v21;
+  assert {:block_sourceloc} {:sourceloc_num 102} true;
+  goto $10;
+$truebb2:
+  assume {:partition} v32;
+  assert {:block_sourceloc} {:sourceloc_num 103} true;
+  goto $12;
+$falsebb2:
+  assume {:partition} !v32;
+  assert {:block_sourceloc} {:sourceloc_num 104} true;
+  goto $16;
+$truebb3:
+  assume {:partition} v34;
+  assert {:block_sourceloc} {:sourceloc_num 105} true;
+  goto $13;
+$falsebb3:
+  assume {:partition} !v34;
+  assert {:block_sourceloc} {:sourceloc_num 106} true;
+  goto $14;
+$truebb4:
+  assume {:partition} v44;
+  assert {:block_sourceloc} {:sourceloc_num 107} true;
+  goto $18;
+$falsebb4:
+  assume {:partition} !v44;
+  assert {:block_sourceloc} {:sourceloc_num 108} true;
+  goto $24;
+$truebb5:
+  assume {:partition} v46;
+  assert {:block_sourceloc} {:sourceloc_num 109} true;
+  goto $20;
+$falsebb5:
+  assume {:partition} !v46;
+  assert {:block_sourceloc} {:sourceloc_num 110} true;
+  goto $22;
+$truebb6:
+  assume {:partition} v48;
+  assert {:block_sourceloc} {:sourceloc_num 111} true;
+  goto $26;
+$falsebb6:
+  assume {:partition} !v48;
+  assert {:block_sourceloc} {:sourceloc_num 112} true;
+  goto $28;
+$truebb7:
+  assume {:partition} v50;
+  assert {:block_sourceloc} {:sourceloc_num 113} true;
+  goto $29;
+$falsebb7:
+  assume {:partition} !v50;
+  assert {:block_sourceloc} {:sourceloc_num 114} true;
+  $bestCost.1, $bestDisparity.1 := $bestCost.0, $bestDisparity.0;
+  goto $30;
+$truebb8:
+  assume {:partition} v51;
+  assert {:block_sourceloc} {:sourceloc_num 115} true;
+  goto $33;
+$falsebb8:
+  assume {:partition} !v51;
+  assert {:block_sourceloc} {:sourceloc_num 116} true;
+  goto $35;
+$truebb9:
+  assume {:partition} v52;
+  assert {:block_sourceloc} {:sourceloc_num 117} true;
+  goto $34;
+$falsebb9:
+  assume {:partition} !v52;
+  assert {:block_sourceloc} {:sourceloc_num 118} true;
+  goto $35;
+}
+procedure {:source_name "_Z5tex2DIjET_7textureIS0_Li2EL19cudaTextureReadMode0EEff"} $_Z5tex2DIjET_7textureIS0_Li2EL19cudaTextureReadMode0EEff($0:int, $1:int, $2:int, $3:int, $4:int) returns ($ret:int);
+procedure {:source_name "_ZL7__usad4jjj"} $_ZL7__usad4jjj($0:int, $1:int, $2:int) returns ($ret:int);
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:int, $1:int);
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 32 then 1 else 0) != 0;
+axiom (if group_size_y == 8 then 1 else 0) != 0;
+axiom (if num_groups_x == 20 then 1 else 0) != 0;
+axiom (if num_groups_y == 67 then 1 else 0) != 0;

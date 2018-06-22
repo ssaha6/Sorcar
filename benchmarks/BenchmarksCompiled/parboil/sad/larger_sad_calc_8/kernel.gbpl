@@ -1,0 +1,305 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP8(x : [bv32]bv8, y : bv32) returns (z : bv8, A : [bv32]bv8);
+var {:source_name "blk_sad"} {:global} $$blk_sad : [bv32]bv8;
+axiom {:array_info "$$blk_sad"} {:global} {:elem_width 8} {:source_name "blk_sad"} {:source_elem_width 16} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 16} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$blk_sad : bool;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 16} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$blk_sad : bool;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 16} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$blk_sad : bool;
+const $arrayId$$blk_sad : arrayId;
+axiom $arrayId$$blk_sad == 1bv2;
+
+type ptr = bv32;
+type arrayId = bv2;
+
+function {:inline true} MKPTR(base: arrayId, offset: bv32) : ptr {
+  base ++ offset[30:0]
+}
+
+function {:inline true} base#MKPTR(p: ptr) : arrayId {
+  p[32:30]
+}
+
+function {:inline true} offset#MKPTR(p : ptr) : bv32 {
+  0bv2++p[30:0]
+}
+
+const $arrayId$$null$ : arrayId;
+axiom $arrayId$$null$ == 0bv2;
+
+const _WATCHED_OFFSET : bv32;
+const {:global_offset_x} global_offset_x : bv32;
+const {:global_offset_y} global_offset_y : bv32;
+const {:global_offset_z} global_offset_z : bv32;
+const {:group_id_x} group_id_x : bv32;
+const {:group_id_y} group_id_y : bv32;
+const {:group_size_x} group_size_x : bv32;
+const {:group_size_y} group_size_y : bv32;
+const {:group_size_z} group_size_z : bv32;
+const {:local_id_x} local_id_x : bv32;
+const {:local_id_y} local_id_y : bv32;
+const {:num_groups_x} num_groups_x : bv32;
+const {:num_groups_y} num_groups_y : bv32;
+const {:num_groups_z} num_groups_z : bv32;
+function {:bvbuiltin "bvadd"} BV16_ADD(bv16, bv16) : bv16;
+function {:bvbuiltin "bvadd"} BV32_ADD(bv32, bv32) : bv32;
+function {:bvbuiltin "bvand"} BV32_AND(bv32, bv32) : bv32;
+function {:bvbuiltin "bvashr"} BV32_ASHR(bv32, bv32) : bv32;
+function {:bvbuiltin "bvlshr"} BV32_LSHR(bv32, bv32) : bv32;
+function {:bvbuiltin "bvmul"} BV32_MUL(bv32, bv32) : bv32;
+function {:bvbuiltin "bvor"} BV32_OR(bv32, bv32) : bv32;
+function {:bvbuiltin "bvshl"} BV32_SHL(bv32, bv32) : bv32;
+function {:bvbuiltin "bvslt"} BV32_SLT(bv32, bv32) : bool;
+function {:bvbuiltin "bvsub"} BV32_SUB(bv32, bv32) : bv32;
+function {:bvbuiltin "bvudiv"} BV32_UDIV(bv32, bv32) : bv32;
+function {:bvbuiltin "bvult"} BV32_ULT(bv32, bv32) : bool;
+function {:bvbuiltin "bvurem"} BV32_UREM(bv32, bv32) : bv32;
+function {:bvbuiltin "zero_extend 31"} BV1_ZEXT32(bv1) : bv32;
+procedure {:source_name "larger_sad_calc_8"} {:kernel} $larger_sad_calc_8($mb_width:bv32, $mb_height:bv32)
+requires {:sourceloc_num 0} (if $mb_width == num_groups_x then 1bv1 else 0bv1) != 0bv1;
+requires {:sourceloc_num 1} (if $mb_height == num_groups_y then 1bv1 else 0bv1) != 0bv1;
+{
+  var $bo_5.0:ptr;
+  var $bo_4.0:ptr;
+  var $search_pos.0:bv32;
+  var v2:bv32;
+  var v3:bv32;
+  var v1:bv32;
+  var v0:bv32;
+  var v41:ptr;
+  var v40:ptr;
+  var v27:bv8;
+  var v21:bv8;
+  var v22:bv8;
+  var v28:bv8;
+  var v16:bv8;
+  var v15:bv8;
+  var v19:bv8;
+  var v24:bv8;
+  var v25:bv8;
+  var v18:bv8;
+  var v10:bv8;
+  var v7:bv8;
+  var v13:bv8;
+  var v9:bv8;
+  var v12:bv8;
+  var v6:bv8;
+  var v4:bool;
+  var v8:bv16;
+  var v11:bv16;
+  var v5:bool;
+  var v20:bv16;
+  var v17:bv16;
+  var v14:bv16;
+  var v23:bv16;
+  var v31:bv16;
+  var v26:bv16;
+  var v30:bv16;
+  var v29:bv16;
+  var v34:bv16;
+  var v36:bv16;
+  var v33:bv16;
+  var v35:bv16;
+  var v37:bv16;
+  var v32:bv16;
+  var v39:bv16;
+  var v38:bv16;
+$entry:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  v0 := BV32_AND(local_id_y, 1bv32);
+  v1 := BV32_LSHR(local_id_y, 1bv32);
+  v2 := BV32_MUL(BV32_ASHR(BV32_SHL($mb_height, 8bv32), 8bv32), BV32_ASHR(BV32_SHL($mb_width, 8bv32), 8bv32));
+  v3 := BV32_MUL(BV32_ADD(BV32_MUL(BV32_ASHR(BV32_SHL($mb_width, 8bv32), 8bv32), BV32_ASHR(BV32_SHL(group_id_y, 8bv32), 8bv32)), group_id_x), 1096bv32);
+  v4 := BV32_SLT(v1, 100bv32);
+  goto $truebb, $falsebb;
+$if.then:
+  assert {:block_sourceloc} {:sourceloc_num 3} true;
+  $bo_5.0, $bo_4.0 := MKPTR($arrayId$$blk_sad, BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_ADD(BV32_SHL(v2, 3bv32), v2), BV32_ADD(BV32_MUL(v1, 4bv32), v0)), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 8bv32), 2bv32))), MKPTR($arrayId$$blk_sad, BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_ADD(BV32_SHL(v2, 2bv32), v2), BV32_ADD(BV32_MUL(v1, 2bv32), v0)), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 4bv32), 2bv32)));
+  goto $if.end;
+$if.end:
+  assert {:block_sourceloc} {:sourceloc_num 4} true;
+  $search_pos.0 := local_id_x;
+  goto $for.cond;
+$for.cond:
+  assert {:block_sourceloc} {:sourceloc_num 5} true;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 6} (if (_READ_HAS_OCCURRED_$$blk_sad ==> BV32_OR(BV32_OR(BV32_OR(BV1_ZEXT32((if BV32_ULT(BV32_UDIV(BV32_SUB(_WATCHED_OFFSET, BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_MUL(25bv32, BV32_ASHR(BV32_SHL(v2, 8bv32), 8bv32)), BV32_ADD(BV32_MUL(v1, 8bv32), BV32_MUL(v0, 2bv32))), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 16bv32), 2bv32))), 4bv32), 545bv32) then 1bv1 else 0bv1)), BV1_ZEXT32((if BV32_ULT(BV32_SUB(BV32_UDIV(BV32_SUB(_WATCHED_OFFSET, BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_MUL(25bv32, BV32_ASHR(BV32_SHL(v2, 8bv32), 8bv32)), BV32_ADD(BV32_MUL(v1, 8bv32), BV32_MUL(v0, 2bv32))), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 16bv32), 2bv32))), 4bv32), 548bv32), 545bv32) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV32_ULT(BV32_SUB(BV32_UDIV(BV32_SUB(_WATCHED_OFFSET, BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_MUL(25bv32, BV32_ASHR(BV32_SHL(v2, 8bv32), 8bv32)), BV32_ADD(BV32_MUL(v1, 8bv32), BV32_MUL(v0, 2bv32))), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 16bv32), 2bv32))), 4bv32), 2192bv32), 545bv32) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV32_ULT(BV32_SUB(BV32_UDIV(BV32_SUB(_WATCHED_OFFSET, BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_MUL(25bv32, BV32_ASHR(BV32_SHL(v2, 8bv32), 8bv32)), BV32_ADD(BV32_MUL(v1, 8bv32), BV32_MUL(v0, 2bv32))), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 16bv32), 2bv32))), 4bv32), 2740bv32), 545bv32) then 1bv1 else 0bv1))) != 0bv32) then 1bv1 else 0bv1) != 0bv1;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 7} (if (_WRITE_HAS_OCCURRED_$$blk_sad ==> BV32_OR(BV32_OR(BV32_OR(BV32_OR(BV32_AND(BV1_ZEXT32((if BV32_ULT(BV32_UDIV(BV32_SUB(_WATCHED_OFFSET, BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_ADD(BV32_SHL(v2, 4bv32), v2), BV32_ADD(BV32_MUL(v1, 4bv32), BV32_MUL(v0, 2bv32))), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 8bv32), 2bv32))), 4bv32), 545bv32) then 1bv1 else 0bv1)), BV1_ZEXT32((if BV32_UREM(BV32_UDIV(BV32_SUB(_WATCHED_OFFSET, BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_ADD(BV32_SHL(v2, 4bv32), v2), BV32_ADD(BV32_MUL(v1, 4bv32), BV32_MUL(v0, 2bv32))), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 8bv32), 2bv32))), 4bv32), 32bv32) == local_id_x then 1bv1 else 0bv1))), BV32_AND(BV1_ZEXT32((if BV32_ULT(BV32_SUB(BV32_UDIV(BV32_SUB(_WATCHED_OFFSET, BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_ADD(BV32_SHL(v2, 4bv32), v2), BV32_ADD(BV32_MUL(v1, 4bv32), BV32_MUL(v0, 2bv32))), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 8bv32), 2bv32))), 4bv32), 548bv32), 545bv32) then 1bv1 else 0bv1)), BV1_ZEXT32((if BV32_UREM(BV32_SUB(BV32_UDIV(BV32_SUB(_WATCHED_OFFSET, BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_ADD(BV32_SHL(v2, 4bv32), v2), BV32_ADD(BV32_MUL(v1, 4bv32), BV32_MUL(v0, 2bv32))), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 8bv32), 2bv32))), 4bv32), 548bv32), 32bv32) == local_id_x then 1bv1 else 0bv1)))), BV32_AND(BV1_ZEXT32((if BV32_ULT(BV32_UDIV(BV32_SUB(_WATCHED_OFFSET, offset#MKPTR($bo_5.0)), 4bv32), 545bv32) then 1bv1 else 0bv1)), BV1_ZEXT32((if BV32_UREM(BV32_UDIV(BV32_SUB(_WATCHED_OFFSET, offset#MKPTR($bo_5.0)), 4bv32), 32bv32) == local_id_x then 1bv1 else 0bv1)))), BV32_AND(BV1_ZEXT32((if BV32_ULT(BV32_SUB(BV32_UDIV(BV32_SUB(_WATCHED_OFFSET, offset#MKPTR($bo_5.0)), 4bv32), 1096bv32), 545bv32) then 1bv1 else 0bv1)), BV1_ZEXT32((if BV32_UREM(BV32_SUB(BV32_UDIV(BV32_SUB(_WATCHED_OFFSET, offset#MKPTR($bo_5.0)), 4bv32), 1096bv32), 32bv32) == local_id_x then 1bv1 else 0bv1)))), BV32_AND(BV1_ZEXT32((if BV32_ULT(BV32_UDIV(BV32_SUB(_WATCHED_OFFSET, offset#MKPTR($bo_4.0)), 4bv32), 545bv32) then 1bv1 else 0bv1)), BV1_ZEXT32((if BV32_UREM(BV32_UDIV(BV32_SUB(_WATCHED_OFFSET, offset#MKPTR($bo_4.0)), 4bv32), 32bv32) == local_id_x then 1bv1 else 0bv1)))) != 0bv32) then 1bv1 else 0bv1) != 0bv1;
+  v5 := BV32_SLT($search_pos.0, 545bv32);
+  goto $truebb0, $falsebb0;
+$for.body:
+  assert {:block_sourceloc} {:sourceloc_num 8} true;
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  v6 := $$blk_sad[BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_MUL(25bv32, BV32_ASHR(BV32_SHL(v2, 8bv32), 8bv32)), BV32_ADD(BV32_MUL(v1, 8bv32), BV32_MUL(v0, 2bv32))), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 16bv32), 2bv32)), BV32_MUL(BV32_MUL($search_pos.0, 2bv32), 2bv32))];
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  v7 := $$blk_sad[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_MUL(25bv32, BV32_ASHR(BV32_SHL(v2, 8bv32), 8bv32)), BV32_ADD(BV32_MUL(v1, 8bv32), BV32_MUL(v0, 2bv32))), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 16bv32), 2bv32)), BV32_MUL(BV32_MUL($search_pos.0, 2bv32), 2bv32)), 1bv32)];
+  v8 := v7 ++ v6;
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  v9 := $$blk_sad[BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_MUL(25bv32, BV32_ASHR(BV32_SHL(v2, 8bv32), 8bv32)), BV32_ADD(BV32_MUL(v1, 8bv32), BV32_MUL(v0, 2bv32))), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 16bv32), 2bv32)), BV32_MUL(BV32_ADD(BV32_MUL($search_pos.0, 2bv32), 1bv32), 2bv32))];
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  v10 := $$blk_sad[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_MUL(25bv32, BV32_ASHR(BV32_SHL(v2, 8bv32), 8bv32)), BV32_ADD(BV32_MUL(v1, 8bv32), BV32_MUL(v0, 2bv32))), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 16bv32), 2bv32)), BV32_MUL(BV32_ADD(BV32_MUL($search_pos.0, 2bv32), 1bv32), 2bv32)), 1bv32)];
+  v11 := v10 ++ v9;
+  assert {:sourceloc} {:sourceloc_num 13} true;
+  v12 := $$blk_sad[BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_MUL(25bv32, BV32_ASHR(BV32_SHL(v2, 8bv32), 8bv32)), BV32_ADD(BV32_MUL(v1, 8bv32), BV32_MUL(v0, 2bv32))), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 16bv32), 2bv32)), BV32_MUL(BV32_MUL(BV32_ADD($search_pos.0, 548bv32), 2bv32), 2bv32))];
+  assert {:sourceloc} {:sourceloc_num 14} true;
+  v13 := $$blk_sad[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_MUL(25bv32, BV32_ASHR(BV32_SHL(v2, 8bv32), 8bv32)), BV32_ADD(BV32_MUL(v1, 8bv32), BV32_MUL(v0, 2bv32))), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 16bv32), 2bv32)), BV32_MUL(BV32_MUL(BV32_ADD($search_pos.0, 548bv32), 2bv32), 2bv32)), 1bv32)];
+  v14 := v13 ++ v12;
+  assert {:sourceloc} {:sourceloc_num 15} true;
+  v15 := $$blk_sad[BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_MUL(25bv32, BV32_ASHR(BV32_SHL(v2, 8bv32), 8bv32)), BV32_ADD(BV32_MUL(v1, 8bv32), BV32_MUL(v0, 2bv32))), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 16bv32), 2bv32)), BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD($search_pos.0, 548bv32), 2bv32), 1bv32), 2bv32))];
+  assert {:sourceloc} {:sourceloc_num 16} true;
+  v16 := $$blk_sad[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_MUL(25bv32, BV32_ASHR(BV32_SHL(v2, 8bv32), 8bv32)), BV32_ADD(BV32_MUL(v1, 8bv32), BV32_MUL(v0, 2bv32))), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 16bv32), 2bv32)), BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD($search_pos.0, 548bv32), 2bv32), 1bv32), 2bv32)), 1bv32)];
+  v17 := v16 ++ v15;
+  assert {:sourceloc} {:sourceloc_num 17} true;
+  v18 := $$blk_sad[BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_MUL(25bv32, BV32_ASHR(BV32_SHL(v2, 8bv32), 8bv32)), BV32_ADD(BV32_MUL(v1, 8bv32), BV32_MUL(v0, 2bv32))), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 16bv32), 2bv32)), BV32_MUL(BV32_MUL(BV32_ADD($search_pos.0, 2192bv32), 2bv32), 2bv32))];
+  assert {:sourceloc} {:sourceloc_num 18} true;
+  v19 := $$blk_sad[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_MUL(25bv32, BV32_ASHR(BV32_SHL(v2, 8bv32), 8bv32)), BV32_ADD(BV32_MUL(v1, 8bv32), BV32_MUL(v0, 2bv32))), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 16bv32), 2bv32)), BV32_MUL(BV32_MUL(BV32_ADD($search_pos.0, 2192bv32), 2bv32), 2bv32)), 1bv32)];
+  v20 := v19 ++ v18;
+  assert {:sourceloc} {:sourceloc_num 19} true;
+  v21 := $$blk_sad[BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_MUL(25bv32, BV32_ASHR(BV32_SHL(v2, 8bv32), 8bv32)), BV32_ADD(BV32_MUL(v1, 8bv32), BV32_MUL(v0, 2bv32))), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 16bv32), 2bv32)), BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD($search_pos.0, 2192bv32), 2bv32), 1bv32), 2bv32))];
+  assert {:sourceloc} {:sourceloc_num 20} true;
+  v22 := $$blk_sad[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_MUL(25bv32, BV32_ASHR(BV32_SHL(v2, 8bv32), 8bv32)), BV32_ADD(BV32_MUL(v1, 8bv32), BV32_MUL(v0, 2bv32))), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 16bv32), 2bv32)), BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD($search_pos.0, 2192bv32), 2bv32), 1bv32), 2bv32)), 1bv32)];
+  v23 := v22 ++ v21;
+  assert {:sourceloc} {:sourceloc_num 21} true;
+  v24 := $$blk_sad[BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_MUL(25bv32, BV32_ASHR(BV32_SHL(v2, 8bv32), 8bv32)), BV32_ADD(BV32_MUL(v1, 8bv32), BV32_MUL(v0, 2bv32))), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 16bv32), 2bv32)), BV32_MUL(BV32_MUL(BV32_ADD($search_pos.0, 2740bv32), 2bv32), 2bv32))];
+  assert {:sourceloc} {:sourceloc_num 22} true;
+  v25 := $$blk_sad[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_MUL(25bv32, BV32_ASHR(BV32_SHL(v2, 8bv32), 8bv32)), BV32_ADD(BV32_MUL(v1, 8bv32), BV32_MUL(v0, 2bv32))), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 16bv32), 2bv32)), BV32_MUL(BV32_MUL(BV32_ADD($search_pos.0, 2740bv32), 2bv32), 2bv32)), 1bv32)];
+  v26 := v25 ++ v24;
+  assert {:sourceloc} {:sourceloc_num 23} true;
+  v27 := $$blk_sad[BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_MUL(25bv32, BV32_ASHR(BV32_SHL(v2, 8bv32), 8bv32)), BV32_ADD(BV32_MUL(v1, 8bv32), BV32_MUL(v0, 2bv32))), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 16bv32), 2bv32)), BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD($search_pos.0, 2740bv32), 2bv32), 1bv32), 2bv32))];
+  assert {:sourceloc} {:sourceloc_num 24} true;
+  v28 := $$blk_sad[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_MUL(25bv32, BV32_ASHR(BV32_SHL(v2, 8bv32), 8bv32)), BV32_ADD(BV32_MUL(v1, 8bv32), BV32_MUL(v0, 2bv32))), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 16bv32), 2bv32)), BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD($search_pos.0, 2740bv32), 2bv32), 1bv32), 2bv32)), 1bv32)];
+  v29 := v28 ++ v27;
+  v30 := BV16_ADD(v8, v20);
+  v31 := BV16_ADD(v11, v23);
+  assert {:sourceloc} {:sourceloc_num 25} true;
+  $$blk_sad[BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_ADD(BV32_SHL(v2, 4bv32), v2), BV32_ADD(BV32_MUL(v1, 4bv32), BV32_MUL(v0, 2bv32))), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 8bv32), 2bv32)), BV32_MUL($search_pos.0, 4bv32))] := v30[8:0];
+  assert {:sourceloc} {:sourceloc_num 26} true;
+  $$blk_sad[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_ADD(BV32_SHL(v2, 4bv32), v2), BV32_ADD(BV32_MUL(v1, 4bv32), BV32_MUL(v0, 2bv32))), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 8bv32), 2bv32)), BV32_MUL($search_pos.0, 4bv32)), 1bv32)] := v30[16:8];
+  assert {:sourceloc} {:sourceloc_num 27} true;
+  $$blk_sad[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_ADD(BV32_SHL(v2, 4bv32), v2), BV32_ADD(BV32_MUL(v1, 4bv32), BV32_MUL(v0, 2bv32))), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 8bv32), 2bv32)), BV32_MUL($search_pos.0, 4bv32)), 2bv32)] := v31[8:0];
+  assert {:sourceloc} {:sourceloc_num 28} true;
+  $$blk_sad[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_ADD(BV32_SHL(v2, 4bv32), v2), BV32_ADD(BV32_MUL(v1, 4bv32), BV32_MUL(v0, 2bv32))), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 8bv32), 2bv32)), BV32_MUL($search_pos.0, 4bv32)), 3bv32)] := v31[16:8];
+  v32 := BV16_ADD(v14, v26);
+  v33 := BV16_ADD(v17, v29);
+  assert {:sourceloc} {:sourceloc_num 29} true;
+  $$blk_sad[BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_ADD(BV32_SHL(v2, 4bv32), v2), BV32_ADD(BV32_MUL(v1, 4bv32), BV32_MUL(v0, 2bv32))), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 8bv32), 2bv32)), BV32_MUL(BV32_ADD($search_pos.0, 548bv32), 4bv32))] := v32[8:0];
+  assert {:sourceloc} {:sourceloc_num 30} true;
+  $$blk_sad[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_ADD(BV32_SHL(v2, 4bv32), v2), BV32_ADD(BV32_MUL(v1, 4bv32), BV32_MUL(v0, 2bv32))), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 8bv32), 2bv32)), BV32_MUL(BV32_ADD($search_pos.0, 548bv32), 4bv32)), 1bv32)] := v32[16:8];
+  assert {:sourceloc} {:sourceloc_num 31} true;
+  $$blk_sad[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_ADD(BV32_SHL(v2, 4bv32), v2), BV32_ADD(BV32_MUL(v1, 4bv32), BV32_MUL(v0, 2bv32))), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 8bv32), 2bv32)), BV32_MUL(BV32_ADD($search_pos.0, 548bv32), 4bv32)), 2bv32)] := v33[8:0];
+  assert {:sourceloc} {:sourceloc_num 32} true;
+  $$blk_sad[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(BV32_ADD(BV32_ADD(BV32_SHL(v2, 4bv32), v2), BV32_ADD(BV32_MUL(v1, 4bv32), BV32_MUL(v0, 2bv32))), 1096bv32), 2bv32), BV32_MUL(BV32_MUL(v3, 8bv32), 2bv32)), BV32_MUL(BV32_ADD($search_pos.0, 548bv32), 4bv32)), 3bv32)] := v33[16:8];
+  v34 := BV16_ADD(v8, v14);
+  v35 := BV16_ADD(v11, v17);
+  if (base#MKPTR($bo_5.0) == $arrayId$$blk_sad) {
+    assert {:sourceloc} {:sourceloc_num 33} true;
+    $$blk_sad[BV32_ADD(offset#MKPTR($bo_5.0), BV32_MUL($search_pos.0, 4bv32))] := v34[8:0];
+  } else {
+    assert {:bad_pointer_access} {:sourceloc_num 34} false;
+  }
+  if (base#MKPTR($bo_5.0) == $arrayId$$blk_sad) {
+    assert {:sourceloc} {:sourceloc_num 35} true;
+    $$blk_sad[BV32_ADD(BV32_ADD(offset#MKPTR($bo_5.0), BV32_MUL($search_pos.0, 4bv32)), 1bv32)] := v34[16:8];
+  } else {
+    assert {:bad_pointer_access} {:sourceloc_num 36} false;
+  }
+  if (base#MKPTR($bo_5.0) == $arrayId$$blk_sad) {
+    assert {:sourceloc} {:sourceloc_num 37} true;
+    $$blk_sad[BV32_ADD(BV32_ADD(offset#MKPTR($bo_5.0), BV32_MUL($search_pos.0, 4bv32)), 2bv32)] := v35[8:0];
+  } else {
+    assert {:bad_pointer_access} {:sourceloc_num 38} false;
+  }
+  if (base#MKPTR($bo_5.0) == $arrayId$$blk_sad) {
+    assert {:sourceloc} {:sourceloc_num 39} true;
+    $$blk_sad[BV32_ADD(BV32_ADD(offset#MKPTR($bo_5.0), BV32_MUL($search_pos.0, 4bv32)), 3bv32)] := v35[16:8];
+  } else {
+    assert {:bad_pointer_access} {:sourceloc_num 40} false;
+  }
+  v36 := BV16_ADD(v20, v26);
+  v37 := BV16_ADD(v23, v29);
+  if (base#MKPTR($bo_5.0) == $arrayId$$blk_sad) {
+    assert {:sourceloc} {:sourceloc_num 41} true;
+    $$blk_sad[BV32_ADD(offset#MKPTR($bo_5.0), BV32_MUL(BV32_ADD($search_pos.0, 1096bv32), 4bv32))] := v36[8:0];
+  } else {
+    assert {:bad_pointer_access} {:sourceloc_num 42} false;
+  }
+  if (base#MKPTR($bo_5.0) == $arrayId$$blk_sad) {
+    assert {:sourceloc} {:sourceloc_num 43} true;
+    $$blk_sad[BV32_ADD(BV32_ADD(offset#MKPTR($bo_5.0), BV32_MUL(BV32_ADD($search_pos.0, 1096bv32), 4bv32)), 1bv32)] := v36[16:8];
+  } else {
+    assert {:bad_pointer_access} {:sourceloc_num 44} false;
+  }
+  if (base#MKPTR($bo_5.0) == $arrayId$$blk_sad) {
+    assert {:sourceloc} {:sourceloc_num 45} true;
+    $$blk_sad[BV32_ADD(BV32_ADD(offset#MKPTR($bo_5.0), BV32_MUL(BV32_ADD($search_pos.0, 1096bv32), 4bv32)), 2bv32)] := v37[8:0];
+  } else {
+    assert {:bad_pointer_access} {:sourceloc_num 46} false;
+  }
+  if (base#MKPTR($bo_5.0) == $arrayId$$blk_sad) {
+    assert {:sourceloc} {:sourceloc_num 47} true;
+    $$blk_sad[BV32_ADD(BV32_ADD(offset#MKPTR($bo_5.0), BV32_MUL(BV32_ADD($search_pos.0, 1096bv32), 4bv32)), 3bv32)] := v37[16:8];
+  } else {
+    assert {:bad_pointer_access} {:sourceloc_num 48} false;
+  }
+  v38 := BV16_ADD(BV16_ADD(v8, v14), BV16_ADD(v20, v26));
+  v39 := BV16_ADD(BV16_ADD(v11, v17), BV16_ADD(v23, v29));
+  if (base#MKPTR($bo_4.0) == $arrayId$$blk_sad) {
+    assert {:sourceloc} {:sourceloc_num 49} true;
+    $$blk_sad[BV32_ADD(offset#MKPTR($bo_4.0), BV32_MUL($search_pos.0, 4bv32))] := v38[8:0];
+  } else {
+    assert {:bad_pointer_access} {:sourceloc_num 50} false;
+  }
+  if (base#MKPTR($bo_4.0) == $arrayId$$blk_sad) {
+    assert {:sourceloc} {:sourceloc_num 51} true;
+    $$blk_sad[BV32_ADD(BV32_ADD(offset#MKPTR($bo_4.0), BV32_MUL($search_pos.0, 4bv32)), 1bv32)] := v38[16:8];
+  } else {
+    assert {:bad_pointer_access} {:sourceloc_num 52} false;
+  }
+  if (base#MKPTR($bo_4.0) == $arrayId$$blk_sad) {
+    assert {:sourceloc} {:sourceloc_num 53} true;
+    $$blk_sad[BV32_ADD(BV32_ADD(offset#MKPTR($bo_4.0), BV32_MUL($search_pos.0, 4bv32)), 2bv32)] := v39[8:0];
+  } else {
+    assert {:bad_pointer_access} {:sourceloc_num 54} false;
+  }
+  if (base#MKPTR($bo_4.0) == $arrayId$$blk_sad) {
+    assert {:sourceloc} {:sourceloc_num 55} true;
+    $$blk_sad[BV32_ADD(BV32_ADD(offset#MKPTR($bo_4.0), BV32_MUL($search_pos.0, 4bv32)), 3bv32)] := v39[16:8];
+  } else {
+    assert {:bad_pointer_access} {:sourceloc_num 56} false;
+  }
+  goto $for.inc;
+$for.inc:
+  assert {:block_sourceloc} {:sourceloc_num 57} true;
+  $search_pos.0 := BV32_ADD($search_pos.0, 32bv32);
+  goto $for.cond;
+$for.end:
+  assert {:block_sourceloc} {:sourceloc_num 58} true;
+  return;
+$truebb:
+  assume {:partition} v4;
+  assert {:block_sourceloc} {:sourceloc_num 59} true;
+  goto $if.then;
+$falsebb:
+  assume {:partition} !v4;
+  assert {:block_sourceloc} {:sourceloc_num 60} true;
+  havoc v40;
+  havoc v41;
+  $bo_5.0, $bo_4.0 := v40, v41;
+  goto $if.end;
+$truebb0:
+  assume {:partition} v5;
+  assert {:block_sourceloc} {:sourceloc_num 61} true;
+  goto $for.body;
+$falsebb0:
+  assume {:partition} !v5;
+  assert {:block_sourceloc} {:sourceloc_num 62} true;
+  goto $for.end;
+}
+axiom (if group_size_z == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_z == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if group_size_x == 32bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if group_size_y == 4bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_x == 11bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_y == 9bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if global_offset_x == 0bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if global_offset_y == 0bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if global_offset_z == 0bv32 then 1bv1 else 0bv1) != 0bv1;

@@ -1,0 +1,519 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "du0"} {:global} $$du0 : [int]int;
+axiom {:array_info "$$du0"} {:global} {:elem_width 32} {:source_name "du0"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$du0 : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$du0 : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$du0 : bool;
+
+var {:source_name "dv0"} {:global} $$dv0 : [int]int;
+axiom {:array_info "$$dv0"} {:global} {:elem_width 32} {:source_name "dv0"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$dv0 : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$dv0 : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$dv0 : bool;
+
+var {:source_name "Ix"} {:global} $$Ix : [int]int;
+axiom {:array_info "$$Ix"} {:global} {:elem_width 32} {:source_name "Ix"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$Ix : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$Ix : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$Ix : bool;
+
+var {:source_name "Iy"} {:global} $$Iy : [int]int;
+axiom {:array_info "$$Iy"} {:global} {:elem_width 32} {:source_name "Iy"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$Iy : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$Iy : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$Iy : bool;
+
+var {:source_name "Iz"} {:global} $$Iz : [int]int;
+axiom {:array_info "$$Iz"} {:global} {:elem_width 32} {:source_name "Iz"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$Iz : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$Iz : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$Iz : bool;
+
+var {:source_name "du1"} {:global} $$du1 : [int]int;
+axiom {:array_info "$$du1"} {:global} {:elem_width 32} {:source_name "du1"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$du1 : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$du1 : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$du1 : bool;
+
+var {:source_name "dv1"} {:global} $$dv1 : [int]int;
+axiom {:array_info "$$dv1"} {:global} {:elem_width 32} {:source_name "dv1"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$dv1 : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$dv1 : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$dv1 : bool;
+
+var {:source_name "du"} {:group_shared} $$_ZZ15JacobiIterationILi32ELi6EEvPKfS1_S1_S1_S1_iiifPfS2_E2du : [int]int;
+axiom {:array_info "$$_ZZ15JacobiIterationILi32ELi6EEvPKfS1_S1_S1_S1_iiifPfS2_E2du"} {:group_shared} {:elem_width 32} {:source_name "du"} {:source_elem_width 32} {:source_dimensions "272"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ15JacobiIterationILi32ELi6EEvPKfS1_S1_S1_S1_iiifPfS2_E2du : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ15JacobiIterationILi32ELi6EEvPKfS1_S1_S1_S1_iiifPfS2_E2du : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ15JacobiIterationILi32ELi6EEvPKfS1_S1_S1_S1_iiifPfS2_E2du : bool;
+
+var {:source_name "dv"} {:group_shared} $$_ZZ15JacobiIterationILi32ELi6EEvPKfS1_S1_S1_S1_iiifPfS2_E2dv : [int]int;
+axiom {:array_info "$$_ZZ15JacobiIterationILi32ELi6EEvPKfS1_S1_S1_S1_iiifPfS2_E2dv"} {:group_shared} {:elem_width 32} {:source_name "dv"} {:source_elem_width 32} {:source_dimensions "272"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ15JacobiIterationILi32ELi6EEvPKfS1_S1_S1_S1_iiifPfS2_E2dv : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ15JacobiIterationILi32ELi6EEvPKfS1_S1_S1_S1_iiifPfS2_E2dv : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ15JacobiIterationILi32ELi6EEvPKfS1_S1_S1_S1_iiifPfS2_E2dv : bool;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_id_y} group_id_y : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:local_id_y} local_id_y : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function FADD32(int, int) : int;
+function FDIV32(int, int) : int;
+function FMUL32(int, int) : int;
+function FSUB32(int, int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SGE(x : int, y : int) : bool {
+  x >= y
+}
+function {:inline true} BV32_SLT(x : int, y : int) : bool {
+  x < y
+}
+function {:inline true} BV32_SUB(x : int, y : int) : int {
+  x - y
+}
+function {:inline true} BV32_ULT(x : int, y : int) : bool {
+  x < y
+}
+procedure {:source_name "JacobiIteration<32, 6>"} {:kernel} $_Z15JacobiIterationILi32ELi6EEvPKfS1_S1_S1_S1_iiifPfS2_($w:int, $h:int, $s:int, $alpha:int)
+requires {:sourceloc_num 0} (if $w == 320 then 1 else 0) != 0;
+requires {:sourceloc_num 1} (if $h == 240 then 1 else 0) != 0;
+requires {:sourceloc_num 2} (if $s == 320 then 1 else 0) != 0;
+{
+  var $0:int;
+  var $1:int;
+  var $2:int;
+  var $3:int;
+  var $4:int;
+  var $5:int;
+  var $6:int;
+  var $7:int;
+  var v0:int;
+  var v1:int;
+  var v2:bool;
+  var v3:bool;
+  var v4:int;
+  var v5:int;
+  var v6:int;
+  var v7:int;
+  var v8:bool;
+  var v9:int;
+  var v10:int;
+  var v11:bool;
+  var v12:bool;
+  var v13:int;
+  var v14:int;
+  var v15:int;
+  var v16:int;
+  var v17:bool;
+  var v18:int;
+  var v19:int;
+  var v20:int;
+  var v21:int;
+  var v22:bool;
+  var v23:int;
+  var v24:int;
+  var v25:bool;
+  var v26:bool;
+  var v27:int;
+  var v28:int;
+  var v30:bool;
+  var v29:int;
+  var v31:int;
+  var v32:int;
+  var v33:bool;
+  var v34:int;
+  var v35:int;
+  var v36:int;
+  var v37:int;
+  var v38:bool;
+  var v39:bool;
+  var v40:int;
+  var v41:int;
+  var v42:int;
+  var v43:int;
+  var v44:int;
+  var v45:int;
+  var v46:int;
+  var v47:int;
+  var v48:int;
+  var v49:int;
+  var v50:int;
+  var v51:int;
+  var v52:int;
+  var v53:int;
+  var v54:int;
+  var v55:int;
+  var v56:int;
+  var v57:int;
+  var v58:int;
+  var v59:int;
+  var v60:int;
+  var v61:int;
+  var v62:int;
+  var v63:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 3} true;
+  v0 := BV32_ADD(local_id_x, BV32_MUL(group_id_x, group_size_x));
+  v1 := BV32_ADD(local_id_y, BV32_MUL(group_id_y, group_size_y));
+  v2 := BV32_SLT(v0, BV32_SUB($w, 1));
+  goto $truebb, $falsebb;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 4} true;
+  $0 := v0;
+  goto $3;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 5} true;
+  $0 := BV32_SUB($w, 1);
+  goto $3;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 6} true;
+  v3 := BV32_SLT(v1, BV32_SUB($h, 1));
+  goto $truebb0, $falsebb0;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  $1 := v1;
+  goto $6;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 8} true;
+  $1 := BV32_SUB($h, 1);
+  goto $6;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 9} true;
+  v4 := BV32_ADD($0, BV32_MUL($1, $s));
+  v5 := BV32_ADD(BV32_ADD(local_id_x, 1), BV32_MUL(BV32_ADD(local_id_y, 1), 34));
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  v6 := $$du0[v4];
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  $$_ZZ15JacobiIterationILi32ELi6EEvPKfS1_S1_S1_S1_iiifPfS2_E2du[v5] := v6;
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  v7 := $$dv0[v4];
+  assert {:sourceloc} {:sourceloc_num 13} true;
+  $$_ZZ15JacobiIterationILi32ELi6EEvPKfS1_S1_S1_S1_iiifPfS2_E2dv[v5] := v7;
+  v8 := local_id_y == 0;
+  goto $truebb1, $falsebb1;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 14} true;
+  v9 := BV32_MUL(group_id_x, group_size_x);
+  v10 := BV32_MUL(group_id_y, group_size_y);
+  v11 := BV32_ULT(BV32_ADD(v9, local_id_x), BV32_SUB($w, 1));
+  goto $truebb2, $falsebb2;
+$8:
+  assert {:block_sourceloc} {:sourceloc_num 15} true;
+  $2 := BV32_ADD(v9, local_id_x);
+  goto $10;
+$9:
+  assert {:block_sourceloc} {:sourceloc_num 16} true;
+  $2 := BV32_SUB($w, 1);
+  goto $10;
+$10:
+  assert {:block_sourceloc} {:sourceloc_num 17} true;
+  v12 := BV32_SLT(BV32_SUB(v10, 1), 0);
+  goto $truebb3, $falsebb3;
+$11:
+  assert {:block_sourceloc} {:sourceloc_num 18} true;
+  $3 := 0;
+  goto $13;
+$12:
+  assert {:block_sourceloc} {:sourceloc_num 19} true;
+  $3 := BV32_SUB(v10, 1);
+  goto $13;
+$13:
+  assert {:block_sourceloc} {:sourceloc_num 20} true;
+  v13 := BV32_ADD(BV32_MUL($3, $s), $2);
+  v14 := BV32_ADD(local_id_x, 1);
+  assert {:sourceloc} {:sourceloc_num 21} true;
+  v15 := $$du0[v13];
+  assert {:sourceloc} {:sourceloc_num 22} true;
+  $$_ZZ15JacobiIterationILi32ELi6EEvPKfS1_S1_S1_S1_iiifPfS2_E2du[v14] := v15;
+  assert {:sourceloc} {:sourceloc_num 23} true;
+  v16 := $$dv0[v13];
+  assert {:sourceloc} {:sourceloc_num 24} true;
+  $$_ZZ15JacobiIterationILi32ELi6EEvPKfS1_S1_S1_S1_iiifPfS2_E2dv[v14] := v16;
+  v17 := BV32_SLT(BV32_ADD(v10, 6), BV32_SUB($h, 1));
+  goto $truebb4, $falsebb4;
+$14:
+  assert {:block_sourceloc} {:sourceloc_num 25} true;
+  $4 := BV32_ADD(v10, 6);
+  goto $16;
+$15:
+  assert {:block_sourceloc} {:sourceloc_num 26} true;
+  $4 := BV32_SUB($h, 1);
+  goto $16;
+$16:
+  assert {:block_sourceloc} {:sourceloc_num 27} true;
+  v18 := BV32_ADD(local_id_x, 239);
+  v19 := BV32_ADD(BV32_MUL($4, $s), $2);
+  assert {:sourceloc} {:sourceloc_num 28} true;
+  v20 := $$du0[v19];
+  assert {:sourceloc} {:sourceloc_num 29} true;
+  $$_ZZ15JacobiIterationILi32ELi6EEvPKfS1_S1_S1_S1_iiifPfS2_E2du[v18] := v20;
+  assert {:sourceloc} {:sourceloc_num 30} true;
+  v21 := $$dv0[v19];
+  assert {:sourceloc} {:sourceloc_num 31} true;
+  $$_ZZ15JacobiIterationILi32ELi6EEvPKfS1_S1_S1_S1_iiifPfS2_E2dv[v18] := v21;
+  goto $31;
+$17:
+  assert {:block_sourceloc} {:sourceloc_num 32} true;
+  v22 := local_id_y == 1;
+  goto $truebb5, $falsebb5;
+$18:
+  assert {:block_sourceloc} {:sourceloc_num 33} true;
+  v23 := BV32_MUL(group_id_x, group_size_x);
+  v24 := BV32_MUL(group_id_y, group_size_y);
+  v25 := BV32_ULT(BV32_ADD(v24, local_id_x), BV32_SUB($h, 1));
+  goto $truebb6, $falsebb6;
+$19:
+  assert {:block_sourceloc} {:sourceloc_num 34} true;
+  $5 := BV32_ADD(v24, local_id_x);
+  goto $21;
+$20:
+  assert {:block_sourceloc} {:sourceloc_num 35} true;
+  $5 := BV32_SUB($h, 1);
+  goto $21;
+$21:
+  assert {:block_sourceloc} {:sourceloc_num 36} true;
+  v26 := BV32_SLT(BV32_SUB(v23, 1), 0);
+  goto $truebb7, $falsebb7;
+$22:
+  assert {:block_sourceloc} {:sourceloc_num 37} true;
+  $6 := 0;
+  goto $24;
+$23:
+  assert {:block_sourceloc} {:sourceloc_num 38} true;
+  $6 := BV32_SUB(v23, 1);
+  goto $24;
+$24:
+  assert {:block_sourceloc} {:sourceloc_num 39} true;
+  v27 := BV32_MUL(local_id_x, 34);
+  v28 := BV32_ADD(34, v27);
+  v29 := BV32_ADD($6, BV32_MUL($5, $s));
+  v30 := BV32_ULT(local_id_x, 6);
+  goto $truebb8, $falsebb8;
+$25:
+  assert {:block_sourceloc} {:sourceloc_num 40} true;
+  assert {:sourceloc} {:sourceloc_num 41} true;
+  v31 := $$du0[v29];
+  assert {:sourceloc} {:sourceloc_num 42} true;
+  $$_ZZ15JacobiIterationILi32ELi6EEvPKfS1_S1_S1_S1_iiifPfS2_E2du[v28] := v31;
+  assert {:sourceloc} {:sourceloc_num 43} true;
+  v32 := $$dv0[v29];
+  assert {:sourceloc} {:sourceloc_num 44} true;
+  $$_ZZ15JacobiIterationILi32ELi6EEvPKfS1_S1_S1_S1_iiifPfS2_E2dv[v28] := v32;
+  v33 := BV32_SLT(BV32_ADD(v23, 32), BV32_SUB($w, 1));
+  goto $truebb9, $falsebb9;
+$26:
+  assert {:block_sourceloc} {:sourceloc_num 45} true;
+  $7 := BV32_ADD(v23, 32);
+  goto $28;
+$27:
+  assert {:block_sourceloc} {:sourceloc_num 46} true;
+  $7 := BV32_SUB($w, 1);
+  goto $28;
+$28:
+  assert {:block_sourceloc} {:sourceloc_num 47} true;
+  v34 := BV32_ADD(BV32_MUL($5, $s), $7);
+  v35 := BV32_ADD(v27, 67);
+  assert {:sourceloc} {:sourceloc_num 48} true;
+  v36 := $$du0[v34];
+  assert {:sourceloc} {:sourceloc_num 49} true;
+  $$_ZZ15JacobiIterationILi32ELi6EEvPKfS1_S1_S1_S1_iiifPfS2_E2du[v35] := v36;
+  assert {:sourceloc} {:sourceloc_num 50} true;
+  v37 := $$dv0[v34];
+  assert {:sourceloc} {:sourceloc_num 51} true;
+  $$_ZZ15JacobiIterationILi32ELi6EEvPKfS1_S1_S1_S1_iiifPfS2_E2dv[v35] := v37;
+  goto $29;
+$29:
+  assert {:block_sourceloc} {:sourceloc_num 52} true;
+  goto $30;
+$30:
+  assert {:block_sourceloc} true;
+  goto $31;
+$31:
+  assert {:block_sourceloc} {:sourceloc_num 53} true;
+  call {:sourceloc_num 54} $bugle_barrier(-1, -1);
+  v38 := BV32_SGE(v0, $w);
+  goto $truebb10, $falsebb10;
+$32:
+  assert {:block_sourceloc} {:sourceloc_num 55} true;
+  v39 := BV32_SGE(v1, $h);
+  goto $truebb11, $falsebb11;
+$33:
+  assert {:block_sourceloc} {:sourceloc_num 56} true;
+  goto $35;
+$34:
+  assert {:block_sourceloc} {:sourceloc_num 57} true;
+  v40 := BV32_SUB(v5, 1);
+  v41 := BV32_ADD(v5, 1);
+  v42 := BV32_ADD(v5, 34);
+  v43 := BV32_SUB(BV32_SUB(v5, 32), 2);
+  assert {:sourceloc} {:sourceloc_num 58} true;
+  v44 := $$_ZZ15JacobiIterationILi32ELi6EEvPKfS1_S1_S1_S1_iiifPfS2_E2du[v40];
+  assert {:sourceloc} {:sourceloc_num 59} true;
+  v45 := $$_ZZ15JacobiIterationILi32ELi6EEvPKfS1_S1_S1_S1_iiifPfS2_E2du[v41];
+  assert {:sourceloc} {:sourceloc_num 60} true;
+  v46 := $$_ZZ15JacobiIterationILi32ELi6EEvPKfS1_S1_S1_S1_iiifPfS2_E2du[v42];
+  assert {:sourceloc} {:sourceloc_num 61} true;
+  v47 := $$_ZZ15JacobiIterationILi32ELi6EEvPKfS1_S1_S1_S1_iiifPfS2_E2du[v43];
+  v48 := FMUL32(FADD32(FADD32(FADD32(v44, v45), v46), v47), 1048576000);
+  assert {:sourceloc} {:sourceloc_num 62} true;
+  v49 := $$_ZZ15JacobiIterationILi32ELi6EEvPKfS1_S1_S1_S1_iiifPfS2_E2dv[v40];
+  assert {:sourceloc} {:sourceloc_num 63} true;
+  v50 := $$_ZZ15JacobiIterationILi32ELi6EEvPKfS1_S1_S1_S1_iiifPfS2_E2dv[v41];
+  assert {:sourceloc} {:sourceloc_num 64} true;
+  v51 := $$_ZZ15JacobiIterationILi32ELi6EEvPKfS1_S1_S1_S1_iiifPfS2_E2dv[v42];
+  assert {:sourceloc} {:sourceloc_num 65} true;
+  v52 := $$_ZZ15JacobiIterationILi32ELi6EEvPKfS1_S1_S1_S1_iiifPfS2_E2dv[v43];
+  v53 := FMUL32(FADD32(FADD32(FADD32(v49, v50), v51), v52), 1048576000);
+  assert {:sourceloc} {:sourceloc_num 66} true;
+  v54 := $$Ix[v4];
+  assert {:sourceloc} {:sourceloc_num 67} true;
+  v55 := $$Iy[v4];
+  assert {:sourceloc} {:sourceloc_num 68} true;
+  v56 := $$Iz[v4];
+  assert {:sourceloc} {:sourceloc_num 69} true;
+  v57 := $$Ix[v4];
+  assert {:sourceloc} {:sourceloc_num 70} true;
+  v58 := $$Ix[v4];
+  assert {:sourceloc} {:sourceloc_num 71} true;
+  v59 := $$Iy[v4];
+  assert {:sourceloc} {:sourceloc_num 72} true;
+  v60 := $$Iy[v4];
+  v61 := FDIV32(FADD32(FADD32(FMUL32(v54, v48), FMUL32(v55, v53)), v56), FADD32(FADD32(FMUL32(v57, v58), FMUL32(v59, v60)), $alpha));
+  assert {:sourceloc} {:sourceloc_num 73} true;
+  v62 := $$Ix[v4];
+  assert {:sourceloc} {:sourceloc_num 74} true;
+  $$du1[v4] := FSUB32(v48, FMUL32(v62, v61));
+  assert {:sourceloc} {:sourceloc_num 75} true;
+  v63 := $$Iy[v4];
+  assert {:sourceloc} {:sourceloc_num 76} true;
+  $$dv1[v4] := FSUB32(v53, FMUL32(v63, v61));
+  goto $35;
+$35:
+  assert {:block_sourceloc} {:sourceloc_num 77} true;
+  return;
+$truebb:
+  assume {:partition} v2;
+  assert {:block_sourceloc} {:sourceloc_num 78} true;
+  goto $1;
+$falsebb:
+  assume {:partition} !v2;
+  assert {:block_sourceloc} {:sourceloc_num 79} true;
+  goto $2;
+$truebb0:
+  assume {:partition} v3;
+  assert {:block_sourceloc} {:sourceloc_num 80} true;
+  goto $4;
+$falsebb0:
+  assume {:partition} !v3;
+  assert {:block_sourceloc} {:sourceloc_num 81} true;
+  goto $5;
+$truebb1:
+  assume {:partition} v8;
+  assert {:block_sourceloc} {:sourceloc_num 82} true;
+  goto $7;
+$falsebb1:
+  assume {:partition} !v8;
+  assert {:block_sourceloc} {:sourceloc_num 83} true;
+  goto $17;
+$truebb2:
+  assume {:partition} v11;
+  assert {:block_sourceloc} {:sourceloc_num 84} true;
+  goto $8;
+$falsebb2:
+  assume {:partition} !v11;
+  assert {:block_sourceloc} {:sourceloc_num 85} true;
+  goto $9;
+$truebb3:
+  assume {:partition} v12;
+  assert {:block_sourceloc} {:sourceloc_num 86} true;
+  goto $11;
+$falsebb3:
+  assume {:partition} !v12;
+  assert {:block_sourceloc} {:sourceloc_num 87} true;
+  goto $12;
+$truebb4:
+  assume {:partition} v17;
+  assert {:block_sourceloc} {:sourceloc_num 88} true;
+  goto $14;
+$falsebb4:
+  assume {:partition} !v17;
+  assert {:block_sourceloc} {:sourceloc_num 89} true;
+  goto $15;
+$truebb5:
+  assume {:partition} v22;
+  assert {:block_sourceloc} {:sourceloc_num 90} true;
+  goto $18;
+$falsebb5:
+  assume {:partition} !v22;
+  assert {:block_sourceloc} {:sourceloc_num 91} true;
+  goto $30;
+$truebb6:
+  assume {:partition} v25;
+  assert {:block_sourceloc} {:sourceloc_num 92} true;
+  goto $19;
+$falsebb6:
+  assume {:partition} !v25;
+  assert {:block_sourceloc} {:sourceloc_num 93} true;
+  goto $20;
+$truebb7:
+  assume {:partition} v26;
+  assert {:block_sourceloc} {:sourceloc_num 94} true;
+  goto $22;
+$falsebb7:
+  assume {:partition} !v26;
+  assert {:block_sourceloc} {:sourceloc_num 95} true;
+  goto $23;
+$truebb8:
+  assume {:partition} v30;
+  assert {:block_sourceloc} {:sourceloc_num 96} true;
+  goto $25;
+$falsebb8:
+  assume {:partition} !v30;
+  assert {:block_sourceloc} {:sourceloc_num 97} true;
+  goto $29;
+$truebb9:
+  assume {:partition} v33;
+  assert {:block_sourceloc} {:sourceloc_num 98} true;
+  goto $26;
+$falsebb9:
+  assume {:partition} !v33;
+  assert {:block_sourceloc} {:sourceloc_num 99} true;
+  goto $27;
+$truebb10:
+  assume {:partition} v38;
+  assert {:block_sourceloc} {:sourceloc_num 100} true;
+  goto $33;
+$falsebb10:
+  assume {:partition} !v38;
+  assert {:block_sourceloc} {:sourceloc_num 101} true;
+  goto $32;
+$truebb11:
+  assume {:partition} v39;
+  assert {:block_sourceloc} {:sourceloc_num 102} true;
+  goto $33;
+$falsebb11:
+  assume {:partition} !v39;
+  assert {:block_sourceloc} {:sourceloc_num 103} true;
+  goto $34;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:int, $1:int);
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 32 then 1 else 0) != 0;
+axiom (if group_size_y == 6 then 1 else 0) != 0;
+axiom (if num_groups_x == 10 then 1 else 0) != 0;
+axiom (if num_groups_y == 40 then 1 else 0) != 0;

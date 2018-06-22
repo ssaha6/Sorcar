@@ -1,0 +1,245 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [bv32]bv32, y : bv32) returns (z : bv32, A : [bv32]bv32);
+procedure _ATOMIC_OP8(x : [bv32]bv8, y : bv32) returns (z : bv8, A : [bv32]bv8);
+var {:source_name "Dst"} {:global} $$Dst : [bv32]bv32;
+axiom {:array_info "$$Dst"} {:global} {:elem_width 32} {:source_name "Dst"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$Dst : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$Dst : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$Dst : bool;
+const $arrayId$$Dst : arrayId;
+axiom $arrayId$$Dst == 1bv3;
+
+var {:source_name "agg.tmp"} $$agg.tmp : [bv32]bv8;
+axiom {:array_info "$$agg.tmp"} {:elem_width 8} {:source_name "agg.tmp"} {:source_elem_width 96} {:source_dimensions "1"} true;
+const $arrayId$$agg.tmp : arrayId;
+axiom $arrayId$$agg.tmp == 2bv3;
+
+var {:source_name "TexSrc"} {:global} $$TexSrc : [bv32]bv8;
+axiom {:array_info "$$TexSrc"} {:global} {:elem_width 8} {:source_name "TexSrc"} {:source_elem_width 96} {:source_dimensions "1"} true;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 96} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$TexSrc : bool;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 96} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$TexSrc : bool;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 96} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$TexSrc : bool;
+const $arrayId$$TexSrc : arrayId;
+axiom $arrayId$$TexSrc == 3bv3;
+
+var {:source_name "CurBlockLocal1"} {:group_shared} $$CurBlockLocal1 : [bv32]bv32;
+axiom {:array_info "$$CurBlockLocal1"} {:group_shared} {:elem_width 32} {:source_name "CurBlockLocal1"} {:source_elem_width 32} {:source_dimensions "64"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$CurBlockLocal1 : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$CurBlockLocal1 : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$CurBlockLocal1 : bool;
+const $arrayId$$CurBlockLocal1 : arrayId;
+axiom $arrayId$$CurBlockLocal1 == 4bv3;
+
+var {:source_name "DCTv8matrix"} {:constant} $$DCTv8matrix : [bv32]bv32;
+axiom {:array_info "$$DCTv8matrix"} {:constant} {:elem_width 32} {:source_name "DCTv8matrix"} {:source_elem_width 32} {:source_dimensions "64"} true;
+const $arrayId$$DCTv8matrix : arrayId;
+axiom $arrayId$$DCTv8matrix == 5bv3;
+
+var {:source_name "CurBlockLocal2"} {:group_shared} $$CurBlockLocal2 : [bv32]bv32;
+axiom {:array_info "$$CurBlockLocal2"} {:group_shared} {:elem_width 32} {:source_name "CurBlockLocal2"} {:source_elem_width 32} {:source_dimensions "64"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$CurBlockLocal2 : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$CurBlockLocal2 : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$CurBlockLocal2 : bool;
+const $arrayId$$CurBlockLocal2 : arrayId;
+axiom $arrayId$$CurBlockLocal2 == 6bv3;
+
+type ptr = bv32;
+type arrayId = bv3;
+
+function {:inline true} MKPTR(base: arrayId, offset: bv32) : ptr {
+  base ++ offset[29:0]
+}
+
+function {:inline true} base#MKPTR(p: ptr) : arrayId {
+  p[32:29]
+}
+
+function {:inline true} offset#MKPTR(p : ptr) : bv32 {
+  0bv3++p[29:0]
+}
+
+const $arrayId$$null$ : arrayId;
+axiom $arrayId$$null$ == 0bv3;
+
+const _WATCHED_OFFSET : bv32;
+const {:group_id_x} group_id_x : bv32;
+const {:group_id_y} group_id_y : bv32;
+const {:group_size_x} group_size_x : bv32;
+const {:group_size_y} group_size_y : bv32;
+const {:group_size_z} group_size_z : bv32;
+const {:local_id_x} local_id_x : bv32;
+const {:local_id_y} local_id_y : bv32;
+const {:num_groups_x} num_groups_x : bv32;
+const {:num_groups_y} num_groups_y : bv32;
+const {:num_groups_z} num_groups_z : bv32;
+function FADD32(bv32, bv32) : bv32;
+function FMUL32(bv32, bv32) : bv32;
+function SI32_TO_FP32(bv32) : bv32;
+function {:bvbuiltin "bvadd"} BV32_ADD(bv32, bv32) : bv32;
+function {:bvbuiltin "bvmul"} BV32_MUL(bv32, bv32) : bv32;
+function {:bvbuiltin "bvshl"} BV32_SHL(bv32, bv32) : bv32;
+function {:bvbuiltin "bvslt"} BV32_SLT(bv32, bv32) : bool;
+procedure {:source_name "CUDAkernel1IDCT"} {:kernel} $_Z15CUDAkernel1IDCTPfiii($ImgWidth:bv32, $OffsetXBlocks:bv32, $OffsetYBlocks:bv32)
+requires {:sourceloc_num 0} (if $ImgWidth == 512bv32 then 1bv1 else 0bv1) != 0bv1;
+{
+  var $curelem.0:bv32;
+  var $DCTv8matrixIndex.0:bv32;
+  var $CurBlockLocal1Index.0:bv32;
+  var $i.0:bv32;
+  var $curelem.1:bv32;
+  var $DCTv8matrixIndex.1:bv32;
+  var $CurBlockLocal2Index.0:bv32;
+  var $i26.0:bv32;
+  var v10:bv8;
+  var v1:bv32;
+  var v0:bv32;
+  var v2:bv8;
+  var v3:bv8;
+  var v6:bv8;
+  var v4:bv8;
+  var v7:bv8;
+  var v5:bv8;
+  var v8:bv8;
+  var v9:bv8;
+  var v19:bv32;
+  var v17:bv32;
+  var v16:bv32;
+  var v20:bv32;
+  var v21:bv32;
+  var v11:bv8;
+  var v12:bv8;
+  var v13:bv8;
+  var v14:bv32;
+  var v18:bool;
+  var v15:bool;
+$entry:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  v0 := BV32_ADD(group_id_x, $OffsetXBlocks);
+  v1 := BV32_ADD(group_id_y, $OffsetYBlocks);
+  assert {:sourceloc} {:sourceloc_num 2} true;
+  v2 := $$TexSrc[0bv32];
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  $$agg.tmp[0bv32] := v2;
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  v3 := $$TexSrc[1bv32];
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  $$agg.tmp[1bv32] := v3;
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  v4 := $$TexSrc[2bv32];
+  assert {:sourceloc} {:sourceloc_num 7} true;
+  $$agg.tmp[2bv32] := v4;
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  v5 := $$TexSrc[3bv32];
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  $$agg.tmp[3bv32] := v5;
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  v6 := $$TexSrc[4bv32];
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  $$agg.tmp[4bv32] := v6;
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  v7 := $$TexSrc[5bv32];
+  assert {:sourceloc} {:sourceloc_num 13} true;
+  $$agg.tmp[5bv32] := v7;
+  assert {:sourceloc} {:sourceloc_num 14} true;
+  v8 := $$TexSrc[6bv32];
+  assert {:sourceloc} {:sourceloc_num 15} true;
+  $$agg.tmp[6bv32] := v8;
+  assert {:sourceloc} {:sourceloc_num 16} true;
+  v9 := $$TexSrc[7bv32];
+  assert {:sourceloc} {:sourceloc_num 17} true;
+  $$agg.tmp[7bv32] := v9;
+  assert {:sourceloc} {:sourceloc_num 18} true;
+  v10 := $$TexSrc[8bv32];
+  assert {:sourceloc} {:sourceloc_num 19} true;
+  $$agg.tmp[8bv32] := v10;
+  assert {:sourceloc} {:sourceloc_num 20} true;
+  v11 := $$TexSrc[9bv32];
+  assert {:sourceloc} {:sourceloc_num 21} true;
+  $$agg.tmp[9bv32] := v11;
+  assert {:sourceloc} {:sourceloc_num 22} true;
+  v12 := $$TexSrc[10bv32];
+  assert {:sourceloc} {:sourceloc_num 23} true;
+  $$agg.tmp[10bv32] := v12;
+  assert {:sourceloc} {:sourceloc_num 24} true;
+  v13 := $$TexSrc[11bv32];
+  assert {:sourceloc} {:sourceloc_num 25} true;
+  $$agg.tmp[11bv32] := v13;
+  call {:sourceloc_num 26}   v14 := $_Z5tex2DIfET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(MKPTR($arrayId$$agg.tmp, 0bv32), FADD32(SI32_TO_FP32(BV32_ADD(BV32_SHL(v0, 3bv32), local_id_x)), 1056964608bv32), FADD32(SI32_TO_FP32(BV32_ADD(BV32_SHL(v1, 3bv32), local_id_y)), 1056964608bv32));
+  assert {:sourceloc} {:sourceloc_num 27} true;
+  $$CurBlockLocal1[BV32_ADD(BV32_SHL(local_id_y, 3bv32), local_id_x)] := v14;
+  call {:sourceloc_num 28} $bugle_barrier(1bv1, 1bv1);
+  $curelem.0, $DCTv8matrixIndex.0, $CurBlockLocal1Index.0, $i.0 := 0bv32, BV32_SHL(local_id_y, 3bv32), local_id_x, 0bv32;
+  goto $for.cond;
+$for.cond:
+  assert {:block_sourceloc} {:sourceloc_num 29} true;
+  v15 := BV32_SLT($i.0, 8bv32);
+  goto $truebb, $falsebb;
+$for.body:
+  assert {:block_sourceloc} {:sourceloc_num 30} true;
+  assert {:sourceloc} {:sourceloc_num 31} true;
+  v16 := $$DCTv8matrix[$DCTv8matrixIndex.0];
+  assert {:sourceloc} {:sourceloc_num 32} true;
+  v17 := $$CurBlockLocal1[$CurBlockLocal1Index.0];
+  goto $for.inc;
+$for.inc:
+  assert {:block_sourceloc} {:sourceloc_num 33} true;
+  $curelem.0, $DCTv8matrixIndex.0, $CurBlockLocal1Index.0, $i.0 := FADD32($curelem.0, FMUL32(v16, v17)), BV32_ADD($DCTv8matrixIndex.0, 1bv32), BV32_ADD($CurBlockLocal1Index.0, 8bv32), BV32_ADD($i.0, 1bv32);
+  goto $for.cond;
+$for.end:
+  assert {:block_sourceloc} {:sourceloc_num 34} true;
+  assert {:sourceloc} {:sourceloc_num 35} true;
+  $$CurBlockLocal2[BV32_ADD(BV32_SHL(local_id_y, 3bv32), local_id_x)] := $curelem.0;
+  call {:sourceloc_num 36} $bugle_barrier(1bv1, 1bv1);
+  $curelem.1, $DCTv8matrixIndex.1, $CurBlockLocal2Index.0, $i26.0 := 0bv32, BV32_SHL(local_id_x, 3bv32), BV32_SHL(local_id_y, 3bv32), 0bv32;
+  goto $for.cond.27;
+$for.cond.27:
+  assert {:block_sourceloc} {:sourceloc_num 37} true;
+  v18 := BV32_SLT($i26.0, 8bv32);
+  goto $truebb0, $falsebb0;
+$for.body.29:
+  assert {:block_sourceloc} {:sourceloc_num 38} true;
+  assert {:sourceloc} {:sourceloc_num 39} true;
+  v19 := $$CurBlockLocal2[$CurBlockLocal2Index.0];
+  assert {:sourceloc} {:sourceloc_num 40} true;
+  v20 := $$DCTv8matrix[$DCTv8matrixIndex.1];
+  goto $for.inc.36;
+$for.inc.36:
+  assert {:block_sourceloc} {:sourceloc_num 41} true;
+  $curelem.1, $DCTv8matrixIndex.1, $CurBlockLocal2Index.0, $i26.0 := FADD32($curelem.1, FMUL32(v19, v20)), BV32_ADD($DCTv8matrixIndex.1, 1bv32), BV32_ADD($CurBlockLocal2Index.0, 1bv32), BV32_ADD($i26.0, 1bv32);
+  goto $for.cond.27;
+$for.end.38:
+  assert {:block_sourceloc} {:sourceloc_num 42} true;
+  assert {:sourceloc} {:sourceloc_num 43} true;
+  $$CurBlockLocal1[BV32_ADD(BV32_SHL(local_id_y, 3bv32), local_id_x)] := $curelem.1;
+  call {:sourceloc_num 44} $bugle_barrier(1bv1, 1bv1);
+  assert {:sourceloc} {:sourceloc_num 45} true;
+  v21 := $$CurBlockLocal1[BV32_ADD(BV32_SHL(local_id_y, 3bv32), local_id_x)];
+  assert {:sourceloc} {:sourceloc_num 46} true;
+  $$Dst[BV32_ADD(BV32_MUL(BV32_ADD(BV32_SHL(v1, 3bv32), local_id_y), $ImgWidth), BV32_ADD(BV32_SHL(v0, 3bv32), local_id_x))] := v21;
+  return;
+$truebb:
+  assume {:partition} v15;
+  assert {:block_sourceloc} {:sourceloc_num 47} true;
+  goto $for.body;
+$falsebb:
+  assume {:partition} !v15;
+  assert {:block_sourceloc} {:sourceloc_num 48} true;
+  goto $for.end;
+$truebb0:
+  assume {:partition} v18;
+  assert {:block_sourceloc} {:sourceloc_num 49} true;
+  goto $for.body.29;
+$falsebb0:
+  assume {:partition} !v18;
+  assert {:block_sourceloc} {:sourceloc_num 50} true;
+  goto $for.end.38;
+}
+procedure {:source_name "_Z5tex2DIfET_7textureIS0_Li2EL19cudaTextureReadMode0EEff"} $_Z5tex2DIfET_7textureIS0_Li2EL19cudaTextureReadMode0EEff($0:ptr, $1:bv32, $2:bv32) returns ($ret:bv32);
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:bv1, $1:bv1);
+axiom (if group_size_x == 8bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if group_size_y == 8bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if group_size_z == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_x == 64bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_y == 64bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_z == 1bv32 then 1bv1 else 0bv1) != 0bv1;

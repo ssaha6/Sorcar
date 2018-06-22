@@ -1,0 +1,179 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [bv32]bv32, y : bv32) returns (z : bv32, A : [bv32]bv32);
+var {:source_name "d_PartialHistograms"} {:global} $$d_PartialHistograms : [bv32]bv32;
+axiom {:array_info "$$d_PartialHistograms"} {:global} {:elem_width 32} {:source_name "d_PartialHistograms"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_PartialHistograms : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_PartialHistograms : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_PartialHistograms : bool;
+
+var {:source_name "d_Data"} {:global} $$d_Data : [bv32]bv32;
+axiom {:array_info "$$d_Data"} {:global} {:elem_width 32} {:source_name "d_Data"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_Data : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_Data : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_Data : bool;
+
+var {:source_name "s_Hist"} {:group_shared} $$_ZZ18histogram256KernelPjS_jE6s_Hist : [bv32]bv32;
+axiom {:array_info "$$_ZZ18histogram256KernelPjS_jE6s_Hist"} {:group_shared} {:elem_width 32} {:source_name "s_Hist"} {:source_elem_width 32} {:source_dimensions "1536"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ18histogram256KernelPjS_jE6s_Hist : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ18histogram256KernelPjS_jE6s_Hist : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ18histogram256KernelPjS_jE6s_Hist : bool;
+
+const _WATCHED_OFFSET : bv32;
+const {:group_id_x} group_id_x : bv32;
+const {:group_size_x} group_size_x : bv32;
+const {:group_size_y} group_size_y : bv32;
+const {:group_size_z} group_size_z : bv32;
+const {:local_id_x} local_id_x : bv32;
+const {:num_groups_x} num_groups_x : bv32;
+const {:num_groups_y} num_groups_y : bv32;
+const {:num_groups_z} num_groups_z : bv32;
+function {:bvbuiltin "bvadd"} BV32_ADD(bv32, bv32) : bv32;
+function {:bvbuiltin "bvand"} BV32_AND(bv32, bv32) : bv32;
+function {:bvbuiltin "bvlshr"} BV32_LSHR(bv32, bv32) : bv32;
+function {:bvbuiltin "bvmul"} BV32_MUL(bv32, bv32) : bv32;
+function {:bvbuiltin "bvsdiv"} BV32_SDIV(bv32, bv32) : bv32;
+function {:bvbuiltin "bvudiv"} BV32_UDIV(bv32, bv32) : bv32;
+function {:bvbuiltin "bvult"} BV32_ULT(bv32, bv32) : bool;
+function {:bvbuiltin "bvurem"} BV32_UREM(bv32, bv32) : bv32;
+procedure {:source_name "histogram256Kernel"} {:kernel} $_Z18histogram256KernelPjS_j($dataCount:bv32)
+{
+  var $i.0:bv32;
+  var $pos.0:bv32;
+  var $bin.0:bv32;
+  var $sum.0:bv32;
+  var $i27.0:bv32;
+  var v0:bool;
+  var v1:bool;
+  var v4:bv32;
+  var v3:bv32;
+  var v5:bv32;
+  var v9:bv32;
+  var v2:bv32;
+  var v6:bv32;
+  var v7:bool;
+  var v8:bool;
+$entry:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  $i.0 := 0bv32;
+  goto $for.cond;
+$for.cond:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  assert {:originated_from_invariant} {:sourceloc_num 2} (if (_WRITE_HAS_OCCURRED_$$_ZZ18histogram256KernelPjS_jE6s_Hist ==> BV32_UREM(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), 192bv32) == local_id_x) then 1bv1 else 0bv1) != 0bv1;
+  v0 := BV32_ULT($i.0, 8bv32);
+  goto $truebb, $falsebb;
+$for.body:
+  assert {:block_sourceloc} {:sourceloc_num 3} true;
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  $$_ZZ18histogram256KernelPjS_jE6s_Hist[BV32_ADD(local_id_x, BV32_MUL($i.0, 192bv32))] := 0bv32;
+  goto $for.inc;
+$for.inc:
+  assert {:block_sourceloc} {:sourceloc_num 5} true;
+  $i.0 := BV32_ADD($i.0, 1bv32);
+  goto $for.cond;
+$for.end:
+  assert {:block_sourceloc} {:sourceloc_num 6} true;
+  call {:sourceloc_num 7} $bugle_barrier(1bv1, 1bv1);
+  $pos.0 := BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x);
+  goto $for.cond.7;
+$for.cond.7:
+  assert {:block_sourceloc} {:sourceloc_num 8} true;
+  v1 := BV32_ULT($pos.0, $dataCount);
+  goto $truebb0, $falsebb0;
+$for.body.9:
+  assert {:block_sourceloc} {:sourceloc_num 9} true;
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  v2 := $$d_Data[$pos.0];
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  call {:atomic} {:atomic_function "__atomicAdd_unsigned_int"} {:arg1 1bv32} {:parts 1} {:part 1} v3, $$_ZZ18histogram256KernelPjS_jE6s_Hist := _ATOMIC_OP32($$_ZZ18histogram256KernelPjS_jE6s_Hist, BV32_SDIV(BV32_ADD(BV32_MUL(BV32_MUL(BV32_LSHR(local_id_x, 5bv32), 256bv32), 4bv32), BV32_MUL(BV32_AND(v2, 255bv32), 4bv32)), 4bv32));
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  call {:atomic} {:atomic_function "__atomicAdd_unsigned_int"} {:arg1 1bv32} {:parts 1} {:part 1} v4, $$_ZZ18histogram256KernelPjS_jE6s_Hist := _ATOMIC_OP32($$_ZZ18histogram256KernelPjS_jE6s_Hist, BV32_SDIV(BV32_ADD(BV32_MUL(BV32_MUL(BV32_LSHR(local_id_x, 5bv32), 256bv32), 4bv32), BV32_MUL(BV32_AND(BV32_LSHR(v2, 8bv32), 255bv32), 4bv32)), 4bv32));
+  assert {:sourceloc} {:sourceloc_num 13} true;
+  call {:atomic} {:atomic_function "__atomicAdd_unsigned_int"} {:arg1 1bv32} {:parts 1} {:part 1} v5, $$_ZZ18histogram256KernelPjS_jE6s_Hist := _ATOMIC_OP32($$_ZZ18histogram256KernelPjS_jE6s_Hist, BV32_SDIV(BV32_ADD(BV32_MUL(BV32_MUL(BV32_LSHR(local_id_x, 5bv32), 256bv32), 4bv32), BV32_MUL(BV32_AND(BV32_LSHR(v2, 16bv32), 255bv32), 4bv32)), 4bv32));
+  assert {:sourceloc} {:sourceloc_num 14} true;
+  call {:atomic} {:atomic_function "__atomicAdd_unsigned_int"} {:arg1 1bv32} {:parts 1} {:part 1} v6, $$_ZZ18histogram256KernelPjS_jE6s_Hist := _ATOMIC_OP32($$_ZZ18histogram256KernelPjS_jE6s_Hist, BV32_SDIV(BV32_ADD(BV32_MUL(BV32_MUL(BV32_LSHR(local_id_x, 5bv32), 256bv32), 4bv32), BV32_MUL(BV32_AND(BV32_LSHR(v2, 24bv32), 255bv32), 4bv32)), 4bv32));
+  goto $for.inc.11;
+$for.inc.11:
+  assert {:block_sourceloc} {:sourceloc_num 15} true;
+  $pos.0 := BV32_ADD($pos.0, BV32_MUL(group_size_x, num_groups_x));
+  goto $for.cond.7;
+$for.end.14:
+  assert {:block_sourceloc} {:sourceloc_num 16} true;
+  call {:sourceloc_num 17} $bugle_barrier(1bv1, 1bv1);
+  $bin.0 := local_id_x;
+  goto $for.cond.15;
+$for.cond.15:
+  assert {:block_sourceloc} {:sourceloc_num 18} true;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 19} (if BV32_UREM($bin.0, group_size_x) == local_id_x then 1bv1 else 0bv1) != 0bv1;
+  assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 20} (if (_WRITE_HAS_OCCURRED_$$d_PartialHistograms ==> BV32_UREM(BV32_UREM(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), 256bv32), group_size_x) == local_id_x) then 1bv1 else 0bv1) != 0bv1;
+  v7 := BV32_ULT($bin.0, 256bv32);
+  goto $truebb1, $falsebb1;
+$for.body.26:
+  assert {:block_sourceloc} {:sourceloc_num 21} true;
+  $sum.0, $i27.0 := 0bv32, 0bv32;
+  goto $for.cond.28;
+$for.cond.28:
+  assert {:block_sourceloc} {:sourceloc_num 22} true;
+  v8 := BV32_ULT($i27.0, 6bv32);
+  goto $truebb2, $falsebb2;
+$for.body.30:
+  assert {:block_sourceloc} {:sourceloc_num 23} true;
+  assert {:sourceloc} {:sourceloc_num 24} true;
+  v9 := $$_ZZ18histogram256KernelPjS_jE6s_Hist[BV32_ADD($bin.0, BV32_MUL($i27.0, 256bv32))];
+  goto $for.inc.35;
+$for.inc.35:
+  assert {:block_sourceloc} {:sourceloc_num 25} true;
+  $sum.0, $i27.0 := BV32_ADD($sum.0, v9), BV32_ADD($i27.0, 1bv32);
+  goto $for.cond.28;
+$for.end.37:
+  assert {:block_sourceloc} {:sourceloc_num 26} true;
+  assert {:sourceloc} {:sourceloc_num 27} true;
+  $$d_PartialHistograms[BV32_ADD(BV32_MUL(group_id_x, 256bv32), $bin.0)] := $sum.0;
+  goto $for.inc.41;
+$for.inc.41:
+  assert {:block_sourceloc} {:sourceloc_num 28} true;
+  $bin.0 := BV32_ADD($bin.0, 192bv32);
+  goto $for.cond.15;
+$for.end.43:
+  assert {:block_sourceloc} {:sourceloc_num 29} true;
+  return;
+$truebb:
+  assume {:partition} v0;
+  assert {:block_sourceloc} {:sourceloc_num 30} true;
+  goto $for.body;
+$falsebb:
+  assume {:partition} !v0;
+  assert {:block_sourceloc} {:sourceloc_num 31} true;
+  goto $for.end;
+$truebb0:
+  assume {:partition} v1;
+  assert {:block_sourceloc} {:sourceloc_num 32} true;
+  goto $for.body.9;
+$falsebb0:
+  assume {:partition} !v1;
+  assert {:block_sourceloc} {:sourceloc_num 33} true;
+  goto $for.end.14;
+$truebb1:
+  assume {:partition} v7;
+  assert {:block_sourceloc} {:sourceloc_num 34} true;
+  goto $for.body.26;
+$falsebb1:
+  assume {:partition} !v7;
+  assert {:block_sourceloc} {:sourceloc_num 35} true;
+  goto $for.end.43;
+$truebb2:
+  assume {:partition} v8;
+  assert {:block_sourceloc} {:sourceloc_num 36} true;
+  goto $for.body.30;
+$falsebb2:
+  assume {:partition} !v8;
+  assert {:block_sourceloc} {:sourceloc_num 37} true;
+  goto $for.end.37;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:bv1, $1:bv1);
+axiom (if group_size_y == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if group_size_z == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_y == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_z == 1bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if group_size_x == 192bv32 then 1bv1 else 0bv1) != 0bv1;
+axiom (if num_groups_x == 240bv32 then 1bv1 else 0bv1) != 0bv1;

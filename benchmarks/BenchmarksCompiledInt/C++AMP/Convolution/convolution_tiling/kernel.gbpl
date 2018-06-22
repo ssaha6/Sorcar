@@ -1,0 +1,217 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "img"} {:global} $$img : [int]int;
+axiom {:array_info "$$img"} {:global} {:elem_width 32} {:source_name "img"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$img : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$img : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$img : bool;
+
+var {:source_name "filter"} {:global} $$filter : [int]int;
+axiom {:array_info "$$filter"} {:global} {:elem_width 32} {:source_name "filter"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$filter : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$filter : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$filter : bool;
+
+var {:source_name "result"} {:global} $$result : [int]int;
+axiom {:array_info "$$result"} {:global} {:elem_width 32} {:source_name "result"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$result : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$result : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$result : bool;
+
+var {:source_name "local_buf"} {:group_shared} $$_ZZ18convolution_tilingPKfS0_PfE9local_buf : [int]int;
+axiom {:array_info "$$_ZZ18convolution_tilingPKfS0_PfE9local_buf"} {:group_shared} {:elem_width 32} {:source_name "local_buf"} {:source_elem_width 32} {:source_dimensions "128"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ18convolution_tilingPKfS0_PfE9local_buf : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ18convolution_tilingPKfS0_PfE9local_buf : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ18convolution_tilingPKfS0_PfE9local_buf : bool;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_id_y} group_id_y : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_y} local_id_y : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function FADD32(int, int) : int;
+function FMUL32(int, int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SGE(x : int, y : int) : bool {
+  x >= y
+}
+function {:inline true} BV32_SGT(x : int, y : int) : bool {
+  x > y
+}
+function {:inline true} BV32_SLE(x : int, y : int) : bool {
+  x <= y
+}
+function {:inline true} BV32_SLT(x : int, y : int) : bool {
+  x < y
+}
+function {:inline true} BV32_SUB(x : int, y : int) : int {
+  x - y
+}
+procedure {:source_name "convolution_tiling"} {:kernel} $_Z18convolution_tilingPKfS0_Pf()
+{
+  var $0:int;
+  var $1:int;
+  var $sum.0:int;
+  var $k.0:int;
+  var v0:int;
+  var v1:bool;
+  var v2:bool;
+  var v3:bool;
+  var v4:int;
+  var v5:bool;
+  var v6:bool;
+  var v7:bool;
+  var v8:bool;
+  var v9:int;
+  var v10:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  v0 := BV32_SUB(BV32_ADD(BV32_MUL(group_id_y, 114), local_id_y), 7);
+  v1 := BV32_SLT(v0, 0);
+  goto $truebb, $falsebb;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  $0 := 0;
+  goto $6;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  v2 := BV32_SGT(v0, 511);
+  goto $truebb0, $falsebb0;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 3} true;
+  $1 := 511;
+  goto $5;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 4} true;
+  $1 := v0;
+  goto $5;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 5} true;
+  $0 := $1;
+  goto $6;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 6} true;
+  v3 := BV32_SLT(v0, 519);
+  goto $truebb1, $falsebb1;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  v4 := $$img[BV32_ADD(BV32_MUL($0, 512), group_id_x)];
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  $$_ZZ18convolution_tilingPKfS0_PfE9local_buf[local_id_y] := v4;
+  goto $8;
+$8:
+  assert {:block_sourceloc} {:sourceloc_num 10} true;
+  call {:sourceloc_num 11} $bugle_barrier(-1, -1);
+  v5 := BV32_SGE(local_id_y, 7);
+  goto $truebb2, $falsebb2;
+$9:
+  assert {:block_sourceloc} {:sourceloc_num 12} true;
+  v6 := BV32_SLT(local_id_y, 121);
+  goto $truebb3, $falsebb3;
+$10:
+  assert {:block_sourceloc} {:sourceloc_num 13} true;
+  v7 := BV32_SLT(v0, 512);
+  goto $truebb4, $falsebb4;
+$11:
+  assert {:block_sourceloc} {:sourceloc_num 14} true;
+  $sum.0, $k.0 := 0, -7;
+  goto $12;
+$12:
+  assert {:block_sourceloc} {:sourceloc_num 15} true;
+  v8 := BV32_SLE($k.0, 7);
+  goto $truebb5, $falsebb5;
+$13:
+  assert {:block_sourceloc} {:sourceloc_num 16} true;
+  assert {:sourceloc} {:sourceloc_num 17} true;
+  v9 := $$_ZZ18convolution_tilingPKfS0_PfE9local_buf[BV32_ADD(local_id_y, $k.0)];
+  assert {:sourceloc} {:sourceloc_num 18} true;
+  v10 := $$filter[BV32_ADD($k.0, 7)];
+  goto $14;
+$14:
+  assert {:block_sourceloc} {:sourceloc_num 19} true;
+  $sum.0, $k.0 := FADD32($sum.0, FMUL32(v9, v10)), BV32_ADD($k.0, 1);
+  goto $12;
+$15:
+  assert {:block_sourceloc} {:sourceloc_num 20} true;
+  assert {:sourceloc} {:sourceloc_num 21} true;
+  $$result[BV32_ADD(BV32_MUL($0, 512), group_id_x)] := $sum.0;
+  goto $16;
+$16:
+  assert {:block_sourceloc} {:sourceloc_num 22} true;
+  return;
+$truebb:
+  assume {:partition} v1;
+  assert {:block_sourceloc} {:sourceloc_num 23} true;
+  goto $1;
+$falsebb:
+  assume {:partition} !v1;
+  assert {:block_sourceloc} {:sourceloc_num 24} true;
+  goto $2;
+$truebb0:
+  assume {:partition} v2;
+  assert {:block_sourceloc} {:sourceloc_num 25} true;
+  goto $3;
+$falsebb0:
+  assume {:partition} !v2;
+  assert {:block_sourceloc} {:sourceloc_num 26} true;
+  goto $4;
+$truebb1:
+  assume {:partition} v3;
+  assert {:block_sourceloc} {:sourceloc_num 27} true;
+  goto $7;
+$falsebb1:
+  assume {:partition} !v3;
+  assert {:block_sourceloc} {:sourceloc_num 28} true;
+  goto $8;
+$truebb2:
+  assume {:partition} v5;
+  assert {:block_sourceloc} {:sourceloc_num 29} true;
+  goto $9;
+$falsebb2:
+  assume {:partition} !v5;
+  assert {:block_sourceloc} {:sourceloc_num 30} true;
+  goto $16;
+$truebb3:
+  assume {:partition} v6;
+  assert {:block_sourceloc} {:sourceloc_num 31} true;
+  goto $10;
+$falsebb3:
+  assume {:partition} !v6;
+  assert {:block_sourceloc} {:sourceloc_num 32} true;
+  goto $16;
+$truebb4:
+  assume {:partition} v7;
+  assert {:block_sourceloc} {:sourceloc_num 33} true;
+  goto $11;
+$falsebb4:
+  assume {:partition} !v7;
+  assert {:block_sourceloc} {:sourceloc_num 34} true;
+  goto $16;
+$truebb5:
+  assume {:partition} v8;
+  assert {:block_sourceloc} {:sourceloc_num 35} true;
+  goto $13;
+$falsebb5:
+  assume {:partition} !v8;
+  assert {:block_sourceloc} {:sourceloc_num 36} true;
+  goto $15;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:int, $1:int);
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 1 then 1 else 0) != 0;
+axiom (if group_size_y == 128 then 1 else 0) != 0;
+axiom (if num_groups_x == 512 then 1 else 0) != 0;
+axiom (if num_groups_y == 6 then 1 else 0) != 0;

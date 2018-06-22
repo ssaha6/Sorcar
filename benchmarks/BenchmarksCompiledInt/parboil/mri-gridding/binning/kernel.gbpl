@@ -1,0 +1,161 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "sample_g"} {:global} $$sample_g : [int]int;
+axiom {:array_info "$$sample_g"} {:global} {:elem_width 32} {:source_name "sample_g"} {:source_elem_width 192} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 192} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$sample_g : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 192} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$sample_g : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 192} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$sample_g : bool;
+
+var {:source_name "idxKey_g"} {:global} $$idxKey_g : [int]int;
+axiom {:array_info "$$idxKey_g"} {:global} {:elem_width 32} {:source_name "idxKey_g"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$idxKey_g : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$idxKey_g : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$idxKey_g : bool;
+
+var {:source_name "idxValue_g"} {:global} $$idxValue_g : [int]int;
+axiom {:array_info "$$idxValue_g"} {:global} {:elem_width 32} {:source_name "idxValue_g"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$idxValue_g : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$idxValue_g : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$idxValue_g : bool;
+
+var {:source_name "binCount_g"} {:global} $$binCount_g : [int]int;
+axiom {:array_info "$$binCount_g"} {:global} {:elem_width 32} {:source_name "binCount_g"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$binCount_g : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$binCount_g : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$binCount_g : bool;
+
+var {:source_name "pt"} $$pt : [int]int;
+axiom {:array_info "$$pt"} {:elem_width 32} {:source_name "pt"} {:source_elem_width 192} {:source_dimensions "1"} true;
+
+const _WATCHED_OFFSET : int;
+const {:global_offset_x} global_offset_x : int;
+const {:global_offset_y} global_offset_y : int;
+const {:global_offset_z} global_offset_z : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function FP32_TO_UI32(int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SDIV(x : int, y : int) : int {
+  x div y
+}
+function {:inline true} BV32_ULT(x : int, y : int) : bool {
+  x < y
+}
+procedure {:source_name "binning_kernel"} {:kernel} $binning_kernel($n:int, $binsize:int, $gridNumElems:int)
+{
+  var $key.0:int;
+  var v0:int;
+  var v1:bool;
+  var v2:int;
+  var v3:int;
+  var v4:int;
+  var v5:int;
+  var v6:int;
+  var v7:int;
+  var v8:int;
+  var v9:int;
+  var v10:int;
+  var v11:int;
+  var v12:int;
+  var v13:bool;
+  var v14:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  v0 := BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x);
+  v1 := BV32_ULT(v0, $n);
+  goto $truebb, $falsebb;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  assert {:sourceloc} {:sourceloc_num 2} true;
+  v2 := $$sample_g[BV32_MUL(v0, 6)];
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  $$pt[0] := v2;
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  v3 := $$sample_g[BV32_ADD(BV32_MUL(v0, 6), 1)];
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  $$pt[1] := v3;
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  v4 := $$sample_g[BV32_ADD(BV32_MUL(v0, 6), 2)];
+  assert {:sourceloc} {:sourceloc_num 7} true;
+  $$pt[2] := v4;
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  v5 := $$sample_g[BV32_ADD(BV32_MUL(v0, 6), 3)];
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  $$pt[3] := v5;
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  v6 := $$sample_g[BV32_ADD(BV32_MUL(v0, 6), 4)];
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  $$pt[4] := v6;
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  v7 := $$sample_g[BV32_ADD(BV32_MUL(v0, 6), 5)];
+  assert {:sourceloc} {:sourceloc_num 13} true;
+  $$pt[5] := v7;
+  assert {:sourceloc} {:sourceloc_num 14} true;
+  v8 := $$pt[4];
+  assert {:sourceloc} {:sourceloc_num 15} true;
+  v9 := $$pt[3];
+  assert {:sourceloc} {:sourceloc_num 16} true;
+  v10 := $$pt[2];
+  v11 := BV32_ADD(BV32_ADD(BV32_MUL(FP32_TO_UI32(v8), 65536), BV32_MUL(FP32_TO_UI32(v9), 256)), FP32_TO_UI32(v10));
+  assert {:sourceloc} {:sourceloc_num 17} true;
+  call {:atomic} {:atomic_function "__bugle_atomic_add_global_uint"} {:arg1 1} {:parts 1} {:part 1} v12, $$binCount_g := _ATOMIC_OP32($$binCount_g, BV32_SDIV(BV32_MUL(v11, 4), 4));
+  v13 := BV32_ULT(v12, $binsize);
+  goto $truebb0, $falsebb0;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 18} true;
+  $key.0 := v11;
+  goto $4;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 19} true;
+  assert {:sourceloc} {:sourceloc_num 20} true;
+  call {:atomic} {:atomic_function "__bugle_atomic_sub_global_uint"} {:arg1 1} {:parts 1} {:part 1} v14, $$binCount_g := _ATOMIC_OP32($$binCount_g, BV32_SDIV(BV32_MUL(v11, 4), 4));
+  $key.0 := $gridNumElems;
+  goto $4;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 21} true;
+  assert {:sourceloc} {:sourceloc_num 22} true;
+  $$idxKey_g[v0] := $key.0;
+  assert {:sourceloc} {:sourceloc_num 23} true;
+  $$idxValue_g[v0] := v0;
+  goto $5;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 24} true;
+  return;
+$truebb:
+  assume {:partition} v1;
+  assert {:block_sourceloc} {:sourceloc_num 25} true;
+  goto $1;
+$falsebb:
+  assume {:partition} !v1;
+  assert {:block_sourceloc} {:sourceloc_num 26} true;
+  goto $5;
+$truebb0:
+  assume {:partition} v13;
+  assert {:block_sourceloc} {:sourceloc_num 27} true;
+  goto $2;
+$falsebb0:
+  assume {:partition} !v13;
+  assert {:block_sourceloc} {:sourceloc_num 28} true;
+  goto $3;
+}
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 1024 then 1 else 0) != 0;
+axiom (if num_groups_x == 2594 then 1 else 0) != 0;
+axiom (if global_offset_x == 0 then 1 else 0) != 0;
+axiom (if global_offset_y == 0 then 1 else 0) != 0;
+axiom (if global_offset_z == 0 then 1 else 0) != 0;

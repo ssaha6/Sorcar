@@ -1,0 +1,146 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "dst_vector"} {:global} $$dst_vector : [int]int;
+axiom {:array_info "$$dst_vector"} {:global} {:elem_width 32} {:source_name "dst_vector"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$dst_vector : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$dst_vector : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$dst_vector : bool;
+
+var {:source_name "d_data"} {:global} $$d_data : [int]int;
+axiom {:array_info "$$d_data"} {:global} {:elem_width 32} {:source_name "d_data"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_data : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_data : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_data : bool;
+
+var {:source_name "d_index"} {:global} $$d_index : [int]int;
+axiom {:array_info "$$d_index"} {:global} {:elem_width 32} {:source_name "d_index"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_index : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_index : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_index : bool;
+
+var {:source_name "d_perm"} {:global} $$d_perm : [int]int;
+axiom {:array_info "$$d_perm"} {:global} {:elem_width 32} {:source_name "d_perm"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_perm : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_perm : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_perm : bool;
+
+var {:source_name "x_vec"} {:global} $$x_vec : [int]int;
+axiom {:array_info "$$x_vec"} {:global} {:elem_width 32} {:source_name "x_vec"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$x_vec : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$x_vec : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$x_vec : bool;
+
+var {:source_name "jds_ptr_int"} {:constant} $$jds_ptr_int : [int]int;
+axiom {:array_info "$$jds_ptr_int"} {:constant} {:elem_width 32} {:source_name "jds_ptr_int"} {:source_elem_width 32} {:source_dimensions "*"} true;
+
+var {:source_name "sh_zcnt_int"} {:constant} $$sh_zcnt_int : [int]int;
+axiom {:array_info "$$sh_zcnt_int"} {:constant} {:elem_width 32} {:source_name "sh_zcnt_int"} {:source_elem_width 32} {:source_dimensions "*"} true;
+
+const _WATCHED_OFFSET : int;
+const {:global_offset_x} global_offset_x : int;
+const {:global_offset_y} global_offset_y : int;
+const {:global_offset_z} global_offset_z : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function FADD32(int, int) : int;
+function FMUL32(int, int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SDIV(x : int, y : int) : int {
+  x div y
+}
+function {:inline true} BV32_SLT(x : int, y : int) : bool {
+  x < y
+}
+procedure {:source_name "spmv_jds_naive"} {:kernel} $spmv_jds_naive($dim:int)
+{
+  var $sum.0:int;
+  var $k.0:int;
+  var v0:int;
+  var v1:bool;
+  var v2:int;
+  var v3:bool;
+  var v4:int;
+  var v5:int;
+  var v6:int;
+  var v7:int;
+  var v8:int;
+  var v9:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  v0 := BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x);
+  v1 := BV32_SLT(v0, $dim);
+  goto $truebb, $falsebb;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  assert {:sourceloc} {:sourceloc_num 2} true;
+  v2 := $$sh_zcnt_int[BV32_SDIV(v0, 32)];
+  $sum.0, $k.0 := 0, 0;
+  goto $2;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 3} true;
+  v3 := BV32_SLT($k.0, v2);
+  goto $truebb0, $falsebb0;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 4} true;
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  v4 := $$jds_ptr_int[$k.0];
+  v5 := BV32_ADD(v4, v0);
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  v6 := $$d_index[v5];
+  assert {:sourceloc} {:sourceloc_num 7} true;
+  v7 := $$d_data[v5];
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  v8 := $$x_vec[v6];
+  goto $4;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 9} true;
+  $sum.0, $k.0 := FADD32($sum.0, FMUL32(v7, v8)), BV32_ADD($k.0, 1);
+  goto $2;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 10} true;
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  v9 := $$d_perm[v0];
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  $$dst_vector[v9] := $sum.0;
+  goto $6;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 13} true;
+  return;
+$truebb:
+  assume {:partition} v1;
+  assert {:block_sourceloc} {:sourceloc_num 14} true;
+  goto $1;
+$falsebb:
+  assume {:partition} !v1;
+  assert {:block_sourceloc} {:sourceloc_num 15} true;
+  goto $6;
+$truebb0:
+  assume {:partition} v3;
+  assert {:block_sourceloc} {:sourceloc_num 16} true;
+  goto $3;
+$falsebb0:
+  assume {:partition} !v3;
+  assert {:block_sourceloc} {:sourceloc_num 17} true;
+  goto $5;
+}
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 32 then 1 else 0) != 0;
+axiom (if num_groups_x == 36 then 1 else 0) != 0;
+axiom (if global_offset_x == 0 then 1 else 0) != 0;
+axiom (if global_offset_y == 0 then 1 else 0) != 0;
+axiom (if global_offset_z == 0 then 1 else 0) != 0;

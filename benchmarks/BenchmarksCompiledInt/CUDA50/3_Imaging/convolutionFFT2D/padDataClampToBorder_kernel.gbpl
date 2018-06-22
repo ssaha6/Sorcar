@@ -1,0 +1,340 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+procedure _ATOMIC_OP8(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "d_Dst"} {:global} $$d_Dst : [int]int;
+axiom {:array_info "$$d_Dst"} {:global} {:elem_width 32} {:source_name "d_Dst"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_Dst : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_Dst : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_Dst : bool;
+
+var {:source_name "d_Src"} {:global} $$d_Src : [int]int;
+axiom {:array_info "$$d_Src"} {:global} {:elem_width 32} {:source_name "d_Src"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_Src : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_Src : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_Src : bool;
+
+var {:source_name ""} $$0 : [int]int;
+axiom {:array_info "$$0"} {:elem_width 8} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
+
+var {:source_name "texFloat"} {:global} $$texFloat : [int]int;
+axiom {:array_info "$$texFloat"} {:global} {:elem_width 8} {:source_name "texFloat"} {:source_elem_width 96} {:source_dimensions "1"} true;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 96} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$texFloat : bool;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 96} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$texFloat : bool;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 96} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$texFloat : bool;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_id_y} group_id_y : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:local_id_y} local_id_y : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function BV_CONCAT(int, int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SGE(x : int, y : int) : bool {
+  x >= y
+}
+function {:inline true} BV32_SLT(x : int, y : int) : bool {
+  x < y
+}
+function {:inline true} BV32_SUB(x : int, y : int) : int {
+  x - y
+}
+procedure {:source_name "padDataClampToBorder_kernel"} {:kernel} $_Z27padDataClampToBorder_kernelPfS_iiiiiiii($fftH:int, $fftW:int, $dataH:int, $dataW:int, $kernelH:int, $kernelW:int, $kernelY:int, $kernelX:int)
+requires {:sourceloc_num 0} (if $fftH == 2048 then 1 else 0) != 0;
+requires {:sourceloc_num 1} (if $fftW == 2048 then 1 else 0) != 0;
+{
+  var $dy.1:int;
+  var $dx.1:int;
+  var $dy.2:int;
+  var $dx.2:int;
+  var v0:int;
+  var v1:int;
+  var v2:int;
+  var v3:int;
+  var v4:bool;
+  var v5:bool;
+  var v6:bool;
+  var v7:bool;
+  var v8:bool;
+  var v9:bool;
+  var v10:bool;
+  var v11:bool;
+  var v12:bool;
+  var v13:bool;
+  var v14:int;
+  var v15:int;
+  var v16:int;
+  var v17:int;
+  var v22:int;
+  var v18:int;
+  var v19:int;
+  var v20:int;
+  var v21:int;
+  var v23:int;
+  var v24:int;
+  var v25:int;
+  var v26:int;
+  var v27:int;
+  var v28:int;
+  var v29:int;
+  var v30:int;
+  var v31:int;
+  var v32:int;
+  var v33:int;
+  var v34:int;
+  var v35:int;
+  var v36:int;
+  var v37:int;
+  var v38:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  v0 := BV32_ADD(BV32_MUL(group_size_y, group_id_y), local_id_y);
+  v1 := BV32_ADD(BV32_MUL(group_size_x, group_id_x), local_id_x);
+  v2 := BV32_ADD($dataH, $kernelY);
+  v3 := BV32_ADD($dataW, $kernelX);
+  v4 := BV32_SLT(v0, $fftH);
+  goto $truebb, $falsebb;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 3} true;
+  v5 := BV32_SLT(v1, $fftW);
+  goto $truebb0, $falsebb0;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 4} true;
+  v6 := BV32_SLT(v0, $dataH);
+  goto $truebb1, $falsebb1;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 5} true;
+  goto $4;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 6} true;
+  v7 := BV32_SLT(v1, $dataW);
+  goto $truebb2, $falsebb2;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  goto $6;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 8} true;
+  v8 := BV32_SGE(v0, $dataH);
+  goto $truebb3, $falsebb3;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 9} true;
+  v9 := BV32_SLT(v0, v2);
+  goto $truebb4, $falsebb4;
+$8:
+  assert {:block_sourceloc} {:sourceloc_num 10} true;
+  $dy.1 := BV32_SUB($dataH, 1);
+  goto $9;
+$9:
+  assert {:block_sourceloc} {:sourceloc_num 11} true;
+  v10 := BV32_SGE(v1, $dataW);
+  goto $truebb5, $falsebb5;
+$10:
+  assert {:block_sourceloc} {:sourceloc_num 12} true;
+  v11 := BV32_SLT(v1, v3);
+  goto $truebb6, $falsebb6;
+$11:
+  assert {:block_sourceloc} {:sourceloc_num 13} true;
+  $dx.1 := BV32_SUB($dataW, 1);
+  goto $12;
+$12:
+  assert {:block_sourceloc} {:sourceloc_num 14} true;
+  v12 := BV32_SGE(v0, v2);
+  goto $truebb7, $falsebb7;
+$13:
+  assert {:block_sourceloc} {:sourceloc_num 15} true;
+  $dy.2 := 0;
+  goto $14;
+$14:
+  assert {:block_sourceloc} {:sourceloc_num 16} true;
+  v13 := BV32_SGE(v1, v3);
+  goto $truebb8, $falsebb8;
+$15:
+  assert {:block_sourceloc} {:sourceloc_num 17} true;
+  $dx.2 := 0;
+  goto $16;
+$16:
+  assert {:block_sourceloc} {:sourceloc_num 18} true;
+  assert {:sourceloc} {:sourceloc_num 19} true;
+  v14 := $$texFloat[0];
+  assert {:sourceloc} {:sourceloc_num 20} true;
+  $$0[0] := v14;
+  assert {:sourceloc} {:sourceloc_num 21} true;
+  v15 := $$texFloat[1];
+  assert {:sourceloc} {:sourceloc_num 22} true;
+  $$0[1] := v15;
+  assert {:sourceloc} {:sourceloc_num 23} true;
+  v16 := $$texFloat[2];
+  assert {:sourceloc} {:sourceloc_num 24} true;
+  $$0[2] := v16;
+  assert {:sourceloc} {:sourceloc_num 25} true;
+  v17 := $$texFloat[3];
+  assert {:sourceloc} {:sourceloc_num 26} true;
+  $$0[3] := v17;
+  assert {:sourceloc} {:sourceloc_num 27} true;
+  v18 := $$texFloat[4];
+  assert {:sourceloc} {:sourceloc_num 28} true;
+  $$0[4] := v18;
+  assert {:sourceloc} {:sourceloc_num 29} true;
+  v19 := $$texFloat[5];
+  assert {:sourceloc} {:sourceloc_num 30} true;
+  $$0[5] := v19;
+  assert {:sourceloc} {:sourceloc_num 31} true;
+  v20 := $$texFloat[6];
+  assert {:sourceloc} {:sourceloc_num 32} true;
+  $$0[6] := v20;
+  assert {:sourceloc} {:sourceloc_num 33} true;
+  v21 := $$texFloat[7];
+  assert {:sourceloc} {:sourceloc_num 34} true;
+  $$0[7] := v21;
+  assert {:sourceloc} {:sourceloc_num 35} true;
+  v22 := $$texFloat[8];
+  assert {:sourceloc} {:sourceloc_num 36} true;
+  $$0[8] := v22;
+  assert {:sourceloc} {:sourceloc_num 37} true;
+  v23 := $$texFloat[9];
+  assert {:sourceloc} {:sourceloc_num 38} true;
+  $$0[9] := v23;
+  assert {:sourceloc} {:sourceloc_num 39} true;
+  v24 := $$texFloat[10];
+  assert {:sourceloc} {:sourceloc_num 40} true;
+  $$0[10] := v24;
+  assert {:sourceloc} {:sourceloc_num 41} true;
+  v25 := $$texFloat[11];
+  assert {:sourceloc} {:sourceloc_num 42} true;
+  $$0[11] := v25;
+  assert {:sourceloc} {:sourceloc_num 43} true;
+  v26 := $$0[0];
+  assert {:sourceloc} {:sourceloc_num 44} true;
+  v27 := $$0[1];
+  assert {:sourceloc} {:sourceloc_num 45} true;
+  v28 := $$0[2];
+  assert {:sourceloc} {:sourceloc_num 46} true;
+  v29 := $$0[3];
+  assert {:sourceloc} {:sourceloc_num 47} true;
+  v30 := $$0[4];
+  assert {:sourceloc} {:sourceloc_num 48} true;
+  v31 := $$0[5];
+  assert {:sourceloc} {:sourceloc_num 49} true;
+  v32 := $$0[6];
+  assert {:sourceloc} {:sourceloc_num 50} true;
+  v33 := $$0[7];
+  assert {:sourceloc} {:sourceloc_num 51} true;
+  v34 := $$0[8];
+  assert {:sourceloc} {:sourceloc_num 52} true;
+  v35 := $$0[9];
+  assert {:sourceloc} {:sourceloc_num 53} true;
+  v36 := $$0[10];
+  assert {:sourceloc} {:sourceloc_num 54} true;
+  v37 := $$0[11];
+  call {:sourceloc_num 55}   v38 := $_Z10tex1DfetchIfET_7textureIS0_Li1EL19cudaTextureReadMode0EEi(BV_CONCAT(BV_CONCAT(BV_CONCAT(v29, v28), v27), v26), BV_CONCAT(BV_CONCAT(BV_CONCAT(v33, v32), v31), v30), BV_CONCAT(BV_CONCAT(BV_CONCAT(v37, v36), v35), v34), BV32_ADD(BV32_MUL($dy.2, $dataW), $dx.2));
+  assert {:sourceloc} {:sourceloc_num 56} true;
+  $$d_Dst[BV32_ADD(BV32_MUL(v0, $fftW), v1)] := v38;
+  goto $17;
+$17:
+  assert {:block_sourceloc} {:sourceloc_num 57} true;
+  return;
+$truebb:
+  assume {:partition} v4;
+  assert {:block_sourceloc} {:sourceloc_num 58} true;
+  goto $1;
+$falsebb:
+  assume {:partition} !v4;
+  assert {:block_sourceloc} {:sourceloc_num 59} true;
+  goto $17;
+$truebb0:
+  assume {:partition} v5;
+  assert {:block_sourceloc} {:sourceloc_num 60} true;
+  goto $2;
+$falsebb0:
+  assume {:partition} !v5;
+  assert {:block_sourceloc} {:sourceloc_num 61} true;
+  goto $17;
+$truebb1:
+  assume {:partition} v6;
+  assert {:block_sourceloc} {:sourceloc_num 62} true;
+  goto $3;
+$falsebb1:
+  assume {:partition} !v6;
+  assert {:block_sourceloc} {:sourceloc_num 63} true;
+  goto $4;
+$truebb2:
+  assume {:partition} v7;
+  assert {:block_sourceloc} {:sourceloc_num 64} true;
+  goto $5;
+$falsebb2:
+  assume {:partition} !v7;
+  assert {:block_sourceloc} {:sourceloc_num 65} true;
+  goto $6;
+$truebb3:
+  assume {:partition} v8;
+  assert {:block_sourceloc} {:sourceloc_num 66} true;
+  goto $7;
+$falsebb3:
+  assume {:partition} !v8;
+  assert {:block_sourceloc} {:sourceloc_num 67} true;
+  $dy.1 := v0;
+  goto $9;
+$truebb4:
+  assume {:partition} v9;
+  assert {:block_sourceloc} {:sourceloc_num 68} true;
+  goto $8;
+$falsebb4:
+  assume {:partition} !v9;
+  assert {:block_sourceloc} {:sourceloc_num 69} true;
+  $dy.1 := v0;
+  goto $9;
+$truebb5:
+  assume {:partition} v10;
+  assert {:block_sourceloc} {:sourceloc_num 70} true;
+  goto $10;
+$falsebb5:
+  assume {:partition} !v10;
+  assert {:block_sourceloc} {:sourceloc_num 71} true;
+  $dx.1 := v1;
+  goto $12;
+$truebb6:
+  assume {:partition} v11;
+  assert {:block_sourceloc} {:sourceloc_num 72} true;
+  goto $11;
+$falsebb6:
+  assume {:partition} !v11;
+  assert {:block_sourceloc} {:sourceloc_num 73} true;
+  $dx.1 := v1;
+  goto $12;
+$truebb7:
+  assume {:partition} v12;
+  assert {:block_sourceloc} {:sourceloc_num 74} true;
+  goto $13;
+$falsebb7:
+  assume {:partition} !v12;
+  assert {:block_sourceloc} {:sourceloc_num 75} true;
+  $dy.2 := $dy.1;
+  goto $14;
+$truebb8:
+  assume {:partition} v13;
+  assert {:block_sourceloc} {:sourceloc_num 76} true;
+  goto $15;
+$falsebb8:
+  assume {:partition} !v13;
+  assert {:block_sourceloc} {:sourceloc_num 77} true;
+  $dx.2 := $dx.1;
+  goto $16;
+}
+procedure {:source_name "_Z10tex1DfetchIfET_7textureIS0_Li1EL19cudaTextureReadMode0EEi"} $_Z10tex1DfetchIfET_7textureIS0_Li1EL19cudaTextureReadMode0EEi($0:int, $1:int, $2:int, $3:int) returns ($ret:int);
+axiom (if group_size_x == 32 then 1 else 0) != 0;
+axiom (if group_size_y == 8 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_x == 64 then 1 else 0) != 0;
+axiom (if num_groups_y == 256 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;

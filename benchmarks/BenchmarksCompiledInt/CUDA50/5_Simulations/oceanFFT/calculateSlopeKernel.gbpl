@@ -1,0 +1,163 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "h"} {:global} $$h : [int]int;
+axiom {:array_info "$$h"} {:global} {:elem_width 32} {:source_name "h"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$h : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$h : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$h : bool;
+
+var {:source_name "slopeOut"} {:global} $$slopeOut : [int]int;
+axiom {:array_info "$$slopeOut"} {:global} {:elem_width 32} {:source_name "slopeOut"} {:source_elem_width 64} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$slopeOut : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$slopeOut : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$slopeOut : bool;
+
+var {:source_name ""} $$0 : [int]int;
+axiom {:array_info "$$0"} {:elem_width 32} {:source_name ""} {:source_elem_width 64} {:source_dimensions "1"} true;
+
+var {:source_name "slope"} $$slope : [int]int;
+axiom {:array_info "$$slope"} {:elem_width 32} {:source_name "slope"} {:source_elem_width 64} {:source_dimensions "1"} true;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_id_y} group_id_y : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:local_id_y} local_id_y : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function FSUB32(int, int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SUB(x : int, y : int) : int {
+  x - y
+}
+function {:inline true} BV32_UGT(x : int, y : int) : bool {
+  x > y
+}
+function {:inline true} BV32_ULT(x : int, y : int) : bool {
+  x < y
+}
+procedure {:source_name "calculateSlopeKernel"} {:kernel} $_Z20calculateSlopeKernelPfP6float2jj($width:int, $height:int)
+requires {:sourceloc_num 0} (if $width == 256 then 1 else 0) != 0;
+requires {:sourceloc_num 1} (if $height == 256 then 1 else 0) != 0;
+{
+  var v0:int;
+  var v1:int;
+  var v2:int;
+  var v3:int;
+  var v4:int;
+  var v5:bool;
+  var v6:bool;
+  var v7:bool;
+  var v8:bool;
+  var v9:int;
+  var v10:int;
+  var v11:int;
+  var v12:int;
+  var v13:int;
+  var v14:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  v0 := BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x);
+  v1 := BV32_ADD(BV32_MUL(group_id_y, group_size_y), local_id_y);
+  v2 := BV32_ADD(BV32_MUL(v1, $width), v0);
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  $$0[0] := 0;
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  $$0[1] := 0;
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  v3 := $$0[0];
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  v4 := $$0[1];
+  assert {:sourceloc} {:sourceloc_num 7} true;
+  $$slope[0] := v3;
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  $$slope[1] := v4;
+  v5 := BV32_UGT(v0, 0);
+  goto $truebb, $falsebb;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 9} true;
+  v6 := BV32_UGT(v1, 0);
+  goto $truebb0, $falsebb0;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 10} true;
+  v7 := BV32_ULT(v0, BV32_SUB($width, 1));
+  goto $truebb1, $falsebb1;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 11} true;
+  v8 := BV32_ULT(v1, BV32_SUB($height, 1));
+  goto $truebb2, $falsebb2;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 12} true;
+  assert {:sourceloc} {:sourceloc_num 13} true;
+  v9 := $$h[BV32_ADD(v2, 1)];
+  assert {:sourceloc} {:sourceloc_num 14} true;
+  v10 := $$h[BV32_SUB(v2, 1)];
+  assert {:sourceloc} {:sourceloc_num 15} true;
+  $$slope[0] := FSUB32(v9, v10);
+  assert {:sourceloc} {:sourceloc_num 16} true;
+  v11 := $$h[BV32_ADD(v2, $width)];
+  assert {:sourceloc} {:sourceloc_num 17} true;
+  v12 := $$h[BV32_SUB(v2, $width)];
+  assert {:sourceloc} {:sourceloc_num 18} true;
+  $$slope[1] := FSUB32(v11, v12);
+  goto $5;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 19} true;
+  assert {:sourceloc} {:sourceloc_num 20} true;
+  v13 := $$slope[0];
+  assert {:sourceloc} {:sourceloc_num 21} true;
+  $$slopeOut[BV32_MUL(v2, 2)] := v13;
+  assert {:sourceloc} {:sourceloc_num 22} true;
+  v14 := $$slope[1];
+  assert {:sourceloc} {:sourceloc_num 23} true;
+  $$slopeOut[BV32_ADD(BV32_MUL(v2, 2), 1)] := v14;
+  return;
+$truebb:
+  assume {:partition} v5;
+  assert {:block_sourceloc} {:sourceloc_num 24} true;
+  goto $1;
+$falsebb:
+  assume {:partition} !v5;
+  assert {:block_sourceloc} {:sourceloc_num 25} true;
+  goto $5;
+$truebb0:
+  assume {:partition} v6;
+  assert {:block_sourceloc} {:sourceloc_num 26} true;
+  goto $2;
+$falsebb0:
+  assume {:partition} !v6;
+  assert {:block_sourceloc} {:sourceloc_num 27} true;
+  goto $5;
+$truebb1:
+  assume {:partition} v7;
+  assert {:block_sourceloc} {:sourceloc_num 28} true;
+  goto $3;
+$falsebb1:
+  assume {:partition} !v7;
+  assert {:block_sourceloc} {:sourceloc_num 29} true;
+  goto $5;
+$truebb2:
+  assume {:partition} v8;
+  assert {:block_sourceloc} {:sourceloc_num 30} true;
+  goto $4;
+$falsebb2:
+  assume {:partition} !v8;
+  assert {:block_sourceloc} {:sourceloc_num 31} true;
+  goto $5;
+}
+axiom (if group_size_x == 8 then 1 else 0) != 0;
+axiom (if group_size_y == 8 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_x == 32 then 1 else 0) != 0;
+axiom (if num_groups_y == 32 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;

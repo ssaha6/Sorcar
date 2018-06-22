@@ -1,0 +1,112 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "pos"} {:global} $$pos : [int]int;
+axiom {:array_info "$$pos"} {:global} {:elem_width 32} {:source_name "pos"} {:source_elem_width 128} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$pos : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$pos : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$pos : bool;
+
+var {:source_name ""} $$0 : [int]int;
+axiom {:array_info "$$0"} {:elem_width 32} {:source_name ""} {:source_elem_width 128} {:source_dimensions "1"} true;
+
+var {:source_name ""} $$1 : [int]int;
+axiom {:array_info "$$1"} {:elem_width 32} {:source_name ""} {:source_elem_width 128} {:source_dimensions "1"} true;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_id_y} group_id_y : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:local_id_y} local_id_y : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function FADD32(int, int) : int;
+function FDIV32(int, int) : int;
+function FMUL32(int, int) : int;
+function FSUB32(int, int) : int;
+function UI32_TO_FP32(int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+procedure {:source_name "simple_vbo_kernel"} {:kernel} $_Z17simple_vbo_kernelP6float4jjf($width:int, $height:int, $time:int)
+requires {:sourceloc_num 0} (if $width == 256 then 1 else 0) != 0;
+{
+  var v0:int;
+  var v1:int;
+  var v3:int;
+  var v2:int;
+  var v4:int;
+  var v5:int;
+  var v6:int;
+  var v7:int;
+  var v8:int;
+  var v9:int;
+  var v10:int;
+  var v11:int;
+  var v12:int;
+  var v13:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  v0 := BV32_ADD(BV32_MUL(group_id_x, group_size_x), local_id_x);
+  v1 := BV32_ADD(BV32_MUL(group_id_y, group_size_y), local_id_y);
+  v2 := FSUB32(FMUL32(FDIV32(UI32_TO_FP32(v0), UI32_TO_FP32($width)), 1073741824), 1065353216);
+  v3 := FSUB32(FMUL32(FDIV32(UI32_TO_FP32(v1), UI32_TO_FP32($height)), 1073741824), 1065353216);
+  call {:sourceloc_num 2}   v4 := $sinf(FADD32(FMUL32(v2, 1082130432), $time));
+  call {:sourceloc_num 3}   v5 := $cosf(FADD32(FMUL32(v3, 1082130432), $time));
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  $$0[0] := v2;
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  $$0[1] := FMUL32(FMUL32(v4, v5), 1056964608);
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  $$0[2] := v3;
+  assert {:sourceloc} {:sourceloc_num 7} true;
+  $$0[3] := 1065353216;
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  v6 := $$0[0];
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  v7 := $$0[1];
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  v8 := $$0[2];
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  v9 := $$0[3];
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  $$1[0] := v6;
+  assert {:sourceloc} {:sourceloc_num 13} true;
+  $$1[1] := v7;
+  assert {:sourceloc} {:sourceloc_num 14} true;
+  $$1[2] := v8;
+  assert {:sourceloc} {:sourceloc_num 15} true;
+  $$1[3] := v9;
+  assert {:sourceloc} {:sourceloc_num 16} true;
+  v10 := $$1[0];
+  assert {:sourceloc} {:sourceloc_num 17} true;
+  $$pos[BV32_MUL(BV32_ADD(BV32_MUL(v1, $width), v0), 4)] := v10;
+  assert {:sourceloc} {:sourceloc_num 18} true;
+  v11 := $$1[1];
+  assert {:sourceloc} {:sourceloc_num 19} true;
+  $$pos[BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(v1, $width), v0), 4), 1)] := v11;
+  assert {:sourceloc} {:sourceloc_num 20} true;
+  v12 := $$1[2];
+  assert {:sourceloc} {:sourceloc_num 21} true;
+  $$pos[BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(v1, $width), v0), 4), 2)] := v12;
+  assert {:sourceloc} {:sourceloc_num 22} true;
+  v13 := $$1[3];
+  assert {:sourceloc} {:sourceloc_num 23} true;
+  $$pos[BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(v1, $width), v0), 4), 3)] := v13;
+  return;
+}
+procedure {:source_name "sinf"} $sinf($0:int) returns ($ret:int);
+procedure {:source_name "cosf"} $cosf($0:int) returns ($ret:int);
+axiom (if group_size_x == 8 then 1 else 0) != 0;
+axiom (if group_size_y == 8 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_x == 32 then 1 else 0) != 0;
+axiom (if num_groups_y == 32 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;

@@ -1,0 +1,575 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP8(x : [int]int, y : int) returns (z : int, A : [int]int);
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "d_box_gpu"} {:global} $$d_box_gpu : [int]int;
+axiom {:array_info "$$d_box_gpu"} {:global} {:elem_width 8} {:source_name "d_box_gpu"} {:source_elem_width 5248} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 5248} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_box_gpu : bool;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 5248} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_box_gpu : bool;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 5248} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_box_gpu : bool;
+
+var {:source_name "d_rv_gpu"} {:global} $$d_rv_gpu : [int]int;
+axiom {:array_info "$$d_rv_gpu"} {:global} {:elem_width 32} {:source_name "d_rv_gpu"} {:source_elem_width 128} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_rv_gpu : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_rv_gpu : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_rv_gpu : bool;
+
+var {:source_name "d_qv_gpu"} {:global} $$d_qv_gpu : [int]int;
+axiom {:array_info "$$d_qv_gpu"} {:global} {:elem_width 32} {:source_name "d_qv_gpu"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_qv_gpu : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_qv_gpu : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_qv_gpu : bool;
+
+var {:source_name "d_fv_gpu"} {:global} $$d_fv_gpu : [int]int;
+axiom {:array_info "$$d_fv_gpu"} {:global} {:elem_width 32} {:source_name "d_fv_gpu"} {:source_elem_width 128} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$d_fv_gpu : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$d_fv_gpu : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_fv_gpu : bool;
+
+var {:source_name "d_par_gpu"} $$d_par_gpu : [int]int;
+axiom {:array_info "$$d_par_gpu"} {:elem_width 32} {:source_name "d_par_gpu"} {:source_elem_width 32} {:source_dimensions "1"} true;
+
+var {:source_name "d_dim_gpu"} $$d_dim_gpu : [int]int;
+axiom {:array_info "$$d_dim_gpu"} {:elem_width 8} {:source_name "d_dim_gpu"} {:source_elem_width 448} {:source_dimensions "1"} true;
+
+var {:source_name "d"} $$d : [int]int;
+axiom {:array_info "$$d"} {:elem_width 32} {:source_name "d"} {:source_elem_width 96} {:source_dimensions "1"} true;
+
+var {:source_name "rA_shared"} {:group_shared} $$kernel_gpu_opencl.rA_shared : [int]int;
+axiom {:array_info "$$kernel_gpu_opencl.rA_shared"} {:group_shared} {:elem_width 32} {:source_name "rA_shared"} {:source_elem_width 128} {:source_dimensions "100"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$kernel_gpu_opencl.rA_shared : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$kernel_gpu_opencl.rA_shared : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$kernel_gpu_opencl.rA_shared : bool;
+
+var {:source_name "rB_shared"} {:group_shared} $$kernel_gpu_opencl.rB_shared : [int]int;
+axiom {:array_info "$$kernel_gpu_opencl.rB_shared"} {:group_shared} {:elem_width 32} {:source_name "rB_shared"} {:source_elem_width 128} {:source_dimensions "100"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$kernel_gpu_opencl.rB_shared : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$kernel_gpu_opencl.rB_shared : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$kernel_gpu_opencl.rB_shared : bool;
+
+var {:source_name "qB_shared"} {:group_shared} $$kernel_gpu_opencl.qB_shared : [int]int;
+axiom {:array_info "$$kernel_gpu_opencl.qB_shared"} {:group_shared} {:elem_width 32} {:source_name "qB_shared"} {:source_elem_width 32} {:source_dimensions "100"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$kernel_gpu_opencl.qB_shared : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$kernel_gpu_opencl.qB_shared : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$kernel_gpu_opencl.qB_shared : bool;
+
+const _WATCHED_OFFSET : int;
+const {:global_offset_x} global_offset_x : int;
+const {:global_offset_y} global_offset_y : int;
+const {:global_offset_z} global_offset_z : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function BV32_SEXT64(int) : int;
+function BV_CONCAT(int, int) : int;
+function BV_EXTRACT(int, int, int) : int;
+function FADD32(int, int) : int;
+function FEXP32(int) : int;
+function FMUL32(int, int) : int;
+function FSUB32(int, int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SLT(x : int, y : int) : bool {
+  x < y
+}
+function {:inline true} BV32_SUB(x : int, y : int) : int {
+  x - y
+}
+function {:inline true} BV64_SLT(x : int, y : int) : bool {
+  x < y
+}
+procedure {:source_name "kernel_gpu_opencl"} {:kernel} $kernel_gpu_opencl($d_par_gpu.coerce:int, $d_dim_gpu.coerce0:int, $d_dim_gpu.coerce1:int, $d_dim_gpu.coerce2:int, $d_dim_gpu.coerce3:int, $d_dim_gpu.coerce4:int, $d_dim_gpu.coerce5:int, $d_dim_gpu.coerce6:int, $d_dim_gpu.coerce7:int, $d_dim_gpu.coerce8:int)
+{
+  var $wtx.0:int;
+  var $k.0:int;
+  var $pointer.0:int;
+  var $wtx.2:int;
+  var $wtx.3:int;
+  var $j.0:int;
+  var v0:int;
+  var v1:int;
+  var v2:int;
+  var v3:int;
+  var v4:int;
+  var v5:int;
+  var v6:int;
+  var v7:int;
+  var v8:int;
+  var v9:int;
+  var v10:bool;
+  var v11:int;
+  var v12:int;
+  var v13:int;
+  var v14:int;
+  var v15:int;
+  var v16:int;
+  var v17:int;
+  var v18:int;
+  var v19:int;
+  var v20:int;
+  var v21:int;
+  var v22:bool;
+  var v23:int;
+  var v24:int;
+  var v25:int;
+  var v26:int;
+  var v27:int;
+  var v28:int;
+  var v29:int;
+  var v30:int;
+  var v31:bool;
+  var v32:bool;
+  var v33:int;
+  var v34:int;
+  var v35:int;
+  var v36:int;
+  var v37:int;
+  var v38:int;
+  var v39:int;
+  var v40:int;
+  var v41:int;
+  var v42:int;
+  var v43:int;
+  var v44:int;
+  var v45:int;
+  var v46:bool;
+  var v47:int;
+  var v48:int;
+  var v49:int;
+  var v50:int;
+  var v51:int;
+  var v52:bool;
+  var v53:bool;
+  var v54:int;
+  var v55:int;
+  var v56:int;
+  var v57:int;
+  var v58:int;
+  var v59:int;
+  var v60:int;
+  var v61:int;
+  var v62:int;
+  var v63:int;
+  var v64:int;
+  var v65:int;
+  var v66:int;
+  var v67:int;
+  var v68:int;
+  var v69:int;
+  var v70:int;
+  var v71:int;
+  var v72:int;
+  var v73:int;
+  var v74:int;
+  var v75:int;
+  var v76:int;
+  var v77:int;
+  var v78:int;
+  var v79:int;
+  var v80:int;
+  var v81:int;
+  var v82:int;
+  var v83:int;
+  var v84:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  $$d_par_gpu[0] := $d_par_gpu.coerce;
+  $$d_dim_gpu[0] := BV_EXTRACT($d_dim_gpu.coerce0, 8, 0);
+  $$d_dim_gpu[1] := BV_EXTRACT($d_dim_gpu.coerce0, 16, 8);
+  $$d_dim_gpu[2] := BV_EXTRACT($d_dim_gpu.coerce0, 24, 16);
+  $$d_dim_gpu[3] := BV_EXTRACT($d_dim_gpu.coerce0, 32, 24);
+  $$d_dim_gpu[4] := BV_EXTRACT($d_dim_gpu.coerce1, 8, 0);
+  $$d_dim_gpu[5] := BV_EXTRACT($d_dim_gpu.coerce1, 16, 8);
+  $$d_dim_gpu[6] := BV_EXTRACT($d_dim_gpu.coerce1, 24, 16);
+  $$d_dim_gpu[7] := BV_EXTRACT($d_dim_gpu.coerce1, 32, 24);
+  $$d_dim_gpu[8] := BV_EXTRACT($d_dim_gpu.coerce2, 8, 0);
+  $$d_dim_gpu[9] := BV_EXTRACT($d_dim_gpu.coerce2, 16, 8);
+  $$d_dim_gpu[10] := BV_EXTRACT($d_dim_gpu.coerce2, 24, 16);
+  $$d_dim_gpu[11] := BV_EXTRACT($d_dim_gpu.coerce2, 32, 24);
+  $$d_dim_gpu[12] := BV_EXTRACT($d_dim_gpu.coerce3, 8, 0);
+  $$d_dim_gpu[13] := BV_EXTRACT($d_dim_gpu.coerce3, 16, 8);
+  $$d_dim_gpu[14] := BV_EXTRACT($d_dim_gpu.coerce3, 24, 16);
+  $$d_dim_gpu[15] := BV_EXTRACT($d_dim_gpu.coerce3, 32, 24);
+  $$d_dim_gpu[16] := BV_EXTRACT($d_dim_gpu.coerce4, 8, 0);
+  $$d_dim_gpu[17] := BV_EXTRACT($d_dim_gpu.coerce4, 16, 8);
+  $$d_dim_gpu[18] := BV_EXTRACT($d_dim_gpu.coerce4, 24, 16);
+  $$d_dim_gpu[19] := BV_EXTRACT($d_dim_gpu.coerce4, 32, 24);
+  $$d_dim_gpu[20] := BV_EXTRACT($d_dim_gpu.coerce4, 40, 32);
+  $$d_dim_gpu[21] := BV_EXTRACT($d_dim_gpu.coerce4, 48, 40);
+  $$d_dim_gpu[22] := BV_EXTRACT($d_dim_gpu.coerce4, 56, 48);
+  $$d_dim_gpu[23] := BV_EXTRACT($d_dim_gpu.coerce4, 64, 56);
+  $$d_dim_gpu[24] := BV_EXTRACT($d_dim_gpu.coerce5, 8, 0);
+  $$d_dim_gpu[25] := BV_EXTRACT($d_dim_gpu.coerce5, 16, 8);
+  $$d_dim_gpu[26] := BV_EXTRACT($d_dim_gpu.coerce5, 24, 16);
+  $$d_dim_gpu[27] := BV_EXTRACT($d_dim_gpu.coerce5, 32, 24);
+  $$d_dim_gpu[28] := BV_EXTRACT($d_dim_gpu.coerce5, 40, 32);
+  $$d_dim_gpu[29] := BV_EXTRACT($d_dim_gpu.coerce5, 48, 40);
+  $$d_dim_gpu[30] := BV_EXTRACT($d_dim_gpu.coerce5, 56, 48);
+  $$d_dim_gpu[31] := BV_EXTRACT($d_dim_gpu.coerce5, 64, 56);
+  $$d_dim_gpu[32] := BV_EXTRACT($d_dim_gpu.coerce6, 8, 0);
+  $$d_dim_gpu[33] := BV_EXTRACT($d_dim_gpu.coerce6, 16, 8);
+  $$d_dim_gpu[34] := BV_EXTRACT($d_dim_gpu.coerce6, 24, 16);
+  $$d_dim_gpu[35] := BV_EXTRACT($d_dim_gpu.coerce6, 32, 24);
+  $$d_dim_gpu[36] := BV_EXTRACT($d_dim_gpu.coerce6, 40, 32);
+  $$d_dim_gpu[37] := BV_EXTRACT($d_dim_gpu.coerce6, 48, 40);
+  $$d_dim_gpu[38] := BV_EXTRACT($d_dim_gpu.coerce6, 56, 48);
+  $$d_dim_gpu[39] := BV_EXTRACT($d_dim_gpu.coerce6, 64, 56);
+  $$d_dim_gpu[40] := BV_EXTRACT($d_dim_gpu.coerce7, 8, 0);
+  $$d_dim_gpu[41] := BV_EXTRACT($d_dim_gpu.coerce7, 16, 8);
+  $$d_dim_gpu[42] := BV_EXTRACT($d_dim_gpu.coerce7, 24, 16);
+  $$d_dim_gpu[43] := BV_EXTRACT($d_dim_gpu.coerce7, 32, 24);
+  $$d_dim_gpu[44] := BV_EXTRACT($d_dim_gpu.coerce7, 40, 32);
+  $$d_dim_gpu[45] := BV_EXTRACT($d_dim_gpu.coerce7, 48, 40);
+  $$d_dim_gpu[46] := BV_EXTRACT($d_dim_gpu.coerce7, 56, 48);
+  $$d_dim_gpu[47] := BV_EXTRACT($d_dim_gpu.coerce7, 64, 56);
+  $$d_dim_gpu[48] := BV_EXTRACT($d_dim_gpu.coerce8, 8, 0);
+  $$d_dim_gpu[49] := BV_EXTRACT($d_dim_gpu.coerce8, 16, 8);
+  $$d_dim_gpu[50] := BV_EXTRACT($d_dim_gpu.coerce8, 24, 16);
+  $$d_dim_gpu[51] := BV_EXTRACT($d_dim_gpu.coerce8, 32, 24);
+  $$d_dim_gpu[52] := BV_EXTRACT($d_dim_gpu.coerce8, 40, 32);
+  $$d_dim_gpu[53] := BV_EXTRACT($d_dim_gpu.coerce8, 48, 40);
+  $$d_dim_gpu[54] := BV_EXTRACT($d_dim_gpu.coerce8, 56, 48);
+  $$d_dim_gpu[55] := BV_EXTRACT($d_dim_gpu.coerce8, 64, 56);
+  v0 := group_id_x;
+  v1 := local_id_x;
+  assert {:sourceloc} {:sourceloc_num 1} true;
+  v2 := $$d_dim_gpu[16];
+  assert {:sourceloc} {:sourceloc_num 2} true;
+  v3 := $$d_dim_gpu[17];
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  v4 := $$d_dim_gpu[18];
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  v5 := $$d_dim_gpu[19];
+  assert {:sourceloc} {:sourceloc_num 5} true;
+  v6 := $$d_dim_gpu[20];
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  v7 := $$d_dim_gpu[21];
+  assert {:sourceloc} {:sourceloc_num 7} true;
+  v8 := $$d_dim_gpu[22];
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  v9 := $$d_dim_gpu[23];
+  v10 := BV64_SLT(BV32_SEXT64(v0), BV_CONCAT(BV_CONCAT(BV_CONCAT(BV_CONCAT(BV_CONCAT(BV_CONCAT(BV_CONCAT(v9, v8), v7), v6), v5), v4), v3), v2));
+  goto $truebb, $falsebb;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 9} true;
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  v11 := $$d_par_gpu[0];
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  v12 := $$d_par_gpu[0];
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  v13 := $$d_box_gpu[BV32_ADD(BV32_MUL(v0, 656), 16)];
+  assert {:sourceloc} {:sourceloc_num 13} true;
+  v14 := $$d_box_gpu[BV32_ADD(BV32_MUL(v0, 656), 17)];
+  assert {:sourceloc} {:sourceloc_num 14} true;
+  v15 := $$d_box_gpu[BV32_ADD(BV32_MUL(v0, 656), 18)];
+  assert {:sourceloc} {:sourceloc_num 15} true;
+  v16 := $$d_box_gpu[BV32_ADD(BV32_MUL(v0, 656), 19)];
+  assert {:sourceloc} {:sourceloc_num 16} true;
+  v17 := $$d_box_gpu[BV32_ADD(BV32_MUL(v0, 656), 20)];
+  assert {:sourceloc} {:sourceloc_num 17} true;
+  v18 := $$d_box_gpu[BV32_ADD(BV32_MUL(v0, 656), 21)];
+  assert {:sourceloc} {:sourceloc_num 18} true;
+  v19 := $$d_box_gpu[BV32_ADD(BV32_MUL(v0, 656), 22)];
+  assert {:sourceloc} {:sourceloc_num 19} true;
+  v20 := $$d_box_gpu[BV32_ADD(BV32_MUL(v0, 656), 23)];
+  v21 := BV_CONCAT(BV_CONCAT(BV_CONCAT(v16, v15), v14), v13);
+  $wtx.0 := v1;
+  goto $2;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 20} true;
+  v22 := BV32_SLT($wtx.0, 100);
+  goto $truebb0, $falsebb0;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 21} true;
+  assert {:sourceloc} {:sourceloc_num 22} true;
+  v23 := $$d_rv_gpu[BV32_MUL(BV32_ADD(v21, $wtx.0), 4)];
+  assert {:sourceloc} {:sourceloc_num 23} true;
+  $$kernel_gpu_opencl.rA_shared[BV32_MUL($wtx.0, 4)] := v23;
+  assert {:sourceloc} {:sourceloc_num 24} true;
+  v24 := $$d_rv_gpu[BV32_ADD(BV32_MUL(BV32_ADD(v21, $wtx.0), 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 25} true;
+  $$kernel_gpu_opencl.rA_shared[BV32_ADD(BV32_MUL($wtx.0, 4), 1)] := v24;
+  assert {:sourceloc} {:sourceloc_num 26} true;
+  v25 := $$d_rv_gpu[BV32_ADD(BV32_MUL(BV32_ADD(v21, $wtx.0), 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 27} true;
+  $$kernel_gpu_opencl.rA_shared[BV32_ADD(BV32_MUL($wtx.0, 4), 2)] := v25;
+  assert {:sourceloc} {:sourceloc_num 28} true;
+  v26 := $$d_rv_gpu[BV32_ADD(BV32_MUL(BV32_ADD(v21, $wtx.0), 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 29} true;
+  $$kernel_gpu_opencl.rA_shared[BV32_ADD(BV32_MUL($wtx.0, 4), 3)] := v26;
+  $wtx.0 := BV32_ADD($wtx.0, 128);
+  goto $2;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 30} true;
+  call {:sourceloc_num 31} $bugle_barrier(-1, 0);
+  $k.0 := 0;
+  goto $5;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 32} true;
+  assert {:sourceloc} {:sourceloc_num 33} true;
+  v27 := $$d_box_gpu[BV32_ADD(BV32_MUL(v0, 656), 24)];
+  assert {:sourceloc} {:sourceloc_num 34} true;
+  v28 := $$d_box_gpu[BV32_ADD(BV32_MUL(v0, 656), 25)];
+  assert {:sourceloc} {:sourceloc_num 35} true;
+  v29 := $$d_box_gpu[BV32_ADD(BV32_MUL(v0, 656), 26)];
+  assert {:sourceloc} {:sourceloc_num 36} true;
+  v30 := $$d_box_gpu[BV32_ADD(BV32_MUL(v0, 656), 27)];
+  v31 := BV32_SLT($k.0, BV32_ADD(1, BV_CONCAT(BV_CONCAT(BV_CONCAT(v30, v29), v28), v27)));
+  goto $truebb1, $falsebb1;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 37} true;
+  v32 := $k.0 == 0;
+  goto $truebb2, $falsebb2;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 38} true;
+  $pointer.0 := v0;
+  goto $9;
+$8:
+  assert {:block_sourceloc} {:sourceloc_num 39} true;
+  assert {:sourceloc} {:sourceloc_num 40} true;
+  v33 := $$d_box_gpu[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(v0, 656), 32), BV32_MUL(BV32_SUB($k.0, 1), 24)), 12)];
+  assert {:sourceloc} {:sourceloc_num 41} true;
+  v34 := $$d_box_gpu[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(v0, 656), 32), BV32_MUL(BV32_SUB($k.0, 1), 24)), 13)];
+  assert {:sourceloc} {:sourceloc_num 42} true;
+  v35 := $$d_box_gpu[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(v0, 656), 32), BV32_MUL(BV32_SUB($k.0, 1), 24)), 14)];
+  assert {:sourceloc} {:sourceloc_num 43} true;
+  v36 := $$d_box_gpu[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(v0, 656), 32), BV32_MUL(BV32_SUB($k.0, 1), 24)), 15)];
+  $pointer.0 := BV_CONCAT(BV_CONCAT(BV_CONCAT(v36, v35), v34), v33);
+  goto $9;
+$9:
+  assert {:block_sourceloc} {:sourceloc_num 44} true;
+  assert {:sourceloc} {:sourceloc_num 45} true;
+  v37 := $$d_box_gpu[BV32_ADD(BV32_MUL($pointer.0, 656), 16)];
+  assert {:sourceloc} {:sourceloc_num 46} true;
+  v38 := $$d_box_gpu[BV32_ADD(BV32_MUL($pointer.0, 656), 17)];
+  assert {:sourceloc} {:sourceloc_num 47} true;
+  v39 := $$d_box_gpu[BV32_ADD(BV32_MUL($pointer.0, 656), 18)];
+  assert {:sourceloc} {:sourceloc_num 48} true;
+  v40 := $$d_box_gpu[BV32_ADD(BV32_MUL($pointer.0, 656), 19)];
+  assert {:sourceloc} {:sourceloc_num 49} true;
+  v41 := $$d_box_gpu[BV32_ADD(BV32_MUL($pointer.0, 656), 20)];
+  assert {:sourceloc} {:sourceloc_num 50} true;
+  v42 := $$d_box_gpu[BV32_ADD(BV32_MUL($pointer.0, 656), 21)];
+  assert {:sourceloc} {:sourceloc_num 51} true;
+  v43 := $$d_box_gpu[BV32_ADD(BV32_MUL($pointer.0, 656), 22)];
+  assert {:sourceloc} {:sourceloc_num 52} true;
+  v44 := $$d_box_gpu[BV32_ADD(BV32_MUL($pointer.0, 656), 23)];
+  v45 := BV_CONCAT(BV_CONCAT(BV_CONCAT(v40, v39), v38), v37);
+  $wtx.2 := v1;
+  goto $10;
+$10:
+  assert {:block_sourceloc} {:sourceloc_num 53} true;
+  v46 := BV32_SLT($wtx.2, 100);
+  goto $truebb3, $falsebb3;
+$11:
+  assert {:block_sourceloc} {:sourceloc_num 54} true;
+  assert {:sourceloc} {:sourceloc_num 55} true;
+  v47 := $$d_rv_gpu[BV32_MUL(BV32_ADD(v45, $wtx.2), 4)];
+  assert {:sourceloc} {:sourceloc_num 56} true;
+  $$kernel_gpu_opencl.rB_shared[BV32_MUL($wtx.2, 4)] := v47;
+  assert {:sourceloc} {:sourceloc_num 57} true;
+  v48 := $$d_rv_gpu[BV32_ADD(BV32_MUL(BV32_ADD(v45, $wtx.2), 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 58} true;
+  $$kernel_gpu_opencl.rB_shared[BV32_ADD(BV32_MUL($wtx.2, 4), 1)] := v48;
+  assert {:sourceloc} {:sourceloc_num 59} true;
+  v49 := $$d_rv_gpu[BV32_ADD(BV32_MUL(BV32_ADD(v45, $wtx.2), 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 60} true;
+  $$kernel_gpu_opencl.rB_shared[BV32_ADD(BV32_MUL($wtx.2, 4), 2)] := v49;
+  assert {:sourceloc} {:sourceloc_num 61} true;
+  v50 := $$d_rv_gpu[BV32_ADD(BV32_MUL(BV32_ADD(v45, $wtx.2), 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 62} true;
+  $$kernel_gpu_opencl.rB_shared[BV32_ADD(BV32_MUL($wtx.2, 4), 3)] := v50;
+  assert {:sourceloc} {:sourceloc_num 63} true;
+  v51 := $$d_qv_gpu[BV32_ADD(v45, $wtx.2)];
+  assert {:sourceloc} {:sourceloc_num 64} true;
+  $$kernel_gpu_opencl.qB_shared[$wtx.2] := v51;
+  $wtx.2 := BV32_ADD($wtx.2, 128);
+  goto $10;
+$12:
+  assert {:block_sourceloc} {:sourceloc_num 65} true;
+  call {:sourceloc_num 66} $bugle_barrier(-1, 0);
+  $wtx.3 := v1;
+  goto $13;
+$13:
+  assert {:block_sourceloc} {:sourceloc_num 67} true;
+  v52 := BV32_SLT($wtx.3, 100);
+  goto $truebb4, $falsebb4;
+$14:
+  assert {:block_sourceloc} {:sourceloc_num 68} true;
+  $j.0 := 0;
+  goto $15;
+$15:
+  assert {:block_sourceloc} {:sourceloc_num 69} true;
+  v53 := BV32_SLT($j.0, 100);
+  goto $truebb5, $falsebb5;
+$16:
+  assert {:block_sourceloc} {:sourceloc_num 70} true;
+  assert {:sourceloc} {:sourceloc_num 71} true;
+  v54 := $$kernel_gpu_opencl.rA_shared[BV32_MUL($wtx.3, 4)];
+  assert {:sourceloc} {:sourceloc_num 72} true;
+  v55 := $$kernel_gpu_opencl.rB_shared[BV32_MUL($j.0, 4)];
+  assert {:sourceloc} {:sourceloc_num 73} true;
+  v56 := $$kernel_gpu_opencl.rA_shared[BV32_ADD(BV32_MUL($wtx.3, 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 74} true;
+  v57 := $$kernel_gpu_opencl.rB_shared[BV32_ADD(BV32_MUL($j.0, 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 75} true;
+  v58 := $$kernel_gpu_opencl.rA_shared[BV32_ADD(BV32_MUL($wtx.3, 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 76} true;
+  v59 := $$kernel_gpu_opencl.rB_shared[BV32_ADD(BV32_MUL($j.0, 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 77} true;
+  v60 := $$kernel_gpu_opencl.rA_shared[BV32_ADD(BV32_MUL($wtx.3, 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 78} true;
+  v61 := $$kernel_gpu_opencl.rB_shared[BV32_ADD(BV32_MUL($j.0, 4), 3)];
+  v62 := FEXP32(FMUL32(FSUB32(-2147483648, FMUL32(FMUL32(FMUL32(1073741824, v11), v12), FSUB32(FADD32(v54, v55), FADD32(FMUL32(v60, v61), FADD32(FMUL32(v56, v57), FMUL32(v58, v59)))))), 1069066811));
+  v63 := FMUL32(1073741824, v62);
+  assert {:sourceloc} {:sourceloc_num 79} true;
+  v64 := $$kernel_gpu_opencl.rA_shared[BV32_ADD(BV32_MUL($wtx.3, 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 80} true;
+  v65 := $$kernel_gpu_opencl.rB_shared[BV32_ADD(BV32_MUL($j.0, 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 81} true;
+  $$d[0] := FSUB32(v64, v65);
+  assert {:sourceloc} {:sourceloc_num 82} true;
+  v66 := $$d[0];
+  assert {:sourceloc} {:sourceloc_num 83} true;
+  v67 := $$kernel_gpu_opencl.rA_shared[BV32_ADD(BV32_MUL($wtx.3, 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 84} true;
+  v68 := $$kernel_gpu_opencl.rB_shared[BV32_ADD(BV32_MUL($j.0, 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 85} true;
+  $$d[1] := FSUB32(v67, v68);
+  assert {:sourceloc} {:sourceloc_num 86} true;
+  v69 := $$d[1];
+  assert {:sourceloc} {:sourceloc_num 87} true;
+  v70 := $$kernel_gpu_opencl.rA_shared[BV32_ADD(BV32_MUL($wtx.3, 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 88} true;
+  v71 := $$kernel_gpu_opencl.rB_shared[BV32_ADD(BV32_MUL($j.0, 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 89} true;
+  $$d[2] := FSUB32(v70, v71);
+  assert {:sourceloc} {:sourceloc_num 90} true;
+  v72 := $$d[2];
+  assert {:sourceloc} {:sourceloc_num 91} true;
+  v73 := $$kernel_gpu_opencl.qB_shared[$j.0];
+  v74 := BV32_ADD(v21, $wtx.3);
+  assert {:sourceloc} {:sourceloc_num 92} true;
+  v75 := $$d_fv_gpu[BV32_MUL(v74, 4)];
+  assert {:sourceloc} {:sourceloc_num 93} true;
+  $$d_fv_gpu[BV32_MUL(v74, 4)] := FADD32(v75, FMUL32(v73, v62));
+  assert {:sourceloc} {:sourceloc_num 94} true;
+  v76 := $$kernel_gpu_opencl.qB_shared[$j.0];
+  v77 := BV32_ADD(v21, $wtx.3);
+  assert {:sourceloc} {:sourceloc_num 95} true;
+  v78 := $$d_fv_gpu[BV32_ADD(BV32_MUL(v77, 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 96} true;
+  $$d_fv_gpu[BV32_ADD(BV32_MUL(v77, 4), 1)] := FADD32(v78, FMUL32(v76, FMUL32(v63, v66)));
+  assert {:sourceloc} {:sourceloc_num 97} true;
+  v79 := $$kernel_gpu_opencl.qB_shared[$j.0];
+  v80 := BV32_ADD(v21, $wtx.3);
+  assert {:sourceloc} {:sourceloc_num 98} true;
+  v81 := $$d_fv_gpu[BV32_ADD(BV32_MUL(v80, 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 99} true;
+  $$d_fv_gpu[BV32_ADD(BV32_MUL(v80, 4), 2)] := FADD32(v81, FMUL32(v79, FMUL32(v63, v69)));
+  assert {:sourceloc} {:sourceloc_num 100} true;
+  v82 := $$kernel_gpu_opencl.qB_shared[$j.0];
+  v83 := BV32_ADD(v21, $wtx.3);
+  assert {:sourceloc} {:sourceloc_num 101} true;
+  v84 := $$d_fv_gpu[BV32_ADD(BV32_MUL(v83, 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 102} true;
+  $$d_fv_gpu[BV32_ADD(BV32_MUL(v83, 4), 3)] := FADD32(v84, FMUL32(v82, FMUL32(v63, v72)));
+  goto $17;
+$17:
+  assert {:block_sourceloc} {:sourceloc_num 103} true;
+  $j.0 := BV32_ADD($j.0, 1);
+  goto $15;
+$18:
+  assert {:block_sourceloc} {:sourceloc_num 104} true;
+  $wtx.3 := BV32_ADD($wtx.3, 128);
+  goto $13;
+$19:
+  assert {:block_sourceloc} {:sourceloc_num 105} true;
+  call {:sourceloc_num 106} $bugle_barrier(-1, 0);
+  goto $20;
+$20:
+  assert {:block_sourceloc} {:sourceloc_num 107} true;
+  $k.0 := BV32_ADD($k.0, 1);
+  goto $5;
+$21:
+  assert {:block_sourceloc} {:sourceloc_num 108} true;
+  goto $22;
+$22:
+  assert {:block_sourceloc} {:sourceloc_num 109} true;
+  return;
+$truebb:
+  assume {:partition} v10;
+  assert {:block_sourceloc} {:sourceloc_num 110} true;
+  goto $1;
+$falsebb:
+  assume {:partition} !v10;
+  assert {:block_sourceloc} {:sourceloc_num 111} true;
+  goto $22;
+$truebb0:
+  assume {:partition} v22;
+  assert {:block_sourceloc} {:sourceloc_num 112} true;
+  goto $3;
+$falsebb0:
+  assume {:partition} !v22;
+  assert {:block_sourceloc} {:sourceloc_num 113} true;
+  goto $4;
+$truebb1:
+  assume {:partition} v31;
+  assert {:block_sourceloc} {:sourceloc_num 114} true;
+  goto $6;
+$falsebb1:
+  assume {:partition} !v31;
+  assert {:block_sourceloc} {:sourceloc_num 115} true;
+  goto $21;
+$truebb2:
+  assume {:partition} v32;
+  assert {:block_sourceloc} {:sourceloc_num 116} true;
+  goto $7;
+$falsebb2:
+  assume {:partition} !v32;
+  assert {:block_sourceloc} {:sourceloc_num 117} true;
+  goto $8;
+$truebb3:
+  assume {:partition} v46;
+  assert {:block_sourceloc} {:sourceloc_num 118} true;
+  goto $11;
+$falsebb3:
+  assume {:partition} !v46;
+  assert {:block_sourceloc} {:sourceloc_num 119} true;
+  goto $12;
+$truebb4:
+  assume {:partition} v52;
+  assert {:block_sourceloc} {:sourceloc_num 120} true;
+  goto $14;
+$falsebb4:
+  assume {:partition} !v52;
+  assert {:block_sourceloc} {:sourceloc_num 121} true;
+  goto $19;
+$truebb5:
+  assume {:partition} v53;
+  assert {:block_sourceloc} {:sourceloc_num 122} true;
+  goto $16;
+$falsebb5:
+  assume {:partition} !v53;
+  assert {:block_sourceloc} {:sourceloc_num 123} true;
+  goto $18;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:int, $1:int);
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 128 then 1 else 0) != 0;
+axiom (if num_groups_x == 1000 then 1 else 0) != 0;
+axiom (if global_offset_x == 0 then 1 else 0) != 0;
+axiom (if global_offset_y == 0 then 1 else 0) != 0;
+axiom (if global_offset_z == 0 then 1 else 0) != 0;

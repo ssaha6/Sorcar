@@ -1,0 +1,189 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "g_idata"} {:global} $$g_idata : [int]int;
+axiom {:array_info "$$g_idata"} {:global} {:elem_width 32} {:source_name "g_idata"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$g_idata : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$g_idata : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_idata : bool;
+
+var {:source_name "g_odata"} {:global} $$g_odata : [int]int;
+axiom {:array_info "$$g_odata"} {:global} {:elem_width 32} {:source_name "g_odata"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$g_odata : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$g_odata : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_odata : bool;
+
+var {:source_name "sdata"} {:group_shared} $$sdata : [int]int;
+axiom {:array_info "$$sdata"} {:group_shared} {:elem_width 32} {:source_name "sdata"} {:source_elem_width 32} {:source_dimensions "0"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$sdata : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$sdata : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$sdata : bool;
+
+const _WATCHED_OFFSET : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function FADD32(int, int) : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_ULT(x : int, y : int) : bool {
+  x < y
+}
+procedure {:source_name "reduceMultiPass<128, true>"} {:kernel} $_Z15reduceMultiPassILj128ELb1EEvPKfPfj($n:int)
+{
+  var $i.i.0:int;
+  var $mySum.i.0:int;
+  var $.0:int;
+  var v3:bool;
+  var v1:int;
+  var v0:bool;
+  var v2:int;
+  var v4:int;
+  var v5:int;
+  var v6:bool;
+  var v7:int;
+  var v8:int;
+  var v9:int;
+  var v10:int;
+  var v11:int;
+  var v12:int;
+  var v13:int;
+  var v14:int;
+  var v15:int;
+  var v16:int;
+  var v17:int;
+  var v18:bool;
+  var v19:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  $i.i.0, $mySum.i.0 := BV32_ADD(BV32_MUL(group_id_x, 256), local_id_x), 0;
+  goto $1;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  v0 := BV32_ULT($i.i.0, $n);
+  goto $truebb, $falsebb;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 2} true;
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  v1 := $$g_idata[$i.i.0];
+  assert {:sourceloc} {:sourceloc_num 4} true;
+  v2 := $$g_idata[BV32_ADD($i.i.0, 128)];
+  $i.i.0, $mySum.i.0 := BV32_ADD($i.i.0, BV32_MUL(256, num_groups_x)), FADD32(FADD32($mySum.i.0, v1), v2);
+  goto $1;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 5} true;
+  assert {:sourceloc} {:sourceloc_num 6} true;
+  $$sdata[local_id_x] := $mySum.i.0;
+  call {:sourceloc_num 7} $bugle_barrier(-1, -1);
+  v3 := BV32_ULT(local_id_x, 64);
+  goto $truebb0, $falsebb0;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 8} true;
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  v4 := $$sdata[BV32_ADD(local_id_x, 64)];
+  v5 := FADD32($mySum.i.0, v4);
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  $$sdata[local_id_x] := v5;
+  $.0 := v5;
+  goto $5;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 11} true;
+  call {:sourceloc_num 12} $bugle_barrier(-1, -1);
+  v6 := BV32_ULT(local_id_x, 32);
+  goto $truebb1, $falsebb1;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 13} true;
+  assert {:sourceloc} {:sourceloc_num 14} true;
+  v7 := $$sdata[BV32_ADD(local_id_x, 32)];
+  v8 := FADD32($.0, v7);
+  assert {:sourceloc} {:sourceloc_num 15} true;
+  $$sdata[local_id_x] := v8;
+  assert {:sourceloc} {:sourceloc_num 16} true;
+  v9 := $$sdata[BV32_ADD(local_id_x, 16)];
+  v10 := FADD32(v8, v9);
+  assert {:sourceloc} {:sourceloc_num 17} true;
+  $$sdata[local_id_x] := v10;
+  assert {:sourceloc} {:sourceloc_num 18} true;
+  v11 := $$sdata[BV32_ADD(local_id_x, 8)];
+  v12 := FADD32(v10, v11);
+  assert {:sourceloc} {:sourceloc_num 19} true;
+  $$sdata[local_id_x] := v12;
+  assert {:sourceloc} {:sourceloc_num 20} true;
+  v13 := $$sdata[BV32_ADD(local_id_x, 4)];
+  v14 := FADD32(v12, v13);
+  assert {:sourceloc} {:sourceloc_num 21} true;
+  $$sdata[local_id_x] := v14;
+  assert {:sourceloc} {:sourceloc_num 22} true;
+  v15 := $$sdata[BV32_ADD(local_id_x, 2)];
+  v16 := FADD32(v14, v15);
+  assert {:sourceloc} {:sourceloc_num 23} true;
+  $$sdata[local_id_x] := v16;
+  assert {:sourceloc} {:sourceloc_num 24} true;
+  v17 := $$sdata[BV32_ADD(local_id_x, 1)];
+  assert {:sourceloc} {:sourceloc_num 25} true;
+  $$sdata[local_id_x] := FADD32(v16, v17);
+  goto $_ZL11reduceBlockILj128EEvPVffj.exit.i;
+$_ZL11reduceBlockILj128EEvPVffj.exit.i:
+  assert {:block_sourceloc} {:sourceloc_num 26} true;
+  v18 := local_id_x == 0;
+  goto $truebb2, $falsebb2;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 27} true;
+  assert {:sourceloc} {:sourceloc_num 28} true;
+  v19 := $$sdata[0];
+  assert {:sourceloc} {:sourceloc_num 29} true;
+  $$g_odata[group_id_x] := v19;
+  goto $_ZL12reduceBlocksILj128ELb1EEvPKfPfj.exit;
+$_ZL12reduceBlocksILj128ELb1EEvPKfPfj.exit:
+  assert {:block_sourceloc} {:sourceloc_num 30} true;
+  return;
+$truebb:
+  assume {:partition} v0;
+  assert {:block_sourceloc} {:sourceloc_num 31} true;
+  goto $2;
+$falsebb:
+  assume {:partition} !v0;
+  assert {:block_sourceloc} {:sourceloc_num 32} true;
+  goto $3;
+$truebb0:
+  assume {:partition} v3;
+  assert {:block_sourceloc} {:sourceloc_num 33} true;
+  goto $4;
+$falsebb0:
+  assume {:partition} !v3;
+  assert {:block_sourceloc} {:sourceloc_num 34} true;
+  $.0 := $mySum.i.0;
+  goto $5;
+$truebb1:
+  assume {:partition} v6;
+  assert {:block_sourceloc} {:sourceloc_num 35} true;
+  goto $6;
+$falsebb1:
+  assume {:partition} !v6;
+  assert {:block_sourceloc} {:sourceloc_num 36} true;
+  goto $_ZL11reduceBlockILj128EEvPVffj.exit.i;
+$truebb2:
+  assume {:partition} v18;
+  assert {:block_sourceloc} {:sourceloc_num 37} true;
+  goto $7;
+$falsebb2:
+  assume {:partition} !v18;
+  assert {:block_sourceloc} {:sourceloc_num 38} true;
+  goto $_ZL12reduceBlocksILj128ELb1EEvPKfPfj.exit;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:int, $1:int);
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 128 then 1 else 0) != 0;
+axiom (if num_groups_x == 64 then 1 else 0) != 0;

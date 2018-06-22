@@ -1,0 +1,1479 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP8(x : [int]int, y : int) returns (z : int, A : [int]int);
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "dst"} {:global} $$dst : [int]int;
+axiom {:array_info "$$dst"} {:global} {:elem_width 8} {:source_name "dst"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$dst : bool;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$dst : bool;
+var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$dst : bool;
+
+var {:source_name "colors"} $$colors : [int]int;
+axiom {:array_info "$$colors"} {:elem_width 8} {:source_name "colors"} {:source_elem_width 32} {:source_dimensions "1"} true;
+
+var {:source_name "pixelColor"} $$pixelColor : [int]int;
+axiom {:array_info "$$pixelColor"} {:elem_width 8} {:source_name "pixelColor"} {:source_elem_width 32} {:source_dimensions "1"} true;
+
+var {:source_name "color"} $$color : [int]int;
+axiom {:array_info "$$color"} {:elem_width 8} {:source_name "color"} {:source_elem_width 32} {:source_dimensions "1"} true;
+
+var {:source_name "blockCounter"} {:global} $$blockCounter : [int]int;
+axiom {:array_info "$$blockCounter"} {:global} {:elem_width 32} {:source_name "blockCounter"} {:source_elem_width 32} {:source_dimensions "1"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$blockCounter : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$blockCounter : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$blockCounter : bool;
+
+var {:source_name "blockIndex"} {:group_shared} $$_ZZ11Mandelbrot1IfEvP6uchar4iiiT_S2_S2_S2_S2_S0_iiiibE10blockIndex : [int]int;
+axiom {:array_info "$$_ZZ11Mandelbrot1IfEvP6uchar4iiiT_S2_S2_S2_S2_S0_iiiibE10blockIndex"} {:group_shared} {:elem_width 32} {:source_name "blockIndex"} {:source_elem_width 32} {:source_dimensions "1"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ11Mandelbrot1IfEvP6uchar4iiiT_S2_S2_S2_S2_S0_iiiibE10blockIndex : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ11Mandelbrot1IfEvP6uchar4iiiT_S2_S2_S2_S2_S0_iiiibE10blockIndex : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ11Mandelbrot1IfEvP6uchar4iiiT_S2_S2_S2_S2_S0_iiiibE10blockIndex : bool;
+
+var {:source_name "blockX"} {:group_shared} $$_ZZ11Mandelbrot1IfEvP6uchar4iiiT_S2_S2_S2_S2_S0_iiiibE6blockX : [int]int;
+axiom {:array_info "$$_ZZ11Mandelbrot1IfEvP6uchar4iiiT_S2_S2_S2_S2_S0_iiiibE6blockX"} {:group_shared} {:elem_width 32} {:source_name "blockX"} {:source_elem_width 32} {:source_dimensions "1"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ11Mandelbrot1IfEvP6uchar4iiiT_S2_S2_S2_S2_S0_iiiibE6blockX : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ11Mandelbrot1IfEvP6uchar4iiiT_S2_S2_S2_S2_S0_iiiibE6blockX : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ11Mandelbrot1IfEvP6uchar4iiiT_S2_S2_S2_S2_S0_iiiibE6blockX : bool;
+
+var {:source_name "blockY"} {:group_shared} $$_ZZ11Mandelbrot1IfEvP6uchar4iiiT_S2_S2_S2_S2_S0_iiiibE6blockY : [int]int;
+axiom {:array_info "$$_ZZ11Mandelbrot1IfEvP6uchar4iiiT_S2_S2_S2_S2_S0_iiiibE6blockY"} {:group_shared} {:elem_width 32} {:source_name "blockY"} {:source_elem_width 32} {:source_dimensions "1"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$_ZZ11Mandelbrot1IfEvP6uchar4iiiT_S2_S2_S2_S2_S0_iiiibE6blockY : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$_ZZ11Mandelbrot1IfEvP6uchar4iiiT_S2_S2_S2_S2_S0_iiiibE6blockY : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$_ZZ11Mandelbrot1IfEvP6uchar4iiiT_S2_S2_S2_S2_S0_iiiibE6blockY : bool;
+
+const _WATCHED_OFFSET : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:local_id_y} local_id_y : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function BV_EXTRACT(int, int, int) : int;
+function FADD32(int, int) : int;
+function FLT32(int, int) : bool;
+function FMUL32(int, int) : int;
+function FSUB32(int, int) : int;
+function SI32_TO_FP32(int) : int;
+function {:inline true} BV1_ZEXT32(x : int) : int {
+  x
+}
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_SDIV(x : int, y : int) : int {
+  x div y
+}
+function {:inline true} BV32_SGT(x : int, y : int) : bool {
+  x > y
+}
+function {:inline true} BV32_SLE(x : int, y : int) : bool {
+  x <= y
+}
+function {:inline true} BV32_SLT(x : int, y : int) : bool {
+  x < y
+}
+function {:inline true} BV32_SUB(x : int, y : int) : int {
+  x - y
+}
+function {:inline true} BV32_UDIV(x : int, y : int) : int {
+  x div y
+}
+function {:inline true} BV32_UGE(x : int, y : int) : bool {
+  x >= y
+}
+function {:inline true} BV32_UREM(x : int, y : int) : int {
+  x mod y
+}
+function {:inline true} BV8_ZEXT32(x : int) : int {
+  x
+}
+procedure {:source_name "Mandelbrot1<float>"} {:kernel} $_Z11Mandelbrot1IfEvP6uchar4iiiT_S2_S2_S2_S2_S0_iiiib($imageW:int, $imageH:int, $crunch:int, $xOff:int, $yOff:int, $xJP:int, $yJP:int, $scale:int, $colors.coerce0:int, $colors.coerce1:int, $colors.coerce2:int, $colors.coerce3:int, $frame:int, $animationFrame:int, $gridWidth:int, $numBlocks:int, $isJ:int)
+requires {:sourceloc_num 0} (if $imageW == 800 then 1 else 0) != 0;
+requires {:sourceloc_num 1} (if $imageH == 600 then 1 else 0) != 0;
+requires {:sourceloc_num 2} (if $gridWidth == 25 then 1 else 0) != 0;
+requires {:sourceloc_num 3} (if $numBlocks == 475 then 1 else 0) != 0;
+{
+  var $count.0:int;
+  var $0:int;
+  var $1:int;
+  var $2:int;
+  var $3:int;
+  var $count.1:int;
+  var $4:int;
+  var $5:int;
+  var $6:int;
+  var $7:int;
+  var $count.2:int;
+  var $8:int;
+  var $9:int;
+  var $10:int;
+  var $11:int;
+  var $count.3:int;
+  var $12:int;
+  var $13:int;
+  var $14:int;
+  var $15:int;
+  var $x.i1.0:int;
+  var $y.i2.0:int;
+  var $xx.i.0:int;
+  var $yy.i.0:int;
+  var $xC.i.0:int;
+  var $yC.i.0:int;
+  var $x.i1.1:int;
+  var $y.i2.1:int;
+  var $xx.i.1:int;
+  var $yy.i.1:int;
+  var $i.i.0:int;
+  var $.0:int;
+  var $16:int;
+  var v12:bool;
+  var v104:int;
+  var v103:int;
+  var v136:int;
+  var v137:bool;
+  var v139:int;
+  var v111:int;
+  var v112:bool;
+  var v0:bool;
+  var v1:bool;
+  var v4:int;
+  var v5:int;
+  var v6:bool;
+  var v7:int;
+  var v8:int;
+  var v9:int;
+  var v10:int;
+  var v11:bool;
+  var v2:int;
+  var v3:int;
+  var v13:int;
+  var v14:int;
+  var v15:int;
+  var v16:int;
+  var v17:int;
+  var v18:bool;
+  var v19:int;
+  var v20:int;
+  var v21:int;
+  var v22:int;
+  var v23:int;
+  var v24:int;
+  var v25:int;
+  var v26:int;
+  var v27:int;
+  var v28:bool;
+  var v29:bool;
+  var v30:bool;
+  var v31:bool;
+  var v32:bool;
+  var v33:bool;
+  var v34:int;
+  var v35:int;
+  var v36:int;
+  var v37:int;
+  var v38:int;
+  var v39:int;
+  var v40:int;
+  var v41:int;
+  var v42:int;
+  var v43:bool;
+  var v44:bool;
+  var v45:bool;
+  var v46:bool;
+  var v47:bool;
+  var v48:bool;
+  var v49:int;
+  var v50:int;
+  var v51:int;
+  var v52:int;
+  var v53:int;
+  var v54:int;
+  var v55:int;
+  var v56:int;
+  var v57:int;
+  var v58:bool;
+  var v59:bool;
+  var v60:bool;
+  var v61:bool;
+  var v62:bool;
+  var v63:bool;
+  var v64:int;
+  var v65:int;
+  var v66:int;
+  var v67:int;
+  var v68:int;
+  var v69:int;
+  var v70:int;
+  var v71:int;
+  var v72:int;
+  var v73:bool;
+  var v74:bool;
+  var v75:bool;
+  var v76:bool;
+  var v77:bool;
+  var v78:bool;
+  var v79:int;
+  var v80:int;
+  var v81:bool;
+  var v82:bool;
+  var v84:int;
+  var v83:int;
+  var v85:int;
+  var v86:int;
+  var v87:bool;
+  var v89:int;
+  var v88:int;
+  var v90:int;
+  var v91:int;
+  var v92:bool;
+  var v94:int;
+  var v93:int;
+  var v95:int;
+  var v96:int;
+  var v97:bool;
+  var v99:int;
+  var v98:int;
+  var v100:int;
+  var v101:int;
+  var v102:bool;
+  var v105:int;
+  var v106:int;
+  var v107:bool;
+  var v109:int;
+  var v108:int;
+  var v110:int;
+  var v114:int;
+  var v113:int;
+  var v115:int;
+  var v116:int;
+  var v117:bool;
+  var v119:int;
+  var v118:int;
+  var v120:int;
+  var v121:int;
+  var v122:bool;
+  var v124:int;
+  var v123:int;
+  var v125:int;
+  var v126:int;
+  var v127:bool;
+  var v129:int;
+  var v128:int;
+  var v130:int;
+  var v131:int;
+  var v132:bool;
+  var v134:int;
+  var v133:int;
+  var v135:int;
+  var v138:int;
+  var v140:int;
+  var v141:int;
+  var v142:bool;
+  var v144:int;
+  var v143:int;
+  var v145:int;
+  var v146:int;
+  var v147:bool;
+  var v149:int;
+  var v148:int;
+  var v150:int;
+  var v151:int;
+  var v152:bool;
+  var v154:int;
+  var v153:int;
+  var v155:int;
+  var v156:int;
+  var v157:bool;
+  var v159:int;
+  var v158:int;
+  var v160:int;
+  var v161:int;
+  var v162:bool;
+  var v164:int;
+  var v163:int;
+  var v165:int;
+  var v166:int;
+  var v167:bool;
+  var v169:int;
+  var v168:int;
+  var v170:int;
+  var v171:int;
+  var v172:bool;
+  var v174:int;
+  var v173:int;
+  var v175:int;
+  var v176:int;
+  var v177:int;
+  var v178:bool;
+  var v179:bool;
+  var v181:int;
+  var v180:int;
+  var v182:bool;
+  var v183:bool;
+  var v184:int;
+  var v185:int;
+  var v186:int;
+  var v187:int;
+  var v188:int;
+  var v189:int;
+  var v190:int;
+  var v191:int;
+  var v192:int;
+  var v193:int;
+  var v194:int;
+  var v195:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 4} true;
+  $$colors[0] := $colors.coerce0;
+  $$colors[1] := $colors.coerce1;
+  $$colors[2] := $colors.coerce2;
+  $$colors[3] := $colors.coerce3;
+  goto $1;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 5} true;
+  call {:sourceloc_num 6} $bugle_barrier(-1, -1);
+  v0 := local_id_x == 0;
+  goto $truebb, $falsebb;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 7} true;
+  v1 := local_id_y == 0;
+  goto $truebb0, $falsebb0;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 8} true;
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  call {:atomic} {:atomic_function "__atomicAdd_unsigned_int"} {:arg1 1} {:parts 1} {:part 1} v2, $$blockCounter := _ATOMIC_OP32($$blockCounter, 0);
+  assert {:sourceloc} {:sourceloc_num 10} true;
+  $$_ZZ11Mandelbrot1IfEvP6uchar4iiiT_S2_S2_S2_S2_S0_iiiibE10blockIndex[0] := v2;
+  assert {:sourceloc} {:sourceloc_num 11} true;
+  v3 := $$_ZZ11Mandelbrot1IfEvP6uchar4iiiT_S2_S2_S2_S2_S0_iiiibE10blockIndex[0];
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  $$_ZZ11Mandelbrot1IfEvP6uchar4iiiT_S2_S2_S2_S2_S0_iiiibE6blockX[0] := BV32_UREM(v3, $gridWidth);
+  assert {:sourceloc} {:sourceloc_num 13} true;
+  v4 := $$_ZZ11Mandelbrot1IfEvP6uchar4iiiT_S2_S2_S2_S2_S0_iiiibE10blockIndex[0];
+  assert {:sourceloc} {:sourceloc_num 14} true;
+  $$_ZZ11Mandelbrot1IfEvP6uchar4iiiT_S2_S2_S2_S2_S0_iiiibE6blockY[0] := BV32_UDIV(v4, $gridWidth);
+  goto $4;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 15} true;
+  call {:sourceloc_num 16} $bugle_barrier(-1, -1);
+  assert {:sourceloc} {:sourceloc_num 17} true;
+  v5 := $$_ZZ11Mandelbrot1IfEvP6uchar4iiiT_S2_S2_S2_S2_S0_iiiibE10blockIndex[0];
+  v6 := BV32_UGE(v5, $numBlocks);
+  goto $truebb1, $falsebb1;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 18} true;
+  goto $115;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 19} true;
+  assert {:sourceloc} {:sourceloc_num 20} true;
+  v7 := $$_ZZ11Mandelbrot1IfEvP6uchar4iiiT_S2_S2_S2_S2_S0_iiiibE6blockX[0];
+  v8 := BV32_ADD(BV32_MUL(group_size_x, v7), local_id_x);
+  assert {:sourceloc} {:sourceloc_num 21} true;
+  v9 := $$_ZZ11Mandelbrot1IfEvP6uchar4iiiT_S2_S2_S2_S2_S0_iiiibE6blockY[0];
+  v10 := BV32_ADD(BV32_MUL(group_size_y, v9), local_id_y);
+  v11 := BV32_SLT(v8, $imageW);
+  goto $truebb2, $falsebb2;
+$7:
+  assert {:block_sourceloc} {:sourceloc_num 22} true;
+  v12 := BV32_SLT(v10, $imageH);
+  goto $truebb3, $falsebb3;
+$8:
+  assert {:block_sourceloc} {:sourceloc_num 23} true;
+  v13 := BV32_ADD(BV32_MUL($imageW, v10), v8);
+  assert {:sourceloc} {:sourceloc_num 24} true;
+  v14 := $$dst[BV32_MUL(v13, 4)];
+  assert {:sourceloc} {:sourceloc_num 25} true;
+  $$pixelColor[0] := v14;
+  assert {:sourceloc} {:sourceloc_num 26} true;
+  v15 := $$dst[BV32_ADD(BV32_MUL(v13, 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 27} true;
+  $$pixelColor[1] := v15;
+  assert {:sourceloc} {:sourceloc_num 28} true;
+  v16 := $$dst[BV32_ADD(BV32_MUL(v13, 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 29} true;
+  $$pixelColor[2] := v16;
+  assert {:sourceloc} {:sourceloc_num 30} true;
+  v17 := $$dst[BV32_ADD(BV32_MUL(v13, 4), 3)];
+  assert {:sourceloc} {:sourceloc_num 31} true;
+  $$pixelColor[3] := v17;
+  v18 := BV32_SGT(v8, 0);
+  goto $truebb4, $falsebb4;
+$9:
+  assert {:block_sourceloc} {:sourceloc_num 32} true;
+  assert {:sourceloc} {:sourceloc_num 33} true;
+  v19 := $$dst[BV32_MUL(BV32_SUB(v13, 1), 4)];
+  assert {:sourceloc} {:sourceloc_num 34} true;
+  v20 := $$pixelColor[0];
+  v21 := BV32_SUB(BV8_ZEXT32(v19), BV8_ZEXT32(v20));
+  assert {:sourceloc} {:sourceloc_num 35} true;
+  v22 := $$dst[BV32_ADD(BV32_MUL(BV32_SUB(v13, 1), 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 36} true;
+  v23 := $$pixelColor[1];
+  v24 := BV32_SUB(BV8_ZEXT32(v22), BV8_ZEXT32(v23));
+  assert {:sourceloc} {:sourceloc_num 37} true;
+  v25 := $$dst[BV32_ADD(BV32_MUL(BV32_SUB(v13, 1), 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 38} true;
+  v26 := $$pixelColor[2];
+  v27 := BV32_SUB(BV8_ZEXT32(v25), BV8_ZEXT32(v26));
+  v28 := BV32_SLT(v21, 0);
+  goto $truebb5, $falsebb5;
+$10:
+  assert {:block_sourceloc} {:sourceloc_num 39} true;
+  $0 := BV32_SUB(0, v21);
+  goto $12;
+$11:
+  assert {:block_sourceloc} {:sourceloc_num 40} true;
+  $0 := v21;
+  goto $12;
+$12:
+  assert {:block_sourceloc} {:sourceloc_num 41} true;
+  v29 := BV32_SGT($0, 10);
+  goto $truebb6, $falsebb6;
+$13:
+  assert {:block_sourceloc} {:sourceloc_num 42} true;
+  v30 := BV32_SLT(v24, 0);
+  goto $truebb7, $falsebb7;
+$14:
+  assert {:block_sourceloc} {:sourceloc_num 43} true;
+  $2 := BV32_SUB(0, v24);
+  goto $16;
+$15:
+  assert {:block_sourceloc} {:sourceloc_num 44} true;
+  $2 := v24;
+  goto $16;
+$16:
+  assert {:block_sourceloc} {:sourceloc_num 45} true;
+  v31 := BV32_SGT($2, 10);
+  goto $truebb8, $falsebb8;
+$17:
+  assert {:block_sourceloc} {:sourceloc_num 46} true;
+  v32 := BV32_SLT(v27, 0);
+  goto $truebb9, $falsebb9;
+$18:
+  assert {:block_sourceloc} {:sourceloc_num 47} true;
+  $3 := BV32_SUB(0, v27);
+  goto $20;
+$19:
+  assert {:block_sourceloc} {:sourceloc_num 48} true;
+  $3 := v27;
+  goto $20;
+$20:
+  assert {:block_sourceloc} {:sourceloc_num 49} true;
+  $1 := (if BV32_SGT($3, 10) then 1 else 0);
+  goto $_ZL11CheckColorsRK6uchar4S1_.exit;
+$_ZL11CheckColorsRK6uchar4S1_.exit:
+  assert {:block_sourceloc} {:sourceloc_num 50} true;
+  $count.0 := BV1_ZEXT32($1);
+  goto $21;
+$21:
+  assert {:block_sourceloc} {:sourceloc_num 51} true;
+  v33 := BV32_SLT(BV32_ADD(v8, 1), $imageW);
+  goto $truebb10, $falsebb10;
+$22:
+  assert {:block_sourceloc} {:sourceloc_num 52} true;
+  assert {:sourceloc} {:sourceloc_num 53} true;
+  v34 := $$dst[BV32_MUL(BV32_ADD(v13, 1), 4)];
+  assert {:sourceloc} {:sourceloc_num 54} true;
+  v35 := $$pixelColor[0];
+  v36 := BV32_SUB(BV8_ZEXT32(v34), BV8_ZEXT32(v35));
+  assert {:sourceloc} {:sourceloc_num 55} true;
+  v37 := $$dst[BV32_ADD(BV32_MUL(BV32_ADD(v13, 1), 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 56} true;
+  v38 := $$pixelColor[1];
+  v39 := BV32_SUB(BV8_ZEXT32(v37), BV8_ZEXT32(v38));
+  assert {:sourceloc} {:sourceloc_num 57} true;
+  v40 := $$dst[BV32_ADD(BV32_MUL(BV32_ADD(v13, 1), 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 58} true;
+  v41 := $$pixelColor[2];
+  v42 := BV32_SUB(BV8_ZEXT32(v40), BV8_ZEXT32(v41));
+  v43 := BV32_SLT(v36, 0);
+  goto $truebb11, $falsebb11;
+$23:
+  assert {:block_sourceloc} {:sourceloc_num 59} true;
+  $4 := BV32_SUB(0, v36);
+  goto $25;
+$24:
+  assert {:block_sourceloc} {:sourceloc_num 60} true;
+  $4 := v36;
+  goto $25;
+$25:
+  assert {:block_sourceloc} {:sourceloc_num 61} true;
+  v44 := BV32_SGT($4, 10);
+  goto $truebb12, $falsebb12;
+$26:
+  assert {:block_sourceloc} {:sourceloc_num 62} true;
+  v45 := BV32_SLT(v39, 0);
+  goto $truebb13, $falsebb13;
+$27:
+  assert {:block_sourceloc} {:sourceloc_num 63} true;
+  $6 := BV32_SUB(0, v39);
+  goto $29;
+$28:
+  assert {:block_sourceloc} {:sourceloc_num 64} true;
+  $6 := v39;
+  goto $29;
+$29:
+  assert {:block_sourceloc} {:sourceloc_num 65} true;
+  v46 := BV32_SGT($6, 10);
+  goto $truebb14, $falsebb14;
+$30:
+  assert {:block_sourceloc} {:sourceloc_num 66} true;
+  v47 := BV32_SLT(v42, 0);
+  goto $truebb15, $falsebb15;
+$31:
+  assert {:block_sourceloc} {:sourceloc_num 67} true;
+  $7 := BV32_SUB(0, v42);
+  goto $33;
+$32:
+  assert {:block_sourceloc} {:sourceloc_num 68} true;
+  $7 := v42;
+  goto $33;
+$33:
+  assert {:block_sourceloc} {:sourceloc_num 69} true;
+  $5 := (if BV32_SGT($7, 10) then 1 else 0);
+  goto $_ZL11CheckColorsRK6uchar4S1_.exit14;
+$_ZL11CheckColorsRK6uchar4S1_.exit14:
+  assert {:block_sourceloc} {:sourceloc_num 70} true;
+  $count.1 := BV32_ADD($count.0, BV1_ZEXT32($5));
+  goto $34;
+$34:
+  assert {:block_sourceloc} {:sourceloc_num 71} true;
+  v48 := BV32_SGT(v10, 0);
+  goto $truebb16, $falsebb16;
+$35:
+  assert {:block_sourceloc} {:sourceloc_num 72} true;
+  assert {:sourceloc} {:sourceloc_num 73} true;
+  v49 := $$dst[BV32_MUL(BV32_SUB(v13, $imageW), 4)];
+  assert {:sourceloc} {:sourceloc_num 74} true;
+  v50 := $$pixelColor[0];
+  v51 := BV32_SUB(BV8_ZEXT32(v49), BV8_ZEXT32(v50));
+  assert {:sourceloc} {:sourceloc_num 75} true;
+  v52 := $$dst[BV32_ADD(BV32_MUL(BV32_SUB(v13, $imageW), 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 76} true;
+  v53 := $$pixelColor[1];
+  v54 := BV32_SUB(BV8_ZEXT32(v52), BV8_ZEXT32(v53));
+  assert {:sourceloc} {:sourceloc_num 77} true;
+  v55 := $$dst[BV32_ADD(BV32_MUL(BV32_SUB(v13, $imageW), 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 78} true;
+  v56 := $$pixelColor[2];
+  v57 := BV32_SUB(BV8_ZEXT32(v55), BV8_ZEXT32(v56));
+  v58 := BV32_SLT(v51, 0);
+  goto $truebb17, $falsebb17;
+$36:
+  assert {:block_sourceloc} {:sourceloc_num 79} true;
+  $8 := BV32_SUB(0, v51);
+  goto $38;
+$37:
+  assert {:block_sourceloc} {:sourceloc_num 80} true;
+  $8 := v51;
+  goto $38;
+$38:
+  assert {:block_sourceloc} {:sourceloc_num 81} true;
+  v59 := BV32_SGT($8, 10);
+  goto $truebb18, $falsebb18;
+$39:
+  assert {:block_sourceloc} {:sourceloc_num 82} true;
+  v60 := BV32_SLT(v54, 0);
+  goto $truebb19, $falsebb19;
+$40:
+  assert {:block_sourceloc} {:sourceloc_num 83} true;
+  $10 := BV32_SUB(0, v54);
+  goto $42;
+$41:
+  assert {:block_sourceloc} {:sourceloc_num 84} true;
+  $10 := v54;
+  goto $42;
+$42:
+  assert {:block_sourceloc} {:sourceloc_num 85} true;
+  v61 := BV32_SGT($10, 10);
+  goto $truebb20, $falsebb20;
+$43:
+  assert {:block_sourceloc} {:sourceloc_num 86} true;
+  v62 := BV32_SLT(v57, 0);
+  goto $truebb21, $falsebb21;
+$44:
+  assert {:block_sourceloc} {:sourceloc_num 87} true;
+  $11 := BV32_SUB(0, v57);
+  goto $46;
+$45:
+  assert {:block_sourceloc} {:sourceloc_num 88} true;
+  $11 := v57;
+  goto $46;
+$46:
+  assert {:block_sourceloc} {:sourceloc_num 89} true;
+  $9 := (if BV32_SGT($11, 10) then 1 else 0);
+  goto $_ZL11CheckColorsRK6uchar4S1_.exit10;
+$_ZL11CheckColorsRK6uchar4S1_.exit10:
+  assert {:block_sourceloc} {:sourceloc_num 90} true;
+  $count.2 := BV32_ADD($count.1, BV1_ZEXT32($9));
+  goto $47;
+$47:
+  assert {:block_sourceloc} {:sourceloc_num 91} true;
+  v63 := BV32_SLT(BV32_ADD(v10, 1), $imageH);
+  goto $truebb22, $falsebb22;
+$48:
+  assert {:block_sourceloc} {:sourceloc_num 92} true;
+  assert {:sourceloc} {:sourceloc_num 93} true;
+  v64 := $$dst[BV32_MUL(BV32_ADD(v13, $imageW), 4)];
+  assert {:sourceloc} {:sourceloc_num 94} true;
+  v65 := $$pixelColor[0];
+  v66 := BV32_SUB(BV8_ZEXT32(v64), BV8_ZEXT32(v65));
+  assert {:sourceloc} {:sourceloc_num 95} true;
+  v67 := $$dst[BV32_ADD(BV32_MUL(BV32_ADD(v13, $imageW), 4), 1)];
+  assert {:sourceloc} {:sourceloc_num 96} true;
+  v68 := $$pixelColor[1];
+  v69 := BV32_SUB(BV8_ZEXT32(v67), BV8_ZEXT32(v68));
+  assert {:sourceloc} {:sourceloc_num 97} true;
+  v70 := $$dst[BV32_ADD(BV32_MUL(BV32_ADD(v13, $imageW), 4), 2)];
+  assert {:sourceloc} {:sourceloc_num 98} true;
+  v71 := $$pixelColor[2];
+  v72 := BV32_SUB(BV8_ZEXT32(v70), BV8_ZEXT32(v71));
+  v73 := BV32_SLT(v66, 0);
+  goto $truebb23, $falsebb23;
+$49:
+  assert {:block_sourceloc} {:sourceloc_num 99} true;
+  $12 := BV32_SUB(0, v66);
+  goto $51;
+$50:
+  assert {:block_sourceloc} {:sourceloc_num 100} true;
+  $12 := v66;
+  goto $51;
+$51:
+  assert {:block_sourceloc} {:sourceloc_num 101} true;
+  v74 := BV32_SGT($12, 10);
+  goto $truebb24, $falsebb24;
+$52:
+  assert {:block_sourceloc} {:sourceloc_num 102} true;
+  v75 := BV32_SLT(v69, 0);
+  goto $truebb25, $falsebb25;
+$53:
+  assert {:block_sourceloc} {:sourceloc_num 103} true;
+  $14 := BV32_SUB(0, v69);
+  goto $55;
+$54:
+  assert {:block_sourceloc} {:sourceloc_num 104} true;
+  $14 := v69;
+  goto $55;
+$55:
+  assert {:block_sourceloc} {:sourceloc_num 105} true;
+  v76 := BV32_SGT($14, 10);
+  goto $truebb26, $falsebb26;
+$56:
+  assert {:block_sourceloc} {:sourceloc_num 106} true;
+  v77 := BV32_SLT(v72, 0);
+  goto $truebb27, $falsebb27;
+$57:
+  assert {:block_sourceloc} {:sourceloc_num 107} true;
+  $15 := BV32_SUB(0, v72);
+  goto $59;
+$58:
+  assert {:block_sourceloc} {:sourceloc_num 108} true;
+  $15 := v72;
+  goto $59;
+$59:
+  assert {:block_sourceloc} {:sourceloc_num 109} true;
+  $13 := (if BV32_SGT($15, 10) then 1 else 0);
+  goto $_ZL11CheckColorsRK6uchar4S1_.exit6;
+$_ZL11CheckColorsRK6uchar4S1_.exit6:
+  assert {:block_sourceloc} {:sourceloc_num 110} true;
+  $count.3 := BV32_ADD($count.2, BV1_ZEXT32($13));
+  goto $60;
+$60:
+  assert {:block_sourceloc} {:sourceloc_num 111} true;
+  v78 := $count.3 != 0;
+  goto $truebb28, $falsebb28;
+$61:
+  assert {:block_sourceloc} {:sourceloc_num 112} true;
+  v79 := FADD32(FMUL32(SI32_TO_FP32(v8), $scale), $xOff);
+  v80 := FADD32(FMUL32(SI32_TO_FP32(v10), $scale), $yOff);
+  v81 := $isJ == 1;
+  goto $truebb29, $falsebb29;
+$62:
+  assert {:block_sourceloc} {:sourceloc_num 113} true;
+  $x.i1.0, $y.i2.0, $xx.i.0, $yy.i.0, $xC.i.0, $yC.i.0 := v79, v80, FMUL32(v79, v79), FMUL32(v80, v80), $xJP, $yJP;
+  goto $64;
+$63:
+  assert {:block_sourceloc} {:sourceloc_num 114} true;
+  $x.i1.0, $y.i2.0, $xx.i.0, $yy.i.0, $xC.i.0, $yC.i.0 := 0, 0, 0, 0, v79, v80;
+  goto $64;
+$64:
+  assert {:block_sourceloc} {:sourceloc_num 115} true;
+  $x.i1.1, $y.i2.1, $xx.i.1, $yy.i.1, $i.i.0 := $x.i1.0, $y.i2.0, $xx.i.0, $yy.i.0, $crunch;
+  goto $65;
+$65:
+  assert {:block_sourceloc} {:sourceloc_num 116} true;
+  v82 := FLT32(1082130432, FADD32($xx.i.1, $yy.i.1));
+  goto $truebb30, $falsebb30;
+$66:
+  assert {:block_sourceloc} {:sourceloc_num 117} true;
+  $.0 := BV32_SUB($i.i.0, 1);
+  goto $_ZL14CalcMandelbrotIfEiT_S0_S0_S0_ib.exit;
+$67:
+  assert {:block_sourceloc} {:sourceloc_num 118} true;
+  v83 := FADD32(FMUL32(FMUL32($x.i1.1, $y.i2.1), 1073741824), $yC.i.0);
+  v84 := FADD32(FSUB32($xx.i.1, $yy.i.1), $xC.i.0);
+  v85 := FMUL32(v83, v83);
+  v86 := FMUL32(v84, v84);
+  v87 := FLT32(1082130432, FADD32(v86, v85));
+  goto $truebb31, $falsebb31;
+$68:
+  assert {:block_sourceloc} {:sourceloc_num 119} true;
+  $.0 := BV32_SUB($i.i.0, 2);
+  goto $_ZL14CalcMandelbrotIfEiT_S0_S0_S0_ib.exit;
+$69:
+  assert {:block_sourceloc} {:sourceloc_num 120} true;
+  v88 := FADD32(FMUL32(FMUL32(v84, v83), 1073741824), $yC.i.0);
+  v89 := FADD32(FSUB32(v86, v85), $xC.i.0);
+  v90 := FMUL32(v88, v88);
+  v91 := FMUL32(v89, v89);
+  v92 := FLT32(1082130432, FADD32(v91, v90));
+  goto $truebb32, $falsebb32;
+$70:
+  assert {:block_sourceloc} {:sourceloc_num 121} true;
+  $.0 := BV32_SUB($i.i.0, 3);
+  goto $_ZL14CalcMandelbrotIfEiT_S0_S0_S0_ib.exit;
+$71:
+  assert {:block_sourceloc} {:sourceloc_num 122} true;
+  v93 := FADD32(FMUL32(FMUL32(v89, v88), 1073741824), $yC.i.0);
+  v94 := FADD32(FSUB32(v91, v90), $xC.i.0);
+  v95 := FMUL32(v93, v93);
+  v96 := FMUL32(v94, v94);
+  v97 := FLT32(1082130432, FADD32(v96, v95));
+  goto $truebb33, $falsebb33;
+$72:
+  assert {:block_sourceloc} {:sourceloc_num 123} true;
+  $.0 := BV32_SUB($i.i.0, 4);
+  goto $_ZL14CalcMandelbrotIfEiT_S0_S0_S0_ib.exit;
+$73:
+  assert {:block_sourceloc} {:sourceloc_num 124} true;
+  v98 := FADD32(FMUL32(FMUL32(v94, v93), 1073741824), $yC.i.0);
+  v99 := FADD32(FSUB32(v96, v95), $xC.i.0);
+  v100 := FMUL32(v98, v98);
+  v101 := FMUL32(v99, v99);
+  v102 := FLT32(1082130432, FADD32(v101, v100));
+  goto $truebb34, $falsebb34;
+$74:
+  assert {:block_sourceloc} {:sourceloc_num 125} true;
+  $.0 := BV32_SUB($i.i.0, 5);
+  goto $_ZL14CalcMandelbrotIfEiT_S0_S0_S0_ib.exit;
+$75:
+  assert {:block_sourceloc} {:sourceloc_num 126} true;
+  v103 := FADD32(FMUL32(FMUL32(v99, v98), 1073741824), $yC.i.0);
+  v104 := FADD32(FSUB32(v101, v100), $xC.i.0);
+  v105 := FMUL32(v103, v103);
+  v106 := FMUL32(v104, v104);
+  v107 := FLT32(1082130432, FADD32(v106, v105));
+  goto $truebb35, $falsebb35;
+$76:
+  assert {:block_sourceloc} {:sourceloc_num 127} true;
+  $.0 := BV32_SUB($i.i.0, 6);
+  goto $_ZL14CalcMandelbrotIfEiT_S0_S0_S0_ib.exit;
+$77:
+  assert {:block_sourceloc} {:sourceloc_num 128} true;
+  v108 := FADD32(FMUL32(FMUL32(v104, v103), 1073741824), $yC.i.0);
+  v109 := FADD32(FSUB32(v106, v105), $xC.i.0);
+  v110 := FMUL32(v108, v108);
+  v111 := FMUL32(v109, v109);
+  v112 := FLT32(1082130432, FADD32(v111, v110));
+  goto $truebb36, $falsebb36;
+$78:
+  assert {:block_sourceloc} {:sourceloc_num 129} true;
+  $.0 := BV32_SUB($i.i.0, 7);
+  goto $_ZL14CalcMandelbrotIfEiT_S0_S0_S0_ib.exit;
+$79:
+  assert {:block_sourceloc} {:sourceloc_num 130} true;
+  v113 := FADD32(FMUL32(FMUL32(v109, v108), 1073741824), $yC.i.0);
+  v114 := FADD32(FSUB32(v111, v110), $xC.i.0);
+  v115 := FMUL32(v113, v113);
+  v116 := FMUL32(v114, v114);
+  v117 := FLT32(1082130432, FADD32(v116, v115));
+  goto $truebb37, $falsebb37;
+$80:
+  assert {:block_sourceloc} {:sourceloc_num 131} true;
+  $.0 := BV32_SUB($i.i.0, 8);
+  goto $_ZL14CalcMandelbrotIfEiT_S0_S0_S0_ib.exit;
+$81:
+  assert {:block_sourceloc} {:sourceloc_num 132} true;
+  v118 := FADD32(FMUL32(FMUL32(v114, v113), 1073741824), $yC.i.0);
+  v119 := FADD32(FSUB32(v116, v115), $xC.i.0);
+  v120 := FMUL32(v118, v118);
+  v121 := FMUL32(v119, v119);
+  v122 := FLT32(1082130432, FADD32(v121, v120));
+  goto $truebb38, $falsebb38;
+$82:
+  assert {:block_sourceloc} {:sourceloc_num 133} true;
+  $.0 := BV32_SUB($i.i.0, 9);
+  goto $_ZL14CalcMandelbrotIfEiT_S0_S0_S0_ib.exit;
+$83:
+  assert {:block_sourceloc} {:sourceloc_num 134} true;
+  v123 := FADD32(FMUL32(FMUL32(v119, v118), 1073741824), $yC.i.0);
+  v124 := FADD32(FSUB32(v121, v120), $xC.i.0);
+  v125 := FMUL32(v123, v123);
+  v126 := FMUL32(v124, v124);
+  v127 := FLT32(1082130432, FADD32(v126, v125));
+  goto $truebb39, $falsebb39;
+$84:
+  assert {:block_sourceloc} {:sourceloc_num 135} true;
+  $.0 := BV32_SUB($i.i.0, 10);
+  goto $_ZL14CalcMandelbrotIfEiT_S0_S0_S0_ib.exit;
+$85:
+  assert {:block_sourceloc} {:sourceloc_num 136} true;
+  v128 := FADD32(FMUL32(FMUL32(v124, v123), 1073741824), $yC.i.0);
+  v129 := FADD32(FSUB32(v126, v125), $xC.i.0);
+  v130 := FMUL32(v128, v128);
+  v131 := FMUL32(v129, v129);
+  v132 := FLT32(1082130432, FADD32(v131, v130));
+  goto $truebb40, $falsebb40;
+$86:
+  assert {:block_sourceloc} {:sourceloc_num 137} true;
+  $.0 := BV32_SUB($i.i.0, 11);
+  goto $_ZL14CalcMandelbrotIfEiT_S0_S0_S0_ib.exit;
+$87:
+  assert {:block_sourceloc} {:sourceloc_num 138} true;
+  v133 := FADD32(FMUL32(FMUL32(v129, v128), 1073741824), $yC.i.0);
+  v134 := FADD32(FSUB32(v131, v130), $xC.i.0);
+  v135 := FMUL32(v133, v133);
+  v136 := FMUL32(v134, v134);
+  v137 := FLT32(1082130432, FADD32(v136, v135));
+  goto $truebb41, $falsebb41;
+$88:
+  assert {:block_sourceloc} {:sourceloc_num 139} true;
+  $.0 := BV32_SUB($i.i.0, 12);
+  goto $_ZL14CalcMandelbrotIfEiT_S0_S0_S0_ib.exit;
+$89:
+  assert {:block_sourceloc} {:sourceloc_num 140} true;
+  v138 := FADD32(FMUL32(FMUL32(v134, v133), 1073741824), $yC.i.0);
+  v139 := FADD32(FSUB32(v136, v135), $xC.i.0);
+  v140 := FMUL32(v138, v138);
+  v141 := FMUL32(v139, v139);
+  v142 := FLT32(1082130432, FADD32(v141, v140));
+  goto $truebb42, $falsebb42;
+$90:
+  assert {:block_sourceloc} {:sourceloc_num 141} true;
+  $.0 := BV32_SUB($i.i.0, 13);
+  goto $_ZL14CalcMandelbrotIfEiT_S0_S0_S0_ib.exit;
+$91:
+  assert {:block_sourceloc} {:sourceloc_num 142} true;
+  v143 := FADD32(FMUL32(FMUL32(v139, v138), 1073741824), $yC.i.0);
+  v144 := FADD32(FSUB32(v141, v140), $xC.i.0);
+  v145 := FMUL32(v143, v143);
+  v146 := FMUL32(v144, v144);
+  v147 := FLT32(1082130432, FADD32(v146, v145));
+  goto $truebb43, $falsebb43;
+$92:
+  assert {:block_sourceloc} {:sourceloc_num 143} true;
+  $.0 := BV32_SUB($i.i.0, 14);
+  goto $_ZL14CalcMandelbrotIfEiT_S0_S0_S0_ib.exit;
+$93:
+  assert {:block_sourceloc} {:sourceloc_num 144} true;
+  v148 := FADD32(FMUL32(FMUL32(v144, v143), 1073741824), $yC.i.0);
+  v149 := FADD32(FSUB32(v146, v145), $xC.i.0);
+  v150 := FMUL32(v148, v148);
+  v151 := FMUL32(v149, v149);
+  v152 := FLT32(1082130432, FADD32(v151, v150));
+  goto $truebb44, $falsebb44;
+$94:
+  assert {:block_sourceloc} {:sourceloc_num 145} true;
+  $.0 := BV32_SUB($i.i.0, 15);
+  goto $_ZL14CalcMandelbrotIfEiT_S0_S0_S0_ib.exit;
+$95:
+  assert {:block_sourceloc} {:sourceloc_num 146} true;
+  v153 := FADD32(FMUL32(FMUL32(v149, v148), 1073741824), $yC.i.0);
+  v154 := FADD32(FSUB32(v151, v150), $xC.i.0);
+  v155 := FMUL32(v153, v153);
+  v156 := FMUL32(v154, v154);
+  v157 := FLT32(1082130432, FADD32(v156, v155));
+  goto $truebb45, $falsebb45;
+$96:
+  assert {:block_sourceloc} {:sourceloc_num 147} true;
+  $.0 := BV32_SUB($i.i.0, 16);
+  goto $_ZL14CalcMandelbrotIfEiT_S0_S0_S0_ib.exit;
+$97:
+  assert {:block_sourceloc} {:sourceloc_num 148} true;
+  v158 := FADD32(FMUL32(FMUL32(v154, v153), 1073741824), $yC.i.0);
+  v159 := FADD32(FSUB32(v156, v155), $xC.i.0);
+  v160 := FMUL32(v158, v158);
+  v161 := FMUL32(v159, v159);
+  v162 := FLT32(1082130432, FADD32(v161, v160));
+  goto $truebb46, $falsebb46;
+$98:
+  assert {:block_sourceloc} {:sourceloc_num 149} true;
+  $.0 := BV32_SUB($i.i.0, 17);
+  goto $_ZL14CalcMandelbrotIfEiT_S0_S0_S0_ib.exit;
+$99:
+  assert {:block_sourceloc} {:sourceloc_num 150} true;
+  v163 := FADD32(FMUL32(FMUL32(v159, v158), 1073741824), $yC.i.0);
+  v164 := FADD32(FSUB32(v161, v160), $xC.i.0);
+  v165 := FMUL32(v163, v163);
+  v166 := FMUL32(v164, v164);
+  v167 := FLT32(1082130432, FADD32(v166, v165));
+  goto $truebb47, $falsebb47;
+$100:
+  assert {:block_sourceloc} {:sourceloc_num 151} true;
+  $.0 := BV32_SUB($i.i.0, 18);
+  goto $_ZL14CalcMandelbrotIfEiT_S0_S0_S0_ib.exit;
+$101:
+  assert {:block_sourceloc} {:sourceloc_num 152} true;
+  v168 := FADD32(FMUL32(FMUL32(v164, v163), 1073741824), $yC.i.0);
+  v169 := FADD32(FSUB32(v166, v165), $xC.i.0);
+  v170 := FMUL32(v168, v168);
+  v171 := FMUL32(v169, v169);
+  v172 := FLT32(1082130432, FADD32(v171, v170));
+  goto $truebb48, $falsebb48;
+$102:
+  assert {:block_sourceloc} {:sourceloc_num 153} true;
+  $.0 := BV32_SUB($i.i.0, 19);
+  goto $_ZL14CalcMandelbrotIfEiT_S0_S0_S0_ib.exit;
+$103:
+  assert {:block_sourceloc} {:sourceloc_num 154} true;
+  v173 := FADD32(FMUL32(FMUL32(v169, v168), 1073741824), $yC.i.0);
+  v174 := FADD32(FSUB32(v171, v170), $xC.i.0);
+  v175 := FMUL32(v173, v173);
+  v176 := FMUL32(v174, v174);
+  v177 := BV32_SUB($i.i.0, 20);
+  v178 := BV32_SLE(v177, 0);
+  goto $truebb49, $falsebb49;
+$104:
+  assert {:block_sourceloc} {:sourceloc_num 155} true;
+  v179 := FLT32(1082130432, FADD32(v176, v175));
+  goto $truebb50, $falsebb50;
+$105:
+  assert {:block_sourceloc} {:sourceloc_num 156} true;
+  $.0 := v177;
+  goto $_ZL14CalcMandelbrotIfEiT_S0_S0_S0_ib.exit;
+$106:
+  assert {:block_sourceloc} {:sourceloc_num 157} true;
+  v180 := FADD32(FMUL32(FMUL32(v174, v173), 1073741824), $yC.i.0);
+  v181 := FADD32(FSUB32(v176, v175), $xC.i.0);
+  $x.i1.1, $y.i2.1, $xx.i.1, $yy.i.1, $i.i.0 := v181, v180, FMUL32(v181, v181), FMUL32(v180, v180), v177;
+  goto $65;
+$_ZL14CalcMandelbrotIfEiT_S0_S0_S0_ib.exit:
+  assert {:block_sourceloc} {:sourceloc_num 158} true;
+  v182 := BV32_SGT($.0, 0);
+  goto $truebb51, $falsebb51;
+$107:
+  assert {:block_sourceloc} {:sourceloc_num 159} true;
+  $16 := BV32_SUB($crunch, $.0);
+  goto $109;
+$108:
+  assert {:block_sourceloc} {:sourceloc_num 160} true;
+  $16 := 0;
+  goto $109;
+$109:
+  assert {:block_sourceloc} {:sourceloc_num 161} true;
+  v183 := $16 != 0;
+  goto $truebb52, $falsebb52;
+$110:
+  assert {:block_sourceloc} {:sourceloc_num 162} true;
+  v184 := BV32_ADD($16, $animationFrame);
+  assert {:sourceloc} {:sourceloc_num 163} true;
+  v185 := $$colors[0];
+  assert {:sourceloc} {:sourceloc_num 164} true;
+  $$color[0] := BV_EXTRACT(BV32_MUL(v184, BV8_ZEXT32(v185)), 8, 0);
+  assert {:sourceloc} {:sourceloc_num 165} true;
+  v186 := $$colors[1];
+  assert {:sourceloc} {:sourceloc_num 166} true;
+  $$color[1] := BV_EXTRACT(BV32_MUL(v184, BV8_ZEXT32(v186)), 8, 0);
+  assert {:sourceloc} {:sourceloc_num 167} true;
+  v187 := $$colors[2];
+  assert {:sourceloc} {:sourceloc_num 168} true;
+  $$color[2] := BV_EXTRACT(BV32_MUL(v184, BV8_ZEXT32(v187)), 8, 0);
+  goto $112;
+$111:
+  assert {:block_sourceloc} {:sourceloc_num 169} true;
+  assert {:sourceloc} {:sourceloc_num 170} true;
+  $$color[0] := 0;
+  assert {:sourceloc} {:sourceloc_num 171} true;
+  $$color[1] := 0;
+  assert {:sourceloc} {:sourceloc_num 172} true;
+  $$color[2] := 0;
+  goto $112;
+$112:
+  assert {:block_sourceloc} {:sourceloc_num 173} true;
+  v188 := BV32_ADD($frame, 1);
+  v189 := BV32_SDIV(v188, 2);
+  assert {:sourceloc} {:sourceloc_num 174} true;
+  v190 := $$pixelColor[0];
+  assert {:sourceloc} {:sourceloc_num 175} true;
+  v191 := $$color[0];
+  assert {:sourceloc} {:sourceloc_num 176} true;
+  $$dst[BV32_MUL(v13, 4)] := BV_EXTRACT(BV32_SDIV(BV32_ADD(BV32_ADD(BV32_MUL(BV8_ZEXT32(v190), $frame), BV8_ZEXT32(v191)), v189), v188), 8, 0);
+  assert {:sourceloc} {:sourceloc_num 177} true;
+  v192 := $$pixelColor[1];
+  assert {:sourceloc} {:sourceloc_num 178} true;
+  v193 := $$color[1];
+  assert {:sourceloc} {:sourceloc_num 179} true;
+  $$dst[BV32_ADD(BV32_MUL(v13, 4), 1)] := BV_EXTRACT(BV32_SDIV(BV32_ADD(BV32_ADD(BV32_MUL(BV8_ZEXT32(v192), $frame), BV8_ZEXT32(v193)), v189), v188), 8, 0);
+  assert {:sourceloc} {:sourceloc_num 180} true;
+  v194 := $$pixelColor[2];
+  assert {:sourceloc} {:sourceloc_num 181} true;
+  v195 := $$color[2];
+  assert {:sourceloc} {:sourceloc_num 182} true;
+  $$dst[BV32_ADD(BV32_MUL(v13, 4), 2)] := BV_EXTRACT(BV32_SDIV(BV32_ADD(BV32_ADD(BV32_MUL(BV8_ZEXT32(v194), $frame), BV8_ZEXT32(v195)), v189), v188), 8, 0);
+  goto $113;
+$113:
+  assert {:block_sourceloc} {:sourceloc_num 183} true;
+  goto $114;
+$114:
+  assert {:block_sourceloc} {:sourceloc_num 184} true;
+  goto $1;
+$115:
+  assert {:block_sourceloc} {:sourceloc_num 185} true;
+  return;
+$truebb:
+  assume {:partition} v0;
+  assert {:block_sourceloc} {:sourceloc_num 186} true;
+  goto $2;
+$falsebb:
+  assume {:partition} !v0;
+  assert {:block_sourceloc} {:sourceloc_num 187} true;
+  goto $4;
+$truebb0:
+  assume {:partition} v1;
+  assert {:block_sourceloc} {:sourceloc_num 188} true;
+  goto $3;
+$falsebb0:
+  assume {:partition} !v1;
+  assert {:block_sourceloc} {:sourceloc_num 189} true;
+  goto $4;
+$truebb1:
+  assume {:partition} v6;
+  assert {:block_sourceloc} {:sourceloc_num 190} true;
+  goto $5;
+$falsebb1:
+  assume {:partition} !v6;
+  assert {:block_sourceloc} {:sourceloc_num 191} true;
+  goto $6;
+$truebb2:
+  assume {:partition} v11;
+  assert {:block_sourceloc} {:sourceloc_num 192} true;
+  goto $7;
+$falsebb2:
+  assume {:partition} !v11;
+  assert {:block_sourceloc} {:sourceloc_num 193} true;
+  goto $114;
+$truebb3:
+  assume {:partition} v12;
+  assert {:block_sourceloc} {:sourceloc_num 194} true;
+  goto $8;
+$falsebb3:
+  assume {:partition} !v12;
+  assert {:block_sourceloc} {:sourceloc_num 195} true;
+  goto $114;
+$truebb4:
+  assume {:partition} v18;
+  assert {:block_sourceloc} {:sourceloc_num 196} true;
+  goto $9;
+$falsebb4:
+  assume {:partition} !v18;
+  assert {:block_sourceloc} {:sourceloc_num 197} true;
+  $count.0 := 0;
+  goto $21;
+$truebb5:
+  assume {:partition} v28;
+  assert {:block_sourceloc} {:sourceloc_num 198} true;
+  goto $10;
+$falsebb5:
+  assume {:partition} !v28;
+  assert {:block_sourceloc} {:sourceloc_num 199} true;
+  goto $11;
+$truebb6:
+  assume {:partition} v29;
+  assert {:block_sourceloc} {:sourceloc_num 200} true;
+  $1 := -1;
+  goto $_ZL11CheckColorsRK6uchar4S1_.exit;
+$falsebb6:
+  assume {:partition} !v29;
+  assert {:block_sourceloc} {:sourceloc_num 201} true;
+  goto $13;
+$truebb7:
+  assume {:partition} v30;
+  assert {:block_sourceloc} {:sourceloc_num 202} true;
+  goto $14;
+$falsebb7:
+  assume {:partition} !v30;
+  assert {:block_sourceloc} {:sourceloc_num 203} true;
+  goto $15;
+$truebb8:
+  assume {:partition} v31;
+  assert {:block_sourceloc} {:sourceloc_num 204} true;
+  $1 := -1;
+  goto $_ZL11CheckColorsRK6uchar4S1_.exit;
+$falsebb8:
+  assume {:partition} !v31;
+  assert {:block_sourceloc} {:sourceloc_num 205} true;
+  goto $17;
+$truebb9:
+  assume {:partition} v32;
+  assert {:block_sourceloc} {:sourceloc_num 206} true;
+  goto $18;
+$falsebb9:
+  assume {:partition} !v32;
+  assert {:block_sourceloc} {:sourceloc_num 207} true;
+  goto $19;
+$truebb10:
+  assume {:partition} v33;
+  assert {:block_sourceloc} {:sourceloc_num 208} true;
+  goto $22;
+$falsebb10:
+  assume {:partition} !v33;
+  assert {:block_sourceloc} {:sourceloc_num 209} true;
+  $count.1 := $count.0;
+  goto $34;
+$truebb11:
+  assume {:partition} v43;
+  assert {:block_sourceloc} {:sourceloc_num 210} true;
+  goto $23;
+$falsebb11:
+  assume {:partition} !v43;
+  assert {:block_sourceloc} {:sourceloc_num 211} true;
+  goto $24;
+$truebb12:
+  assume {:partition} v44;
+  assert {:block_sourceloc} {:sourceloc_num 212} true;
+  $5 := -1;
+  goto $_ZL11CheckColorsRK6uchar4S1_.exit14;
+$falsebb12:
+  assume {:partition} !v44;
+  assert {:block_sourceloc} {:sourceloc_num 213} true;
+  goto $26;
+$truebb13:
+  assume {:partition} v45;
+  assert {:block_sourceloc} {:sourceloc_num 214} true;
+  goto $27;
+$falsebb13:
+  assume {:partition} !v45;
+  assert {:block_sourceloc} {:sourceloc_num 215} true;
+  goto $28;
+$truebb14:
+  assume {:partition} v46;
+  assert {:block_sourceloc} {:sourceloc_num 216} true;
+  $5 := -1;
+  goto $_ZL11CheckColorsRK6uchar4S1_.exit14;
+$falsebb14:
+  assume {:partition} !v46;
+  assert {:block_sourceloc} {:sourceloc_num 217} true;
+  goto $30;
+$truebb15:
+  assume {:partition} v47;
+  assert {:block_sourceloc} {:sourceloc_num 218} true;
+  goto $31;
+$falsebb15:
+  assume {:partition} !v47;
+  assert {:block_sourceloc} {:sourceloc_num 219} true;
+  goto $32;
+$truebb16:
+  assume {:partition} v48;
+  assert {:block_sourceloc} {:sourceloc_num 220} true;
+  goto $35;
+$falsebb16:
+  assume {:partition} !v48;
+  assert {:block_sourceloc} {:sourceloc_num 221} true;
+  $count.2 := $count.1;
+  goto $47;
+$truebb17:
+  assume {:partition} v58;
+  assert {:block_sourceloc} {:sourceloc_num 222} true;
+  goto $36;
+$falsebb17:
+  assume {:partition} !v58;
+  assert {:block_sourceloc} {:sourceloc_num 223} true;
+  goto $37;
+$truebb18:
+  assume {:partition} v59;
+  assert {:block_sourceloc} {:sourceloc_num 224} true;
+  $9 := -1;
+  goto $_ZL11CheckColorsRK6uchar4S1_.exit10;
+$falsebb18:
+  assume {:partition} !v59;
+  assert {:block_sourceloc} {:sourceloc_num 225} true;
+  goto $39;
+$truebb19:
+  assume {:partition} v60;
+  assert {:block_sourceloc} {:sourceloc_num 226} true;
+  goto $40;
+$falsebb19:
+  assume {:partition} !v60;
+  assert {:block_sourceloc} {:sourceloc_num 227} true;
+  goto $41;
+$truebb20:
+  assume {:partition} v61;
+  assert {:block_sourceloc} {:sourceloc_num 228} true;
+  $9 := -1;
+  goto $_ZL11CheckColorsRK6uchar4S1_.exit10;
+$falsebb20:
+  assume {:partition} !v61;
+  assert {:block_sourceloc} {:sourceloc_num 229} true;
+  goto $43;
+$truebb21:
+  assume {:partition} v62;
+  assert {:block_sourceloc} {:sourceloc_num 230} true;
+  goto $44;
+$falsebb21:
+  assume {:partition} !v62;
+  assert {:block_sourceloc} {:sourceloc_num 231} true;
+  goto $45;
+$truebb22:
+  assume {:partition} v63;
+  assert {:block_sourceloc} {:sourceloc_num 232} true;
+  goto $48;
+$falsebb22:
+  assume {:partition} !v63;
+  assert {:block_sourceloc} {:sourceloc_num 233} true;
+  $count.3 := $count.2;
+  goto $60;
+$truebb23:
+  assume {:partition} v73;
+  assert {:block_sourceloc} {:sourceloc_num 234} true;
+  goto $49;
+$falsebb23:
+  assume {:partition} !v73;
+  assert {:block_sourceloc} {:sourceloc_num 235} true;
+  goto $50;
+$truebb24:
+  assume {:partition} v74;
+  assert {:block_sourceloc} {:sourceloc_num 236} true;
+  $13 := -1;
+  goto $_ZL11CheckColorsRK6uchar4S1_.exit6;
+$falsebb24:
+  assume {:partition} !v74;
+  assert {:block_sourceloc} {:sourceloc_num 237} true;
+  goto $52;
+$truebb25:
+  assume {:partition} v75;
+  assert {:block_sourceloc} {:sourceloc_num 238} true;
+  goto $53;
+$falsebb25:
+  assume {:partition} !v75;
+  assert {:block_sourceloc} {:sourceloc_num 239} true;
+  goto $54;
+$truebb26:
+  assume {:partition} v76;
+  assert {:block_sourceloc} {:sourceloc_num 240} true;
+  $13 := -1;
+  goto $_ZL11CheckColorsRK6uchar4S1_.exit6;
+$falsebb26:
+  assume {:partition} !v76;
+  assert {:block_sourceloc} {:sourceloc_num 241} true;
+  goto $56;
+$truebb27:
+  assume {:partition} v77;
+  assert {:block_sourceloc} {:sourceloc_num 242} true;
+  goto $57;
+$falsebb27:
+  assume {:partition} !v77;
+  assert {:block_sourceloc} {:sourceloc_num 243} true;
+  goto $58;
+$truebb28:
+  assume {:partition} v78;
+  assert {:block_sourceloc} {:sourceloc_num 244} true;
+  goto $61;
+$falsebb28:
+  assume {:partition} !v78;
+  assert {:block_sourceloc} {:sourceloc_num 245} true;
+  goto $113;
+$truebb29:
+  assume {:partition} v81;
+  assert {:block_sourceloc} {:sourceloc_num 246} true;
+  goto $62;
+$falsebb29:
+  assume {:partition} !v81;
+  assert {:block_sourceloc} {:sourceloc_num 247} true;
+  goto $63;
+$truebb30:
+  assume {:partition} v82;
+  assert {:block_sourceloc} {:sourceloc_num 248} true;
+  goto $66;
+$falsebb30:
+  assume {:partition} !v82;
+  assert {:block_sourceloc} {:sourceloc_num 249} true;
+  goto $67;
+$truebb31:
+  assume {:partition} v87;
+  assert {:block_sourceloc} {:sourceloc_num 250} true;
+  goto $68;
+$falsebb31:
+  assume {:partition} !v87;
+  assert {:block_sourceloc} {:sourceloc_num 251} true;
+  goto $69;
+$truebb32:
+  assume {:partition} v92;
+  assert {:block_sourceloc} {:sourceloc_num 252} true;
+  goto $70;
+$falsebb32:
+  assume {:partition} !v92;
+  assert {:block_sourceloc} {:sourceloc_num 253} true;
+  goto $71;
+$truebb33:
+  assume {:partition} v97;
+  assert {:block_sourceloc} {:sourceloc_num 254} true;
+  goto $72;
+$falsebb33:
+  assume {:partition} !v97;
+  assert {:block_sourceloc} {:sourceloc_num 255} true;
+  goto $73;
+$truebb34:
+  assume {:partition} v102;
+  assert {:block_sourceloc} {:sourceloc_num 256} true;
+  goto $74;
+$falsebb34:
+  assume {:partition} !v102;
+  assert {:block_sourceloc} {:sourceloc_num 257} true;
+  goto $75;
+$truebb35:
+  assume {:partition} v107;
+  assert {:block_sourceloc} {:sourceloc_num 258} true;
+  goto $76;
+$falsebb35:
+  assume {:partition} !v107;
+  assert {:block_sourceloc} {:sourceloc_num 259} true;
+  goto $77;
+$truebb36:
+  assume {:partition} v112;
+  assert {:block_sourceloc} {:sourceloc_num 260} true;
+  goto $78;
+$falsebb36:
+  assume {:partition} !v112;
+  assert {:block_sourceloc} {:sourceloc_num 261} true;
+  goto $79;
+$truebb37:
+  assume {:partition} v117;
+  assert {:block_sourceloc} {:sourceloc_num 262} true;
+  goto $80;
+$falsebb37:
+  assume {:partition} !v117;
+  assert {:block_sourceloc} {:sourceloc_num 263} true;
+  goto $81;
+$truebb38:
+  assume {:partition} v122;
+  assert {:block_sourceloc} {:sourceloc_num 264} true;
+  goto $82;
+$falsebb38:
+  assume {:partition} !v122;
+  assert {:block_sourceloc} {:sourceloc_num 265} true;
+  goto $83;
+$truebb39:
+  assume {:partition} v127;
+  assert {:block_sourceloc} {:sourceloc_num 266} true;
+  goto $84;
+$falsebb39:
+  assume {:partition} !v127;
+  assert {:block_sourceloc} {:sourceloc_num 267} true;
+  goto $85;
+$truebb40:
+  assume {:partition} v132;
+  assert {:block_sourceloc} {:sourceloc_num 268} true;
+  goto $86;
+$falsebb40:
+  assume {:partition} !v132;
+  assert {:block_sourceloc} {:sourceloc_num 269} true;
+  goto $87;
+$truebb41:
+  assume {:partition} v137;
+  assert {:block_sourceloc} {:sourceloc_num 270} true;
+  goto $88;
+$falsebb41:
+  assume {:partition} !v137;
+  assert {:block_sourceloc} {:sourceloc_num 271} true;
+  goto $89;
+$truebb42:
+  assume {:partition} v142;
+  assert {:block_sourceloc} {:sourceloc_num 272} true;
+  goto $90;
+$falsebb42:
+  assume {:partition} !v142;
+  assert {:block_sourceloc} {:sourceloc_num 273} true;
+  goto $91;
+$truebb43:
+  assume {:partition} v147;
+  assert {:block_sourceloc} {:sourceloc_num 274} true;
+  goto $92;
+$falsebb43:
+  assume {:partition} !v147;
+  assert {:block_sourceloc} {:sourceloc_num 275} true;
+  goto $93;
+$truebb44:
+  assume {:partition} v152;
+  assert {:block_sourceloc} {:sourceloc_num 276} true;
+  goto $94;
+$falsebb44:
+  assume {:partition} !v152;
+  assert {:block_sourceloc} {:sourceloc_num 277} true;
+  goto $95;
+$truebb45:
+  assume {:partition} v157;
+  assert {:block_sourceloc} {:sourceloc_num 278} true;
+  goto $96;
+$falsebb45:
+  assume {:partition} !v157;
+  assert {:block_sourceloc} {:sourceloc_num 279} true;
+  goto $97;
+$truebb46:
+  assume {:partition} v162;
+  assert {:block_sourceloc} {:sourceloc_num 280} true;
+  goto $98;
+$falsebb46:
+  assume {:partition} !v162;
+  assert {:block_sourceloc} {:sourceloc_num 281} true;
+  goto $99;
+$truebb47:
+  assume {:partition} v167;
+  assert {:block_sourceloc} {:sourceloc_num 282} true;
+  goto $100;
+$falsebb47:
+  assume {:partition} !v167;
+  assert {:block_sourceloc} {:sourceloc_num 283} true;
+  goto $101;
+$truebb48:
+  assume {:partition} v172;
+  assert {:block_sourceloc} {:sourceloc_num 284} true;
+  goto $102;
+$falsebb48:
+  assume {:partition} !v172;
+  assert {:block_sourceloc} {:sourceloc_num 285} true;
+  goto $103;
+$truebb49:
+  assume {:partition} v178;
+  assert {:block_sourceloc} {:sourceloc_num 286} true;
+  goto $105;
+$falsebb49:
+  assume {:partition} !v178;
+  assert {:block_sourceloc} {:sourceloc_num 287} true;
+  goto $104;
+$truebb50:
+  assume {:partition} v179;
+  assert {:block_sourceloc} {:sourceloc_num 288} true;
+  goto $105;
+$falsebb50:
+  assume {:partition} !v179;
+  assert {:block_sourceloc} {:sourceloc_num 289} true;
+  goto $106;
+$truebb51:
+  assume {:partition} v182;
+  assert {:block_sourceloc} {:sourceloc_num 290} true;
+  goto $107;
+$falsebb51:
+  assume {:partition} !v182;
+  assert {:block_sourceloc} {:sourceloc_num 291} true;
+  goto $108;
+$truebb52:
+  assume {:partition} v183;
+  assert {:block_sourceloc} {:sourceloc_num 292} true;
+  goto $110;
+$falsebb52:
+  assume {:partition} !v183;
+  assert {:block_sourceloc} {:sourceloc_num 293} true;
+  goto $111;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:int, $1:int);
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 32 then 1 else 0) != 0;
+axiom (if group_size_y == 32 then 1 else 0) != 0;
+axiom (if num_groups_x == 14 then 1 else 0) != 0;

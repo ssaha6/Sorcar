@@ -1,0 +1,132 @@
+type _SIZE_T_TYPE = bv32;
+
+procedure _ATOMIC_OP32(x : [int]int, y : int) returns (z : int, A : [int]int);
+var {:source_name "dataBase"} {:global} $$dataBase : [int]int;
+axiom {:array_info "$$dataBase"} {:global} {:elem_width 32} {:source_name "dataBase"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$dataBase : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$dataBase : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$dataBase : bool;
+
+var {:source_name "interBase"} {:global} $$interBase : [int]int;
+axiom {:array_info "$$interBase"} {:global} {:elem_width 32} {:source_name "interBase"} {:source_elem_width 32} {:source_dimensions "*"} true;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$interBase : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$interBase : bool;
+var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$interBase : bool;
+
+var {:source_name "uni"} {:group_shared} $$uniformAdd.uni : [int]int;
+axiom {:array_info "$$uniformAdd.uni"} {:group_shared} {:elem_width 32} {:source_name "uni"} {:source_elem_width 32} {:source_dimensions "1"} true;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$uniformAdd.uni : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$uniformAdd.uni : bool;
+var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$uniformAdd.uni : bool;
+
+const _WATCHED_OFFSET : int;
+const {:global_offset_x} global_offset_x : int;
+const {:global_offset_y} global_offset_y : int;
+const {:global_offset_z} global_offset_z : int;
+const {:group_id_x} group_id_x : int;
+const {:group_size_x} group_size_x : int;
+const {:group_size_y} group_size_y : int;
+const {:group_size_z} group_size_z : int;
+const {:local_id_x} local_id_x : int;
+const {:num_groups_x} num_groups_x : int;
+const {:num_groups_y} num_groups_y : int;
+const {:num_groups_z} num_groups_z : int;
+function {:inline true} BV32_ADD(x : int, y : int) : int {
+  x + y
+}
+function {:inline true} BV32_MUL(x : int, y : int) : int {
+  x * y
+}
+function {:inline true} BV32_ULT(x : int, y : int) : bool {
+  x < y
+}
+procedure {:source_name "uniformAdd"} {:kernel} $uniformAdd($n:int, $data_offset:int, $inter_offset:int)
+{
+  var v0:bool;
+  var v1:int;
+  var v2:int;
+  var v3:int;
+  var v4:bool;
+  var v5:int;
+  var v6:int;
+  var v7:bool;
+  var v8:int;
+  var v9:int;
+$0:
+  assert {:block_sourceloc} {:sourceloc_num 0} true;
+  v0 := local_id_x == 0;
+  goto $truebb, $falsebb;
+$1:
+  assert {:block_sourceloc} {:sourceloc_num 1} true;
+  assert {:sourceloc} {:sourceloc_num 2} true;
+  v1 := $$interBase[BV32_ADD($inter_offset, group_id_x)];
+  assert {:sourceloc} {:sourceloc_num 3} true;
+  $$uniformAdd.uni[0] := v1;
+  goto $2;
+$2:
+  assert {:block_sourceloc} {:sourceloc_num 4} true;
+  call {:sourceloc_num 5} $bugle_barrier(-1, 0);
+  v2 := BV32_ADD(BV32_MUL(BV32_MUL(group_id_x, 2), group_size_x), local_id_x);
+  v3 := BV32_ADD(v2, group_size_x);
+  v4 := BV32_ULT(v2, $n);
+  goto $truebb0, $falsebb0;
+$3:
+  assert {:block_sourceloc} {:sourceloc_num 6} true;
+  assert {:sourceloc} {:sourceloc_num 7} true;
+  v5 := $$uniformAdd.uni[0];
+  assert {:sourceloc} {:sourceloc_num 8} true;
+  v6 := $$dataBase[BV32_ADD($data_offset, v2)];
+  assert {:sourceloc} {:sourceloc_num 9} true;
+  $$dataBase[BV32_ADD($data_offset, v2)] := BV32_ADD(v6, v5);
+  goto $4;
+$4:
+  assert {:block_sourceloc} {:sourceloc_num 10} true;
+  v7 := BV32_ULT(v3, $n);
+  goto $truebb1, $falsebb1;
+$5:
+  assert {:block_sourceloc} {:sourceloc_num 11} true;
+  assert {:sourceloc} {:sourceloc_num 12} true;
+  v8 := $$uniformAdd.uni[0];
+  assert {:sourceloc} {:sourceloc_num 13} true;
+  v9 := $$dataBase[BV32_ADD($data_offset, v3)];
+  assert {:sourceloc} {:sourceloc_num 14} true;
+  $$dataBase[BV32_ADD($data_offset, v3)] := BV32_ADD(v9, v8);
+  goto $6;
+$6:
+  assert {:block_sourceloc} {:sourceloc_num 15} true;
+  return;
+$truebb:
+  assume {:partition} v0;
+  assert {:block_sourceloc} {:sourceloc_num 16} true;
+  goto $1;
+$falsebb:
+  assume {:partition} !v0;
+  assert {:block_sourceloc} {:sourceloc_num 17} true;
+  goto $2;
+$truebb0:
+  assume {:partition} v4;
+  assert {:block_sourceloc} {:sourceloc_num 18} true;
+  goto $3;
+$falsebb0:
+  assume {:partition} !v4;
+  assert {:block_sourceloc} {:sourceloc_num 19} true;
+  goto $4;
+$truebb1:
+  assume {:partition} v7;
+  assert {:block_sourceloc} {:sourceloc_num 20} true;
+  goto $5;
+$falsebb1:
+  assume {:partition} !v7;
+  assert {:block_sourceloc} {:sourceloc_num 21} true;
+  goto $6;
+}
+procedure {:source_name "bugle_barrier"} {:barrier} $bugle_barrier($0:int, $1:int);
+axiom (if group_size_y == 1 then 1 else 0) != 0;
+axiom (if group_size_z == 1 then 1 else 0) != 0;
+axiom (if num_groups_y == 1 then 1 else 0) != 0;
+axiom (if num_groups_z == 1 then 1 else 0) != 0;
+axiom (if group_size_x == 512 then 1 else 0) != 0;
+axiom (if num_groups_x == 16385 then 1 else 0) != 0;
+axiom (if global_offset_x == 0 then 1 else 0) != 0;
+axiom (if global_offset_y == 0 then 1 else 0) != 0;
+axiom (if global_offset_z == 0 then 1 else 0) != 0;
