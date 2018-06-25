@@ -22,7 +22,7 @@ SOURCEDIR="$PREFIX/benchmarks/BenchmarksCompiled"
 # SOURCEDIR="../../benchmarks/BenchmarksDryad/"
 # PRELUDEFILE="../../benchmarks/BenchmarksDryad/Vcc3Prelude.array.bpl"
 
-BOOGIE_OPT=""
+BOOGIE_OPT=" /doNotUseLabels  /z3opt:smt.relevancy=0  /doModSetAnalysis  /proverOpt:OPTIMIZE_FOR_BV=true "
 
 # #Abstract Houdini Boogie flags
 # BOOGIE_OPT+=" /doNotUseLabels /z3opt:smt.relevancy=0  /doModSetAnalysis "
@@ -32,8 +32,8 @@ BOOGIE_OPT=""
 
 
 # # #Gpuverify Sorcar Boogie flags
-BOOGIE_OPT+=" /doNotUseLabels  /z3opt:smt.relevancy=0  /doModSetAnalysis "
-BOOGIE_OPT+=" /proverOpt:OPTIMIZE_FOR_BV=true "
+# BOOGIE_OPT+=" /doNotUseLabels  /z3opt:smt.relevancy=0  /doModSetAnalysis "
+# BOOGIE_OPT+=" /proverOpt:OPTIMIZE_FOR_BV=true "
 # #REMOVE ERRORLIMIT
 # BOOGIE_OPT+=" /errorLimit:1 "
 
