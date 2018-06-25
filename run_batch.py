@@ -33,7 +33,7 @@ def all_subsets(ss):
 
 
 
-algorithms = ["sorcar-first", "horndini"] 
+algorithms = ["sorcar", "sorcar-first", "horndini"] 
 options    = [ "f", "t", "r"]
 
 
