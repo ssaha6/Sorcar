@@ -53,8 +53,10 @@ for (option,file) in create_options():
     command = "sh run.sh \"" + option + "\" \"" + file + "\""
     print(str(now))
     print(command)
-    subprocess.check_output(command, shell=True)    
-
+    try:
+        subprocess.check_output(command, shell=True)    
+    except:
+        pass
 
 # command = "sh run.sh \"-a sorcar -t  -r \" \"sorcar_tr.txt\"" 
 # print(str(now))
