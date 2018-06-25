@@ -77,7 +77,7 @@ echo "OUTPUT=$OUTPUT"
 done 2>&1 | tee $OUTPUT
 
 
-
+cd ../../
 
 # }
 
