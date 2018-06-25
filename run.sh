@@ -4,8 +4,8 @@
 SORCAR_OPTION=$1
 OUTPUT_FILE=$2
 
-PREFIX="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-cd $PREFIX
+PREFIX=/dev/shm/neider/gv/
+#cd $PREFIX
 
 BOOGIE_DIR="$PREFIX/boogie_horn_sorcar_false/Binaries/"
 # BOOGIE_DIR="boogie_lables/Binaries/"
@@ -22,7 +22,7 @@ SOURCEDIR="$PREFIX/benchmarks/BenchmarksCompiled"
 # SOURCEDIR="../../benchmarks/BenchmarksDryad/"
 # PRELUDEFILE="../../benchmarks/BenchmarksDryad/Vcc3Prelude.array.bpl"
 
-
+BOOGIE_OPT=""
 
 # #Abstract Houdini Boogie flags
 # BOOGIE_OPT+=" /doNotUseLabels /z3opt:smt.relevancy=0  /doModSetAnalysis "
@@ -52,7 +52,7 @@ TIMEOUT="600s"
 
 
 
-pushd $BOOGIE_DIR
+cd $BOOGIE_DIR
 
 for file in $(cat $SOURCELIST ) ; 
 do 
@@ -76,7 +76,7 @@ echo "OUTPUT=$OUTPUT"
 
 done 2>&1 | tee $OUTPUT
 
-popd
+
 
 
 # }
