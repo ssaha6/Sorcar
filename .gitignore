@@ -1,0 +1,17 @@
+*.attributes
+*.data
+*.horn
+*.intervals
+*.json
+*.R
+*.statistics
+*.status
+*.o
+*.exe
+*/sorcar
+sorcar
+BenchmarksCompiled/asorcar
+*/BenchmarksCompiled/asorcar
+*/BenchmarksCompiled/asorcarfr
+*/BenchmarksCompiled/asorcarftr
+*/BenchmarksCompiled/ahorndini
