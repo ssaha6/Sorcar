@@ -1,26 +1,51 @@
 #!/bin/bash
 
-# call using: sh run.sh "-a sorcar -f -t -r" "sorcar_f_t_r.txt"  
+# call using: sh run.sh "-a sorcar -f -t -r" 
 SORCAR_OPTION=$1
-OUTPUT_FILE=$2
+OPTION_KEY=`echo $SORCAR_OPTION | sed -e 's/[ -]//g'`
 
-PREFIX=/dev/shm/neider/gv/
-#cd $PREFIX
+# ------------------------------------------------- #
+
+PREFIX=/mnt/d/Docker
 
 BOOGIE_DIR="$PREFIX/boogie_horn_sorcar_false/Binaries/"
-# BOOGIE_DIR="boogie_lables/Binaries/"
+Z3_BIN="$PREFIX/../z3/z3-ubuntu/build/z3"
 
+OUTPUT="$PREFIX/results/variants/$OPTION_KEY.txt"
+TIMEOUT="10s" 
+
+# ------------------------------------------------- #
 
 #GPUverify sources
 SOURCELIST="$PREFIX/benchmarks/BenchmarksCompiled/inv_ice2files"
 SOURCEDIR="$PREFIX/benchmarks/BenchmarksCompiled"
-# PRELUDEFILE=""
-
+PRELUDEFILE=""
 
 #Dryad Sources
-# SOURCELIST="../../benchmarks/BenchmarksDryad/phase3invfiles"
-# SOURCEDIR="../../benchmarks/BenchmarksDryad/"
-# PRELUDEFILE="../../benchmarks/BenchmarksDryad/Vcc3Prelude.array.bpl"
+# SOURCELIST="$PREFIX/benchmarks/BenchmarksDryad/phase3invfiles"
+# SOURCEDIR="$PREFIX/benchmarks/BenchmarksDryad/"
+# PRELUDEFILE="$PREFIX/benchmarks/BenchmarksDryad/Vcc3Prelude.array.bpl"
+
+
+# ------------------------------------------------- #
+
+#Create workspace
+WORK_DIR="$SOURCEDIR/$OPTION_KEY"
+rm -rf $WORK_DIR
+
+for file in $(cat $SOURCELIST) ; 
+do
+    mkdir -p `dirname $WORK_DIR/$file` 
+    cp $SOURCEDIR/$file  $WORK_DIR/$file 
+done
+
+#else
+# WORK_DIR="$SOURCEDIR"
+
+#copy prelude file
+# WORKPRELUDEFILE=$PRELUDEFILE
+
+# ------------------------------------------------- #
 
 BOOGIE_OPT=" /doNotUseLabels  /z3opt:smt.relevancy=0  /doModSetAnalysis  /proverOpt:OPTIMIZE_FOR_BV=true "
 
@@ -35,7 +60,7 @@ BOOGIE_OPT=" /doNotUseLabels  /z3opt:smt.relevancy=0  /doModSetAnalysis  /prover
 # BOOGIE_OPT+=" /doNotUseLabels  /z3opt:smt.relevancy=0  /doModSetAnalysis "
 # BOOGIE_OPT+=" /proverOpt:OPTIMIZE_FOR_BV=true "
 # #REMOVE ERRORLIMIT
-# BOOGIE_OPT+=" /errorLimit:1 "
+# #BOOGIE_OPT+=" /errorLimit:1 "
 
 
 # Dryad Sorcar Boogie flags
@@ -45,42 +70,39 @@ BOOGIE_OPT=" /doNotUseLabels  /z3opt:smt.relevancy=0  /doModSetAnalysis  /prover
 # # BOOGIE_OPT+=" /errorLimit:1 "
 
 
-# func() {
+USUAL_OPT=" /nologo /env:2 /typeEncoding:m  /mv:-  /enhancedErrorMessages:1  /useArrayTheory /prover:SMTLib /noinfer /contractInfer /trace "
 
-OUTPUT="$PREFIX/results/variants/$OUTPUT_FILE"
-TIMEOUT="600s" 
-
+# ------------------------------------------------- #
 
 
 cd $BOOGIE_DIR
 
-for file in $(cat $SOURCELIST ) ; 
+for file in $(cat $SOURCELIST) ; 
 do 
 
 echo "#################"
 date
+echo "KEY=$OPTION_KEY"
 echo "OUTPUT=$OUTPUT"
 
 
-{  time  /usr/bin/timeout   $TIMEOUT mono ./Boogie.exe  /nologo /env:2 /typeEncoding:m  /mv:-  /enhancedErrorMessages:1  /z3exe:$PREFIX/../z3/bin/z3  /useArrayTheory /prover:SMTLib /noinfer /contractInfer /trace  /mlHoudini:sorcar /learnerOptions:"$SORCAR_OPTION"  $BOOGIE_OPT $PRELUDEFILE $SOURCEDIR/$file ;
-}
+(
+    { time  /usr/bin/timeout $TIMEOUT mono ./Boogie.exe  $USUAL_OPT /z3exe:$Z3_BIN /mlHoudini:sorcar /learnerOptions:"$SORCAR_OPTION"  $BOOGIE_OPT $PRELUDEFILE $WORK_DIR/$file ;}
+      
+    ps  | grep z3       | awk '{print $2}' | xargs --no-run-if-empty -I {} kill -9 {}
+    ps  | grep Boogie   | awk '{print $2}' | xargs --no-run-if-empty -I {} kill -9 {}
+    ps  | grep mono     | awk '{print $2}' | xargs --no-run-if-empty -I {} kill -9 {}  
+    ps  | grep timeout  | awk '{print $2}' | xargs --no-run-if-empty -I {} kill -9 {}
 
+)
 
-    echo "FILE:$file"
+echo "FILE:$file"
         
-    ps -aux | grep z3           | awk '{print $2}' | xargs --no-run-if-empty -I {} kill -9 {}
-    ps -aux | grep Boogie       | awk '{print $2}' | xargs --no-run-if-empty -I {} kill -9 {}
-    ps -aux | grep timeout      | awk '{print $2}' | xargs --no-run-if-empty -I {} kill -9 {}
-    ps -aux | grep sorcar       | awk '{print $2}' | xargs --no-run-if-empty -I {} kill -9 {}
-    ps -aux | grep mono         | awk '{print $2}' | xargs --no-run-if-empty -I {} kill -9 {}  
-
 done 2>&1 | tee $OUTPUT
 
 
-cd ../../
 
-# }
-
+# ------------------------------------------------- #
 
 # Sorcar learnerOptions
 # -a <algorithm>        Selects the learning algorithm. Valid options are:
