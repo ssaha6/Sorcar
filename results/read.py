@@ -12,10 +12,11 @@ import operator
 import logging
 
 
+POSIX_time = True
 
 
-def read_file(file, timeout_reg, timeout):
-    # all_result = []
+def read_file(file, timeout_reg, timeout, benchmark_pattern):
+    global POSIX_time
     all_result = {}
     all_files = [] 
     with open (file, 'r' ) as f:
@@ -27,12 +28,9 @@ def read_file(file, timeout_reg, timeout):
         logging.info( file + ": #res = " + str(len(seperate_files)))
         
         for output in seperate_files:
-
-            try:#../BenchmarksCompiled/./polybench/datamining/covariance/kernel3.bpl.ice2.bpl
-
-                ##change: dependent
-                # filename = re.search('Parsing (.+)BenchmarksCompiled\/(.*)', output).group(2).strip()
-                filename = re.search('Parsing (.+)phase3\/(.*)', output).group(2).strip()
+            
+            try:
+                filename = re.search(benchmark_pattern, output).group(2).strip()
                 all_files.append(filename)
                 # print filename
             except:
@@ -40,10 +38,13 @@ def read_file(file, timeout_reg, timeout):
                 
 
             time = 0.0
-            status = ""
-            timereg = re.search('real\s+([0-9]+)m([0-9]*\.?[0-9]*)s', output, re.IGNORECASE)
-            # rounds = re.findall('ROUND ([0-9]*)',output)
-            
+            status = ""           
+           
+            if POSIX_time:
+                timereg = re.search('real\s+([0-9]+)m([0-9]*\.?[0-9]*)s', output, re.IGNORECASE)
+            else: 
+                timereg = re.search('([0-9]{1,2})\:([0-9]{2}\.[0-9]+)elapsed', output, re.IGNORECASE)
+                
 
             #looks ok
             if re.search('Boogie program verifier finished with [1-9] verified, 0 error', output, re.IGNORECASE) != None:
@@ -76,7 +77,7 @@ def read_file(file, timeout_reg, timeout):
             
             #looks ok
             ##change :dependent
-            elif re.search('real\s*' + timeout_reg, output, re.IGNORECASE) != None:
+            elif re.search(timeout_reg, output, re.IGNORECASE) != None:
 
                 ##change dependent
                 status = "timeout"
@@ -116,10 +117,7 @@ def read_file(file, timeout_reg, timeout):
                 final_pred = all_pred[-1]
                 num_final_pred = len(re.findall('b[0-9]{4}',final_pred))
 
-                
 
-            # element = {"filename": filename, "status": status, "time": time, "num_predicates":num_predicates, "num_rounds": num_rounds, "prover_time":prover_time }
-            # all_result.append(element)
             all_result[filename.strip()] = {"status": status, "time": time, "num_predicates":num_predicates, "final_pred":num_final_pred, "num_rounds": num_rounds, "prover_time":prover_time }
             
 
@@ -127,86 +125,106 @@ def read_file(file, timeout_reg, timeout):
 
 
 
-def print_files(file_list, timeout_pattern, timeout):
+def print_files(file_list, timeout_pattern, timeout, benchmark_pattern):
 
+    global POSIX_time
 
-    #Get all results
-    read_list = list(map(lambda x: read_file(x, timeout_pattern.strip(), timeout), file_list))
+    read_list = {}
+    union_of_files = []
+    for file_name in file_list:
+        read_list[file_name] = read_file(file_name, timeout_pattern.strip(), timeout, benchmark_pattern)
+        union_of_files = list(set(union_of_files) | set(read_list[file_name].keys()))
    
-   #create list of files
-    union_of_files = sorted(reduce(lambda x,y: set(x).union(set(y)), 
-                                   list(map(lambda x: x.keys(), read_list))
-                                   ),
-                            key=lambda z: z.lower())
+    union_of_files.sort()
+
 
 
     #create headings
     file_heading = "files:, "
     attribute_heading = "file, "
 
-    for (file, file_name) in zip(read_list, file_list):
-        for attribute in file[union_of_files[0]].keys():
-            if attribute == "status":
+    attributes = read_list[file_list[0]][union_of_files[0]].keys()
+    for file_name in file_list:
+        for attr in attributes: 
+            attribute_heading += attr + ", "
+            if attr == "status":
                 file_heading += file_name + ", "
             else :
                 file_heading += ", "
-            attribute_heading += attribute + ", "
+                
 
     print file_heading
     print attribute_heading
-
+    
 
     #print values
     for benchmark in union_of_files:
         print benchmark, ",", 
 
-        for file in read_list:
-            for attribute in file[benchmark].keys():
-                if file[benchmark][attribute]:
-                    print file[benchmark][attribute]  , "," , 
-                else :
-                    print " " , "," , 
+        for file_name in file_list:
+            for attr in attributes:
+                try : 
+                    print read_list[file_name][benchmark][attr], ",",
+                except :
+                    print " ," , 
 
         print ""
 
 
 
-# def create_combinations():
-# 
-#     algorithms =            ["sorcar_all", "sorcar_greedy"] # 'houdini',, sorcar_sat
-#     houdini_first_round =   ["true", "false"]
-#     reset_R =               ["true", "false"]
-#     alternate =             ["true", "false"]
-# 
-#     filename = []
-#     for algo_opt in algorithms:
-#         for h_opt in houdini_first_round:
-#             for r_opt in reset_R:
-#                 for alt_opt in alternate:
-#                     filename.append(algo_opt + "_" + h_opt + "_" + r_opt + "_" + alt_opt + ".txt")
-# 
-#     return filename
-
-
-
 def main():
-    # if len(sys.argv) <= 1: 
-    #     sys.exit(2)
-    # files = list(map(lambda x: x.strip(), sys.argv))[1:]
-    # files = create_combinations()
     
-    # files = ['gpuverify_sorcar.txt']
-    files = ['dryad_sorcar.txt', 'dryad_abshoudini_int.txt']
-    
-    timeout_pattern = '10m0\.[0-9]*s'
+
+    files = ['variants/asorcar.txt',
+        'variants/asorcarf.txt',
+        'variants/asorcart.txt',
+        'variants/asorcarr.txt',
+        'variants/asorcarft.txt',
+        'variants/asorcarfr.txt',
+        'variants/asorcartr.txt',
+        'variants/asorcarftr.txt',
+        'variants/asorcarfirst.txt',
+        'variants/asorcarfirstf.txt',
+        'variants/asorcarfirstt.txt',
+        'variants/asorcarfirstr.txt',
+        'variants/asorcarfirstft.txt',
+        'variants/asorcarfirstfr.txt',
+        'variants/asorcarfirsttr.txt',
+        'variants/asorcarfirstftr.txt',
+        'variants/ahorndini.txt',
+        'variants/ahorndinif.txt',
+        'variants/ahorndinit.txt',
+        'variants/ahorndinir.txt',
+        'variants/ahorndinift.txt',
+        'variants/ahorndinifr.txt',
+        'variants/ahorndinitr.txt',
+        'variants/ahorndiniftr.txt']
+            
+    global POSIX_time    
+    POSIX_time = False
     timeout = 600
-    print_files(files, timeout_pattern, timeout)
     
-    # print read_file('SorcarHorn.txt', timeout_pattern.strip(), timeout)
+    if POSIX_time:
+        timeout_pattern = 'real\s*600[0-9\.\:]+'
+    else :
+        timeout_pattern = '10\:[0-9]{2}\.[0-9]+elapsed'
+    
+    
+    # benchmark_pattern = 'Parsing (.+)BenchmarksCompiled\/(.*)' 
+    # '../BenchmarksCompiled/./polybench/datamining/covariance/kernel3.bpl.ice2.bpl'
+    
+    benchmark_pattern = 'Parsing (.+)BenchmarksCompiled\/a(?:sorcar|sorcarfirst|horndini)(?:(?:f|t|r)*)\/(.*)'
+    # '/dev/shm/neider/gv//benchmarks/BenchmarksCompiled/ahorndini/CUDA50/6_Advanced/eigenvalues/_bisect_kernel_small.bpl.ice2.bpl'
+    
+      
+    print_files(files, timeout_pattern, timeout, benchmark_pattern)
+
+    print POSIX_time
+
 
 
 if __name__== "__main__":
-  main()
+    main()
 
 
 #other regex patterns
