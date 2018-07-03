@@ -87,18 +87,21 @@ echo "OUTPUT=$OUTPUT"
 
 
 (
-    { time  /usr/bin/timeout $TIMEOUT mono ./Boogie.exe  $USUAL_OPT /z3exe:$Z3_BIN /mlHoudini:sorcar /learnerOptions:"$SORCAR_OPTION"  $BOOGIE_OPT $PRELUDEFILE $WORK_DIR/$file ;}
-      
-    ps  | grep z3       | awk '{print $2}' | xargs --no-run-if-empty -I {} kill -9 {}
-    ps  | grep Boogie   | awk '{print $2}' | xargs --no-run-if-empty -I {} kill -9 {}
-    ps  | grep mono     | awk '{print $2}' | xargs --no-run-if-empty -I {} kill -9 {}  
-    ps  | grep timeout  | awk '{print $2}' | xargs --no-run-if-empty -I {} kill -9 {}
-
+    time  /usr/bin/timeout $TIMEOUT mono ./Boogie.exe  $USUAL_OPT /z3exe:$Z3_BIN /mlHoudini:sorcar /learnerOptions:"$SORCAR_OPTION"  $BOOGIE_OPT $PRELUDEFILE $WORK_DIR/$file ;
 )
+
+      
+    # ps  | grep z3       | awk '{print $1}' | xargs --no-run-if-empty -I {} kill -9 {}
+    # ps  | grep Boogie   | awk '{print $1}' | xargs --no-run-if-empty -I {} kill -9 {}
+    # ps  | grep mono     | awk '{print $1}' | xargs --no-run-if-empty -I {} kill -9 {}  
+    # ps  | grep timeout  | awk '{print $1}' | xargs --no-run-if-empty -I {} kill -9 {}
+
+
 
 echo "FILE:$file"
         
 done 2>&1 | tee $OUTPUT
+
 
 
 
