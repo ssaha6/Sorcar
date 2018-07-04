@@ -1,0 +1,6 @@
+llvm      : 3238:262542
+bugle     : eb1cbc0009ba2aeebc5e990b9c92017a56ec88e1
+libclc    : 147756:260304
+gpuverify : 53baaaf712d17a30c00c181a34ecb90f730358ab
+z3        : 95c9ccb2959abb46c553ec72731cd75358b80138
+cvc4      : 2cf533e6d7f459484786db9e242bb2e97bab4db0
