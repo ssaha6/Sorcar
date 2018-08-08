@@ -118,7 +118,38 @@ def read_file(file, timeout_reg, timeout, benchmark_pattern):
                 num_final_pred = len(re.findall('b[0-9]{4}',final_pred))
 
 
-            all_result[filename.strip()] = {"status": status, "time": time, "num_predicates":num_predicates, "final_pred":num_final_pred, "num_rounds": num_rounds, "prover_time":prover_time }
+            num_pos_example = 0  
+            try: 
+                num_pos_example = int(re.search('Number of positive examples:([0-9]+)', output, re.IGNORECASE).group(1).strip())
+            except:
+                pass
+                
+                
+            num_neg_example = 0
+            try: 
+                num_neg_example = int(re.search('Number of negative examples:([0-9]+)', output, re.IGNORECASE).group(1).strip())
+            except:
+                pass
+
+
+            num_horn_example = 0
+            try:
+                num_horn_example = int(re.search('Number of Horn clauses:([0-9]+)', output, re.IGNORECASE).group(1).strip())
+            except:
+                pass
+
+            all_result[filename.strip()] = {"status": status, 
+                                        "time": time, 
+                                        "num_predicates":num_predicates, 
+                                        "final_pred":num_final_pred, 
+                                        "num_rounds": num_rounds, 
+                                        "prover_time":prover_time , 
+                                        "num_pos": num_pos_example, 
+                                        "num_neg": num_neg_example, 
+                                        "num_horn": num_horn_example 
+                                        }
+
+            # all_result[filename.strip()] = {"status": status, "time": time, "num_predicates":num_predicates, "final_pred":num_final_pred, "num_rounds": num_rounds, "prover_time":prover_time }
             
 
     return all_result
