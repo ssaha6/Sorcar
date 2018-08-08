@@ -36,5 +36,10 @@ BenchmarksCompiled/asorcar
 */BenchmarksCompiled/ahorndinitr
 */BenchmarksCompiled/ahorndiniftr
 /results/variants
-res.csv
-res1.csv
+res*.csv
+houdiniCexTrace*.*
+*.bc
+*.cbpl
+*.gbpl
+*.loc
+*.opt.bc
