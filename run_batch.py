@@ -33,7 +33,7 @@ def all_subsets(ss):
 
 
 
-algorithms = ["sorcar", "sorcar-first", "horndini"] 
+algorithms = ["horndini", "sorcar", "sorcar-first", "sorcar-greedy", "sorcar-minimal"]
 options    = [ "f", "t", "r"]
 
 
@@ -50,13 +50,9 @@ def create_options():
 
 
 for (option,file) in create_options():
-    command = "sh run.sh \"" + option + "\" \"" + file + "\""
-    print(str(now))
-    print(command)
-    try:
-        subprocess.check_output(command, shell=True)    
-    except:
-        pass
+    command = "sh run.sh \"" + option + "\" & " 
+    # subprocess.check_output(command, shell=True)
+    print(command)    
 
 # command = "sh run.sh \"-a sorcar -t  -r \" \"sorcar_tr.txt\"" 
 # print(str(now))
