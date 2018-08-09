@@ -42,3 +42,5 @@ sh run.sh "-a sorcar-minimal -f  -t " &
 sh run.sh "-a sorcar-minimal -f  -r " &                                                                                                                                             
 sh run.sh "-a sorcar-minimal -t  -r " &                                                                                                                                             
 sh run.sh "-a sorcar-minimal -f  -t  -r " &      
+mkdir -p results/variants2
+
