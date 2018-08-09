@@ -1,3 +1,5 @@
+mkdir -p results/variants2
+
 sh run.sh "-a horndini " &                                                                                                                                                          
 sh run.sh "-a horndini -f " &                                                                                                                                                       
 sh run.sh "-a horndini -t " &                                                                                                                                                       
@@ -42,5 +44,3 @@ sh run.sh "-a sorcar-minimal -f  -t " &
 sh run.sh "-a sorcar-minimal -f  -r " &                                                                                                                                             
 sh run.sh "-a sorcar-minimal -t  -r " &                                                                                                                                             
 sh run.sh "-a sorcar-minimal -f  -t  -r " &      
-mkdir -p results/variants2
-
