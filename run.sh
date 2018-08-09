@@ -10,10 +10,10 @@ export LD_LIBRARY_PATH=../../z3/bin:$LD_LIBRARY_PATH
 
 
 BOOGIE_DIR="$PREFIX/boogie_horn_sorcar_false/Binaries/"
-Z3_BIN="$PREFIX/../z3/z3-ubuntu/build/z3"
+Z3_BIN="$PREFIX/z3/bin/z3"
 
-OUTPUT="$PREFIX/results/variants/$OPTION_KEY.txt"
-TIMEOUT="10s" 
+OUTPUT="$PREFIX/results/variants2/$OPTION_KEY.txt"
+TIMEOUT="600s" 
 
 # ------------------------------------------------- #
 
