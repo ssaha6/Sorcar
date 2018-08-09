@@ -5,8 +5,9 @@ SORCAR_OPTION=$1
 OPTION_KEY=`echo $SORCAR_OPTION | sed -e 's/[ -]//g'`
 
 # ------------------------------------------------- #
+PREFIX=`pwd`
+export LD_LIBRARY_PATH=../../z3/bin:$LD_LIBRARY_PATH
 
-PREFIX=/mnt/d/Docker
 
 BOOGIE_DIR="$PREFIX/boogie_horn_sorcar_false/Binaries/"
 Z3_BIN="$PREFIX/../z3/z3-ubuntu/build/z3"
