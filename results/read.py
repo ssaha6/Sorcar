@@ -13,7 +13,7 @@ import logging
 import pickle
 import warnings
 import xlsxwriter
-
+from collections import OrderedDict
 
 POSIX_time = True
 
@@ -42,7 +42,7 @@ def read_gpuverify_file(file, timeout, benchmark_pattern):
         for output in seperate_files:
 
             try:
-                filename = re.search('FILE: (.*)', output).group(1).strip()
+                filename = re.search('FILE: (.*)(?:(?:\.cu)|(?:\.cl))', output).group(1).strip()
                 all_files.append(filename)
                 # print filename
             except:
@@ -299,7 +299,8 @@ def print_result(read_list, union_of_files, file_list):
     file_heading = "files:, "
     attribute_heading = "file, "
 
-    attributes = read_list[next(iter(read_list))][union_of_files[0]].keys()
+    # attributes = read_list[next(iter(read_list))][union_of_files[0]].keys()
+    attributes = ['status', 'num_pos', 'num_neg', 'num_horn', 'num_predicates', 'final_pred', 'num_rounds', 'prover_time', 'time' ]
     for file_name in file_list:
         for attr in attributes: 
             attribute_heading += attr + ", "
@@ -337,7 +338,7 @@ def print_result(read_list, union_of_files, file_list):
 # -------------------
 
 
-def analyze(read_list, union_of_files, file_list):
+def analyze(read_list, union_of_files, file_list, write_workbook=False):
     # First, It would be good to have a few numbers for all variants, such as
     # total number of timeouts, average time on all terminating benchmarks, average number of predicates on all terminating benchmarks.
     # For the five or so best variants, perhaps we can have a more detailed analysis. Maybe we should briefly talk about that?
@@ -352,6 +353,7 @@ def analyze(read_list, union_of_files, file_list):
         num_timeout = 0 
         num_success = 0
         num_failure = 0
+        num_neg = 0
 
         total_time_success = 0.0
         avg_time_success = 0.0
@@ -366,6 +368,7 @@ def analyze(read_list, union_of_files, file_list):
             
             status = read_list[variants][file]['status']
             total_time += read_list[variants][file]['time']
+            num_neg = num_neg + read_list[variants][file]['num_neg']
 
             if status == 'timeout': 
                 num_timeout = num_timeout +1
@@ -396,6 +399,7 @@ def analyze(read_list, union_of_files, file_list):
                             'num_failure': num_failure, 
                             'total_pred_success': total_pred_success,
                             'avg_pred_success': avg_pred_success,
+                            'num_neg': num_neg, 
                             'total_time_success': total_time_success,
                             'avg_time_success': avg_time_success, 
                             'total_time_succ_timeout': timeout_succ_time,
@@ -404,32 +408,32 @@ def analyze(read_list, union_of_files, file_list):
                             'avg_time': avg_time
                             }
     
+    sorted_files = map(lambda y: y[0], sorted(result.items(), key= lambda x: x[1]['avg_time_success']))
+    
 
-
-
-
-
-    workbook = xlsxwriter.Workbook('File.xlsx')
-    worksheet = workbook.add_worksheet()
-    row = 0
-    header = True
-    for key in result.keys():
-        col = 0
-        if header: 
-             worksheet.write(row, col,'file')
-        row += 1
-        worksheet.write(row, col, key)
-        # for item in result[key]:
-        for item in ['num_success', 'num_failure', 'num_timeout', 'total_pred_success', 'avg_pred_success', 'total_time_success', 'avg_time_success', 'total_time_succ_timeout', 'avg_time_succ_timeout', 'total_time', 'avg_time']:
-            col += 1
+    if write_workbook: 
+        workbook = xlsxwriter.Workbook('File.xlsx')
+        worksheet = workbook.add_worksheet()
+        row = 0
+        header = True
+        # for key in result.keys():
+        for key in sorted_files: 
+            col = 0
             if header: 
-                worksheet.write(row-1, col, item)
-            worksheet.write(row, col, result[key][item])
-        header = False
+                 worksheet.write(row, col,'file')
+            row += 1
+            worksheet.write(row, col, key)
+            # for item in result[key]:
+            for item in ['num_success', 'num_failure', 'num_timeout', 'total_pred_success', 'avg_pred_success', 'num_neg', 'total_time_success', 'avg_time_success', 'total_time_succ_timeout', 'avg_time_succ_timeout', 'total_time', 'avg_time']:
+                col += 1
+                if header: 
+                    worksheet.write(row-1, col, item)
+                worksheet.write(row, col, result[key][item])
+            header = False
 
-    workbook.close()
+        workbook.close()
 
-
+    return sorted_files
 
 
 def main():
@@ -494,7 +498,7 @@ def main():
     # benchmark_pattern = 'Parsing (.+)BenchmarksCompiled\/(.*)' 
     # '../BenchmarksCompiled/./polybench/datamining/covariance/kernel3.bpl.ice2.bpl'
     
-    benchmark_pattern = 'Parsing (.+)BenchmarksCompiled\/a(?:sorcar|sorcarfirst|horndini|sorcargreedy|sorcarminimal)(?:(?:f|t|r)*)\/(.*)'
+    benchmark_pattern = 'Parsing (.+)BenchmarksCompiled\/a(?:sorcar|sorcarfirst|horndini|sorcargreedy|sorcarminimal)(?:(?:f|t|r)*)\/(.*)(?:\.bpl\.ice2\.bpl)'
     # '/dev/shm/neider/gv//benchmarks/BenchmarksCompiled/ahorndini/CUDA50/6_Advanced/eigenvalues/_bisect_kernel_small.bpl.ice2.bpl'
     ##############SETTINGS##############
 
@@ -502,15 +506,17 @@ def main():
     ##############LOAD DATA##############
     # read_list = read_all_files(files, timeout, benchmark_pattern, write_pickle=True)
     # union_of_files = compute_union_of_files(read_list,  write_pickle=True)
-    # print_result(read_list, union_of_files)
+    # print_result(read_list, union_of_files, files)
 
     read_list = read_pickle('read_list.pickle')
     union_of_files = read_pickle('union_of_files.pickle')
-    # print_result(read_list, union_of_files, files)
+    sorted_files = analyze(read_list, union_of_files, files, write_workbook=True)
+
+    print_result(read_list, union_of_files, sorted_files)
     ##############LOAD DATA##############
 
 
-    analyze(read_list, union_of_files, files)
+   
 
 
 
