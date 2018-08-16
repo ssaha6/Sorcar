@@ -17,7 +17,8 @@ import xlsxwriter
 
 POSIX_time = True
 
-def write_pickle(structure, file_name):
+
+def write_to_pickle(structure, file_name):
     with open(file_name, 'wb') as handle:
         pickle.dump(structure, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
@@ -26,9 +27,93 @@ def read_pickle(file_name):
         structure = pickle.load(handle)
         return structure
 
+def read_gpuverify_file(file, timeout, benchmark_pattern):
+    POSIX_time = True
+    all_result = {}
+    all_files = [] 
+    with open (file, 'r' ) as f:
+        content = f.read()
+
+        seperate_files = content.split("#################")
+
+        logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
+        logging.info( file + ": #res = " + str(len(seperate_files)))
+        
+        for output in seperate_files:
+
+            try:
+                filename = re.search('FILE: (.*)', output).group(1).strip()
+                all_files.append(filename)
+                # print filename
+            except:
+                continue
+                
+
+            time = 0.0
+            status = ""
 
 
-def read_file(file, timeout_reg, timeout, benchmark_pattern):
+            if POSIX_time:
+                timereg = re.search('real\s+([0-9]+)m([0-9]*\.?[0-9]*)s', output, re.IGNORECASE)
+                timeout_pattern = 'real\s*10m[0-9\.\:]+s'
+            else:
+                timereg = re.search('([0-9]{1,2})\:([0-9]{2}\.[0-9]+)elapsed', output, re.IGNORECASE)
+                timeout_pattern = '10\:[0-9]{2}\.[0-9]+elapsed'
+
+        
+
+            #GPUVerify kernel analyser finished with 1 verified, 0 errors
+            if re.search('GPUVerify kernel analyser finished with [1-9]+ verified, 0 error', output, re.IGNORECASE) != None:
+                status = "nontrivialsuccess"
+                if timereg:
+                    time = round(float(timereg.group(1))*60+float(timereg.group(2)),1)
+            
+            elif re.search('GPUVerify kernel analyser finished with 0 verified', output, re.IGNORECASE) != None:
+                status = "nontrivialfailure"
+                if timereg:
+                    time = round(float(timereg.group(1))*60+float(timereg.group(2)),1)
+                    
+            elif re.search(timeout_pattern, output, re.IGNORECASE) != None:
+                status = "timeout"
+                time = timeout
+
+            else:
+                status = "unknown"
+                if timereg:
+                    time = round(float(timereg.group(1))*60+float(timereg.group(2)), 1)
+                
+                
+            num_predicates = 0 
+            num_final_pred = 0 
+            num_rounds = 0
+            
+            all_rounds = re.findall('Houdini assignment axiom:.*\)', output, re.IGNORECASE)
+            if all_rounds:
+                num_rounds = len(all_rounds)
+                final_round = all_rounds[-1]
+                num_predicates = len(re.findall('_b[0-9]+', final_round, re.IGNORECASE))
+                num_pred_dropped = len(re.findall('!', final_round, re.IGNORECASE))
+                num_final_pred = num_predicates - num_pred_dropped
+
+
+            all_result[filename.strip()] = {"status": status, 
+                                            "time": time, 
+                                            "num_predicates":num_predicates, 
+                                            "final_pred":num_final_pred, 
+                                            "num_rounds": num_rounds,
+                                            "prover_time": 0,
+                                            "num_pos": 0,
+                                            "num_neg": 0,
+                                            "num_horn": 0
+                                            }
+
+
+    return all_result
+
+
+
+
+def read_file(file, timeout, benchmark_pattern):
     global POSIX_time
     all_result = {}
     all_files = [] 
@@ -55,9 +140,12 @@ def read_file(file, timeout_reg, timeout, benchmark_pattern):
            
             if POSIX_time:
                 timereg = re.search('real\s+([0-9]+)m([0-9]*\.?[0-9]*)s', output, re.IGNORECASE)
-            else: 
+                timeout_pattern = 'real\s*10m[0-9\.\:]+s'
+            else:
                 timereg = re.search('([0-9]{1,2})\:([0-9]{2}\.[0-9]+)elapsed', output, re.IGNORECASE)
-                
+                timeout_pattern = '10\:[0-9]{2}\.[0-9]+elapsed'
+
+
 
             #looks ok
             if re.search('Boogie program verifier finished with [1-9] verified, 0 error', output, re.IGNORECASE) != None:
@@ -79,18 +167,24 @@ def read_file(file, timeout_reg, timeout, benchmark_pattern):
             #looks ok
             elif re.search('runtime', output, re.IGNORECASE) != None:
                 status = "runtime"
+                if timereg:
+                    time = round(float(timereg.group(1))*60+float(timereg.group(2)), 1)
             
             #(are mostly covered by rnutime .. so none here)
             elif re.search('Negative datapoint [0-9]+ does satisfy conjunction', output, re.IGNORECASE) != None:
                 status = "exception"
+                if timereg:
+                    time = round(float(timereg.group(1))*60+float(timereg.group(2)), 1)
             
             ##non-runtime exception... moemory.. 
             elif re.search('Unhandled Exception', output,re.IGNORECASE) != None:
                 status = "exception"
+                if timereg:
+                    time = round(float(timereg.group(1))*60+float(timereg.group(2)), 1)
             
             #looks ok
             ##change :dependent
-            elif re.search(timeout_reg, output, re.IGNORECASE) != None:
+            elif re.search(timeout_pattern, output, re.IGNORECASE) != None:
 
                 ##change dependent
                 status = "timeout"
@@ -100,10 +194,14 @@ def read_file(file, timeout_reg, timeout, benchmark_pattern):
             #parsing error.. variable not declared.. 
             elif re.search('error', output, re.IGNORECASE) != None:
                 status = "error"
+                if timereg:
+                    time = round(float(timereg.group(1))*60+float(timereg.group(2)), 1)
             
             #no unknowns
             else:
                 status = "unknown"
+                if timereg:
+                    time = round(float(timereg.group(1))*60+float(timereg.group(2)), 1)
 
 
             num_predicates = 0
@@ -168,15 +266,16 @@ def read_file(file, timeout_reg, timeout, benchmark_pattern):
     return all_result
 
 
-def read_all_files(file_list, timeout_pattern, timeout, benchmark_pattern, write_pickle=True):
-    global POSIX_time
-
+def read_all_files(file_list, timeout, benchmark_pattern, write_pickle=True):
     read_list = {}
     for file_name in file_list:
-        read_list[file_name] = read_file(file_name, timeout_pattern.strip(), timeout, benchmark_pattern)
+        if file_name == "vanila_gpuverify.txt":
+            read_list[file_name] = read_gpuverify_file(file_name, timeout, benchmark_pattern)
+        else: 
+            read_list[file_name] = read_file(file_name, timeout, benchmark_pattern)
 
     if write_pickle:
-        write_pickle(read_list, 'read_list.pickle')
+        write_to_pickle(read_list, 'read_list.pickle')
         
     return read_list
 
@@ -189,7 +288,7 @@ def compute_union_of_files(read_list, write_pickle=True):
     union_of_files.sort()
 
     if write_pickle:
-        write_pickle(union_of_files, 'union_of_files.pickle')
+        write_to_pickle(union_of_files, 'union_of_files.pickle')
 
     return union_of_files
 
@@ -200,7 +299,7 @@ def print_result(read_list, union_of_files, file_list):
     file_heading = "files:, "
     attribute_heading = "file, "
 
-    attributes = read_list[file_list[0]][union_of_files[0]].keys()
+    attributes = read_list[next(iter(read_list))][union_of_files[0]].keys()
     for file_name in file_list:
         for attr in attributes: 
             attribute_heading += attr + ", "
@@ -239,14 +338,17 @@ def print_result(read_list, union_of_files, file_list):
 
 
 def analyze(read_list, union_of_files, file_list):
-# First, It would be good to have a few numbers for all variants, such as
-# total number of timeouts, average time on all terminating benchmarks, average number of predicates on all terminating benchmarks.
-# For the five or so best variants, perhaps we can have a more detailed analysis. Maybe we should briefly talk about that?
+    # First, It would be good to have a few numbers for all variants, such as
+    # total number of timeouts, average time on all terminating benchmarks, average number of predicates on all terminating benchmarks.
+    # For the five or so best variants, perhaps we can have a more detailed analysis. Maybe we should briefly talk about that?
 
-# The higher order bit for me is whether any variant beats houduni convincingly.
-# So do tell us the aggregated statistics as Daniel says for each variant, including houdini. Also include total time taken on all benchmarks.
+    # The higher order bit for me is whether any variant beats houduni convincingly.
+    # So do tell us the aggregated statistics as Daniel says for each variant, including houdini. Also include total time taken on all benchmarks.
     result = {}
-    for variants in read_list.keys():
+    for variants in file_list:
+        if variants not in read_list.keys():
+            continue
+        
         num_timeout = 0 
         num_success = 0
         num_failure = 0
@@ -254,12 +356,14 @@ def analyze(read_list, union_of_files, file_list):
         total_time_success = 0.0
         avg_time_success = 0.0
         total_pred_success = 0
-        avg_num_pred_success = 0
+        avg_pred_success = 0.0
         total_time = 0.0
-        
+        timeout_succ_time = 0.0
+        avg_timeout_succ_time = 0.0
+        avg_time = 0.0
 
         for file in read_list[variants].keys():
-    
+            
             status = read_list[variants][file]['status']
             total_time += read_list[variants][file]['time']
 
@@ -271,21 +375,38 @@ def analyze(read_list, union_of_files, file_list):
                 total_time_success = total_time_success + read_list[variants][file]['time']
                 total_pred_success = total_pred_success + read_list[variants][file]['final_pred']
 
-            elif status == 'nontrivialfailure' or status == 'exception' or status == 'error' or status == 'runtime':
+            elif status == 'nontrivialfailure' or status == 'exception' or status == 'error' or status == 'runtime' or status == 'unknown':
                 num_failure = num_failure + 1
+            
+            else :
+                raise
 
-        avg_time_success = total_time_success / num_success
-        avg_num_pred_success = total_pred_success / num_success
+
+            if status == 'timeout' or status == 'trivialsuccess' or status == 'nontrivialsuccess':
+                timeout_succ_time = timeout_succ_time + read_list[variants][file]['time']
+
+
+        avg_time_success = round(total_time_success / num_success, 1)
+        avg_pred_success = round(float(total_pred_success) / num_success, 1)
+        avg_timeout_succ_time = round( timeout_succ_time / (num_timeout + num_success ), 1)
+        avg_time = round( total_time / (num_timeout + num_success + num_failure), 1)
 
         result[variants] = {'num_timeout': num_timeout,
                             'num_success': num_success, 
                             'num_failure': num_failure, 
+                            'total_pred_success': total_pred_success,
+                            'avg_pred_success': avg_pred_success,
                             'total_time_success': total_time_success,
                             'avg_time_success': avg_time_success, 
-                            'total_pred_success': total_pred_success,
-                            'avg_num_pred_success': avg_num_pred_success,
-                            'total_time': total_time
+                            'total_time_succ_timeout': timeout_succ_time,
+                            'avg_time_succ_timeout': avg_timeout_succ_time,
+                            'total_time': total_time,
+                            'avg_time': avg_time
                             }
+    
+
+
+
 
 
     workbook = xlsxwriter.Workbook('File.xlsx')
@@ -298,7 +419,8 @@ def analyze(read_list, union_of_files, file_list):
              worksheet.write(row, col,'file')
         row += 1
         worksheet.write(row, col, key)
-        for item in result[key]:
+        # for item in result[key]:
+        for item in ['num_success', 'num_failure', 'num_timeout', 'total_pred_success', 'avg_pred_success', 'total_time_success', 'avg_time_success', 'total_time_succ_timeout', 'avg_time_succ_timeout', 'total_time', 'avg_time']:
             col += 1
             if header: 
                 worksheet.write(row-1, col, item)
@@ -312,8 +434,7 @@ def analyze(read_list, union_of_files, file_list):
 
 def main():
     
-
-    files = [
+    files = ["vanila_gpuverify.txt",
             "variants2/ahorndini.txt",
             "variants2/ahorndinif.txt",
             "variants2/ahorndinit.txt",
@@ -362,10 +483,7 @@ def main():
     POSIX_time = False
     timeout = 600
     
-    if POSIX_time:
-        timeout_pattern = 'real\s*600[0-9\.\:]+'
-    else :
-        timeout_pattern = '10\:[0-9]{2}\.[0-9]+elapsed'
+
     
     #other regex patterns
     #'5m[\.0-9]*s'
@@ -382,7 +500,7 @@ def main():
 
 
     ##############LOAD DATA##############
-    # read_list = read_all_files(files, timeout_pattern, timeout, benchmark_pattern, write_pickle=True)
+    # read_list = read_all_files(files, timeout, benchmark_pattern, write_pickle=True)
     # union_of_files = compute_union_of_files(read_list,  write_pickle=True)
     # print_result(read_list, union_of_files)
 
