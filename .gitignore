@@ -12,5 +12,11 @@ benchmarks/**/*.R
 benchmarks/**/*.horn
 benchmarks/**/*.intervals
 benchmarks/**/*.status
+benchmarks/**/*.cbpl
+benchmarks/**/*.bc
+benchmarks/**/*.gbpl
+benchmarks/**/*.loc
+benchmarks/**/*.json
+benchmarks/**/*.statistics
 .vscode
 houdiniCexTrace*.*

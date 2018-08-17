@@ -63,7 +63,7 @@ with open (file, 'r' ) as f:
         #syntax of assert: assert Attribute* Expression, Atrribute= {: expr|string }
         #for all row in matched, 
         #row[0] = (\{:.*\}) can be discarded  
-        #row[1] = (.*), whatever comes before _bxx.. might be another implication pi ==> _bi.. 
+        #row[1] = (.*), whatever comes before _bxx.. might be another implication (pi ==> ) _bi.. 
         #row[2] = ([0-9]{0,4}), _b index number
         #row[3] = (.*);, the right hand side expression of the implication
         
@@ -73,12 +73,12 @@ with open (file, 'r' ) as f:
         
             
         # rule 1
-        # (( bi => x) and ( bi => y)) <=> ( bi => (x and y))
+        # (( bi => x) and ( bi => y)) <=> ( bi => (x and y)):tautology checked
         for row in matched:
             # if indexed row has not been seen before       
             if indexed.get(row[2]) == None:  
                 # rule 2 
-                # transform (p => bi => expr) to (bi => p => expr)
+                # transform (p => bi => expr) to (bi => p => expr): tautology checked
                 # if the expression before the bi is not empty, 
                 # then assuming it is of the form, p => .. save the expression of bi as (p => expr)  
                 indexed[row[2]] =  ' ( ' + row[1].strip() + ' ' + row[3].strip() + ' ) '
@@ -86,6 +86,8 @@ with open (file, 'r' ) as f:
                 
             else:
                 # if bi is seen before
+                # row[1] contains: "pi ==>"" 
+                # (( bi => x) and ( bi => y)) <=> ( bi => (x and y)):tautology checked
                 indexed[row[2]] = indexed[row[2]] + ' && ( ' + row[1].strip() + ' ' + row[3].strip() + ' ) '
                 #then save the and of, the past expression with this expression. 
                 
@@ -100,7 +102,7 @@ with open (file, 'r' ) as f:
         # the maximum index of the bi indexes. Can be combined with the sorted_index 
         # ?????? need to change.. global maximum.. maximum of earlier maximum and local maxima
         maxinv = max(int(max(sorted_indexed,key = lambda p: int(p[0]))[0]), int(maxinv))
-        
+        # Does this need to be max inv +1? 
         
         # # make a dictionary from the indexed expressions
         # # assuming invariants in groups are disjoint
@@ -133,26 +135,26 @@ with open (file, 'r' ) as f:
         
         # sys.exit()
         
-        pred_assignment = ''
-        new_inv = 'assert  my_inv ( '
+        # pred_assignment = ''
+        # new_inv = 'assert  my_inv ( '
         inv     = 'assert  my_inv ( '
-        for j in range(0,int(maxinv) + 1) :      
+        for j in range(0,int(maxinv) + 1) :
             if j != 0: 
                 inv += ', '
-                new_inv += ', '
+                # new_inv += ', '
             if  str(j) in domains: 
                     inv += str(global_dict[int(i)]['dict'][str(j)])
-                    pred_assignment += ' xy' + str(j).zfill(4) + ' := ' + str(global_dict[int(i)]['dict'][str(j)]) + ' ;\n' ; 
-                    new_inv += ' xy' + str(j).zfill(4)
+                    # pred_assignment += ' xy' + str(j).zfill(4) + ' := ' + str(global_dict[int(i)]['dict'][str(j)]) + ' ;\n' ; 
+                    # new_inv += ' xy' + str(j).zfill(4)
             else:
                     inv += ' true '   
-                    new_inv += ' true '
+                    # new_inv += ' true '
         
         inv = inv + ' ); \n'           
-        new_inv += ' ); \n'
-        
+        # new_inv += ' ); \n'
         # inv = inv + ' ); \n' + str(global_dict[int(i)]['assertion'])
         
+
         
         
         index = -1        
