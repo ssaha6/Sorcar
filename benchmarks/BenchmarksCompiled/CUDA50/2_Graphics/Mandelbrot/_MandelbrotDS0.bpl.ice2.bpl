@@ -212,7 +212,7 @@ var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 32} {:source_
 
 var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$dst: bool;
 
-axiom {:array_info "$$colors"} {:elem_width 8} {:source_name "colors"} {:source_elem_width 32} {:source_dimensions "1"} true;
+axiom {:array_info "$$colors.val"} {:elem_width 8} {:source_name "colors.val"} {:source_elem_width 32} {:source_dimensions "1"} true;
 
 axiom {:array_info "$$color"} {:elem_width 8} {:source_name "color"} {:source_elem_width 32} {:source_dimensions "1"} true;
 
@@ -306,7 +306,7 @@ function {:bvbuiltin "bvurem"} BV32_UREM(bv32, bv32) : bv32;
 
 function {:bvbuiltin "zero_extend 24"} BV8_ZEXT32(bv8) : bv32;
 
-procedure {:source_name "MandelbrotDS0"} {:kernel} $_Z13MandelbrotDS0P6uchar4iiifffffffS_iiiib($imageW: bv32, $imageH: bv32, $crunch: bv32, $xOff0: bv32, $xOff1: bv32, $yOff0: bv32, $yOff1: bv32, $xJP: bv32, $yJP: bv32, $scale: bv32, $colors.coerce0: bv8, $colors.coerce1: bv8, $colors.coerce2: bv8, $colors.coerce3: bv8, $frame: bv32, $animationFrame: bv32, $gridWidth: bv32, $numBlocks: bv32, $isJ: bv1);
+procedure {:source_name "MandelbrotDS0"} {:kernel} $_Z13MandelbrotDS0P6uchar4iiifffffffS_iiiib($imageW: bv32, $imageH: bv32, $crunch: bv32, $xOff0: bv32, $xOff1: bv32, $yOff0: bv32, $yOff1: bv32, $xJP: bv32, $yJP: bv32, $scale: bv32, $colors: bv32, $frame: bv32, $animationFrame: bv32, $gridWidth: bv32, $numBlocks: bv32, $isJ: bv1);
   requires {:sourceloc_num 0} {:thread 1} (if $imageW == 800bv32 then 1bv1 else 0bv1) != 0bv1;
   requires {:sourceloc_num 1} {:thread 1} (if $imageH == 600bv32 then 1bv1 else 0bv1) != 0bv1;
   requires {:sourceloc_num 2} {:thread 1} (if $gridWidth == 25bv32 then 1bv1 else 0bv1) != 0bv1;
@@ -346,7 +346,7 @@ procedure {:source_name "MandelbrotDS0"} {:kernel} $_Z13MandelbrotDS0P6uchar4iii
 
 
 
-implementation {:source_name "MandelbrotDS0"} {:kernel} $_Z13MandelbrotDS0P6uchar4iiifffffffS_iiiib($imageW: bv32, $imageH: bv32, $crunch: bv32, $xOff0: bv32, $xOff1: bv32, $yOff0: bv32, $yOff1: bv32, $xJP: bv32, $yJP: bv32, $scale: bv32, $colors.coerce0: bv8, $colors.coerce1: bv8, $colors.coerce2: bv8, $colors.coerce3: bv8, $frame: bv32, $animationFrame: bv32, $gridWidth: bv32, $numBlocks: bv32, $isJ: bv1)
+implementation {:source_name "MandelbrotDS0"} {:kernel} $_Z13MandelbrotDS0P6uchar4iiifffffffS_iiiib($imageW: bv32, $imageH: bv32, $crunch: bv32, $xOff0: bv32, $xOff1: bv32, $yOff0: bv32, $yOff1: bv32, $xJP: bv32, $yJP: bv32, $scale: bv32, $colors: bv32, $frame: bv32, $animationFrame: bv32, $gridWidth: bv32, $numBlocks: bv32, $isJ: bv1)
 {
   var $y1.i.0$1: bv32;
   var $y1.i.0$2: bv32;
@@ -398,6 +398,20 @@ implementation {:source_name "MandelbrotDS0"} {:kernel} $_Z13MandelbrotDS0P6ucha
   var $0$2: bv1;
   var $1$1: bv32;
   var $1$2: bv32;
+  var v2$1: bv32;
+  var v2$2: bv32;
+  var v0$1: bool;
+  var v0$2: bool;
+  var v1$1: bool;
+  var v1$2: bool;
+  var v3$1: bv32;
+  var v3$2: bv32;
+  var v4$1: bv32;
+  var v4$2: bv32;
+  var v5$1: bv32;
+  var v5$2: bv32;
+  var v6$1: bool;
+  var v6$2: bool;
   var v7$1: bv32;
   var v7$2: bv32;
   var v8$1: bv32;
@@ -412,10 +426,10 @@ implementation {:source_name "MandelbrotDS0"} {:kernel} $_Z13MandelbrotDS0P6ucha
   var v12$2: bool;
   var v13$1: bv32;
   var v13$2: bv32;
-  var v15$1: bv32;
-  var v15$2: bv32;
   var v14$1: bv32;
   var v14$2: bv32;
+  var v15$1: bv32;
+  var v15$2: bv32;
   var v16$1: bv32;
   var v16$2: bv32;
   var v17$1: bv32;
@@ -434,20 +448,6 @@ implementation {:source_name "MandelbrotDS0"} {:kernel} $_Z13MandelbrotDS0P6ucha
   var v23$2: bv32;
   var v24$1: bv32;
   var v24$2: bv32;
-  var v0$1: bool;
-  var v0$2: bool;
-  var v1$1: bool;
-  var v1$2: bool;
-  var v3$1: bv32;
-  var v3$2: bv32;
-  var v4$1: bv32;
-  var v4$2: bv32;
-  var v5$1: bv32;
-  var v5$2: bv32;
-  var v6$1: bool;
-  var v6$2: bool;
-  var v2$1: bv32;
-  var v2$2: bv32;
   var v25$1: bool;
   var v25$2: bool;
   var v26$1: bv32;
@@ -464,8 +464,6 @@ implementation {:source_name "MandelbrotDS0"} {:kernel} $_Z13MandelbrotDS0P6ucha
   var v31$2: bv32;
   var v32$1: bv32;
   var v32$2: bv32;
-  var v38$1: bv32;
-  var v38$2: bv32;
   var v33$1: bv32;
   var v33$2: bv32;
   var v34$1: bv32;
@@ -476,6 +474,8 @@ implementation {:source_name "MandelbrotDS0"} {:kernel} $_Z13MandelbrotDS0P6ucha
   var v36$2: bv32;
   var v37$1: bv32;
   var v37$2: bv32;
+  var v38$1: bv32;
+  var v38$2: bv32;
   var v39$1: bv32;
   var v39$2: bv32;
   var v40$1: bv32;
@@ -564,10 +564,6 @@ implementation {:source_name "MandelbrotDS0"} {:kernel} $_Z13MandelbrotDS0P6ucha
   var v81$2: bv32;
   var v82$1: bv32;
   var v82$2: bv32;
-  var v108$1: bv32;
-  var v108$2: bv32;
-  var v109$1: bv32;
-  var v109$2: bv32;
   var v83$1: bv32;
   var v83$2: bv32;
   var v84$1: bv32;
@@ -618,6 +614,10 @@ implementation {:source_name "MandelbrotDS0"} {:kernel} $_Z13MandelbrotDS0P6ucha
   var v106$2: bv32;
   var v107$1: bv32;
   var v107$2: bv32;
+  var v108$1: bv32;
+  var v108$2: bv32;
+  var v109$1: bv32;
+  var v109$2: bv32;
   var v110$1: bv32;
   var v110$2: bv32;
   var v111$1: bv32;
@@ -725,14 +725,14 @@ implementation {:source_name "MandelbrotDS0"} {:kernel} $_Z13MandelbrotDS0P6ucha
 
 
   $0:
-    $$colors$0bv32$1 := $colors.coerce0;
-    $$colors$0bv32$2 := $colors.coerce0;
-    $$colors$1bv32$1 := $colors.coerce1;
-    $$colors$1bv32$2 := $colors.coerce1;
-    $$colors$2bv32$1 := $colors.coerce2;
-    $$colors$2bv32$2 := $colors.coerce2;
-    $$colors$3bv32$1 := $colors.coerce3;
-    $$colors$3bv32$2 := $colors.coerce3;
+    $$colors.val$0bv32$1 := $colors[8:0];
+    $$colors.val$0bv32$2 := $colors[8:0];
+    $$colors.val$1bv32$1 := $colors[16:8];
+    $$colors.val$1bv32$2 := $colors[16:8];
+    $$colors.val$2bv32$1 := $colors[24:16];
+    $$colors.val$2bv32$2 := $colors[24:16];
+    $$colors.val$3bv32$1 := $colors[32:24];
+    $$colors.val$3bv32$2 := $colors[32:24];
     p0$1 := false;
     p0$2 := false;
     p0$1 := true;
@@ -942,7 +942,7 @@ implementation {:source_name "MandelbrotDS0"} {:kernel} $_Z13MandelbrotDS0P6ucha
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$_ZZ13MandelbrotDS0P6uchar4iiifffffffS_iiiibE10blockIndex ==> true;
     
     
-assert  my_inv (  (  !BV32_UGE(v5$1, $numBlocks) ==> p0$1 )  && (  !BV32_UGE(v5$2, $numBlocks) ==> p0$2 ) ,  (  v130$1 == 0bv32 || BV32_AND(v130$1, BV32_SUB(v130$1, 1bv32)) == 0bv32 ) ,  (  v130$1 != 0bv32 ) ,  (  v130$2 == 0bv32 || BV32_AND(v130$2, BV32_SUB(v130$2, 1bv32)) == 0bv32 ) ,  (  v130$2 != 0bv32 ) ,  (  v131$1 == 0bv32 || BV32_AND(v131$1, BV32_SUB(v131$1, 1bv32)) == 0bv32 ) ,  (  v131$1 != 0bv32 ) ,  (  v131$2 == 0bv32 || BV32_AND(v131$2, BV32_SUB(v131$2, 1bv32)) == 0bv32 ) ,  (  v131$2 != 0bv32 ) ,  (  p0$1 == p0$2 ) ,  (  true ==> p0$1 == p0$2 ) ,  (  p0$1 && p0$2 ==> $y1.i.0$1 == $y1.i.0$2 ) ,  (  p0$1 && p0$2 ==> $y0.i.0$1 == $y0.i.0$2 ) ,  (  p0$1 && p0$2 ==> $x1.i.0$1 == $x1.i.0$2 ) ,  (  p0$1 && p0$2 ==> $x0.i.0$1 == $x0.i.0$2 ) ,  (  p0$1 && p0$2 ==> $yy1.i.0$1 == $yy1.i.0$2 ) ,  (  p0$1 && p0$2 ==> $yy0.i.0$1 == $yy0.i.0$2 ) ,  (  p0$1 && p0$2 ==> $xx1.i.0$1 == $xx1.i.0$2 ) ,  (  p0$1 && p0$2 ==> $xx0.i.0$1 == $xx0.i.0$2 ) ,  (  p0$1 && p0$2 ==> $xC0.i.0$1 == $xC0.i.0$2 ) ,  (  p0$1 && p0$2 ==> $xC1.i.0$1 == $xC1.i.0$2 ) ,  (  p0$1 && p0$2 ==> $yC0.i.0$1 == $yC0.i.0$2 ) ,  (  p0$1 && p0$2 ==> $yC1.i.0$1 == $yC1.i.0$2 ) ,  (  p0$1 && p0$2 ==> $y1.i.1$1 == $y1.i.1$2 ) ,  (  p0$1 && p0$2 ==> $y0.i.1$1 == $y0.i.1$2 ) ,  (  p0$1 && p0$2 ==> $x1.i.1$1 == $x1.i.1$2 ) ,  (  p0$1 && p0$2 ==> $x0.i.1$1 == $x0.i.1$2 ) ,  (  p0$1 && p0$2 ==> $sum1.i.0$1 == $sum1.i.0$2 ) ,  (  p0$1 && p0$2 ==> $sum0.i.0$1 == $sum0.i.0$2 ) ,  (  p0$1 && p0$2 ==> $yy1.i.1$1 == $yy1.i.1$2 ) ,  (  p0$1 && p0$2 ==> $yy0.i.1$1 == $yy0.i.1$2 ) ,  (  p0$1 && p0$2 ==> $xx1.i.1$1 == $xx1.i.1$2 ) ,  (  p0$1 && p0$2 ==> $xx0.i.1$1 == $xx0.i.1$2 ) ,  (  p0$1 && p0$2 ==> $i.i.0$1 == $i.i.0$2 ) ,  (  p0$1 && p0$2 ==> $0$1 == $0$2 ) ,  (  p0$1 && p0$2 ==> $1$1 == $1$2 ) ,  (  p0$1 && p0$2 ==> v7$1 == v7$2 ) ,  (  p0$1 && p0$2 ==> v8$1 == v8$2 ) ,  (  p0$1 && p0$2 ==> v9$1 == v9$2 ) ,  (  p0$1 && p0$2 ==> v10$1 == v10$2 ) ,  (  p0$1 && p0$2 ==> v11$1 == v11$2 ) ,  (  p0$1 && p0$2 ==> v12$1 == v12$2 ) ,  (  p0$1 && p0$2 ==> v13$1 == v13$2 ) ,  (  p0$1 && p0$2 ==> v15$1 == v15$2 ) ,  (  p0$1 && p0$2 ==> v14$1 == v14$2 ) ,  (  p0$1 && p0$2 ==> v16$1 == v16$2 ) ,  (  p0$1 && p0$2 ==> v17$1 == v17$2 ) ,  (  p0$1 && p0$2 ==> v18$1 == v18$2 ) ,  (  p0$1 && p0$2 ==> v19$1 == v19$2 ) ,  (  p0$1 && p0$2 ==> v20$1 == v20$2 ) ,  (  p0$1 && p0$2 ==> v21$1 == v21$2 ) ,  (  p0$1 && p0$2 ==> v22$1 == v22$2 ) ,  (  p0$1 && p0$2 ==> v23$1 == v23$2 ) ,  (  p0$1 && p0$2 ==> v24$1 == v24$2 ) ,  (  p0$1 && p0$2 ==> v0$1 == v0$2 ) ,  (  p0$1 && p0$2 ==> v1$1 == v1$2 ) ,  (  p0$1 && p0$2 ==> v3$1 == v3$2 ) ,  (  p0$1 && p0$2 ==> v4$1 == v4$2 ) ,  (  p0$1 && p0$2 ==> v5$1 == v5$2 ) ,  (  p0$1 && p0$2 ==> v6$1 == v6$2 ) ,  (  p0$1 && p0$2 ==> v2$1 == v2$2 ) ,  (  p0$1 && p0$2 ==> v25$1 == v25$2 ) ,  (  p0$1 && p0$2 ==> v26$1 == v26$2 ) ,  (  p0$1 && p0$2 ==> v27$1 == v27$2 ) ,  (  p0$1 && p0$2 ==> v28$1 == v28$2 ) ,  (  p0$1 && p0$2 ==> v29$1 == v29$2 ) ,  (  p0$1 && p0$2 ==> v30$1 == v30$2 ) ,  (  p0$1 && p0$2 ==> v31$1 == v31$2 ) ,  (  p0$1 && p0$2 ==> v32$1 == v32$2 ) ,  (  p0$1 && p0$2 ==> v38$1 == v38$2 ) ,  (  p0$1 && p0$2 ==> v33$1 == v33$2 ) ,  (  p0$1 && p0$2 ==> v34$1 == v34$2 ) ,  (  p0$1 && p0$2 ==> v35$1 == v35$2 ) ,  (  p0$1 && p0$2 ==> v36$1 == v36$2 ) ,  (  p0$1 && p0$2 ==> v37$1 == v37$2 ) ,  (  p0$1 && p0$2 ==> v39$1 == v39$2 ) ,  (  p0$1 && p0$2 ==> v40$1 == v40$2 ) ,  (  p0$1 && p0$2 ==> v41$1 == v41$2 ) ,  (  p0$1 && p0$2 ==> v42$1 == v42$2 ) ,  (  p0$1 && p0$2 ==> v43$1 == v43$2 ) ,  (  p0$1 && p0$2 ==> v44$1 == v44$2 ) ,  (  p0$1 && p0$2 ==> v45$1 == v45$2 ) ,  (  p0$1 && p0$2 ==> v46$1 == v46$2 ) ,  (  p0$1 && p0$2 ==> v47$1 == v47$2 ) ,  (  p0$1 && p0$2 ==> v48$1 == v48$2 ) ,  (  p0$1 && p0$2 ==> v49$1 == v49$2 ) ,  (  p0$1 && p0$2 ==> v50$1 == v50$2 ) ,  (  p0$1 && p0$2 ==> v51$1 == v51$2 ) ,  (  p0$1 && p0$2 ==> v52$1 == v52$2 ) ,  (  p0$1 && p0$2 ==> v53$1 == v53$2 ) ,  (  p0$1 && p0$2 ==> v54$1 == v54$2 ) ,  (  p0$1 && p0$2 ==> v55$1 == v55$2 ) ,  (  p0$1 && p0$2 ==> v56$1 == v56$2 ) ,  (  p0$1 && p0$2 ==> v57$1 == v57$2 ) ,  (  p0$1 && p0$2 ==> v58$1 == v58$2 ) ,  (  p0$1 && p0$2 ==> v59$1 == v59$2 ) ,  (  p0$1 && p0$2 ==> v60$1 == v60$2 ) ,  (  p0$1 && p0$2 ==> v61$1 == v61$2 ) ,  (  p0$1 && p0$2 ==> v62$1 == v62$2 ) ,  (  p0$1 && p0$2 ==> v63$1 == v63$2 ) ,  (  p0$1 && p0$2 ==> v64$1 == v64$2 ) ,  (  p0$1 && p0$2 ==> v65$1 == v65$2 ) ,  (  p0$1 && p0$2 ==> v66$1 == v66$2 ) ,  (  p0$1 && p0$2 ==> v67$1 == v67$2 ) ,  (  p0$1 && p0$2 ==> v68$1 == v68$2 ) ,  (  p0$1 && p0$2 ==> v69$1 == v69$2 ) ,  (  p0$1 && p0$2 ==> v70$1 == v70$2 ) ,  (  p0$1 && p0$2 ==> v71$1 == v71$2 ) ,  (  p0$1 && p0$2 ==> v72$1 == v72$2 ) ,  (  p0$1 && p0$2 ==> v73$1 == v73$2 ) ,  (  p0$1 && p0$2 ==> v74$1 == v74$2 ) ,  (  p0$1 && p0$2 ==> v75$1 == v75$2 ) ,  (  p0$1 && p0$2 ==> v76$1 == v76$2 ) ,  (  p0$1 && p0$2 ==> v77$1 == v77$2 ) ,  (  p0$1 && p0$2 ==> v78$1 == v78$2 ) ,  (  p0$1 && p0$2 ==> v79$1 == v79$2 ) ,  (  p0$1 && p0$2 ==> v80$1 == v80$2 ) ,  (  p0$1 && p0$2 ==> v81$1 == v81$2 ) ,  (  p0$1 && p0$2 ==> v82$1 == v82$2 ) ,  (  p0$1 && p0$2 ==> v108$1 == v108$2 ) ,  (  p0$1 && p0$2 ==> v109$1 == v109$2 ) ,  (  p0$1 && p0$2 ==> v83$1 == v83$2 ) ,  (  p0$1 && p0$2 ==> v84$1 == v84$2 ) ,  (  p0$1 && p0$2 ==> v85$1 == v85$2 ) ,  (  p0$1 && p0$2 ==> v86$1 == v86$2 ) ,  (  p0$1 && p0$2 ==> v87$1 == v87$2 ) ,  (  p0$1 && p0$2 ==> v88$1 == v88$2 ) ,  (  p0$1 && p0$2 ==> v89$1 == v89$2 ) ,  (  p0$1 && p0$2 ==> v90$1 == v90$2 ) ,  (  p0$1 && p0$2 ==> v91$1 == v91$2 ) ,  (  p0$1 && p0$2 ==> v92$1 == v92$2 ) ,  (  p0$1 && p0$2 ==> v93$1 == v93$2 ) ,  (  p0$1 && p0$2 ==> v94$1 == v94$2 ) ,  (  p0$1 && p0$2 ==> v95$1 == v95$2 ) ,  (  p0$1 && p0$2 ==> v96$1 == v96$2 ) ,  (  p0$1 && p0$2 ==> v97$1 == v97$2 ) ,  (  p0$1 && p0$2 ==> v98$1 == v98$2 ) ,  (  p0$1 && p0$2 ==> v99$1 == v99$2 ) ,  (  p0$1 && p0$2 ==> v100$1 == v100$2 ) ,  (  p0$1 && p0$2 ==> v101$1 == v101$2 ) ,  (  p0$1 && p0$2 ==> v102$1 == v102$2 ) ,  (  p0$1 && p0$2 ==> v103$1 == v103$2 ) ,  (  p0$1 && p0$2 ==> v104$1 == v104$2 ) ,  (  p0$1 && p0$2 ==> v105$1 == v105$2 ) ,  (  p0$1 && p0$2 ==> v106$1 == v106$2 ) ,  (  p0$1 && p0$2 ==> v107$1 == v107$2 ) ,  (  p0$1 && p0$2 ==> v110$1 == v110$2 ) ,  (  p0$1 && p0$2 ==> v111$1 == v111$2 ) ,  (  p0$1 && p0$2 ==> v112$1 == v112$2 ) ,  (  p0$1 && p0$2 ==> v113$1 == v113$2 ) ,  (  p0$1 && p0$2 ==> v114$1 == v114$2 ) ,  (  p0$1 && p0$2 ==> v115$1 == v115$2 ) ,  (  p0$1 && p0$2 ==> v116$1 == v116$2 ) ,  (  p0$1 && p0$2 ==> v117$1 == v117$2 ) ,  (  p0$1 && p0$2 ==> v118$1 == v118$2 ) ,  (  p0$1 && p0$2 ==> v119$1 == v119$2 ) ,  (  p0$1 && p0$2 ==> v120$1 == v120$2 ) ,  (  p0$1 && p0$2 ==> v121$1 == v121$2 ) ,  (  p0$1 && p0$2 ==> v122$1 == v122$2 ) ,  (  p0$1 && p0$2 ==> v123$1 == v123$2 ) ,  (  p0$1 && p0$2 ==> v124$1 == v124$2 ) ,  (  p0$1 && p0$2 ==> v125$1 == v125$2 ) ,  (  p0$1 && p0$2 ==> v126$1 == v126$2 ) ,  (  p0$1 && p0$2 ==> v127$1 == v127$2 ) ,  (  p0$1 && p0$2 ==> v128$1 == v128$2 ) ,  (  p0$1 && p0$2 ==> v129$1 == v129$2 ) ,  (  p0$1 && p0$2 ==> v130$1 == v130$2 ) ,  (  p0$1 && p0$2 ==> v131$1 == v131$2 ) ,  (  p0$1 && p0$2 ==> v132$1 == v132$2 ) ,  (  p0$1 && p0$2 ==> v133$1 == v133$2 ) ,  (  p0$1 && p0$2 ==> v134$1 == v134$2 ) ,  (  p0$1 && p0$2 ==> v135$1 == v135$2 ) ,  (  p0$1 && p0$2 ==> v136$1 == v136$2 ) ,  (  p0$1 && p0$2 ==> v137$1 == v137$2 ) ,  (  !_READ_HAS_OCCURRED_$$dst ) ,  (  !_WRITE_HAS_OCCURRED_$$dst ) ,  (  !_ATOMIC_HAS_OCCURRED_$$blockCounter ) ,  (  _ATOMIC_HAS_OCCURRED_$$blockCounter ==> _WATCHED_OFFSET == 0bv32 ) ,  (  !_READ_HAS_OCCURRED_$$_ZZ13MandelbrotDS0P6uchar4iiifffffffS_iiiibE10blockIndex ) ,  (  !_WRITE_HAS_OCCURRED_$$_ZZ13MandelbrotDS0P6uchar4iiifffffffS_iiiibE10blockIndex ) ,  (  _READ_HAS_OCCURRED_$$_ZZ13MandelbrotDS0P6uchar4iiifffffffS_iiiibE10blockIndex ==> _WATCHED_OFFSET == 0bv32 ) ,  (  _WRITE_HAS_OCCURRED_$$_ZZ13MandelbrotDS0P6uchar4iiifffffffS_iiiibE10blockIndex ==> _WATCHED_OFFSET == 0bv32 ) ,  (  !_READ_HAS_OCCURRED_$$_ZZ13MandelbrotDS0P6uchar4iiifffffffS_iiiibE6blockX ) ,  (  !_WRITE_HAS_OCCURRED_$$_ZZ13MandelbrotDS0P6uchar4iiifffffffS_iiiibE6blockX ) ,  (  _READ_HAS_OCCURRED_$$_ZZ13MandelbrotDS0P6uchar4iiifffffffS_iiiibE6blockX ==> _WATCHED_OFFSET == 0bv32 ) ,  (  _WRITE_HAS_OCCURRED_$$_ZZ13MandelbrotDS0P6uchar4iiifffffffS_iiiibE6blockX ==> _WATCHED_OFFSET == 0bv32 ) ,  (  !_READ_HAS_OCCURRED_$$_ZZ13MandelbrotDS0P6uchar4iiifffffffS_iiiibE6blockY ) ,  (  !_WRITE_HAS_OCCURRED_$$_ZZ13MandelbrotDS0P6uchar4iiifffffffS_iiiibE6blockY ) ,  (  _READ_HAS_OCCURRED_$$_ZZ13MandelbrotDS0P6uchar4iiifffffffS_iiiibE6blockY ==> _WATCHED_OFFSET == 0bv32 ) ,  (  _WRITE_HAS_OCCURRED_$$_ZZ13MandelbrotDS0P6uchar4iiifffffffS_iiiibE6blockY ==> _WATCHED_OFFSET == 0bv32 )  ); 
+assert  my_inv (  (  !BV32_UGE(v5$1, $numBlocks) ==> p0$1 )  && (  !BV32_UGE(v5$2, $numBlocks) ==> p0$2 ) ,  (  v130$1 == 0bv32 || BV32_AND(v130$1, BV32_SUB(v130$1, 1bv32)) == 0bv32 ) ,  (  v130$1 != 0bv32 ) ,  (  v130$2 == 0bv32 || BV32_AND(v130$2, BV32_SUB(v130$2, 1bv32)) == 0bv32 ) ,  (  v130$2 != 0bv32 ) ,  (  v131$1 == 0bv32 || BV32_AND(v131$1, BV32_SUB(v131$1, 1bv32)) == 0bv32 ) ,  (  v131$1 != 0bv32 ) ,  (  v131$2 == 0bv32 || BV32_AND(v131$2, BV32_SUB(v131$2, 1bv32)) == 0bv32 ) ,  (  v131$2 != 0bv32 ) ,  (  p0$1 == p0$2 ) ,  (  true ==> p0$1 == p0$2 ) ,  (  p0$1 && p0$2 ==> $y1.i.0$1 == $y1.i.0$2 ) ,  (  p0$1 && p0$2 ==> $y0.i.0$1 == $y0.i.0$2 ) ,  (  p0$1 && p0$2 ==> $x1.i.0$1 == $x1.i.0$2 ) ,  (  p0$1 && p0$2 ==> $x0.i.0$1 == $x0.i.0$2 ) ,  (  p0$1 && p0$2 ==> $yy1.i.0$1 == $yy1.i.0$2 ) ,  (  p0$1 && p0$2 ==> $yy0.i.0$1 == $yy0.i.0$2 ) ,  (  p0$1 && p0$2 ==> $xx1.i.0$1 == $xx1.i.0$2 ) ,  (  p0$1 && p0$2 ==> $xx0.i.0$1 == $xx0.i.0$2 ) ,  (  p0$1 && p0$2 ==> $xC0.i.0$1 == $xC0.i.0$2 ) ,  (  p0$1 && p0$2 ==> $xC1.i.0$1 == $xC1.i.0$2 ) ,  (  p0$1 && p0$2 ==> $yC0.i.0$1 == $yC0.i.0$2 ) ,  (  p0$1 && p0$2 ==> $yC1.i.0$1 == $yC1.i.0$2 ) ,  (  p0$1 && p0$2 ==> $y1.i.1$1 == $y1.i.1$2 ) ,  (  p0$1 && p0$2 ==> $y0.i.1$1 == $y0.i.1$2 ) ,  (  p0$1 && p0$2 ==> $x1.i.1$1 == $x1.i.1$2 ) ,  (  p0$1 && p0$2 ==> $x0.i.1$1 == $x0.i.1$2 ) ,  (  p0$1 && p0$2 ==> $sum1.i.0$1 == $sum1.i.0$2 ) ,  (  p0$1 && p0$2 ==> $sum0.i.0$1 == $sum0.i.0$2 ) ,  (  p0$1 && p0$2 ==> $yy1.i.1$1 == $yy1.i.1$2 ) ,  (  p0$1 && p0$2 ==> $yy0.i.1$1 == $yy0.i.1$2 ) ,  (  p0$1 && p0$2 ==> $xx1.i.1$1 == $xx1.i.1$2 ) ,  (  p0$1 && p0$2 ==> $xx0.i.1$1 == $xx0.i.1$2 ) ,  (  p0$1 && p0$2 ==> $i.i.0$1 == $i.i.0$2 ) ,  (  p0$1 && p0$2 ==> $0$1 == $0$2 ) ,  (  p0$1 && p0$2 ==> $1$1 == $1$2 ) ,  (  p0$1 && p0$2 ==> v2$1 == v2$2 ) ,  (  p0$1 && p0$2 ==> v0$1 == v0$2 ) ,  (  p0$1 && p0$2 ==> v1$1 == v1$2 ) ,  (  p0$1 && p0$2 ==> v3$1 == v3$2 ) ,  (  p0$1 && p0$2 ==> v4$1 == v4$2 ) ,  (  p0$1 && p0$2 ==> v5$1 == v5$2 ) ,  (  p0$1 && p0$2 ==> v6$1 == v6$2 ) ,  (  p0$1 && p0$2 ==> v7$1 == v7$2 ) ,  (  p0$1 && p0$2 ==> v8$1 == v8$2 ) ,  (  p0$1 && p0$2 ==> v9$1 == v9$2 ) ,  (  p0$1 && p0$2 ==> v10$1 == v10$2 ) ,  (  p0$1 && p0$2 ==> v11$1 == v11$2 ) ,  (  p0$1 && p0$2 ==> v12$1 == v12$2 ) ,  (  p0$1 && p0$2 ==> v13$1 == v13$2 ) ,  (  p0$1 && p0$2 ==> v14$1 == v14$2 ) ,  (  p0$1 && p0$2 ==> v15$1 == v15$2 ) ,  (  p0$1 && p0$2 ==> v16$1 == v16$2 ) ,  (  p0$1 && p0$2 ==> v17$1 == v17$2 ) ,  (  p0$1 && p0$2 ==> v18$1 == v18$2 ) ,  (  p0$1 && p0$2 ==> v19$1 == v19$2 ) ,  (  p0$1 && p0$2 ==> v20$1 == v20$2 ) ,  (  p0$1 && p0$2 ==> v21$1 == v21$2 ) ,  (  p0$1 && p0$2 ==> v22$1 == v22$2 ) ,  (  p0$1 && p0$2 ==> v23$1 == v23$2 ) ,  (  p0$1 && p0$2 ==> v24$1 == v24$2 ) ,  (  p0$1 && p0$2 ==> v25$1 == v25$2 ) ,  (  p0$1 && p0$2 ==> v26$1 == v26$2 ) ,  (  p0$1 && p0$2 ==> v27$1 == v27$2 ) ,  (  p0$1 && p0$2 ==> v28$1 == v28$2 ) ,  (  p0$1 && p0$2 ==> v29$1 == v29$2 ) ,  (  p0$1 && p0$2 ==> v30$1 == v30$2 ) ,  (  p0$1 && p0$2 ==> v31$1 == v31$2 ) ,  (  p0$1 && p0$2 ==> v32$1 == v32$2 ) ,  (  p0$1 && p0$2 ==> v33$1 == v33$2 ) ,  (  p0$1 && p0$2 ==> v34$1 == v34$2 ) ,  (  p0$1 && p0$2 ==> v35$1 == v35$2 ) ,  (  p0$1 && p0$2 ==> v36$1 == v36$2 ) ,  (  p0$1 && p0$2 ==> v37$1 == v37$2 ) ,  (  p0$1 && p0$2 ==> v38$1 == v38$2 ) ,  (  p0$1 && p0$2 ==> v39$1 == v39$2 ) ,  (  p0$1 && p0$2 ==> v40$1 == v40$2 ) ,  (  p0$1 && p0$2 ==> v41$1 == v41$2 ) ,  (  p0$1 && p0$2 ==> v42$1 == v42$2 ) ,  (  p0$1 && p0$2 ==> v43$1 == v43$2 ) ,  (  p0$1 && p0$2 ==> v44$1 == v44$2 ) ,  (  p0$1 && p0$2 ==> v45$1 == v45$2 ) ,  (  p0$1 && p0$2 ==> v46$1 == v46$2 ) ,  (  p0$1 && p0$2 ==> v47$1 == v47$2 ) ,  (  p0$1 && p0$2 ==> v48$1 == v48$2 ) ,  (  p0$1 && p0$2 ==> v49$1 == v49$2 ) ,  (  p0$1 && p0$2 ==> v50$1 == v50$2 ) ,  (  p0$1 && p0$2 ==> v51$1 == v51$2 ) ,  (  p0$1 && p0$2 ==> v52$1 == v52$2 ) ,  (  p0$1 && p0$2 ==> v53$1 == v53$2 ) ,  (  p0$1 && p0$2 ==> v54$1 == v54$2 ) ,  (  p0$1 && p0$2 ==> v55$1 == v55$2 ) ,  (  p0$1 && p0$2 ==> v56$1 == v56$2 ) ,  (  p0$1 && p0$2 ==> v57$1 == v57$2 ) ,  (  p0$1 && p0$2 ==> v58$1 == v58$2 ) ,  (  p0$1 && p0$2 ==> v59$1 == v59$2 ) ,  (  p0$1 && p0$2 ==> v60$1 == v60$2 ) ,  (  p0$1 && p0$2 ==> v61$1 == v61$2 ) ,  (  p0$1 && p0$2 ==> v62$1 == v62$2 ) ,  (  p0$1 && p0$2 ==> v63$1 == v63$2 ) ,  (  p0$1 && p0$2 ==> v64$1 == v64$2 ) ,  (  p0$1 && p0$2 ==> v65$1 == v65$2 ) ,  (  p0$1 && p0$2 ==> v66$1 == v66$2 ) ,  (  p0$1 && p0$2 ==> v67$1 == v67$2 ) ,  (  p0$1 && p0$2 ==> v68$1 == v68$2 ) ,  (  p0$1 && p0$2 ==> v69$1 == v69$2 ) ,  (  p0$1 && p0$2 ==> v70$1 == v70$2 ) ,  (  p0$1 && p0$2 ==> v71$1 == v71$2 ) ,  (  p0$1 && p0$2 ==> v72$1 == v72$2 ) ,  (  p0$1 && p0$2 ==> v73$1 == v73$2 ) ,  (  p0$1 && p0$2 ==> v74$1 == v74$2 ) ,  (  p0$1 && p0$2 ==> v75$1 == v75$2 ) ,  (  p0$1 && p0$2 ==> v76$1 == v76$2 ) ,  (  p0$1 && p0$2 ==> v77$1 == v77$2 ) ,  (  p0$1 && p0$2 ==> v78$1 == v78$2 ) ,  (  p0$1 && p0$2 ==> v79$1 == v79$2 ) ,  (  p0$1 && p0$2 ==> v80$1 == v80$2 ) ,  (  p0$1 && p0$2 ==> v81$1 == v81$2 ) ,  (  p0$1 && p0$2 ==> v82$1 == v82$2 ) ,  (  p0$1 && p0$2 ==> v83$1 == v83$2 ) ,  (  p0$1 && p0$2 ==> v84$1 == v84$2 ) ,  (  p0$1 && p0$2 ==> v85$1 == v85$2 ) ,  (  p0$1 && p0$2 ==> v86$1 == v86$2 ) ,  (  p0$1 && p0$2 ==> v87$1 == v87$2 ) ,  (  p0$1 && p0$2 ==> v88$1 == v88$2 ) ,  (  p0$1 && p0$2 ==> v89$1 == v89$2 ) ,  (  p0$1 && p0$2 ==> v90$1 == v90$2 ) ,  (  p0$1 && p0$2 ==> v91$1 == v91$2 ) ,  (  p0$1 && p0$2 ==> v92$1 == v92$2 ) ,  (  p0$1 && p0$2 ==> v93$1 == v93$2 ) ,  (  p0$1 && p0$2 ==> v94$1 == v94$2 ) ,  (  p0$1 && p0$2 ==> v95$1 == v95$2 ) ,  (  p0$1 && p0$2 ==> v96$1 == v96$2 ) ,  (  p0$1 && p0$2 ==> v97$1 == v97$2 ) ,  (  p0$1 && p0$2 ==> v98$1 == v98$2 ) ,  (  p0$1 && p0$2 ==> v99$1 == v99$2 ) ,  (  p0$1 && p0$2 ==> v100$1 == v100$2 ) ,  (  p0$1 && p0$2 ==> v101$1 == v101$2 ) ,  (  p0$1 && p0$2 ==> v102$1 == v102$2 ) ,  (  p0$1 && p0$2 ==> v103$1 == v103$2 ) ,  (  p0$1 && p0$2 ==> v104$1 == v104$2 ) ,  (  p0$1 && p0$2 ==> v105$1 == v105$2 ) ,  (  p0$1 && p0$2 ==> v106$1 == v106$2 ) ,  (  p0$1 && p0$2 ==> v107$1 == v107$2 ) ,  (  p0$1 && p0$2 ==> v108$1 == v108$2 ) ,  (  p0$1 && p0$2 ==> v109$1 == v109$2 ) ,  (  p0$1 && p0$2 ==> v110$1 == v110$2 ) ,  (  p0$1 && p0$2 ==> v111$1 == v111$2 ) ,  (  p0$1 && p0$2 ==> v112$1 == v112$2 ) ,  (  p0$1 && p0$2 ==> v113$1 == v113$2 ) ,  (  p0$1 && p0$2 ==> v114$1 == v114$2 ) ,  (  p0$1 && p0$2 ==> v115$1 == v115$2 ) ,  (  p0$1 && p0$2 ==> v116$1 == v116$2 ) ,  (  p0$1 && p0$2 ==> v117$1 == v117$2 ) ,  (  p0$1 && p0$2 ==> v118$1 == v118$2 ) ,  (  p0$1 && p0$2 ==> v119$1 == v119$2 ) ,  (  p0$1 && p0$2 ==> v120$1 == v120$2 ) ,  (  p0$1 && p0$2 ==> v121$1 == v121$2 ) ,  (  p0$1 && p0$2 ==> v122$1 == v122$2 ) ,  (  p0$1 && p0$2 ==> v123$1 == v123$2 ) ,  (  p0$1 && p0$2 ==> v124$1 == v124$2 ) ,  (  p0$1 && p0$2 ==> v125$1 == v125$2 ) ,  (  p0$1 && p0$2 ==> v126$1 == v126$2 ) ,  (  p0$1 && p0$2 ==> v127$1 == v127$2 ) ,  (  p0$1 && p0$2 ==> v128$1 == v128$2 ) ,  (  p0$1 && p0$2 ==> v129$1 == v129$2 ) ,  (  p0$1 && p0$2 ==> v130$1 == v130$2 ) ,  (  p0$1 && p0$2 ==> v131$1 == v131$2 ) ,  (  p0$1 && p0$2 ==> v132$1 == v132$2 ) ,  (  p0$1 && p0$2 ==> v133$1 == v133$2 ) ,  (  p0$1 && p0$2 ==> v134$1 == v134$2 ) ,  (  p0$1 && p0$2 ==> v135$1 == v135$2 ) ,  (  p0$1 && p0$2 ==> v136$1 == v136$2 ) ,  (  p0$1 && p0$2 ==> v137$1 == v137$2 ) ,  (  !_READ_HAS_OCCURRED_$$dst ) ,  (  !_WRITE_HAS_OCCURRED_$$dst ) ,  (  !_ATOMIC_HAS_OCCURRED_$$blockCounter ) ,  (  _ATOMIC_HAS_OCCURRED_$$blockCounter ==> _WATCHED_OFFSET == 0bv32 ) ,  (  !_READ_HAS_OCCURRED_$$_ZZ13MandelbrotDS0P6uchar4iiifffffffS_iiiibE10blockIndex ) ,  (  !_WRITE_HAS_OCCURRED_$$_ZZ13MandelbrotDS0P6uchar4iiifffffffS_iiiibE10blockIndex ) ,  (  _READ_HAS_OCCURRED_$$_ZZ13MandelbrotDS0P6uchar4iiifffffffS_iiiibE10blockIndex ==> _WATCHED_OFFSET == 0bv32 ) ,  (  _WRITE_HAS_OCCURRED_$$_ZZ13MandelbrotDS0P6uchar4iiifffffffS_iiiibE10blockIndex ==> _WATCHED_OFFSET == 0bv32 ) ,  (  !_READ_HAS_OCCURRED_$$_ZZ13MandelbrotDS0P6uchar4iiifffffffS_iiiibE6blockX ) ,  (  !_WRITE_HAS_OCCURRED_$$_ZZ13MandelbrotDS0P6uchar4iiifffffffS_iiiibE6blockX ) ,  (  _READ_HAS_OCCURRED_$$_ZZ13MandelbrotDS0P6uchar4iiifffffffS_iiiibE6blockX ==> _WATCHED_OFFSET == 0bv32 ) ,  (  _WRITE_HAS_OCCURRED_$$_ZZ13MandelbrotDS0P6uchar4iiifffffffS_iiiibE6blockX ==> _WATCHED_OFFSET == 0bv32 ) ,  (  !_READ_HAS_OCCURRED_$$_ZZ13MandelbrotDS0P6uchar4iiifffffffS_iiiibE6blockY ) ,  (  !_WRITE_HAS_OCCURRED_$$_ZZ13MandelbrotDS0P6uchar4iiifffffffS_iiiibE6blockY ) ,  (  _READ_HAS_OCCURRED_$$_ZZ13MandelbrotDS0P6uchar4iiifffffffS_iiiibE6blockY ==> _WATCHED_OFFSET == 0bv32 ) ,  (  _WRITE_HAS_OCCURRED_$$_ZZ13MandelbrotDS0P6uchar4iiifffffffS_iiiibE6blockY ==> _WATCHED_OFFSET == 0bv32 )  ); 
 
 
     assert {:block_sourceloc} {:sourceloc_num 5} p0$1 ==> true;
@@ -1371,16 +1371,16 @@ assert  my_inv (  (  !BV32_UGE(v5$1, $numBlocks) ==> p0$1 )  && (  !BV32_UGE(v5$
     $$color$2bv32$2 := (if p18$2 then 0bv8 else $$color$2bv32$2);
     v120$1 := (if p19$1 then BV32_ADD($1$1, $animationFrame) else v120$1);
     v120$2 := (if p19$2 then BV32_ADD($1$2, $animationFrame) else v120$2);
-    v121$1 := (if p19$1 then $$colors$0bv32$1 else v121$1);
-    v121$2 := (if p19$2 then $$colors$0bv32$2 else v121$2);
+    v121$1 := (if p19$1 then $$colors.val$0bv32$1 else v121$1);
+    v121$2 := (if p19$2 then $$colors.val$0bv32$2 else v121$2);
     $$color$0bv32$1 := (if p19$1 then BV32_MUL(v120$1, BV8_ZEXT32(v121$1))[8:0] else $$color$0bv32$1);
     $$color$0bv32$2 := (if p19$2 then BV32_MUL(v120$2, BV8_ZEXT32(v121$2))[8:0] else $$color$0bv32$2);
-    v122$1 := (if p19$1 then $$colors$1bv32$1 else v122$1);
-    v122$2 := (if p19$2 then $$colors$1bv32$2 else v122$2);
+    v122$1 := (if p19$1 then $$colors.val$1bv32$1 else v122$1);
+    v122$2 := (if p19$2 then $$colors.val$1bv32$2 else v122$2);
     $$color$1bv32$1 := (if p19$1 then BV32_MUL(v120$1, BV8_ZEXT32(v122$1))[8:0] else $$color$1bv32$1);
     $$color$1bv32$2 := (if p19$2 then BV32_MUL(v120$2, BV8_ZEXT32(v122$2))[8:0] else $$color$1bv32$2);
-    v123$1 := (if p19$1 then $$colors$2bv32$1 else v123$1);
-    v123$2 := (if p19$2 then $$colors$2bv32$2 else v123$2);
+    v123$1 := (if p19$1 then $$colors.val$2bv32$1 else v123$1);
+    v123$2 := (if p19$2 then $$colors.val$2bv32$2 else v123$2);
     $$color$2bv32$1 := (if p19$1 then BV32_MUL(v120$1, BV8_ZEXT32(v123$1))[8:0] else $$color$2bv32$1);
     $$color$2bv32$2 := (if p19$2 then BV32_MUL(v120$2, BV8_ZEXT32(v123$2))[8:0] else $$color$2bv32$2);
     v124$1 := (if p9$1 then BV32_ADD(BV32_MUL($imageW, v10$1), v8$1) else v124$1);
@@ -1541,21 +1541,21 @@ procedure {:inline 1} {:source_name "bugle_barrier"} {:barrier} $bugle_barrier_d
 
 
 
-var $$colors$0bv32$1: bv8;
+var $$colors.val$0bv32$1: bv8;
 
-var $$colors$0bv32$2: bv8;
+var $$colors.val$0bv32$2: bv8;
 
-var $$colors$1bv32$1: bv8;
+var $$colors.val$1bv32$1: bv8;
 
-var $$colors$1bv32$2: bv8;
+var $$colors.val$1bv32$2: bv8;
 
-var $$colors$2bv32$1: bv8;
+var $$colors.val$2bv32$1: bv8;
 
-var $$colors$2bv32$2: bv8;
+var $$colors.val$2bv32$2: bv8;
 
-var $$colors$3bv32$1: bv8;
+var $$colors.val$3bv32$1: bv8;
 
-var $$colors$3bv32$2: bv8;
+var $$colors.val$3bv32$2: bv8;
 
 var $$color$0bv32$1: bv8;
 

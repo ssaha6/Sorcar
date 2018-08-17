@@ -109,17 +109,17 @@ implementation {:source_name "writeLocalMemory"} {:kernel} $writeLocalMemory($si
   var $s.0$1: bv32;
   var $s.0$2: bv32;
   var $j.1: bv32;
-  var v4$1: bv32;
-  var v4$2: bv32;
+  var v0$1: bv32;
+  var v0$2: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
   var v2: bool;
-  var v0$1: bv32;
-  var v0$2: bv32;
   var v3: bool;
+  var v4$1: bv32;
+  var v4$2: bv32;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2);
     v1$1 := local_id_x$1;
@@ -127,9 +127,9 @@ implementation {:source_name "writeLocalMemory"} {:kernel} $writeLocalMemory($si
     $j.0, $s.0$1 := 0bv32, v1$1;
     $s.0$2 := v1$2;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$writeLocalMemory.lbuf ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$writeLocalMemory.lbuf ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -151,9 +151,9 @@ implementation {:source_name "writeLocalMemory"} {:kernel} $writeLocalMemory($si
     call {:sourceloc_num 22} $bugle_barrier_duplicated_0(1bv1, 0bv1);
     $j.1 := 0bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.70;
+    goto $5;
 
-  $for.cond.70:
+  $5:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b10 ==> _WRITE_HAS_OCCURRED_$$output ==> _WATCHED_OFFSET == BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$writeLocalMemory.lbuf ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -186,7 +186,7 @@ implementation {:source_name "writeLocalMemory"} {:kernel} $writeLocalMemory($si
     $$output[v0$2] := v4$2;
     $j.1 := BV32_ADD($j.1, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.70;
+    goto $5;
 
   $truebb:
     assume {:partition} v2;
@@ -305,7 +305,7 @@ implementation {:source_name "writeLocalMemory"} {:kernel} $writeLocalMemory($si
     $j.0, $s.0$1 := BV32_ADD($j.0, 1bv32), BV32_AND(BV32_ADD($s.0$1, 16bv32), 4095bv32);
     $s.0$2 := BV32_AND(BV32_ADD($s.0$2, 16bv32), 4095bv32);
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

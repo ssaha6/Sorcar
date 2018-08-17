@@ -100,40 +100,40 @@ implementation {:source_name "BitonicKernel"} {:kernel} $_Z13BitonicKernelPi()
 {
   var $k.0: bv32;
   var $j.0: bv32;
-  var v3$1: bv32;
-  var v3$2: bv32;
-  var v1: bool;
-  var v2: bool;
-  var v4$1: bool;
-  var v4$2: bool;
   var v0$1: bv32;
   var v0$2: bv32;
+  var v1: bool;
+  var v2: bool;
+  var v3$1: bv32;
+  var v3$2: bv32;
+  var v4$1: bool;
+  var v4$2: bool;
   var v5$1: bool;
   var v5$2: bool;
-  var v8$1: bool;
-  var v8$2: bool;
-  var v14$1: bool;
-  var v14$2: bool;
-  var v11$1: bv32;
-  var v11$2: bv32;
-  var v17$1: bv32;
-  var v17$2: bv32;
-  var v9$1: bv32;
-  var v9$2: bv32;
   var v6$1: bv32;
   var v6$2: bv32;
   var v7$1: bv32;
   var v7$2: bv32;
-  var v15$1: bv32;
-  var v15$2: bv32;
+  var v8$1: bool;
+  var v8$2: bool;
+  var v9$1: bv32;
+  var v9$2: bv32;
   var v10$1: bv32;
   var v10$2: bv32;
+  var v11$1: bv32;
+  var v11$2: bv32;
   var v12$1: bv32;
   var v12$2: bv32;
   var v13$1: bv32;
   var v13$2: bv32;
+  var v14$1: bool;
+  var v14$2: bool;
+  var v15$1: bv32;
+  var v15$2: bv32;
   var v16$1: bv32;
   var v16$2: bv32;
+  var v17$1: bv32;
+  var v17$2: bv32;
   var v18$1: bv32;
   var v18$2: bv32;
   var p0$1: bool;
@@ -154,7 +154,7 @@ implementation {:source_name "BitonicKernel"} {:kernel} $_Z13BitonicKernelPi()
   var p7$2: bool;
 
 
-  __partitioned_block_$entry_0:
+  __partitioned_block_$0_0:
     call {:sourceloc} {:sourceloc_num 1} _LOG_READ_$$values(true, local_id_x$1, $$values[local_id_x$1]);
     assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 1} true;
     call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 1} _CHECK_READ_$$values(true, local_id_x$2, $$values[local_id_x$2]);
@@ -168,15 +168,15 @@ implementation {:source_name "BitonicKernel"} {:kernel} $_Z13BitonicKernelPi()
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$shared"} true;
     $$shared[1bv1][local_id_x$1] := v0$1;
     $$shared[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2] := v0$2;
-    goto __partitioned_block_$entry_1;
+    goto __partitioned_block_$0_1;
 
-  __partitioned_block_$entry_1:
+  __partitioned_block_$0_1:
     call {:sourceloc_num 3} $bugle_barrier_duplicated_0(1bv1, 1bv1);
     $k.0 := 2bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b13 ==> _WRITE_HAS_OCCURRED_$$shared ==> _WATCHED_OFFSET == local_id_x$1 || _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b12 ==> _READ_HAS_OCCURRED_$$shared ==> _WATCHED_OFFSET == local_id_x$1 || _WATCHED_OFFSET == local_id_x$1 || _WATCHED_OFFSET == local_id_x$1 || _WATCHED_OFFSET == local_id_x$1 || _WATCHED_OFFSET == local_id_x$1 || _WATCHED_OFFSET == local_id_x$1;
@@ -216,9 +216,9 @@ implementation {:source_name "BitonicKernel"} {:kernel} $_Z13BitonicKernelPi()
     assume {:partition} v1;
     $j.0 := BV32_UDIV($k.0, 2bv32);
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.2;
+    goto $3;
 
-  $for.cond.2:
+  $3:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b17 ==> _WRITE_HAS_OCCURRED_$$shared ==> _WATCHED_OFFSET == local_id_x$1 || _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b16 ==> _READ_HAS_OCCURRED_$$shared ==> _WATCHED_OFFSET == local_id_x$1 || _WATCHED_OFFSET == local_id_x$1 || _WATCHED_OFFSET == local_id_x$1 || _WATCHED_OFFSET == local_id_x$1 || _WATCHED_OFFSET == local_id_x$1 || _WATCHED_OFFSET == local_id_x$1;
@@ -255,7 +255,7 @@ implementation {:source_name "BitonicKernel"} {:kernel} $_Z13BitonicKernelPi()
     assume {:partition} !v2;
     $k.0 := BV32_MUL($k.0, 2bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
   __partitioned_block_$truebb0_0:
     assume {:partition} v2;
@@ -373,7 +373,7 @@ implementation {:source_name "BitonicKernel"} {:kernel} $_Z13BitonicKernelPi()
     call {:sourceloc_num 30} $bugle_barrier_duplicated_1(1bv1, 1bv1);
     $j.0 := BV32_UDIV($j.0, 2bv32);
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.2;
+    goto $3;
 }
 
 

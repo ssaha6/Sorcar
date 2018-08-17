@@ -107,8 +107,8 @@ procedure {:source_name "reduce2<int>"} {:kernel} $_Z7reduce2IiEvPT_S1_j($n: bv3
 
 implementation {:source_name "reduce2<int>"} {:kernel} $_Z7reduce2IiEvPT_S1_j($n: bv32)
 {
-  var $cond$1: bv32;
-  var $cond$2: bv32;
+  var $0$1: bv32;
+  var $0$2: bv32;
   var $s.0: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
@@ -116,15 +116,15 @@ implementation {:source_name "reduce2<int>"} {:kernel} $_Z7reduce2IiEvPT_S1_j($n
   var v1$2: bool;
   var v2$1: bv32;
   var v2$2: bv32;
-  var v5$1: bv32;
-  var v5$2: bv32;
+  var v3: bool;
   var v4$1: bool;
   var v4$2: bool;
-  var v7$1: bool;
-  var v7$2: bool;
-  var v3: bool;
+  var v5$1: bv32;
+  var v5$2: bv32;
   var v6$1: bv32;
   var v6$2: bv32;
+  var v7$1: bool;
+  var v7$2: bool;
   var v8$1: bv32;
   var v8$2: bv32;
   var p0$1: bool;
@@ -143,7 +143,7 @@ implementation {:source_name "reduce2<int>"} {:kernel} $_Z7reduce2IiEvPT_S1_j($n
   var _HAVOC_bv32$2: bv32;
 
 
-  __partitioned_block_$entry_0:
+  __partitioned_block_$0_0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2);
     v1$1 := BV32_ULT(v0$1, $n);
@@ -159,26 +159,26 @@ implementation {:source_name "reduce2<int>"} {:kernel} $_Z7reduce2IiEvPT_S1_j($n
     havoc _HAVOC_bv32$1, _HAVOC_bv32$2;
     v2$1 := (if p0$1 then _HAVOC_bv32$1 else v2$1);
     v2$2 := (if p0$2 then _HAVOC_bv32$2 else v2$2);
-    $cond$1 := (if p0$1 then v2$1 else $cond$1);
-    $cond$2 := (if p0$2 then v2$2 else $cond$2);
-    $cond$1 := (if p1$1 then 0bv32 else $cond$1);
-    $cond$2 := (if p1$2 then 0bv32 else $cond$2);
-    call {:sourceloc} {:sourceloc_num 5} _LOG_WRITE_$$__smem(true, local_id_x$1, $cond$1, $$__smem[1bv1][local_id_x$1]);
+    $0$1 := (if p0$1 then v2$1 else $0$1);
+    $0$2 := (if p0$2 then v2$2 else $0$2);
+    $0$1 := (if p1$1 then 0bv32 else $0$1);
+    $0$2 := (if p1$2 then 0bv32 else $0$2);
+    call {:sourceloc} {:sourceloc_num 5} _LOG_WRITE_$$__smem(true, local_id_x$1, $0$1, $$__smem[1bv1][local_id_x$1]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$__smem(true, local_id_x$2);
     assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 5} true;
-    call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 5} _CHECK_WRITE_$$__smem(true, local_id_x$2, $cond$2);
+    call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 5} _CHECK_WRITE_$$__smem(true, local_id_x$2, $0$2);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$__smem"} true;
-    $$__smem[1bv1][local_id_x$1] := $cond$1;
-    $$__smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2] := $cond$2;
-    goto __partitioned_block_$entry_1;
+    $$__smem[1bv1][local_id_x$1] := $0$1;
+    $$__smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2] := $0$2;
+    goto __partitioned_block_$0_1;
 
-  __partitioned_block_$entry_1:
+  __partitioned_block_$0_1:
     call {:sourceloc_num 6} $bugle_barrier_duplicated_0(1bv1, 1bv1);
     $s.0 := BV32_UDIV(group_size_x, 2bv32);
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $4;
 
-  $for.cond:
+  $4:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b9 ==> _WRITE_HAS_OCCURRED_$$__smem ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b8 ==> _READ_HAS_OCCURRED_$$__smem ==> _WATCHED_OFFSET == local_id_x$1;
@@ -257,7 +257,7 @@ implementation {:source_name "reduce2<int>"} {:kernel} $_Z7reduce2IiEvPT_S1_j($n
     call {:sourceloc_num 14} $bugle_barrier_duplicated_1(1bv1, 1bv1);
     $s.0 := BV32_LSHR($s.0, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $4;
 }
 
 

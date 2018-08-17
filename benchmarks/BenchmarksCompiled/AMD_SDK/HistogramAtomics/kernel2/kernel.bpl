@@ -90,22 +90,22 @@ implementation {:source_name "reduceKernel"} {:kernel} $reduceKernel($nSubHists:
   var $bin.0$1: bv32;
   var $bin.0$2: bv32;
   var $i.0: bv32;
-  var v2$1: bv32;
-  var v2$2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
   var v1: bool;
+  var v2$1: bv32;
+  var v2$2: bv32;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2);
     $bin.0$1, $i.0 := 0bv32, 0bv32;
     $bin.0$2 := 0bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessBreak"} _b7 ==> _READ_HAS_OCCURRED_$$Histogram ==> group_id_x$1 == BV32_DIV(_WATCHED_OFFSET, group_size_x);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b6 ==> _READ_HAS_OCCURRED_$$Histogram ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 256bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 256bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 256bv32), BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1)));
@@ -141,7 +141,7 @@ implementation {:source_name "reduceKernel"} {:kernel} $reduceKernel($nSubHists:
     $bin.0$1, $i.0 := BV32_ADD($bin.0$1, v2$1), BV32_ADD($i.0, 1bv32);
     $bin.0$2 := BV32_ADD($bin.0$2, v2$2);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

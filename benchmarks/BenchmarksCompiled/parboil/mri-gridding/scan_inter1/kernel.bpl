@@ -111,18 +111,6 @@ implementation {:source_name "scan_inter1_kernel"} {:kernel} $scan_inter1_kernel
   var $d.0: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
-  var v11$1: bv32;
-  var v11$2: bv32;
-  var v10$1: bv32;
-  var v10$2: bv32;
-  var v21$1: bv32;
-  var v21$2: bv32;
-  var v20$1: bv32;
-  var v20$2: bv32;
-  var v19$1: bv32;
-  var v19$2: bv32;
-  var v22$1: bv32;
-  var v22$2: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
   var v2$1: bv32;
@@ -135,32 +123,44 @@ implementation {:source_name "scan_inter1_kernel"} {:kernel} $scan_inter1_kernel
   var v5$2: bv32;
   var v6$1: bv32;
   var v6$2: bv32;
+  var v7$1: bv32;
+  var v7$2: bv32;
   var v8$1: bv32;
   var v8$2: bv32;
   var v9$1: bv32;
   var v9$2: bv32;
-  var v7$1: bv32;
-  var v7$2: bv32;
-  var v18$1: bv32;
-  var v18$2: bv32;
-  var v17$1: bv32;
-  var v17$2: bv32;
-  var v14$1: bv32;
-  var v14$2: bv32;
-  var v15$1: bv32;
-  var v15$2: bv32;
-  var v16$1: bv32;
-  var v16$2: bv32;
+  var v10$1: bv32;
+  var v10$2: bv32;
+  var v11$1: bv32;
+  var v11$2: bv32;
+  var v12: bool;
   var v13$1: bool;
   var v13$2: bool;
-  var v12: bool;
+  var v15$1: bv32;
+  var v15$2: bv32;
+  var v14$1: bv32;
+  var v14$2: bv32;
+  var v16$1: bv32;
+  var v16$2: bv32;
+  var v17$1: bv32;
+  var v17$2: bv32;
+  var v18$1: bv32;
+  var v18$2: bv32;
+  var v19$1: bv32;
+  var v19$2: bv32;
+  var v20$1: bv32;
+  var v20$2: bv32;
+  var v21$1: bv32;
+  var v21$2: bv32;
+  var v22$1: bv32;
+  var v22$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
   var p1$2: bool;
 
 
-  $entry:
+  $0:
     v0$1 := local_id_x$1;
     v0$2 := local_id_x$2;
     v1$1 := BV32_SUB(BV32_ADD(BV32_MUL(BV32_MUL(2bv32, $iter), BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1)), $iter), 1bv32);
@@ -209,9 +209,9 @@ implementation {:source_name "scan_inter1_kernel"} {:kernel} $scan_inter1_kernel
     $$scan_inter1_kernel.s_data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v9$2] := v11$2;
     $stride.0, $d.0 := 1bv32, group_size_x;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessBreak"} _b45 ==> _WRITE_HAS_OCCURRED_$$scan_inter1_kernel.s_data ==> local_id_x$1 == BV32_SUB(BV32_SUB(BV32_SUB(BV32_DIV(BV32_DIV(_WATCHED_OFFSET, 2bv32), $stride.0), BV32_DIV(BV32_MUL(local_id_x$1, $stride.0), $stride.0)), BV32_DIV(BV32_MUL(local_id_x$1, $stride.0), $stride.0)), BV32_DIV(BV32_MUL(local_id_x$1, $stride.0), $stride.0));
     assert {:tag "accessBreak"} _b44 ==> _WRITE_HAS_OCCURRED_$$scan_inter1_kernel.s_data ==> local_id_x$1 == BV32_SUB(BV32_SUB(BV32_SUB(BV32_DIV(BV32_DIV(_WATCHED_OFFSET, 2bv32), $stride.0), BV32_DIV(BV32_MUL(local_id_x$1, $stride.0), $stride.0)), BV32_DIV(BV32_MUL(local_id_x$1, $stride.0), $stride.0)), BV32_DIV(BV32_MUL(local_id_x$1, $stride.0), $stride.0));
@@ -339,7 +339,7 @@ implementation {:source_name "scan_inter1_kernel"} {:kernel} $scan_inter1_kernel
     $$scan_inter1_kernel.s_data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v18$2] := (if p1$2 then BV32_ADD(v20$2, v19$2) else $$scan_inter1_kernel.s_data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v18$2]);
     $stride.0, $d.0 := BV32_MUL($stride.0, 2bv32), BV32_LSHR($d.0, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

@@ -129,44 +129,44 @@ implementation {:source_name "updateVelocity_k"} {:kernel} $_Z16updateVelocity_k
 {
   var $p.0$1: bv32;
   var $p.0$2: bv32;
-  var v0$1: bv32;
-  var v0$2: bv32;
-  var v6$1: bv32;
-  var v6$2: bv32;
-  var v11$1: bv8;
-  var v11$2: bv8;
-  var v12$1: bv8;
-  var v12$2: bv8;
-  var v7$1: bv32;
-  var v7$2: bv32;
-  var v17$1: bv8;
-  var v17$2: bv8;
-  var v16$1: bv8;
-  var v16$2: bv8;
-  var v14$1: bv8;
-  var v14$2: bv8;
-  var v13$1: bv8;
-  var v13$2: bv8;
-  var v15$1: bv8;
-  var v15$2: bv8;
-  var v18$1: bv8;
-  var v18$2: bv8;
-  var v1$1: bool;
-  var v1$2: bool;
-  var v3$1: bv32;
-  var v3$2: bv32;
-  var v4$1: bool;
-  var v4$2: bool;
   var v5$1: bv32;
   var v5$2: bv32;
-  var v2$1: bool;
-  var v2$2: bool;
+  var v6$1: bv32;
+  var v6$2: bv32;
+  var v7$1: bv32;
+  var v7$2: bv32;
   var v8$1: bv32;
   var v8$2: bv32;
   var v9$1: bv32;
   var v9$2: bv32;
   var v10$1: bv32;
   var v10$2: bv32;
+  var v11$1: bv8;
+  var v11$2: bv8;
+  var v12$1: bv8;
+  var v12$2: bv8;
+  var v13$1: bv8;
+  var v13$2: bv8;
+  var v14$1: bv8;
+  var v14$2: bv8;
+  var v1$1: bool;
+  var v1$2: bool;
+  var v2$1: bool;
+  var v2$2: bool;
+  var v0$1: bv32;
+  var v0$2: bv32;
+  var v3$1: bv32;
+  var v3$2: bv32;
+  var v4$1: bool;
+  var v4$2: bool;
+  var v15$1: bv8;
+  var v15$2: bv8;
+  var v16$1: bv8;
+  var v16$2: bv8;
+  var v17$1: bv8;
+  var v17$2: bv8;
+  var v18$1: bv8;
+  var v18$2: bv8;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -181,10 +181,10 @@ implementation {:source_name "updateVelocity_k"} {:kernel} $_Z16updateVelocity_k
   var p5$2: bool;
   var _HAVOC_bv32$1: bv32;
   var _HAVOC_bv32$2: bv32;
-  var _WRITE_HAS_OCCURRED_$$v$ghost$$for.cond: bool;
+  var _WRITE_HAS_OCCURRED_$$v$ghost$$2: bool;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2);
     v1$1 := BV32_SLT(v0$1, $dx);
@@ -201,13 +201,13 @@ implementation {:source_name "updateVelocity_k"} {:kernel} $_Z16updateVelocity_k
     $p.0$2 := (if p0$2 then 0bv32 else $p.0$2);
     p1$1 := (if p0$1 then true else p1$1);
     p1$2 := (if p0$2 then true else p1$2);
-    _WRITE_HAS_OCCURRED_$$v$ghost$$for.cond := _WRITE_HAS_OCCURRED_$$v;
+    _WRITE_HAS_OCCURRED_$$v$ghost$$2 := _WRITE_HAS_OCCURRED_$$v;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $2;
 
-  $for.cond:
+  $2:
     assume {:captureState "loop_head_state_0"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b11 ==> !p0$1 ==> _WRITE_HAS_OCCURRED_$$v$ghost$$for.cond == _WRITE_HAS_OCCURRED_$$v;
+    assert {:tag "disabledMaintainsInstrumentation"} _b11 ==> !p0$1 ==> _WRITE_HAS_OCCURRED_$$v$ghost$$2 == _WRITE_HAS_OCCURRED_$$v;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b10 ==> _WRITE_HAS_OCCURRED_$$v ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, $pitch), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, $pitch), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, BV32_ADD(BV32_MUL(group_id_y$1, BV32_MUL($lb, group_size_y)), BV32_MUL(local_id_y$1, $lb))), $pitch), BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), 8bv32))) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, $pitch), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, $pitch), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(BV32_ADD(0bv32, BV32_ADD(BV32_MUL(group_id_y$1, BV32_MUL($lb, group_size_y)), BV32_MUL(local_id_y$1, $lb))), $pitch), BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), 8bv32)), 1bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, $pitch), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, $pitch), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(BV32_ADD(0bv32, BV32_ADD(BV32_MUL(group_id_y$1, BV32_MUL($lb, group_size_y)), BV32_MUL(local_id_y$1, $lb))), $pitch), BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), 8bv32)), 2bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, $pitch), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, $pitch), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(BV32_ADD(0bv32, BV32_ADD(BV32_MUL(group_id_y$1, BV32_MUL($lb, group_size_y)), BV32_MUL(local_id_y$1, $lb))), $pitch), BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), 8bv32)), 3bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, $pitch), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, $pitch), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(BV32_ADD(0bv32, BV32_ADD(BV32_MUL(group_id_y$1, BV32_MUL($lb, group_size_y)), BV32_MUL(local_id_y$1, $lb))), $pitch), BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), 8bv32)), 4bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, $pitch), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, $pitch), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(BV32_ADD(0bv32, BV32_ADD(BV32_MUL(group_id_y$1, BV32_MUL($lb, group_size_y)), BV32_MUL(local_id_y$1, $lb))), $pitch), BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), 8bv32)), 5bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, $pitch), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, $pitch), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(BV32_ADD(0bv32, BV32_ADD(BV32_MUL(group_id_y$1, BV32_MUL($lb, group_size_y)), BV32_MUL(local_id_y$1, $lb))), $pitch), BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), 8bv32)), 6bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, $pitch), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, $pitch), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(BV32_ADD(0bv32, BV32_ADD(BV32_MUL(group_id_y$1, BV32_MUL($lb, group_size_y)), BV32_MUL(local_id_y$1, $lb))), $pitch), BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), 8bv32)), 7bv32));
     assert {:tag "accessUpperBoundBlock"} _b9 ==> _WRITE_HAS_OCCURRED_$$v ==> BV32_SLT(_WATCHED_OFFSET, BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(group_id_x$1, 1bv32), group_size_x), local_id_x$1), 8bv32));
     assert {:tag "accessLowerBoundBlock"} _b8 ==> _WRITE_HAS_OCCURRED_$$v ==> BV32_SLE(BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), 8bv32), _WATCHED_OFFSET);
@@ -354,16 +354,16 @@ implementation {:source_name "updateVelocity_k"} {:kernel} $_Z16updateVelocity_k
     $p.0$2 := (if p2$2 then BV32_ADD($p.0$2, 1bv32) else $p.0$2);
     p1$1 := (if p2$1 then true else p1$1);
     p1$2 := (if p2$2 then true else p1$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $2.backedge, $2.tail;
 
-  $for.cond.tail:
+  $2.tail:
     assume !p1$1 && !p1$2;
     return;
 
-  $for.cond.backedge:
+  $2.backedge:
     assume {:backedge} p1$1 || p1$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $2;
 }
 
 

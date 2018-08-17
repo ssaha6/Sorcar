@@ -104,6 +104,8 @@ const {:num_groups_y} num_groups_y: bv32;
 
 const {:num_groups_z} num_groups_z: bv32;
 
+function FADD32(bv32, bv32) : bv32;
+
 function FDIV32(bv32, bv32) : bv32;
 
 function FMUL32(bv32, bv32) : bv32;
@@ -441,13 +443,13 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$shadow"} true;
     v9$1 := (if p3$1 then $$shadow[1bv1][v8$1] else v9$1);
     v9$2 := (if p3$2 then $$shadow[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v8$2] else v9$2);
-    call {:sourceloc} {:sourceloc_num 19} _LOG_WRITE_$$shadow(p3$1, v8$1, FSUB32(v9$1, FMUL32(v6$1, v7$1)), $$shadow[1bv1][v8$1]);
+    call {:sourceloc} {:sourceloc_num 19} _LOG_WRITE_$$shadow(p3$1, v8$1, FADD32(FMUL32(FSUB32(2147483648bv32, v6$1), v7$1), v9$1), $$shadow[1bv1][v8$1]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$shadow(p3$2, v8$2);
     assume {:do_not_predicate} {:check_id "check_state_12"} {:captureState "check_state_12"} {:sourceloc} {:sourceloc_num 19} true;
-    call {:check_id "check_state_12"} {:sourceloc} {:sourceloc_num 19} _CHECK_WRITE_$$shadow(p3$2, v8$2, FSUB32(v9$2, FMUL32(v6$2, v7$2)));
+    call {:check_id "check_state_12"} {:sourceloc} {:sourceloc_num 19} _CHECK_WRITE_$$shadow(p3$2, v8$2, FADD32(FMUL32(FSUB32(2147483648bv32, v6$2), v7$2), v9$2));
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$shadow"} true;
-    $$shadow[1bv1][v8$1] := (if p3$1 then FSUB32(v9$1, FMUL32(v6$1, v7$1)) else $$shadow[1bv1][v8$1]);
-    $$shadow[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v8$2] := (if p3$2 then FSUB32(v9$2, FMUL32(v6$2, v7$2)) else $$shadow[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v8$2]);
+    $$shadow[1bv1][v8$1] := (if p3$1 then FADD32(FMUL32(FSUB32(2147483648bv32, v6$1), v7$1), v9$1) else $$shadow[1bv1][v8$1]);
+    $$shadow[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v8$2] := (if p3$2 then FADD32(FMUL32(FSUB32(2147483648bv32, v6$2), v7$2), v9$2) else $$shadow[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v8$2]);
     $j.0$1 := (if p3$1 then BV32_ADD($j.0$1, 1bv32) else $j.0$1);
     $j.0$2 := (if p3$2 then BV32_ADD($j.0$2, 1bv32) else $j.0$2);
     p2$1 := (if p3$1 then true else p2$1);
@@ -558,13 +560,13 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$shadow"} true;
     v18$1 := (if p7$1 then $$shadow[1bv1][v17$1] else v18$1);
     v18$2 := (if p7$2 then $$shadow[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v17$2] else v18$2);
-    call {:sourceloc} {:sourceloc_num 34} _LOG_WRITE_$$shadow(p7$1, v17$1, FSUB32(v18$1, FMUL32(v15$1, v16$1)), $$shadow[1bv1][v17$1]);
+    call {:sourceloc} {:sourceloc_num 34} _LOG_WRITE_$$shadow(p7$1, v17$1, FADD32(FMUL32(FSUB32(2147483648bv32, v15$1), v16$1), v18$1), $$shadow[1bv1][v17$1]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$shadow(p7$2, v17$2);
     assume {:do_not_predicate} {:check_id "check_state_5"} {:captureState "check_state_5"} {:sourceloc} {:sourceloc_num 34} true;
-    call {:check_id "check_state_5"} {:sourceloc} {:sourceloc_num 34} _CHECK_WRITE_$$shadow(p7$2, v17$2, FSUB32(v18$2, FMUL32(v15$2, v16$2)));
+    call {:check_id "check_state_5"} {:sourceloc} {:sourceloc_num 34} _CHECK_WRITE_$$shadow(p7$2, v17$2, FADD32(FMUL32(FSUB32(2147483648bv32, v15$2), v16$2), v18$2));
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$shadow"} true;
-    $$shadow[1bv1][v17$1] := (if p7$1 then FSUB32(v18$1, FMUL32(v15$1, v16$1)) else $$shadow[1bv1][v17$1]);
-    $$shadow[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v17$2] := (if p7$2 then FSUB32(v18$2, FMUL32(v15$2, v16$2)) else $$shadow[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v17$2]);
+    $$shadow[1bv1][v17$1] := (if p7$1 then FADD32(FMUL32(FSUB32(2147483648bv32, v15$1), v16$1), v18$1) else $$shadow[1bv1][v17$1]);
+    $$shadow[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v17$2] := (if p7$2 then FADD32(FMUL32(FSUB32(2147483648bv32, v15$2), v16$2), v18$2) else $$shadow[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v17$2]);
     $j.1$1 := (if p7$1 then BV32_ADD($j.1$1, 1bv32) else $j.1$1);
     $j.1$2 := (if p7$2 then BV32_ADD($j.1$2, 1bv32) else $j.1$2);
     p6$1 := (if p7$1 then true else p6$1);

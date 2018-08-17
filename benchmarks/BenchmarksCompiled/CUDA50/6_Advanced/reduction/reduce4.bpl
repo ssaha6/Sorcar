@@ -107,8 +107,8 @@ procedure {:source_name "reduce4<int, 256>"} {:kernel} $_Z7reduce4IiLj256EEvPT_S
 
 implementation {:source_name "reduce4<int, 256>"} {:kernel} $_Z7reduce4IiLj256EEvPT_S1_j($n: bv32)
 {
-  var $cond$1: bv32;
-  var $cond$2: bv32;
+  var $0$1: bv32;
+  var $0$2: bv32;
   var $mySum.0$1: bv32;
   var $mySum.0$2: bv32;
   var $mySum.1$1: bv32;
@@ -120,47 +120,47 @@ implementation {:source_name "reduce4<int, 256>"} {:kernel} $_Z7reduce4IiLj256EE
   var v0$2: bv32;
   var v1$1: bool;
   var v1$2: bool;
-  var v12$1: bv32;
-  var v12$2: bv32;
   var v2$1: bv32;
   var v2$2: bv32;
+  var v3$1: bool;
+  var v3$2: bool;
   var v4$1: bv32;
   var v4$2: bv32;
-  var v10$1: bv32;
-  var v10$2: bv32;
+  var v5: bool;
+  var v6$1: bool;
+  var v6$2: bool;
   var v7$1: bv32;
   var v7$2: bv32;
   var v8$1: bv32;
   var v8$2: bv32;
-  var v5: bool;
-  var v6$1: bool;
-  var v6$2: bool;
-  var v3$1: bool;
-  var v3$2: bool;
-  var v11$1: bv32;
-  var v11$2: bv32;
-  var v15$1: bv32;
-  var v15$2: bv32;
   var v9$1: bool;
   var v9$2: bool;
+  var v10$1: bv32;
+  var v10$2: bv32;
+  var v11$1: bv32;
+  var v11$2: bv32;
+  var v12$1: bv32;
+  var v12$2: bv32;
   var v13$1: bv32;
   var v13$2: bv32;
-  var v17$1: bv32;
-  var v17$2: bv32;
-  var v19$1: bv32;
-  var v19$2: bv32;
-  var v22$1: bv32;
-  var v22$2: bv32;
-  var v16$1: bv32;
-  var v16$2: bv32;
-  var v20$1: bv32;
-  var v20$2: bv32;
   var v14$1: bv32;
   var v14$2: bv32;
+  var v15$1: bv32;
+  var v15$2: bv32;
+  var v16$1: bv32;
+  var v16$2: bv32;
+  var v17$1: bv32;
+  var v17$2: bv32;
   var v18$1: bv32;
   var v18$2: bv32;
+  var v19$1: bv32;
+  var v19$2: bv32;
+  var v20$1: bv32;
+  var v20$2: bv32;
   var v21$1: bool;
   var v21$2: bool;
+  var v22$1: bv32;
+  var v22$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -185,7 +185,7 @@ implementation {:source_name "reduce4<int, 256>"} {:kernel} $_Z7reduce4IiLj256EE
   var _HAVOC_bv32$2: bv32;
 
 
-  __partitioned_block_$entry_0:
+  __partitioned_block_$0_0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, BV32_MUL(group_size_x, 2bv32)), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, BV32_MUL(group_size_x, 2bv32)), local_id_x$2);
     v1$1 := BV32_ULT(v0$1, $n);
@@ -205,10 +205,10 @@ implementation {:source_name "reduce4<int, 256>"} {:kernel} $_Z7reduce4IiLj256EE
     havoc _HAVOC_bv32$1, _HAVOC_bv32$2;
     v2$1 := (if p0$1 then _HAVOC_bv32$1 else v2$1);
     v2$2 := (if p0$2 then _HAVOC_bv32$2 else v2$2);
-    $cond$1 := (if p0$1 then v2$1 else $cond$1);
-    $cond$2 := (if p0$2 then v2$2 else $cond$2);
-    $cond$1 := (if p1$1 then 0bv32 else $cond$1);
-    $cond$2 := (if p1$2 then 0bv32 else $cond$2);
+    $0$1 := (if p0$1 then v2$1 else $0$1);
+    $0$2 := (if p0$2 then v2$2 else $0$2);
+    $0$1 := (if p1$1 then 0bv32 else $0$1);
+    $0$2 := (if p1$2 then 0bv32 else $0$2);
     v3$1 := BV32_ULT(BV32_ADD(v0$1, 256bv32), $n);
     v3$2 := BV32_ULT(BV32_ADD(v0$2, 256bv32), $n);
     p2$1 := (if v3$1 then v3$1 else p2$1);
@@ -218,10 +218,10 @@ implementation {:source_name "reduce4<int, 256>"} {:kernel} $_Z7reduce4IiLj256EE
     havoc _HAVOC_bv32$1, _HAVOC_bv32$2;
     v4$1 := (if p2$1 then _HAVOC_bv32$1 else v4$1);
     v4$2 := (if p2$2 then _HAVOC_bv32$2 else v4$2);
-    $mySum.0$1 := (if p2$1 then BV32_ADD($cond$1, v4$1) else $mySum.0$1);
-    $mySum.0$2 := (if p2$2 then BV32_ADD($cond$2, v4$2) else $mySum.0$2);
-    $mySum.0$1 := (if p3$1 then $cond$1 else $mySum.0$1);
-    $mySum.0$2 := (if p3$2 then $cond$2 else $mySum.0$2);
+    $mySum.0$1 := (if p2$1 then BV32_ADD($0$1, v4$1) else $mySum.0$1);
+    $mySum.0$2 := (if p2$2 then BV32_ADD($0$2, v4$2) else $mySum.0$2);
+    $mySum.0$1 := (if p3$1 then $0$1 else $mySum.0$1);
+    $mySum.0$2 := (if p3$2 then $0$2 else $mySum.0$2);
     call _PRE_WARP_SYNC_$$__smem_WRITE(true, true);
     call {:sourceloc} {:sourceloc_num 8} _LOG_WRITE_$$__smem(true, local_id_x$1, $mySum.0$1, $$__smem[1bv1][local_id_x$1]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$__smem(true, local_id_x$2);
@@ -231,16 +231,16 @@ implementation {:source_name "reduce4<int, 256>"} {:kernel} $_Z7reduce4IiLj256EE
     call _POST_WARP_SYNC_$$__smem_WRITE(true, true);
     $$__smem[1bv1][local_id_x$1] := $mySum.0$1;
     $$__smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2] := $mySum.0$2;
-    goto __partitioned_block_$entry_1;
+    goto __partitioned_block_$0_1;
 
-  __partitioned_block_$entry_1:
+  __partitioned_block_$0_1:
     call {:sourceloc_num 9} $bugle_barrier_duplicated_0(1bv1, 1bv1);
     $mySum.1$1, $s.0 := $mySum.0$1, BV32_UDIV(group_size_x, 2bv32);
     $mySum.1$2 := $mySum.0$2;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $6;
 
-  $for.cond:
+  $6:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b14 ==> _WRITE_HAS_OCCURRED_$$__smem ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b13 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_WRITE_HAS_OCCURRED_$$__smem;
@@ -455,7 +455,7 @@ implementation {:source_name "reduce4<int, 256>"} {:kernel} $_Z7reduce4IiLj256EE
     $mySum.1$1, $s.0 := $mySum.2$1, BV32_LSHR($s.0, 1bv32);
     $mySum.1$2 := $mySum.2$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $6;
 }
 
 

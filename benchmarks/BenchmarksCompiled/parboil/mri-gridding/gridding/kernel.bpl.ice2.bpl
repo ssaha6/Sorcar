@@ -445,8 +445,6 @@ implementation {:source_name "gridding_GPU"} {:kernel} $gridding_GPU($beta: bv32
   var $pt.4$2: bv64;
   var $density.4$1: bv32;
   var $density.4$2: bv32;
-  var v13$1: bv32;
-  var v13$2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
   var v1$1: bv32;
@@ -473,6 +471,8 @@ implementation {:source_name "gridding_GPU"} {:kernel} $gridding_GPU($beta: bv32
   var v11$2: bv32;
   var v12$1: bool;
   var v12$2: bool;
+  var v13$1: bv32;
+  var v13$2: bv32;
   var v14$1: bool;
   var v14$2: bool;
   var v15$1: bv32;
@@ -483,10 +483,10 @@ implementation {:source_name "gridding_GPU"} {:kernel} $gridding_GPU($beta: bv32
   var v17$2: bv32;
   var v18$1: bool;
   var v18$2: bool;
-  var v19$1: bv32;
-  var v19$2: bv32;
   var v20$1: bool;
   var v20$2: bool;
+  var v19$1: bv32;
+  var v19$2: bv32;
   var v21$1: bool;
   var v21$2: bool;
   var v22$1: bv32;
@@ -1314,8 +1314,8 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$gridding_GPU.sharedBin"} true;
     v48$1 := (if p30$1 then $$gridding_GPU.sharedBin[1bv1][BV32_ADD(BV32_MUL($j.0$1, 6bv32), 4bv32)] else v48$1);
     v48$2 := (if p30$2 then $$gridding_GPU.sharedBin[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($j.0$2, 6bv32), 4bv32)] else v48$2);
-    v49$1 := (if p30$1 then FADD32(FADD32(FMUL32(FSUB32(v43$1, SI32_TO_FP32(v4$1)), FSUB32(v44$1, SI32_TO_FP32(v4$1))), FMUL32(FSUB32(v45$1, SI32_TO_FP32(v5$1)), FSUB32(v46$1, SI32_TO_FP32(v5$1)))), FMUL32(FSUB32(v47$1, SI32_TO_FP32(v6$1)), FSUB32(v48$1, SI32_TO_FP32(v6$1)))) else v49$1);
-    v49$2 := (if p30$2 then FADD32(FADD32(FMUL32(FSUB32(v43$2, SI32_TO_FP32(v4$2)), FSUB32(v44$2, SI32_TO_FP32(v4$2))), FMUL32(FSUB32(v45$2, SI32_TO_FP32(v5$2)), FSUB32(v46$2, SI32_TO_FP32(v5$2)))), FMUL32(FSUB32(v47$2, SI32_TO_FP32(v6$2)), FSUB32(v48$2, SI32_TO_FP32(v6$2)))) else v49$2);
+    v49$1 := (if p30$1 then FADD32(FMUL32(FSUB32(v47$1, SI32_TO_FP32(v6$1)), FSUB32(v48$1, SI32_TO_FP32(v6$1))), FADD32(FMUL32(FSUB32(v45$1, SI32_TO_FP32(v5$1)), FSUB32(v46$1, SI32_TO_FP32(v5$1))), FMUL32(FSUB32(v43$1, SI32_TO_FP32(v4$1)), FSUB32(v44$1, SI32_TO_FP32(v4$1))))) else v49$1);
+    v49$2 := (if p30$2 then FADD32(FMUL32(FSUB32(v47$2, SI32_TO_FP32(v6$2)), FSUB32(v48$2, SI32_TO_FP32(v6$2))), FADD32(FMUL32(FSUB32(v45$2, SI32_TO_FP32(v5$2)), FSUB32(v46$2, SI32_TO_FP32(v5$2))), FMUL32(FSUB32(v43$2, SI32_TO_FP32(v4$2)), FSUB32(v44$2, SI32_TO_FP32(v4$2))))) else v49$2);
     v50$1 := (if p30$1 then FLT64(FP32_CONV64(v49$1), 4618722892845154304bv64) else v50$1);
     v50$2 := (if p30$2 then FLT64(FP32_CONV64(v49$2), 4618722892845154304bv64) else v50$2);
     p32$1 := (if p30$1 && v50$1 then v50$1 else p32$1);
@@ -1332,8 +1332,8 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     v53$2 := (if p32$2 then FMUL32(FDIV32(FSUB32(2147483648bv32, FADD32(FMUL32(v52$2, FADD32(FMUL32(v52$2, FADD32(FMUL32(v52$2, FADD32(FMUL32(v52$2, FADD32(FMUL32(v52$2, FADD32(FMUL32(v52$2, FADD32(FMUL32(v52$2, FADD32(FMUL32(v52$2, FADD32(FMUL32(v52$2, FADD32(FMUL32(v52$2, FADD32(FMUL32(v52$2, FADD32(FMUL32(v52$2, FADD32(FMUL32(v52$2, FADD32(FMUL32(v52$2, 432777539bv32), 523487654bv32)), 610081361bv32)), 692319900bv32)), 772037077bv32)), 847880648bv32)), 920370152bv32)), 990168357bv32)), 1055725654bv32)), 1117183506bv32)), 1174523828bv32)), 1225494738bv32)), 1269111979bv32)), 1302990772bv32)), 1319876621bv32)), FADD32(FMUL32(v52$2, FADD32(FMUL32(v52$2, FSUB32(v52$2, 1161840514bv32)), 1247030429bv32)), 3467360269bv32)), v39$2) else v53$2);
     v54$1 := (if p32$1 then $pt.3$1[64:32] else v54$1);
     v54$2 := (if p32$2 then $pt.3$2[64:32] else v54$2);
-    $pt.4$1, $density.4$1 := (if p32$1 then FADD32(v54$1, FMUL32(v53$1, v38$1)) ++ FADD32($pt.3$1[32:0], FMUL32(v53$1, v37$1)) else $pt.4$1), (if p32$1 then FADD32($density.3$1, 1065353216bv32) else $density.4$1);
-    $pt.4$2, $density.4$2 := (if p32$2 then FADD32(v54$2, FMUL32(v53$2, v38$2)) ++ FADD32($pt.3$2[32:0], FMUL32(v53$2, v37$2)) else $pt.4$2), (if p32$2 then FADD32($density.3$2, 1065353216bv32) else $density.4$2);
+    $pt.4$1, $density.4$1 := (if p32$1 then FADD32(FMUL32(v53$1, v38$1), v54$1) ++ FADD32(FMUL32(v53$1, v37$1), $pt.3$1[32:0]) else $pt.4$1), (if p32$1 then FADD32($density.3$1, 1065353216bv32) else $density.4$1);
+    $pt.4$2, $density.4$2 := (if p32$2 then FADD32(FMUL32(v53$2, v38$2), v54$2) ++ FADD32(FMUL32(v53$2, v37$2), $pt.3$2[32:0]) else $pt.4$2), (if p32$2 then FADD32($density.3$2, 1065353216bv32) else $density.4$2);
     $pt.5$1, $density.5$1 := (if p30$1 then $pt.4$1 else $pt.5$1), (if p30$1 then $density.4$1 else $density.5$1);
     $pt.5$2, $density.5$2 := (if p30$2 then $pt.4$2 else $pt.5$2), (if p30$2 then $density.4$2 else $density.5$2);
     $pt.3$1, $density.3$1, $j.0$1 := (if p23$1 then $pt.5$1 else $pt.3$1), (if p23$1 then $density.5$1 else $density.3$1), (if p23$1 then BV32_ADD($j.0$1, 1bv32) else $j.0$1);

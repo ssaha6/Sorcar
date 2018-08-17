@@ -62,6 +62,10 @@ var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source
 
 var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_img0: bool;
 
+const $arrayId$$g_img0: arrayId;
+
+axiom $arrayId$$g_img0 == 1bv4;
+
 axiom {:array_info "$$g_img1"} {:global} {:elem_width 32} {:source_name "g_img1"} {:source_elem_width 32} {:source_dimensions "*"} true;
 
 var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$g_img1: bool;
@@ -69,6 +73,10 @@ var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source
 var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$g_img1: bool;
 
 var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_img1: bool;
+
+const $arrayId$$g_img1: arrayId;
+
+axiom $arrayId$$g_img1 == 2bv4;
 
 var {:source_name "g_odata"} {:global} $$g_odata: [bv32]bv32;
 
@@ -80,11 +88,19 @@ var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source
 
 var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_odata: bool;
 
+const $arrayId$$g_odata: arrayId;
+
+axiom $arrayId$$g_odata == 3bv4;
+
 var {:source_name "imLeftA"} $$imLeftA$1: [bv32]bv32;
 
 var {:source_name "imLeftA"} $$imLeftA$2: [bv32]bv32;
 
 axiom {:array_info "$$imLeftA"} {:elem_width 32} {:source_name "imLeftA"} {:source_elem_width 32} {:source_dimensions "3"} true;
+
+const $arrayId$$imLeftA: arrayId;
+
+axiom $arrayId$$imLeftA == 4bv4;
 
 var {:source_name "imLeftB"} $$imLeftB$1: [bv32]bv32;
 
@@ -92,13 +108,33 @@ var {:source_name "imLeftB"} $$imLeftB$2: [bv32]bv32;
 
 axiom {:array_info "$$imLeftB"} {:elem_width 32} {:source_name "imLeftB"} {:source_elem_width 32} {:source_dimensions "3"} true;
 
+const $arrayId$$imLeftB: arrayId;
+
+axiom $arrayId$$imLeftB == 5bv4;
+
 axiom {:array_info "$$0"} {:elem_width 32} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
+
+const $arrayId$$0: arrayId;
+
+axiom $arrayId$$0 == 6bv4;
 
 axiom {:array_info "$$1"} {:elem_width 32} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
 
+const $arrayId$$1: arrayId;
+
+axiom $arrayId$$1 == 7bv4;
+
 axiom {:array_info "$$2"} {:elem_width 32} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
 
+const $arrayId$$2: arrayId;
+
+axiom $arrayId$$2 == 8bv4;
+
 axiom {:array_info "$$3"} {:elem_width 32} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
+
+const $arrayId$$3: arrayId;
+
+axiom $arrayId$$3 == 9bv4;
 
 axiom {:array_info "$$tex2Dleft"} {:global} {:elem_width 32} {:source_name "tex2Dleft"} {:source_elem_width 96} {:source_dimensions "1"} true;
 
@@ -107,6 +143,10 @@ var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 96} {:source
 var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 96} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$tex2Dleft: bool;
 
 var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 96} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$tex2Dleft: bool;
+
+const $arrayId$$tex2Dleft: arrayId;
+
+axiom $arrayId$$tex2Dleft == 10bv4;
 
 var {:source_name "diff"} {:group_shared} $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff: [bv1][bv32]bv32;
 
@@ -118,6 +158,10 @@ var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:
 
 var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*,48"} _ATOMIC_HAS_OCCURRED_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff: bool;
 
+const $arrayId$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff: arrayId;
+
+axiom $arrayId$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff == 11bv4;
+
 axiom {:array_info "$$tex2Dright"} {:global} {:elem_width 32} {:source_name "tex2Dright"} {:source_elem_width 96} {:source_dimensions "1"} true;
 
 var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 96} {:source_dimensions "*"} _READ_HAS_OCCURRED_$$tex2Dright: bool;
@@ -125,6 +169,33 @@ var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 96} {:source
 var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 96} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$tex2Dright: bool;
 
 var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 96} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$tex2Dright: bool;
+
+const $arrayId$$tex2Dright: arrayId;
+
+axiom $arrayId$$tex2Dright == 12bv4;
+
+type ptr = bv32;
+
+type arrayId = bv4;
+
+function {:inline true} MKPTR(base: arrayId, offset: bv32) : ptr
+{
+  base ++ offset[28:0]
+}
+
+function {:inline true} base#MKPTR(p: ptr) : arrayId
+{
+  p[32:28]
+}
+
+function {:inline true} offset#MKPTR(p: ptr) : bv32
+{
+  0bv4 ++ p[28:0]
+}
+
+const $arrayId$$null$: arrayId;
+
+axiom $arrayId$$null$ == 0bv4;
 
 const _WATCHED_OFFSET: bv32;
 
@@ -268,27 +339,25 @@ implementation {:source_name "stereoDisparityKernel"} {:kernel} $_Z21stereoDispa
   var v12$2: bv32;
   var v13$1: bv32;
   var v13$2: bv32;
-  var v14$1: bv32;
-  var v14$2: bv32;
-  var v15$1: bv32;
-  var v15$2: bv32;
-  var v16$1: bv32;
-  var v16$2: bv32;
+  var v14: bool;
+  var v15: bool;
+  var v16: bv32;
   var v17$1: bv32;
   var v17$2: bv32;
   var v18$1: bv32;
   var v18$2: bv32;
   var v19$1: bv32;
   var v19$2: bv32;
-  var v20: bool;
-  var v21: bool;
-  var v22: bv32;
-  var v23$1: bv32;
-  var v23$2: bv32;
-  var v24$1: bv32;
-  var v24$2: bv32;
-  var v25$1: bv32;
-  var v25$2: bv32;
+  var v20$1: bv32;
+  var v20$2: bv32;
+  var v21$1: bv32;
+  var v21$2: bv32;
+  var v22$1: bv32;
+  var v22$2: bv32;
+  var v23: bool;
+  var v24: bv32;
+  var v25$1: bool;
+  var v25$2: bool;
   var v26$1: bv32;
   var v26$2: bv32;
   var v27$1: bv32;
@@ -303,40 +372,18 @@ implementation {:source_name "stereoDisparityKernel"} {:kernel} $_Z21stereoDispa
   var v31$2: bv32;
   var v32: bool;
   var v33: bv32;
-  var v34$1: bool;
-  var v34$2: bool;
+  var v34: bool;
   var v35$1: bv32;
   var v35$2: bv32;
-  var v36$1: bv32;
-  var v36$2: bv32;
+  var v36: bool;
   var v37$1: bv32;
   var v37$2: bv32;
-  var v38$1: bv32;
-  var v38$2: bv32;
-  var v39$1: bv32;
-  var v39$2: bv32;
-  var v40$1: bv32;
-  var v40$2: bv32;
-  var v41$1: bv32;
-  var v41$2: bv32;
-  var v42$1: bv32;
-  var v42$2: bv32;
-  var v43$1: bv32;
-  var v43$2: bv32;
-  var v44: bool;
-  var v45: bv32;
-  var v46: bool;
-  var v47$1: bv32;
-  var v47$2: bv32;
-  var v48: bool;
-  var v49$1: bv32;
-  var v49$2: bv32;
-  var v50$1: bool;
-  var v50$2: bool;
-  var v51$1: bool;
-  var v51$2: bool;
-  var v52$1: bool;
-  var v52$2: bool;
+  var v38$1: bool;
+  var v38$2: bool;
+  var v39$1: bool;
+  var v39$2: bool;
+  var v40$1: bool;
+  var v40$2: bool;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -412,8 +459,8 @@ implementation {:source_name "stereoDisparityKernel"} {:kernel} $_Z21stereoDispa
 assert  my_inv (  (  BV32_SLE(0bv32, $d.0) ) ,  (  BV32_SLE($d.0, $minDisparity) ) ,  (  BV32_SGE($d.0, $minDisparity) ) ,  (  BV32_ULE($d.0, $minDisparity) ) ,  (  BV32_UGE($d.0, $minDisparity) ) ,  (  BV32_SLE($bestCost.0$1, 9999999bv32) )  && (  BV32_SLE($bestCost.0$2, 9999999bv32) ) ,  (  BV32_SGE($bestCost.0$1, 9999999bv32) )  && (  BV32_SGE($bestCost.0$2, 9999999bv32) ) ,  (  BV32_ULE($bestCost.0$1, 9999999bv32) )  && (  BV32_ULE($bestCost.0$2, 9999999bv32) ) ,  (  BV32_UGE($bestCost.0$1, 9999999bv32) )  && (  BV32_UGE($bestCost.0$2, 9999999bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  !_READ_HAS_OCCURRED_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff ) ,  (  !_WRITE_HAS_OCCURRED_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff ) ,  (  _READ_HAS_OCCURRED_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 48bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 48bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, BV32_ADD(local_id_y$1, 8bv32)), 48bv32), BV32_ADD(local_id_x$1, 8bv32))) ) ,  (  _WRITE_HAS_OCCURRED_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff ==> BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 8bv32), 48bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 8bv32), 48bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_MUL(0bv32, 8bv32), 4294967288bv32), BV32_ADD(local_id_y$1, 8bv32)), 48bv32), BV32_ADD(local_id_x$1, 8bv32))) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true  ); 
 
 
-    assert {:block_sourceloc} {:sourceloc_num 28} true;
-    v20 := BV32_SLE($d.0, $maxDisparity);
+    assert {:block_sourceloc} {:sourceloc_num 22} true;
+    v14 := BV32_SLE($d.0, $maxDisparity);
     p4$1 := false;
     p4$2 := false;
     p5$1 := false;
@@ -425,26 +472,26 @@ assert  my_inv (  (  BV32_SLE(0bv32, $d.0) ) ,  (  BV32_SLE($d.0, $minDisparity)
     goto $truebb0, $falsebb0;
 
   $falsebb0:
-    assume {:partition} !v20;
-    v51$1 := BV32_SLT(v1$1, $h);
-    v51$2 := BV32_SLT(v1$2, $h);
-    p4$1 := (if v51$1 then v51$1 else p4$1);
-    p4$2 := (if v51$2 then v51$2 else p4$2);
-    v52$1 := (if p4$1 then BV32_SLT(v0$1, $w) else v52$1);
-    v52$2 := (if p4$2 then BV32_SLT(v0$2, $w) else v52$2);
-    p5$1 := (if p4$1 && v52$1 then v52$1 else p5$1);
-    p5$2 := (if p4$2 && v52$2 then v52$2 else p5$2);
-    call {:sourceloc} {:sourceloc_num 95} _LOG_WRITE_$$g_odata(p5$1, BV32_ADD(BV32_MUL(v1$1, $w), v0$1), $bestDisparity.0$1, $$g_odata[BV32_ADD(BV32_MUL(v1$1, $w), v0$1)]);
+    assume {:partition} !v14;
+    v39$1 := BV32_SLT(v1$1, $h);
+    v39$2 := BV32_SLT(v1$2, $h);
+    p4$1 := (if v39$1 then v39$1 else p4$1);
+    p4$2 := (if v39$2 then v39$2 else p4$2);
+    v40$1 := (if p4$1 then BV32_SLT(v0$1, $w) else v40$1);
+    v40$2 := (if p4$2 then BV32_SLT(v0$2, $w) else v40$2);
+    p5$1 := (if p4$1 && v40$1 then v40$1 else p5$1);
+    p5$2 := (if p4$2 && v40$2 then v40$2 else p5$2);
+    call {:sourceloc} {:sourceloc_num 83} _LOG_WRITE_$$g_odata(p5$1, BV32_ADD(BV32_MUL(v1$1, $w), v0$1), $bestDisparity.0$1, $$g_odata[BV32_ADD(BV32_MUL(v1$1, $w), v0$1)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$g_odata(p5$2, BV32_ADD(BV32_MUL(v1$2, $w), v0$2));
-    assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 95} true;
-    call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 95} _CHECK_WRITE_$$g_odata(p5$2, BV32_ADD(BV32_MUL(v1$2, $w), v0$2), $bestDisparity.0$2);
+    assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 83} true;
+    call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 83} _CHECK_WRITE_$$g_odata(p5$2, BV32_ADD(BV32_MUL(v1$2, $w), v0$2), $bestDisparity.0$2);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$g_odata"} true;
     $$g_odata[BV32_ADD(BV32_MUL(v1$1, $w), v0$1)] := (if p5$1 then $bestDisparity.0$1 else $$g_odata[BV32_ADD(BV32_MUL(v1$1, $w), v0$1)]);
     $$g_odata[BV32_ADD(BV32_MUL(v1$2, $w), v0$2)] := (if p5$2 then $bestDisparity.0$2 else $$g_odata[BV32_ADD(BV32_MUL(v1$2, $w), v0$2)]);
     return;
 
   $truebb0:
-    assume {:partition} v20;
+    assume {:partition} v14;
     $i1.0 := 0bv32;
     assume {:captureState "loop_entry_state_5_0"} true;
     goto $7;
@@ -463,14 +510,14 @@ assert  my_inv (  (  BV32_SLE(0bv32, $d.0) ) ,  (  BV32_SLE($d.0, $minDisparity)
 assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  BV32_SLE(0bv32, $i1.0) ) ,  (  BV32_SLE($i1.0, 0bv32) ) ,  (  BV32_SGE($i1.0, 0bv32) ) ,  (  BV32_ULE($i1.0, 0bv32) ) ,  (  BV32_UGE($i1.0, 0bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  _WRITE_HAS_OCCURRED_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff ==> local_id_y$1 == BV32_DIV(_WATCHED_OFFSET, 48bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true  ); 
 
 
-    assert {:block_sourceloc} {:sourceloc_num 30} true;
-    assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 31} {:thread 1} (if _WRITE_HAS_OCCURRED_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff ==> BV32_UREM(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), 48bv32) == BV32_SUB(v2$1, 8bv32) then 1bv1 else 0bv1) != 0bv1;
-    assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 32} {:thread 1} (if _WRITE_HAS_OCCURRED_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff ==> BV32_UREM(BV32_ADD(BV32_SUB(BV32_UDIV(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), 48bv32), v3$1), 8bv32), 8bv32) == 0bv32 then 1bv1 else 0bv1) != 0bv1;
-    v21 := BV32_SLT($i1.0, 3bv32);
+    assert {:block_sourceloc} {:sourceloc_num 24} true;
+    assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 25} {:thread 1} (if _WRITE_HAS_OCCURRED_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff ==> BV32_UREM(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), 48bv32) == BV32_SUB(v2$1, 8bv32) then 1bv1 else 0bv1) != 0bv1;
+    assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 26} {:thread 1} (if _WRITE_HAS_OCCURRED_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff ==> BV32_UREM(BV32_ADD(BV32_SUB(BV32_UDIV(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), 48bv32), v3$1), 8bv32), 8bv32) == 0bv32 then 1bv1 else 0bv1) != 0bv1;
+    v15 := BV32_SLT($i1.0, 3bv32);
     goto $truebb1, $falsebb1;
 
   $falsebb1:
-    assume {:partition} !v21;
+    assume {:partition} !v15;
     $i3.0 := 0bv32;
     assume {:captureState "loop_entry_state_4_0"} true;
     goto $11;
@@ -489,10 +536,10 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
 assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  BV32_SLE(0bv32, $i3.0) ) ,  (  BV32_SLE($i3.0, 0bv32) ) ,  (  BV32_SGE($i3.0, 0bv32) ) ,  (  BV32_ULE($i3.0, 0bv32) ) ,  (  BV32_UGE($i3.0, 0bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  _WRITE_HAS_OCCURRED_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff ==> local_id_y$1 == BV32_DIV(_WATCHED_OFFSET, 48bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true  ); 
 
 
-    assert {:block_sourceloc} {:sourceloc_num 49} true;
-    assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 50} {:thread 1} (if _WRITE_HAS_OCCURRED_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff ==> BV32_OR(BV1_ZEXT32((if BV32_UREM(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), 48bv32) == BV32_ADD(BV32_SUB(v2$1, 8bv32), 32bv32) then 1bv1 else 0bv1)), BV1_ZEXT32((if BV32_UREM(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), 48bv32) == BV32_SUB(v2$1, 8bv32) then 1bv1 else 0bv1))) != 0bv32 then 1bv1 else 0bv1) != 0bv1;
-    assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 51} {:thread 1} (if _WRITE_HAS_OCCURRED_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff ==> BV32_UREM(BV32_ADD(BV32_SUB(BV32_UDIV(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), 48bv32), v3$1), 8bv32), 8bv32) == 0bv32 then 1bv1 else 0bv1) != 0bv1;
-    v32 := BV32_SLT($i3.0, 3bv32);
+    assert {:block_sourceloc} {:sourceloc_num 40} true;
+    assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 41} {:thread 1} (if _WRITE_HAS_OCCURRED_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff ==> BV32_OR(BV1_ZEXT32((if BV32_UREM(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), 48bv32) == BV32_ADD(BV32_SUB(v2$1, 8bv32), 32bv32) then 1bv1 else 0bv1)), BV1_ZEXT32((if BV32_UREM(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), 48bv32) == BV32_SUB(v2$1, 8bv32) then 1bv1 else 0bv1))) != 0bv32 then 1bv1 else 0bv1) != 0bv1;
+    assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 42} {:thread 1} (if _WRITE_HAS_OCCURRED_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff ==> BV32_UREM(BV32_ADD(BV32_SUB(BV32_UDIV(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), 48bv32), v3$1), 8bv32), 8bv32) == 0bv32 then 1bv1 else 0bv1) != 0bv1;
+    v23 := BV32_SLT($i3.0, 3bv32);
     p0$1 := false;
     p0$2 := false;
     p1$1 := false;
@@ -500,11 +547,11 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     goto $truebb2, __partitioned_block_$falsebb2_0;
 
   __partitioned_block_$falsebb2_0:
-    assume {:partition} !v32;
+    assume {:partition} !v23;
     goto __partitioned_block_$falsebb2_1;
 
   __partitioned_block_$falsebb2_1:
-    call {:sourceloc_num 70} $bugle_barrier_duplicated_0(1bv1, 1bv1);
+    call {:sourceloc_num 58} $bugle_barrier_duplicated_0(1bv1, 1bv1);
     $j.0 := 0bv32;
     assume {:captureState "loop_entry_state_2_0"} true;
     goto $17;
@@ -527,12 +574,12 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
 assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  BV32_SLE(0bv32, $j.0) ) ,  (  BV32_SLE($j.0, 0bv32) ) ,  (  BV32_SGE($j.0, 0bv32) ) ,  (  BV32_ULE($j.0, 0bv32) ) ,  (  BV32_UGE($j.0, 0bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  !_READ_HAS_OCCURRED_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff ) ,  (  !_WRITE_HAS_OCCURRED_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff ) ,  (  _WRITE_HAS_OCCURRED_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff ==> BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 8bv32), 48bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 8bv32), 48bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_MUL(0bv32, 8bv32), 4294967288bv32), BV32_ADD(local_id_y$1, 8bv32)), 48bv32), BV32_ADD(local_id_x$1, 8bv32))) ) ,  (  _READ_HAS_OCCURRED_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff ==> local_id_y$1 == BV32_DIV(_WATCHED_OFFSET, 48bv32) ) ,  (  _WRITE_HAS_OCCURRED_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff ==> local_id_y$1 == BV32_DIV(_WATCHED_OFFSET, 48bv32) ) ,  true ,  true ,  true  ); 
 
 
-    assert {:block_sourceloc} {:sourceloc_num 71} true;
-    v44 := BV32_SLT($j.0, 3bv32);
+    assert {:block_sourceloc} {:sourceloc_num 59} true;
+    v32 := BV32_SLT($j.0, 3bv32);
     goto $truebb4, $falsebb4;
 
   $falsebb4:
-    assume {:partition} !v44;
+    assume {:partition} !v32;
     $cost.1$1, $i7.0 := 0bv32, 4294967288bv32;
     $cost.1$2 := 0bv32;
     assume {:captureState "loop_entry_state_1_0"} true;
@@ -553,8 +600,8 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
 assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  BV32_SLE(0bv32, $i7.0) ) ,  (  BV32_SLE($i7.0, 4294967288bv32) ) ,  (  BV32_SGE($i7.0, 4294967288bv32) ) ,  (  BV32_ULE($i7.0, 4294967288bv32) ) ,  (  BV32_UGE($i7.0, 4294967288bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  _READ_HAS_OCCURRED_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 48bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 48bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, BV32_ADD(local_id_y$1, 8bv32)), 48bv32), BV32_ADD(local_id_x$1, 8bv32))) ) ,  (  _READ_HAS_OCCURRED_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff ==> local_id_y$1 == BV32_DIV(_WATCHED_OFFSET, 48bv32) ) ,  true  ); 
 
 
-    assert {:block_sourceloc} {:sourceloc_num 83} true;
-    v48 := BV32_SLE($i7.0, 8bv32);
+    assert {:block_sourceloc} {:sourceloc_num 71} true;
+    v36 := BV32_SLE($i7.0, 8bv32);
     p2$1 := false;
     p2$2 := false;
     p3$1 := false;
@@ -562,13 +609,13 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     goto $truebb6, __partitioned_block_$falsebb6_0;
 
   __partitioned_block_$falsebb6_0:
-    assume {:partition} !v48;
-    v50$1 := BV32_ULT($cost.1$1, $bestCost.0$1);
-    v50$2 := BV32_ULT($cost.1$2, $bestCost.0$2);
-    p3$1 := (if v50$1 then v50$1 else p3$1);
-    p3$2 := (if v50$2 then v50$2 else p3$2);
-    p2$1 := (if !v50$1 then !v50$1 else p2$1);
-    p2$2 := (if !v50$2 then !v50$2 else p2$2);
+    assume {:partition} !v36;
+    v38$1 := BV32_ULT($cost.1$1, $bestCost.0$1);
+    v38$2 := BV32_ULT($cost.1$2, $bestCost.0$2);
+    p3$1 := (if v38$1 then v38$1 else p3$1);
+    p3$2 := (if v38$2 then v38$2 else p3$2);
+    p2$1 := (if !v38$1 then !v38$1 else p2$1);
+    p2$2 := (if !v38$2 then !v38$2 else p2$2);
     $bestCost.1$1, $bestDisparity.1$1 := (if p2$1 then $bestCost.0$1 else $bestCost.1$1), (if p2$1 then $bestDisparity.0$1 else $bestDisparity.1$1);
     $bestCost.1$2, $bestDisparity.1$2 := (if p2$2 then $bestCost.0$2 else $bestCost.1$2), (if p2$2 then $bestDisparity.0$2 else $bestDisparity.1$2);
     $bestCost.1$1, $bestDisparity.1$1 := (if p3$1 then $cost.1$1 else $bestCost.1$1), (if p3$1 then BV32_ADD($d.0, 8bv32) else $bestDisparity.1$1);
@@ -576,28 +623,28 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     goto __partitioned_block_$falsebb6_1;
 
   __partitioned_block_$falsebb6_1:
-    call {:sourceloc_num 90} $bugle_barrier_duplicated_1(1bv1, 1bv1);
+    call {:sourceloc_num 78} $bugle_barrier_duplicated_1(1bv1, 1bv1);
     $bestCost.0$1, $bestDisparity.0$1, $d.0 := $bestCost.1$1, $bestDisparity.1$1, BV32_ADD($d.0, 1bv32);
     $bestCost.0$2, $bestDisparity.0$2 := $bestCost.1$2, $bestDisparity.1$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
     goto $5;
 
   $truebb6:
-    assume {:partition} v48;
-    call {:sourceloc} {:sourceloc_num 85} _LOG_READ_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff(true, BV32_ADD(BV32_MUL(BV32_ADD(v3$1, $i7.0), 48bv32), v2$1), $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(v3$1, $i7.0), 48bv32), v2$1)]);
-    assume {:do_not_predicate} {:check_id "check_state_1"} {:captureState "check_state_1"} {:sourceloc} {:sourceloc_num 85} true;
-    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 85} _CHECK_READ_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff(true, BV32_ADD(BV32_MUL(BV32_ADD(v3$2, $i7.0), 48bv32), v2$2), $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(v3$2, $i7.0), 48bv32), v2$2)]);
+    assume {:partition} v36;
+    call {:sourceloc} {:sourceloc_num 73} _LOG_READ_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff(true, BV32_ADD(BV32_MUL(BV32_ADD(v3$1, $i7.0), 48bv32), v2$1), $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(v3$1, $i7.0), 48bv32), v2$1)]);
+    assume {:do_not_predicate} {:check_id "check_state_1"} {:captureState "check_state_1"} {:sourceloc} {:sourceloc_num 73} true;
+    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 73} _CHECK_READ_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff(true, BV32_ADD(BV32_MUL(BV32_ADD(v3$2, $i7.0), 48bv32), v2$2), $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(v3$2, $i7.0), 48bv32), v2$2)]);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff"} true;
-    v49$1 := $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(v3$1, $i7.0), 48bv32), v2$1)];
-    v49$2 := $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(v3$2, $i7.0), 48bv32), v2$2)];
-    $cost.1$1, $i7.0 := BV32_ADD($cost.1$1, v49$1), BV32_ADD($i7.0, 1bv32);
-    $cost.1$2 := BV32_ADD($cost.1$2, v49$2);
+    v37$1 := $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(v3$1, $i7.0), 48bv32), v2$1)];
+    v37$2 := $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(v3$2, $i7.0), 48bv32), v2$2)];
+    $cost.1$1, $i7.0 := BV32_ADD($cost.1$1, v37$1), BV32_ADD($i7.0, 1bv32);
+    $cost.1$2 := BV32_ADD($cost.1$2, v37$2);
     assume {:captureState "loop_back_edge_state_1_0"} true;
     goto $25;
 
   $truebb4:
-    assume {:partition} v44;
-    v45 := BV32_ADD(4294967288bv32, BV32_MUL($j.0, 8bv32));
+    assume {:partition} v32;
+    v33 := BV32_ADD(4294967288bv32, BV32_MUL($j.0, 8bv32));
     $cost.0$1, $i6.0 := 0bv32, 4294967288bv32;
     $cost.0$2 := 0bv32;
     assume {:captureState "loop_entry_state_3_0"} true;
@@ -617,120 +664,108 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
 assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  BV32_SLE(0bv32, $i6.0) ) ,  (  BV32_SLE($i6.0, 4294967288bv32) ) ,  (  BV32_SGE($i6.0, 4294967288bv32) ) ,  (  BV32_ULE($i6.0, 4294967288bv32) ) ,  (  BV32_UGE($i6.0, 4294967288bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  _READ_HAS_OCCURRED_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff ==> local_id_y$1 == BV32_DIV(_WATCHED_OFFSET, 48bv32) )  ); 
 
 
-    assert {:block_sourceloc} {:sourceloc_num 73} true;
-    v46 := BV32_SLE($i6.0, 8bv32);
+    assert {:block_sourceloc} {:sourceloc_num 61} true;
+    v34 := BV32_SLE($i6.0, 8bv32);
     goto $truebb5, __partitioned_block_$falsebb5_0;
 
   __partitioned_block_$falsebb5_0:
-    assume {:partition} !v46;
+    assume {:partition} !v34;
     goto __partitioned_block_$falsebb5_1;
 
   __partitioned_block_$falsebb5_1:
-    call {:sourceloc_num 78} $bugle_barrier_duplicated_2(1bv1, 1bv1);
-    call {:sourceloc} {:sourceloc_num 79} _LOG_WRITE_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff(true, BV32_ADD(BV32_MUL(BV32_ADD(v3$1, v45), 48bv32), v2$1), $cost.0$1, $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(v3$1, v45), 48bv32), v2$1)]);
-    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff(true, BV32_ADD(BV32_MUL(BV32_ADD(v3$2, v45), 48bv32), v2$2));
-    assume {:do_not_predicate} {:check_id "check_state_2"} {:captureState "check_state_2"} {:sourceloc} {:sourceloc_num 79} true;
-    call {:check_id "check_state_2"} {:sourceloc} {:sourceloc_num 79} _CHECK_WRITE_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff(true, BV32_ADD(BV32_MUL(BV32_ADD(v3$2, v45), 48bv32), v2$2), $cost.0$2);
+    call {:sourceloc_num 66} $bugle_barrier_duplicated_2(1bv1, 1bv1);
+    call {:sourceloc} {:sourceloc_num 67} _LOG_WRITE_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff(true, BV32_ADD(BV32_MUL(BV32_ADD(v3$1, v33), 48bv32), v2$1), $cost.0$1, $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(v3$1, v33), 48bv32), v2$1)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff(true, BV32_ADD(BV32_MUL(BV32_ADD(v3$2, v33), 48bv32), v2$2));
+    assume {:do_not_predicate} {:check_id "check_state_2"} {:captureState "check_state_2"} {:sourceloc} {:sourceloc_num 67} true;
+    call {:check_id "check_state_2"} {:sourceloc} {:sourceloc_num 67} _CHECK_WRITE_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff(true, BV32_ADD(BV32_MUL(BV32_ADD(v3$2, v33), 48bv32), v2$2), $cost.0$2);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff"} true;
-    $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(v3$1, v45), 48bv32), v2$1)] := $cost.0$1;
-    $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(v3$2, v45), 48bv32), v2$2)] := $cost.0$2;
+    $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(v3$1, v33), 48bv32), v2$1)] := $cost.0$1;
+    $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(v3$2, v33), 48bv32), v2$2)] := $cost.0$2;
     goto __partitioned_block_$falsebb5_2;
 
   __partitioned_block_$falsebb5_2:
-    call {:sourceloc_num 80} $bugle_barrier_duplicated_3(1bv1, 1bv1);
+    call {:sourceloc_num 68} $bugle_barrier_duplicated_3(1bv1, 1bv1);
     $j.0 := BV32_ADD($j.0, 1bv32);
     assume {:captureState "loop_back_edge_state_2_0"} true;
     goto $17;
 
   $truebb5:
-    assume {:partition} v46;
-    call {:sourceloc} {:sourceloc_num 75} _LOG_READ_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff(true, BV32_ADD(BV32_MUL(BV32_ADD(v3$1, v45), 48bv32), BV32_ADD(v2$1, $i6.0)), $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(v3$1, v45), 48bv32), BV32_ADD(v2$1, $i6.0))]);
-    assume {:do_not_predicate} {:check_id "check_state_3"} {:captureState "check_state_3"} {:sourceloc} {:sourceloc_num 75} true;
-    call {:check_id "check_state_3"} {:sourceloc} {:sourceloc_num 75} _CHECK_READ_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff(true, BV32_ADD(BV32_MUL(BV32_ADD(v3$2, v45), 48bv32), BV32_ADD(v2$2, $i6.0)), $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(v3$2, v45), 48bv32), BV32_ADD(v2$2, $i6.0))]);
+    assume {:partition} v34;
+    call {:sourceloc} {:sourceloc_num 63} _LOG_READ_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff(true, BV32_ADD(BV32_MUL(BV32_ADD(v3$1, v33), 48bv32), BV32_ADD(v2$1, $i6.0)), $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(v3$1, v33), 48bv32), BV32_ADD(v2$1, $i6.0))]);
+    assume {:do_not_predicate} {:check_id "check_state_3"} {:captureState "check_state_3"} {:sourceloc} {:sourceloc_num 63} true;
+    call {:check_id "check_state_3"} {:sourceloc} {:sourceloc_num 63} _CHECK_READ_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff(true, BV32_ADD(BV32_MUL(BV32_ADD(v3$2, v33), 48bv32), BV32_ADD(v2$2, $i6.0)), $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(v3$2, v33), 48bv32), BV32_ADD(v2$2, $i6.0))]);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff"} true;
-    v47$1 := $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(v3$1, v45), 48bv32), BV32_ADD(v2$1, $i6.0))];
-    v47$2 := $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(v3$2, v45), 48bv32), BV32_ADD(v2$2, $i6.0))];
-    $cost.0$1, $i6.0 := BV32_ADD($cost.0$1, v47$1), BV32_ADD($i6.0, 1bv32);
-    $cost.0$2 := BV32_ADD($cost.0$2, v47$2);
+    v35$1 := $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(v3$1, v33), 48bv32), BV32_ADD(v2$1, $i6.0))];
+    v35$2 := $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(v3$2, v33), 48bv32), BV32_ADD(v2$2, $i6.0))];
+    $cost.0$1, $i6.0 := BV32_ADD($cost.0$1, v35$1), BV32_ADD($i6.0, 1bv32);
+    $cost.0$2 := BV32_ADD($cost.0$2, v35$2);
     assume {:captureState "loop_back_edge_state_3_0"} true;
     goto $19;
 
   $truebb2:
-    assume {:partition} v32;
-    v33 := BV32_ADD(4294967288bv32, BV32_MUL($i3.0, 8bv32));
-    v34$1 := BV32_ULT(local_id_x$1, 16bv32);
-    v34$2 := BV32_ULT(local_id_x$2, 16bv32);
-    p1$1 := (if v34$1 then v34$1 else p1$1);
-    p1$2 := (if v34$2 then v34$2 else p1$2);
-    v35$1 := (if p1$1 then $$imLeftB$1[$i3.0] else v35$1);
-    v35$2 := (if p1$2 then $$imLeftB$2[$i3.0] else v35$2);
+    assume {:partition} v23;
+    v24 := BV32_ADD(4294967288bv32, BV32_MUL($i3.0, 8bv32));
+    v25$1 := BV32_ULT(local_id_x$1, 16bv32);
+    v25$2 := BV32_ULT(local_id_x$2, 16bv32);
+    p1$1 := (if v25$1 then v25$1 else p1$1);
+    p1$2 := (if v25$2 then v25$2 else p1$2);
+    v26$1 := (if p1$1 then $$imLeftB$1[$i3.0] else v26$1);
+    v26$2 := (if p1$2 then $$imLeftB$2[$i3.0] else v26$2);
     havoc _HAVOC_bv32$1, _HAVOC_bv32$2;
-    v36$1 := (if p1$1 then _HAVOC_bv32$1 else v36$1);
-    v36$2 := (if p1$2 then _HAVOC_bv32$2 else v36$2);
-    $$3$0bv32$1 := (if p1$1 then v36$1 else $$3$0bv32$1);
-    $$3$0bv32$2 := (if p1$2 then v36$2 else $$3$0bv32$2);
+    v27$1 := (if p1$1 then _HAVOC_bv32$1 else v27$1);
+    v27$2 := (if p1$2 then _HAVOC_bv32$2 else v27$2);
+    $$3$0bv32$1 := (if p1$1 then v27$1 else $$3$0bv32$1);
+    $$3$0bv32$2 := (if p1$2 then v27$2 else $$3$0bv32$2);
     havoc _HAVOC_bv32$1, _HAVOC_bv32$2;
-    v37$1 := (if p1$1 then _HAVOC_bv32$1 else v37$1);
-    v37$2 := (if p1$2 then _HAVOC_bv32$2 else v37$2);
-    $$3$1bv32$1 := (if p1$1 then v37$1 else $$3$1bv32$1);
-    $$3$1bv32$2 := (if p1$2 then v37$2 else $$3$1bv32$2);
+    v28$1 := (if p1$1 then _HAVOC_bv32$1 else v28$1);
+    v28$2 := (if p1$2 then _HAVOC_bv32$2 else v28$2);
+    $$3$1bv32$1 := (if p1$1 then v28$1 else $$3$1bv32$1);
+    $$3$1bv32$2 := (if p1$2 then v28$2 else $$3$1bv32$2);
     havoc _HAVOC_bv32$1, _HAVOC_bv32$2;
-    v38$1 := (if p1$1 then _HAVOC_bv32$1 else v38$1);
-    v38$2 := (if p1$2 then _HAVOC_bv32$2 else v38$2);
-    $$3$2bv32$1 := (if p1$1 then v38$1 else $$3$2bv32$1);
-    $$3$2bv32$2 := (if p1$2 then v38$2 else $$3$2bv32$2);
-    v39$1 := (if p1$1 then $$3$0bv32$1 else v39$1);
-    v39$2 := (if p1$2 then $$3$0bv32$2 else v39$2);
-    v40$1 := (if p1$1 then $$3$1bv32$1 else v40$1);
-    v40$2 := (if p1$2 then $$3$1bv32$2 else v40$2);
-    v41$1 := (if p1$1 then $$3$2bv32$1 else v41$1);
-    v41$2 := (if p1$2 then $$3$2bv32$2 else v41$2);
-    call {:sourceloc_num 64} v42$1, v42$2 := $_Z5tex2DIjET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(p1$1, v39$1, v40$1, v41$1, SI32_TO_FP32(BV32_ADD(BV32_ADD(BV32_SUB(v0$1, 8bv32), 32bv32), $d.0)), SI32_TO_FP32(BV32_ADD(v1$1, v33)), p1$2, v39$2, v40$2, v41$2, SI32_TO_FP32(BV32_ADD(BV32_ADD(BV32_SUB(v0$2, 8bv32), 32bv32), $d.0)), SI32_TO_FP32(BV32_ADD(v1$2, v33)));
+    v29$1 := (if p1$1 then _HAVOC_bv32$1 else v29$1);
+    v29$2 := (if p1$2 then _HAVOC_bv32$2 else v29$2);
+    $$3$2bv32$1 := (if p1$1 then v29$1 else $$3$2bv32$1);
+    $$3$2bv32$2 := (if p1$2 then v29$2 else $$3$2bv32$2);
+    call {:sourceloc_num 52} v30$1, v30$2 := $_Z5tex2DIjET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(MKPTR($arrayId$$3, 0bv32), p1$1, SI32_TO_FP32(BV32_ADD(BV32_ADD(BV32_SUB(v0$1, 8bv32), 32bv32), $d.0)), SI32_TO_FP32(BV32_ADD(v1$1, v24)), p1$2, SI32_TO_FP32(BV32_ADD(BV32_ADD(BV32_SUB(v0$2, 8bv32), 32bv32), $d.0)), SI32_TO_FP32(BV32_ADD(v1$2, v24)));
     assume {:captureState "call_return_state_0"} {:procedureName "$_Z5tex2DIjET_7textureIS0_Li2EL19cudaTextureReadMode0EEff"} true;
-    call {:sourceloc_num 65} v43$1, v43$2 := $_ZL7__usad4jjj(0bv32, p1$1, v35$1, v42$1, p1$2, v35$2, v42$2);
+    call {:sourceloc_num 53} v31$1, v31$2 := $_ZL7__usad4jjj(0bv32, p1$1, v26$1, v30$1, p1$2, v26$2, v30$2);
     assume {:captureState "call_return_state_0"} {:procedureName "$_ZL7__usad4jjj"} true;
-    call {:sourceloc} {:sourceloc_num 66} _LOG_WRITE_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff(p1$1, BV32_ADD(BV32_MUL(BV32_ADD(v3$1, v33), 48bv32), BV32_ADD(BV32_SUB(v2$1, 8bv32), 32bv32)), v43$1, $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(v3$1, v33), 48bv32), BV32_ADD(BV32_SUB(v2$1, 8bv32), 32bv32))]);
-    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff(p1$2, BV32_ADD(BV32_MUL(BV32_ADD(v3$2, v33), 48bv32), BV32_ADD(BV32_SUB(v2$2, 8bv32), 32bv32)));
-    assume {:do_not_predicate} {:check_id "check_state_4"} {:captureState "check_state_4"} {:sourceloc} {:sourceloc_num 66} true;
-    call {:check_id "check_state_4"} {:sourceloc} {:sourceloc_num 66} _CHECK_WRITE_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff(p1$2, BV32_ADD(BV32_MUL(BV32_ADD(v3$2, v33), 48bv32), BV32_ADD(BV32_SUB(v2$2, 8bv32), 32bv32)), v43$2);
+    call {:sourceloc} {:sourceloc_num 54} _LOG_WRITE_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff(p1$1, BV32_ADD(BV32_MUL(BV32_ADD(v3$1, v24), 48bv32), BV32_ADD(BV32_SUB(v2$1, 8bv32), 32bv32)), v31$1, $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(v3$1, v24), 48bv32), BV32_ADD(BV32_SUB(v2$1, 8bv32), 32bv32))]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff(p1$2, BV32_ADD(BV32_MUL(BV32_ADD(v3$2, v24), 48bv32), BV32_ADD(BV32_SUB(v2$2, 8bv32), 32bv32)));
+    assume {:do_not_predicate} {:check_id "check_state_4"} {:captureState "check_state_4"} {:sourceloc} {:sourceloc_num 54} true;
+    call {:check_id "check_state_4"} {:sourceloc} {:sourceloc_num 54} _CHECK_WRITE_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff(p1$2, BV32_ADD(BV32_MUL(BV32_ADD(v3$2, v24), 48bv32), BV32_ADD(BV32_SUB(v2$2, 8bv32), 32bv32)), v31$2);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff"} true;
-    $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(v3$1, v33), 48bv32), BV32_ADD(BV32_SUB(v2$1, 8bv32), 32bv32))] := (if p1$1 then v43$1 else $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(v3$1, v33), 48bv32), BV32_ADD(BV32_SUB(v2$1, 8bv32), 32bv32))]);
-    $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(v3$2, v33), 48bv32), BV32_ADD(BV32_SUB(v2$2, 8bv32), 32bv32))] := (if p1$2 then v43$2 else $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(v3$2, v33), 48bv32), BV32_ADD(BV32_SUB(v2$2, 8bv32), 32bv32))]);
+    $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(v3$1, v24), 48bv32), BV32_ADD(BV32_SUB(v2$1, 8bv32), 32bv32))] := (if p1$1 then v31$1 else $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(v3$1, v24), 48bv32), BV32_ADD(BV32_SUB(v2$1, 8bv32), 32bv32))]);
+    $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(v3$2, v24), 48bv32), BV32_ADD(BV32_SUB(v2$2, 8bv32), 32bv32))] := (if p1$2 then v31$2 else $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(v3$2, v24), 48bv32), BV32_ADD(BV32_SUB(v2$2, 8bv32), 32bv32))]);
     $i3.0 := BV32_ADD($i3.0, 1bv32);
     assume {:captureState "loop_back_edge_state_4_0"} true;
     goto $11;
 
   $truebb1:
-    assume {:partition} v21;
-    v22 := BV32_ADD(4294967288bv32, BV32_MUL($i1.0, 8bv32));
-    v23$1 := $$imLeftA$1[$i1.0];
-    v23$2 := $$imLeftA$2[$i1.0];
-    havoc v24$1, v24$2;
-    $$2$0bv32$1 := v24$1;
-    $$2$0bv32$2 := v24$2;
-    havoc v25$1, v25$2;
-    $$2$1bv32$1 := v25$1;
-    $$2$1bv32$2 := v25$2;
-    havoc v26$1, v26$2;
-    $$2$2bv32$1 := v26$1;
-    $$2$2bv32$2 := v26$2;
-    v27$1 := $$2$0bv32$1;
-    v27$2 := $$2$0bv32$2;
-    v28$1 := $$2$1bv32$1;
-    v28$2 := $$2$1bv32$2;
-    v29$1 := $$2$2bv32$1;
-    v29$2 := $$2$2bv32$2;
-    call {:sourceloc_num 44} v30$1, v30$2 := $_Z5tex2DIjET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(true, v27$1, v28$1, v29$1, SI32_TO_FP32(BV32_ADD(BV32_SUB(v0$1, 8bv32), $d.0)), SI32_TO_FP32(BV32_ADD(v1$1, v22)), true, v27$2, v28$2, v29$2, SI32_TO_FP32(BV32_ADD(BV32_SUB(v0$2, 8bv32), $d.0)), SI32_TO_FP32(BV32_ADD(v1$2, v22)));
+    assume {:partition} v15;
+    v16 := BV32_ADD(4294967288bv32, BV32_MUL($i1.0, 8bv32));
+    v17$1 := $$imLeftA$1[$i1.0];
+    v17$2 := $$imLeftA$2[$i1.0];
+    havoc v18$1, v18$2;
+    $$2$0bv32$1 := v18$1;
+    $$2$0bv32$2 := v18$2;
+    havoc v19$1, v19$2;
+    $$2$1bv32$1 := v19$1;
+    $$2$1bv32$2 := v19$2;
+    havoc v20$1, v20$2;
+    $$2$2bv32$1 := v20$1;
+    $$2$2bv32$2 := v20$2;
+    call {:sourceloc_num 35} v21$1, v21$2 := $_Z5tex2DIjET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(MKPTR($arrayId$$2, 0bv32), true, SI32_TO_FP32(BV32_ADD(BV32_SUB(v0$1, 8bv32), $d.0)), SI32_TO_FP32(BV32_ADD(v1$1, v16)), true, SI32_TO_FP32(BV32_ADD(BV32_SUB(v0$2, 8bv32), $d.0)), SI32_TO_FP32(BV32_ADD(v1$2, v16)));
     assume {:captureState "call_return_state_0"} {:procedureName "$_Z5tex2DIjET_7textureIS0_Li2EL19cudaTextureReadMode0EEff"} true;
-    call {:sourceloc_num 45} v31$1, v31$2 := $_ZL7__usad4jjj(0bv32, true, v23$1, v30$1, true, v23$2, v30$2);
+    call {:sourceloc_num 36} v22$1, v22$2 := $_ZL7__usad4jjj(0bv32, true, v17$1, v21$1, true, v17$2, v21$2);
     assume {:captureState "call_return_state_0"} {:procedureName "$_ZL7__usad4jjj"} true;
-    call {:sourceloc} {:sourceloc_num 46} _LOG_WRITE_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff(true, BV32_ADD(BV32_MUL(BV32_ADD(v3$1, v22), 48bv32), BV32_SUB(v2$1, 8bv32)), v31$1, $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(v3$1, v22), 48bv32), BV32_SUB(v2$1, 8bv32))]);
-    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff(true, BV32_ADD(BV32_MUL(BV32_ADD(v3$2, v22), 48bv32), BV32_SUB(v2$2, 8bv32)));
-    assume {:do_not_predicate} {:check_id "check_state_5"} {:captureState "check_state_5"} {:sourceloc} {:sourceloc_num 46} true;
-    call {:check_id "check_state_5"} {:sourceloc} {:sourceloc_num 46} _CHECK_WRITE_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff(true, BV32_ADD(BV32_MUL(BV32_ADD(v3$2, v22), 48bv32), BV32_SUB(v2$2, 8bv32)), v31$2);
+    call {:sourceloc} {:sourceloc_num 37} _LOG_WRITE_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff(true, BV32_ADD(BV32_MUL(BV32_ADD(v3$1, v16), 48bv32), BV32_SUB(v2$1, 8bv32)), v22$1, $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(v3$1, v16), 48bv32), BV32_SUB(v2$1, 8bv32))]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff(true, BV32_ADD(BV32_MUL(BV32_ADD(v3$2, v16), 48bv32), BV32_SUB(v2$2, 8bv32)));
+    assume {:do_not_predicate} {:check_id "check_state_5"} {:captureState "check_state_5"} {:sourceloc} {:sourceloc_num 37} true;
+    call {:check_id "check_state_5"} {:sourceloc} {:sourceloc_num 37} _CHECK_WRITE_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff(true, BV32_ADD(BV32_MUL(BV32_ADD(v3$2, v16), 48bv32), BV32_SUB(v2$2, 8bv32)), v22$2);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff"} true;
-    $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(v3$1, v22), 48bv32), BV32_SUB(v2$1, 8bv32))] := v31$1;
-    $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(v3$2, v22), 48bv32), BV32_SUB(v2$2, 8bv32))] := v31$2;
+    $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(v3$1, v16), 48bv32), BV32_SUB(v2$1, 8bv32))] := v22$1;
+    $$_ZZ21stereoDisparityKernelPjS_S_iiiiE4diff[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(v3$2, v16), 48bv32), BV32_SUB(v2$2, 8bv32))] := v22$2;
     $i1.0 := BV32_ADD($i1.0, 1bv32);
     assume {:captureState "loop_back_edge_state_5_0"} true;
     goto $7;
@@ -747,35 +782,23 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     havoc v8$1, v8$2;
     $$0$2bv32$1 := v8$1;
     $$0$2bv32$2 := v8$2;
-    v9$1 := $$0$0bv32$1;
-    v9$2 := $$0$0bv32$2;
-    v10$1 := $$0$1bv32$1;
-    v10$2 := $$0$1bv32$2;
-    v11$1 := $$0$2bv32$1;
-    v11$2 := $$0$2bv32$2;
-    call {:sourceloc_num 13} v12$1, v12$2 := $_Z5tex2DIjET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(true, v9$1, v10$1, v11$1, SI32_TO_FP32(BV32_SUB(v0$1, 8bv32)), SI32_TO_FP32(BV32_ADD(v1$1, v5)), true, v9$2, v10$2, v11$2, SI32_TO_FP32(BV32_SUB(v0$2, 8bv32)), SI32_TO_FP32(BV32_ADD(v1$2, v5)));
+    call {:sourceloc_num 10} v9$1, v9$2 := $_Z5tex2DIjET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(MKPTR($arrayId$$0, 0bv32), true, SI32_TO_FP32(BV32_SUB(v0$1, 8bv32)), SI32_TO_FP32(BV32_ADD(v1$1, v5)), true, SI32_TO_FP32(BV32_SUB(v0$2, 8bv32)), SI32_TO_FP32(BV32_ADD(v1$2, v5)));
     assume {:captureState "call_return_state_0"} {:procedureName "$_Z5tex2DIjET_7textureIS0_Li2EL19cudaTextureReadMode0EEff"} true;
-    $$imLeftA$1[$i.0] := v12$1;
-    $$imLeftA$2[$i.0] := v12$2;
-    havoc v13$1, v13$2;
-    $$1$0bv32$1 := v13$1;
-    $$1$0bv32$2 := v13$2;
-    havoc v14$1, v14$2;
-    $$1$1bv32$1 := v14$1;
-    $$1$1bv32$2 := v14$2;
-    havoc v15$1, v15$2;
-    $$1$2bv32$1 := v15$1;
-    $$1$2bv32$2 := v15$2;
-    v16$1 := $$1$0bv32$1;
-    v16$2 := $$1$0bv32$2;
-    v17$1 := $$1$1bv32$1;
-    v17$2 := $$1$1bv32$2;
-    v18$1 := $$1$2bv32$1;
-    v18$2 := $$1$2bv32$2;
-    call {:sourceloc_num 24} v19$1, v19$2 := $_Z5tex2DIjET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(true, v16$1, v17$1, v18$1, SI32_TO_FP32(BV32_ADD(BV32_SUB(v0$1, 8bv32), 32bv32)), SI32_TO_FP32(BV32_ADD(v1$1, v5)), true, v16$2, v17$2, v18$2, SI32_TO_FP32(BV32_ADD(BV32_SUB(v0$2, 8bv32), 32bv32)), SI32_TO_FP32(BV32_ADD(v1$2, v5)));
+    $$imLeftA$1[$i.0] := v9$1;
+    $$imLeftA$2[$i.0] := v9$2;
+    havoc v10$1, v10$2;
+    $$1$0bv32$1 := v10$1;
+    $$1$0bv32$2 := v10$2;
+    havoc v11$1, v11$2;
+    $$1$1bv32$1 := v11$1;
+    $$1$1bv32$2 := v11$2;
+    havoc v12$1, v12$2;
+    $$1$2bv32$1 := v12$1;
+    $$1$2bv32$2 := v12$2;
+    call {:sourceloc_num 18} v13$1, v13$2 := $_Z5tex2DIjET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(MKPTR($arrayId$$1, 0bv32), true, SI32_TO_FP32(BV32_ADD(BV32_SUB(v0$1, 8bv32), 32bv32)), SI32_TO_FP32(BV32_ADD(v1$1, v5)), true, SI32_TO_FP32(BV32_ADD(BV32_SUB(v0$2, 8bv32), 32bv32)), SI32_TO_FP32(BV32_ADD(v1$2, v5)));
     assume {:captureState "call_return_state_0"} {:procedureName "$_Z5tex2DIjET_7textureIS0_Li2EL19cudaTextureReadMode0EEff"} true;
-    $$imLeftB$1[$i.0] := v19$1;
-    $$imLeftB$2[$i.0] := v19$2;
+    $$imLeftB$1[$i.0] := v13$1;
+    $$imLeftB$2[$i.0] := v13$2;
     $i.0 := BV32_ADD($i.0, 1bv32);
     assume {:captureState "loop_back_edge_state_6_0"} true;
     goto $1;
@@ -783,7 +806,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
 
 
 
-procedure {:source_name "_Z5tex2DIjET_7textureIS0_Li2EL19cudaTextureReadMode0EEff"} $_Z5tex2DIjET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(_P$1: bool, $0$1: bv32, $1$1: bv32, $2$1: bv32, $3$1: bv32, $4$1: bv32, _P$2: bool, $0$2: bv32, $1$2: bv32, $2$2: bv32, $3$2: bv32, $4$2: bv32) returns ($ret$1: bv32, $ret$2: bv32);
+procedure {:source_name "_Z5tex2DIjET_7textureIS0_Li2EL19cudaTextureReadMode0EEff"} $_Z5tex2DIjET_7textureIS0_Li2EL19cudaTextureReadMode0EEff($0: ptr, _P$1: bool, $1$1: bv32, $2$1: bv32, _P$2: bool, $1$2: bv32, $2$2: bv32) returns ($ret$1: bv32, $ret$2: bv32);
 
 
 

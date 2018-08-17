@@ -29,9 +29,7 @@ function {:existential true} my_inv (
  b0027: bool,
  b0028: bool,
  b0029: bool,
- b0030: bool,
- b0031: bool,
- b0032: bool
+ b0030: bool
  ) : bool;
 type _SIZE_T_TYPE = bv32;
 
@@ -182,8 +180,6 @@ implementation {:source_name "convolutionColumnsKernel"} {:kernel} $_Z24convolut
   var $sum.0$1: bv32;
   var $sum.0$2: bv32;
   var $j.0: bv32;
-  var v15$1: bv32;
-  var v15$2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
   var v1$1: bv32;
@@ -209,6 +205,8 @@ implementation {:source_name "convolutionColumnsKernel"} {:kernel} $_Z24convolut
   var v13: bool;
   var v14$1: bv32;
   var v14$2: bv32;
+  var v15$1: bv32;
+  var v15$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -246,7 +244,7 @@ implementation {:source_name "convolutionColumnsKernel"} {:kernel} $_Z24convolut
     
     
     
-assert  my_inv (  (  BV32_SLE(0bv32, $i.0) ) ,  (  BV32_SLE($i.0, 1bv32) ) ,  (  BV32_SGE($i.0, 1bv32) ) ,  (  BV32_ULE($i.0, 1bv32) ) ,  (  BV32_UGE($i.0, 1bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  _WRITE_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 8bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 8bv32), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(0bv32, 8bv32), local_id_y$1), BV32_MUL(local_id_x$1, 81bv32))) ) ,  (  _WRITE_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> local_id_x$1 == BV32_DIV(_WATCHED_OFFSET, 81bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true  ); 
+assert  my_inv (  (  BV32_SLE(0bv32, $i.0) ) ,  (  BV32_SLE($i.0, 1bv32) ) ,  (  BV32_SGE($i.0, 1bv32) ) ,  (  BV32_ULE($i.0, 1bv32) ) ,  (  BV32_UGE($i.0, 1bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  _WRITE_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 8bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 8bv32), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(0bv32, 8bv32), local_id_y$1), BV32_MUL(local_id_x$1, 81bv32))) ) ,  (  _WRITE_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> local_id_x$1 == BV32_DIV(_WATCHED_OFFSET, 81bv32) ) ,  true ,  true ,  true ,  true  ); 
 
 
     assert {:block_sourceloc} {:sourceloc_num 2} true;
@@ -271,7 +269,7 @@ assert  my_inv (  (  BV32_SLE(0bv32, $i.0) ) ,  (  BV32_SLE($i.0, 1bv32) ) ,  ( 
     
     
     
-assert  my_inv (  true ,  true ,  true ,  true ,  true ,  (  BV32_SLE(0bv32, $i1.0) ) ,  (  BV32_SLE($i1.0, 0bv32) ) ,  (  BV32_SGE($i1.0, 0bv32) ) ,  (  BV32_ULE($i1.0, 0bv32) ) ,  (  BV32_UGE($i1.0, 0bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  _WRITE_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 8bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 8bv32), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(0bv32, 8bv32), local_id_y$1), BV32_MUL(local_id_x$1, 81bv32))) ) ,  (  _WRITE_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> local_id_x$1 == BV32_DIV(_WATCHED_OFFSET, 81bv32) ) ,  true ,  true ,  true ,  true  ); 
+assert  my_inv (  true ,  true ,  true ,  true ,  true ,  (  BV32_SLE(0bv32, $i1.0) ) ,  (  BV32_SLE($i1.0, 0bv32) ) ,  (  BV32_SGE($i1.0, 0bv32) ) ,  (  BV32_ULE($i1.0, 0bv32) ) ,  (  BV32_UGE($i1.0, 0bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  _WRITE_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 8bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 8bv32), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(0bv32, 8bv32), local_id_y$1), BV32_MUL(local_id_x$1, 81bv32))) ) ,  (  _WRITE_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> local_id_x$1 == BV32_DIV(_WATCHED_OFFSET, 81bv32) ) ,  true ,  true  ); 
 
 
     assert {:block_sourceloc} {:sourceloc_num 8} true;
@@ -300,7 +298,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  (  BV32_SLE(0bv32, $i1
     
     
     
-assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  BV32_SLE(0bv32, $i2.0) ) ,  (  BV32_SLE($i2.0, 9bv32) ) ,  (  BV32_SGE($i2.0, 9bv32) ) ,  (  BV32_ULE($i2.0, 9bv32) ) ,  (  BV32_UGE($i2.0, 9bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  _WRITE_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 8bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 8bv32), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(0bv32, 8bv32), local_id_y$1), BV32_MUL(local_id_x$1, 81bv32))) ) ,  (  _WRITE_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> local_id_x$1 == BV32_DIV(_WATCHED_OFFSET, 81bv32) ) ,  true ,  true  ); 
+assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  BV32_SLE(0bv32, $i2.0) ) ,  (  BV32_SLE($i2.0, 9bv32) ) ,  (  BV32_SGE($i2.0, 9bv32) ) ,  (  BV32_ULE($i2.0, 9bv32) ) ,  (  BV32_UGE($i2.0, 9bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  _WRITE_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 8bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 8bv32), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(0bv32, 8bv32), local_id_y$1), BV32_MUL(local_id_x$1, 81bv32))) ) ,  (  _WRITE_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> local_id_x$1 == BV32_DIV(_WATCHED_OFFSET, 81bv32) )  ); 
 
 
     assert {:block_sourceloc} {:sourceloc_num 17} true;
@@ -323,7 +321,6 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
 
   $19:
     assume {:captureState "loop_head_state_0"} true;
-    
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -332,7 +329,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     
     
     
-assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  BV32_SLE(0bv32, $i3.0) ) ,  (  BV32_SLE($i3.0, 1bv32) ) ,  (  BV32_SGE($i3.0, 1bv32) ) ,  (  BV32_ULE($i3.0, 1bv32) ) ,  (  BV32_UGE($i3.0, 1bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  _READ_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> local_id_x$1 == BV32_DIV(_WATCHED_OFFSET, 81bv32) ) ,  true  ); 
+assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  BV32_SLE(0bv32, $i3.0) ) ,  (  BV32_SLE($i3.0, 1bv32) ) ,  (  BV32_SGE($i3.0, 1bv32) ) ,  (  BV32_ULE($i3.0, 1bv32) ) ,  (  BV32_UGE($i3.0, 1bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true  ); 
 
 
     assert {:block_sourceloc} {:sourceloc_num 27} true;
@@ -355,7 +352,6 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
 
   $21:
     assume {:captureState "loop_head_state_1"} true;
-    
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -364,7 +360,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     
     
     
-assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  BV32_SLE(0bv32, $j.0) ) ,  (  BV32_SLE($j.0, 4294967288bv32) ) ,  (  BV32_SGE($j.0, 4294967288bv32) ) ,  (  BV32_ULE($j.0, 4294967288bv32) ) ,  (  BV32_UGE($j.0, 4294967288bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  _READ_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> local_id_x$1 == BV32_DIV(_WATCHED_OFFSET, 81bv32) )  ); 
+assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  BV32_SLE(0bv32, $j.0) ) ,  (  BV32_SLE($j.0, 4294967288bv32) ) ,  (  BV32_SGE($j.0, 4294967288bv32) ) ,  (  BV32_ULE($j.0, 4294967288bv32) ) ,  (  BV32_UGE($j.0, 4294967288bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true  ); 
 
 
     assert {:block_sourceloc} {:sourceloc_num 32} true;
@@ -388,10 +384,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     assume {:partition} v13;
     v14$1 := $$c_Kernel$1[BV32_SUB(8bv32, $j.0)];
     v14$2 := $$c_Kernel$2[BV32_SUB(8bv32, $j.0)];
-    call {:sourceloc} {:sourceloc_num 35} _LOG_READ_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data(true, BV32_ADD(BV32_MUL(local_id_x$1, 81bv32), BV32_ADD(BV32_ADD(local_id_y$1, BV32_MUL($i3.0, 8bv32)), $j.0)), $$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data[1bv1][BV32_ADD(BV32_MUL(local_id_x$1, 81bv32), BV32_ADD(BV32_ADD(local_id_y$1, BV32_MUL($i3.0, 8bv32)), $j.0))]);
     assume {:do_not_predicate} {:check_id "check_state_1"} {:captureState "check_state_1"} {:sourceloc} {:sourceloc_num 35} true;
-    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 35} _CHECK_READ_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data(true, BV32_ADD(BV32_MUL(local_id_x$2, 81bv32), BV32_ADD(BV32_ADD(local_id_y$2, BV32_MUL($i3.0, 8bv32)), $j.0)), $$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(local_id_x$2, 81bv32), BV32_ADD(BV32_ADD(local_id_y$2, BV32_MUL($i3.0, 8bv32)), $j.0))]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data"} true;
     v15$1 := $$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data[1bv1][BV32_ADD(BV32_MUL(local_id_x$1, 81bv32), BV32_ADD(BV32_ADD(local_id_y$1, BV32_MUL($i3.0, 8bv32)), $j.0))];
     v15$2 := $$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(local_id_x$2, 81bv32), BV32_ADD(BV32_ADD(local_id_y$2, BV32_MUL($i3.0, 8bv32)), $j.0))];
     $sum.0$1, $j.0 := FADD32($sum.0$1, FMUL32(v14$1, v15$1)), BV32_ADD($j.0, 1bv32);
@@ -866,10 +859,6 @@ function {:bvbuiltin "bvand"} BV32_AND(bv32, bv32) : bv32;
 
 
 function {:bvbuiltin "bvsdiv"} BV32_DIV(bv32, bv32) : bv32;
-
-
-
-
 
 
 

@@ -145,57 +145,57 @@ implementation {:source_name "binomialOptionsKernel"} {:kernel} $_Z21binomialOpt
 {
   var $i.0$1: bv32;
   var $i.0$2: bv32;
-  var $cond.i$1: bv32;
-  var $cond.i$2: bv32;
-  var $i12.0: bv32;
+  var $0$1: bv32;
+  var $0$2: bv32;
+  var $i1.0: bv32;
   var $c_base.0: bv32;
-  var $cond: bv32;
+  var $1: bv32;
   var $k.0: bv32;
-  var v6$1: bool;
-  var v6$2: bool;
+  var v0$1: bv32;
+  var v0$2: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
-  var v4$1: bv32;
-  var v4$2: bv32;
   var v2$1: bv32;
   var v2$2: bv32;
   var v3$1: bv32;
   var v3$2: bv32;
+  var v4$1: bv32;
+  var v4$2: bv32;
   var v5$1: bv32;
   var v5$2: bv32;
+  var v6$1: bool;
+  var v6$2: bool;
   var v7$1: bv32;
   var v7$2: bv32;
+  var v8$1: bv32;
+  var v8$2: bv32;
+  var v9$1: bool;
+  var v9$2: bool;
+  var v10: bool;
+  var v11: bool;
+  var v12: bool;
+  var v13: bv32;
+  var v14$1: bool;
+  var v14$2: bool;
   var v15$1: bv32;
   var v15$2: bv32;
+  var v16: bool;
   var v17$1: bv32;
   var v17$2: bv32;
   var v18$1: bv32;
   var v18$2: bv32;
-  var v0$1: bv32;
-  var v0$2: bv32;
-  var v9$1: bool;
-  var v9$2: bool;
-  var v8$1: bv32;
-  var v8$2: bv32;
-  var v11: bool;
-  var v12: bool;
-  var v10: bool;
-  var v16: bool;
-  var v14$1: bool;
-  var v14$2: bool;
-  var v13: bv32;
-  var v21$1: bool;
-  var v21$2: bool;
-  var v23$1: bool;
-  var v23$2: bool;
-  var v24$1: bv32;
-  var v24$2: bv32;
   var v19$1: bv32;
   var v19$2: bv32;
   var v20$1: bv32;
   var v20$2: bv32;
+  var v21$1: bool;
+  var v21$2: bool;
   var v22$1: bv32;
   var v22$2: bv32;
+  var v23$1: bool;
+  var v23$2: bool;
+  var v24$1: bv32;
+  var v24$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -220,7 +220,7 @@ implementation {:source_name "binomialOptionsKernel"} {:kernel} $_Z21binomialOpt
   var p10$2: bool;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_MUL(group_id_x$1, 2064bv32);
     v0$2 := BV32_MUL(group_id_x$2, 2064bv32);
     v1$1 := $$d_OptionData[BV32_MUL(group_id_x$1, 5bv32)];
@@ -240,9 +240,9 @@ implementation {:source_name "binomialOptionsKernel"} {:kernel} $_Z21binomialOpt
     p0$1 := true;
     p0$2 := true;
     assume {:captureState "loop_entry_state_3_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_3"} true;
     assert {:tag "accessBreak"} _b27 ==> _WRITE_HAS_OCCURRED_$$d_CallBuffer ==> group_id_x$1 == BV32_DIV(_WATCHED_OFFSET, 2064bv32);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b26 ==> _WRITE_HAS_OCCURRED_$$d_CallBuffer ==> BV32_AND(BV32_SUB(256bv32, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(256bv32, 1bv32), BV32_ADD(local_id_x$1, BV32_MUL(group_id_x$1, 2064bv32)));
@@ -293,30 +293,30 @@ implementation {:source_name "binomialOptionsKernel"} {:kernel} $_Z21binomialOpt
     p3$2 := (if p1$2 && v9$2 then v9$2 else p3$2);
     p2$1 := (if p1$1 && !v9$1 then !v9$1 else p2$1);
     p2$2 := (if p1$2 && !v9$2 then !v9$2 else p2$2);
-    $cond.i$1 := (if p2$1 then 0bv32 else $cond.i$1);
-    $cond.i$2 := (if p2$2 then 0bv32 else $cond.i$2);
-    $cond.i$1 := (if p3$1 then v8$1 else $cond.i$1);
-    $cond.i$2 := (if p3$2 then v8$2 else $cond.i$2);
-    call {:sourceloc} {:sourceloc_num 12} _LOG_WRITE_$$d_CallBuffer(p1$1, BV32_ADD(v0$1, $i.0$1), $cond.i$1, $$d_CallBuffer[BV32_ADD(v0$1, $i.0$1)]);
+    $0$1 := (if p2$1 then 0bv32 else $0$1);
+    $0$2 := (if p2$2 then 0bv32 else $0$2);
+    $0$1 := (if p3$1 then v8$1 else $0$1);
+    $0$2 := (if p3$2 then v8$2 else $0$2);
+    call {:sourceloc} {:sourceloc_num 12} _LOG_WRITE_$$d_CallBuffer(p1$1, BV32_ADD(v0$1, $i.0$1), $0$1, $$d_CallBuffer[BV32_ADD(v0$1, $i.0$1)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$d_CallBuffer(p1$2, BV32_ADD(v0$2, $i.0$2));
     assume {:do_not_predicate} {:check_id "check_state_12"} {:captureState "check_state_12"} {:sourceloc} {:sourceloc_num 12} true;
-    call {:check_id "check_state_12"} {:sourceloc} {:sourceloc_num 12} _CHECK_WRITE_$$d_CallBuffer(p1$2, BV32_ADD(v0$2, $i.0$2), $cond.i$2);
+    call {:check_id "check_state_12"} {:sourceloc} {:sourceloc_num 12} _CHECK_WRITE_$$d_CallBuffer(p1$2, BV32_ADD(v0$2, $i.0$2), $0$2);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$d_CallBuffer"} true;
-    $$d_CallBuffer[BV32_ADD(v0$1, $i.0$1)] := (if p1$1 then $cond.i$1 else $$d_CallBuffer[BV32_ADD(v0$1, $i.0$1)]);
-    $$d_CallBuffer[BV32_ADD(v0$2, $i.0$2)] := (if p1$2 then $cond.i$2 else $$d_CallBuffer[BV32_ADD(v0$2, $i.0$2)]);
+    $$d_CallBuffer[BV32_ADD(v0$1, $i.0$1)] := (if p1$1 then $0$1 else $$d_CallBuffer[BV32_ADD(v0$1, $i.0$1)]);
+    $$d_CallBuffer[BV32_ADD(v0$2, $i.0$2)] := (if p1$2 then $0$2 else $$d_CallBuffer[BV32_ADD(v0$2, $i.0$2)]);
     $i.0$1 := (if p1$1 then BV32_ADD($i.0$1, 256bv32) else $i.0$1);
     $i.0$2 := (if p1$2 then BV32_ADD($i.0$2, 256bv32) else $i.0$2);
     p0$1 := (if p1$1 then true else p0$1);
     p0$2 := (if p1$2 then true else p0$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $1.backedge, $1.tail;
 
-  $for.cond.tail:
+  $1.tail:
     assume !p0$1 && !p0$2;
-    $i12.0 := 2048bv32;
+    $i1.0 := 2048bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.13;
+    goto $7;
 
-  $for.cond.13:
+  $7:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b45 ==> _WRITE_HAS_OCCURRED_$$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callB ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b44 ==> _READ_HAS_OCCURRED_$$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callB ==> _WATCHED_OFFSET == BV32_ADD(local_id_x$1, 1bv32) || _WATCHED_OFFSET == local_id_x$1;
@@ -342,13 +342,13 @@ implementation {:source_name "binomialOptionsKernel"} {:kernel} $_Z21binomialOpt
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callA ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callA ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callA ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
-    assert {:tag "loopBound"} {:thread 1} _b11 ==> BV32_UGE($i12.0, 2048bv32);
-    assert {:tag "loopBound"} {:thread 1} _b10 ==> BV32_ULE($i12.0, 2048bv32);
-    assert {:tag "loopBound"} {:thread 1} _b9 ==> BV32_SGE($i12.0, 2048bv32);
-    assert {:tag "loopBound"} {:thread 1} _b8 ==> BV32_SLE($i12.0, 2048bv32);
-    assert {:tag "guardNonNeg"} {:thread 1} _b7 ==> BV32_SLE(0bv32, $i12.0);
+    assert {:tag "loopBound"} {:thread 1} _b11 ==> BV32_UGE($i1.0, 2048bv32);
+    assert {:tag "loopBound"} {:thread 1} _b10 ==> BV32_ULE($i1.0, 2048bv32);
+    assert {:tag "loopBound"} {:thread 1} _b9 ==> BV32_SGE($i1.0, 2048bv32);
+    assert {:tag "loopBound"} {:thread 1} _b8 ==> BV32_SLE($i1.0, 2048bv32);
+    assert {:tag "guardNonNeg"} {:thread 1} _b7 ==> BV32_SLE(0bv32, $i1.0);
     assert {:block_sourceloc} {:sourceloc_num 15} true;
-    v10 := BV32_SGT($i12.0, 0bv32);
+    v10 := BV32_SGT($i1.0, 0bv32);
     p9$1 := false;
     p9$2 := false;
     p10$1 := false;
@@ -380,9 +380,9 @@ implementation {:source_name "binomialOptionsKernel"} {:kernel} $_Z21binomialOpt
     assume {:partition} v10;
     $c_base.0 := 0bv32;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.16;
+    goto $9;
 
-  $for.cond.16:
+  $9:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b63 ==> _WRITE_HAS_OCCURRED_$$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callB ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b62 ==> _READ_HAS_OCCURRED_$$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callB ==> _WATCHED_OFFSET == BV32_ADD(local_id_x$1, 1bv32) || _WATCHED_OFFSET == local_id_x$1;
@@ -415,7 +415,7 @@ implementation {:source_name "binomialOptionsKernel"} {:kernel} $_Z21binomialOpt
     assert {:tag "guardNonNeg"} {:thread 1} _b13 ==> BV32_SLE(0bv32, $c_base.0);
     assert {:tag "loopCounterIsStrided"} {:thread 1} _b12 ==> BV32_AND(BV32_SUB(224bv32, 1bv32), $c_base.0) == BV32_AND(BV32_SUB(224bv32, 1bv32), 0bv32);
     assert {:block_sourceloc} {:sourceloc_num 17} true;
-    v11 := BV32_SLT($c_base.0, $i12.0);
+    v11 := BV32_SLT($c_base.0, $i1.0);
     p5$1 := false;
     p5$2 := false;
     p6$1 := false;
@@ -424,28 +424,28 @@ implementation {:source_name "binomialOptionsKernel"} {:kernel} $_Z21binomialOpt
 
   $falsebb2:
     assume {:partition} !v11;
-    $i12.0 := BV32_SUB($i12.0, 32bv32);
+    $i1.0 := BV32_SUB($i1.0, 32bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.13;
+    goto $7;
 
   $truebb2:
     assume {:partition} v11;
-    v12 := BV32_SLT(255bv32, BV32_SUB($i12.0, $c_base.0));
+    v12 := BV32_SLT(255bv32, BV32_SUB($i1.0, $c_base.0));
     goto $truebb3, $falsebb3;
 
   $falsebb3:
     assume {:partition} !v12;
-    $cond := BV32_SUB($i12.0, $c_base.0);
-    goto __partitioned_block_$cond.end_0;
+    $1 := BV32_SUB($i1.0, $c_base.0);
+    goto __partitioned_block_$13_0;
 
-  __partitioned_block_$cond.end_0:
-    v13 := BV32_SUB($cond, 32bv32);
-    goto __partitioned_block_$cond.end_1;
+  __partitioned_block_$13_0:
+    v13 := BV32_SUB($1, 32bv32);
+    goto __partitioned_block_$13_1;
 
-  __partitioned_block_$cond.end_1:
+  __partitioned_block_$13_1:
     call {:sourceloc_num 22} $bugle_barrier_duplicated_0(1bv1, 1bv1);
-    v14$1 := BV32_SLE(local_id_x$1, $cond);
-    v14$2 := BV32_SLE(local_id_x$2, $cond);
+    v14$1 := BV32_SLE(local_id_x$1, $1);
+    v14$2 := BV32_SLE(local_id_x$2, $1);
     p6$1 := (if v14$1 then v14$1 else p6$1);
     p6$2 := (if v14$2 then v14$2 else p6$2);
     call {:sourceloc} {:sourceloc_num 24} _LOG_READ_$$d_CallBuffer(p6$1, BV32_ADD(v0$1, BV32_ADD($c_base.0, local_id_x$1)), $$d_CallBuffer[BV32_ADD(v0$1, BV32_ADD($c_base.0, local_id_x$1))]);
@@ -461,11 +461,11 @@ implementation {:source_name "binomialOptionsKernel"} {:kernel} $_Z21binomialOpt
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callA"} true;
     $$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callA[1bv1][local_id_x$1] := (if p6$1 then v15$1 else $$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callA[1bv1][local_id_x$1]);
     $$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callA[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2] := (if p6$2 then v15$2 else $$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callA[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2]);
-    $k.0 := BV32_SUB($cond, 1bv32);
+    $k.0 := BV32_SUB($1, 1bv32);
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond.27;
+    goto $16;
 
-  $for.cond.27:
+  $16:
     assume {:captureState "loop_head_state_2"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b69 ==> _WRITE_HAS_OCCURRED_$$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callB ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b68 ==> _READ_HAS_OCCURRED_$$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callB ==> _WATCHED_OFFSET == BV32_ADD(local_id_x$1, 1bv32) || _WATCHED_OFFSET == local_id_x$1;
@@ -479,12 +479,12 @@ implementation {:source_name "binomialOptionsKernel"} {:kernel} $_Z21binomialOpt
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callA ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callA ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callA ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
-    assert {:tag "loopBound"} {:thread 1} _b23 ==> BV32_UGE($k.0, BV32_SUB($cond, 1bv32));
-    assert {:tag "loopBound"} {:thread 1} _b22 ==> BV32_ULE($k.0, BV32_SUB($cond, 1bv32));
-    assert {:tag "loopBound"} {:thread 1} _b21 ==> BV32_SGE($k.0, BV32_SUB($cond, 1bv32));
-    assert {:tag "loopBound"} {:thread 1} _b20 ==> BV32_SLE($k.0, BV32_SUB($cond, 1bv32));
+    assert {:tag "loopBound"} {:thread 1} _b23 ==> BV32_UGE($k.0, BV32_SUB($1, 1bv32));
+    assert {:tag "loopBound"} {:thread 1} _b22 ==> BV32_ULE($k.0, BV32_SUB($1, 1bv32));
+    assert {:tag "loopBound"} {:thread 1} _b21 ==> BV32_SGE($k.0, BV32_SUB($1, 1bv32));
+    assert {:tag "loopBound"} {:thread 1} _b20 ==> BV32_SLE($k.0, BV32_SUB($1, 1bv32));
     assert {:tag "guardNonNeg"} {:thread 1} _b19 ==> BV32_SLE(0bv32, $k.0);
-    assert {:tag "loopCounterIsStrided"} {:thread 1} _b18 ==> BV32_AND(BV32_SUB(4294967294bv32, 1bv32), $k.0) == BV32_AND(BV32_SUB(4294967294bv32, 1bv32), BV32_SUB($cond, 1bv32));
+    assert {:tag "loopCounterIsStrided"} {:thread 1} _b18 ==> BV32_AND(BV32_SUB(4294967294bv32, 1bv32), $k.0) == BV32_AND(BV32_SUB(4294967294bv32, 1bv32), BV32_SUB($1, 1bv32));
     assert {:block_sourceloc} {:sourceloc_num 27} true;
     v16 := BV32_SGE($k.0, v13);
     p7$1 := false;
@@ -518,7 +518,7 @@ implementation {:source_name "binomialOptionsKernel"} {:kernel} $_Z21binomialOpt
     $$d_CallBuffer[BV32_ADD(v0$2, BV32_ADD($c_base.0, local_id_x$2))] := (if p8$2 then v22$2 else $$d_CallBuffer[BV32_ADD(v0$2, BV32_ADD($c_base.0, local_id_x$2))]);
     $c_base.0 := BV32_ADD($c_base.0, 224bv32);
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.16;
+    goto $9;
 
   __partitioned_block_$truebb5_0:
     assume {:partition} v16;
@@ -564,17 +564,17 @@ implementation {:source_name "binomialOptionsKernel"} {:kernel} $_Z21binomialOpt
     $$_ZZ21binomialOptionsKernelP13__TOptionDataPfS1_E5callA[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2] := FADD32(FMUL32(v4$2, v19$2), FMUL32(v5$2, v20$2));
     $k.0 := BV32_ADD($k.0, 4294967294bv32);
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond.27;
+    goto $16;
 
   $truebb3:
     assume {:partition} v12;
-    $cond := 255bv32;
-    goto __partitioned_block_$cond.end_0;
+    $1 := 255bv32;
+    goto __partitioned_block_$13_0;
 
-  $for.cond.backedge:
+  $1.backedge:
     assume {:backedge} p0$1 || p0$2;
     assume {:captureState "loop_back_edge_state_3_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

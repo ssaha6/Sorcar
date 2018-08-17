@@ -67,9 +67,7 @@ function {:existential true} my_inv (
  b0065: bool,
  b0066: bool,
  b0067: bool,
- b0068: bool,
- b0069: bool,
- b0070: bool
+ b0068: bool
  ) : bool;
 type _SIZE_T_TYPE = bv32;
 
@@ -231,8 +229,6 @@ implementation {:source_name "histogramKernel"} {:kernel} $histogramKernel($n4Ve
   var v14$2: bv32;
   var v15$1: bv32;
   var v15$2: bv32;
-  var v24$1: bv32;
-  var v24$2: bv32;
   var v16$1: bv32;
   var v16$2: bv32;
   var v18$1: bv32;
@@ -249,8 +245,8 @@ implementation {:source_name "histogramKernel"} {:kernel} $histogramKernel($n4Ve
   var v22$2: bv32;
   var v23$1: bv32;
   var v23$2: bv32;
-  var v36$1: bv32;
-  var v36$2: bv32;
+  var v24$1: bv32;
+  var v24$2: bv32;
   var v25$1: bv32;
   var v25$2: bv32;
   var v26$1: bv32;
@@ -273,6 +269,8 @@ implementation {:source_name "histogramKernel"} {:kernel} $histogramKernel($n4Ve
   var v34$2: bv32;
   var v35$1: bv32;
   var v35$2: bv32;
+  var v36$1: bv32;
+  var v36$2: bv32;
   var v37$1: bool;
   var v37$2: bool;
   var v38$1: bool;
@@ -310,7 +308,6 @@ implementation {:source_name "histogramKernel"} {:kernel} $histogramKernel($n4Ve
   var _HAVOC_bv32$1: bv32;
   var _HAVOC_bv32$2: bv32;
   var _WRITE_HAS_OCCURRED_$$histogramKernel.subhists$ghost$$11: bool;
-  var _READ_HAS_OCCURRED_$$histogramKernel.subhists$ghost$$21: bool;
 
 
   $0:
@@ -370,7 +367,7 @@ implementation {:source_name "histogramKernel"} {:kernel} $histogramKernel($n4Ve
     assume {:captureState "loop_head_state_2"} true;
     
     
-assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  _WRITE_HAS_OCCURRED_$$histogramKernel.subhists ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_MUL(0bv32, 4bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 4bv32), 1bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 4bv32), 2bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 4bv32), 3bv32)) ) ,  (  !p0$1 ==> _WRITE_HAS_OCCURRED_$$histogramKernel.subhists$ghost$$11 == _WRITE_HAS_OCCURRED_$$histogramKernel.subhists ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true  ); 
+assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  _WRITE_HAS_OCCURRED_$$histogramKernel.subhists ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_MUL(0bv32, 4bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 4bv32), 1bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 4bv32), 2bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 4bv32), 3bv32)) ) ,  (  !p0$1 ==> _WRITE_HAS_OCCURRED_$$histogramKernel.subhists$ghost$$11 == _WRITE_HAS_OCCURRED_$$histogramKernel.subhists ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true  ); 
 
 
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$histogramKernel.subhists ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -390,7 +387,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     
     
     
-assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  ( p1$1 ==> BV32_SLE($i.0$1, 0bv32) )  && ( p1$2 ==> BV32_SLE($i.0$2, 0bv32) ) ,  ( p1$1 ==> BV32_SGE($i.0$1, 0bv32) )  && ( p1$2 ==> BV32_SGE($i.0$2, 0bv32) ) ,  ( p1$1 ==> BV32_ULE($i.0$1, 0bv32) )  && ( p1$2 ==> BV32_ULE($i.0$2, 0bv32) ) ,  ( p1$1 ==> BV32_UGE($i.0$1, 0bv32) )  && ( p1$2 ==> BV32_UGE($i.0$2, 0bv32) ) ,  ( p1$1 ==> p1$1 ==> BV32_ULT(local_id_x$1, $2) )  && ( p1$2 ==> p1$2 ==> BV32_ULT(local_id_x$2, $2) ) ,  (  BV32_ULT(local_id_x$1, $2) && BV32_ULT($i.0$1, BV32_UDIV(BV32_UDIV(4096bv32, $2), 4bv32)) ==> p1$1 )  && (  BV32_ULT(local_id_x$2, $2) && BV32_ULT($i.0$2, BV32_UDIV(BV32_UDIV(4096bv32, $2), 4bv32)) ==> p1$2 ) ,  (  _WRITE_HAS_OCCURRED_$$histogramKernel.subhists ==> BV32_ULT(local_id_x$1, $2) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true  ); 
+assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  ( p1$1 ==> BV32_SLE($i.0$1, 0bv32) )  && ( p1$2 ==> BV32_SLE($i.0$2, 0bv32) ) ,  ( p1$1 ==> BV32_SGE($i.0$1, 0bv32) )  && ( p1$2 ==> BV32_SGE($i.0$2, 0bv32) ) ,  ( p1$1 ==> BV32_ULE($i.0$1, 0bv32) )  && ( p1$2 ==> BV32_ULE($i.0$2, 0bv32) ) ,  ( p1$1 ==> BV32_UGE($i.0$1, 0bv32) )  && ( p1$2 ==> BV32_UGE($i.0$2, 0bv32) ) ,  ( p1$1 ==> p1$1 ==> BV32_ULT(local_id_x$1, $2) )  && ( p1$2 ==> p1$2 ==> BV32_ULT(local_id_x$2, $2) ) ,  (  BV32_ULT(local_id_x$1, $2) && BV32_ULT($i.0$1, BV32_UDIV(BV32_UDIV(4096bv32, $2), 4bv32)) ==> p1$1 )  && (  BV32_ULT(local_id_x$2, $2) && BV32_ULT($i.0$2, BV32_UDIV(BV32_UDIV(4096bv32, $2), 4bv32)) ==> p1$2 ) ,  (  _WRITE_HAS_OCCURRED_$$histogramKernel.subhists ==> BV32_ULT(local_id_x$1, $2) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true  ); 
 
 
     assert {:block_sourceloc} {:sourceloc_num 11} p1$1 ==> true;
@@ -513,7 +510,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     
     
     
-assert  my_inv (  (  BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), $idx.1$1) == BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1)) )  && (  BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), $idx.1$2) == BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2)) ) ,  (  BV32_SLE($i.1, 0bv32) ) ,  (  BV32_SGE($i.1, 0bv32) ) ,  (  BV32_ULE($i.1, 0bv32) ) ,  (  BV32_UGE($i.1, 0bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  v9$1 == 0bv32 || BV32_AND(v9$1, BV32_SUB(v9$1, 1bv32)) == 0bv32 ) ,  (  v9$1 != 0bv32 ) ,  (  v9$2 == 0bv32 || BV32_AND(v9$2, BV32_SUB(v9$2, 1bv32)) == 0bv32 ) ,  (  v9$2 != 0bv32 ) ,  (  v10$1 == 0bv32 || BV32_AND(v10$1, BV32_SUB(v10$1, 1bv32)) == 0bv32 ) ,  (  v10$1 != 0bv32 ) ,  (  v10$2 == 0bv32 || BV32_AND(v10$2, BV32_SUB(v10$2, 1bv32)) == 0bv32 ) ,  (  v10$2 != 0bv32 ) ,  (  v11$1 == 0bv32 || BV32_AND(v11$1, BV32_SUB(v11$1, 1bv32)) == 0bv32 ) ,  (  v11$1 != 0bv32 ) ,  (  v11$2 == 0bv32 || BV32_AND(v11$2, BV32_SUB(v11$2, 1bv32)) == 0bv32 ) ,  (  v11$2 != 0bv32 ) ,  (  v12$1 == 0bv32 || BV32_AND(v12$1, BV32_SUB(v12$1, 1bv32)) == 0bv32 ) ,  (  v12$1 != 0bv32 ) ,  (  v12$2 == 0bv32 || BV32_AND(v12$2, BV32_SUB(v12$2, 1bv32)) == 0bv32 ) ,  (  v12$2 != 0bv32 ) ,  (  v18$1 == 0bv32 || BV32_AND(v18$1, BV32_SUB(v18$1, 1bv32)) == 0bv32 ) ,  (  v18$1 != 0bv32 ) ,  (  v18$2 == 0bv32 || BV32_AND(v18$2, BV32_SUB(v18$2, 1bv32)) == 0bv32 ) ,  (  v18$2 != 0bv32 ) ,  (  v17$1 == 0bv32 || BV32_AND(v17$1, BV32_SUB(v17$1, 1bv32)) == 0bv32 ) ,  (  v17$1 != 0bv32 ) ,  (  v17$2 == 0bv32 || BV32_AND(v17$2, BV32_SUB(v17$2, 1bv32)) == 0bv32 ) ,  (  v17$2 != 0bv32 ) ,  (  v19$1 == 0bv32 || BV32_AND(v19$1, BV32_SUB(v19$1, 1bv32)) == 0bv32 ) ,  (  v19$1 != 0bv32 ) ,  (  v19$2 == 0bv32 || BV32_AND(v19$2, BV32_SUB(v19$2, 1bv32)) == 0bv32 ) ,  (  v19$2 != 0bv32 ) ,  (  v20$1 == 0bv32 || BV32_AND(v20$1, BV32_SUB(v20$1, 1bv32)) == 0bv32 ) ,  (  v20$1 != 0bv32 ) ,  (  v20$2 == 0bv32 || BV32_AND(v20$2, BV32_SUB(v20$2, 1bv32)) == 0bv32 ) ,  (  v20$2 != 0bv32 ) ,  (  v25$1 == 0bv32 || BV32_AND(v25$1, BV32_SUB(v25$1, 1bv32)) == 0bv32 ) ,  (  v25$1 != 0bv32 ) ,  (  v25$2 == 0bv32 || BV32_AND(v25$2, BV32_SUB(v25$2, 1bv32)) == 0bv32 ) ,  (  v25$2 != 0bv32 ) ,  (  v26$1 == 0bv32 || BV32_AND(v26$1, BV32_SUB(v26$1, 1bv32)) == 0bv32 ) ,  (  v26$1 != 0bv32 ) ,  (  v26$2 == 0bv32 || BV32_AND(v26$2, BV32_SUB(v26$2, 1bv32)) == 0bv32 ) ,  (  v26$2 != 0bv32 ) ,  (  v27$1 == 0bv32 || BV32_AND(v27$1, BV32_SUB(v27$1, 1bv32)) == 0bv32 ) ,  (  v27$1 != 0bv32 ) ,  (  v27$2 == 0bv32 || BV32_AND(v27$2, BV32_SUB(v27$2, 1bv32)) == 0bv32 ) ,  (  v27$2 != 0bv32 ) ,  (  v28$1 == 0bv32 || BV32_AND(v28$1, BV32_SUB(v28$1, 1bv32)) == 0bv32 ) ,  (  v28$1 != 0bv32 ) ,  (  v28$2 == 0bv32 || BV32_AND(v28$2, BV32_SUB(v28$2, 1bv32)) == 0bv32 ) ,  (  v28$2 != 0bv32 ) ,  true ,  true  ); 
+assert  my_inv (  (  BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), $idx.1$1) == BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1)) )  && (  BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), $idx.1$2) == BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2)) ) ,  (  BV32_SLE($i.1, 0bv32) ) ,  (  BV32_SGE($i.1, 0bv32) ) ,  (  BV32_ULE($i.1, 0bv32) ) ,  (  BV32_UGE($i.1, 0bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  v9$1 == 0bv32 || BV32_AND(v9$1, BV32_SUB(v9$1, 1bv32)) == 0bv32 ) ,  (  v9$1 != 0bv32 ) ,  (  v9$2 == 0bv32 || BV32_AND(v9$2, BV32_SUB(v9$2, 1bv32)) == 0bv32 ) ,  (  v9$2 != 0bv32 ) ,  (  v10$1 == 0bv32 || BV32_AND(v10$1, BV32_SUB(v10$1, 1bv32)) == 0bv32 ) ,  (  v10$1 != 0bv32 ) ,  (  v10$2 == 0bv32 || BV32_AND(v10$2, BV32_SUB(v10$2, 1bv32)) == 0bv32 ) ,  (  v10$2 != 0bv32 ) ,  (  v11$1 == 0bv32 || BV32_AND(v11$1, BV32_SUB(v11$1, 1bv32)) == 0bv32 ) ,  (  v11$1 != 0bv32 ) ,  (  v11$2 == 0bv32 || BV32_AND(v11$2, BV32_SUB(v11$2, 1bv32)) == 0bv32 ) ,  (  v11$2 != 0bv32 ) ,  (  v12$1 == 0bv32 || BV32_AND(v12$1, BV32_SUB(v12$1, 1bv32)) == 0bv32 ) ,  (  v12$1 != 0bv32 ) ,  (  v12$2 == 0bv32 || BV32_AND(v12$2, BV32_SUB(v12$2, 1bv32)) == 0bv32 ) ,  (  v12$2 != 0bv32 ) ,  (  v18$1 == 0bv32 || BV32_AND(v18$1, BV32_SUB(v18$1, 1bv32)) == 0bv32 ) ,  (  v18$1 != 0bv32 ) ,  (  v18$2 == 0bv32 || BV32_AND(v18$2, BV32_SUB(v18$2, 1bv32)) == 0bv32 ) ,  (  v18$2 != 0bv32 ) ,  (  v17$1 == 0bv32 || BV32_AND(v17$1, BV32_SUB(v17$1, 1bv32)) == 0bv32 ) ,  (  v17$1 != 0bv32 ) ,  (  v17$2 == 0bv32 || BV32_AND(v17$2, BV32_SUB(v17$2, 1bv32)) == 0bv32 ) ,  (  v17$2 != 0bv32 ) ,  (  v19$1 == 0bv32 || BV32_AND(v19$1, BV32_SUB(v19$1, 1bv32)) == 0bv32 ) ,  (  v19$1 != 0bv32 ) ,  (  v19$2 == 0bv32 || BV32_AND(v19$2, BV32_SUB(v19$2, 1bv32)) == 0bv32 ) ,  (  v19$2 != 0bv32 ) ,  (  v20$1 == 0bv32 || BV32_AND(v20$1, BV32_SUB(v20$1, 1bv32)) == 0bv32 ) ,  (  v20$1 != 0bv32 ) ,  (  v20$2 == 0bv32 || BV32_AND(v20$2, BV32_SUB(v20$2, 1bv32)) == 0bv32 ) ,  (  v20$2 != 0bv32 ) ,  (  v25$1 == 0bv32 || BV32_AND(v25$1, BV32_SUB(v25$1, 1bv32)) == 0bv32 ) ,  (  v25$1 != 0bv32 ) ,  (  v25$2 == 0bv32 || BV32_AND(v25$2, BV32_SUB(v25$2, 1bv32)) == 0bv32 ) ,  (  v25$2 != 0bv32 ) ,  (  v26$1 == 0bv32 || BV32_AND(v26$1, BV32_SUB(v26$1, 1bv32)) == 0bv32 ) ,  (  v26$1 != 0bv32 ) ,  (  v26$2 == 0bv32 || BV32_AND(v26$2, BV32_SUB(v26$2, 1bv32)) == 0bv32 ) ,  (  v26$2 != 0bv32 ) ,  (  v27$1 == 0bv32 || BV32_AND(v27$1, BV32_SUB(v27$1, 1bv32)) == 0bv32 ) ,  (  v27$1 != 0bv32 ) ,  (  v27$2 == 0bv32 || BV32_AND(v27$2, BV32_SUB(v27$2, 1bv32)) == 0bv32 ) ,  (  v27$2 != 0bv32 ) ,  (  v28$1 == 0bv32 || BV32_AND(v28$1, BV32_SUB(v28$1, 1bv32)) == 0bv32 ) ,  (  v28$1 != 0bv32 ) ,  (  v28$2 == 0bv32 || BV32_AND(v28$2, BV32_SUB(v28$2, 1bv32)) == 0bv32 ) ,  (  v28$2 != 0bv32 )  ); 
 
 
     assert {:block_sourceloc} {:sourceloc_num 23} true;
@@ -538,17 +535,11 @@ assert  my_inv (  (  BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv
     $i.2$2, $bin.0$2 := (if p4$2 then 0bv32 else $i.2$2), (if p4$2 then 0bv32 else $bin.0$2);
     p5$1 := (if p4$1 then true else p5$1);
     p5$2 := (if p4$2 then true else p5$2);
-    _READ_HAS_OCCURRED_$$histogramKernel.subhists$ghost$$21 := _READ_HAS_OCCURRED_$$histogramKernel.subhists;
     assume {:captureState "loop_entry_state_0_0"} true;
     goto $21;
 
   $21:
     assume {:captureState "loop_head_state_0"} true;
-    
-    
-assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  _READ_HAS_OCCURRED_$$histogramKernel.subhists ==> local_id_x$1 == BV32_DIV(_WATCHED_OFFSET, 16bv32) ) ,  (  !p4$1 ==> _READ_HAS_OCCURRED_$$histogramKernel.subhists$ghost$$21 == _READ_HAS_OCCURRED_$$histogramKernel.subhists )  ); 
-
-
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$histogramKernel.subhists ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$histogramKernel.subhists ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$histogramKernel.subhists ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -566,7 +557,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     
     
     
-assert  my_inv (  true ,  true ,  true ,  true ,  true ,  ( p5$1 ==> BV32_SLE($i.2$1, 0bv32) )  && ( p5$2 ==> BV32_SLE($i.2$2, 0bv32) ) ,  ( p5$1 ==> BV32_SGE($i.2$1, 0bv32) )  && ( p5$2 ==> BV32_SGE($i.2$2, 0bv32) ) ,  ( p5$1 ==> BV32_ULE($i.2$1, 0bv32) )  && ( p5$2 ==> BV32_ULE($i.2$2, 0bv32) ) ,  ( p5$1 ==> BV32_UGE($i.2$1, 0bv32) )  && ( p5$2 ==> BV32_UGE($i.2$2, 0bv32) ) ,  ( p5$1 ==> p5$1 ==> BV32_ULT(local_id_x$1, 256bv32) )  && ( p5$2 ==> p5$2 ==> BV32_ULT(local_id_x$2, 256bv32) ) ,  (  BV32_ULT(local_id_x$1, 256bv32) && BV32_ULT($i.2$1, 16bv32) ==> p5$1 )  && (  BV32_ULT(local_id_x$2, 256bv32) && BV32_ULT($i.2$2, 16bv32) ==> p5$2 ) ,  (  _READ_HAS_OCCURRED_$$histogramKernel.subhists ==> BV32_ULT(local_id_x$1, 256bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true  ); 
+assert  my_inv (  true ,  true ,  true ,  true ,  true ,  ( p5$1 ==> BV32_SLE($i.2$1, 0bv32) )  && ( p5$2 ==> BV32_SLE($i.2$2, 0bv32) ) ,  ( p5$1 ==> BV32_SGE($i.2$1, 0bv32) )  && ( p5$2 ==> BV32_SGE($i.2$2, 0bv32) ) ,  ( p5$1 ==> BV32_ULE($i.2$1, 0bv32) )  && ( p5$2 ==> BV32_ULE($i.2$2, 0bv32) ) ,  ( p5$1 ==> BV32_UGE($i.2$1, 0bv32) )  && ( p5$2 ==> BV32_UGE($i.2$2, 0bv32) ) ,  ( p5$1 ==> p5$1 ==> BV32_ULT(local_id_x$1, 256bv32) )  && ( p5$2 ==> p5$2 ==> BV32_ULT(local_id_x$2, 256bv32) ) ,  (  BV32_ULT(local_id_x$1, 256bv32) && BV32_ULT($i.2$1, 16bv32) ==> p5$1 )  && (  BV32_ULT(local_id_x$2, 256bv32) && BV32_ULT($i.2$2, 16bv32) ==> p5$2 ) ,  (  _READ_HAS_OCCURRED_$$histogramKernel.subhists ==> BV32_ULT(local_id_x$1, 256bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true  ); 
 
 
     assert {:block_sourceloc} {:sourceloc_num 49} p5$1 ==> true;
@@ -581,13 +572,10 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  ( p5$1 ==> BV32_SLE($i
     havoc _HAVOC_bv32$1, _HAVOC_bv32$2;
     _abstracted_call_arg_0$1 := (if p6$1 then _HAVOC_bv32$1 else _abstracted_call_arg_0$1);
     _abstracted_call_arg_0$2 := (if p6$2 then _HAVOC_bv32$2 else _abstracted_call_arg_0$2);
-    call {:sourceloc} {:sourceloc_num 51} _LOG_READ_$$histogramKernel.subhists(p6$1, BV32_ADD(BV32_MUL(v0$1, 16bv32), $i.2$1), _abstracted_call_arg_0$1);
     assume {:do_not_predicate} {:check_id "check_state_1"} {:captureState "check_state_1"} {:sourceloc} {:sourceloc_num 51} true;
     havoc _HAVOC_bv32$1, _HAVOC_bv32$2;
     _abstracted_call_arg_1$1 := (if p6$1 then _HAVOC_bv32$1 else _abstracted_call_arg_1$1);
     _abstracted_call_arg_1$2 := (if p6$2 then _HAVOC_bv32$2 else _abstracted_call_arg_1$2);
-    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 51} _CHECK_READ_$$histogramKernel.subhists(p6$2, BV32_ADD(BV32_MUL(v0$2, 16bv32), $i.2$2), _abstracted_call_arg_1$2);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$histogramKernel.subhists"} true;
     havoc _HAVOC_bv32$1, _HAVOC_bv32$2;
     v39$1 := (if p6$1 then _HAVOC_bv32$1 else v39$1);
     v39$2 := (if p6$2 then _HAVOC_bv32$2 else v39$2);
@@ -1354,12 +1342,6 @@ function {:bvbuiltin "bvslt"} BV32_SLT(bv32, bv32) : bool;
 
 
 
-
-
-
-
-
-function {:bvbuiltin "bvsdiv"} BV32_DIV(bv32, bv32) : bv32;
 
 
 

@@ -105,22 +105,22 @@ implementation {:source_name "transposeNaive"} {:kernel} $_Z14transposeNaivePfS_
   var v1$2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
-  var v4$1: bv32;
-  var v4$2: bv32;
   var v2: bool;
   var v3: bool;
+  var v4$1: bv32;
+  var v4$2: bv32;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, 16bv32), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, 16bv32), local_id_x$2);
     v1$1 := BV32_ADD(BV32_MUL(group_id_y$1, 16bv32), local_id_y$1);
     v1$2 := BV32_ADD(BV32_MUL(group_id_y$2, 16bv32), local_id_y$2);
     $r.0 := 0bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessBreak"} _b14 ==> _WRITE_HAS_OCCURRED_$$odata ==> local_id_x$1 == BV32_SUB(BV32_SUB(BV32_DIV(_WATCHED_OFFSET, $height), BV32_DIV(BV32_MUL(group_id_y$1, 16bv32), $height)), BV32_MUL(group_id_x$1, 16bv32));
     assert {:tag "accessBreak"} _b13 ==> _WRITE_HAS_OCCURRED_$$odata ==> group_id_x$1 == BV32_SUB(BV32_SUB(BV32_DIV(BV32_DIV(_WATCHED_OFFSET, $height), 16bv32), BV32_DIV(group_id_y$1, $height)), BV32_DIV(local_id_x$1, 16bv32));
@@ -143,9 +143,9 @@ implementation {:source_name "transposeNaive"} {:kernel} $_Z14transposeNaivePfS_
     assume {:partition} v2;
     $i.0 := 0bv32;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.8;
+    goto $3;
 
-  $for.cond.8:
+  $3:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "accessBreak"} _b18 ==> _WRITE_HAS_OCCURRED_$$odata ==> local_id_x$1 == BV32_SUB(BV32_SUB(BV32_DIV(_WATCHED_OFFSET, $height), BV32_DIV(BV32_MUL(group_id_y$1, 16bv32), $height)), BV32_MUL(group_id_x$1, 16bv32));
     assert {:tag "accessBreak"} _b17 ==> _WRITE_HAS_OCCURRED_$$odata ==> group_id_x$1 == BV32_SUB(BV32_SUB(BV32_DIV(BV32_DIV(_WATCHED_OFFSET, $height), 16bv32), BV32_DIV(group_id_y$1, $height)), BV32_DIV(local_id_x$1, 16bv32));
@@ -165,7 +165,7 @@ implementation {:source_name "transposeNaive"} {:kernel} $_Z14transposeNaivePfS_
     assume {:partition} !v3;
     $r.0 := BV32_ADD($r.0, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
   $truebb0:
     assume {:partition} v3;
@@ -179,7 +179,7 @@ implementation {:source_name "transposeNaive"} {:kernel} $_Z14transposeNaivePfS_
     $$odata[BV32_ADD(BV32_ADD(v1$2, BV32_MUL($height, v0$2)), $i.0)] := v4$2;
     $i.0 := BV32_ADD($i.0, 16bv32);
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.8;
+    goto $3;
 }
 
 

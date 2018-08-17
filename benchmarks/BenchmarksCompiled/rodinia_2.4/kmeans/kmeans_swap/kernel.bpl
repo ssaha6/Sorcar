@@ -106,14 +106,14 @@ implementation {:source_name "kmeans_swap"} {:kernel} $kmeans_swap($npoints: bv3
 {
   var $i.0$1: bv32;
   var $i.0$2: bv32;
-  var v3$1: bv32;
-  var v3$2: bv32;
-  var v2$1: bool;
-  var v2$2: bool;
-  var v1$1: bool;
-  var v1$2: bool;
   var v0$1: bv32;
   var v0$2: bv32;
+  var v1$1: bool;
+  var v1$2: bool;
+  var v2$1: bool;
+  var v2$2: bool;
+  var v3$1: bv32;
+  var v3$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -124,10 +124,10 @@ implementation {:source_name "kmeans_swap"} {:kernel} $kmeans_swap($npoints: bv3
   var p3$2: bool;
   var _HAVOC_bv32$1: bv32;
   var _HAVOC_bv32$2: bv32;
-  var _WRITE_HAS_OCCURRED_$$feature_swap$ghost$$for.cond: bool;
+  var _WRITE_HAS_OCCURRED_$$feature_swap$ghost$$2: bool;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2);
     v1$1 := BV32_ULT(v0$1, $npoints);
@@ -144,13 +144,13 @@ implementation {:source_name "kmeans_swap"} {:kernel} $kmeans_swap($npoints: bv3
     $i.0$2 := (if p0$2 then 0bv32 else $i.0$2);
     p1$1 := (if p0$1 then true else p1$1);
     p1$2 := (if p0$2 then true else p1$2);
-    _WRITE_HAS_OCCURRED_$$feature_swap$ghost$$for.cond := _WRITE_HAS_OCCURRED_$$feature_swap;
+    _WRITE_HAS_OCCURRED_$$feature_swap$ghost$$2 := _WRITE_HAS_OCCURRED_$$feature_swap;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $2;
 
-  $for.cond:
+  $2:
     assume {:captureState "loop_head_state_0"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b12 ==> !p0$1 ==> _WRITE_HAS_OCCURRED_$$feature_swap$ghost$$for.cond == _WRITE_HAS_OCCURRED_$$feature_swap;
+    assert {:tag "disabledMaintainsInstrumentation"} _b12 ==> !p0$1 ==> _WRITE_HAS_OCCURRED_$$feature_swap$ghost$$2 == _WRITE_HAS_OCCURRED_$$feature_swap;
     assert {:tag "accessBreak"} _b11 ==> _WRITE_HAS_OCCURRED_$$feature_swap ==> group_id_x$1 == BV32_DIV(_WATCHED_OFFSET, group_size_x);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b10 ==> _WRITE_HAS_OCCURRED_$$feature_swap ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, $npoints), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, $npoints), 1bv32), BV32_ADD(BV32_MUL(0bv32, $npoints), BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1)));
     assert {:tag "accessUpperBoundBlock"} _b9 ==> _WRITE_HAS_OCCURRED_$$feature_swap ==> BV32_SLT(_WATCHED_OFFSET, BV32_ADD(BV32_MUL(BV32_ADD(group_id_x$1, 1bv32), group_size_x), local_id_x$1));
@@ -195,16 +195,16 @@ implementation {:source_name "kmeans_swap"} {:kernel} $kmeans_swap($npoints: bv3
     $i.0$2 := (if p2$2 then BV32_ADD($i.0$2, 1bv32) else $i.0$2);
     p1$1 := (if p2$1 then true else p1$1);
     p1$2 := (if p2$2 then true else p1$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $2.backedge, $2.tail;
 
-  $for.cond.tail:
+  $2.tail:
     assume !p1$1 && !p1$2;
     return;
 
-  $for.cond.backedge:
+  $2.backedge:
     assume {:backedge} p1$1 || p1$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $2;
 }
 
 

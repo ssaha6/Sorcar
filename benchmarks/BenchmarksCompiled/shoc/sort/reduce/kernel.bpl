@@ -130,41 +130,41 @@ procedure {:source_name "reduce"} {:kernel} $reduce($n: bv32, $shift: bv32);
 
 implementation {:source_name "reduce"} {:kernel} $reduce($n: bv32, $shift: bv32)
 {
-  var $cond$1: bv32;
-  var $cond$2: bv32;
+  var $0$1: bv32;
+  var $0$2: bv32;
   var $i.0$1: bv32;
   var $i.0$2: bv32;
   var $d.0: bv32;
   var $s.0: bv32;
-  var v4$1: bool;
-  var v4$2: bool;
-  var v3$1: bv32;
-  var v3$2: bv32;
-  var v2$1: bool;
-  var v2$2: bool;
   var v0: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
+  var v2$1: bool;
+  var v2$2: bool;
+  var v3$1: bv32;
+  var v3$2: bv32;
+  var v4$1: bool;
+  var v4$2: bool;
   var v5$1: bv32;
   var v5$2: bv32;
-  var v7$1: bv32;
-  var v7$2: bv32;
-  var v15$1: bv32;
-  var v15$2: bv32;
-  var v9$1: bv32;
-  var v9$2: bv32;
-  var v13$1: bv32;
-  var v13$2: bv32;
-  var v12$1: bv32;
-  var v12$2: bv32;
-  var v8: bool;
   var v6$1: bv32;
   var v6$2: bv32;
-  var v14$1: bool;
-  var v14$2: bool;
+  var v7$1: bv32;
+  var v7$2: bv32;
+  var v8: bool;
+  var v9$1: bv32;
+  var v9$2: bv32;
+  var v10: bool;
   var v11$1: bool;
   var v11$2: bool;
-  var v10: bool;
+  var v12$1: bv32;
+  var v12$2: bv32;
+  var v13$1: bv32;
+  var v13$2: bv32;
+  var v14$1: bool;
+  var v14$2: bool;
+  var v15$1: bv32;
+  var v15$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -187,7 +187,7 @@ implementation {:source_name "reduce"} {:kernel} $reduce($n: bv32, $shift: bv32)
   var _HAVOC_bv32$2: bv32;
 
 
-  $entry:
+  $0:
     v0 := BV32_MUL(BV32_UDIV(BV32_SDIV($n, 4bv32), num_groups_x), 4bv32);
     v1$1 := BV32_MUL(group_id_x$1, v0);
     v1$2 := BV32_MUL(group_id_x$2, v0);
@@ -203,10 +203,10 @@ implementation {:source_name "reduce"} {:kernel} $reduce($n: bv32, $shift: bv32)
     p0$2 := (if v2$2 then v2$2 else p0$2);
     p1$1 := (if !v2$1 then !v2$1 else p1$1);
     p1$2 := (if !v2$2 then !v2$2 else p1$2);
-    $cond$1 := (if p0$1 then $n else $cond$1);
-    $cond$2 := (if p0$2 then $n else $cond$2);
-    $cond$1 := (if p1$1 then BV32_ADD(v1$1, v0) else $cond$1);
-    $cond$2 := (if p1$2 then BV32_ADD(v1$2, v0) else $cond$2);
+    $0$1 := (if p0$1 then $n else $0$1);
+    $0$2 := (if p0$2 then $n else $0$2);
+    $0$1 := (if p1$1 then BV32_ADD(v1$1, v0) else $0$1);
+    $0$2 := (if p1$2 then BV32_ADD(v1$2, v0) else $0$2);
     v3$1 := local_id_x$1;
     v3$2 := local_id_x$2;
     $$digit_counts$1[0bv32] := 0bv32;
@@ -246,17 +246,17 @@ implementation {:source_name "reduce"} {:kernel} $reduce($n: bv32, $shift: bv32)
     p2$1 := true;
     p2$2 := true;
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $while.cond;
+    goto $4;
 
-  $while.cond:
+  $4:
     assume {:captureState "loop_head_state_2"} true;
     assume {:invGenSkippedLoop} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$lmem ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$lmem ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$lmem ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:block_sourceloc} {:sourceloc_num 21} p2$1 ==> true;
-    v4$1 := (if p2$1 then BV32_SLT($i.0$1, $cond$1) else v4$1);
-    v4$2 := (if p2$2 then BV32_SLT($i.0$2, $cond$2) else v4$2);
+    v4$1 := (if p2$1 then BV32_SLT($i.0$1, $0$1) else v4$1);
+    v4$2 := (if p2$2 then BV32_SLT($i.0$2, $0$2) else v4$2);
     p3$1 := false;
     p3$2 := false;
     p4$1 := false;
@@ -278,15 +278,15 @@ implementation {:source_name "reduce"} {:kernel} $reduce($n: bv32, $shift: bv32)
     $i.0$2 := (if p3$2 then BV32_ADD($i.0$2, group_size_x) else $i.0$2);
     p2$1 := (if p3$1 then true else p2$1);
     p2$2 := (if p3$2 then true else p2$2);
-    goto $while.cond.backedge, $while.cond.tail;
+    goto $4.backedge, $4.tail;
 
-  $while.cond.tail:
+  $4.tail:
     assume !p2$1 && !p2$2;
     $d.0 := 0bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $7;
 
-  $for.cond:
+  $7:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b18 ==> _WRITE_HAS_OCCURRED_$$lmem ==> _WATCHED_OFFSET == local_id_x$1 || _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b17 ==> _READ_HAS_OCCURRED_$$lmem ==> _WATCHED_OFFSET == 0bv32 || _WATCHED_OFFSET == local_id_x$1;
@@ -333,9 +333,9 @@ implementation {:source_name "reduce"} {:kernel} $reduce($n: bv32, $shift: bv32)
     call {:sourceloc_num 33} $bugle_barrier_duplicated_0(1bv1, 0bv1);
     $s.0 := BV32_UDIV(group_size_x, 2bv32);
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.25;
+    goto $9;
 
-  $for.cond.25:
+  $9:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b24 ==> _WRITE_HAS_OCCURRED_$$lmem ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b23 ==> _READ_HAS_OCCURRED_$$lmem ==> _WATCHED_OFFSET == local_id_x$1;
@@ -383,7 +383,7 @@ implementation {:source_name "reduce"} {:kernel} $reduce($n: bv32, $shift: bv32)
     $$isums[BV32_ADD(BV32_MUL($d.0, num_groups_x), group_id_x$2)] := (if p8$2 then v15$2 else $$isums[BV32_ADD(BV32_MUL($d.0, num_groups_x), group_id_x$2)]);
     $d.0 := BV32_ADD($d.0, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $7;
 
   __partitioned_block_$truebb2_0:
     assume {:partition} v10;
@@ -416,12 +416,12 @@ implementation {:source_name "reduce"} {:kernel} $reduce($n: bv32, $shift: bv32)
     call {:sourceloc_num 41} $bugle_barrier_duplicated_1(1bv1, 0bv1);
     $s.0 := BV32_LSHR($s.0, 1bv32);
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.25;
+    goto $9;
 
-  $while.cond.backedge:
+  $4.backedge:
     assume {:backedge} p2$1 || p2$2;
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $while.cond;
+    goto $4;
 }
 
 

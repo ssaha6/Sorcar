@@ -133,36 +133,36 @@ implementation {:source_name "DCT"} {:kernel} $DCT($width: bv32, $blockWidth: bv
   var $acc.0$1: bv32;
   var $acc.0$2: bv32;
   var $k.0: bv32;
-  var $cond$1: bv32;
-  var $cond$2: bv32;
+  var $0$1: bv32;
+  var $0$2: bv32;
   var $acc.1$1: bv32;
   var $acc.1$2: bv32;
-  var $k19.0: bv32;
-  var $cond35$1: bv32;
-  var $cond35$2: bv32;
-  var v1$1: bv32;
-  var v1$2: bv32;
+  var $k1.0: bv32;
+  var $1$1: bv32;
+  var $1$2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
-  var v5$1: bv32;
-  var v5$2: bv32;
-  var v11$1: bv32;
-  var v11$2: bv32;
-  var v6$1: bv32;
-  var v6$2: bv32;
-  var v10$1: bv32;
-  var v10$2: bv32;
-  var v3: bool;
+  var v1$1: bv32;
+  var v1$2: bv32;
   var v2$1: bv32;
   var v2$2: bv32;
+  var v3: bool;
   var v4: bool;
+  var v5$1: bv32;
+  var v5$2: bv32;
+  var v6$1: bv32;
+  var v6$2: bv32;
+  var v7: bool;
   var v8$1: bv32;
   var v8$2: bv32;
   var v9: bool;
-  var v7: bool;
+  var v10$1: bv32;
+  var v10$2: bv32;
+  var v11$1: bv32;
+  var v11$2: bv32;
 
 
-  $entry:
+  $0:
     v0$1 := local_id_x$1;
     v0$2 := local_id_x$2;
     v1$1 := local_id_y$1;
@@ -172,9 +172,9 @@ implementation {:source_name "DCT"} {:kernel} $DCT($width: bv32, $blockWidth: bv
     $acc.0$1, $k.0 := 0bv32, 0bv32;
     $acc.0$2 := 0bv32;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_1"} true;
     assume {:invGenSkippedLoop} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$inter ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -197,22 +197,22 @@ implementation {:source_name "DCT"} {:kernel} $DCT($width: bv32, $blockWidth: bv
 
   __partitioned_block_$falsebb_1:
     call {:sourceloc_num 13} $bugle_barrier_duplicated_0(1bv1, 0bv1);
-    $acc.1$1, $k19.0 := 0bv32, 0bv32;
+    $acc.1$1, $k1.0 := 0bv32, 0bv32;
     $acc.1$2 := 0bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.20;
+    goto $8;
 
-  $for.cond.20:
+  $8:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$inter ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$inter ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$inter ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
-    assert {:tag "loopBound"} {:thread 1} _b3 ==> BV32_UGE($k19.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b2 ==> BV32_ULE($k19.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b1 ==> BV32_SGE($k19.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b0 ==> BV32_SLE($k19.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b3 ==> BV32_UGE($k1.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b2 ==> BV32_ULE($k1.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b1 ==> BV32_SGE($k1.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b0 ==> BV32_SLE($k1.0, 0bv32);
     assert {:block_sourceloc} {:sourceloc_num 14} true;
-    v7 := BV32_ULT($k19.0, $blockWidth);
+    v7 := BV32_ULT($k1.0, $blockWidth);
     goto $truebb1, $falsebb1;
 
   $falsebb1:
@@ -228,32 +228,32 @@ implementation {:source_name "DCT"} {:kernel} $DCT($width: bv32, $blockWidth: bv
 
   $truebb1:
     assume {:partition} v7;
-    v8$1 := BV32_ADD(BV32_MUL(v0$1, $blockWidth), $k19.0);
-    v8$2 := BV32_ADD(BV32_MUL(v0$2, $blockWidth), $k19.0);
+    v8$1 := BV32_ADD(BV32_MUL(v0$1, $blockWidth), $k1.0);
+    v8$2 := BV32_ADD(BV32_MUL(v0$2, $blockWidth), $k1.0);
     v9 := $inverse != 0bv32;
     goto $truebb2, $falsebb2;
 
   $falsebb2:
     assume {:partition} !v9;
-    $cond35$1 := BV32_ADD(BV32_MUL($k19.0, $blockWidth), v1$1);
-    $cond35$2 := BV32_ADD(BV32_MUL($k19.0, $blockWidth), v1$2);
-    goto $cond.end.34;
+    $1$1 := BV32_ADD(BV32_MUL($k1.0, $blockWidth), v1$1);
+    $1$2 := BV32_ADD(BV32_MUL($k1.0, $blockWidth), v1$2);
+    goto $12;
 
-  $cond.end.34:
+  $12:
     assume {:do_not_predicate} {:check_id "check_state_2"} {:captureState "check_state_2"} {:sourceloc} {:sourceloc_num 19} true;
     v10$1 := $$inter[1bv1][v8$1];
     v10$2 := $$inter[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v8$2];
     havoc v11$1, v11$2;
-    $acc.1$1, $k19.0 := FADD32($acc.1$1, FMUL32(v10$1, v11$1)), BV32_ADD($k19.0, 1bv32);
-    $acc.1$2 := FADD32($acc.1$2, FMUL32(v10$2, v11$2));
+    $acc.1$1, $k1.0 := FADD32(FMUL32(v10$1, v11$1), $acc.1$1), BV32_ADD($k1.0, 1bv32);
+    $acc.1$2 := FADD32(FMUL32(v10$2, v11$2), $acc.1$2);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.20;
+    goto $8;
 
   $truebb2:
     assume {:partition} v9;
-    $cond35$1 := BV32_ADD(BV32_MUL(v1$1, $blockWidth), $k19.0);
-    $cond35$2 := BV32_ADD(BV32_MUL(v1$2, $blockWidth), $k19.0);
-    goto $cond.end.34;
+    $1$1 := BV32_ADD(BV32_MUL(v1$1, $blockWidth), $k1.0);
+    $1$2 := BV32_ADD(BV32_MUL(v1$2, $blockWidth), $k1.0);
+    goto $12;
 
   $truebb:
     assume {:partition} v3;
@@ -262,23 +262,23 @@ implementation {:source_name "DCT"} {:kernel} $DCT($width: bv32, $blockWidth: bv
 
   $falsebb0:
     assume {:partition} !v4;
-    $cond$1 := BV32_ADD(BV32_MUL($k.0, $blockWidth), v0$1);
-    $cond$2 := BV32_ADD(BV32_MUL($k.0, $blockWidth), v0$2);
-    goto $cond.end;
+    $0$1 := BV32_ADD(BV32_MUL($k.0, $blockWidth), v0$1);
+    $0$2 := BV32_ADD(BV32_MUL($k.0, $blockWidth), v0$2);
+    goto $5;
 
-  $cond.end:
+  $5:
     havoc v5$1, v5$2;
     havoc v6$1, v6$2;
-    $acc.0$1, $k.0 := FADD32($acc.0$1, FMUL32(v5$1, v6$1)), BV32_ADD($k.0, 1bv32);
-    $acc.0$2 := FADD32($acc.0$2, FMUL32(v5$2, v6$2));
+    $acc.0$1, $k.0 := FADD32(FMUL32(v5$1, v6$1), $acc.0$1), BV32_ADD($k.0, 1bv32);
+    $acc.0$2 := FADD32(FMUL32(v5$2, v6$2), $acc.0$2);
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond;
+    goto $1;
 
   $truebb0:
     assume {:partition} v4;
-    $cond$1 := BV32_ADD(BV32_MUL(v0$1, $blockWidth), $k.0);
-    $cond$2 := BV32_ADD(BV32_MUL(v0$2, $blockWidth), $k.0);
-    goto $cond.end;
+    $0$1 := BV32_ADD(BV32_MUL(v0$1, $blockWidth), $k.0);
+    $0$2 := BV32_ADD(BV32_MUL(v0$2, $blockWidth), $k.0);
+    goto $5;
 }
 
 

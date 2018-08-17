@@ -110,10 +110,10 @@ implementation {:source_name "sum_kernel"} {:kernel} $sum_kernel($Nparticles: bv
   var p2$2: bool;
   var p3$1: bool;
   var p3$2: bool;
-  var _READ_HAS_OCCURRED_$$partial_sums$ghost$$for.cond: bool;
+  var _READ_HAS_OCCURRED_$$partial_sums$ghost$$2: bool;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1) == 0bv32;
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2) == 0bv32;
     p0$1 := false;
@@ -128,13 +128,13 @@ implementation {:source_name "sum_kernel"} {:kernel} $sum_kernel($Nparticles: bv
     $x.0$2, $sum.0$2 := (if p0$2 then 0bv32 else $x.0$2), (if p0$2 then 0bv32 else $sum.0$2);
     p1$1 := (if p0$1 then true else p1$1);
     p1$2 := (if p0$2 then true else p1$2);
-    _READ_HAS_OCCURRED_$$partial_sums$ghost$$for.cond := _READ_HAS_OCCURRED_$$partial_sums;
+    _READ_HAS_OCCURRED_$$partial_sums$ghost$$2 := _READ_HAS_OCCURRED_$$partial_sums;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $2;
 
-  $for.cond:
+  $2:
     assume {:captureState "loop_head_state_0"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b8 ==> !p0$1 ==> _READ_HAS_OCCURRED_$$partial_sums$ghost$$for.cond == _READ_HAS_OCCURRED_$$partial_sums;
+    assert {:tag "disabledMaintainsInstrumentation"} _b8 ==> !p0$1 ==> _READ_HAS_OCCURRED_$$partial_sums$ghost$$2 == _READ_HAS_OCCURRED_$$partial_sums;
     assume {:predicate "p1"} {:dominator_predicate "p0"} true;
     assert {:do_not_predicate} {:tag "accessOnlyIfEnabledInEnclosingScopes"} {:thread 1} _b7 ==> _READ_HAS_OCCURRED_$$partial_sums ==> BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1) == 0bv32;
     assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 1} _b6 ==> BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1) == 0bv32 && BV32_SLT($x.0$1, BV32_ADD(BV32_UDIV($Nparticles, group_size_x), 1bv32)) ==> p1$1;
@@ -170,9 +170,9 @@ implementation {:source_name "sum_kernel"} {:kernel} $sum_kernel($Nparticles: bv
     $x.0$2, $sum.0$2 := (if p2$2 then BV32_ADD($x.0$2, 1bv32) else $x.0$2), (if p2$2 then FADD32($sum.0$2, v2$2) else $sum.0$2);
     p1$1 := (if p2$1 then true else p1$1);
     p1$2 := (if p2$2 then true else p1$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $2.backedge, $2.tail;
 
-  $for.cond.tail:
+  $2.tail:
     assume !p1$1 && !p1$2;
     call {:sourceloc} {:sourceloc_num 8} _LOG_WRITE_$$partial_sums(p0$1, 0bv32, $sum.0$1, $$partial_sums[0bv32]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$partial_sums(p0$2, 0bv32);
@@ -183,10 +183,10 @@ implementation {:source_name "sum_kernel"} {:kernel} $sum_kernel($Nparticles: bv
     $$partial_sums[0bv32] := (if p0$2 then $sum.0$2 else $$partial_sums[0bv32]);
     return;
 
-  $for.cond.backedge:
+  $2.backedge:
     assume {:backedge} p1$1 || p1$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $2;
 }
 
 

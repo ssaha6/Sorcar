@@ -22,9 +22,7 @@ function {:existential true} my_inv (
  b0020: bool,
  b0021: bool,
  b0022: bool,
- b0023: bool,
- b0024: bool,
- b0025: bool
+ b0023: bool
  ) : bool;
 type _SIZE_T_TYPE = bv32;
 
@@ -165,146 +163,70 @@ implementation {:source_name "CUDAkernelShortIDCT"} {:kernel} $_Z19CUDAkernelSho
   var $i.0$2: bv32;
   var $i1.0$1: bv32;
   var $i1.0$2: bv32;
+  var v0$1: bv32;
+  var v0$2: bv32;
+  var v38$1: bv32;
+  var v38$2: bv32;
+  var v39$1: bv32;
+  var v39$2: bv32;
+  var v40$1: bv32;
+  var v40$2: bv32;
   var v41$1: bv32;
   var v41$2: bv32;
   var v42$1: bv32;
   var v42$2: bv32;
-  var v52$1: bv16;
-  var v52$2: bv16;
-  var v70$1: bv8;
-  var v70$2: bv8;
-  var v71$1: bv8;
-  var v71$2: bv8;
-  var v72$1: bv8;
-  var v72$2: bv8;
-  var v73$1: bv8;
-  var v73$2: bv8;
-  var v8$1: bv8;
-  var v8$2: bv8;
-  var v115$1: bv32;
-  var v115$2: bv32;
-  var v120$1: bv16;
-  var v120$2: bv16;
-  var v28$1: bv8;
-  var v28$2: bv8;
-  var v31$1: bv32;
-  var v31$2: bv32;
-  var v105$1: bv32;
-  var v105$2: bv32;
-  var v106$1: bv32;
-  var v106$2: bv32;
-  var v74$1: bv8;
-  var v74$2: bv8;
-  var v75$1: bv8;
-  var v75$2: bv8;
-  var v116$1: bv16;
-  var v116$2: bv16;
-  var v118$1: bv16;
-  var v118$2: bv16;
-  var v15$1: bv32;
-  var v15$2: bv32;
-  var v114$1: bv32;
-  var v114$2: bv32;
-  var v14$1: bv8;
-  var v14$2: bv8;
-  var v27$1: bv32;
-  var v27$2: bv32;
-  var v13$1: bv8;
-  var v13$2: bv8;
-  var v29$1: bv8;
-  var v29$2: bv8;
-  var v19$1: bv8;
-  var v19$2: bv8;
-  var v20$1: bv8;
-  var v20$2: bv8;
-  var v21$1: bv32;
-  var v21$2: bv32;
-  var v37$1: bv32;
-  var v37$2: bv32;
-  var v35$1: bv32;
-  var v35$2: bv32;
-  var v22$1: bv8;
-  var v22$2: bv8;
-  var v38$1: bv32;
-  var v38$2: bv32;
-  var v23$1: bv8;
-  var v23$2: bv8;
-  var v24$1: bv32;
-  var v24$2: bv32;
+  var v43$1: bv32;
+  var v43$2: bv32;
+  var v44$1: bv32;
+  var v44$2: bv32;
+  var v45$1: bv32;
+  var v45$2: bv32;
+  var v46$1: bv32;
+  var v46$2: bv32;
   var v3$1: bool;
   var v3$2: bool;
-  var v9$1: bv8;
-  var v9$2: bv8;
   var v47$1: bv32;
   var v47$2: bv32;
-  var v36$1: bv32;
-  var v36$2: bv32;
-  var v39$1: bv32;
-  var v39$2: bv32;
+  var v48$1: bv32;
+  var v48$2: bv32;
   var v49$1: bv32;
   var v49$2: bv32;
-  var v40$1: bv32;
-  var v40$2: bv32;
+  var v50$1: bv16;
+  var v50$2: bv16;
+  var v51$1: bv16;
+  var v51$2: bv16;
+  var v1$1: bv32;
+  var v1$2: bv32;
+  var v31$1: bv32;
+  var v31$2: bv32;
+  var v32$1: bv32;
+  var v32$2: bv32;
   var v33$1: bv32;
   var v33$2: bv32;
   var v34$1: bv32;
   var v34$2: bv32;
+  var v35$1: bv32;
+  var v35$2: bv32;
+  var v36$1: bv32;
+  var v36$2: bv32;
+  var v37$1: bv32;
+  var v37$2: bv32;
+  var v52$1: bv16;
+  var v52$2: bv16;
+  var v53$1: bv16;
+  var v53$2: bv16;
+  var v54$1: bv16;
+  var v54$2: bv16;
   var v55$1: bv16;
   var v55$2: bv16;
-  var v4$1: bv8;
-  var v4$2: bv8;
-  var v5$1: bv8;
-  var v5$2: bv8;
-  var v6$1: bv8;
-  var v6$2: bv8;
-  var v7$1: bv8;
-  var v7$2: bv8;
-  var v104$1: bv32;
-  var v104$2: bv32;
-  var v66$1: bv8;
-  var v66$2: bv8;
-  var v103$1: bv32;
-  var v103$2: bv32;
-  var v1$1: bv32;
-  var v1$2: bv32;
-  var v89$1: bv8;
-  var v89$2: bv8;
-  var v90$1: bv32;
-  var v90$2: bv32;
-  var v91$1: bv8;
-  var v91$2: bv8;
+  var v114$1: bv32;
+  var v114$2: bv32;
+  var v56$1: bv16;
+  var v56$2: bv16;
   var v57$1: bv16;
   var v57$2: bv16;
-  var v92$1: bv8;
-  var v92$2: bv8;
-  var v93$1: bv32;
-  var v93$2: bv32;
-  var v94$1: bv8;
-  var v94$2: bv8;
-  var v95$1: bv8;
-  var v95$2: bv8;
-  var v96$1: bv32;
-  var v96$2: bv32;
-  var v58$1: bv8;
-  var v58$2: bv8;
-  var v59$1: bv8;
-  var v59$2: bv8;
-  var v60$1: bv8;
-  var v60$2: bv8;
-  var v61$1: bv8;
-  var v61$2: bv8;
-  var v97$1: bv32;
-  var v97$2: bv32;
   var v98$1: bv32;
   var v98$2: bv32;
-  var v62$1: bv8;
-  var v62$2: bv8;
-  var v63$1: bv8;
-  var v63$2: bv8;
-  var v64$1: bv8;
-  var v64$2: bv8;
-  var v65$1: bv8;
-  var v65$2: bv8;
   var v99$1: bv32;
   var v99$2: bv32;
   var v100$1: bv32;
@@ -313,68 +235,14 @@ implementation {:source_name "CUDAkernelShortIDCT"} {:kernel} $_Z19CUDAkernelSho
   var v101$2: bv32;
   var v102$1: bv32;
   var v102$2: bv32;
-  var v83$1: bv8;
-  var v83$2: bv8;
-  var v84$1: bv32;
-  var v84$2: bv32;
-  var v85$1: bv8;
-  var v85$2: bv8;
-  var v43$1: bv32;
-  var v43$2: bv32;
-  var v48$1: bv32;
-  var v48$2: bv32;
-  var v44$1: bv32;
-  var v44$2: bv32;
-  var v45$1: bv32;
-  var v45$2: bv32;
-  var v10$1: bv32;
-  var v10$2: bv32;
-  var v11$1: bv8;
-  var v11$2: bv8;
-  var v32$1: bv32;
-  var v32$2: bv32;
-  var v53$1: bv16;
-  var v53$2: bv16;
-  var v12$1: bv8;
-  var v12$2: bv8;
-  var v2$1: bool;
-  var v2$2: bool;
-  var v51$1: bv16;
-  var v51$2: bv16;
-  var v16$1: bv8;
-  var v16$2: bv8;
-  var v17$1: bv8;
-  var v17$2: bv8;
-  var v18$1: bv32;
-  var v18$2: bv32;
-  var v0$1: bv32;
-  var v0$2: bv32;
-  var v46$1: bv32;
-  var v46$2: bv32;
-  var v56$1: bv16;
-  var v56$2: bv16;
-  var v81$1: bv32;
-  var v81$2: bv32;
-  var v82$1: bv8;
-  var v82$2: bv8;
-  var v76$1: bv32;
-  var v76$2: bv32;
-  var v77$1: bv8;
-  var v77$2: bv8;
-  var v78$1: bv8;
-  var v78$2: bv8;
-  var v79$1: bv8;
-  var v79$2: bv8;
-  var v80$1: bv8;
-  var v80$2: bv8;
-  var v86$1: bv8;
-  var v86$2: bv8;
-  var v87$1: bv32;
-  var v87$2: bv32;
-  var v88$1: bv8;
-  var v88$2: bv8;
-  var v113$1: bv32;
-  var v113$2: bv32;
+  var v103$1: bv32;
+  var v103$2: bv32;
+  var v104$1: bv32;
+  var v104$2: bv32;
+  var v105$1: bv32;
+  var v105$2: bv32;
+  var v106$1: bv32;
+  var v106$2: bv32;
   var v107$1: bv32;
   var v107$2: bv32;
   var v108$1: bv32;
@@ -387,26 +255,156 @@ implementation {:source_name "CUDAkernelShortIDCT"} {:kernel} $_Z19CUDAkernelSho
   var v111$2: bv32;
   var v112$1: bv32;
   var v112$2: bv32;
+  var v113$1: bv32;
+  var v113$2: bv32;
+  var v115$1: bv32;
+  var v115$2: bv32;
+  var v116$1: bv16;
+  var v116$2: bv16;
+  var v117$1: bv16;
+  var v117$2: bv16;
+  var v118$1: bv16;
+  var v118$2: bv16;
+  var v119$1: bv16;
+  var v119$2: bv16;
+  var v120$1: bv16;
+  var v120$2: bv16;
+  var v13$1: bv8;
+  var v13$2: bv8;
+  var v14$1: bv8;
+  var v14$2: bv8;
+  var v15$1: bv32;
+  var v15$2: bv32;
+  var v16$1: bv8;
+  var v16$2: bv8;
+  var v17$1: bv8;
+  var v17$2: bv8;
+  var v18$1: bv32;
+  var v18$2: bv32;
+  var v8$1: bv8;
+  var v8$2: bv8;
+  var v9$1: bv8;
+  var v9$2: bv8;
+  var v10$1: bv32;
+  var v10$2: bv32;
+  var v11$1: bv8;
+  var v11$2: bv8;
+  var v12$1: bv8;
+  var v12$2: bv8;
+  var v19$1: bv8;
+  var v19$2: bv8;
+  var v58$1: bv8;
+  var v58$2: bv8;
+  var v59$1: bv8;
+  var v59$2: bv8;
+  var v60$1: bv8;
+  var v60$2: bv8;
+  var v61$1: bv8;
+  var v61$2: bv8;
+  var v62$1: bv8;
+  var v62$2: bv8;
+  var v63$1: bv8;
+  var v63$2: bv8;
+  var v64$1: bv8;
+  var v64$2: bv8;
+  var v65$1: bv8;
+  var v65$2: bv8;
+  var v66$1: bv8;
+  var v66$2: bv8;
   var v67$1: bv8;
   var v67$2: bv8;
   var v68$1: bv8;
   var v68$2: bv8;
   var v69$1: bv8;
   var v69$2: bv8;
-  var v54$1: bv16;
-  var v54$2: bv16;
-  var v50$1: bv16;
-  var v50$2: bv16;
-  var v30$1: bv32;
-  var v30$2: bv32;
+  var v70$1: bv8;
+  var v70$2: bv8;
+  var v71$1: bv8;
+  var v71$2: bv8;
+  var v72$1: bv8;
+  var v72$2: bv8;
+  var v73$1: bv8;
+  var v73$2: bv8;
+  var v74$1: bv8;
+  var v74$2: bv8;
+  var v75$1: bv8;
+  var v75$2: bv8;
+  var v76$1: bv32;
+  var v76$2: bv32;
+  var v77$1: bv8;
+  var v77$2: bv8;
+  var v78$1: bv8;
+  var v78$2: bv8;
+  var v79$1: bv8;
+  var v79$2: bv8;
+  var v80$1: bv8;
+  var v80$2: bv8;
+  var v81$1: bv32;
+  var v81$2: bv32;
+  var v82$1: bv8;
+  var v82$2: bv8;
+  var v83$1: bv8;
+  var v83$2: bv8;
+  var v84$1: bv32;
+  var v84$2: bv32;
+  var v85$1: bv8;
+  var v85$2: bv8;
+  var v86$1: bv8;
+  var v86$2: bv8;
+  var v87$1: bv32;
+  var v87$2: bv32;
+  var v88$1: bv8;
+  var v88$2: bv8;
+  var v89$1: bv8;
+  var v89$2: bv8;
+  var v90$1: bv32;
+  var v90$2: bv32;
+  var v91$1: bv8;
+  var v91$2: bv8;
+  var v92$1: bv8;
+  var v92$2: bv8;
+  var v93$1: bv32;
+  var v93$2: bv32;
+  var v94$1: bv8;
+  var v94$2: bv8;
+  var v95$1: bv8;
+  var v95$2: bv8;
+  var v96$1: bv32;
+  var v96$2: bv32;
+  var v97$1: bv32;
+  var v97$2: bv32;
+  var v2$1: bool;
+  var v2$2: bool;
+  var v20$1: bv8;
+  var v20$2: bv8;
+  var v21$1: bv32;
+  var v21$2: bv32;
+  var v22$1: bv8;
+  var v22$2: bv8;
+  var v23$1: bv8;
+  var v23$2: bv8;
+  var v24$1: bv32;
+  var v24$2: bv32;
   var v25$1: bv8;
   var v25$2: bv8;
   var v26$1: bv8;
   var v26$2: bv8;
-  var v117$1: bv16;
-  var v117$2: bv16;
-  var v119$1: bv16;
-  var v119$2: bv16;
+  var v27$1: bv32;
+  var v27$2: bv32;
+  var v28$1: bv8;
+  var v28$2: bv8;
+  var v29$1: bv8;
+  var v29$2: bv8;
+  var v30$1: bv32;
+  var v30$2: bv32;
+  var v4$1: bv8;
+  var v4$2: bv8;
+  var v5$1: bv8;
+  var v5$2: bv8;
+  var v6$1: bv8;
+  var v6$2: bv8;
+  var v7$1: bv8;
+  var v7$2: bv8;
   var v121$1: bv16;
   var v121$2: bv16;
   var v122$1: bv16;
@@ -476,7 +474,6 @@ implementation {:source_name "CUDAkernelShortIDCT"} {:kernel} $_Z19CUDAkernelSho
   var _READ_HAS_OCCURRED_$$SrcDst$ghost$$2: bool;
   var _WRITE_HAS_OCCURRED_$$_ZZ19CUDAkernelShortIDCTPsiE5block$ghost$$2: bool;
   var _WRITE_HAS_OCCURRED_$$SrcDst$ghost$$8: bool;
-  var _READ_HAS_OCCURRED_$$_ZZ19CUDAkernelShortIDCTPsiE5block$ghost$$8: bool;
 
 
   $0:
@@ -515,7 +512,7 @@ implementation {:source_name "CUDAkernelShortIDCT"} {:kernel} $_Z19CUDAkernelSho
     
     
     
-assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  _READ_HAS_OCCURRED_$$SrcDst ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 4bv32), BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_y$1, 32bv32), BV32_MUL(local_id_z$1, 8bv32)), $ImgStride), BV32_ADD(BV32_MUL(group_id_x$1, 32bv32), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 2bv32))), 2bv32))) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(0bv32, 4bv32), BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_y$1, 32bv32), BV32_MUL(local_id_z$1, 8bv32)), $ImgStride), BV32_ADD(BV32_MUL(group_id_x$1, 32bv32), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 2bv32))), 2bv32)), 1bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(0bv32, 4bv32), BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_y$1, 32bv32), BV32_MUL(local_id_z$1, 8bv32)), $ImgStride), BV32_ADD(BV32_MUL(group_id_x$1, 32bv32), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 2bv32))), 2bv32)), 2bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(0bv32, 4bv32), BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_y$1, 32bv32), BV32_MUL(local_id_z$1, 8bv32)), $ImgStride), BV32_ADD(BV32_MUL(group_id_x$1, 32bv32), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 2bv32))), 2bv32)), 3bv32)) ) ,  (  !p0$1 ==> _READ_HAS_OCCURRED_$$SrcDst$ghost$$2 == _READ_HAS_OCCURRED_$$SrcDst ) ,  (  _WRITE_HAS_OCCURRED_$$_ZZ19CUDAkernelShortIDCTPsiE5block ==> BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 17bv32), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 17bv32), 4bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_MUL(0bv32, 17bv32), 4bv32), BV32_MUL(BV32_ADD(BV32_MUL(BV32_MUL(local_id_z$1, 8bv32), 34bv32), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 2bv32)), 2bv32))) || BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 17bv32), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 17bv32), 4bv32), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(0bv32, 17bv32), 4bv32), BV32_MUL(BV32_ADD(BV32_MUL(BV32_MUL(local_id_z$1, 8bv32), 34bv32), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 2bv32)), 2bv32)), 1bv32)) || BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 17bv32), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 17bv32), 4bv32), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(0bv32, 17bv32), 4bv32), BV32_MUL(BV32_ADD(BV32_MUL(BV32_MUL(local_id_z$1, 8bv32), 34bv32), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 2bv32)), 2bv32)), 2bv32)) || BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 17bv32), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 17bv32), 4bv32), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(0bv32, 17bv32), 4bv32), BV32_MUL(BV32_ADD(BV32_MUL(BV32_MUL(local_id_z$1, 8bv32), 34bv32), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 2bv32)), 2bv32)), 3bv32)) ) ,  (  !p0$1 ==> _WRITE_HAS_OCCURRED_$$_ZZ19CUDAkernelShortIDCTPsiE5block$ghost$$2 == _WRITE_HAS_OCCURRED_$$_ZZ19CUDAkernelShortIDCTPsiE5block ) ,  true ,  true ,  true ,  true  ); 
+assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  _READ_HAS_OCCURRED_$$SrcDst ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 4bv32), BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_y$1, 32bv32), BV32_MUL(local_id_z$1, 8bv32)), $ImgStride), BV32_ADD(BV32_MUL(group_id_x$1, 32bv32), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 2bv32))), 2bv32))) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(0bv32, 4bv32), BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_y$1, 32bv32), BV32_MUL(local_id_z$1, 8bv32)), $ImgStride), BV32_ADD(BV32_MUL(group_id_x$1, 32bv32), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 2bv32))), 2bv32)), 1bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(0bv32, 4bv32), BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_y$1, 32bv32), BV32_MUL(local_id_z$1, 8bv32)), $ImgStride), BV32_ADD(BV32_MUL(group_id_x$1, 32bv32), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 2bv32))), 2bv32)), 2bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(0bv32, 4bv32), BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_y$1, 32bv32), BV32_MUL(local_id_z$1, 8bv32)), $ImgStride), BV32_ADD(BV32_MUL(group_id_x$1, 32bv32), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 2bv32))), 2bv32)), 3bv32)) ) ,  (  !p0$1 ==> _READ_HAS_OCCURRED_$$SrcDst$ghost$$2 == _READ_HAS_OCCURRED_$$SrcDst ) ,  (  _WRITE_HAS_OCCURRED_$$_ZZ19CUDAkernelShortIDCTPsiE5block ==> BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 17bv32), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 17bv32), 4bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_MUL(0bv32, 17bv32), 4bv32), BV32_MUL(BV32_ADD(BV32_MUL(BV32_MUL(local_id_z$1, 8bv32), 34bv32), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 2bv32)), 2bv32))) || BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 17bv32), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 17bv32), 4bv32), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(0bv32, 17bv32), 4bv32), BV32_MUL(BV32_ADD(BV32_MUL(BV32_MUL(local_id_z$1, 8bv32), 34bv32), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 2bv32)), 2bv32)), 1bv32)) || BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 17bv32), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 17bv32), 4bv32), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(0bv32, 17bv32), 4bv32), BV32_MUL(BV32_ADD(BV32_MUL(BV32_MUL(local_id_z$1, 8bv32), 34bv32), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 2bv32)), 2bv32)), 2bv32)) || BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 17bv32), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 17bv32), 4bv32), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(0bv32, 17bv32), 4bv32), BV32_MUL(BV32_ADD(BV32_MUL(BV32_MUL(local_id_z$1, 8bv32), 34bv32), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 2bv32)), 2bv32)), 3bv32)) ) ,  (  !p0$1 ==> _WRITE_HAS_OCCURRED_$$_ZZ19CUDAkernelShortIDCTPsiE5block$ghost$$2 == _WRITE_HAS_OCCURRED_$$_ZZ19CUDAkernelShortIDCTPsiE5block ) ,  true ,  true  ); 
 
 
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ19CUDAkernelShortIDCTPsiE5block ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -538,7 +535,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     
     
     
-assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  ( p1$1 ==> BV32_SLE(0bv32, $i.0$1) )  && ( p1$2 ==> BV32_SLE(0bv32, $i.0$2) ) ,  ( p1$1 ==> BV32_SLE($i.0$1, 0bv32) )  && ( p1$2 ==> BV32_SLE($i.0$2, 0bv32) ) ,  ( p1$1 ==> BV32_SGE($i.0$1, 0bv32) )  && ( p1$2 ==> BV32_SGE($i.0$2, 0bv32) ) ,  ( p1$1 ==> BV32_ULE($i.0$1, 0bv32) )  && ( p1$2 ==> BV32_ULE($i.0$2, 0bv32) ) ,  ( p1$1 ==> BV32_UGE($i.0$1, 0bv32) )  && ( p1$2 ==> BV32_UGE($i.0$2, 0bv32) ) ,  ( p1$1 ==> p1$1 ==> BV32_SLT(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 16bv32) )  && ( p1$2 ==> p1$2 ==> BV32_SLT(BV32_ADD(BV32_MUL(local_id_y$2, 8bv32), local_id_x$2), 16bv32) ) ,  (  BV32_SLT(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 16bv32) && BV32_SLT($i.0$1, 8bv32) ==> p1$1 )  && (  BV32_SLT(BV32_ADD(BV32_MUL(local_id_y$2, 8bv32), local_id_x$2), 16bv32) && BV32_SLT($i.0$2, 8bv32) ==> p1$2 ) ,  (  _READ_HAS_OCCURRED_$$SrcDst ==> BV32_SLT(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 16bv32) ) ,  (  _WRITE_HAS_OCCURRED_$$_ZZ19CUDAkernelShortIDCTPsiE5block ==> BV32_SLT(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 16bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true  ); 
+assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  ( p1$1 ==> BV32_SLE(0bv32, $i.0$1) )  && ( p1$2 ==> BV32_SLE(0bv32, $i.0$2) ) ,  ( p1$1 ==> BV32_SLE($i.0$1, 0bv32) )  && ( p1$2 ==> BV32_SLE($i.0$2, 0bv32) ) ,  ( p1$1 ==> BV32_SGE($i.0$1, 0bv32) )  && ( p1$2 ==> BV32_SGE($i.0$2, 0bv32) ) ,  ( p1$1 ==> BV32_ULE($i.0$1, 0bv32) )  && ( p1$2 ==> BV32_ULE($i.0$2, 0bv32) ) ,  ( p1$1 ==> BV32_UGE($i.0$1, 0bv32) )  && ( p1$2 ==> BV32_UGE($i.0$2, 0bv32) ) ,  ( p1$1 ==> p1$1 ==> BV32_SLT(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 16bv32) )  && ( p1$2 ==> p1$2 ==> BV32_SLT(BV32_ADD(BV32_MUL(local_id_y$2, 8bv32), local_id_x$2), 16bv32) ) ,  (  BV32_SLT(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 16bv32) && BV32_SLT($i.0$1, 8bv32) ==> p1$1 )  && (  BV32_SLT(BV32_ADD(BV32_MUL(local_id_y$2, 8bv32), local_id_x$2), 16bv32) && BV32_SLT($i.0$2, 8bv32) ==> p1$2 ) ,  (  _READ_HAS_OCCURRED_$$SrcDst ==> BV32_SLT(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 16bv32) ) ,  (  _WRITE_HAS_OCCURRED_$$_ZZ19CUDAkernelShortIDCTPsiE5block ==> BV32_SLT(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 16bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true  ); 
 
 
     assert {:block_sourceloc} {:sourceloc_num 3} p1$1 ==> true;
@@ -1315,7 +1312,6 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     p5$1 := (if p4$1 then true else p5$1);
     p5$2 := (if p4$2 then true else p5$2);
     _WRITE_HAS_OCCURRED_$$SrcDst$ghost$$8 := _WRITE_HAS_OCCURRED_$$SrcDst;
-    _READ_HAS_OCCURRED_$$_ZZ19CUDAkernelShortIDCTPsiE5block$ghost$$8 := _READ_HAS_OCCURRED_$$_ZZ19CUDAkernelShortIDCTPsiE5block;
     assume {:captureState "loop_entry_state_0_0"} true;
     goto $8;
 
@@ -1323,9 +1319,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     assume {:captureState "loop_head_state_0"} true;
     
     
-    
-    
-assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  _WRITE_HAS_OCCURRED_$$SrcDst ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 4bv32), BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_y$1, 32bv32), BV32_MUL(local_id_z$1, 8bv32)), $ImgStride), BV32_ADD(BV32_MUL(group_id_x$1, 32bv32), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 2bv32))), 2bv32))) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(0bv32, 4bv32), BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_y$1, 32bv32), BV32_MUL(local_id_z$1, 8bv32)), $ImgStride), BV32_ADD(BV32_MUL(group_id_x$1, 32bv32), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 2bv32))), 2bv32)), 1bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(0bv32, 4bv32), BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_y$1, 32bv32), BV32_MUL(local_id_z$1, 8bv32)), $ImgStride), BV32_ADD(BV32_MUL(group_id_x$1, 32bv32), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 2bv32))), 2bv32)), 2bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(0bv32, 4bv32), BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_y$1, 32bv32), BV32_MUL(local_id_z$1, 8bv32)), $ImgStride), BV32_ADD(BV32_MUL(group_id_x$1, 32bv32), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 2bv32))), 2bv32)), 3bv32)) ) ,  (  !p4$1 ==> _WRITE_HAS_OCCURRED_$$SrcDst$ghost$$8 == _WRITE_HAS_OCCURRED_$$SrcDst ) ,  (  _READ_HAS_OCCURRED_$$_ZZ19CUDAkernelShortIDCTPsiE5block ==> BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 17bv32), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 17bv32), 4bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_MUL(0bv32, 17bv32), 4bv32), BV32_MUL(BV32_ADD(BV32_MUL(BV32_MUL(local_id_z$1, 8bv32), 34bv32), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 2bv32)), 2bv32))) || BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 17bv32), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 17bv32), 4bv32), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(0bv32, 17bv32), 4bv32), BV32_MUL(BV32_ADD(BV32_MUL(BV32_MUL(local_id_z$1, 8bv32), 34bv32), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 2bv32)), 2bv32)), 1bv32)) || BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 17bv32), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 17bv32), 4bv32), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(0bv32, 17bv32), 4bv32), BV32_MUL(BV32_ADD(BV32_MUL(BV32_MUL(local_id_z$1, 8bv32), 34bv32), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 2bv32)), 2bv32)), 2bv32)) || BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 17bv32), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 17bv32), 4bv32), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(0bv32, 17bv32), 4bv32), BV32_MUL(BV32_ADD(BV32_MUL(BV32_MUL(local_id_z$1, 8bv32), 34bv32), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 2bv32)), 2bv32)), 3bv32)) ) ,  (  !p4$1 ==> _READ_HAS_OCCURRED_$$_ZZ19CUDAkernelShortIDCTPsiE5block$ghost$$8 == _READ_HAS_OCCURRED_$$_ZZ19CUDAkernelShortIDCTPsiE5block )  ); 
+assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  _WRITE_HAS_OCCURRED_$$SrcDst ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 4bv32), BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_y$1, 32bv32), BV32_MUL(local_id_z$1, 8bv32)), $ImgStride), BV32_ADD(BV32_MUL(group_id_x$1, 32bv32), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 2bv32))), 2bv32))) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(0bv32, 4bv32), BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_y$1, 32bv32), BV32_MUL(local_id_z$1, 8bv32)), $ImgStride), BV32_ADD(BV32_MUL(group_id_x$1, 32bv32), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 2bv32))), 2bv32)), 1bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(0bv32, 4bv32), BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_y$1, 32bv32), BV32_MUL(local_id_z$1, 8bv32)), $ImgStride), BV32_ADD(BV32_MUL(group_id_x$1, 32bv32), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 2bv32))), 2bv32)), 2bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(0bv32, 4bv32), BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_y$1, 32bv32), BV32_MUL(local_id_z$1, 8bv32)), $ImgStride), BV32_ADD(BV32_MUL(group_id_x$1, 32bv32), BV32_MUL(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 2bv32))), 2bv32)), 3bv32)) ) ,  (  !p4$1 ==> _WRITE_HAS_OCCURRED_$$SrcDst$ghost$$8 == _WRITE_HAS_OCCURRED_$$SrcDst )  ); 
 
 
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ19CUDAkernelShortIDCTPsiE5block ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -1348,7 +1342,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     
     
     
-assert  my_inv (  ( p5$1 ==> BV32_SLE(0bv32, $i1.0$1) )  && ( p5$2 ==> BV32_SLE(0bv32, $i1.0$2) ) ,  ( p5$1 ==> BV32_SLE($i1.0$1, 0bv32) )  && ( p5$2 ==> BV32_SLE($i1.0$2, 0bv32) ) ,  ( p5$1 ==> BV32_SGE($i1.0$1, 0bv32) )  && ( p5$2 ==> BV32_SGE($i1.0$2, 0bv32) ) ,  ( p5$1 ==> BV32_ULE($i1.0$1, 0bv32) )  && ( p5$2 ==> BV32_ULE($i1.0$2, 0bv32) ) ,  ( p5$1 ==> BV32_UGE($i1.0$1, 0bv32) )  && ( p5$2 ==> BV32_UGE($i1.0$2, 0bv32) ) ,  ( p5$1 ==> p5$1 ==> BV32_SLT(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 16bv32) )  && ( p5$2 ==> p5$2 ==> BV32_SLT(BV32_ADD(BV32_MUL(local_id_y$2, 8bv32), local_id_x$2), 16bv32) ) ,  (  BV32_SLT(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 16bv32) && BV32_SLT($i1.0$1, 8bv32) ==> p5$1 )  && (  BV32_SLT(BV32_ADD(BV32_MUL(local_id_y$2, 8bv32), local_id_x$2), 16bv32) && BV32_SLT($i1.0$2, 8bv32) ==> p5$2 ) ,  (  _READ_HAS_OCCURRED_$$_ZZ19CUDAkernelShortIDCTPsiE5block ==> BV32_SLT(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 16bv32) ) ,  (  _WRITE_HAS_OCCURRED_$$SrcDst ==> BV32_SLT(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 16bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true  ); 
+assert  my_inv (  ( p5$1 ==> BV32_SLE(0bv32, $i1.0$1) )  && ( p5$2 ==> BV32_SLE(0bv32, $i1.0$2) ) ,  ( p5$1 ==> BV32_SLE($i1.0$1, 0bv32) )  && ( p5$2 ==> BV32_SLE($i1.0$2, 0bv32) ) ,  ( p5$1 ==> BV32_SGE($i1.0$1, 0bv32) )  && ( p5$2 ==> BV32_SGE($i1.0$2, 0bv32) ) ,  ( p5$1 ==> BV32_ULE($i1.0$1, 0bv32) )  && ( p5$2 ==> BV32_ULE($i1.0$2, 0bv32) ) ,  ( p5$1 ==> BV32_UGE($i1.0$1, 0bv32) )  && ( p5$2 ==> BV32_UGE($i1.0$2, 0bv32) ) ,  ( p5$1 ==> p5$1 ==> BV32_SLT(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 16bv32) )  && ( p5$2 ==> p5$2 ==> BV32_SLT(BV32_ADD(BV32_MUL(local_id_y$2, 8bv32), local_id_x$2), 16bv32) ) ,  (  BV32_SLT(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 16bv32) && BV32_SLT($i1.0$1, 8bv32) ==> p5$1 )  && (  BV32_SLT(BV32_ADD(BV32_MUL(local_id_y$2, 8bv32), local_id_x$2), 16bv32) && BV32_SLT($i1.0$2, 8bv32) ==> p5$2 ) ,  (  _READ_HAS_OCCURRED_$$_ZZ19CUDAkernelShortIDCTPsiE5block ==> BV32_SLT(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 16bv32) ) ,  (  _WRITE_HAS_OCCURRED_$$SrcDst ==> BV32_SLT(BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1), 16bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true  ); 
 
 
     assert {:block_sourceloc} {:sourceloc_num 152} p5$1 ==> true;
@@ -1362,28 +1356,16 @@ assert  my_inv (  ( p5$1 ==> BV32_SLE(0bv32, $i1.0$1) )  && ( p5$2 ==> BV32_SLE(
     p6$2 := (if p5$2 && v141$2 then v141$2 else p6$2);
     p5$1 := (if p5$1 && !v141$1 then v141$1 else p5$1);
     p5$2 := (if p5$2 && !v141$2 then v141$2 else p5$2);
-    call {:sourceloc} {:sourceloc_num 156} _LOG_READ_$$_ZZ19CUDAkernelShortIDCTPsiE5block(p6$1, BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(v1$1, 34bv32), BV32_MUL(v0$1, 2bv32)), 2bv32), BV32_MUL(BV32_MUL($i1.0$1, 17bv32), 4bv32)), $$_ZZ19CUDAkernelShortIDCTPsiE5block[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(v1$1, 34bv32), BV32_MUL(v0$1, 2bv32)), 2bv32), BV32_MUL(BV32_MUL($i1.0$1, 17bv32), 4bv32))]);
     assume {:do_not_predicate} {:check_id "check_state_64"} {:captureState "check_state_64"} {:sourceloc} {:sourceloc_num 156} true;
-    call {:check_id "check_state_64"} {:sourceloc} {:sourceloc_num 156} _CHECK_READ_$$_ZZ19CUDAkernelShortIDCTPsiE5block(p6$2, BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(v1$2, 34bv32), BV32_MUL(v0$2, 2bv32)), 2bv32), BV32_MUL(BV32_MUL($i1.0$2, 17bv32), 4bv32)), $$_ZZ19CUDAkernelShortIDCTPsiE5block[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(v1$2, 34bv32), BV32_MUL(v0$2, 2bv32)), 2bv32), BV32_MUL(BV32_MUL($i1.0$2, 17bv32), 4bv32))]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ19CUDAkernelShortIDCTPsiE5block"} true;
     v142$1 := (if p6$1 then $$_ZZ19CUDAkernelShortIDCTPsiE5block[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(v1$1, 34bv32), BV32_MUL(v0$1, 2bv32)), 2bv32), BV32_MUL(BV32_MUL($i1.0$1, 17bv32), 4bv32))] else v142$1);
     v142$2 := (if p6$2 then $$_ZZ19CUDAkernelShortIDCTPsiE5block[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(v1$2, 34bv32), BV32_MUL(v0$2, 2bv32)), 2bv32), BV32_MUL(BV32_MUL($i1.0$2, 17bv32), 4bv32))] else v142$2);
-    call {:sourceloc} {:sourceloc_num 157} _LOG_READ_$$_ZZ19CUDAkernelShortIDCTPsiE5block(p6$1, BV32_ADD(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(v1$1, 34bv32), BV32_MUL(v0$1, 2bv32)), 2bv32), BV32_MUL(BV32_MUL($i1.0$1, 17bv32), 4bv32)), 1bv32), $$_ZZ19CUDAkernelShortIDCTPsiE5block[1bv1][BV32_ADD(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(v1$1, 34bv32), BV32_MUL(v0$1, 2bv32)), 2bv32), BV32_MUL(BV32_MUL($i1.0$1, 17bv32), 4bv32)), 1bv32)]);
     assume {:do_not_predicate} {:check_id "check_state_65"} {:captureState "check_state_65"} {:sourceloc} {:sourceloc_num 157} true;
-    call {:check_id "check_state_65"} {:sourceloc} {:sourceloc_num 157} _CHECK_READ_$$_ZZ19CUDAkernelShortIDCTPsiE5block(p6$2, BV32_ADD(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(v1$2, 34bv32), BV32_MUL(v0$2, 2bv32)), 2bv32), BV32_MUL(BV32_MUL($i1.0$2, 17bv32), 4bv32)), 1bv32), $$_ZZ19CUDAkernelShortIDCTPsiE5block[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(v1$2, 34bv32), BV32_MUL(v0$2, 2bv32)), 2bv32), BV32_MUL(BV32_MUL($i1.0$2, 17bv32), 4bv32)), 1bv32)]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ19CUDAkernelShortIDCTPsiE5block"} true;
     v143$1 := (if p6$1 then $$_ZZ19CUDAkernelShortIDCTPsiE5block[1bv1][BV32_ADD(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(v1$1, 34bv32), BV32_MUL(v0$1, 2bv32)), 2bv32), BV32_MUL(BV32_MUL($i1.0$1, 17bv32), 4bv32)), 1bv32)] else v143$1);
     v143$2 := (if p6$2 then $$_ZZ19CUDAkernelShortIDCTPsiE5block[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(v1$2, 34bv32), BV32_MUL(v0$2, 2bv32)), 2bv32), BV32_MUL(BV32_MUL($i1.0$2, 17bv32), 4bv32)), 1bv32)] else v143$2);
-    call {:sourceloc} {:sourceloc_num 158} _LOG_READ_$$_ZZ19CUDAkernelShortIDCTPsiE5block(p6$1, BV32_ADD(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(v1$1, 34bv32), BV32_MUL(v0$1, 2bv32)), 2bv32), BV32_MUL(BV32_MUL($i1.0$1, 17bv32), 4bv32)), 2bv32), $$_ZZ19CUDAkernelShortIDCTPsiE5block[1bv1][BV32_ADD(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(v1$1, 34bv32), BV32_MUL(v0$1, 2bv32)), 2bv32), BV32_MUL(BV32_MUL($i1.0$1, 17bv32), 4bv32)), 2bv32)]);
     assume {:do_not_predicate} {:check_id "check_state_66"} {:captureState "check_state_66"} {:sourceloc} {:sourceloc_num 158} true;
-    call {:check_id "check_state_66"} {:sourceloc} {:sourceloc_num 158} _CHECK_READ_$$_ZZ19CUDAkernelShortIDCTPsiE5block(p6$2, BV32_ADD(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(v1$2, 34bv32), BV32_MUL(v0$2, 2bv32)), 2bv32), BV32_MUL(BV32_MUL($i1.0$2, 17bv32), 4bv32)), 2bv32), $$_ZZ19CUDAkernelShortIDCTPsiE5block[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(v1$2, 34bv32), BV32_MUL(v0$2, 2bv32)), 2bv32), BV32_MUL(BV32_MUL($i1.0$2, 17bv32), 4bv32)), 2bv32)]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ19CUDAkernelShortIDCTPsiE5block"} true;
     v144$1 := (if p6$1 then $$_ZZ19CUDAkernelShortIDCTPsiE5block[1bv1][BV32_ADD(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(v1$1, 34bv32), BV32_MUL(v0$1, 2bv32)), 2bv32), BV32_MUL(BV32_MUL($i1.0$1, 17bv32), 4bv32)), 2bv32)] else v144$1);
     v144$2 := (if p6$2 then $$_ZZ19CUDAkernelShortIDCTPsiE5block[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(v1$2, 34bv32), BV32_MUL(v0$2, 2bv32)), 2bv32), BV32_MUL(BV32_MUL($i1.0$2, 17bv32), 4bv32)), 2bv32)] else v144$2);
-    call {:sourceloc} {:sourceloc_num 159} _LOG_READ_$$_ZZ19CUDAkernelShortIDCTPsiE5block(p6$1, BV32_ADD(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(v1$1, 34bv32), BV32_MUL(v0$1, 2bv32)), 2bv32), BV32_MUL(BV32_MUL($i1.0$1, 17bv32), 4bv32)), 3bv32), $$_ZZ19CUDAkernelShortIDCTPsiE5block[1bv1][BV32_ADD(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(v1$1, 34bv32), BV32_MUL(v0$1, 2bv32)), 2bv32), BV32_MUL(BV32_MUL($i1.0$1, 17bv32), 4bv32)), 3bv32)]);
     assume {:do_not_predicate} {:check_id "check_state_67"} {:captureState "check_state_67"} {:sourceloc} {:sourceloc_num 159} true;
-    call {:check_id "check_state_67"} {:sourceloc} {:sourceloc_num 159} _CHECK_READ_$$_ZZ19CUDAkernelShortIDCTPsiE5block(p6$2, BV32_ADD(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(v1$2, 34bv32), BV32_MUL(v0$2, 2bv32)), 2bv32), BV32_MUL(BV32_MUL($i1.0$2, 17bv32), 4bv32)), 3bv32), $$_ZZ19CUDAkernelShortIDCTPsiE5block[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(v1$2, 34bv32), BV32_MUL(v0$2, 2bv32)), 2bv32), BV32_MUL(BV32_MUL($i1.0$2, 17bv32), 4bv32)), 3bv32)]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ19CUDAkernelShortIDCTPsiE5block"} true;
     v145$1 := (if p6$1 then $$_ZZ19CUDAkernelShortIDCTPsiE5block[1bv1][BV32_ADD(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(v1$1, 34bv32), BV32_MUL(v0$1, 2bv32)), 2bv32), BV32_MUL(BV32_MUL($i1.0$1, 17bv32), 4bv32)), 3bv32)] else v145$1);
     v145$2 := (if p6$2 then $$_ZZ19CUDAkernelShortIDCTPsiE5block[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(v1$2, 34bv32), BV32_MUL(v0$2, 2bv32)), 2bv32), BV32_MUL(BV32_MUL($i1.0$2, 17bv32), 4bv32)), 3bv32)] else v145$2);
     call {:sourceloc} {:sourceloc_num 160} _LOG_WRITE_$$SrcDst(p6$1, BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_y$1, 32bv32), v1$1), $ImgStride), BV32_ADD(BV32_MUL(group_id_x$1, 32bv32), BV32_MUL(v0$1, 2bv32))), 2bv32), BV32_MUL(BV32_MUL($i1.0$1, BV32_SDIV($ImgStride, 2bv32)), 4bv32)), v142$1, $$SrcDst[BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_y$1, 32bv32), v1$1), $ImgStride), BV32_ADD(BV32_MUL(group_id_x$1, 32bv32), BV32_MUL(v0$1, 2bv32))), 2bv32), BV32_MUL(BV32_MUL($i1.0$1, BV32_SDIV($ImgStride, 2bv32)), 4bv32))]);
@@ -1933,10 +1915,6 @@ implementation {:inline 1} $bugle_barrier_duplicated_2($0: bv1, $1: bv1)
 
 
 function {:bvbuiltin "bvsgt"} BV32_SGT(bv32, bv32) : bool;
-
-
-
-
 
 
 

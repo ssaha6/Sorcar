@@ -120,10 +120,10 @@ implementation {:source_name "BitonicKernel"} {:kernel} $_Z13BitonicKernelPi()
 {
   var $k.0: bv32;
   var $j.0: bv32;
-  var v1: bool;
-  var v2: bool;
   var v0$1: bv32;
   var v0$2: bv32;
+  var v1: bool;
+  var v2: bool;
   var v3$1: bv32;
   var v3$2: bv32;
   var v4$1: bool;
@@ -132,10 +132,10 @@ implementation {:source_name "BitonicKernel"} {:kernel} $_Z13BitonicKernelPi()
   var v5$2: bool;
   var v6$1: bv32;
   var v6$2: bv32;
-  var v8$1: bool;
-  var v8$2: bool;
   var v7$1: bv32;
   var v7$2: bv32;
+  var v8$1: bool;
+  var v8$2: bool;
   var v9$1: bv32;
   var v9$2: bv32;
   var v10$1: bv32;
@@ -144,10 +144,10 @@ implementation {:source_name "BitonicKernel"} {:kernel} $_Z13BitonicKernelPi()
   var v11$2: bv32;
   var v12$1: bv32;
   var v12$2: bv32;
-  var v14$1: bool;
-  var v14$2: bool;
   var v13$1: bv32;
   var v13$2: bv32;
+  var v14$1: bool;
+  var v14$2: bool;
   var v15$1: bv32;
   var v15$2: bv32;
   var v16$1: bv32;

@@ -52,6 +52,8 @@ const {:num_groups_y} num_groups_y: bv32;
 
 const {:num_groups_z} num_groups_z: bv32;
 
+function FADD64(bv64, bv64) : bv64;
+
 function FMUL64(bv64, bv64) : bv64;
 
 function FSUB64(bv64, bv64) : bv64;
@@ -146,24 +148,24 @@ implementation {:source_name "kernel3"} {:kernel} $kernel3($n: bv32, $c0: bv64)
   var v0$2: bv64;
   var v1$1: bv64;
   var v1$2: bv64;
+  var v2$1: bool;
+  var v2$2: bool;
+  var v3$1: bool;
+  var v3$2: bool;
+  var v4$1: bool;
+  var v4$2: bool;
   var v5$1: bv64;
   var v5$2: bv64;
   var v6$1: bv64;
   var v6$2: bv64;
-  var v8$1: bv64;
-  var v8$2: bv64;
-  var v10$1: bv64;
-  var v10$2: bv64;
-  var v9$1: bv64;
-  var v9$2: bv64;
-  var v3$1: bool;
-  var v3$2: bool;
-  var v2$1: bool;
-  var v2$2: bool;
-  var v4$1: bool;
-  var v4$2: bool;
   var v7$1: bool;
   var v7$2: bool;
+  var v8$1: bv64;
+  var v8$2: bv64;
+  var v9$1: bv64;
+  var v9$2: bv64;
+  var v10$1: bv64;
+  var v10$2: bv64;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -182,10 +184,10 @@ implementation {:source_name "kernel3"} {:kernel} $kernel3($n: bv32, $c0: bv64)
   var p7$2: bool;
   var p8$1: bool;
   var p8$2: bool;
-  var _READ_HAS_OCCURRED_$$A$ghost$$for.cond.35: bool;
+  var _READ_HAS_OCCURRED_$$A$ghost$$5: bool;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ZEXT64(group_id_x$1);
     v0$2 := BV32_ZEXT64(group_id_x$2);
     v1$1 := BV32_ZEXT64(local_id_x$1);
@@ -197,9 +199,9 @@ implementation {:source_name "kernel3"} {:kernel} $kernel3($n: bv32, $c0: bv64)
     p0$1 := true;
     p0$2 := true;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b18 ==> _WRITE_HAS_OCCURRED_$$A ==> BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), 0bv64[32:0]);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b17 ==> _READ_HAS_OCCURRED_$$A ==> BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), 0bv64[32:0]) || BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), 0bv64[32:0]) || BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), 0bv64[32:0]);
@@ -262,13 +264,13 @@ implementation {:source_name "kernel3"} {:kernel} $kernel3($n: bv32, $c0: bv64)
     $private_w.0$2, $c3.0$2 := (if p5$2 then v6$2 else $private_w.0$2), (if p5$2 then 1bv64 else $c3.0$2);
     p6$1 := (if p5$1 then true else p6$1);
     p6$2 := (if p5$2 then true else p6$2);
-    _READ_HAS_OCCURRED_$$A$ghost$$for.cond.35 := _READ_HAS_OCCURRED_$$A;
+    _READ_HAS_OCCURRED_$$A$ghost$$5 := _READ_HAS_OCCURRED_$$A;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.35;
+    goto $5;
 
-  $for.cond.35:
+  $5:
     assume {:captureState "loop_head_state_1"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b20 ==> !p5$1 ==> _READ_HAS_OCCURRED_$$A$ghost$$for.cond.35 == _READ_HAS_OCCURRED_$$A;
+    assert {:tag "disabledMaintainsInstrumentation"} _b20 ==> !p5$1 ==> _READ_HAS_OCCURRED_$$A$ghost$$5 == _READ_HAS_OCCURRED_$$A;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b19 ==> _READ_HAS_OCCURRED_$$A ==> BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), 0bv64[32:0]) || BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), 0bv64[32:0]);
     assume {:predicate "p6"} {:dominator_predicate "p5"} true;
     assert p6$1 ==> p0$1;
@@ -313,13 +315,13 @@ implementation {:source_name "kernel3"} {:kernel} $kernel3($n: bv32, $c0: bv64)
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$A"} true;
     v9$1 := (if p7$1 then $$A[BV64_ADD(BV64_MUL(BV64_SUB($c3.0$1, 1bv64), BV32_SEXT64($n)), BV64_ADD(v1$1, $c1.0$1))[32:0]] else v9$1);
     v9$2 := (if p7$2 then $$A[BV64_ADD(BV64_MUL(BV64_SUB($c3.0$2, 1bv64), BV32_SEXT64($n)), BV64_ADD(v1$2, $c1.0$2))[32:0]] else v9$2);
-    $private_w.0$1, $c3.0$1 := (if p7$1 then FSUB64($private_w.0$1, FMUL64(v8$1, v9$1)) else $private_w.0$1), (if p7$1 then BV64_ADD($c3.0$1, 1bv64) else $c3.0$1);
-    $private_w.0$2, $c3.0$2 := (if p7$2 then FSUB64($private_w.0$2, FMUL64(v8$2, v9$2)) else $private_w.0$2), (if p7$2 then BV64_ADD($c3.0$2, 1bv64) else $c3.0$2);
+    $private_w.0$1, $c3.0$1 := (if p7$1 then FADD64(FMUL64(FSUB64(9223372036854775808bv64, v8$1), v9$1), $private_w.0$1) else $private_w.0$1), (if p7$1 then BV64_ADD($c3.0$1, 1bv64) else $c3.0$1);
+    $private_w.0$2, $c3.0$2 := (if p7$2 then FADD64(FMUL64(FSUB64(9223372036854775808bv64, v8$2), v9$2), $private_w.0$2) else $private_w.0$2), (if p7$2 then BV64_ADD($c3.0$2, 1bv64) else $c3.0$2);
     p6$1 := (if p7$1 then true else p6$1);
     p6$2 := (if p7$2 then true else p6$2);
-    goto $for.cond.35.backedge, $for.cond.35.tail;
+    goto $5.backedge, $5.tail;
 
-  $for.cond.35.tail:
+  $5.tail:
     assume !p6$1 && !p6$2;
     $$private_A_0$0bv32$1 := (if p5$1 then $private_w.0$1 else $$private_A_0$0bv32$1);
     $$private_A_0$0bv32$2 := (if p5$2 then $private_w.0$2 else $$private_A_0$0bv32$2);
@@ -336,21 +338,21 @@ implementation {:source_name "kernel3"} {:kernel} $kernel3($n: bv32, $c0: bv64)
     $c1.0$2 := (if p1$2 then BV64_ADD($c1.0$2, 1048576bv64) else $c1.0$2);
     p0$1 := (if p1$1 then true else p0$1);
     p0$2 := (if p1$2 then true else p0$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $1.backedge, $1.tail;
 
-  $for.cond.tail:
+  $1.tail:
     assume !p0$1 && !p0$2;
     return;
 
-  $for.cond.backedge:
+  $1.backedge:
     assume {:backedge} p0$1 || p0$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond.35.backedge:
+  $5.backedge:
     assume {:backedge} p6$1 || p6$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.35;
+    goto $5;
 }
 
 

@@ -191,14 +191,14 @@ implementation {:source_name "dynproc_kernel"} {:kernel} $dynproc_kernel($iterat
   var v0: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
-  var v5$1: bool;
-  var v5$2: bool;
   var v2$1: bv32;
   var v2$2: bv32;
   var v3$1: bv32;
   var v3$2: bv32;
   var v4$1: bv32;
   var v4$2: bv32;
+  var v5$1: bool;
+  var v5$2: bool;
   var v6$1: bool;
   var v6$2: bool;
   var v7$1: bv32;

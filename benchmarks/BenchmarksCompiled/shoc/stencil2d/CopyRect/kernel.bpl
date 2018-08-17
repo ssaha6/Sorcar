@@ -107,14 +107,14 @@ implementation {:source_name "CopyRect"} {:kernel} $CopyRect($doffset: bv32, $dp
 {
   var $c.0$1: bv32;
   var $c.0$2: bv32;
-  var v1$1: bool;
-  var v1$2: bool;
   var v0$1: bv32;
   var v0$2: bv32;
-  var v3$1: bv32;
-  var v3$2: bv32;
+  var v1$1: bool;
+  var v1$2: bool;
   var v2$1: bool;
   var v2$2: bool;
+  var v3$1: bv32;
+  var v3$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -125,10 +125,10 @@ implementation {:source_name "CopyRect"} {:kernel} $CopyRect($doffset: bv32, $dp
   var p3$2: bool;
   var _HAVOC_bv32$1: bv32;
   var _HAVOC_bv32$2: bv32;
-  var _WRITE_HAS_OCCURRED_$$dest$ghost$$for.cond: bool;
+  var _WRITE_HAS_OCCURRED_$$dest$ghost$$2: bool;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2);
     v1$1 := BV32_SLT(v0$1, $height);
@@ -145,13 +145,13 @@ implementation {:source_name "CopyRect"} {:kernel} $CopyRect($doffset: bv32, $dp
     $c.0$2 := (if p0$2 then 0bv32 else $c.0$2);
     p1$1 := (if p0$1 then true else p1$1);
     p1$2 := (if p0$2 then true else p1$2);
-    _WRITE_HAS_OCCURRED_$$dest$ghost$$for.cond := _WRITE_HAS_OCCURRED_$$dest;
+    _WRITE_HAS_OCCURRED_$$dest$ghost$$2 := _WRITE_HAS_OCCURRED_$$dest;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $2;
 
-  $for.cond:
+  $2:
     assume {:captureState "loop_head_state_0"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b10 ==> !p0$1 ==> _WRITE_HAS_OCCURRED_$$dest$ghost$$for.cond == _WRITE_HAS_OCCURRED_$$dest;
+    assert {:tag "disabledMaintainsInstrumentation"} _b10 ==> !p0$1 ==> _WRITE_HAS_OCCURRED_$$dest$ghost$$2 == _WRITE_HAS_OCCURRED_$$dest;
     assert {:tag "accessBreak"} _b9 ==> _WRITE_HAS_OCCURRED_$$dest ==> local_id_x$1 == BV32_SUB(BV32_DIV(_WATCHED_OFFSET, $dpitch), BV32_MUL(group_id_x$1, group_size_x));
     assert {:tag "accessBreak"} _b8 ==> _WRITE_HAS_OCCURRED_$$dest ==> group_id_x$1 == BV32_SUB(BV32_DIV(BV32_DIV(_WATCHED_OFFSET, $dpitch), group_size_x), BV32_DIV(local_id_x$1, group_size_x));
     assume {:predicate "p1"} {:dominator_predicate "p0"} true;
@@ -194,16 +194,16 @@ implementation {:source_name "CopyRect"} {:kernel} $CopyRect($doffset: bv32, $dp
     $c.0$2 := (if p2$2 then BV32_ADD($c.0$2, 1bv32) else $c.0$2);
     p1$1 := (if p2$1 then true else p1$1);
     p1$2 := (if p2$2 then true else p1$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $2.backedge, $2.tail;
 
-  $for.cond.tail:
+  $2.tail:
     assume !p1$1 && !p1$2;
     return;
 
-  $for.cond.backedge:
+  $2.backedge:
     assume {:backedge} p1$1 || p1$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $2;
 }
 
 

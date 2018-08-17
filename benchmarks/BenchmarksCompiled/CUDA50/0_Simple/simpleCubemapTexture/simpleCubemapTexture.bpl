@@ -22,11 +22,11 @@ const $arrayId$$g_odata: arrayId;
 
 axiom $arrayId$$g_odata == 1bv3;
 
-axiom {:array_info "$$agg.tmp"} {:elem_width 8} {:source_name "agg.tmp"} {:source_elem_width 96} {:source_dimensions "1"} true;
+axiom {:array_info "$$0"} {:elem_width 8} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
 
-const $arrayId$$agg.tmp: arrayId;
+const $arrayId$$0: arrayId;
 
-axiom $arrayId$$agg.tmp == 2bv3;
+axiom $arrayId$$0 == 2bv3;
 
 axiom {:array_info "$$tex"} {:global} {:elem_width 8} {:source_name "tex"} {:source_elem_width 96} {:source_dimensions "1"} true;
 
@@ -195,56 +195,56 @@ implementation {:source_name "transformKernel"} {:kernel} $_Z15transformKernelPf
   var $cy.1$2: bv32;
   var $cz.1$1: bv32;
   var $cz.1$2: bv32;
-  var v3$1: bv32;
-  var v3$2: bv32;
-  var v7: bool;
   var v0$1: bv32;
   var v0$2: bv32;
-  var v2$1: bv32;
-  var v2$2: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
-  var v8: bool;
-  var v9: bool;
+  var v2$1: bv32;
+  var v2$2: bv32;
+  var v3$1: bv32;
+  var v3$2: bv32;
   var v6$1: bv32;
   var v6$2: bv32;
   var v5$1: bv32;
   var v5$2: bv32;
   var v4$1: bv32;
   var v4$2: bv32;
+  var v7: bool;
+  var v8: bool;
+  var v9: bool;
+  var v10: bool;
   var v11: bool;
   var v12: bool;
-  var v10: bool;
   var v13: bool;
+  var v14$1: bv8;
+  var v14$2: bv8;
+  var v15$1: bv8;
+  var v15$2: bv8;
+  var v16$1: bv8;
+  var v16$2: bv8;
+  var v17$1: bv8;
+  var v17$2: bv8;
+  var v18$1: bv8;
+  var v18$2: bv8;
+  var v19$1: bv8;
+  var v19$2: bv8;
+  var v20$1: bv8;
+  var v20$2: bv8;
+  var v21$1: bv8;
+  var v21$2: bv8;
+  var v22$1: bv8;
+  var v22$2: bv8;
+  var v23$1: bv8;
+  var v23$2: bv8;
+  var v24$1: bv8;
+  var v24$2: bv8;
   var v25$1: bv8;
   var v25$2: bv8;
   var v26$1: bv32;
   var v26$2: bv32;
-  var v15$1: bv8;
-  var v15$2: bv8;
-  var v14$1: bv8;
-  var v14$2: bv8;
-  var v17$1: bv8;
-  var v17$2: bv8;
-  var v16$1: bv8;
-  var v16$2: bv8;
-  var v19$1: bv8;
-  var v19$2: bv8;
-  var v24$1: bv8;
-  var v24$2: bv8;
-  var v18$1: bv8;
-  var v18$2: bv8;
-  var v21$1: bv8;
-  var v21$2: bv8;
-  var v20$1: bv8;
-  var v20$2: bv8;
-  var v23$1: bv8;
-  var v23$2: bv8;
-  var v22$1: bv8;
-  var v22$2: bv8;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2);
     v1$1 := BV32_ADD(BV32_MUL(group_id_y$1, group_size_y), local_id_y$1);
@@ -259,9 +259,9 @@ implementation {:source_name "transformKernel"} {:kernel} $_Z15transformKernelPf
     $cx.0$1, $cy.0$1, $cz.0$1, $face.0 := v4$1, v5$1, v6$1, 0bv32;
     $cx.0$2, $cy.0$2, $cz.0$2 := v4$2, v5$2, v6$2;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessBreak"} _b9 ==> _WRITE_HAS_OCCURRED_$$g_odata ==> group_id_x$1 == BV32_SUB(BV32_SUB(BV32_DIV(_WATCHED_OFFSET, group_size_x), BV32_DIV(BV32_MUL(BV32_MUL(group_id_y$1, $width), group_size_y), group_size_x)), BV32_DIV(BV32_MUL(local_id_y$1, $width), group_size_x));
     assert {:tag "accessBreak"} _b8 ==> _WRITE_HAS_OCCURRED_$$g_odata ==> local_id_y$1 == BV32_SUB(BV32_SUB(BV32_DIV(_WATCHED_OFFSET, $width), BV32_MUL(group_id_y$1, group_size_y)), BV32_DIV(BV32_MUL(group_id_x$1, group_size_x), $width));
@@ -315,71 +315,71 @@ implementation {:source_name "transformKernel"} {:kernel} $_Z15transformKernelPf
     assume {:partition} !v13;
     $cx.1$1, $cy.1$1, $cz.1$1 := $cx.0$1, $cy.0$1, $cz.0$1;
     $cx.1$2, $cy.1$2, $cz.1$2 := $cx.0$2, $cy.0$2, $cz.0$2;
-    goto $if.end;
+    goto $14;
 
-  $if.end:
+  $14:
     $cx.2$1, $cy.2$1, $cz.2$1 := $cx.1$1, $cy.1$1, $cz.1$1;
     $cx.2$2, $cy.2$2, $cz.2$2 := $cx.1$2, $cy.1$2, $cz.1$2;
-    goto $if.end.35;
+    goto $15;
 
-  $if.end.35:
+  $15:
     $cx.3$1, $cy.3$1, $cz.3$1 := $cx.2$1, $cy.2$1, $cz.2$1;
     $cx.3$2, $cy.3$2, $cz.3$2 := $cx.2$2, $cy.2$2, $cz.2$2;
-    goto $if.end.36;
+    goto $16;
 
-  $if.end.36:
+  $16:
     $cx.4$1, $cy.4$1, $cz.4$1 := $cx.3$1, $cy.3$1, $cz.3$1;
     $cx.4$2, $cy.4$2, $cz.4$2 := $cx.3$2, $cy.3$2, $cz.3$2;
-    goto $if.end.37;
+    goto $17;
 
-  $if.end.37:
+  $17:
     $cx.5$1, $cy.5$1, $cz.5$1 := $cx.4$1, $cy.4$1, $cz.4$1;
     $cx.5$2, $cy.5$2, $cz.5$2 := $cx.4$2, $cy.4$2, $cz.4$2;
-    goto $if.end.38;
+    goto $18;
 
-  $if.end.38:
+  $18:
     $cx.6$1, $cy.6$1, $cz.6$1 := $cx.5$1, $cy.5$1, $cz.5$1;
     $cx.6$2, $cy.6$2, $cz.6$2 := $cx.5$2, $cy.5$2, $cz.5$2;
-    goto $if.end.39;
+    goto $19;
 
-  $if.end.39:
+  $19:
     havoc v14$1, v14$2;
-    $$agg.tmp$0bv32$1 := v14$1;
-    $$agg.tmp$0bv32$2 := v14$2;
+    $$0$0bv32$1 := v14$1;
+    $$0$0bv32$2 := v14$2;
     havoc v15$1, v15$2;
-    $$agg.tmp$1bv32$1 := v15$1;
-    $$agg.tmp$1bv32$2 := v15$2;
+    $$0$1bv32$1 := v15$1;
+    $$0$1bv32$2 := v15$2;
     havoc v16$1, v16$2;
-    $$agg.tmp$2bv32$1 := v16$1;
-    $$agg.tmp$2bv32$2 := v16$2;
+    $$0$2bv32$1 := v16$1;
+    $$0$2bv32$2 := v16$2;
     havoc v17$1, v17$2;
-    $$agg.tmp$3bv32$1 := v17$1;
-    $$agg.tmp$3bv32$2 := v17$2;
+    $$0$3bv32$1 := v17$1;
+    $$0$3bv32$2 := v17$2;
     havoc v18$1, v18$2;
-    $$agg.tmp$4bv32$1 := v18$1;
-    $$agg.tmp$4bv32$2 := v18$2;
+    $$0$4bv32$1 := v18$1;
+    $$0$4bv32$2 := v18$2;
     havoc v19$1, v19$2;
-    $$agg.tmp$5bv32$1 := v19$1;
-    $$agg.tmp$5bv32$2 := v19$2;
+    $$0$5bv32$1 := v19$1;
+    $$0$5bv32$2 := v19$2;
     havoc v20$1, v20$2;
-    $$agg.tmp$6bv32$1 := v20$1;
-    $$agg.tmp$6bv32$2 := v20$2;
+    $$0$6bv32$1 := v20$1;
+    $$0$6bv32$2 := v20$2;
     havoc v21$1, v21$2;
-    $$agg.tmp$7bv32$1 := v21$1;
-    $$agg.tmp$7bv32$2 := v21$2;
+    $$0$7bv32$1 := v21$1;
+    $$0$7bv32$2 := v21$2;
     havoc v22$1, v22$2;
-    $$agg.tmp$8bv32$1 := v22$1;
-    $$agg.tmp$8bv32$2 := v22$2;
+    $$0$8bv32$1 := v22$1;
+    $$0$8bv32$2 := v22$2;
     havoc v23$1, v23$2;
-    $$agg.tmp$9bv32$1 := v23$1;
-    $$agg.tmp$9bv32$2 := v23$2;
+    $$0$9bv32$1 := v23$1;
+    $$0$9bv32$2 := v23$2;
     havoc v24$1, v24$2;
-    $$agg.tmp$10bv32$1 := v24$1;
-    $$agg.tmp$10bv32$2 := v24$2;
+    $$0$10bv32$1 := v24$1;
+    $$0$10bv32$2 := v24$2;
     havoc v25$1, v25$2;
-    $$agg.tmp$11bv32$1 := v25$1;
-    $$agg.tmp$11bv32$2 := v25$2;
-    call {:sourceloc_num 40} v26$1, v26$2 := $_Z10texCubemapIfET_7textureIS0_Li12EL19cudaTextureReadMode0EEfff(MKPTR($arrayId$$agg.tmp, 0bv32), $cx.6$1, $cy.6$1, $cz.6$1, $cx.6$2, $cy.6$2, $cz.6$2);
+    $$0$11bv32$1 := v25$1;
+    $$0$11bv32$2 := v25$2;
+    call {:sourceloc_num 40} v26$1, v26$2 := $_Z10texCubemapIfET_7textureIS0_Li12EL19cudaTextureReadMode0EEfff(MKPTR($arrayId$$0, 0bv32), $cx.6$1, $cy.6$1, $cz.6$1, $cx.6$2, $cy.6$2, $cz.6$2);
     assume {:captureState "call_return_state_0"} {:procedureName "$_Z10texCubemapIfET_7textureIS0_Li12EL19cudaTextureReadMode0EEfff"} true;
     call {:sourceloc} {:sourceloc_num 41} _LOG_WRITE_$$g_odata(true, BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL($face.0, $width), $width), BV32_MUL(v1$1, $width)), v0$1), FSUB32(2147483648bv32, v26$1), $$g_odata[BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL($face.0, $width), $width), BV32_MUL(v1$1, $width)), v0$1)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$g_odata(true, BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL($face.0, $width), $width), BV32_MUL(v1$2, $width)), v0$2));
@@ -391,43 +391,43 @@ implementation {:source_name "transformKernel"} {:kernel} $_Z15transformKernelPf
     $cx.0$1, $cy.0$1, $cz.0$1, $face.0 := $cx.6$1, $cy.6$1, $cz.6$1, BV32_ADD($face.0, 1bv32);
     $cx.0$2, $cy.0$2, $cz.0$2 := $cx.6$2, $cy.6$2, $cz.6$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
   $truebb5:
     assume {:partition} v13;
     $cx.1$1, $cy.1$1, $cz.1$1 := FSUB32(2147483648bv32, v2$1), FSUB32(2147483648bv32, v3$1), 3212836864bv32;
     $cx.1$2, $cy.1$2, $cz.1$2 := FSUB32(2147483648bv32, v2$2), FSUB32(2147483648bv32, v3$2), 3212836864bv32;
-    goto $if.end;
+    goto $14;
 
   $truebb4:
     assume {:partition} v12;
     $cx.2$1, $cy.2$1, $cz.2$1 := v2$1, FSUB32(2147483648bv32, v3$1), 1065353216bv32;
     $cx.2$2, $cy.2$2, $cz.2$2 := v2$2, FSUB32(2147483648bv32, v3$2), 1065353216bv32;
-    goto $if.end.35;
+    goto $15;
 
   $truebb3:
     assume {:partition} v11;
     $cx.3$1, $cy.3$1, $cz.3$1 := v2$1, 3212836864bv32, FSUB32(2147483648bv32, v3$1);
     $cx.3$2, $cy.3$2, $cz.3$2 := v2$2, 3212836864bv32, FSUB32(2147483648bv32, v3$2);
-    goto $if.end.36;
+    goto $16;
 
   $truebb2:
     assume {:partition} v10;
     $cx.4$1, $cy.4$1, $cz.4$1 := v2$1, 1065353216bv32, v3$1;
     $cx.4$2, $cy.4$2, $cz.4$2 := v2$2, 1065353216bv32, v3$2;
-    goto $if.end.37;
+    goto $17;
 
   $truebb1:
     assume {:partition} v9;
     $cx.5$1, $cy.5$1, $cz.5$1 := 3212836864bv32, FSUB32(2147483648bv32, v3$1), v2$1;
     $cx.5$2, $cy.5$2, $cz.5$2 := 3212836864bv32, FSUB32(2147483648bv32, v3$2), v2$2;
-    goto $if.end.38;
+    goto $18;
 
   $truebb0:
     assume {:partition} v8;
     $cx.6$1, $cy.6$1, $cz.6$1 := 1065353216bv32, FSUB32(2147483648bv32, v3$1), FSUB32(2147483648bv32, v2$1);
     $cx.6$2, $cy.6$2, $cz.6$2 := 1065353216bv32, FSUB32(2147483648bv32, v3$2), FSUB32(2147483648bv32, v2$2);
-    goto $if.end.39;
+    goto $19;
 }
 
 
@@ -456,53 +456,53 @@ const {:group_id_z} group_id_z$1: bv32;
 
 const {:group_id_z} group_id_z$2: bv32;
 
-var $$agg.tmp$0bv32$1: bv8;
+var $$0$0bv32$1: bv8;
 
-var $$agg.tmp$0bv32$2: bv8;
+var $$0$0bv32$2: bv8;
 
-var $$agg.tmp$1bv32$1: bv8;
+var $$0$1bv32$1: bv8;
 
-var $$agg.tmp$1bv32$2: bv8;
+var $$0$1bv32$2: bv8;
 
-var $$agg.tmp$2bv32$1: bv8;
+var $$0$2bv32$1: bv8;
 
-var $$agg.tmp$2bv32$2: bv8;
+var $$0$2bv32$2: bv8;
 
-var $$agg.tmp$3bv32$1: bv8;
+var $$0$3bv32$1: bv8;
 
-var $$agg.tmp$3bv32$2: bv8;
+var $$0$3bv32$2: bv8;
 
-var $$agg.tmp$4bv32$1: bv8;
+var $$0$4bv32$1: bv8;
 
-var $$agg.tmp$4bv32$2: bv8;
+var $$0$4bv32$2: bv8;
 
-var $$agg.tmp$5bv32$1: bv8;
+var $$0$5bv32$1: bv8;
 
-var $$agg.tmp$5bv32$2: bv8;
+var $$0$5bv32$2: bv8;
 
-var $$agg.tmp$6bv32$1: bv8;
+var $$0$6bv32$1: bv8;
 
-var $$agg.tmp$6bv32$2: bv8;
+var $$0$6bv32$2: bv8;
 
-var $$agg.tmp$7bv32$1: bv8;
+var $$0$7bv32$1: bv8;
 
-var $$agg.tmp$7bv32$2: bv8;
+var $$0$7bv32$2: bv8;
 
-var $$agg.tmp$8bv32$1: bv8;
+var $$0$8bv32$1: bv8;
 
-var $$agg.tmp$8bv32$2: bv8;
+var $$0$8bv32$2: bv8;
 
-var $$agg.tmp$9bv32$1: bv8;
+var $$0$9bv32$1: bv8;
 
-var $$agg.tmp$9bv32$2: bv8;
+var $$0$9bv32$2: bv8;
 
-var $$agg.tmp$10bv32$1: bv8;
+var $$0$10bv32$1: bv8;
 
-var $$agg.tmp$10bv32$2: bv8;
+var $$0$10bv32$2: bv8;
 
-var $$agg.tmp$11bv32$1: bv8;
+var $$0$11bv32$1: bv8;
 
-var $$agg.tmp$11bv32$2: bv8;
+var $$0$11bv32$2: bv8;
 
 function {:bvbuiltin "bvsle"} BV32_SLE(bv32, bv32) : bool;
 

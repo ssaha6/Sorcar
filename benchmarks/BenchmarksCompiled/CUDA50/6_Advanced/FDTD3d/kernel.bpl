@@ -159,7 +159,7 @@ implementation {:source_name "FiniteDifferencesKernel"} {:kernel} $_Z23FiniteDif
   var $current.0$2: bv32;
   var $inputIndex.1$1: bv32;
   var $inputIndex.1$2: bv32;
-  var $i43.0: bv32;
+  var $i1.0: bv32;
   var $inputIndex.2$1: bv32;
   var $inputIndex.2$2: bv32;
   var $outputIndex.0$1: bv32;
@@ -167,45 +167,25 @@ implementation {:source_name "FiniteDifferencesKernel"} {:kernel} $_Z23FiniteDif
   var $current.1$1: bv32;
   var $current.1$2: bv32;
   var $iz.0: bv32;
-  var $i81.0: bv32;
-  var $i93.0: bv32;
+  var $i2.0: bv32;
+  var $i3.0: bv32;
   var $value.0$1: bv32;
   var $value.0$2: bv32;
-  var $i141.0: bv32;
+  var $i4.0: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
   var v2: bv32;
+  var v3: bv32;
   var v4$1: bv32;
   var v4$2: bv32;
-  var v6$1: bool;
-  var v6$2: bool;
   var v5$1: bv32;
   var v5$2: bv32;
+  var v6$1: bool;
+  var v6$2: bool;
   var v7$1: bool;
   var v7$2: bool;
-  var v3: bv32;
-  var v39$1: bv32;
-  var v39$2: bv32;
-  var v40$1: bv32;
-  var v40$2: bv32;
-  var v37$1: bv32;
-  var v37$2: bv32;
-  var v38$1: bv32;
-  var v38$2: bv32;
-  var v33$1: bv32;
-  var v33$2: bv32;
-  var v35$1: bv32;
-  var v35$2: bv32;
-  var v36$1: bv32;
-  var v36$2: bv32;
-  var v41$1: bv32;
-  var v41$2: bv32;
-  var v14$1: bv32;
-  var v14$2: bv32;
-  var v12$1: bv32;
-  var v12$2: bv32;
   var v8$1: bool;
   var v8$2: bool;
   var v9$1: bool;
@@ -213,43 +193,63 @@ implementation {:source_name "FiniteDifferencesKernel"} {:kernel} $_Z23FiniteDif
   var v10: bool;
   var v11$1: bool;
   var v11$2: bool;
+  var v12$1: bv32;
+  var v12$2: bv32;
+  var v13$1: bool;
+  var v13$2: bool;
   var v43$1: bv32;
   var v43$2: bv32;
+  var v14$1: bv32;
+  var v14$2: bv32;
   var v15: bool;
   var v16$1: bool;
   var v16$2: bool;
-  var v13$1: bool;
-  var v13$2: bool;
-  var v20$1: bv32;
-  var v20$2: bv32;
   var v17$1: bv32;
   var v17$2: bv32;
-  var v28$1: bv32;
-  var v28$2: bv32;
+  var v18: bool;
+  var v19: bool;
+  var v20$1: bv32;
+  var v20$2: bv32;
+  var v22: bool;
   var v21$1: bv32;
   var v21$2: bv32;
-  var v25$1: bv32;
-  var v25$2: bv32;
   var v23$1: bv32;
   var v23$2: bv32;
-  var v29$1: bv32;
-  var v29$2: bv32;
-  var v31$1: bv32;
-  var v31$2: bv32;
-  var v32$1: bv32;
-  var v32$2: bv32;
-  var v22: bool;
   var v24$1: bool;
   var v24$2: bool;
-  var v19: bool;
-  var v18: bool;
+  var v25$1: bv32;
+  var v25$2: bv32;
   var v26$1: bv32;
   var v26$2: bv32;
   var v27$1: bool;
   var v27$2: bool;
+  var v28$1: bv32;
+  var v28$2: bv32;
+  var v29$1: bv32;
+  var v29$2: bv32;
   var v30$1: bool;
   var v30$2: bool;
+  var v31$1: bv32;
+  var v31$2: bv32;
+  var v32$1: bv32;
+  var v32$2: bv32;
+  var v33$1: bv32;
+  var v33$2: bv32;
   var v34: bool;
+  var v35$1: bv32;
+  var v35$2: bv32;
+  var v36$1: bv32;
+  var v36$2: bv32;
+  var v37$1: bv32;
+  var v37$2: bv32;
+  var v38$1: bv32;
+  var v38$2: bv32;
+  var v39$1: bv32;
+  var v39$2: bv32;
+  var v40$1: bv32;
+  var v40$2: bv32;
+  var v41$1: bv32;
+  var v41$2: bv32;
   var v42$1: bool;
   var v42$2: bool;
   var p0$1: bool;
@@ -304,7 +304,7 @@ implementation {:source_name "FiniteDifferencesKernel"} {:kernel} $_Z23FiniteDif
   var _HAVOC_bv32$2: bv32;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2);
     v1$1 := BV32_ADD(BV32_MUL(group_id_y$1, group_size_y), local_id_y$1);
@@ -378,9 +378,9 @@ implementation {:source_name "FiniteDifferencesKernel"} {:kernel} $_Z23FiniteDif
     $inputIndex.0$1, $i.0 := BV32_ADD(BV32_ADD(BV32_MUL(4bv32, v2), 4bv32), BV32_ADD(BV32_MUL(v1$1, v2), v0$1)), 2bv32;
     $inputIndex.0$2 := BV32_ADD(BV32_ADD(BV32_MUL(4bv32, v2), 4bv32), BV32_ADD(BV32_MUL(v1$2, v2), v0$2));
     assume {:captureState "loop_entry_state_5_0"} true;
-    goto $for.cond;
+    goto $7;
 
-  $for.cond:
+  $7:
     assume {:captureState "loop_head_state_5"} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -426,19 +426,19 @@ implementation {:source_name "FiniteDifferencesKernel"} {:kernel} $_Z23FiniteDif
     v43$2 := (if p13$2 then _HAVOC_bv32$2 else v43$2);
     $current.0$1 := (if p13$1 then v43$1 else $current.0$1);
     $current.0$2 := (if p13$2 then v43$2 else $current.0$2);
-    $inputIndex.1$1, $i43.0 := BV32_ADD($inputIndex.0$1, v3), 0bv32;
+    $inputIndex.1$1, $i1.0 := BV32_ADD($inputIndex.0$1, v3), 0bv32;
     $inputIndex.1$2 := BV32_ADD($inputIndex.0$2, v3);
     assume {:captureState "loop_entry_state_4_0"} true;
-    goto $for.cond.44;
+    goto $15;
 
-  $for.cond.44:
+  $15:
     assume {:captureState "loop_head_state_4"} true;
     assume {:invGenSkippedLoop} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:block_sourceloc} {:sourceloc_num 23} true;
-    v15 := BV32_SLT($i43.0, 4bv32);
+    v15 := BV32_SLT($i1.0, 4bv32);
     p14$1 := false;
     p14$2 := false;
     p15$1 := false;
@@ -450,9 +450,9 @@ implementation {:source_name "FiniteDifferencesKernel"} {:kernel} $_Z23FiniteDif
     $inputIndex.2$1, $outputIndex.0$1, $current.1$1, $iz.0 := $inputIndex.1$1, $inputIndex.0$1, $current.0$1, 0bv32;
     $inputIndex.2$2, $outputIndex.0$2, $current.1$2 := $inputIndex.1$2, $inputIndex.0$2, $current.0$2;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.55;
+    goto $21;
 
-  $for.cond.55:
+  $21:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b24 ==> _WRITE_HAS_OCCURRED_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile ==> _WATCHED_OFFSET == BV32_ADD(BV32_MUL(local_id_y$1, 40bv32), BV32_ADD(local_id_x$1, 4bv32)) || _WATCHED_OFFSET == BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(local_id_y$1, group_size_y), 4bv32), 40bv32), BV32_ADD(local_id_x$1, 4bv32)) || _WATCHED_OFFSET == BV32_ADD(BV32_MUL(BV32_ADD(local_id_y$1, 4bv32), 40bv32), local_id_x$1) || _WATCHED_OFFSET == BV32_ADD(BV32_MUL(BV32_ADD(local_id_y$1, 4bv32), 40bv32), BV32_ADD(BV32_ADD(local_id_x$1, group_size_x), 4bv32)) || _WATCHED_OFFSET == BV32_ADD(BV32_MUL(BV32_ADD(local_id_y$1, 4bv32), 40bv32), BV32_ADD(local_id_x$1, 4bv32));
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b23 ==> _READ_HAS_OCCURRED_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 40bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 40bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 40bv32), BV32_ADD(local_id_x$1, 4bv32))) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 40bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 40bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, BV32_ADD(local_id_y$1, 4bv32)), 40bv32), BV32_ADD(local_id_x$1, 4bv32)));
@@ -487,18 +487,18 @@ implementation {:source_name "FiniteDifferencesKernel"} {:kernel} $_Z23FiniteDif
 
   $truebb8:
     assume {:partition} v18;
-    $i81.0 := 3bv32;
+    $i2.0 := 3bv32;
     assume {:captureState "loop_entry_state_3_0"} true;
-    goto $for.cond.82;
+    goto $23;
 
-  $for.cond.82:
+  $23:
     assume {:captureState "loop_head_state_3"} true;
     assume {:invGenSkippedLoop} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:block_sourceloc} {:sourceloc_num 37} true;
-    v19 := BV32_SGT($i81.0, 0bv32);
+    v19 := BV32_SGT($i2.0, 0bv32);
     goto $truebb9, $falsebb9;
 
   $falsebb9:
@@ -507,18 +507,18 @@ implementation {:source_name "FiniteDifferencesKernel"} {:kernel} $_Z23FiniteDif
     $$behind$2[0bv32] := $current.1$2;
     v21$1 := $$infront$1[0bv32];
     v21$2 := $$infront$2[0bv32];
-    $i93.0 := 0bv32;
+    $i3.0 := 0bv32;
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond.94;
+    goto $27;
 
-  $for.cond.94:
+  $27:
     assume {:captureState "loop_head_state_2"} true;
     assume {:invGenSkippedLoop} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:block_sourceloc} {:sourceloc_num 45} true;
-    v22 := BV32_SLT($i93.0, 3bv32);
+    v22 := BV32_SLT($i3.0, 3bv32);
     p16$1 := false;
     p16$2 := false;
     p17$1 := false;
@@ -611,24 +611,24 @@ implementation {:source_name "FiniteDifferencesKernel"} {:kernel} $_Z23FiniteDif
     call {:sourceloc_num 69} $bugle_barrier_duplicated_1(1bv1, 1bv1);
     v33$1 := $$stencil$1[0bv32];
     v33$2 := $$stencil$2[0bv32];
-    $value.0$1, $i141.0 := FMUL32(v33$1, v21$1), 1bv32;
+    $value.0$1, $i4.0 := FMUL32(v33$1, v21$1), 1bv32;
     $value.0$2 := FMUL32(v33$2, v21$2);
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.142;
+    goto $37;
 
-  $for.cond.142:
+  $37:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b25 ==> _READ_HAS_OCCURRED_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 40bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 40bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 40bv32), BV32_ADD(local_id_x$1, 4bv32))) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 40bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 40bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, BV32_ADD(local_id_y$1, 4bv32)), 40bv32), BV32_ADD(local_id_x$1, 4bv32)));
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
-    assert {:tag "loopBound"} {:thread 1} _b18 ==> BV32_UGE($i141.0, 1bv32);
-    assert {:tag "loopBound"} {:thread 1} _b17 ==> BV32_ULE($i141.0, 1bv32);
-    assert {:tag "loopBound"} {:thread 1} _b16 ==> BV32_SGE($i141.0, 1bv32);
-    assert {:tag "loopBound"} {:thread 1} _b15 ==> BV32_SLE($i141.0, 1bv32);
-    assert {:tag "guardNonNeg"} {:thread 1} _b14 ==> BV32_SLE(0bv32, $i141.0);
+    assert {:tag "loopBound"} {:thread 1} _b18 ==> BV32_UGE($i4.0, 1bv32);
+    assert {:tag "loopBound"} {:thread 1} _b17 ==> BV32_ULE($i4.0, 1bv32);
+    assert {:tag "loopBound"} {:thread 1} _b16 ==> BV32_SGE($i4.0, 1bv32);
+    assert {:tag "loopBound"} {:thread 1} _b15 ==> BV32_SLE($i4.0, 1bv32);
+    assert {:tag "guardNonNeg"} {:thread 1} _b14 ==> BV32_SLE(0bv32, $i4.0);
     assert {:block_sourceloc} {:sourceloc_num 71} true;
-    v34 := BV32_SLE($i141.0, 4bv32);
+    v34 := BV32_SLE($i4.0, 4bv32);
     p22$1 := false;
     p22$2 := false;
     p23$1 := false;
@@ -651,64 +651,64 @@ implementation {:source_name "FiniteDifferencesKernel"} {:kernel} $_Z23FiniteDif
     $inputIndex.2$1, $outputIndex.0$1, $current.1$1, $iz.0 := BV32_ADD($inputIndex.2$1, v3), v26$1, v21$1, BV32_ADD($iz.0, 1bv32);
     $inputIndex.2$2, $outputIndex.0$2, $current.1$2 := BV32_ADD($inputIndex.2$2, v3), v26$2, v21$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.55;
+    goto $21;
 
   $truebb14:
     assume {:partition} v34;
-    v35$1 := $$stencil$1[$i141.0];
-    v35$2 := $$stencil$2[$i141.0];
-    v36$1 := $$infront$1[BV32_SUB($i141.0, 1bv32)];
-    v36$2 := $$infront$2[BV32_SUB($i141.0, 1bv32)];
-    v37$1 := $$behind$1[BV32_SUB($i141.0, 1bv32)];
-    v37$2 := $$behind$2[BV32_SUB($i141.0, 1bv32)];
-    call {:sourceloc} {:sourceloc_num 76} _LOG_READ_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile(true, BV32_ADD(BV32_MUL(BV32_SUB(v5$1, $i141.0), 40bv32), v4$1), $$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile[1bv1][BV32_ADD(BV32_MUL(BV32_SUB(v5$1, $i141.0), 40bv32), v4$1)]);
+    v35$1 := $$stencil$1[$i4.0];
+    v35$2 := $$stencil$2[$i4.0];
+    v36$1 := $$infront$1[BV32_SUB($i4.0, 1bv32)];
+    v36$2 := $$infront$2[BV32_SUB($i4.0, 1bv32)];
+    v37$1 := $$behind$1[BV32_SUB($i4.0, 1bv32)];
+    v37$2 := $$behind$2[BV32_SUB($i4.0, 1bv32)];
+    call {:sourceloc} {:sourceloc_num 76} _LOG_READ_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile(true, BV32_ADD(BV32_MUL(BV32_SUB(v5$1, $i4.0), 40bv32), v4$1), $$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile[1bv1][BV32_ADD(BV32_MUL(BV32_SUB(v5$1, $i4.0), 40bv32), v4$1)]);
     assume {:do_not_predicate} {:check_id "check_state_2"} {:captureState "check_state_2"} {:sourceloc} {:sourceloc_num 76} true;
-    call {:check_id "check_state_2"} {:sourceloc} {:sourceloc_num 76} _CHECK_READ_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile(true, BV32_ADD(BV32_MUL(BV32_SUB(v5$2, $i141.0), 40bv32), v4$2), $$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_SUB(v5$2, $i141.0), 40bv32), v4$2)]);
+    call {:check_id "check_state_2"} {:sourceloc} {:sourceloc_num 76} _CHECK_READ_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile(true, BV32_ADD(BV32_MUL(BV32_SUB(v5$2, $i4.0), 40bv32), v4$2), $$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_SUB(v5$2, $i4.0), 40bv32), v4$2)]);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile"} true;
-    v38$1 := $$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile[1bv1][BV32_ADD(BV32_MUL(BV32_SUB(v5$1, $i141.0), 40bv32), v4$1)];
-    v38$2 := $$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_SUB(v5$2, $i141.0), 40bv32), v4$2)];
-    call {:sourceloc} {:sourceloc_num 77} _LOG_READ_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile(true, BV32_ADD(BV32_MUL(BV32_ADD(v5$1, $i141.0), 40bv32), v4$1), $$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(v5$1, $i141.0), 40bv32), v4$1)]);
+    v38$1 := $$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile[1bv1][BV32_ADD(BV32_MUL(BV32_SUB(v5$1, $i4.0), 40bv32), v4$1)];
+    v38$2 := $$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_SUB(v5$2, $i4.0), 40bv32), v4$2)];
+    call {:sourceloc} {:sourceloc_num 77} _LOG_READ_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile(true, BV32_ADD(BV32_MUL(BV32_ADD(v5$1, $i4.0), 40bv32), v4$1), $$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(v5$1, $i4.0), 40bv32), v4$1)]);
     assume {:do_not_predicate} {:check_id "check_state_3"} {:captureState "check_state_3"} {:sourceloc} {:sourceloc_num 77} true;
-    call {:check_id "check_state_3"} {:sourceloc} {:sourceloc_num 77} _CHECK_READ_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile(true, BV32_ADD(BV32_MUL(BV32_ADD(v5$2, $i141.0), 40bv32), v4$2), $$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(v5$2, $i141.0), 40bv32), v4$2)]);
+    call {:check_id "check_state_3"} {:sourceloc} {:sourceloc_num 77} _CHECK_READ_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile(true, BV32_ADD(BV32_MUL(BV32_ADD(v5$2, $i4.0), 40bv32), v4$2), $$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(v5$2, $i4.0), 40bv32), v4$2)]);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile"} true;
-    v39$1 := $$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(v5$1, $i141.0), 40bv32), v4$1)];
-    v39$2 := $$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(v5$2, $i141.0), 40bv32), v4$2)];
-    call {:sourceloc} {:sourceloc_num 78} _LOG_READ_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile(true, BV32_ADD(BV32_MUL(v5$1, 40bv32), BV32_SUB(v4$1, $i141.0)), $$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile[1bv1][BV32_ADD(BV32_MUL(v5$1, 40bv32), BV32_SUB(v4$1, $i141.0))]);
+    v39$1 := $$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(v5$1, $i4.0), 40bv32), v4$1)];
+    v39$2 := $$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(v5$2, $i4.0), 40bv32), v4$2)];
+    call {:sourceloc} {:sourceloc_num 78} _LOG_READ_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile(true, BV32_ADD(BV32_MUL(v5$1, 40bv32), BV32_SUB(v4$1, $i4.0)), $$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile[1bv1][BV32_ADD(BV32_MUL(v5$1, 40bv32), BV32_SUB(v4$1, $i4.0))]);
     assume {:do_not_predicate} {:check_id "check_state_4"} {:captureState "check_state_4"} {:sourceloc} {:sourceloc_num 78} true;
-    call {:check_id "check_state_4"} {:sourceloc} {:sourceloc_num 78} _CHECK_READ_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile(true, BV32_ADD(BV32_MUL(v5$2, 40bv32), BV32_SUB(v4$2, $i141.0)), $$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(v5$2, 40bv32), BV32_SUB(v4$2, $i141.0))]);
+    call {:check_id "check_state_4"} {:sourceloc} {:sourceloc_num 78} _CHECK_READ_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile(true, BV32_ADD(BV32_MUL(v5$2, 40bv32), BV32_SUB(v4$2, $i4.0)), $$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(v5$2, 40bv32), BV32_SUB(v4$2, $i4.0))]);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile"} true;
-    v40$1 := $$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile[1bv1][BV32_ADD(BV32_MUL(v5$1, 40bv32), BV32_SUB(v4$1, $i141.0))];
-    v40$2 := $$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(v5$2, 40bv32), BV32_SUB(v4$2, $i141.0))];
-    call {:sourceloc} {:sourceloc_num 79} _LOG_READ_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile(true, BV32_ADD(BV32_MUL(v5$1, 40bv32), BV32_ADD(v4$1, $i141.0)), $$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile[1bv1][BV32_ADD(BV32_MUL(v5$1, 40bv32), BV32_ADD(v4$1, $i141.0))]);
+    v40$1 := $$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile[1bv1][BV32_ADD(BV32_MUL(v5$1, 40bv32), BV32_SUB(v4$1, $i4.0))];
+    v40$2 := $$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(v5$2, 40bv32), BV32_SUB(v4$2, $i4.0))];
+    call {:sourceloc} {:sourceloc_num 79} _LOG_READ_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile(true, BV32_ADD(BV32_MUL(v5$1, 40bv32), BV32_ADD(v4$1, $i4.0)), $$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile[1bv1][BV32_ADD(BV32_MUL(v5$1, 40bv32), BV32_ADD(v4$1, $i4.0))]);
     assume {:do_not_predicate} {:check_id "check_state_5"} {:captureState "check_state_5"} {:sourceloc} {:sourceloc_num 79} true;
-    call {:check_id "check_state_5"} {:sourceloc} {:sourceloc_num 79} _CHECK_READ_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile(true, BV32_ADD(BV32_MUL(v5$2, 40bv32), BV32_ADD(v4$2, $i141.0)), $$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(v5$2, 40bv32), BV32_ADD(v4$2, $i141.0))]);
+    call {:check_id "check_state_5"} {:sourceloc} {:sourceloc_num 79} _CHECK_READ_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile(true, BV32_ADD(BV32_MUL(v5$2, 40bv32), BV32_ADD(v4$2, $i4.0)), $$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(v5$2, 40bv32), BV32_ADD(v4$2, $i4.0))]);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile"} true;
-    v41$1 := $$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile[1bv1][BV32_ADD(BV32_MUL(v5$1, 40bv32), BV32_ADD(v4$1, $i141.0))];
-    v41$2 := $$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(v5$2, 40bv32), BV32_ADD(v4$2, $i141.0))];
-    $value.0$1, $i141.0 := FADD32($value.0$1, FMUL32(v35$1, FADD32(FADD32(FADD32(FADD32(FADD32(v36$1, v37$1), v38$1), v39$1), v40$1), v41$1))), BV32_ADD($i141.0, 1bv32);
+    v41$1 := $$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile[1bv1][BV32_ADD(BV32_MUL(v5$1, 40bv32), BV32_ADD(v4$1, $i4.0))];
+    v41$2 := $$_ZZ23FiniteDifferencesKernelPfPKfiiiE4tile[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(v5$2, 40bv32), BV32_ADD(v4$2, $i4.0))];
+    $value.0$1, $i4.0 := FADD32($value.0$1, FMUL32(v35$1, FADD32(FADD32(FADD32(FADD32(FADD32(v36$1, v37$1), v38$1), v39$1), v40$1), v41$1))), BV32_ADD($i4.0, 1bv32);
     $value.0$2 := FADD32($value.0$2, FMUL32(v35$2, FADD32(FADD32(FADD32(FADD32(FADD32(v36$2, v37$2), v38$2), v39$2), v40$2), v41$2)));
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.142;
+    goto $37;
 
   $truebb10:
     assume {:partition} v22;
-    v23$1 := $$infront$1[BV32_ADD($i93.0, 1bv32)];
-    v23$2 := $$infront$2[BV32_ADD($i93.0, 1bv32)];
-    $$infront$1[$i93.0] := v23$1;
-    $$infront$2[$i93.0] := v23$2;
-    $i93.0 := BV32_ADD($i93.0, 1bv32);
+    v23$1 := $$infront$1[BV32_ADD($i3.0, 1bv32)];
+    v23$2 := $$infront$2[BV32_ADD($i3.0, 1bv32)];
+    $$infront$1[$i3.0] := v23$1;
+    $$infront$2[$i3.0] := v23$2;
+    $i3.0 := BV32_ADD($i3.0, 1bv32);
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond.94;
+    goto $27;
 
   $truebb9:
     assume {:partition} v19;
-    v20$1 := $$behind$1[BV32_SUB($i81.0, 1bv32)];
-    v20$2 := $$behind$2[BV32_SUB($i81.0, 1bv32)];
-    $$behind$1[$i81.0] := v20$1;
-    $$behind$2[$i81.0] := v20$2;
-    $i81.0 := BV32_ADD($i81.0, 4294967295bv32);
+    v20$1 := $$behind$1[BV32_SUB($i2.0, 1bv32)];
+    v20$2 := $$behind$2[BV32_SUB($i2.0, 1bv32)];
+    $$behind$1[$i2.0] := v20$1;
+    $$behind$2[$i2.0] := v20$2;
+    $i2.0 := BV32_ADD($i2.0, 4294967295bv32);
     assume {:captureState "loop_back_edge_state_3_0"} true;
-    goto $for.cond.82;
+    goto $23;
 
   $truebb6:
     assume {:partition} v15;
@@ -719,12 +719,12 @@ implementation {:source_name "FiniteDifferencesKernel"} {:kernel} $_Z23FiniteDif
     havoc _HAVOC_bv32$1, _HAVOC_bv32$2;
     v17$1 := (if p15$1 then _HAVOC_bv32$1 else v17$1);
     v17$2 := (if p15$2 then _HAVOC_bv32$2 else v17$2);
-    $$infront$1[$i43.0] := (if p15$1 then v17$1 else $$infront$1[$i43.0]);
-    $$infront$2[$i43.0] := (if p15$2 then v17$2 else $$infront$2[$i43.0]);
-    $inputIndex.1$1, $i43.0 := BV32_ADD($inputIndex.1$1, v3), BV32_ADD($i43.0, 1bv32);
+    $$infront$1[$i1.0] := (if p15$1 then v17$1 else $$infront$1[$i1.0]);
+    $$infront$2[$i1.0] := (if p15$2 then v17$2 else $$infront$2[$i1.0]);
+    $inputIndex.1$1, $i1.0 := BV32_ADD($inputIndex.1$1, v3), BV32_ADD($i1.0, 1bv32);
     $inputIndex.1$2 := BV32_ADD($inputIndex.1$2, v3);
     assume {:captureState "loop_back_edge_state_4_0"} true;
-    goto $for.cond.44;
+    goto $15;
 
   $truebb3:
     assume {:partition} v10;
@@ -740,7 +740,7 @@ implementation {:source_name "FiniteDifferencesKernel"} {:kernel} $_Z23FiniteDif
     $inputIndex.0$1, $i.0 := BV32_ADD($inputIndex.0$1, v3), BV32_ADD($i.0, 4294967295bv32);
     $inputIndex.0$2 := BV32_ADD($inputIndex.0$2, v3);
     assume {:captureState "loop_back_edge_state_5_0"} true;
-    goto $for.cond;
+    goto $7;
 }
 
 

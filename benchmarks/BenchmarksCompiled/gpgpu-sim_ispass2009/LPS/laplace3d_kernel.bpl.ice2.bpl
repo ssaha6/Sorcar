@@ -180,6 +180,8 @@ implementation {:source_name "GPU_laplace3d"} {:kernel} $_Z13GPU_laplace3diiiiPf
   var $indg_h.2$2: bv32;
   var $u2.0$1: bv32;
   var $u2.0$2: bv32;
+  var v21$1: bv32;
+  var v21$2: bv32;
   var v0: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
@@ -187,8 +189,6 @@ implementation {:source_name "GPU_laplace3d"} {:kernel} $_Z13GPU_laplace3diiiiPf
   var v2$2: bv32;
   var v3$1: bool;
   var v3$2: bool;
-  var v21$1: bv32;
-  var v21$2: bv32;
   var v50$1: bv32;
   var v50$2: bv32;
   var v49$1: bv32;
@@ -205,10 +205,10 @@ implementation {:source_name "GPU_laplace3d"} {:kernel} $_Z13GPU_laplace3diiiiPf
   var v8$2: bool;
   var v9$1: bool;
   var v9$2: bool;
-  var v11$1: bv32;
-  var v11$2: bv32;
   var v10$1: bv32;
   var v10$2: bv32;
+  var v11$1: bv32;
+  var v11$2: bv32;
   var v12$1: bv32;
   var v12$2: bv32;
   var v13$1: bv32;

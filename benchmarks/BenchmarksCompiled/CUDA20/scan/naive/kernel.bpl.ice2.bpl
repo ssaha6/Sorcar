@@ -216,10 +216,7 @@ assert  my_inv (  (  BV32_SLE(0bv32, $offset.0) ) ,  (  BV32_SLE($offset.0, 1bv3
 
   __partitioned_block_$falsebb0_1:
     call {:sourceloc_num 19} $bugle_barrier_duplicated_0(1bv1, 1bv1);
-    call {:sourceloc} {:sourceloc_num 20} _LOG_READ_$$_ZZ6kernelPfS_iE4temp(true, BV32_ADD(BV32_MUL($pout.0, $n), local_id_x$1), $$_ZZ6kernelPfS_iE4temp[1bv1][BV32_ADD(BV32_MUL($pout.0, $n), local_id_x$1)]);
     assume {:do_not_predicate} {:check_id "check_state_1"} {:captureState "check_state_1"} {:sourceloc} {:sourceloc_num 20} true;
-    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 20} _CHECK_READ_$$_ZZ6kernelPfS_iE4temp(true, BV32_ADD(BV32_MUL($pout.0, $n), local_id_x$2), $$_ZZ6kernelPfS_iE4temp[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($pout.0, $n), local_id_x$2)]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ6kernelPfS_iE4temp"} true;
     v10$1 := $$_ZZ6kernelPfS_iE4temp[1bv1][BV32_ADD(BV32_MUL($pout.0, $n), local_id_x$1)];
     v10$2 := $$_ZZ6kernelPfS_iE4temp[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($pout.0, $n), local_id_x$2)];
     call {:sourceloc} {:sourceloc_num 21} _LOG_WRITE_$$g_odata(true, local_id_x$1, v10$1, $$g_odata[local_id_x$1]);

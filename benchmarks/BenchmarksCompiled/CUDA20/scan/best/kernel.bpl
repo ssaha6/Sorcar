@@ -116,57 +116,57 @@ implementation {:source_name "scanBestKernel"} {:kernel} $_Z14scanBestKernelPfS_
   var $offset.0: bv32;
   var $d.0: bv32;
   var $offset.1: bv32;
-  var $d50.0: bv32;
-  var v23$1: bv32;
-  var v23$2: bv32;
-  var v11$1: bv32;
-  var v11$2: bv32;
-  var v12$1: bv32;
-  var v12$2: bv32;
-  var v22$1: bv32;
-  var v22$2: bv32;
-  var v3$1: bv32;
-  var v3$2: bv32;
-  var v4$1: bv32;
-  var v4$2: bv32;
+  var $d1.0: bv32;
+  var v0$1: bv32;
+  var v0$2: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
   var v2$1: bv32;
   var v2$2: bv32;
-  var v0$1: bv32;
-  var v0$2: bv32;
+  var v3$1: bv32;
+  var v3$2: bv32;
+  var v4$1: bv32;
+  var v4$2: bv32;
+  var v5: bool;
   var v6: bv32;
+  var v7$1: bool;
+  var v7$2: bool;
   var v8$1: bv32;
   var v8$2: bv32;
   var v9$1: bv32;
   var v9$2: bv32;
-  var v7$1: bool;
-  var v7$2: bool;
-  var v5: bool;
-  var v19$1: bv32;
-  var v19$2: bv32;
-  var v16: bv32;
+  var v10$1: bv32;
+  var v10$2: bv32;
+  var v11$1: bv32;
+  var v11$2: bv32;
+  var v12$1: bv32;
+  var v12$2: bv32;
+  var v13$1: bool;
+  var v13$2: bool;
+  var v14$1: bv32;
+  var v14$2: bv32;
   var v15: bool;
+  var v16: bv32;
   var v17$1: bool;
   var v17$2: bool;
   var v18$1: bv32;
   var v18$2: bv32;
-  var v14$1: bv32;
-  var v14$2: bv32;
-  var v10$1: bv32;
-  var v10$2: bv32;
-  var v13$1: bool;
-  var v13$2: bool;
+  var v19$1: bv32;
+  var v19$2: bv32;
   var v20$1: bv32;
   var v20$2: bv32;
   var v21$1: bv32;
   var v21$2: bv32;
-  var v26$1: bv32;
-  var v26$2: bv32;
-  var v25$1: bv32;
-  var v25$2: bv32;
+  var v22$1: bv32;
+  var v22$2: bv32;
+  var v23$1: bv32;
+  var v23$2: bv32;
   var v24$1: bv32;
   var v24$2: bv32;
+  var v25$1: bv32;
+  var v25$2: bv32;
+  var v26$1: bv32;
+  var v26$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -181,7 +181,7 @@ implementation {:source_name "scanBestKernel"} {:kernel} $_Z14scanBestKernelPfS_
   var p5$2: bool;
 
 
-  __partitioned_block_$entry_0:
+  __partitioned_block_$0_0:
     v0$1 := BV32_ADD(local_id_x$1, BV32_ASHR($n, 1bv32));
     v0$2 := BV32_ADD(local_id_x$2, BV32_ASHR($n, 1bv32));
     v1$1 := BV32_ASHR(local_id_x$1, 4bv32);
@@ -204,15 +204,15 @@ implementation {:source_name "scanBestKernel"} {:kernel} $_Z14scanBestKernelPfS_
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$_ZZ14scanBestKernelPfS_iE4temp"} true;
     $$_ZZ14scanBestKernelPfS_iE4temp[1bv1][BV32_ADD(v0$1, v2$1)] := v4$1;
     $$_ZZ14scanBestKernelPfS_iE4temp[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v0$2, v2$2)] := v4$2;
-    goto __partitioned_block_$entry_1;
+    goto __partitioned_block_$0_1;
 
-  __partitioned_block_$entry_1:
+  __partitioned_block_$0_1:
     call {:sourceloc_num 7} $bugle_barrier_duplicated_0(1bv1, 1bv1);
     $offset.0, $d.0 := 1bv32, BV32_ASHR($n, 1bv32);
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "nowrite"} _b49 ==> !_WRITE_HAS_OCCURRED_$$_ZZ14scanBestKernelPfS_iE4temp;
     assert {:tag "noread"} _b48 ==> !_READ_HAS_OCCURRED_$$_ZZ14scanBestKernelPfS_iE4temp;
@@ -291,62 +291,62 @@ implementation {:source_name "scanBestKernel"} {:kernel} $_Z14scanBestKernelPfS_
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$_ZZ14scanBestKernelPfS_iE4temp"} true;
     $$_ZZ14scanBestKernelPfS_iE4temp[1bv1][BV32_ADD(v14$1, BV32_ASHR(v14$1, 4bv32))] := (if p2$1 then 0bv32 else $$_ZZ14scanBestKernelPfS_iE4temp[1bv1][BV32_ADD(v14$1, BV32_ASHR(v14$1, 4bv32))]);
     $$_ZZ14scanBestKernelPfS_iE4temp[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v14$2, BV32_ASHR(v14$2, 4bv32))] := (if p2$2 then 0bv32 else $$_ZZ14scanBestKernelPfS_iE4temp[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v14$2, BV32_ASHR(v14$2, 4bv32))]);
-    $offset.1, $d50.0 := $offset.0, 1bv32;
+    $offset.1, $d1.0 := $offset.0, 1bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.51;
+    goto $9;
 
-  $for.cond.51:
+  $9:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "nowrite"} _b89 ==> !_WRITE_HAS_OCCURRED_$$_ZZ14scanBestKernelPfS_iE4temp;
     assert {:tag "noread"} _b88 ==> !_READ_HAS_OCCURRED_$$_ZZ14scanBestKernelPfS_iE4temp;
-    assert {:tag "relationalPow2"} _b87 ==> ($offset.1 == 0bv32 && $d50.0 == 2bv32) || BV32_MUL($d50.0, $offset.1) == 1bv32;
-    assert {:tag "relationalPow2"} _b86 ==> BV32_MUL($d50.0, $offset.1) == 1bv32;
-    assert {:tag "relationalPow2"} _b85 ==> ($offset.1 == 0bv32 && $d50.0 == 4bv32) || BV32_MUL($d50.0, $offset.1) == 2bv32;
-    assert {:tag "relationalPow2"} _b84 ==> BV32_MUL($d50.0, $offset.1) == 2bv32;
-    assert {:tag "relationalPow2"} _b83 ==> ($offset.1 == 0bv32 && $d50.0 == 8bv32) || BV32_MUL($d50.0, $offset.1) == 4bv32;
-    assert {:tag "relationalPow2"} _b82 ==> BV32_MUL($d50.0, $offset.1) == 4bv32;
-    assert {:tag "relationalPow2"} _b81 ==> ($offset.1 == 0bv32 && $d50.0 == 16bv32) || BV32_MUL($d50.0, $offset.1) == 8bv32;
-    assert {:tag "relationalPow2"} _b80 ==> BV32_MUL($d50.0, $offset.1) == 8bv32;
-    assert {:tag "relationalPow2"} _b79 ==> ($offset.1 == 0bv32 && $d50.0 == 32bv32) || BV32_MUL($d50.0, $offset.1) == 16bv32;
-    assert {:tag "relationalPow2"} _b78 ==> BV32_MUL($d50.0, $offset.1) == 16bv32;
-    assert {:tag "relationalPow2"} _b77 ==> ($offset.1 == 0bv32 && $d50.0 == 64bv32) || BV32_MUL($d50.0, $offset.1) == 32bv32;
-    assert {:tag "relationalPow2"} _b76 ==> BV32_MUL($d50.0, $offset.1) == 32bv32;
-    assert {:tag "relationalPow2"} _b75 ==> ($offset.1 == 0bv32 && $d50.0 == 128bv32) || BV32_MUL($d50.0, $offset.1) == 64bv32;
-    assert {:tag "relationalPow2"} _b74 ==> BV32_MUL($d50.0, $offset.1) == 64bv32;
-    assert {:tag "relationalPow2"} _b73 ==> ($offset.1 == 0bv32 && $d50.0 == 256bv32) || BV32_MUL($d50.0, $offset.1) == 128bv32;
-    assert {:tag "relationalPow2"} _b72 ==> BV32_MUL($d50.0, $offset.1) == 128bv32;
-    assert {:tag "relationalPow2"} _b71 ==> ($offset.1 == 0bv32 && $d50.0 == 512bv32) || BV32_MUL($d50.0, $offset.1) == 256bv32;
-    assert {:tag "relationalPow2"} _b70 ==> BV32_MUL($d50.0, $offset.1) == 256bv32;
-    assert {:tag "relationalPow2"} _b69 ==> ($offset.1 == 0bv32 && $d50.0 == 1024bv32) || BV32_MUL($d50.0, $offset.1) == 512bv32;
-    assert {:tag "relationalPow2"} _b68 ==> BV32_MUL($d50.0, $offset.1) == 512bv32;
-    assert {:tag "relationalPow2"} _b67 ==> ($offset.1 == 0bv32 && $d50.0 == 2048bv32) || BV32_MUL($d50.0, $offset.1) == 1024bv32;
-    assert {:tag "relationalPow2"} _b66 ==> BV32_MUL($d50.0, $offset.1) == 1024bv32;
-    assert {:tag "relationalPow2"} _b65 ==> ($offset.1 == 0bv32 && $d50.0 == 4096bv32) || BV32_MUL($d50.0, $offset.1) == 2048bv32;
-    assert {:tag "relationalPow2"} _b64 ==> BV32_MUL($d50.0, $offset.1) == 2048bv32;
-    assert {:tag "relationalPow2"} _b63 ==> ($offset.1 == 0bv32 && $d50.0 == 8192bv32) || BV32_MUL($d50.0, $offset.1) == 4096bv32;
-    assert {:tag "relationalPow2"} _b62 ==> BV32_MUL($d50.0, $offset.1) == 4096bv32;
-    assert {:tag "relationalPow2"} _b61 ==> ($offset.1 == 0bv32 && $d50.0 == 16384bv32) || BV32_MUL($d50.0, $offset.1) == 8192bv32;
-    assert {:tag "relationalPow2"} _b60 ==> BV32_MUL($d50.0, $offset.1) == 8192bv32;
-    assert {:tag "relationalPow2"} _b59 ==> ($offset.1 == 0bv32 && $d50.0 == 32768bv32) || BV32_MUL($d50.0, $offset.1) == 16384bv32;
-    assert {:tag "relationalPow2"} _b58 ==> BV32_MUL($d50.0, $offset.1) == 16384bv32;
-    assert {:tag "relationalPow2"} _b57 ==> ($offset.1 == 0bv32 && $d50.0 == 65536bv32) || BV32_MUL($d50.0, $offset.1) == 32768bv32;
-    assert {:tag "relationalPow2"} _b56 ==> BV32_MUL($d50.0, $offset.1) == 32768bv32;
+    assert {:tag "relationalPow2"} _b87 ==> ($offset.1 == 0bv32 && $d1.0 == 2bv32) || BV32_MUL($d1.0, $offset.1) == 1bv32;
+    assert {:tag "relationalPow2"} _b86 ==> BV32_MUL($d1.0, $offset.1) == 1bv32;
+    assert {:tag "relationalPow2"} _b85 ==> ($offset.1 == 0bv32 && $d1.0 == 4bv32) || BV32_MUL($d1.0, $offset.1) == 2bv32;
+    assert {:tag "relationalPow2"} _b84 ==> BV32_MUL($d1.0, $offset.1) == 2bv32;
+    assert {:tag "relationalPow2"} _b83 ==> ($offset.1 == 0bv32 && $d1.0 == 8bv32) || BV32_MUL($d1.0, $offset.1) == 4bv32;
+    assert {:tag "relationalPow2"} _b82 ==> BV32_MUL($d1.0, $offset.1) == 4bv32;
+    assert {:tag "relationalPow2"} _b81 ==> ($offset.1 == 0bv32 && $d1.0 == 16bv32) || BV32_MUL($d1.0, $offset.1) == 8bv32;
+    assert {:tag "relationalPow2"} _b80 ==> BV32_MUL($d1.0, $offset.1) == 8bv32;
+    assert {:tag "relationalPow2"} _b79 ==> ($offset.1 == 0bv32 && $d1.0 == 32bv32) || BV32_MUL($d1.0, $offset.1) == 16bv32;
+    assert {:tag "relationalPow2"} _b78 ==> BV32_MUL($d1.0, $offset.1) == 16bv32;
+    assert {:tag "relationalPow2"} _b77 ==> ($offset.1 == 0bv32 && $d1.0 == 64bv32) || BV32_MUL($d1.0, $offset.1) == 32bv32;
+    assert {:tag "relationalPow2"} _b76 ==> BV32_MUL($d1.0, $offset.1) == 32bv32;
+    assert {:tag "relationalPow2"} _b75 ==> ($offset.1 == 0bv32 && $d1.0 == 128bv32) || BV32_MUL($d1.0, $offset.1) == 64bv32;
+    assert {:tag "relationalPow2"} _b74 ==> BV32_MUL($d1.0, $offset.1) == 64bv32;
+    assert {:tag "relationalPow2"} _b73 ==> ($offset.1 == 0bv32 && $d1.0 == 256bv32) || BV32_MUL($d1.0, $offset.1) == 128bv32;
+    assert {:tag "relationalPow2"} _b72 ==> BV32_MUL($d1.0, $offset.1) == 128bv32;
+    assert {:tag "relationalPow2"} _b71 ==> ($offset.1 == 0bv32 && $d1.0 == 512bv32) || BV32_MUL($d1.0, $offset.1) == 256bv32;
+    assert {:tag "relationalPow2"} _b70 ==> BV32_MUL($d1.0, $offset.1) == 256bv32;
+    assert {:tag "relationalPow2"} _b69 ==> ($offset.1 == 0bv32 && $d1.0 == 1024bv32) || BV32_MUL($d1.0, $offset.1) == 512bv32;
+    assert {:tag "relationalPow2"} _b68 ==> BV32_MUL($d1.0, $offset.1) == 512bv32;
+    assert {:tag "relationalPow2"} _b67 ==> ($offset.1 == 0bv32 && $d1.0 == 2048bv32) || BV32_MUL($d1.0, $offset.1) == 1024bv32;
+    assert {:tag "relationalPow2"} _b66 ==> BV32_MUL($d1.0, $offset.1) == 1024bv32;
+    assert {:tag "relationalPow2"} _b65 ==> ($offset.1 == 0bv32 && $d1.0 == 4096bv32) || BV32_MUL($d1.0, $offset.1) == 2048bv32;
+    assert {:tag "relationalPow2"} _b64 ==> BV32_MUL($d1.0, $offset.1) == 2048bv32;
+    assert {:tag "relationalPow2"} _b63 ==> ($offset.1 == 0bv32 && $d1.0 == 8192bv32) || BV32_MUL($d1.0, $offset.1) == 4096bv32;
+    assert {:tag "relationalPow2"} _b62 ==> BV32_MUL($d1.0, $offset.1) == 4096bv32;
+    assert {:tag "relationalPow2"} _b61 ==> ($offset.1 == 0bv32 && $d1.0 == 16384bv32) || BV32_MUL($d1.0, $offset.1) == 8192bv32;
+    assert {:tag "relationalPow2"} _b60 ==> BV32_MUL($d1.0, $offset.1) == 8192bv32;
+    assert {:tag "relationalPow2"} _b59 ==> ($offset.1 == 0bv32 && $d1.0 == 32768bv32) || BV32_MUL($d1.0, $offset.1) == 16384bv32;
+    assert {:tag "relationalPow2"} _b58 ==> BV32_MUL($d1.0, $offset.1) == 16384bv32;
+    assert {:tag "relationalPow2"} _b57 ==> ($offset.1 == 0bv32 && $d1.0 == 65536bv32) || BV32_MUL($d1.0, $offset.1) == 32768bv32;
+    assert {:tag "relationalPow2"} _b56 ==> BV32_MUL($d1.0, $offset.1) == 32768bv32;
     assert {:tag "pow2NotZero"} _b55 ==> v16 != 0bv32;
     assert {:tag "pow2"} _b54 ==> v16 == 0bv32 || BV32_AND(v16, BV32_SUB(v16, 1bv32)) == 0bv32;
-    assert {:tag "pow2NotZero"} _b53 ==> $d50.0 != 0bv32;
-    assert {:tag "pow2"} _b52 ==> $d50.0 == 0bv32 || BV32_AND($d50.0, BV32_SUB($d50.0, 1bv32)) == 0bv32;
+    assert {:tag "pow2NotZero"} _b53 ==> $d1.0 != 0bv32;
+    assert {:tag "pow2"} _b52 ==> $d1.0 == 0bv32 || BV32_AND($d1.0, BV32_SUB($d1.0, 1bv32)) == 0bv32;
     assert {:tag "pow2NotZero"} _b51 ==> $offset.1 != 0bv32;
     assert {:tag "pow2"} _b50 ==> $offset.1 == 0bv32 || BV32_AND($offset.1, BV32_SUB($offset.1, 1bv32)) == 0bv32;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ14scanBestKernelPfS_iE4temp ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ14scanBestKernelPfS_iE4temp ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$_ZZ14scanBestKernelPfS_iE4temp ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
-    assert {:tag "loopBound"} {:thread 1} _b9 ==> BV32_UGE($d50.0, 1bv32);
-    assert {:tag "loopBound"} {:thread 1} _b8 ==> BV32_ULE($d50.0, 1bv32);
-    assert {:tag "loopBound"} {:thread 1} _b7 ==> BV32_SGE($d50.0, 1bv32);
-    assert {:tag "loopBound"} {:thread 1} _b6 ==> BV32_SLE($d50.0, 1bv32);
-    assert {:tag "guardNonNeg"} {:thread 1} _b5 ==> BV32_SLE(0bv32, $d50.0);
+    assert {:tag "loopBound"} {:thread 1} _b9 ==> BV32_UGE($d1.0, 1bv32);
+    assert {:tag "loopBound"} {:thread 1} _b8 ==> BV32_ULE($d1.0, 1bv32);
+    assert {:tag "loopBound"} {:thread 1} _b7 ==> BV32_SGE($d1.0, 1bv32);
+    assert {:tag "loopBound"} {:thread 1} _b6 ==> BV32_SLE($d1.0, 1bv32);
+    assert {:tag "guardNonNeg"} {:thread 1} _b5 ==> BV32_SLE(0bv32, $d1.0);
     assert {:block_sourceloc} {:sourceloc_num 23} true;
-    v15 := BV32_SLT($d50.0, $n);
+    v15 := BV32_SLT($d1.0, $n);
     p4$1 := false;
     p4$2 := false;
     p5$1 := false;
@@ -388,8 +388,8 @@ implementation {:source_name "scanBestKernel"} {:kernel} $_Z14scanBestKernelPfS_
 
   __partitioned_block_$truebb2_1:
     call {:sourceloc_num 25} $bugle_barrier_duplicated_2(1bv1, 1bv1);
-    v17$1 := BV32_SLT(local_id_x$1, $d50.0);
-    v17$2 := BV32_SLT(local_id_x$2, $d50.0);
+    v17$1 := BV32_SLT(local_id_x$1, $d1.0);
+    v17$2 := BV32_SLT(local_id_x$2, $d1.0);
     p5$1 := (if v17$1 then v17$1 else p5$1);
     p5$2 := (if v17$2 then v17$2 else p5$2);
     v18$1 := (if p5$1 then BV32_SUB(BV32_MUL(v16, BV32_ADD(BV32_MUL(2bv32, local_id_x$1), 1bv32)), 1bv32) else v18$1);
@@ -432,9 +432,9 @@ implementation {:source_name "scanBestKernel"} {:kernel} $_Z14scanBestKernelPfS_
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$_ZZ14scanBestKernelPfS_iE4temp"} true;
     $$_ZZ14scanBestKernelPfS_iE4temp[1bv1][v21$1] := (if p5$1 then FADD32(v24$1, v22$1) else $$_ZZ14scanBestKernelPfS_iE4temp[1bv1][v21$1]);
     $$_ZZ14scanBestKernelPfS_iE4temp[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v21$2] := (if p5$2 then FADD32(v24$2, v22$2) else $$_ZZ14scanBestKernelPfS_iE4temp[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v21$2]);
-    $offset.1, $d50.0 := v16, BV32_MUL($d50.0, 2bv32);
+    $offset.1, $d1.0 := v16, BV32_MUL($d1.0, 2bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.51;
+    goto $9;
 
   __partitioned_block_$truebb_0:
     assume {:partition} v5;
@@ -474,7 +474,7 @@ implementation {:source_name "scanBestKernel"} {:kernel} $_Z14scanBestKernelPfS_
     $$_ZZ14scanBestKernelPfS_iE4temp[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v10$2] := (if p1$2 then FADD32(v12$2, v11$2) else $$_ZZ14scanBestKernelPfS_iE4temp[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v10$2]);
     $offset.0, $d.0 := v6, BV32_ASHR($d.0, 1bv32);
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

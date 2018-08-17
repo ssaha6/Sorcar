@@ -178,7 +178,7 @@ function {:bvbuiltin "bvsub"} BV32_SUB(bv32, bv32) : bv32;
 
 function {:bvbuiltin "bvult"} BV32_ULT(bv32, bv32) : bool;
 
-procedure {:source_name "ScanLargeArrays"} {:kernel} $ScanLargeArrays($block_size: bv32, $length: bv32);
+procedure {:source_name "ScanLargeArrays"} {:kernel} $ScanLargeArrays($block_size: bv32, $__bugle_length: bv32);
   requires {:sourceloc_num 0} {:thread 1} (if $block_size == 256bv32 then 1bv1 else 0bv1) != 0bv1;
   requires !_READ_HAS_OCCURRED_$$output && !_WRITE_HAS_OCCURRED_$$output && !_ATOMIC_HAS_OCCURRED_$$output;
   requires !_READ_HAS_OCCURRED_$$input && !_WRITE_HAS_OCCURRED_$$input && !_ATOMIC_HAS_OCCURRED_$$input;
@@ -219,15 +219,12 @@ procedure {:source_name "ScanLargeArrays"} {:kernel} $ScanLargeArrays($block_siz
 
 
 
-implementation {:source_name "ScanLargeArrays"} {:kernel} $ScanLargeArrays($block_size: bv32, $length: bv32)
+implementation {:source_name "ScanLargeArrays"} {:kernel} $ScanLargeArrays($block_size: bv32, $__bugle_length: bv32)
 {
   var $offset.0: bv32;
   var $d.0: bv32;
   var $offset.1: bv32;
   var $d1.0: bv32;
-  var v6$1: bool;
-  var v6$2: bool;
-  var v11: bool;
   var v0$1: bv32;
   var v0$2: bv32;
   var v1$1: bv32;
@@ -239,6 +236,8 @@ implementation {:source_name "ScanLargeArrays"} {:kernel} $ScanLargeArrays($bloc
   var v4$1: bv32;
   var v4$2: bv32;
   var v5: bool;
+  var v6$1: bool;
+  var v6$2: bool;
   var v7$1: bv32;
   var v7$2: bv32;
   var v8$1: bv32;
@@ -247,8 +246,7 @@ implementation {:source_name "ScanLargeArrays"} {:kernel} $ScanLargeArrays($bloc
   var v9$2: bv32;
   var v10$1: bv32;
   var v10$2: bv32;
-  var v19$1: bool;
-  var v19$2: bool;
+  var v11: bool;
   var v12: bv32;
   var v13$1: bool;
   var v13$2: bool;
@@ -262,6 +260,8 @@ implementation {:source_name "ScanLargeArrays"} {:kernel} $ScanLargeArrays($bloc
   var v17$2: bv32;
   var v18$1: bv32;
   var v18$2: bv32;
+  var v19$1: bool;
+  var v19$2: bool;
   var v20$1: bv32;
   var v20$2: bv32;
   var v21$1: bv32;
@@ -478,10 +478,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  (  BV32_SLE($d1.0, 1bv
     p4$2 := (if v19$2 then v19$2 else p4$2);
     p5$1 := (if !v19$1 then !v19$1 else p5$1);
     p5$2 := (if !v19$2 then !v19$2 else p5$2);
-    call {:sourceloc} {:sourceloc_num 35} _LOG_READ_$$block(p4$1, BV32_MUL(2bv32, v0$1), $$block[1bv1][BV32_MUL(2bv32, v0$1)]);
     assume {:do_not_predicate} {:check_id "check_state_9"} {:captureState "check_state_9"} {:sourceloc} {:sourceloc_num 35} true;
-    call {:check_id "check_state_9"} {:sourceloc} {:sourceloc_num 35} _CHECK_READ_$$block(p4$2, BV32_MUL(2bv32, v0$2), $$block[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_MUL(2bv32, v0$2)]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$block"} true;
     v20$1 := (if p4$1 then $$block[1bv1][BV32_MUL(2bv32, v0$1)] else v20$1);
     v20$2 := (if p4$2 then $$block[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_MUL(2bv32, v0$2)] else v20$2);
     call {:sourceloc} {:sourceloc_num 36} _LOG_WRITE_$$output(p4$1, BV32_MUL(2bv32, v1$1), v20$1, $$output[BV32_MUL(2bv32, v1$1)]);
@@ -491,10 +488,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  (  BV32_SLE($d1.0, 1bv
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$output"} true;
     $$output[BV32_MUL(2bv32, v1$1)] := (if p4$1 then v20$1 else $$output[BV32_MUL(2bv32, v1$1)]);
     $$output[BV32_MUL(2bv32, v1$2)] := (if p4$2 then v20$2 else $$output[BV32_MUL(2bv32, v1$2)]);
-    call {:sourceloc} {:sourceloc_num 37} _LOG_READ_$$block(p4$1, BV32_ADD(BV32_MUL(2bv32, v0$1), 1bv32), $$block[1bv1][BV32_ADD(BV32_MUL(2bv32, v0$1), 1bv32)]);
     assume {:do_not_predicate} {:check_id "check_state_11"} {:captureState "check_state_11"} {:sourceloc} {:sourceloc_num 37} true;
-    call {:check_id "check_state_11"} {:sourceloc} {:sourceloc_num 37} _CHECK_READ_$$block(p4$2, BV32_ADD(BV32_MUL(2bv32, v0$2), 1bv32), $$block[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(2bv32, v0$2), 1bv32)]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$block"} true;
     v21$1 := (if p4$1 then $$block[1bv1][BV32_ADD(BV32_MUL(2bv32, v0$1), 1bv32)] else v21$1);
     v21$2 := (if p4$2 then $$block[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(2bv32, v0$2), 1bv32)] else v21$2);
     call {:sourceloc} {:sourceloc_num 38} _LOG_WRITE_$$output(p4$1, BV32_ADD(BV32_MUL(2bv32, v1$1), 1bv32), v21$1, $$output[BV32_ADD(BV32_MUL(2bv32, v1$1), 1bv32)]);
@@ -504,10 +498,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  (  BV32_SLE($d1.0, 1bv
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$output"} true;
     $$output[BV32_ADD(BV32_MUL(2bv32, v1$1), 1bv32)] := (if p4$1 then v21$1 else $$output[BV32_ADD(BV32_MUL(2bv32, v1$1), 1bv32)]);
     $$output[BV32_ADD(BV32_MUL(2bv32, v1$2), 1bv32)] := (if p4$2 then v21$2 else $$output[BV32_ADD(BV32_MUL(2bv32, v1$2), 1bv32)]);
-    call {:sourceloc} {:sourceloc_num 40} _LOG_READ_$$block(p5$1, BV32_MUL(2bv32, v0$1), $$block[1bv1][BV32_MUL(2bv32, v0$1)]);
     assume {:do_not_predicate} {:check_id "check_state_5"} {:captureState "check_state_5"} {:sourceloc} {:sourceloc_num 40} true;
-    call {:check_id "check_state_5"} {:sourceloc} {:sourceloc_num 40} _CHECK_READ_$$block(p5$2, BV32_MUL(2bv32, v0$2), $$block[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_MUL(2bv32, v0$2)]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$block"} true;
     v22$1 := (if p5$1 then $$block[1bv1][BV32_MUL(2bv32, v0$1)] else v22$1);
     v22$2 := (if p5$2 then $$block[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_MUL(2bv32, v0$2)] else v22$2);
     call {:sourceloc} {:sourceloc_num 41} _LOG_WRITE_$$output(p5$1, BV32_MUL(2bv32, v1$1), v22$1, $$output[BV32_MUL(2bv32, v1$1)]);
@@ -517,10 +508,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  (  BV32_SLE($d1.0, 1bv
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$output"} true;
     $$output[BV32_MUL(2bv32, v1$1)] := (if p5$1 then v22$1 else $$output[BV32_MUL(2bv32, v1$1)]);
     $$output[BV32_MUL(2bv32, v1$2)] := (if p5$2 then v22$2 else $$output[BV32_MUL(2bv32, v1$2)]);
-    call {:sourceloc} {:sourceloc_num 42} _LOG_READ_$$block(p5$1, BV32_ADD(BV32_MUL(2bv32, v0$1), 1bv32), $$block[1bv1][BV32_ADD(BV32_MUL(2bv32, v0$1), 1bv32)]);
     assume {:do_not_predicate} {:check_id "check_state_7"} {:captureState "check_state_7"} {:sourceloc} {:sourceloc_num 42} true;
-    call {:check_id "check_state_7"} {:sourceloc} {:sourceloc_num 42} _CHECK_READ_$$block(p5$2, BV32_ADD(BV32_MUL(2bv32, v0$2), 1bv32), $$block[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(2bv32, v0$2), 1bv32)]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$block"} true;
     v23$1 := (if p5$1 then $$block[1bv1][BV32_ADD(BV32_MUL(2bv32, v0$1), 1bv32)] else v23$1);
     v23$2 := (if p5$2 then $$block[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(2bv32, v0$2), 1bv32)] else v23$2);
     call {:sourceloc} {:sourceloc_num 43} _LOG_WRITE_$$output(p5$1, BV32_ADD(BV32_MUL(2bv32, v1$1), 1bv32), v23$1, $$output[BV32_ADD(BV32_MUL(2bv32, v1$1), 1bv32)]);

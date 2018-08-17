@@ -43,7 +43,15 @@ var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source
 
 var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$Dst: bool;
 
+const $arrayId$$Dst: arrayId;
+
+axiom $arrayId$$Dst == 1bv3;
+
 axiom {:array_info "$$0"} {:elem_width 8} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
+
+const $arrayId$$0: arrayId;
+
+axiom $arrayId$$0 == 2bv3;
 
 axiom {:array_info "$$TexSrc"} {:global} {:elem_width 8} {:source_name "TexSrc"} {:source_elem_width 96} {:source_dimensions "1"} true;
 
@@ -52,6 +60,10 @@ var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 96} {:source_
 var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 96} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$TexSrc: bool;
 
 var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 96} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$TexSrc: bool;
+
+const $arrayId$$TexSrc: arrayId;
+
+axiom $arrayId$$TexSrc == 3bv3;
 
 var {:source_name "CurBlockLocal1"} {:group_shared} $$CurBlockLocal1: [bv1][bv32]bv32;
 
@@ -63,11 +75,19 @@ var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:
 
 var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$CurBlockLocal1: bool;
 
+const $arrayId$$CurBlockLocal1: arrayId;
+
+axiom $arrayId$$CurBlockLocal1 == 4bv3;
+
 var {:source_name "DCTv8matrix"} {:constant} $$DCTv8matrix$1: [bv32]bv32;
 
 var {:source_name "DCTv8matrix"} {:constant} $$DCTv8matrix$2: [bv32]bv32;
 
 axiom {:array_info "$$DCTv8matrix"} {:constant} {:elem_width 32} {:source_name "DCTv8matrix"} {:source_elem_width 32} {:source_dimensions "64"} true;
+
+const $arrayId$$DCTv8matrix: arrayId;
+
+axiom $arrayId$$DCTv8matrix == 5bv3;
 
 var {:source_name "CurBlockLocal2"} {:group_shared} $$CurBlockLocal2: [bv1][bv32]bv32;
 
@@ -78,6 +98,33 @@ var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:
 var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$CurBlockLocal2: bool;
 
 var {:race_checking} {:group_shared} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$CurBlockLocal2: bool;
+
+const $arrayId$$CurBlockLocal2: arrayId;
+
+axiom $arrayId$$CurBlockLocal2 == 6bv3;
+
+type ptr = bv32;
+
+type arrayId = bv3;
+
+function {:inline true} MKPTR(base: arrayId, offset: bv32) : ptr
+{
+  base ++ offset[29:0]
+}
+
+function {:inline true} base#MKPTR(p: ptr) : arrayId
+{
+  p[32:29]
+}
+
+function {:inline true} offset#MKPTR(p: ptr) : bv32
+{
+  0bv3 ++ p[29:0]
+}
+
+const $arrayId$$null$: arrayId;
+
+axiom $arrayId$$null$ == 0bv3;
 
 const _WATCHED_OFFSET: bv32;
 
@@ -184,14 +231,12 @@ implementation {:source_name "CUDAkernel1IDCT"} {:kernel} $_Z15CUDAkernel1IDCTPf
   var v0$2: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
-  var v4$1: bv8;
-  var v4$2: bv8;
   var v2$1: bv8;
   var v2$2: bv8;
   var v3$1: bv8;
   var v3$2: bv8;
-  var v12$1: bv8;
-  var v12$2: bv8;
+  var v4$1: bv8;
+  var v4$2: bv8;
   var v5$1: bv8;
   var v5$2: bv8;
   var v6$1: bv8;
@@ -206,46 +251,24 @@ implementation {:source_name "CUDAkernel1IDCT"} {:kernel} $_Z15CUDAkernel1IDCTPf
   var v10$2: bv8;
   var v11$1: bv8;
   var v11$2: bv8;
+  var v12$1: bv8;
+  var v12$2: bv8;
   var v13$1: bv8;
   var v13$2: bv8;
-  var v14$1: bv8;
-  var v14$2: bv8;
-  var v15$1: bv8;
-  var v15$2: bv8;
-  var v16$1: bv8;
-  var v16$2: bv8;
-  var v17$1: bv8;
-  var v17$2: bv8;
-  var v18$1: bv8;
-  var v18$2: bv8;
-  var v19$1: bv8;
-  var v19$2: bv8;
-  var v20$1: bv8;
-  var v20$2: bv8;
-  var v21$1: bv8;
-  var v21$2: bv8;
-  var v22$1: bv8;
-  var v22$2: bv8;
-  var v23$1: bv8;
-  var v23$2: bv8;
-  var v24$1: bv8;
-  var v24$2: bv8;
-  var v25$1: bv8;
-  var v25$2: bv8;
-  var v26$1: bv32;
-  var v26$2: bv32;
-  var v27: bool;
-  var v28$1: bv32;
-  var v28$2: bv32;
-  var v29$1: bv32;
-  var v29$2: bv32;
-  var v30: bool;
-  var v31$1: bv32;
-  var v31$2: bv32;
-  var v32$1: bv32;
-  var v32$2: bv32;
-  var v33$1: bv32;
-  var v33$2: bv32;
+  var v14$1: bv32;
+  var v14$2: bv32;
+  var v15: bool;
+  var v16$1: bv32;
+  var v16$2: bv32;
+  var v17$1: bv32;
+  var v17$2: bv32;
+  var v18: bool;
+  var v19$1: bv32;
+  var v19$2: bv32;
+  var v20$1: bv32;
+  var v20$2: bv32;
+  var v21$1: bv32;
+  var v21$2: bv32;
 
 
   __partitioned_block_$0_0:
@@ -289,43 +312,19 @@ implementation {:source_name "CUDAkernel1IDCT"} {:kernel} $_Z15CUDAkernel1IDCTPf
     havoc v13$1, v13$2;
     $$0$11bv32$1 := v13$1;
     $$0$11bv32$2 := v13$2;
-    v14$1 := $$0$0bv32$1;
-    v14$2 := $$0$0bv32$2;
-    v15$1 := $$0$1bv32$1;
-    v15$2 := $$0$1bv32$2;
-    v16$1 := $$0$2bv32$1;
-    v16$2 := $$0$2bv32$2;
-    v17$1 := $$0$3bv32$1;
-    v17$2 := $$0$3bv32$2;
-    v18$1 := $$0$4bv32$1;
-    v18$2 := $$0$4bv32$2;
-    v19$1 := $$0$5bv32$1;
-    v19$2 := $$0$5bv32$2;
-    v20$1 := $$0$6bv32$1;
-    v20$2 := $$0$6bv32$2;
-    v21$1 := $$0$7bv32$1;
-    v21$2 := $$0$7bv32$2;
-    v22$1 := $$0$8bv32$1;
-    v22$2 := $$0$8bv32$2;
-    v23$1 := $$0$9bv32$1;
-    v23$2 := $$0$9bv32$2;
-    v24$1 := $$0$10bv32$1;
-    v24$2 := $$0$10bv32$2;
-    v25$1 := $$0$11bv32$1;
-    v25$2 := $$0$11bv32$2;
-    call {:sourceloc_num 38} v26$1, v26$2 := $_Z5tex2DIfET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(v17$1 ++ v16$1 ++ v15$1 ++ v14$1, v21$1 ++ v20$1 ++ v19$1 ++ v18$1, v25$1 ++ v24$1 ++ v23$1 ++ v22$1, FADD32(SI32_TO_FP32(BV32_ADD(BV32_SHL(v0$1, 3bv32), local_id_x$1)), 1056964608bv32), FADD32(SI32_TO_FP32(BV32_ADD(BV32_SHL(v1$1, 3bv32), local_id_y$1)), 1056964608bv32), v17$2 ++ v16$2 ++ v15$2 ++ v14$2, v21$2 ++ v20$2 ++ v19$2 ++ v18$2, v25$2 ++ v24$2 ++ v23$2 ++ v22$2, FADD32(SI32_TO_FP32(BV32_ADD(BV32_SHL(v0$2, 3bv32), local_id_x$2)), 1056964608bv32), FADD32(SI32_TO_FP32(BV32_ADD(BV32_SHL(v1$2, 3bv32), local_id_y$2)), 1056964608bv32));
+    call {:sourceloc_num 26} v14$1, v14$2 := $_Z5tex2DIfET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(MKPTR($arrayId$$0, 0bv32), FADD32(SI32_TO_FP32(BV32_ADD(BV32_SHL(v0$1, 3bv32), local_id_x$1)), 1056964608bv32), FADD32(SI32_TO_FP32(BV32_ADD(BV32_SHL(v1$1, 3bv32), local_id_y$1)), 1056964608bv32), FADD32(SI32_TO_FP32(BV32_ADD(BV32_SHL(v0$2, 3bv32), local_id_x$2)), 1056964608bv32), FADD32(SI32_TO_FP32(BV32_ADD(BV32_SHL(v1$2, 3bv32), local_id_y$2)), 1056964608bv32));
     assume {:captureState "call_return_state_0"} {:procedureName "$_Z5tex2DIfET_7textureIS0_Li2EL19cudaTextureReadMode0EEff"} true;
-    call {:sourceloc} {:sourceloc_num 39} _LOG_WRITE_$$CurBlockLocal1(true, BV32_ADD(BV32_SHL(local_id_y$1, 3bv32), local_id_x$1), v26$1, $$CurBlockLocal1[1bv1][BV32_ADD(BV32_SHL(local_id_y$1, 3bv32), local_id_x$1)]);
+    call {:sourceloc} {:sourceloc_num 27} _LOG_WRITE_$$CurBlockLocal1(true, BV32_ADD(BV32_SHL(local_id_y$1, 3bv32), local_id_x$1), v14$1, $$CurBlockLocal1[1bv1][BV32_ADD(BV32_SHL(local_id_y$1, 3bv32), local_id_x$1)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$CurBlockLocal1(true, BV32_ADD(BV32_SHL(local_id_y$2, 3bv32), local_id_x$2));
-    assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 39} true;
-    call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 39} _CHECK_WRITE_$$CurBlockLocal1(true, BV32_ADD(BV32_SHL(local_id_y$2, 3bv32), local_id_x$2), v26$2);
+    assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 27} true;
+    call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 27} _CHECK_WRITE_$$CurBlockLocal1(true, BV32_ADD(BV32_SHL(local_id_y$2, 3bv32), local_id_x$2), v14$2);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$CurBlockLocal1"} true;
-    $$CurBlockLocal1[1bv1][BV32_ADD(BV32_SHL(local_id_y$1, 3bv32), local_id_x$1)] := v26$1;
-    $$CurBlockLocal1[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_SHL(local_id_y$2, 3bv32), local_id_x$2)] := v26$2;
+    $$CurBlockLocal1[1bv1][BV32_ADD(BV32_SHL(local_id_y$1, 3bv32), local_id_x$1)] := v14$1;
+    $$CurBlockLocal1[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_SHL(local_id_y$2, 3bv32), local_id_x$2)] := v14$2;
     goto __partitioned_block_$0_1;
 
   __partitioned_block_$0_1:
-    call {:sourceloc_num 40} $bugle_barrier_duplicated_0(1bv1, 1bv1);
+    call {:sourceloc_num 28} $bugle_barrier_duplicated_0(1bv1, 1bv1);
     $curelem.0$1, $DCTv8matrixIndex.0$1, $CurBlockLocal1Index.0$1, $i.0 := 0bv32, BV32_SHL(local_id_y$1, 3bv32), local_id_x$1, 0bv32;
     $curelem.0$2, $DCTv8matrixIndex.0$2, $CurBlockLocal1Index.0$2 := 0bv32, BV32_SHL(local_id_y$2, 3bv32), local_id_x$2;
     assume {:captureState "loop_entry_state_1_0"} true;
@@ -353,23 +352,23 @@ implementation {:source_name "CUDAkernel1IDCT"} {:kernel} $_Z15CUDAkernel1IDCTPf
 assert  my_inv (  (  BV32_AND(BV32_SUB(8bv32, 1bv32), $CurBlockLocal1Index.0$1) == BV32_AND(BV32_SUB(8bv32, 1bv32), local_id_x$1) )  && (  BV32_AND(BV32_SUB(8bv32, 1bv32), $CurBlockLocal1Index.0$2) == BV32_AND(BV32_SUB(8bv32, 1bv32), local_id_x$2) ) ,  (  BV32_SLE(0bv32, $i.0) ) ,  (  BV32_SLE($i.0, 0bv32) ) ,  (  BV32_SGE($i.0, 0bv32) ) ,  (  BV32_ULE($i.0, 0bv32) ) ,  (  BV32_UGE($i.0, 0bv32) ) ,  true ,  true ,  true ,  true ,  true ,  (  $DCTv8matrixIndex.0$1 == 0bv32 || BV32_AND($DCTv8matrixIndex.0$1, BV32_SUB($DCTv8matrixIndex.0$1, 1bv32)) == 0bv32 ) ,  (  $DCTv8matrixIndex.0$1 != 0bv32 ) ,  (  $DCTv8matrixIndex.0$2 == 0bv32 || BV32_AND($DCTv8matrixIndex.0$2, BV32_SUB($DCTv8matrixIndex.0$2, 1bv32)) == 0bv32 ) ,  (  $DCTv8matrixIndex.0$2 != 0bv32 ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true  ); 
 
 
-    assert {:block_sourceloc} {:sourceloc_num 41} true;
-    v27 := BV32_SLT($i.0, 8bv32);
+    assert {:block_sourceloc} {:sourceloc_num 29} true;
+    v15 := BV32_SLT($i.0, 8bv32);
     goto $truebb, __partitioned_block_$falsebb_0;
 
   __partitioned_block_$falsebb_0:
-    assume {:partition} !v27;
-    call {:sourceloc} {:sourceloc_num 47} _LOG_WRITE_$$CurBlockLocal2(true, BV32_ADD(BV32_SHL(local_id_y$1, 3bv32), local_id_x$1), $curelem.0$1, $$CurBlockLocal2[1bv1][BV32_ADD(BV32_SHL(local_id_y$1, 3bv32), local_id_x$1)]);
+    assume {:partition} !v15;
+    call {:sourceloc} {:sourceloc_num 35} _LOG_WRITE_$$CurBlockLocal2(true, BV32_ADD(BV32_SHL(local_id_y$1, 3bv32), local_id_x$1), $curelem.0$1, $$CurBlockLocal2[1bv1][BV32_ADD(BV32_SHL(local_id_y$1, 3bv32), local_id_x$1)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$CurBlockLocal2(true, BV32_ADD(BV32_SHL(local_id_y$2, 3bv32), local_id_x$2));
-    assume {:do_not_predicate} {:check_id "check_state_1"} {:captureState "check_state_1"} {:sourceloc} {:sourceloc_num 47} true;
-    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 47} _CHECK_WRITE_$$CurBlockLocal2(true, BV32_ADD(BV32_SHL(local_id_y$2, 3bv32), local_id_x$2), $curelem.0$2);
+    assume {:do_not_predicate} {:check_id "check_state_1"} {:captureState "check_state_1"} {:sourceloc} {:sourceloc_num 35} true;
+    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 35} _CHECK_WRITE_$$CurBlockLocal2(true, BV32_ADD(BV32_SHL(local_id_y$2, 3bv32), local_id_x$2), $curelem.0$2);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$CurBlockLocal2"} true;
     $$CurBlockLocal2[1bv1][BV32_ADD(BV32_SHL(local_id_y$1, 3bv32), local_id_x$1)] := $curelem.0$1;
     $$CurBlockLocal2[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_SHL(local_id_y$2, 3bv32), local_id_x$2)] := $curelem.0$2;
     goto __partitioned_block_$falsebb_1;
 
   __partitioned_block_$falsebb_1:
-    call {:sourceloc_num 48} $bugle_barrier_duplicated_1(1bv1, 1bv1);
+    call {:sourceloc_num 36} $bugle_barrier_duplicated_1(1bv1, 1bv1);
     $curelem.1$1, $DCTv8matrixIndex.1$1, $CurBlockLocal2Index.0$1, $i1.0 := 0bv32, BV32_SHL(local_id_x$1, 3bv32), BV32_SHL(local_id_y$1, 3bv32), 0bv32;
     $curelem.1$2, $DCTv8matrixIndex.1$2, $CurBlockLocal2Index.0$2 := 0bv32, BV32_SHL(local_id_x$2, 3bv32), BV32_SHL(local_id_y$2, 3bv32);
     assume {:captureState "loop_entry_state_0_0"} true;
@@ -399,66 +398,63 @@ assert  my_inv (  (  BV32_AND(BV32_SUB(8bv32, 1bv32), $CurBlockLocal1Index.0$1) 
 assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  (  BV32_SLE(0bv32, $i1.0) ) ,  (  BV32_SLE($i1.0, 0bv32) ) ,  (  BV32_SGE($i1.0, 0bv32) ) ,  (  BV32_ULE($i1.0, 0bv32) ) ,  (  BV32_UGE($i1.0, 0bv32) ) ,  true ,  true ,  true ,  true ,  (  $DCTv8matrixIndex.1$1 == 0bv32 || BV32_AND($DCTv8matrixIndex.1$1, BV32_SUB($DCTv8matrixIndex.1$1, 1bv32)) == 0bv32 ) ,  (  $DCTv8matrixIndex.1$1 != 0bv32 ) ,  (  $DCTv8matrixIndex.1$2 == 0bv32 || BV32_AND($DCTv8matrixIndex.1$2, BV32_SUB($DCTv8matrixIndex.1$2, 1bv32)) == 0bv32 ) ,  (  $DCTv8matrixIndex.1$2 != 0bv32 ) ,  (  $CurBlockLocal2Index.0$1 == 0bv32 || BV32_AND($CurBlockLocal2Index.0$1, BV32_SUB($CurBlockLocal2Index.0$1, 1bv32)) == 0bv32 ) ,  (  $CurBlockLocal2Index.0$1 != 0bv32 ) ,  (  $CurBlockLocal2Index.0$2 == 0bv32 || BV32_AND($CurBlockLocal2Index.0$2, BV32_SUB($CurBlockLocal2Index.0$2, 1bv32)) == 0bv32 ) ,  (  $CurBlockLocal2Index.0$2 != 0bv32 )  ); 
 
 
-    assert {:block_sourceloc} {:sourceloc_num 49} true;
-    v30 := BV32_SLT($i1.0, 8bv32);
+    assert {:block_sourceloc} {:sourceloc_num 37} true;
+    v18 := BV32_SLT($i1.0, 8bv32);
     goto $truebb0, __partitioned_block_$falsebb0_0;
 
   __partitioned_block_$falsebb0_0:
-    assume {:partition} !v30;
-    call {:sourceloc} {:sourceloc_num 55} _LOG_WRITE_$$CurBlockLocal1(true, BV32_ADD(BV32_SHL(local_id_y$1, 3bv32), local_id_x$1), $curelem.1$1, $$CurBlockLocal1[1bv1][BV32_ADD(BV32_SHL(local_id_y$1, 3bv32), local_id_x$1)]);
+    assume {:partition} !v18;
+    call {:sourceloc} {:sourceloc_num 43} _LOG_WRITE_$$CurBlockLocal1(true, BV32_ADD(BV32_SHL(local_id_y$1, 3bv32), local_id_x$1), $curelem.1$1, $$CurBlockLocal1[1bv1][BV32_ADD(BV32_SHL(local_id_y$1, 3bv32), local_id_x$1)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$CurBlockLocal1(true, BV32_ADD(BV32_SHL(local_id_y$2, 3bv32), local_id_x$2));
-    assume {:do_not_predicate} {:check_id "check_state_2"} {:captureState "check_state_2"} {:sourceloc} {:sourceloc_num 55} true;
-    call {:check_id "check_state_2"} {:sourceloc} {:sourceloc_num 55} _CHECK_WRITE_$$CurBlockLocal1(true, BV32_ADD(BV32_SHL(local_id_y$2, 3bv32), local_id_x$2), $curelem.1$2);
+    assume {:do_not_predicate} {:check_id "check_state_2"} {:captureState "check_state_2"} {:sourceloc} {:sourceloc_num 43} true;
+    call {:check_id "check_state_2"} {:sourceloc} {:sourceloc_num 43} _CHECK_WRITE_$$CurBlockLocal1(true, BV32_ADD(BV32_SHL(local_id_y$2, 3bv32), local_id_x$2), $curelem.1$2);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$CurBlockLocal1"} true;
     $$CurBlockLocal1[1bv1][BV32_ADD(BV32_SHL(local_id_y$1, 3bv32), local_id_x$1)] := $curelem.1$1;
     $$CurBlockLocal1[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_SHL(local_id_y$2, 3bv32), local_id_x$2)] := $curelem.1$2;
     goto __partitioned_block_$falsebb0_1;
 
   __partitioned_block_$falsebb0_1:
-    call {:sourceloc_num 56} $bugle_barrier_duplicated_2(1bv1, 1bv1);
-    call {:sourceloc} {:sourceloc_num 57} _LOG_READ_$$CurBlockLocal1(true, BV32_ADD(BV32_SHL(local_id_y$1, 3bv32), local_id_x$1), $$CurBlockLocal1[1bv1][BV32_ADD(BV32_SHL(local_id_y$1, 3bv32), local_id_x$1)]);
-    assume {:do_not_predicate} {:check_id "check_state_3"} {:captureState "check_state_3"} {:sourceloc} {:sourceloc_num 57} true;
-    call {:check_id "check_state_3"} {:sourceloc} {:sourceloc_num 57} _CHECK_READ_$$CurBlockLocal1(true, BV32_ADD(BV32_SHL(local_id_y$2, 3bv32), local_id_x$2), $$CurBlockLocal1[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_SHL(local_id_y$2, 3bv32), local_id_x$2)]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$CurBlockLocal1"} true;
-    v33$1 := $$CurBlockLocal1[1bv1][BV32_ADD(BV32_SHL(local_id_y$1, 3bv32), local_id_x$1)];
-    v33$2 := $$CurBlockLocal1[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_SHL(local_id_y$2, 3bv32), local_id_x$2)];
-    call {:sourceloc} {:sourceloc_num 58} _LOG_WRITE_$$Dst(true, BV32_ADD(BV32_MUL(BV32_ADD(BV32_SHL(v1$1, 3bv32), local_id_y$1), $ImgWidth), BV32_ADD(BV32_SHL(v0$1, 3bv32), local_id_x$1)), v33$1, $$Dst[BV32_ADD(BV32_MUL(BV32_ADD(BV32_SHL(v1$1, 3bv32), local_id_y$1), $ImgWidth), BV32_ADD(BV32_SHL(v0$1, 3bv32), local_id_x$1))]);
+    call {:sourceloc_num 44} $bugle_barrier_duplicated_2(1bv1, 1bv1);
+    assume {:do_not_predicate} {:check_id "check_state_3"} {:captureState "check_state_3"} {:sourceloc} {:sourceloc_num 45} true;
+    v21$1 := $$CurBlockLocal1[1bv1][BV32_ADD(BV32_SHL(local_id_y$1, 3bv32), local_id_x$1)];
+    v21$2 := $$CurBlockLocal1[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_SHL(local_id_y$2, 3bv32), local_id_x$2)];
+    call {:sourceloc} {:sourceloc_num 46} _LOG_WRITE_$$Dst(true, BV32_ADD(BV32_MUL(BV32_ADD(BV32_SHL(v1$1, 3bv32), local_id_y$1), $ImgWidth), BV32_ADD(BV32_SHL(v0$1, 3bv32), local_id_x$1)), v21$1, $$Dst[BV32_ADD(BV32_MUL(BV32_ADD(BV32_SHL(v1$1, 3bv32), local_id_y$1), $ImgWidth), BV32_ADD(BV32_SHL(v0$1, 3bv32), local_id_x$1))]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$Dst(true, BV32_ADD(BV32_MUL(BV32_ADD(BV32_SHL(v1$2, 3bv32), local_id_y$2), $ImgWidth), BV32_ADD(BV32_SHL(v0$2, 3bv32), local_id_x$2)));
-    assume {:do_not_predicate} {:check_id "check_state_4"} {:captureState "check_state_4"} {:sourceloc} {:sourceloc_num 58} true;
-    call {:check_id "check_state_4"} {:sourceloc} {:sourceloc_num 58} _CHECK_WRITE_$$Dst(true, BV32_ADD(BV32_MUL(BV32_ADD(BV32_SHL(v1$2, 3bv32), local_id_y$2), $ImgWidth), BV32_ADD(BV32_SHL(v0$2, 3bv32), local_id_x$2)), v33$2);
+    assume {:do_not_predicate} {:check_id "check_state_4"} {:captureState "check_state_4"} {:sourceloc} {:sourceloc_num 46} true;
+    call {:check_id "check_state_4"} {:sourceloc} {:sourceloc_num 46} _CHECK_WRITE_$$Dst(true, BV32_ADD(BV32_MUL(BV32_ADD(BV32_SHL(v1$2, 3bv32), local_id_y$2), $ImgWidth), BV32_ADD(BV32_SHL(v0$2, 3bv32), local_id_x$2)), v21$2);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$Dst"} true;
-    $$Dst[BV32_ADD(BV32_MUL(BV32_ADD(BV32_SHL(v1$1, 3bv32), local_id_y$1), $ImgWidth), BV32_ADD(BV32_SHL(v0$1, 3bv32), local_id_x$1))] := v33$1;
-    $$Dst[BV32_ADD(BV32_MUL(BV32_ADD(BV32_SHL(v1$2, 3bv32), local_id_y$2), $ImgWidth), BV32_ADD(BV32_SHL(v0$2, 3bv32), local_id_x$2))] := v33$2;
+    $$Dst[BV32_ADD(BV32_MUL(BV32_ADD(BV32_SHL(v1$1, 3bv32), local_id_y$1), $ImgWidth), BV32_ADD(BV32_SHL(v0$1, 3bv32), local_id_x$1))] := v21$1;
+    $$Dst[BV32_ADD(BV32_MUL(BV32_ADD(BV32_SHL(v1$2, 3bv32), local_id_y$2), $ImgWidth), BV32_ADD(BV32_SHL(v0$2, 3bv32), local_id_x$2))] := v21$2;
     return;
 
   $truebb0:
-    assume {:partition} v30;
-    assume {:do_not_predicate} {:check_id "check_state_5"} {:captureState "check_state_5"} {:sourceloc} {:sourceloc_num 51} true;
-    v31$1 := $$CurBlockLocal2[1bv1][$CurBlockLocal2Index.0$1];
-    v31$2 := $$CurBlockLocal2[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][$CurBlockLocal2Index.0$2];
-    v32$1 := $$DCTv8matrix$1[$DCTv8matrixIndex.1$1];
-    v32$2 := $$DCTv8matrix$2[$DCTv8matrixIndex.1$2];
-    $curelem.1$1, $DCTv8matrixIndex.1$1, $CurBlockLocal2Index.0$1, $i1.0 := FADD32($curelem.1$1, FMUL32(v31$1, v32$1)), BV32_ADD($DCTv8matrixIndex.1$1, 1bv32), BV32_ADD($CurBlockLocal2Index.0$1, 1bv32), BV32_ADD($i1.0, 1bv32);
-    $curelem.1$2, $DCTv8matrixIndex.1$2, $CurBlockLocal2Index.0$2 := FADD32($curelem.1$2, FMUL32(v31$2, v32$2)), BV32_ADD($DCTv8matrixIndex.1$2, 1bv32), BV32_ADD($CurBlockLocal2Index.0$2, 1bv32);
+    assume {:partition} v18;
+    assume {:do_not_predicate} {:check_id "check_state_5"} {:captureState "check_state_5"} {:sourceloc} {:sourceloc_num 39} true;
+    v19$1 := $$CurBlockLocal2[1bv1][$CurBlockLocal2Index.0$1];
+    v19$2 := $$CurBlockLocal2[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][$CurBlockLocal2Index.0$2];
+    v20$1 := $$DCTv8matrix$1[$DCTv8matrixIndex.1$1];
+    v20$2 := $$DCTv8matrix$2[$DCTv8matrixIndex.1$2];
+    $curelem.1$1, $DCTv8matrixIndex.1$1, $CurBlockLocal2Index.0$1, $i1.0 := FADD32($curelem.1$1, FMUL32(v19$1, v20$1)), BV32_ADD($DCTv8matrixIndex.1$1, 1bv32), BV32_ADD($CurBlockLocal2Index.0$1, 1bv32), BV32_ADD($i1.0, 1bv32);
+    $curelem.1$2, $DCTv8matrixIndex.1$2, $CurBlockLocal2Index.0$2 := FADD32($curelem.1$2, FMUL32(v19$2, v20$2)), BV32_ADD($DCTv8matrixIndex.1$2, 1bv32), BV32_ADD($CurBlockLocal2Index.0$2, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
     goto $5;
 
   $truebb:
-    assume {:partition} v27;
-    v28$1 := $$DCTv8matrix$1[$DCTv8matrixIndex.0$1];
-    v28$2 := $$DCTv8matrix$2[$DCTv8matrixIndex.0$2];
-    assume {:do_not_predicate} {:check_id "check_state_6"} {:captureState "check_state_6"} {:sourceloc} {:sourceloc_num 44} true;
-    v29$1 := $$CurBlockLocal1[1bv1][$CurBlockLocal1Index.0$1];
-    v29$2 := $$CurBlockLocal1[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][$CurBlockLocal1Index.0$2];
-    $curelem.0$1, $DCTv8matrixIndex.0$1, $CurBlockLocal1Index.0$1, $i.0 := FADD32($curelem.0$1, FMUL32(v28$1, v29$1)), BV32_ADD($DCTv8matrixIndex.0$1, 1bv32), BV32_ADD($CurBlockLocal1Index.0$1, 8bv32), BV32_ADD($i.0, 1bv32);
-    $curelem.0$2, $DCTv8matrixIndex.0$2, $CurBlockLocal1Index.0$2 := FADD32($curelem.0$2, FMUL32(v28$2, v29$2)), BV32_ADD($DCTv8matrixIndex.0$2, 1bv32), BV32_ADD($CurBlockLocal1Index.0$2, 8bv32);
+    assume {:partition} v15;
+    v16$1 := $$DCTv8matrix$1[$DCTv8matrixIndex.0$1];
+    v16$2 := $$DCTv8matrix$2[$DCTv8matrixIndex.0$2];
+    assume {:do_not_predicate} {:check_id "check_state_6"} {:captureState "check_state_6"} {:sourceloc} {:sourceloc_num 32} true;
+    v17$1 := $$CurBlockLocal1[1bv1][$CurBlockLocal1Index.0$1];
+    v17$2 := $$CurBlockLocal1[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][$CurBlockLocal1Index.0$2];
+    $curelem.0$1, $DCTv8matrixIndex.0$1, $CurBlockLocal1Index.0$1, $i.0 := FADD32($curelem.0$1, FMUL32(v16$1, v17$1)), BV32_ADD($DCTv8matrixIndex.0$1, 1bv32), BV32_ADD($CurBlockLocal1Index.0$1, 8bv32), BV32_ADD($i.0, 1bv32);
+    $curelem.0$2, $DCTv8matrixIndex.0$2, $CurBlockLocal1Index.0$2 := FADD32($curelem.0$2, FMUL32(v16$2, v17$2)), BV32_ADD($DCTv8matrixIndex.0$2, 1bv32), BV32_ADD($CurBlockLocal1Index.0$2, 8bv32);
     assume {:captureState "loop_back_edge_state_1_0"} true;
     goto $1;
 }
 
 
 
-procedure {:source_name "_Z5tex2DIfET_7textureIS0_Li2EL19cudaTextureReadMode0EEff"} $_Z5tex2DIfET_7textureIS0_Li2EL19cudaTextureReadMode0EEff($0$1: bv32, $1$1: bv32, $2$1: bv32, $3$1: bv32, $4$1: bv32, $0$2: bv32, $1$2: bv32, $2$2: bv32, $3$2: bv32, $4$2: bv32) returns ($ret$1: bv32, $ret$2: bv32);
+procedure {:source_name "_Z5tex2DIfET_7textureIS0_Li2EL19cudaTextureReadMode0EEff"} $_Z5tex2DIfET_7textureIS0_Li2EL19cudaTextureReadMode0EEff($0: ptr, $1$1: bv32, $2$1: bv32, $1$2: bv32, $2$2: bv32) returns ($ret$1: bv32, $ret$2: bv32);
 
 
 

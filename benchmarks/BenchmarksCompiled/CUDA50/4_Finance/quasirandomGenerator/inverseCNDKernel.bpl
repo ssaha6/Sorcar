@@ -93,15 +93,13 @@ function {:bvbuiltin "bvadd"} BV32_ADD(bv32, bv32) : bv32;
 
 function {:bvbuiltin "bvmul"} BV32_MUL(bv32, bv32) : bv32;
 
-function {:bvbuiltin "bvsub"} BV64_SUB(bv64, bv64) : bv64;
+function {:bvbuiltin "bvsub"} BV32_SUB(bv32, bv32) : bv32;
 
 function {:bvbuiltin "bvudiv"} BV32_UDIV(bv32, bv32) : bv32;
 
-function {:bvbuiltin "bvuge"} BV64_UGE(bv64, bv64) : bool;
+function {:bvbuiltin "bvuge"} BV32_UGE(bv32, bv32) : bool;
 
 function {:bvbuiltin "bvult"} BV32_ULT(bv32, bv32) : bool;
-
-function {:bvbuiltin "zero_extend 32"} BV32_ZEXT64(bv32) : bv64;
 
 procedure {:source_name "inverseCNDKernel"} {:kernel} $_Z16inverseCNDKernelPfPjj($pathN: bv32);
   requires !_READ_HAS_OCCURRED_$$d_Output && !_WRITE_HAS_OCCURRED_$$d_Output && !_ATOMIC_HAS_OCCURRED_$$d_Output;
@@ -145,66 +143,66 @@ implementation {:source_name "inverseCNDKernel"} {:kernel} $_Z16inverseCNDKernel
 {
   var $pos.0$1: bv32;
   var $pos.0$2: bv32;
-  var $negate.i.41.0$1: bv8;
-  var $negate.i.41.0$2: bv8;
-  var $x.addr.i.22.0$1: bv32;
-  var $x.addr.i.22.0$2: bv32;
-  var $z.i.40.0$1: bv32;
-  var $z.i.40.0$2: bv32;
-  var $cond.i.102$1: bv32;
-  var $cond.i.102$2: bv32;
-  var $pos6.0$1: bv32;
-  var $pos6.0$2: bv32;
-  var $x.addr.i.17.0$1: bv32;
-  var $x.addr.i.17.0$2: bv32;
+  var $negate.i21.0$1: bv8;
+  var $negate.i21.0$2: bv8;
+  var $.0$1: bv32;
+  var $.0$2: bv32;
+  var $z.i20.0$1: bv32;
+  var $z.i20.0$2: bv32;
+  var $0$1: bv32;
+  var $0$2: bv32;
+  var $pos1.0$1: bv32;
+  var $pos1.0$2: bv32;
+  var $.01$1: bv32;
+  var $.01$2: bv32;
   var $negate.i.0$1: bv8;
   var $negate.i.0$2: bv8;
   var $z.i.0$1: bv32;
   var $z.i.0$2: bv32;
-  var $cond.i$1: bv32;
-  var $cond.i$2: bv32;
-  var v1: bv32;
-  var v5$1: bool;
-  var v5$2: bool;
+  var $1$1: bv32;
+  var $1$2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
+  var v1: bv32;
   var v2: bool;
   var v3$1: bool;
   var v3$2: bool;
-  var v21$1: bv32;
-  var v21$2: bv32;
-  var v20$1: bv32;
-  var v20$2: bv32;
   var v4$1: bv32;
   var v4$2: bv32;
-  var v11$1: bv32;
-  var v11$2: bv32;
-  var v10$1: bv32;
-  var v10$2: bv32;
-  var v9$1: bv32;
-  var v9$2: bv32;
+  var v5$1: bool;
+  var v5$2: bool;
   var v6$1: bv32;
   var v6$2: bv32;
   var v7$1: bv32;
   var v7$2: bv32;
   var v8$1: bool;
   var v8$2: bool;
-  var v13$1: bool;
-  var v13$2: bool;
+  var v9$1: bv32;
+  var v9$2: bv32;
+  var v10$1: bv32;
+  var v10$2: bv32;
+  var v11$1: bv32;
+  var v11$2: bv32;
   var v12$1: bool;
   var v12$2: bool;
+  var v13$1: bool;
+  var v13$2: bool;
   var v14$1: bv32;
   var v14$2: bv32;
   var v15$1: bool;
   var v15$2: bool;
-  var v19$1: bv32;
-  var v19$2: bv32;
-  var v17$1: bv32;
-  var v17$2: bv32;
-  var v16$1: bv32;
-  var v16$2: bv32;
   var v18$1: bool;
   var v18$2: bool;
+  var v16$1: bv32;
+  var v16$2: bv32;
+  var v17$1: bv32;
+  var v17$2: bv32;
+  var v19$1: bv32;
+  var v19$2: bv32;
+  var v20$1: bv32;
+  var v20$2: bv32;
+  var v21$1: bv32;
+  var v21$2: bv32;
   var v22$1: bool;
   var v22$2: bool;
   var p0$1: bool;
@@ -245,7 +243,7 @@ implementation {:source_name "inverseCNDKernel"} {:kernel} $_Z16inverseCNDKernel
   var p17$2: bool;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_MUL(group_size_x, group_id_x$1), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_size_x, group_id_x$2), local_id_x$2);
     v1 := BV32_MUL(group_size_x, num_groups_x);
@@ -258,34 +256,34 @@ implementation {:source_name "inverseCNDKernel"} {:kernel} $_Z16inverseCNDKernel
 
   $falsebb:
     assume {:partition} !v2;
-    $pos6.0$1 := v0$1;
-    $pos6.0$2 := v0$2;
+    $pos1.0$1 := v0$1;
+    $pos1.0$2 := v0$2;
     p9$1 := true;
     p9$2 := true;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.7;
+    goto $14;
 
-  $for.cond.7:
+  $14:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b16 ==> _WRITE_HAS_OCCURRED_$$d_Output ==> BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), v0$1);
     assert {:do_not_predicate} {:tag "accessOnlyIfEnabledInEnclosingScopes"} {:thread 1} _b7 ==> _WRITE_HAS_OCCURRED_$$d_Output ==> MKPTR($arrayId$$d_Input, 0bv32) == MKPTR($arrayId$$null$, 0bv32);
-    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 1} _b6 ==> MKPTR($arrayId$$d_Input, 0bv32) == MKPTR($arrayId$$null$, 0bv32) && BV32_ULT($pos6.0$1, $pathN) ==> p9$1;
-    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 2} _b6 ==> MKPTR($arrayId$$d_Input, 0bv32) == MKPTR($arrayId$$null$, 0bv32) && BV32_ULT($pos6.0$2, $pathN) ==> p9$2;
+    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 1} _b6 ==> MKPTR($arrayId$$d_Input, 0bv32) == MKPTR($arrayId$$null$, 0bv32) && BV32_ULT($pos1.0$1, $pathN) ==> p9$1;
+    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 2} _b6 ==> MKPTR($arrayId$$d_Input, 0bv32) == MKPTR($arrayId$$null$, 0bv32) && BV32_ULT($pos1.0$2, $pathN) ==> p9$2;
     assert {:tag "conditionsImpliedByEnabledness"} {:thread 1} p9$1 ==> _b5 ==> p9$1 ==> MKPTR($arrayId$$d_Input, 0bv32) == MKPTR($arrayId$$null$, 0bv32);
     assert {:tag "conditionsImpliedByEnabledness"} {:thread 2} p9$2 ==> _b5 ==> p9$2 ==> MKPTR($arrayId$$d_Input, 0bv32) == MKPTR($arrayId$$null$, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} p9$1 ==> _b4 ==> BV32_UGE($pos6.0$1, v0$1);
-    assert {:tag "loopBound"} {:thread 2} p9$2 ==> _b4 ==> BV32_UGE($pos6.0$2, v0$2);
-    assert {:tag "loopBound"} {:thread 1} p9$1 ==> _b3 ==> BV32_ULE($pos6.0$1, v0$1);
-    assert {:tag "loopBound"} {:thread 2} p9$2 ==> _b3 ==> BV32_ULE($pos6.0$2, v0$2);
-    assert {:tag "loopBound"} {:thread 1} p9$1 ==> _b2 ==> BV32_SGE($pos6.0$1, v0$1);
-    assert {:tag "loopBound"} {:thread 2} p9$2 ==> _b2 ==> BV32_SGE($pos6.0$2, v0$2);
-    assert {:tag "loopBound"} {:thread 1} p9$1 ==> _b1 ==> BV32_SLE($pos6.0$1, v0$1);
-    assert {:tag "loopBound"} {:thread 2} p9$2 ==> _b1 ==> BV32_SLE($pos6.0$2, v0$2);
-    assert {:tag "loopCounterIsStrided"} {:thread 1} p9$1 ==> _b0 ==> BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), $pos6.0$1) == BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), v0$1);
-    assert {:tag "loopCounterIsStrided"} {:thread 2} p9$2 ==> _b0 ==> BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), $pos6.0$2) == BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), v0$2);
+    assert {:tag "loopBound"} {:thread 1} p9$1 ==> _b4 ==> BV32_UGE($pos1.0$1, v0$1);
+    assert {:tag "loopBound"} {:thread 2} p9$2 ==> _b4 ==> BV32_UGE($pos1.0$2, v0$2);
+    assert {:tag "loopBound"} {:thread 1} p9$1 ==> _b3 ==> BV32_ULE($pos1.0$1, v0$1);
+    assert {:tag "loopBound"} {:thread 2} p9$2 ==> _b3 ==> BV32_ULE($pos1.0$2, v0$2);
+    assert {:tag "loopBound"} {:thread 1} p9$1 ==> _b2 ==> BV32_SGE($pos1.0$1, v0$1);
+    assert {:tag "loopBound"} {:thread 2} p9$2 ==> _b2 ==> BV32_SGE($pos1.0$2, v0$2);
+    assert {:tag "loopBound"} {:thread 1} p9$1 ==> _b1 ==> BV32_SLE($pos1.0$1, v0$1);
+    assert {:tag "loopBound"} {:thread 2} p9$2 ==> _b1 ==> BV32_SLE($pos1.0$2, v0$2);
+    assert {:tag "loopCounterIsStrided"} {:thread 1} p9$1 ==> _b0 ==> BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), $pos1.0$1) == BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), v0$1);
+    assert {:tag "loopCounterIsStrided"} {:thread 2} p9$2 ==> _b0 ==> BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), $pos1.0$2) == BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), v0$2);
     assert {:block_sourceloc} {:sourceloc_num 19} p9$1 ==> true;
-    v13$1 := (if p9$1 then BV32_ULT($pos6.0$1, $pathN) else v13$1);
-    v13$2 := (if p9$2 then BV32_ULT($pos6.0$2, $pathN) else v13$2);
+    v13$1 := (if p9$1 then BV32_ULT($pos1.0$1, $pathN) else v13$1);
+    v13$2 := (if p9$2 then BV32_ULT($pos1.0$2, $pathN) else v13$2);
     p10$1 := false;
     p10$2 := false;
     p11$1 := false;
@@ -306,20 +304,20 @@ implementation {:source_name "inverseCNDKernel"} {:kernel} $_Z16inverseCNDKernel
     p10$2 := (if p9$2 && v13$2 then v13$2 else p10$2);
     p9$1 := (if p9$1 && !v13$1 then v13$1 else p9$1);
     p9$2 := (if p9$2 && !v13$2 then v13$2 else p9$2);
-    v14$1 := (if p10$1 then BV32_MUL(BV32_ADD($pos6.0$1, 1bv32), BV32_UDIV(4294967295bv32, BV32_ADD($pathN, 1bv32))) else v14$1);
-    v14$2 := (if p10$2 then BV32_MUL(BV32_ADD($pos6.0$2, 1bv32), BV32_UDIV(4294967295bv32, BV32_ADD($pathN, 1bv32))) else v14$2);
-    v15$1 := (if p10$1 then BV64_UGE(BV32_ZEXT64(v14$1), 2147483648bv64) else v15$1);
-    v15$2 := (if p10$2 then BV64_UGE(BV32_ZEXT64(v14$2), 2147483648bv64) else v15$2);
+    v14$1 := (if p10$1 then BV32_MUL(BV32_ADD($pos1.0$1, 1bv32), BV32_UDIV(4294967295bv32, BV32_ADD($pathN, 1bv32))) else v14$1);
+    v14$2 := (if p10$2 then BV32_MUL(BV32_ADD($pos1.0$2, 1bv32), BV32_UDIV(4294967295bv32, BV32_ADD($pathN, 1bv32))) else v14$2);
+    v15$1 := (if p10$1 then BV32_UGE(v14$1, 2147483648bv32) else v15$1);
+    v15$2 := (if p10$2 then BV32_UGE(v14$2, 2147483648bv32) else v15$2);
     p12$1 := (if p10$1 && v15$1 then v15$1 else p12$1);
     p12$2 := (if p10$2 && v15$2 then v15$2 else p12$2);
     p11$1 := (if p10$1 && !v15$1 then !v15$1 else p11$1);
     p11$2 := (if p10$2 && !v15$2 then !v15$2 else p11$2);
-    $x.addr.i.17.0$1, $negate.i.0$1 := (if p11$1 then v14$1 else $x.addr.i.17.0$1), (if p11$1 then 0bv8 else $negate.i.0$1);
-    $x.addr.i.17.0$2, $negate.i.0$2 := (if p11$2 then v14$2 else $x.addr.i.17.0$2), (if p11$2 then 0bv8 else $negate.i.0$2);
-    $x.addr.i.17.0$1, $negate.i.0$1 := (if p12$1 then BV64_SUB(4294967295bv64, BV32_ZEXT64(v14$1))[32:0] else $x.addr.i.17.0$1), (if p12$1 then 1bv8 else $negate.i.0$1);
-    $x.addr.i.17.0$2, $negate.i.0$2 := (if p12$2 then BV64_SUB(4294967295bv64, BV32_ZEXT64(v14$2))[32:0] else $x.addr.i.17.0$2), (if p12$2 then 1bv8 else $negate.i.0$2);
-    v16$1 := (if p10$1 then FADD32(FMUL32(UI32_TO_FP32($x.addr.i.17.0$1), 796917760bv32), 788529152bv32) else v16$1);
-    v16$2 := (if p10$2 then FADD32(FMUL32(UI32_TO_FP32($x.addr.i.17.0$2), 796917760bv32), 788529152bv32) else v16$2);
+    $.01$1, $negate.i.0$1 := (if p11$1 then v14$1 else $.01$1), (if p11$1 then 0bv8 else $negate.i.0$1);
+    $.01$2, $negate.i.0$2 := (if p11$2 then v14$2 else $.01$2), (if p11$2 then 0bv8 else $negate.i.0$2);
+    $.01$1, $negate.i.0$1 := (if p12$1 then BV32_SUB(4294967295bv32, v14$1) else $.01$1), (if p12$1 then 1bv8 else $negate.i.0$1);
+    $.01$2, $negate.i.0$2 := (if p12$2 then BV32_SUB(4294967295bv32, v14$2) else $.01$2), (if p12$2 then 1bv8 else $negate.i.0$2);
+    v16$1 := (if p10$1 then FADD32(FMUL32(UI32_TO_FP32($.01$1), 796917760bv32), 788529152bv32) else v16$1);
+    v16$2 := (if p10$2 then FADD32(FMUL32(UI32_TO_FP32($.01$2), 796917760bv32), 788529152bv32) else v16$2);
     v17$1 := (if p10$1 then FSUB32(v16$1, 1056964608bv32) else v17$1);
     v17$2 := (if p10$2 then FSUB32(v16$2, 1056964608bv32) else v17$2);
     v18$1 := (if p10$1 then FLT32(3201763901bv32, v17$1) else v18$1);
@@ -344,34 +342,34 @@ implementation {:source_name "inverseCNDKernel"} {:kernel} $_Z16inverseCNDKernel
     p16$2 := (if p10$2 && v22$2 then v22$2 else p16$2);
     p15$1 := (if p10$1 && !v22$1 then !v22$1 else p15$1);
     p15$2 := (if p10$2 && !v22$2 then !v22$2 else p15$2);
-    $cond.i$1 := (if p15$1 then $z.i.0$1 else $cond.i$1);
-    $cond.i$2 := (if p15$2 then $z.i.0$2 else $cond.i$2);
-    $cond.i$1 := (if p16$1 then FSUB32(2147483648bv32, $z.i.0$1) else $cond.i$1);
-    $cond.i$2 := (if p16$2 then FSUB32(2147483648bv32, $z.i.0$2) else $cond.i$2);
-    call {:sourceloc} {:sourceloc_num 31} _LOG_WRITE_$$d_Output(p10$1, $pos6.0$1, $cond.i$1, $$d_Output[$pos6.0$1]);
-    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$d_Output(p10$2, $pos6.0$2);
+    $1$1 := (if p15$1 then $z.i.0$1 else $1$1);
+    $1$2 := (if p15$2 then $z.i.0$2 else $1$2);
+    $1$1 := (if p16$1 then FSUB32(2147483648bv32, $z.i.0$1) else $1$1);
+    $1$2 := (if p16$2 then FSUB32(2147483648bv32, $z.i.0$2) else $1$2);
+    call {:sourceloc} {:sourceloc_num 31} _LOG_WRITE_$$d_Output(p10$1, $pos1.0$1, $1$1, $$d_Output[$pos1.0$1]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$d_Output(p10$2, $pos1.0$2);
     assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 31} true;
-    call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 31} _CHECK_WRITE_$$d_Output(p10$2, $pos6.0$2, $cond.i$2);
+    call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 31} _CHECK_WRITE_$$d_Output(p10$2, $pos1.0$2, $1$2);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$d_Output"} true;
-    $$d_Output[$pos6.0$1] := (if p10$1 then $cond.i$1 else $$d_Output[$pos6.0$1]);
-    $$d_Output[$pos6.0$2] := (if p10$2 then $cond.i$2 else $$d_Output[$pos6.0$2]);
-    $pos6.0$1 := (if p10$1 then BV32_ADD($pos6.0$1, v1) else $pos6.0$1);
-    $pos6.0$2 := (if p10$2 then BV32_ADD($pos6.0$2, v1) else $pos6.0$2);
+    $$d_Output[$pos1.0$1] := (if p10$1 then $1$1 else $$d_Output[$pos1.0$1]);
+    $$d_Output[$pos1.0$2] := (if p10$2 then $1$2 else $$d_Output[$pos1.0$2]);
+    $pos1.0$1 := (if p10$1 then BV32_ADD($pos1.0$1, v1) else $pos1.0$1);
+    $pos1.0$2 := (if p10$2 then BV32_ADD($pos1.0$2, v1) else $pos1.0$2);
     p9$1 := (if p10$1 then true else p9$1);
     p9$2 := (if p10$2 then true else p9$2);
-    goto $for.cond.7.backedge, $for.cond.7.tail;
+    goto $14.backedge, $14.tail;
 
-  $for.cond.7.tail:
+  $14.tail:
     assume !p9$1 && !p9$2;
-    goto $if.end;
+    goto $25;
 
-  $if.end:
+  $25:
     return;
 
-  $for.cond.7.backedge:
+  $14.backedge:
     assume {:backedge} p9$1 || p9$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.7;
+    goto $14;
 
   $truebb:
     assume {:partition} v2;
@@ -380,9 +378,9 @@ implementation {:source_name "inverseCNDKernel"} {:kernel} $_Z16inverseCNDKernel
     p0$1 := true;
     p0$2 := true;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond;
+    goto $2;
 
-  $for.cond:
+  $2:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b17 ==> _WRITE_HAS_OCCURRED_$$d_Output ==> BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), v0$1);
     assert {:do_not_predicate} {:tag "accessOnlyIfEnabledInEnclosingScopes"} {:thread 1} _b15 ==> _WRITE_HAS_OCCURRED_$$d_Output ==> MKPTR($arrayId$$d_Input, 0bv32) != MKPTR($arrayId$$null$, 0bv32);
@@ -425,18 +423,18 @@ implementation {:source_name "inverseCNDKernel"} {:kernel} $_Z16inverseCNDKernel
     p0$2 := (if p0$2 && !v3$2 then v3$2 else p0$2);
     v4$1 := (if p1$1 then $$d_Input[$pos.0$1] else v4$1);
     v4$2 := (if p1$2 then $$d_Input[$pos.0$2] else v4$2);
-    v5$1 := (if p1$1 then BV64_UGE(BV32_ZEXT64(v4$1), 2147483648bv64) else v5$1);
-    v5$2 := (if p1$2 then BV64_UGE(BV32_ZEXT64(v4$2), 2147483648bv64) else v5$2);
+    v5$1 := (if p1$1 then BV32_UGE(v4$1, 2147483648bv32) else v5$1);
+    v5$2 := (if p1$2 then BV32_UGE(v4$2, 2147483648bv32) else v5$2);
     p3$1 := (if p1$1 && v5$1 then v5$1 else p3$1);
     p3$2 := (if p1$2 && v5$2 then v5$2 else p3$2);
     p2$1 := (if p1$1 && !v5$1 then !v5$1 else p2$1);
     p2$2 := (if p1$2 && !v5$2 then !v5$2 else p2$2);
-    $negate.i.41.0$1, $x.addr.i.22.0$1 := (if p2$1 then 0bv8 else $negate.i.41.0$1), (if p2$1 then v4$1 else $x.addr.i.22.0$1);
-    $negate.i.41.0$2, $x.addr.i.22.0$2 := (if p2$2 then 0bv8 else $negate.i.41.0$2), (if p2$2 then v4$2 else $x.addr.i.22.0$2);
-    $negate.i.41.0$1, $x.addr.i.22.0$1 := (if p3$1 then 1bv8 else $negate.i.41.0$1), (if p3$1 then BV64_SUB(4294967295bv64, BV32_ZEXT64(v4$1))[32:0] else $x.addr.i.22.0$1);
-    $negate.i.41.0$2, $x.addr.i.22.0$2 := (if p3$2 then 1bv8 else $negate.i.41.0$2), (if p3$2 then BV64_SUB(4294967295bv64, BV32_ZEXT64(v4$2))[32:0] else $x.addr.i.22.0$2);
-    v6$1 := (if p1$1 then FADD32(FMUL32(UI32_TO_FP32($x.addr.i.22.0$1), 796917760bv32), 788529152bv32) else v6$1);
-    v6$2 := (if p1$2 then FADD32(FMUL32(UI32_TO_FP32($x.addr.i.22.0$2), 796917760bv32), 788529152bv32) else v6$2);
+    $negate.i21.0$1, $.0$1 := (if p2$1 then 0bv8 else $negate.i21.0$1), (if p2$1 then v4$1 else $.0$1);
+    $negate.i21.0$2, $.0$2 := (if p2$2 then 0bv8 else $negate.i21.0$2), (if p2$2 then v4$2 else $.0$2);
+    $negate.i21.0$1, $.0$1 := (if p3$1 then 1bv8 else $negate.i21.0$1), (if p3$1 then BV32_SUB(4294967295bv32, v4$1) else $.0$1);
+    $negate.i21.0$2, $.0$2 := (if p3$2 then 1bv8 else $negate.i21.0$2), (if p3$2 then BV32_SUB(4294967295bv32, v4$2) else $.0$2);
+    v6$1 := (if p1$1 then FADD32(FMUL32(UI32_TO_FP32($.0$1), 796917760bv32), 788529152bv32) else v6$1);
+    v6$2 := (if p1$2 then FADD32(FMUL32(UI32_TO_FP32($.0$2), 796917760bv32), 788529152bv32) else v6$2);
     v7$1 := (if p1$1 then FSUB32(v6$1, 1056964608bv32) else v7$1);
     v7$2 := (if p1$2 then FSUB32(v6$2, 1056964608bv32) else v7$2);
     v8$1 := (if p1$1 then FLT32(3201763901bv32, v7$1) else v8$1);
@@ -449,43 +447,43 @@ implementation {:source_name "inverseCNDKernel"} {:kernel} $_Z16inverseCNDKernel
     assume {:captureState "call_return_state_0"} {:procedureName "$__logf"} true;
     call {:sourceloc_num 10} v11$1, v11$2 := $__logf(p4$1, FSUB32(2147483648bv32, v10$1), p4$2, FSUB32(2147483648bv32, v10$2));
     assume {:captureState "call_return_state_0"} {:procedureName "$__logf"} true;
-    $z.i.40.0$1 := (if p4$1 then FSUB32(2147483648bv32, FADD32(1051511190bv32, FMUL32(v11$1, FADD32(1064953398bv32, FMUL32(v11$1, FADD32(1042589753bv32, FMUL32(v11$1, FADD32(1021474156bv32, FMUL32(v11$1, FADD32(997962271bv32, FMUL32(v11$1, FADD32(969879925bv32, FMUL32(v11$1, FADD32(939980176bv32, FMUL32(v11$1, FADD32(882577068bv32, FMUL32(v11$1, 886349352bv32))))))))))))))))) else $z.i.40.0$1);
-    $z.i.40.0$2 := (if p4$2 then FSUB32(2147483648bv32, FADD32(1051511190bv32, FMUL32(v11$2, FADD32(1064953398bv32, FMUL32(v11$2, FADD32(1042589753bv32, FMUL32(v11$2, FADD32(1021474156bv32, FMUL32(v11$2, FADD32(997962271bv32, FMUL32(v11$2, FADD32(969879925bv32, FMUL32(v11$2, FADD32(939980176bv32, FMUL32(v11$2, FADD32(882577068bv32, FMUL32(v11$2, 886349352bv32))))))))))))))))) else $z.i.40.0$2);
+    $z.i20.0$1 := (if p4$1 then FSUB32(2147483648bv32, FADD32(1051511190bv32, FMUL32(v11$1, FADD32(1064953398bv32, FMUL32(v11$1, FADD32(1042589753bv32, FMUL32(v11$1, FADD32(1021474156bv32, FMUL32(v11$1, FADD32(997962271bv32, FMUL32(v11$1, FADD32(969879925bv32, FMUL32(v11$1, FADD32(939980176bv32, FMUL32(v11$1, FADD32(882577068bv32, FMUL32(v11$1, 886349352bv32))))))))))))))))) else $z.i20.0$1);
+    $z.i20.0$2 := (if p4$2 then FSUB32(2147483648bv32, FADD32(1051511190bv32, FMUL32(v11$2, FADD32(1064953398bv32, FMUL32(v11$2, FADD32(1042589753bv32, FMUL32(v11$2, FADD32(1021474156bv32, FMUL32(v11$2, FADD32(997962271bv32, FMUL32(v11$2, FADD32(969879925bv32, FMUL32(v11$2, FADD32(939980176bv32, FMUL32(v11$2, FADD32(882577068bv32, FMUL32(v11$2, 886349352bv32))))))))))))))))) else $z.i20.0$2);
     v9$1 := (if p5$1 then FMUL32(v7$1, v7$1) else v9$1);
     v9$2 := (if p5$2 then FMUL32(v7$2, v7$2) else v9$2);
-    $z.i.40.0$1 := (if p5$1 then FDIV32(FMUL32(v7$1, FADD32(FMUL32(FADD32(FMUL32(FADD32(FMUL32(3251341131bv32, v9$1), 1109758102bv32), v9$1), 3247762309bv32), v9$1), 1075866777bv32)), FADD32(FMUL32(FADD32(FMUL32(FADD32(FMUL32(FADD32(FMUL32(1078484865bv32, v9$1), 3249045368bv32), v9$1), 1102621373bv32), v9$1), 3238499200bv32), v9$1), 1065353216bv32)) else $z.i.40.0$1);
-    $z.i.40.0$2 := (if p5$2 then FDIV32(FMUL32(v7$2, FADD32(FMUL32(FADD32(FMUL32(FADD32(FMUL32(3251341131bv32, v9$2), 1109758102bv32), v9$2), 3247762309bv32), v9$2), 1075866777bv32)), FADD32(FMUL32(FADD32(FMUL32(FADD32(FMUL32(FADD32(FMUL32(1078484865bv32, v9$2), 3249045368bv32), v9$2), 1102621373bv32), v9$2), 3238499200bv32), v9$2), 1065353216bv32)) else $z.i.40.0$2);
-    v12$1 := (if p1$1 then $negate.i.41.0$1[1:0] == 1bv1 else v12$1);
-    v12$2 := (if p1$2 then $negate.i.41.0$2[1:0] == 1bv1 else v12$2);
+    $z.i20.0$1 := (if p5$1 then FDIV32(FMUL32(v7$1, FADD32(FMUL32(FADD32(FMUL32(FADD32(FMUL32(3251341131bv32, v9$1), 1109758102bv32), v9$1), 3247762309bv32), v9$1), 1075866777bv32)), FADD32(FMUL32(FADD32(FMUL32(FADD32(FMUL32(FADD32(FMUL32(1078484865bv32, v9$1), 3249045368bv32), v9$1), 1102621373bv32), v9$1), 3238499200bv32), v9$1), 1065353216bv32)) else $z.i20.0$1);
+    $z.i20.0$2 := (if p5$2 then FDIV32(FMUL32(v7$2, FADD32(FMUL32(FADD32(FMUL32(FADD32(FMUL32(3251341131bv32, v9$2), 1109758102bv32), v9$2), 3247762309bv32), v9$2), 1075866777bv32)), FADD32(FMUL32(FADD32(FMUL32(FADD32(FMUL32(FADD32(FMUL32(1078484865bv32, v9$2), 3249045368bv32), v9$2), 1102621373bv32), v9$2), 3238499200bv32), v9$2), 1065353216bv32)) else $z.i20.0$2);
+    v12$1 := (if p1$1 then $negate.i21.0$1[1:0] == 1bv1 else v12$1);
+    v12$2 := (if p1$2 then $negate.i21.0$2[1:0] == 1bv1 else v12$2);
     p7$1 := (if p1$1 && v12$1 then v12$1 else p7$1);
     p7$2 := (if p1$2 && v12$2 then v12$2 else p7$2);
     p6$1 := (if p1$1 && !v12$1 then !v12$1 else p6$1);
     p6$2 := (if p1$2 && !v12$2 then !v12$2 else p6$2);
-    $cond.i.102$1 := (if p6$1 then $z.i.40.0$1 else $cond.i.102$1);
-    $cond.i.102$2 := (if p6$2 then $z.i.40.0$2 else $cond.i.102$2);
-    $cond.i.102$1 := (if p7$1 then FSUB32(2147483648bv32, $z.i.40.0$1) else $cond.i.102$1);
-    $cond.i.102$2 := (if p7$2 then FSUB32(2147483648bv32, $z.i.40.0$2) else $cond.i.102$2);
-    call {:sourceloc} {:sourceloc_num 15} _LOG_WRITE_$$d_Output(p1$1, $pos.0$1, $cond.i.102$1, $$d_Output[$pos.0$1]);
+    $0$1 := (if p6$1 then $z.i20.0$1 else $0$1);
+    $0$2 := (if p6$2 then $z.i20.0$2 else $0$2);
+    $0$1 := (if p7$1 then FSUB32(2147483648bv32, $z.i20.0$1) else $0$1);
+    $0$2 := (if p7$2 then FSUB32(2147483648bv32, $z.i20.0$2) else $0$2);
+    call {:sourceloc} {:sourceloc_num 15} _LOG_WRITE_$$d_Output(p1$1, $pos.0$1, $0$1, $$d_Output[$pos.0$1]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$d_Output(p1$2, $pos.0$2);
     assume {:do_not_predicate} {:check_id "check_state_1"} {:captureState "check_state_1"} {:sourceloc} {:sourceloc_num 15} true;
-    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 15} _CHECK_WRITE_$$d_Output(p1$2, $pos.0$2, $cond.i.102$2);
+    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 15} _CHECK_WRITE_$$d_Output(p1$2, $pos.0$2, $0$2);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$d_Output"} true;
-    $$d_Output[$pos.0$1] := (if p1$1 then $cond.i.102$1 else $$d_Output[$pos.0$1]);
-    $$d_Output[$pos.0$2] := (if p1$2 then $cond.i.102$2 else $$d_Output[$pos.0$2]);
+    $$d_Output[$pos.0$1] := (if p1$1 then $0$1 else $$d_Output[$pos.0$1]);
+    $$d_Output[$pos.0$2] := (if p1$2 then $0$2 else $$d_Output[$pos.0$2]);
     $pos.0$1 := (if p1$1 then BV32_ADD($pos.0$1, v1) else $pos.0$1);
     $pos.0$2 := (if p1$2 then BV32_ADD($pos.0$2, v1) else $pos.0$2);
     p0$1 := (if p1$1 then true else p0$1);
     p0$2 := (if p1$2 then true else p0$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $2.backedge, $2.tail;
 
-  $for.cond.tail:
+  $2.tail:
     assume !p0$1 && !p0$2;
-    goto $if.end;
+    goto $25;
 
-  $for.cond.backedge:
+  $2.backedge:
     assume {:backedge} p0$1 || p0$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond;
+    goto $2;
 }
 
 
@@ -522,8 +520,6 @@ const {:group_id_z} group_id_z$1: bv32;
 
 const {:group_id_z} group_id_z$2: bv32;
 
-function {:bvbuiltin "bvsub"} BV32_SUB(bv32, bv32) : bv32;
-
 function {:bvbuiltin "bvand"} BV32_AND(bv32, bv32) : bv32;
 
 const {:existential true} _b0: bool;
@@ -539,8 +535,6 @@ const {:existential true} _b2: bool;
 function {:bvbuiltin "bvule"} BV32_ULE(bv32, bv32) : bool;
 
 const {:existential true} _b3: bool;
-
-function {:bvbuiltin "bvuge"} BV32_UGE(bv32, bv32) : bool;
 
 const {:existential true} _b4: bool;
 

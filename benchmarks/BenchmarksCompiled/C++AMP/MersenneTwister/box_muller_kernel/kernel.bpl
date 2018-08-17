@@ -110,24 +110,24 @@ implementation {:source_name "box_muller_kernel"} {:kernel} $_Z17box_muller_kern
   var v1: bool;
   var v2$1: bv32;
   var v2$2: bv32;
-  var v4$1: bv64;
-  var v4$2: bv64;
   var v3$1: bv32;
   var v3$2: bv32;
-  var v6$1: bv32;
-  var v6$2: bv32;
+  var v4$1: bv64;
+  var v4$2: bv64;
   var v5$1: bv32;
   var v5$2: bv32;
+  var v6$1: bv32;
+  var v6$2: bv32;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2);
     $out.0 := 0bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b10 ==> _WRITE_HAS_OCCURRED_$$normalized_random_nums ==> BV32_AND(BV32_SUB(BV32_MUL(2bv32, 4096bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(2bv32, 4096bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 4096bv32), BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1))) || BV32_AND(BV32_SUB(BV32_MUL(2bv32, 4096bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(2bv32, 4096bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, 1bv32), 4096bv32), BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1)));
     assert {:tag "accessUpperBoundBlock"} _b9 ==> _WRITE_HAS_OCCURRED_$$normalized_random_nums ==> BV32_SLT(_WATCHED_OFFSET, BV32_ADD(BV32_MUL(BV32_ADD(group_id_x$1, 1bv32), group_size_x), local_id_x$1));
@@ -174,7 +174,7 @@ implementation {:source_name "box_muller_kernel"} {:kernel} $_Z17box_muller_kern
     $$normalized_random_nums[BV32_ADD(BV32_MUL(BV32_ADD($out.0, 1bv32), 4096bv32), v0$2)] := FP64_CONV32(FMUL64(FP32_CONV64(v5$2), FSIN64(FP32_CONV64(v6$2))));
     $out.0 := BV32_ADD($out.0, 2bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

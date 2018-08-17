@@ -130,22 +130,22 @@ implementation {:source_name "kernel4"} {:kernel} $kernel4($eps: bv64, $m: bv32,
 {
   var $c0.0$1: bv64;
   var $c0.0$2: bv64;
-  var $cond$1: bv64;
-  var $cond$2: bv64;
+  var $0$1: bv64;
+  var $0$2: bv64;
+  var v0$1: bv64;
+  var v0$2: bv64;
+  var v1$1: bv64;
+  var v1$2: bv64;
+  var v2$1: bool;
+  var v2$2: bool;
+  var v3$1: bool;
+  var v3$2: bool;
   var v4$1: bv64;
   var v4$2: bv64;
   var v5$1: bv64;
   var v5$2: bv64;
   var v6$1: bv64;
   var v6$2: bv64;
-  var v2$1: bool;
-  var v2$2: bool;
-  var v1$1: bv64;
-  var v1$2: bv64;
-  var v0$1: bv64;
-  var v0$2: bv64;
-  var v3$1: bool;
-  var v3$2: bool;
   var v7$1: bool;
   var v7$2: bool;
   var v8$1: bv64;
@@ -168,7 +168,7 @@ implementation {:source_name "kernel4"} {:kernel} $kernel4($eps: bv64, $m: bv32,
   var p6$2: bool;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ZEXT64(group_id_x$1);
     v0$2 := BV32_ZEXT64(group_id_x$2);
     v1$1 := BV32_ZEXT64(local_id_x$1);
@@ -180,9 +180,9 @@ implementation {:source_name "kernel4"} {:kernel} $kernel4($eps: bv64, $m: bv32,
     p0$1 := true;
     p0$2 := true;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b8 ==> _WRITE_HAS_OCCURRED_$$stddev ==> BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), 0bv64[32:0]);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b7 ==> _READ_HAS_OCCURRED_$$stddev ==> BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), 0bv64[32:0]);
@@ -247,12 +247,12 @@ implementation {:source_name "kernel4"} {:kernel} $kernel4($eps: bv64, $m: bv32,
     p4$2 := (if p3$2 && !v7$2 then !v7$2 else p4$2);
     v8$1 := (if p4$1 then $$private_stddev$0bv32$1 else v8$1);
     v8$2 := (if p4$2 then $$private_stddev$0bv32$2 else v8$2);
-    $cond$1 := (if p4$1 then v8$1 else $cond$1);
-    $cond$2 := (if p4$2 then v8$2 else $cond$2);
-    $cond$1 := (if p5$1 then 4607182418800017408bv64 else $cond$1);
-    $cond$2 := (if p5$2 then 4607182418800017408bv64 else $cond$2);
-    $$private_stddev$0bv32$1 := (if p3$1 then $cond$1 else $$private_stddev$0bv32$1);
-    $$private_stddev$0bv32$2 := (if p3$2 then $cond$2 else $$private_stddev$0bv32$2);
+    $0$1 := (if p4$1 then v8$1 else $0$1);
+    $0$2 := (if p4$2 then v8$2 else $0$2);
+    $0$1 := (if p5$1 then 4607182418800017408bv64 else $0$1);
+    $0$2 := (if p5$2 then 4607182418800017408bv64 else $0$2);
+    $$private_stddev$0bv32$1 := (if p3$1 then $0$1 else $$private_stddev$0bv32$1);
+    $$private_stddev$0bv32$2 := (if p3$2 then $0$2 else $$private_stddev$0bv32$2);
     v9$1 := (if p3$1 then $$private_stddev$0bv32$1 else v9$1);
     v9$2 := (if p3$2 then $$private_stddev$0bv32$2 else v9$2);
     call {:sourceloc} {:sourceloc_num 20} _LOG_WRITE_$$stddev(p3$1, BV64_ADD(v1$1, $c0.0$1)[32:0], v9$1, $$stddev[BV64_ADD(v1$1, $c0.0$1)[32:0]]);
@@ -266,16 +266,16 @@ implementation {:source_name "kernel4"} {:kernel} $kernel4($eps: bv64, $m: bv32,
     $c0.0$2 := (if p1$2 then BV64_ADD($c0.0$2, 1048576bv64) else $c0.0$2);
     p0$1 := (if p1$1 then true else p0$1);
     p0$2 := (if p1$2 then true else p0$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $1.backedge, $1.tail;
 
-  $for.cond.tail:
+  $1.tail:
     assume !p0$1 && !p0$2;
     return;
 
-  $for.cond.backedge:
+  $1.backedge:
     assume {:backedge} p0$1 || p0$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

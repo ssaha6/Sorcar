@@ -135,75 +135,75 @@ implementation {:source_name "generatePaths<float>"} {:kernel} $_Z13generatePath
   var $s.0$2: bv32;
   var $t.0$1: bv32;
   var $t.0$2: bv32;
-  var v1: bv32;
-  var v0$1: bv32;
-  var v0$2: bv32;
-  var v27$1: bool;
-  var v27$2: bool;
-  var v28$1: bool;
-  var v28$2: bool;
-  var v34$1: bv32;
-  var v34$2: bv32;
-  var v20$1: bv8;
-  var v20$2: bv8;
-  var v13$1: bv8;
-  var v13$2: bv8;
-  var v19$1: bv8;
-  var v19$2: bv8;
-  var v22$1: bv8;
-  var v22$2: bv8;
-  var v12$1: bv8;
-  var v12$2: bv8;
-  var v23$1: bv8;
-  var v23$2: bv8;
-  var v14$1: bv8;
-  var v14$2: bv8;
-  var v21$1: bv8;
-  var v21$2: bv8;
-  var v18$1: bv8;
-  var v18$2: bv8;
-  var v11$1: bv8;
-  var v11$2: bv8;
-  var v16$1: bv8;
-  var v16$2: bv8;
-  var v15$1: bv8;
-  var v15$2: bv8;
-  var v17$1: bv8;
-  var v17$2: bv8;
-  var v10$1: bv8;
-  var v10$2: bv8;
-  var v26$1: bv32;
-  var v26$2: bv32;
-  var v25$1: bv8;
-  var v25$2: bv8;
-  var v24$1: bv8;
-  var v24$2: bv8;
-  var v29$1: bv32;
-  var v29$2: bv32;
-  var v2$1: bv8;
-  var v2$2: bv8;
-  var v5$1: bv8;
-  var v5$2: bv8;
-  var v3$1: bv8;
-  var v3$2: bv8;
   var v4$1: bv8;
   var v4$2: bv8;
-  var v7$1: bv8;
-  var v7$2: bv8;
-  var v6$1: bv8;
-  var v6$2: bv8;
-  var v8$1: bv8;
-  var v8$2: bv8;
+  var v5$1: bv8;
+  var v5$2: bv8;
   var v9$1: bv8;
   var v9$2: bv8;
+  var v11$1: bv8;
+  var v11$2: bv8;
+  var v1: bv32;
+  var v2$1: bv8;
+  var v2$2: bv8;
+  var v3$1: bv8;
+  var v3$2: bv8;
+  var v6$1: bv8;
+  var v6$2: bv8;
+  var v7$1: bv8;
+  var v7$2: bv8;
+  var v8$1: bv8;
+  var v8$2: bv8;
+  var v10$1: bv8;
+  var v10$2: bv8;
+  var v18$1: bv8;
+  var v18$2: bv8;
+  var v19$1: bv8;
+  var v19$2: bv8;
+  var v20$1: bv8;
+  var v20$2: bv8;
+  var v21$1: bv8;
+  var v21$2: bv8;
+  var v28$1: bool;
+  var v28$2: bool;
   var v31$1: bv32;
   var v31$2: bv32;
-  var v30$1: bv32;
-  var v30$2: bv32;
   var v32$1: bv32;
   var v32$2: bv32;
   var v33$1: bv32;
   var v33$2: bv32;
+  var v34$1: bv32;
+  var v34$2: bv32;
+  var v29$1: bv32;
+  var v29$2: bv32;
+  var v30$1: bv32;
+  var v30$2: bv32;
+  var v14$1: bv8;
+  var v14$2: bv8;
+  var v15$1: bv8;
+  var v15$2: bv8;
+  var v16$1: bv8;
+  var v16$2: bv8;
+  var v27$1: bool;
+  var v27$2: bool;
+  var v22$1: bv8;
+  var v22$2: bv8;
+  var v23$1: bv8;
+  var v23$2: bv8;
+  var v24$1: bv8;
+  var v24$2: bv8;
+  var v25$1: bv8;
+  var v25$2: bv8;
+  var v12$1: bv8;
+  var v12$2: bv8;
+  var v13$1: bv8;
+  var v13$2: bv8;
+  var v0$1: bv32;
+  var v0$2: bv32;
+  var v26$1: bv32;
+  var v26$2: bv32;
+  var v17$1: bv8;
+  var v17$2: bv8;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -214,10 +214,10 @@ implementation {:source_name "generatePaths<float>"} {:kernel} $_Z13generatePath
   var p3$2: bool;
   var p4$1: bool;
   var p4$2: bool;
-  var _WRITE_HAS_OCCURRED_$$paths$ghost$$for.cond.20: bool;
+  var _WRITE_HAS_OCCURRED_$$paths$ghost$$3: bool;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2);
     v1 := BV32_MUL(num_groups_x, group_size_x);
@@ -255,9 +255,9 @@ implementation {:source_name "generatePaths<float>"} {:kernel} $_Z13generatePath
     p0$1 := true;
     p0$2 := true;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b14 ==> _WRITE_HAS_OCCURRED_$$paths ==> BV32_AND(BV32_SUB($numSims, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB($numSims, 1bv32), $i.0$1);
     assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 1} _b5 ==> BV32_ULT($i.0$1, $numSims) ==> p0$1;
@@ -292,13 +292,13 @@ implementation {:source_name "generatePaths<float>"} {:kernel} $_Z13generatePath
     $output.0$2, $s.0$2, $t.0$2 := (if p1$2 then $i.0$2 else $output.0$2), (if p1$2 then 1065353216bv32 else $s.0$2), (if p1$2 then 0bv32 else $t.0$2);
     p2$1 := (if p1$1 then true else p2$1);
     p2$2 := (if p1$2 then true else p2$2);
-    _WRITE_HAS_OCCURRED_$$paths$ghost$$for.cond.20 := _WRITE_HAS_OCCURRED_$$paths;
+    _WRITE_HAS_OCCURRED_$$paths$ghost$$3 := _WRITE_HAS_OCCURRED_$$paths;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.20;
+    goto $3;
 
-  $for.cond.20:
+  $3:
     assume {:captureState "loop_head_state_1"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b16 ==> !p1$1 ==> _WRITE_HAS_OCCURRED_$$paths$ghost$$for.cond.20 == _WRITE_HAS_OCCURRED_$$paths;
+    assert {:tag "disabledMaintainsInstrumentation"} _b16 ==> !p1$1 ==> _WRITE_HAS_OCCURRED_$$paths$ghost$$3 == _WRITE_HAS_OCCURRED_$$paths;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b15 ==> _WRITE_HAS_OCCURRED_$$paths ==> BV32_AND(BV32_SUB($numSims, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB($numSims, 1bv32), $i.0$1);
     assume {:predicate "p2"} {:dominator_predicate "p1"} true;
     assert p2$1 ==> p0$1;
@@ -355,29 +355,29 @@ implementation {:source_name "generatePaths<float>"} {:kernel} $_Z13generatePath
     $output.0$2, $s.0$2, $t.0$2 := (if p3$2 then BV32_ADD($output.0$2, $numSims) else $output.0$2), (if p3$2 then v34$2 else $s.0$2), (if p3$2 then BV32_ADD($t.0$2, 1bv32) else $t.0$2);
     p2$1 := (if p3$1 then true else p2$1);
     p2$2 := (if p3$2 then true else p2$2);
-    goto $for.cond.20.backedge, $for.cond.20.tail;
+    goto $3.backedge, $3.tail;
 
-  $for.cond.20.tail:
+  $3.tail:
     assume !p2$1 && !p2$2;
     $i.0$1 := (if p1$1 then BV32_ADD($i.0$1, v1) else $i.0$1);
     $i.0$2 := (if p1$2 then BV32_ADD($i.0$2, v1) else $i.0$2);
     p0$1 := (if p1$1 then true else p0$1);
     p0$2 := (if p1$2 then true else p0$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $1.backedge, $1.tail;
 
-  $for.cond.tail:
+  $1.tail:
     assume !p0$1 && !p0$2;
     return;
 
-  $for.cond.backedge:
+  $1.backedge:
     assume {:backedge} p0$1 || p0$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond.20.backedge:
+  $3.backedge:
     assume {:backedge} p2$1 || p2$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.20;
+    goto $3;
 }
 
 

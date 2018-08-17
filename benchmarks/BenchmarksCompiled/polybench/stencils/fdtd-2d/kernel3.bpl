@@ -163,36 +163,36 @@ implementation {:source_name "kernel3"} {:kernel} $kernel3($ny: bv32, $tmax: bv3
   var $c2.0$2: bv64;
   var $c4.0$1: bv64;
   var $c4.0$2: bv64;
-  var $cond$1: bv64;
-  var $cond$2: bv64;
-  var v11$1: bv64;
-  var v11$2: bv64;
-  var v9$1: bv64;
-  var v9$2: bv64;
-  var v12$1: bv64;
-  var v12$2: bv64;
-  var v13$1: bv64;
-  var v13$2: bv64;
-  var v10$1: bv64;
-  var v10$2: bv64;
-  var v3$1: bv64;
-  var v3$2: bv64;
+  var $0$1: bv64;
+  var $0$2: bv64;
   var v0$1: bv64;
   var v0$2: bv64;
   var v1$1: bv64;
   var v1$2: bv64;
   var v2$1: bv64;
   var v2$2: bv64;
-  var v5$1: bool;
-  var v5$2: bool;
+  var v3$1: bv64;
+  var v3$2: bv64;
   var v4$1: bool;
   var v4$2: bool;
-  var v8$1: bool;
-  var v8$2: bool;
+  var v5$1: bool;
+  var v5$2: bool;
   var v6$1: bool;
   var v6$2: bool;
   var v7$1: bool;
   var v7$2: bool;
+  var v8$1: bool;
+  var v8$2: bool;
+  var v9$1: bv64;
+  var v9$2: bv64;
+  var v10$1: bv64;
+  var v10$2: bv64;
+  var v11$1: bv64;
+  var v11$2: bv64;
+  var v12$1: bv64;
+  var v12$2: bv64;
+  var v13$1: bv64;
+  var v13$2: bv64;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -217,13 +217,13 @@ implementation {:source_name "kernel3"} {:kernel} $kernel3($ny: bv32, $tmax: bv3
   var p10$2: bool;
   var _HAVOC_bv64$1: bv64;
   var _HAVOC_bv64$2: bv64;
-  var _READ_HAS_OCCURRED_$$hz$ghost$$for.cond.38: bool;
-  var _WRITE_HAS_OCCURRED_$$hz$ghost$$for.cond.38: bool;
-  var _READ_HAS_OCCURRED_$$hz$ghost$$for.cond.44: bool;
-  var _WRITE_HAS_OCCURRED_$$hz$ghost$$for.cond.44: bool;
+  var _READ_HAS_OCCURRED_$$hz$ghost$$4: bool;
+  var _WRITE_HAS_OCCURRED_$$hz$ghost$$4: bool;
+  var _READ_HAS_OCCURRED_$$hz$ghost$$6: bool;
+  var _WRITE_HAS_OCCURRED_$$hz$ghost$$6: bool;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ZEXT64(group_id_x$1);
     v0$2 := BV32_ZEXT64(group_id_x$2);
     v1$1 := BV32_ZEXT64(group_id_y$1);
@@ -239,9 +239,9 @@ implementation {:source_name "kernel3"} {:kernel} $kernel3($ny: bv32, $tmax: bv3
     p0$1 := true;
     p0$2 := true;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b35 ==> _WRITE_HAS_OCCURRED_$$hz ==> BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), 0bv64[32:0]);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b34 ==> _READ_HAS_OCCURRED_$$hz ==> BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), 0bv64[32:0]);
@@ -288,15 +288,15 @@ implementation {:source_name "kernel3"} {:kernel} $kernel3($ny: bv32, $tmax: bv3
     $c2.0$2 := (if p3$2 then BV64_MUL(32bv64, v1$2) else $c2.0$2);
     p4$1 := (if p3$1 then true else p4$1);
     p4$2 := (if p3$2 then true else p4$2);
-    _READ_HAS_OCCURRED_$$hz$ghost$$for.cond.38 := _READ_HAS_OCCURRED_$$hz;
-    _WRITE_HAS_OCCURRED_$$hz$ghost$$for.cond.38 := _WRITE_HAS_OCCURRED_$$hz;
+    _READ_HAS_OCCURRED_$$hz$ghost$$4 := _READ_HAS_OCCURRED_$$hz;
+    _WRITE_HAS_OCCURRED_$$hz$ghost$$4 := _WRITE_HAS_OCCURRED_$$hz;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.38;
+    goto $4;
 
-  $for.cond.38:
+  $4:
     assume {:captureState "loop_head_state_1"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b39 ==> !p3$1 ==> _WRITE_HAS_OCCURRED_$$hz$ghost$$for.cond.38 == _WRITE_HAS_OCCURRED_$$hz;
-    assert {:tag "disabledMaintainsInstrumentation"} _b38 ==> !p3$1 ==> _READ_HAS_OCCURRED_$$hz$ghost$$for.cond.38 == _READ_HAS_OCCURRED_$$hz;
+    assert {:tag "disabledMaintainsInstrumentation"} _b39 ==> !p3$1 ==> _WRITE_HAS_OCCURRED_$$hz$ghost$$4 == _WRITE_HAS_OCCURRED_$$hz;
+    assert {:tag "disabledMaintainsInstrumentation"} _b38 ==> !p3$1 ==> _READ_HAS_OCCURRED_$$hz$ghost$$4 == _READ_HAS_OCCURRED_$$hz;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b37 ==> _WRITE_HAS_OCCURRED_$$hz ==> BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), 0bv64[32:0]);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b36 ==> _READ_HAS_OCCURRED_$$hz ==> BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), 0bv64[32:0]);
     assume {:predicate "p4"} {:dominator_predicate "p3"} true;
@@ -341,15 +341,15 @@ implementation {:source_name "kernel3"} {:kernel} $kernel3($ny: bv32, $tmax: bv3
     $c4.0$2 := (if p5$2 then v3$2 else $c4.0$2);
     p6$1 := (if p5$1 then true else p6$1);
     p6$2 := (if p5$2 then true else p6$2);
-    _READ_HAS_OCCURRED_$$hz$ghost$$for.cond.44 := _READ_HAS_OCCURRED_$$hz;
-    _WRITE_HAS_OCCURRED_$$hz$ghost$$for.cond.44 := _WRITE_HAS_OCCURRED_$$hz;
+    _READ_HAS_OCCURRED_$$hz$ghost$$6 := _READ_HAS_OCCURRED_$$hz;
+    _WRITE_HAS_OCCURRED_$$hz$ghost$$6 := _WRITE_HAS_OCCURRED_$$hz;
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond.44;
+    goto $6;
 
-  $for.cond.44:
+  $6:
     assume {:captureState "loop_head_state_2"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b43 ==> !p5$1 ==> _WRITE_HAS_OCCURRED_$$hz$ghost$$for.cond.44 == _WRITE_HAS_OCCURRED_$$hz;
-    assert {:tag "disabledMaintainsInstrumentation"} _b42 ==> !p5$1 ==> _READ_HAS_OCCURRED_$$hz$ghost$$for.cond.44 == _READ_HAS_OCCURRED_$$hz;
+    assert {:tag "disabledMaintainsInstrumentation"} _b43 ==> !p5$1 ==> _WRITE_HAS_OCCURRED_$$hz$ghost$$6 == _WRITE_HAS_OCCURRED_$$hz;
+    assert {:tag "disabledMaintainsInstrumentation"} _b42 ==> !p5$1 ==> _READ_HAS_OCCURRED_$$hz$ghost$$6 == _READ_HAS_OCCURRED_$$hz;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b41 ==> _WRITE_HAS_OCCURRED_$$hz ==> BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), 0bv64[32:0]);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b40 ==> _READ_HAS_OCCURRED_$$hz ==> BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), 0bv64[32:0]);
     assume {:predicate "p6"} {:dominator_predicate "p5"} true;
@@ -363,8 +363,8 @@ implementation {:source_name "kernel3"} {:kernel} $kernel3($ny: bv32, $tmax: bv3
     assert {:do_not_predicate} {:tag "accessOnlyIfEnabledInEnclosingScopes"} {:thread 1} _b30 ==> _READ_HAS_OCCURRED_$$hz ==> BV64_SLT($c2.0$1, BV32_SEXT64(BV32_SUB($ny, 1bv32)));
     assert {:do_not_predicate} {:tag "accessOnlyIfEnabledInEnclosingScopes"} {:thread 1} _b29 ==> _READ_HAS_OCCURRED_$$hz ==> BV64_SGE(BV32_SEXT64($nx), BV64_ADD(BV64_ADD(BV32_ZEXT64(local_id_x$1), $c1.0$1), 2bv64));
     assert {:do_not_predicate} {:tag "accessOnlyIfEnabledInEnclosingScopes"} {:thread 1} _b28 ==> _READ_HAS_OCCURRED_$$hz ==> BV64_SLT($c1.0$1, BV32_SEXT64(BV32_SUB($nx, 1bv32)));
-    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 1} _b27 ==> BV64_SLT($c1.0$1, BV32_SEXT64(BV32_SUB($nx, 1bv32))) && BV64_SGE(BV32_SEXT64($nx), BV64_ADD(BV64_ADD(BV32_ZEXT64(local_id_x$1), $c1.0$1), 2bv64)) && BV64_SLT($c2.0$1, BV32_SEXT64(BV32_SUB($ny, 1bv32))) && BV64_SLE($c4.0$1, $cond$1) ==> p6$1;
-    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 2} _b27 ==> BV64_SLT($c1.0$2, BV32_SEXT64(BV32_SUB($nx, 1bv32))) && BV64_SGE(BV32_SEXT64($nx), BV64_ADD(BV64_ADD(BV32_ZEXT64(local_id_x$2), $c1.0$2), 2bv64)) && BV64_SLT($c2.0$2, BV32_SEXT64(BV32_SUB($ny, 1bv32))) && BV64_SLE($c4.0$2, $cond$2) ==> p6$2;
+    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 1} _b27 ==> BV64_SLT($c1.0$1, BV32_SEXT64(BV32_SUB($nx, 1bv32))) && BV64_SGE(BV32_SEXT64($nx), BV64_ADD(BV64_ADD(BV32_ZEXT64(local_id_x$1), $c1.0$1), 2bv64)) && BV64_SLT($c2.0$1, BV32_SEXT64(BV32_SUB($ny, 1bv32))) && BV64_SLE($c4.0$1, $0$1) ==> p6$1;
+    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 2} _b27 ==> BV64_SLT($c1.0$2, BV32_SEXT64(BV32_SUB($nx, 1bv32))) && BV64_SGE(BV32_SEXT64($nx), BV64_ADD(BV64_ADD(BV32_ZEXT64(local_id_x$2), $c1.0$2), 2bv64)) && BV64_SLT($c2.0$2, BV32_SEXT64(BV32_SUB($ny, 1bv32))) && BV64_SLE($c4.0$2, $0$2) ==> p6$2;
     assert {:tag "conditionsImpliedByEnabledness"} {:thread 1} p6$1 ==> _b26 ==> p6$1 ==> BV64_SLT($c1.0$1, BV32_SEXT64(BV32_SUB($nx, 1bv32))) && BV64_SGE(BV32_SEXT64($nx), BV64_ADD(BV64_ADD(BV32_ZEXT64(local_id_x$1), $c1.0$1), 2bv64)) && BV64_SLT($c2.0$1, BV32_SEXT64(BV32_SUB($ny, 1bv32)));
     assert {:tag "conditionsImpliedByEnabledness"} {:thread 2} p6$2 ==> _b26 ==> p6$2 ==> BV64_SLT($c1.0$2, BV32_SEXT64(BV32_SUB($nx, 1bv32))) && BV64_SGE(BV32_SEXT64($nx), BV64_ADD(BV64_ADD(BV32_ZEXT64(local_id_x$2), $c1.0$2), 2bv64)) && BV64_SLT($c2.0$2, BV32_SEXT64(BV32_SUB($ny, 1bv32)));
     assert {:tag "loopBound"} {:thread 1} p6$1 ==> _b25 ==> BV64_UGE($c4.0$1, v3$1);
@@ -375,8 +375,8 @@ implementation {:source_name "kernel3"} {:kernel} $kernel3($ny: bv32, $tmax: bv3
     assert {:tag "loopBound"} {:thread 2} p6$2 ==> _b23 ==> BV64_SGE($c4.0$2, v3$2);
     assert {:tag "loopBound"} {:thread 1} p6$1 ==> _b22 ==> BV64_SLE($c4.0$1, v3$1);
     assert {:tag "loopBound"} {:thread 2} p6$2 ==> _b22 ==> BV64_SLE($c4.0$2, v3$2);
-    assert {:tag "guardNonNeg"} {:thread 1} p6$1 ==> _b21 ==> BV64_SLE(0bv64, $cond$1);
-    assert {:tag "guardNonNeg"} {:thread 2} p6$2 ==> _b21 ==> BV64_SLE(0bv64, $cond$2);
+    assert {:tag "guardNonNeg"} {:thread 1} p6$1 ==> _b21 ==> BV64_SLE(0bv64, $0$1);
+    assert {:tag "guardNonNeg"} {:thread 2} p6$2 ==> _b21 ==> BV64_SLE(0bv64, $0$2);
     assert {:tag "guardNonNeg"} {:thread 1} p6$1 ==> _b20 ==> BV64_SLE(0bv64, $c4.0$1);
     assert {:tag "guardNonNeg"} {:thread 2} p6$2 ==> _b20 ==> BV64_SLE(0bv64, $c4.0$2);
     assert {:tag "loopCounterIsStrided"} {:thread 1} p6$1 ==> _b19 ==> BV64_AND(BV64_SUB(16bv64, 1bv64), $c4.0$1) == BV64_AND(BV64_SUB(16bv64, 1bv64), v3$1);
@@ -398,12 +398,12 @@ implementation {:source_name "kernel3"} {:kernel} $kernel3($ny: bv32, $tmax: bv3
     p8$2 := (if p6$2 && v7$2 then v7$2 else p8$2);
     p7$1 := (if p6$1 && !v7$1 then !v7$1 else p7$1);
     p7$2 := (if p6$2 && !v7$2 then !v7$2 else p7$2);
-    $cond$1 := (if p7$1 then BV64_SUB(BV64_SUB(BV32_SEXT64($ny), $c2.0$1), 2bv64) else $cond$1);
-    $cond$2 := (if p7$2 then BV64_SUB(BV64_SUB(BV32_SEXT64($ny), $c2.0$2), 2bv64) else $cond$2);
-    $cond$1 := (if p8$1 then 31bv64 else $cond$1);
-    $cond$2 := (if p8$2 then 31bv64 else $cond$2);
-    v8$1 := (if p6$1 then BV64_SLE($c4.0$1, $cond$1) else v8$1);
-    v8$2 := (if p6$2 then BV64_SLE($c4.0$2, $cond$2) else v8$2);
+    $0$1 := (if p7$1 then BV64_SUB(BV64_SUB(BV32_SEXT64($ny), $c2.0$1), 2bv64) else $0$1);
+    $0$2 := (if p7$2 then BV64_SUB(BV64_SUB(BV32_SEXT64($ny), $c2.0$2), 2bv64) else $0$2);
+    $0$1 := (if p8$1 then 31bv64 else $0$1);
+    $0$2 := (if p8$2 then 31bv64 else $0$2);
+    v8$1 := (if p6$1 then BV64_SLE($c4.0$1, $0$1) else v8$1);
+    v8$2 := (if p6$2 then BV64_SLE($c4.0$2, $0$2) else v8$2);
     p9$1 := (if p6$1 && v8$1 then v8$1 else p9$1);
     p9$2 := (if p6$2 && v8$2 then v8$2 else p9$2);
     p6$1 := (if p6$1 && !v8$1 then v8$1 else p6$1);
@@ -437,42 +437,42 @@ implementation {:source_name "kernel3"} {:kernel} $kernel3($ny: bv32, $tmax: bv3
     $c4.0$2 := (if p9$2 then BV64_ADD($c4.0$2, 16bv64) else $c4.0$2);
     p6$1 := (if p9$1 then true else p6$1);
     p6$2 := (if p9$2 then true else p6$2);
-    goto $for.cond.44.backedge, $for.cond.44.tail;
+    goto $6.backedge, $6.tail;
 
-  $for.cond.44.tail:
+  $6.tail:
     assume !p6$1 && !p6$2;
     $c2.0$1 := (if p5$1 then BV64_ADD($c2.0$1, 8192bv64) else $c2.0$1);
     $c2.0$2 := (if p5$2 then BV64_ADD($c2.0$2, 8192bv64) else $c2.0$2);
     p4$1 := (if p5$1 then true else p4$1);
     p4$2 := (if p5$2 then true else p4$2);
-    goto $for.cond.38.backedge, $for.cond.38.tail;
+    goto $4.backedge, $4.tail;
 
-  $for.cond.38.tail:
+  $4.tail:
     assume !p4$1 && !p4$2;
     $c1.0$1 := (if p1$1 then BV64_ADD($c1.0$1, 8192bv64) else $c1.0$1);
     $c1.0$2 := (if p1$2 then BV64_ADD($c1.0$2, 8192bv64) else $c1.0$2);
     p0$1 := (if p1$1 then true else p0$1);
     p0$2 := (if p1$2 then true else p0$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $1.backedge, $1.tail;
 
-  $for.cond.tail:
+  $1.tail:
     assume !p0$1 && !p0$2;
     return;
 
-  $for.cond.backedge:
+  $1.backedge:
     assume {:backedge} p0$1 || p0$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond.38.backedge:
+  $4.backedge:
     assume {:backedge} p4$1 || p4$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.38;
+    goto $4;
 
-  $for.cond.44.backedge:
+  $6.backedge:
     assume {:backedge} p6$1 || p6$2;
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond.44;
+    goto $6;
 }
 
 

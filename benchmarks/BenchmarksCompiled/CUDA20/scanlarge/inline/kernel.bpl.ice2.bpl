@@ -579,10 +579,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  (  BV32_SLE($d1.0, 1bv
 
   __partitioned_block_$falsebb7_1:
     call {:sourceloc_num 50} $bugle_barrier_duplicated_0(1bv1, 1bv1);
-    call {:sourceloc} {:sourceloc_num 51} _LOG_READ_$$_ZZ1kPfPKfS_iiiiiE6s_data(true, BV32_ADD(local_id_x$1, v4$1), $$_ZZ1kPfPKfS_iiiiiE6s_data[1bv1][BV32_ADD(local_id_x$1, v4$1)]);
     assume {:do_not_predicate} {:check_id "check_state_2"} {:captureState "check_state_2"} {:sourceloc} {:sourceloc_num 51} true;
-    call {:check_id "check_state_2"} {:sourceloc} {:sourceloc_num 51} _CHECK_READ_$$_ZZ1kPfPKfS_iiiiiE6s_data(true, BV32_ADD(local_id_x$2, v4$2), $$_ZZ1kPfPKfS_iiiiiE6s_data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(local_id_x$2, v4$2)]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ1kPfPKfS_iiiiiE6s_data"} true;
     v35$1 := $$_ZZ1kPfPKfS_iiiiiE6s_data[1bv1][BV32_ADD(local_id_x$1, v4$1)];
     v35$2 := $$_ZZ1kPfPKfS_iiiiiE6s_data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(local_id_x$2, v4$2)];
     call {:sourceloc} {:sourceloc_num 52} _LOG_WRITE_$$g_odata(true, v1$1, v35$1, $$g_odata[v1$1]);
@@ -597,10 +594,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  (  BV32_SLE($d1.0, 1bv
 
   $falsebb9:
     assume {:partition} !v36;
-    call {:sourceloc} {:sourceloc_num 59} _LOG_READ_$$_ZZ1kPfPKfS_iiiiiE6s_data(true, BV32_ADD(v3$1, v5$1), $$_ZZ1kPfPKfS_iiiiiE6s_data[1bv1][BV32_ADD(v3$1, v5$1)]);
     assume {:do_not_predicate} {:check_id "check_state_4"} {:captureState "check_state_4"} {:sourceloc} {:sourceloc_num 59} true;
-    call {:check_id "check_state_4"} {:sourceloc} {:sourceloc_num 59} _CHECK_READ_$$_ZZ1kPfPKfS_iiiiiE6s_data(true, BV32_ADD(v3$2, v5$2), $$_ZZ1kPfPKfS_iiiiiE6s_data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v3$2, v5$2)]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ1kPfPKfS_iiiiiE6s_data"} true;
     v39$1 := $$_ZZ1kPfPKfS_iiiiiE6s_data[1bv1][BV32_ADD(v3$1, v5$1)];
     v39$2 := $$_ZZ1kPfPKfS_iiiiiE6s_data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v3$2, v5$2)];
     call {:sourceloc} {:sourceloc_num 60} _LOG_WRITE_$$g_odata(true, v2$1, v39$1, $$g_odata[v2$1]);
@@ -621,10 +615,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  (  BV32_SLE($d1.0, 1bv
     v37$2 := BV32_SLT(v3$2, $n);
     p10$1 := (if v37$1 then v37$1 else p10$1);
     p10$2 := (if v37$2 then v37$2 else p10$2);
-    call {:sourceloc} {:sourceloc_num 55} _LOG_READ_$$_ZZ1kPfPKfS_iiiiiE6s_data(p10$1, BV32_ADD(v3$1, v5$1), $$_ZZ1kPfPKfS_iiiiiE6s_data[1bv1][BV32_ADD(v3$1, v5$1)]);
     assume {:do_not_predicate} {:check_id "check_state_6"} {:captureState "check_state_6"} {:sourceloc} {:sourceloc_num 55} true;
-    call {:check_id "check_state_6"} {:sourceloc} {:sourceloc_num 55} _CHECK_READ_$$_ZZ1kPfPKfS_iiiiiE6s_data(p10$2, BV32_ADD(v3$2, v5$2), $$_ZZ1kPfPKfS_iiiiiE6s_data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v3$2, v5$2)]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ1kPfPKfS_iiiiiE6s_data"} true;
     v38$1 := (if p10$1 then $$_ZZ1kPfPKfS_iiiiiE6s_data[1bv1][BV32_ADD(v3$1, v5$1)] else v38$1);
     v38$2 := (if p10$2 then $$_ZZ1kPfPKfS_iiiiiE6s_data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v3$2, v5$2)] else v38$2);
     call {:sourceloc} {:sourceloc_num 56} _LOG_WRITE_$$g_odata(p10$1, v2$1, v38$1, $$g_odata[v2$1]);

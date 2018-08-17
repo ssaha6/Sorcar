@@ -143,38 +143,38 @@ implementation {:source_name "dwtHaar1D"} {:kernel} $_Z9dwtHaar1DPfS_S_jji($dlev
   var $num_threads.1$2: bv32;
   var $idata0.1$1: bv32;
   var $idata0.1$2: bv32;
-  var v3$1: bv32;
-  var v3$2: bv32;
-  var v2$1: bv32;
-  var v2$2: bv32;
-  var v1$1: bv32;
-  var v1$2: bv32;
-  var v4$1: bv32;
-  var v4$2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
+  var v1$1: bv32;
+  var v1$2: bv32;
+  var v2$1: bv32;
+  var v2$2: bv32;
+  var v3$1: bv32;
+  var v3$2: bv32;
+  var v4$1: bv32;
+  var v4$2: bv32;
   var v5: bool;
+  var v6: bool;
   var v7$1: bool;
   var v7$2: bool;
-  var v6: bool;
-  var v10$1: bv32;
-  var v10$2: bv32;
   var v8$1: bv32;
   var v8$2: bv32;
   var v9$1: bv32;
   var v9$2: bv32;
-  var v16$1: bv32;
-  var v16$2: bv32;
+  var v10$1: bv32;
+  var v10$2: bv32;
   var v11$1: bv32;
   var v11$2: bv32;
-  var v14$1: bv32;
-  var v14$2: bv32;
   var v12$1: bv32;
   var v12$2: bv32;
   var v13$1: bv32;
   var v13$2: bv32;
+  var v14$1: bv32;
+  var v14$2: bv32;
   var v15$1: bool;
   var v15$2: bool;
+  var v16$1: bv32;
+  var v16$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -185,7 +185,7 @@ implementation {:source_name "dwtHaar1D"} {:kernel} $_Z9dwtHaar1DPfS_S_jji($dlev
   var p3$2: bool;
 
 
-  __partitioned_block_$entry_0:
+  __partitioned_block_$0_0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, BV32_MUL(2bv32, $bdim)), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, BV32_MUL(2bv32, $bdim)), local_id_x$2);
     havoc v1$1, v1$2;
@@ -204,9 +204,9 @@ implementation {:source_name "dwtHaar1D"} {:kernel} $_Z9dwtHaar1DPfS_S_jji($dlev
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$shared"} true;
     $$shared[1bv1][BV32_ADD(local_id_x$1, $bdim)] := v2$1;
     $$shared[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(local_id_x$2, $bdim)] := v2$2;
-    goto __partitioned_block_$entry_1;
+    goto __partitioned_block_$0_1;
 
-  __partitioned_block_$entry_1:
+  __partitioned_block_$0_1:
     call {:sourceloc_num 7} $bugle_barrier_duplicated_0(1bv1, 1bv1);
     assume {:do_not_predicate} {:check_id "check_state_2"} {:captureState "check_state_2"} {:sourceloc} {:sourceloc_num 8} true;
     v3$1 := $$shared[1bv1][BV32_MUL(2bv32, local_id_x$1)];
@@ -214,9 +214,9 @@ implementation {:source_name "dwtHaar1D"} {:kernel} $_Z9dwtHaar1DPfS_S_jji($dlev
     assume {:do_not_predicate} {:check_id "check_state_3"} {:captureState "check_state_3"} {:sourceloc} {:sourceloc_num 9} true;
     v4$1 := $$shared[1bv1][BV32_ADD(BV32_MUL(2bv32, local_id_x$1), 1bv32)];
     v4$2 := $$shared[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(2bv32, local_id_x$2), 1bv32)];
-    goto __partitioned_block_$entry_2;
+    goto __partitioned_block_$0_2;
 
-  __partitioned_block_$entry_2:
+  __partitioned_block_$0_2:
     call {:sourceloc_num 10} $bugle_barrier_duplicated_1(1bv1, 1bv1);
     call {:sourceloc} {:sourceloc_num 11} _LOG_WRITE_$$od(true, BV32_ADD(BV32_ADD(BV32_MUL(group_id_x$1, $bdim), local_id_x$1), $slength_step_half), FMUL32(FSUB32(v3$1, v4$1), 1060439283bv32), $$od[BV32_ADD(BV32_ADD(BV32_MUL(group_id_x$1, $bdim), local_id_x$1), $slength_step_half)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$od(true, BV32_ADD(BV32_ADD(BV32_MUL(group_id_x$2, $bdim), local_id_x$2), $slength_step_half));
@@ -232,18 +232,18 @@ implementation {:source_name "dwtHaar1D"} {:kernel} $_Z9dwtHaar1DPfS_S_jji($dlev
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$shared"} true;
     $$shared[1bv1][BV32_ADD(local_id_x$1, BV32_ASHR(local_id_x$1, 4bv32))] := FMUL32(FADD32(v3$1, v4$1), 1060439283bv32);
     $$shared[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(local_id_x$2, BV32_ASHR(local_id_x$2, 4bv32))] := FMUL32(FADD32(v3$2, v4$2), 1060439283bv32);
-    goto __partitioned_block_$entry_3;
+    goto __partitioned_block_$0_3;
 
-  __partitioned_block_$entry_3:
+  __partitioned_block_$0_3:
     call {:sourceloc_num 13} $bugle_barrier_duplicated_2(1bv1, 1bv1);
     v5 := BV32_UGT($dlevels, 1bv32);
     goto $truebb, $falsebb;
 
   $falsebb:
     assume {:partition} !v5;
-    goto $if.end.65;
+    goto $10;
 
-  $if.end.65:
+  $10:
     return;
 
   $truebb:
@@ -251,9 +251,9 @@ implementation {:source_name "dwtHaar1D"} {:kernel} $_Z9dwtHaar1DPfS_S_jji($dlev
     $offset_neighbor.0$1, $num_threads.0$1, $idata0.0$1, $i.0 := 1bv32, BV32_ASHR($bdim, 1bv32), BV32_MUL(local_id_x$1, 2bv32), 1bv32;
     $offset_neighbor.0$2, $num_threads.0$2, $idata0.0$2 := 1bv32, BV32_ASHR($bdim, 1bv32), BV32_MUL(local_id_x$2, 2bv32);
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $2;
 
-  $for.cond:
+  $2:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "nowrite"} _b34 ==> !_WRITE_HAS_OCCURRED_$$shared;
     assert {:tag "noread"} _b33 ==> !_READ_HAS_OCCURRED_$$shared;
@@ -334,7 +334,7 @@ implementation {:source_name "dwtHaar1D"} {:kernel} $_Z9dwtHaar1DPfS_S_jji($dlev
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$approx_final"} true;
     $$approx_final[group_id_x$1] := (if p2$1 then v16$1 else $$approx_final[group_id_x$1]);
     $$approx_final[group_id_x$2] := (if p2$2 then v16$2 else $$approx_final[group_id_x$2]);
-    goto $if.end.65;
+    goto $10;
 
   __partitioned_block_$truebb0_0:
     assume {:partition} v6;
@@ -399,7 +399,7 @@ implementation {:source_name "dwtHaar1D"} {:kernel} $_Z9dwtHaar1DPfS_S_jji($dlev
     $offset_neighbor.0$1, $num_threads.0$1, $idata0.0$1, $i.0 := $offset_neighbor.1$1, $num_threads.1$1, $idata0.1$1, BV32_ADD($i.0, 1bv32);
     $offset_neighbor.0$2, $num_threads.0$2, $idata0.0$2 := $offset_neighbor.1$2, $num_threads.1$2, $idata0.1$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $2;
 }
 
 

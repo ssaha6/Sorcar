@@ -5,8 +5,7 @@ function {:existential true} my_inv (
  b0003: bool,
  b0004: bool,
  b0005: bool,
- b0006: bool,
- b0007: bool
+ b0006: bool
  ) : bool;
 type _SIZE_T_TYPE = bv32;
 
@@ -185,8 +184,6 @@ implementation {:source_name "splitRearrange"} {:kernel} $splitRearrange($numEle
   var $1$2: bv32;
   var $2$1: bv32;
   var $2$2: bv32;
-  var v12$1: bv128;
-  var v12$2: bv128;
   var v0$1: bv32;
   var v0$2: bv32;
   var v1$1: bool;
@@ -211,12 +208,12 @@ implementation {:source_name "splitRearrange"} {:kernel} $splitRearrange($numEle
   var v10$2: bv32;
   var v11$1: bv32;
   var v11$2: bv32;
+  var v12$1: bv128;
+  var v12$2: bv128;
   var v13$1: bv32;
   var v13$2: bv32;
   var v14$1: bv32;
   var v14$2: bv32;
-  var v21$1: bv32;
-  var v21$2: bv32;
   var v15$1: bv32;
   var v15$2: bv32;
   var v16$1: bv32;
@@ -229,6 +226,8 @@ implementation {:source_name "splitRearrange"} {:kernel} $splitRearrange($numEle
   var v19$2: bv32;
   var v20$1: bv32;
   var v20$2: bv32;
+  var v21$1: bv32;
+  var v21$2: bv32;
   var v22$1: bool;
   var v22$2: bool;
   var v23$1: bv32;
@@ -387,28 +386,16 @@ implementation {:source_name "splitRearrange"} {:kernel} $splitRearrange($numEle
 
   __partitioned_block_$0_1:
     call {:sourceloc_num 20} $bugle_barrier_duplicated_0(1bv1, 0bv1);
-    call {:sourceloc} {:sourceloc_num 21} _LOG_READ_$$splitRearrange.histo_s(true, v13$1, $$splitRearrange.histo_s[1bv1][v13$1]);
     assume {:do_not_predicate} {:check_id "check_state_4"} {:captureState "check_state_4"} {:sourceloc} {:sourceloc_num 21} true;
-    call {:check_id "check_state_4"} {:sourceloc} {:sourceloc_num 21} _CHECK_READ_$$splitRearrange.histo_s(true, v13$2, $$splitRearrange.histo_s[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v13$2]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$splitRearrange.histo_s"} true;
     v18$1 := $$splitRearrange.histo_s[1bv1][v13$1];
     v18$2 := $$splitRearrange.histo_s[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v13$2];
-    call {:sourceloc} {:sourceloc_num 22} _LOG_READ_$$splitRearrange.histo_s(true, v14$1, $$splitRearrange.histo_s[1bv1][v14$1]);
     assume {:do_not_predicate} {:check_id "check_state_5"} {:captureState "check_state_5"} {:sourceloc} {:sourceloc_num 22} true;
-    call {:check_id "check_state_5"} {:sourceloc} {:sourceloc_num 22} _CHECK_READ_$$splitRearrange.histo_s(true, v14$2, $$splitRearrange.histo_s[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v14$2]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$splitRearrange.histo_s"} true;
     v19$1 := $$splitRearrange.histo_s[1bv1][v14$1];
     v19$2 := $$splitRearrange.histo_s[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v14$2];
-    call {:sourceloc} {:sourceloc_num 23} _LOG_READ_$$splitRearrange.histo_s(true, v15$1, $$splitRearrange.histo_s[1bv1][v15$1]);
     assume {:do_not_predicate} {:check_id "check_state_6"} {:captureState "check_state_6"} {:sourceloc} {:sourceloc_num 23} true;
-    call {:check_id "check_state_6"} {:sourceloc} {:sourceloc_num 23} _CHECK_READ_$$splitRearrange.histo_s(true, v15$2, $$splitRearrange.histo_s[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v15$2]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$splitRearrange.histo_s"} true;
     v20$1 := $$splitRearrange.histo_s[1bv1][v15$1];
     v20$2 := $$splitRearrange.histo_s[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v15$2];
-    call {:sourceloc} {:sourceloc_num 24} _LOG_READ_$$splitRearrange.histo_s(true, v16$1, $$splitRearrange.histo_s[1bv1][v16$1]);
     assume {:do_not_predicate} {:check_id "check_state_7"} {:captureState "check_state_7"} {:sourceloc} {:sourceloc_num 24} true;
-    call {:check_id "check_state_7"} {:sourceloc} {:sourceloc_num 24} _CHECK_READ_$$splitRearrange.histo_s(true, v16$2, $$splitRearrange.histo_s[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v16$2]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$splitRearrange.histo_s"} true;
     v21$1 := $$splitRearrange.histo_s[1bv1][v16$1];
     v21$2 := $$splitRearrange.histo_s[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v16$2];
     $new_index.0$1, $i.0$1 := v21$1 ++ v20$1 ++ v19$1 ++ v18$1, BV32_SUB(BV32_MUL(4bv32, local_id_x$1), 1bv32);
@@ -420,7 +407,6 @@ implementation {:source_name "splitRearrange"} {:kernel} $splitRearrange($numEle
 
   $6:
     assume {:captureState "loop_head_state_0"} true;
-    
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$splitRearrange.array_s ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$splitRearrange.array_s ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$splitRearrange.array_s ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -441,7 +427,7 @@ implementation {:source_name "splitRearrange"} {:kernel} $splitRearrange($numEle
     
     
     
-assert  my_inv (  ( p4$1 ==> BV32_AND(BV32_SUB(4294967295bv32, 1bv32), $i.0$1) == BV32_AND(BV32_SUB(4294967295bv32, 1bv32), BV32_SUB(BV32_MUL(4bv32, local_id_x$1), 1bv32)) )  && ( p4$2 ==> BV32_AND(BV32_SUB(4294967295bv32, 1bv32), $i.0$2) == BV32_AND(BV32_SUB(4294967295bv32, 1bv32), BV32_SUB(BV32_MUL(4bv32, local_id_x$2), 1bv32)) ) ,  ( p4$1 ==> BV32_SLE(0bv32, $i.0$1) )  && ( p4$2 ==> BV32_SLE(0bv32, $i.0$2) ) ,  ( p4$1 ==> BV32_SLE($i.0$1, BV32_SUB(BV32_MUL(4bv32, local_id_x$1), 1bv32)) )  && ( p4$2 ==> BV32_SLE($i.0$2, BV32_SUB(BV32_MUL(4bv32, local_id_x$2), 1bv32)) ) ,  ( p4$1 ==> BV32_SGE($i.0$1, BV32_SUB(BV32_MUL(4bv32, local_id_x$1), 1bv32)) )  && ( p4$2 ==> BV32_SGE($i.0$2, BV32_SUB(BV32_MUL(4bv32, local_id_x$2), 1bv32)) ) ,  ( p4$1 ==> BV32_ULE($i.0$1, BV32_SUB(BV32_MUL(4bv32, local_id_x$1), 1bv32)) )  && ( p4$2 ==> BV32_ULE($i.0$2, BV32_SUB(BV32_MUL(4bv32, local_id_x$2), 1bv32)) ) ,  ( p4$1 ==> BV32_UGE($i.0$1, BV32_SUB(BV32_MUL(4bv32, local_id_x$1), 1bv32)) )  && ( p4$2 ==> BV32_UGE($i.0$2, BV32_SUB(BV32_MUL(4bv32, local_id_x$2), 1bv32)) ) ,  (  BV32_SGE($i.0$1, 0bv32) ==> p4$1 )  && (  BV32_SGE($i.0$2, 0bv32) ==> p4$2 ) ,  (  _READ_HAS_OCCURRED_$$splitRearrange.array_s ==> BV32_AND(BV32_SUB(4294967295bv32, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(4294967295bv32, 1bv32), BV32_SUB(BV32_MUL(4bv32, local_id_x$1), 1bv32)) )  ); 
+assert  my_inv (  ( p4$1 ==> BV32_AND(BV32_SUB(4294967295bv32, 1bv32), $i.0$1) == BV32_AND(BV32_SUB(4294967295bv32, 1bv32), BV32_SUB(BV32_MUL(4bv32, local_id_x$1), 1bv32)) )  && ( p4$2 ==> BV32_AND(BV32_SUB(4294967295bv32, 1bv32), $i.0$2) == BV32_AND(BV32_SUB(4294967295bv32, 1bv32), BV32_SUB(BV32_MUL(4bv32, local_id_x$2), 1bv32)) ) ,  ( p4$1 ==> BV32_SLE(0bv32, $i.0$1) )  && ( p4$2 ==> BV32_SLE(0bv32, $i.0$2) ) ,  ( p4$1 ==> BV32_SLE($i.0$1, BV32_SUB(BV32_MUL(4bv32, local_id_x$1), 1bv32)) )  && ( p4$2 ==> BV32_SLE($i.0$2, BV32_SUB(BV32_MUL(4bv32, local_id_x$2), 1bv32)) ) ,  ( p4$1 ==> BV32_SGE($i.0$1, BV32_SUB(BV32_MUL(4bv32, local_id_x$1), 1bv32)) )  && ( p4$2 ==> BV32_SGE($i.0$2, BV32_SUB(BV32_MUL(4bv32, local_id_x$2), 1bv32)) ) ,  ( p4$1 ==> BV32_ULE($i.0$1, BV32_SUB(BV32_MUL(4bv32, local_id_x$1), 1bv32)) )  && ( p4$2 ==> BV32_ULE($i.0$2, BV32_SUB(BV32_MUL(4bv32, local_id_x$2), 1bv32)) ) ,  ( p4$1 ==> BV32_UGE($i.0$1, BV32_SUB(BV32_MUL(4bv32, local_id_x$1), 1bv32)) )  && ( p4$2 ==> BV32_UGE($i.0$2, BV32_SUB(BV32_MUL(4bv32, local_id_x$2), 1bv32)) ) ,  (  BV32_SGE($i.0$1, 0bv32) ==> p4$1 )  && (  BV32_SGE($i.0$2, 0bv32) ==> p4$2 )  ); 
 
 
     assert {:block_sourceloc} {:sourceloc_num 25} p4$1 ==> true;
@@ -475,10 +461,7 @@ assert  my_inv (  ( p4$1 ==> BV32_AND(BV32_SUB(4294967295bv32, 1bv32), $i.0$1) =
     p5$2 := (if p4$2 && v22$2 then v22$2 else p5$2);
     p4$1 := (if p4$1 && !v22$1 then v22$1 else p4$1);
     p4$2 := (if p4$2 && !v22$2 then v22$2 else p4$2);
-    call {:sourceloc} {:sourceloc_num 27} _LOG_READ_$$splitRearrange.array_s(p5$1, $i.0$1, $$splitRearrange.array_s[1bv1][$i.0$1]);
     assume {:do_not_predicate} {:check_id "check_state_16"} {:captureState "check_state_16"} {:sourceloc} {:sourceloc_num 27} true;
-    call {:check_id "check_state_16"} {:sourceloc} {:sourceloc_num 27} _CHECK_READ_$$splitRearrange.array_s(p5$2, $i.0$2, $$splitRearrange.array_s[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][$i.0$2]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$splitRearrange.array_s"} true;
     v23$1 := (if p5$1 then $$splitRearrange.array_s[1bv1][$i.0$1] else v23$1);
     v23$2 := (if p5$2 then $$splitRearrange.array_s[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][$i.0$2] else v23$2);
     v24$1 := (if p5$1 then v23$1 == v13$1 else v24$1);
@@ -1329,5 +1312,3 @@ implementation {:inline 1} $bugle_barrier_duplicated_0($0: bv1, $1: bv1)
 
 
 function {:bvbuiltin "bvsgt"} BV32_SGT(bv32, bv32) : bool;
-
-

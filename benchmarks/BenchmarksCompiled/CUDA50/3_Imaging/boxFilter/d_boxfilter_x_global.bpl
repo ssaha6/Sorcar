@@ -112,49 +112,49 @@ implementation {:source_name "d_boxfilter_x_global"} {:kernel} $_Z20d_boxfilter_
   var $x.i.0: bv32;
   var $t.i.1$1: bv32;
   var $t.i.1$2: bv32;
-  var $x7.i.0: bv32;
+  var $x1.i.0: bv32;
   var $t.i.2$1: bv32;
   var $t.i.2$2: bv32;
-  var $x21.i.0: bv32;
+  var $x2.i.0: bv32;
   var $t.i.3$1: bv32;
   var $t.i.3$2: bv32;
-  var $x39.i.0: bv32;
-  var v17$1: bv32;
-  var v17$2: bv32;
-  var v2$1: bv32;
-  var v2$2: bv32;
+  var $x3.i.0: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
+  var v2$1: bv32;
+  var v2$2: bv32;
   var v3: bv32;
-  var v5: bool;
-  var v9$1: bv32;
-  var v9$2: bv32;
-  var v6$1: bv32;
-  var v6$2: bv32;
-  var v8$1: bv32;
-  var v8$2: bv32;
   var v4$1: bv32;
   var v4$2: bv32;
-  var v12$1: bv32;
-  var v12$2: bv32;
-  var v16$1: bv32;
-  var v16$2: bv32;
-  var v13$1: bv32;
-  var v13$2: bv32;
-  var v11: bool;
+  var v5: bool;
+  var v6$1: bv32;
+  var v6$2: bv32;
+  var v7: bool;
+  var v8$1: bv32;
+  var v8$2: bv32;
+  var v9$1: bv32;
+  var v9$2: bv32;
   var v10$1: bv32;
   var v10$2: bv32;
-  var v7: bool;
+  var v11: bool;
+  var v12$1: bv32;
+  var v12$2: bv32;
+  var v13$1: bv32;
+  var v13$2: bv32;
   var v14$1: bv32;
   var v14$2: bv32;
   var v15: bool;
+  var v16$1: bv32;
+  var v16$2: bv32;
+  var v17$1: bv32;
+  var v17$2: bv32;
   var v18$1: bv32;
   var v18$2: bv32;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2);
     v1$1 := BV32_MUL(v0$1, $w);
@@ -166,9 +166,9 @@ implementation {:source_name "d_boxfilter_x_global"} {:kernel} $_Z20d_boxfilter_
     $t.i.0$1, $x.i.0 := FMUL32(v4$1, SI32_TO_FP32($r)), 0bv32;
     $t.i.0$2 := FMUL32(v4$2, SI32_TO_FP32($r));
     assume {:captureState "loop_entry_state_3_0"} true;
-    goto $for.cond.i;
+    goto $1;
 
-  $for.cond.i:
+  $1:
     assume {:captureState "loop_head_state_3"} true;
     assume {:invGenSkippedLoop} true;
     assert {:block_sourceloc} {:sourceloc_num 5} true;
@@ -184,68 +184,68 @@ implementation {:source_name "d_boxfilter_x_global"} {:kernel} $_Z20d_boxfilter_
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$od"} true;
     $$od[v2$1] := FMUL32($t.i.0$1, v3);
     $$od[v2$2] := FMUL32($t.i.0$2, v3);
-    $t.i.1$1, $x7.i.0 := $t.i.0$1, 1bv32;
+    $t.i.1$1, $x1.i.0 := $t.i.0$1, 1bv32;
     $t.i.1$2 := $t.i.0$2;
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond.8.i;
+    goto $4;
 
-  $for.cond.8.i:
+  $4:
     assume {:captureState "loop_head_state_2"} true;
     assert {:tag "accessBreak"} _b18 ==> _WRITE_HAS_OCCURRED_$$od ==> local_id_x$1 == BV32_SUB(BV32_DIV(_WATCHED_OFFSET, $w), BV32_MUL(group_id_x$1, group_size_x));
     assert {:tag "accessBreak"} _b17 ==> _WRITE_HAS_OCCURRED_$$od ==> group_id_x$1 == BV32_SUB(BV32_DIV(BV32_DIV(_WATCHED_OFFSET, $w), group_size_x), BV32_DIV(local_id_x$1, group_size_x));
     assert {:tag "accessUpperBoundBlock"} _b16 ==> _WRITE_HAS_OCCURRED_$$od ==> BV32_SLT(_WATCHED_OFFSET, BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(group_id_x$1, 1bv32), group_size_x), local_id_x$1), $w));
     assert {:tag "accessLowerBoundBlock"} _b15 ==> _WRITE_HAS_OCCURRED_$$od ==> BV32_SLE(BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), $w), _WATCHED_OFFSET);
-    assert {:tag "loopBound"} {:thread 1} _b4 ==> BV32_UGE($x7.i.0, 1bv32);
-    assert {:tag "loopBound"} {:thread 1} _b3 ==> BV32_ULE($x7.i.0, 1bv32);
-    assert {:tag "loopBound"} {:thread 1} _b2 ==> BV32_SGE($x7.i.0, 1bv32);
-    assert {:tag "loopBound"} {:thread 1} _b1 ==> BV32_SLE($x7.i.0, 1bv32);
-    assert {:tag "guardNonNeg"} {:thread 1} _b0 ==> BV32_SLE(0bv32, $x7.i.0);
+    assert {:tag "loopBound"} {:thread 1} _b4 ==> BV32_UGE($x1.i.0, 1bv32);
+    assert {:tag "loopBound"} {:thread 1} _b3 ==> BV32_ULE($x1.i.0, 1bv32);
+    assert {:tag "loopBound"} {:thread 1} _b2 ==> BV32_SGE($x1.i.0, 1bv32);
+    assert {:tag "loopBound"} {:thread 1} _b1 ==> BV32_SLE($x1.i.0, 1bv32);
+    assert {:tag "guardNonNeg"} {:thread 1} _b0 ==> BV32_SLE(0bv32, $x1.i.0);
     assert {:block_sourceloc} {:sourceloc_num 10} true;
-    v7 := BV32_SLT($x7.i.0, BV32_ADD($r, 1bv32));
+    v7 := BV32_SLT($x1.i.0, BV32_ADD($r, 1bv32));
     goto $truebb0, $falsebb0;
 
   $falsebb0:
     assume {:partition} !v7;
-    $t.i.2$1, $x21.i.0 := $t.i.1$1, BV32_ADD($r, 1bv32);
+    $t.i.2$1, $x2.i.0 := $t.i.1$1, BV32_ADD($r, 1bv32);
     $t.i.2$2 := $t.i.1$2;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.23.i;
+    goto $7;
 
-  $for.cond.23.i:
+  $7:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "accessBreak"} _b22 ==> _WRITE_HAS_OCCURRED_$$od ==> local_id_x$1 == BV32_SUB(BV32_DIV(_WATCHED_OFFSET, $w), BV32_MUL(group_id_x$1, group_size_x));
     assert {:tag "accessBreak"} _b21 ==> _WRITE_HAS_OCCURRED_$$od ==> group_id_x$1 == BV32_SUB(BV32_DIV(BV32_DIV(_WATCHED_OFFSET, $w), group_size_x), BV32_DIV(local_id_x$1, group_size_x));
     assert {:tag "accessUpperBoundBlock"} _b20 ==> _WRITE_HAS_OCCURRED_$$od ==> BV32_SLT(_WATCHED_OFFSET, BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(group_id_x$1, 1bv32), group_size_x), local_id_x$1), $w));
     assert {:tag "accessLowerBoundBlock"} _b19 ==> _WRITE_HAS_OCCURRED_$$od ==> BV32_SLE(BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), $w), _WATCHED_OFFSET);
-    assert {:tag "loopBound"} {:thread 1} _b9 ==> BV32_UGE($x21.i.0, BV32_ADD($r, 1bv32));
-    assert {:tag "loopBound"} {:thread 1} _b8 ==> BV32_ULE($x21.i.0, BV32_ADD($r, 1bv32));
-    assert {:tag "loopBound"} {:thread 1} _b7 ==> BV32_SGE($x21.i.0, BV32_ADD($r, 1bv32));
-    assert {:tag "loopBound"} {:thread 1} _b6 ==> BV32_SLE($x21.i.0, BV32_ADD($r, 1bv32));
-    assert {:tag "guardNonNeg"} {:thread 1} _b5 ==> BV32_SLE(0bv32, $x21.i.0);
+    assert {:tag "loopBound"} {:thread 1} _b9 ==> BV32_UGE($x2.i.0, BV32_ADD($r, 1bv32));
+    assert {:tag "loopBound"} {:thread 1} _b8 ==> BV32_ULE($x2.i.0, BV32_ADD($r, 1bv32));
+    assert {:tag "loopBound"} {:thread 1} _b7 ==> BV32_SGE($x2.i.0, BV32_ADD($r, 1bv32));
+    assert {:tag "loopBound"} {:thread 1} _b6 ==> BV32_SLE($x2.i.0, BV32_ADD($r, 1bv32));
+    assert {:tag "guardNonNeg"} {:thread 1} _b5 ==> BV32_SLE(0bv32, $x2.i.0);
     assert {:block_sourceloc} {:sourceloc_num 16} true;
-    v11 := BV32_SLT($x21.i.0, BV32_SUB($w, $r));
+    v11 := BV32_SLT($x2.i.0, BV32_SUB($w, $r));
     goto $truebb1, $falsebb1;
 
   $falsebb1:
     assume {:partition} !v11;
-    $t.i.3$1, $x39.i.0 := $t.i.2$1, BV32_SUB($w, $r);
+    $t.i.3$1, $x3.i.0 := $t.i.2$1, BV32_SUB($w, $r);
     $t.i.3$2 := $t.i.2$2;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.41.i;
+    goto $10;
 
-  $for.cond.41.i:
+  $10:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessBreak"} _b26 ==> _WRITE_HAS_OCCURRED_$$od ==> local_id_x$1 == BV32_SUB(BV32_DIV(_WATCHED_OFFSET, $w), BV32_MUL(group_id_x$1, group_size_x));
     assert {:tag "accessBreak"} _b25 ==> _WRITE_HAS_OCCURRED_$$od ==> group_id_x$1 == BV32_SUB(BV32_DIV(BV32_DIV(_WATCHED_OFFSET, $w), group_size_x), BV32_DIV(local_id_x$1, group_size_x));
     assert {:tag "accessUpperBoundBlock"} _b24 ==> _WRITE_HAS_OCCURRED_$$od ==> BV32_SLT(_WATCHED_OFFSET, BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(group_id_x$1, 1bv32), group_size_x), local_id_x$1), $w));
     assert {:tag "accessLowerBoundBlock"} _b23 ==> _WRITE_HAS_OCCURRED_$$od ==> BV32_SLE(BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), $w), _WATCHED_OFFSET);
-    assert {:tag "loopBound"} {:thread 1} _b14 ==> BV32_UGE($x39.i.0, BV32_SUB($w, $r));
-    assert {:tag "loopBound"} {:thread 1} _b13 ==> BV32_ULE($x39.i.0, BV32_SUB($w, $r));
-    assert {:tag "loopBound"} {:thread 1} _b12 ==> BV32_SGE($x39.i.0, BV32_SUB($w, $r));
-    assert {:tag "loopBound"} {:thread 1} _b11 ==> BV32_SLE($x39.i.0, BV32_SUB($w, $r));
-    assert {:tag "guardNonNeg"} {:thread 1} _b10 ==> BV32_SLE(0bv32, $x39.i.0);
+    assert {:tag "loopBound"} {:thread 1} _b14 ==> BV32_UGE($x3.i.0, BV32_SUB($w, $r));
+    assert {:tag "loopBound"} {:thread 1} _b13 ==> BV32_ULE($x3.i.0, BV32_SUB($w, $r));
+    assert {:tag "loopBound"} {:thread 1} _b12 ==> BV32_SGE($x3.i.0, BV32_SUB($w, $r));
+    assert {:tag "loopBound"} {:thread 1} _b11 ==> BV32_SLE($x3.i.0, BV32_SUB($w, $r));
+    assert {:tag "guardNonNeg"} {:thread 1} _b10 ==> BV32_SLE(0bv32, $x3.i.0);
     assert {:block_sourceloc} {:sourceloc_num 22} true;
-    v15 := BV32_SLT($x39.i.0, $w);
+    v15 := BV32_SLT($x3.i.0, $w);
     goto $truebb2, $falsebb2;
 
   $falsebb2:
@@ -258,17 +258,17 @@ implementation {:source_name "d_boxfilter_x_global"} {:kernel} $_Z20d_boxfilter_
     havoc v17$1, v17$2;
     v18$1 := FSUB32(FADD32($t.i.3$1, v16$1), v17$1);
     v18$2 := FSUB32(FADD32($t.i.3$2, v16$2), v17$2);
-    call {:sourceloc} {:sourceloc_num 26} _LOG_WRITE_$$od(true, BV32_ADD(v2$1, $x39.i.0), FMUL32(v18$1, v3), $$od[BV32_ADD(v2$1, $x39.i.0)]);
-    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$od(true, BV32_ADD(v2$2, $x39.i.0));
+    call {:sourceloc} {:sourceloc_num 26} _LOG_WRITE_$$od(true, BV32_ADD(v2$1, $x3.i.0), FMUL32(v18$1, v3), $$od[BV32_ADD(v2$1, $x3.i.0)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$od(true, BV32_ADD(v2$2, $x3.i.0));
     assume {:do_not_predicate} {:check_id "check_state_1"} {:captureState "check_state_1"} {:sourceloc} {:sourceloc_num 26} true;
-    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 26} _CHECK_WRITE_$$od(true, BV32_ADD(v2$2, $x39.i.0), FMUL32(v18$2, v3));
+    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 26} _CHECK_WRITE_$$od(true, BV32_ADD(v2$2, $x3.i.0), FMUL32(v18$2, v3));
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$od"} true;
-    $$od[BV32_ADD(v2$1, $x39.i.0)] := FMUL32(v18$1, v3);
-    $$od[BV32_ADD(v2$2, $x39.i.0)] := FMUL32(v18$2, v3);
-    $t.i.3$1, $x39.i.0 := v18$1, BV32_ADD($x39.i.0, 1bv32);
+    $$od[BV32_ADD(v2$1, $x3.i.0)] := FMUL32(v18$1, v3);
+    $$od[BV32_ADD(v2$2, $x3.i.0)] := FMUL32(v18$2, v3);
+    $t.i.3$1, $x3.i.0 := v18$1, BV32_ADD($x3.i.0, 1bv32);
     $t.i.3$2 := v18$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.41.i;
+    goto $10;
 
   $truebb1:
     assume {:partition} v11;
@@ -276,17 +276,17 @@ implementation {:source_name "d_boxfilter_x_global"} {:kernel} $_Z20d_boxfilter_
     havoc v13$1, v13$2;
     v14$1 := FSUB32(FADD32($t.i.2$1, v12$1), v13$1);
     v14$2 := FSUB32(FADD32($t.i.2$2, v12$2), v13$2);
-    call {:sourceloc} {:sourceloc_num 20} _LOG_WRITE_$$od(true, BV32_ADD(v2$1, $x21.i.0), FMUL32(v14$1, v3), $$od[BV32_ADD(v2$1, $x21.i.0)]);
-    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$od(true, BV32_ADD(v2$2, $x21.i.0));
+    call {:sourceloc} {:sourceloc_num 20} _LOG_WRITE_$$od(true, BV32_ADD(v2$1, $x2.i.0), FMUL32(v14$1, v3), $$od[BV32_ADD(v2$1, $x2.i.0)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$od(true, BV32_ADD(v2$2, $x2.i.0));
     assume {:do_not_predicate} {:check_id "check_state_2"} {:captureState "check_state_2"} {:sourceloc} {:sourceloc_num 20} true;
-    call {:check_id "check_state_2"} {:sourceloc} {:sourceloc_num 20} _CHECK_WRITE_$$od(true, BV32_ADD(v2$2, $x21.i.0), FMUL32(v14$2, v3));
+    call {:check_id "check_state_2"} {:sourceloc} {:sourceloc_num 20} _CHECK_WRITE_$$od(true, BV32_ADD(v2$2, $x2.i.0), FMUL32(v14$2, v3));
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$od"} true;
-    $$od[BV32_ADD(v2$1, $x21.i.0)] := FMUL32(v14$1, v3);
-    $$od[BV32_ADD(v2$2, $x21.i.0)] := FMUL32(v14$2, v3);
-    $t.i.2$1, $x21.i.0 := v14$1, BV32_ADD($x21.i.0, 1bv32);
+    $$od[BV32_ADD(v2$1, $x2.i.0)] := FMUL32(v14$1, v3);
+    $$od[BV32_ADD(v2$2, $x2.i.0)] := FMUL32(v14$2, v3);
+    $t.i.2$1, $x2.i.0 := v14$1, BV32_ADD($x2.i.0, 1bv32);
     $t.i.2$2 := v14$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.23.i;
+    goto $7;
 
   $truebb0:
     assume {:partition} v7;
@@ -294,17 +294,17 @@ implementation {:source_name "d_boxfilter_x_global"} {:kernel} $_Z20d_boxfilter_
     havoc v9$1, v9$2;
     v10$1 := FSUB32(FADD32($t.i.1$1, v8$1), v9$1);
     v10$2 := FSUB32(FADD32($t.i.1$2, v8$2), v9$2);
-    call {:sourceloc} {:sourceloc_num 14} _LOG_WRITE_$$od(true, BV32_ADD(v2$1, $x7.i.0), FMUL32(v10$1, v3), $$od[BV32_ADD(v2$1, $x7.i.0)]);
-    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$od(true, BV32_ADD(v2$2, $x7.i.0));
+    call {:sourceloc} {:sourceloc_num 14} _LOG_WRITE_$$od(true, BV32_ADD(v2$1, $x1.i.0), FMUL32(v10$1, v3), $$od[BV32_ADD(v2$1, $x1.i.0)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$od(true, BV32_ADD(v2$2, $x1.i.0));
     assume {:do_not_predicate} {:check_id "check_state_3"} {:captureState "check_state_3"} {:sourceloc} {:sourceloc_num 14} true;
-    call {:check_id "check_state_3"} {:sourceloc} {:sourceloc_num 14} _CHECK_WRITE_$$od(true, BV32_ADD(v2$2, $x7.i.0), FMUL32(v10$2, v3));
+    call {:check_id "check_state_3"} {:sourceloc} {:sourceloc_num 14} _CHECK_WRITE_$$od(true, BV32_ADD(v2$2, $x1.i.0), FMUL32(v10$2, v3));
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$od"} true;
-    $$od[BV32_ADD(v2$1, $x7.i.0)] := FMUL32(v10$1, v3);
-    $$od[BV32_ADD(v2$2, $x7.i.0)] := FMUL32(v10$2, v3);
-    $t.i.1$1, $x7.i.0 := v10$1, BV32_ADD($x7.i.0, 1bv32);
+    $$od[BV32_ADD(v2$1, $x1.i.0)] := FMUL32(v10$1, v3);
+    $$od[BV32_ADD(v2$2, $x1.i.0)] := FMUL32(v10$2, v3);
+    $t.i.1$1, $x1.i.0 := v10$1, BV32_ADD($x1.i.0, 1bv32);
     $t.i.1$2 := v10$2;
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond.8.i;
+    goto $4;
 
   $truebb:
     assume {:partition} v5;
@@ -312,7 +312,7 @@ implementation {:source_name "d_boxfilter_x_global"} {:kernel} $_Z20d_boxfilter_
     $t.i.0$1, $x.i.0 := FADD32($t.i.0$1, v6$1), BV32_ADD($x.i.0, 1bv32);
     $t.i.0$2 := FADD32($t.i.0$2, v6$2);
     assume {:captureState "loop_back_edge_state_3_0"} true;
-    goto $for.cond.i;
+    goto $1;
 }
 
 

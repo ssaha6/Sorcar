@@ -117,9 +117,9 @@ procedure {:source_name "histogramKernel"} {:kernel} $histogramKernel($n4Vectors
 
 implementation {:source_name "histogramKernel"} {:kernel} $histogramKernel($n4VectorsPerThread: bv32)
 {
-  var $cond: bv32;
-  var $cond12: bv32;
-  var $cond20: bv32;
+  var $0: bv32;
+  var $1: bv32;
+  var $2: bv32;
   var $i.0$1: bv32;
   var $i.0$2: bv32;
   var $idx.0$1: bv32;
@@ -131,81 +131,81 @@ implementation {:source_name "histogramKernel"} {:kernel} $histogramKernel($n4Ve
   var $i.2$2: bv32;
   var $bin.0$1: bv32;
   var $bin.0$2: bv32;
-  var v4: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
   var v2: bool;
   var v3: bool;
-  var v11$1: bv32;
-  var v11$2: bv32;
-  var v9$1: bv32;
-  var v9$2: bv32;
-  var v12$1: bv32;
-  var v12$2: bv32;
-  var v10$1: bv32;
-  var v10$2: bv32;
-  var v39$1: bv32;
-  var v39$2: bv32;
-  var v22$1: bv32;
-  var v22$2: bv32;
+  var v4: bv32;
   var v5: bool;
   var v6$1: bool;
   var v6$2: bool;
   var v7$1: bool;
   var v7$2: bool;
-  var v15$1: bv32;
-  var v15$2: bv32;
-  var v14$1: bv32;
-  var v14$2: bv32;
+  var v8: bool;
+  var v9$1: bv32;
+  var v9$2: bv32;
+  var v10$1: bv32;
+  var v10$2: bv32;
+  var v11$1: bv32;
+  var v11$2: bv32;
+  var v12$1: bv32;
+  var v12$2: bv32;
   var v13$1: bv32;
   var v13$2: bv32;
-  var v21$1: bv32;
-  var v21$2: bv32;
+  var v14$1: bv32;
+  var v14$2: bv32;
+  var v15$1: bv32;
+  var v15$2: bv32;
   var v16$1: bv32;
   var v16$2: bv32;
-  var v8: bool;
-  var v17$1: bv32;
-  var v17$2: bv32;
   var v18$1: bv32;
   var v18$2: bv32;
+  var v17$1: bv32;
+  var v17$2: bv32;
   var v19$1: bv32;
   var v19$2: bv32;
   var v20$1: bv32;
   var v20$2: bv32;
-  var v26$1: bv32;
-  var v26$2: bv32;
-  var v28$1: bv32;
-  var v28$2: bv32;
-  var v25$1: bv32;
-  var v25$2: bv32;
-  var v27$1: bv32;
-  var v27$2: bv32;
-  var v31$1: bv32;
-  var v31$2: bv32;
-  var v35$1: bv32;
-  var v35$2: bv32;
-  var v33$1: bv32;
-  var v33$2: bv32;
-  var v32$1: bv32;
-  var v32$2: bv32;
-  var v34$1: bv32;
-  var v34$2: bv32;
-  var v36$1: bv32;
-  var v36$2: bv32;
-  var v30$1: bv32;
-  var v30$2: bv32;
-  var v29$1: bv32;
-  var v29$2: bv32;
-  var v24$1: bv32;
-  var v24$2: bv32;
+  var v21$1: bv32;
+  var v21$2: bv32;
+  var v22$1: bv32;
+  var v22$2: bv32;
   var v23$1: bv32;
   var v23$2: bv32;
+  var v24$1: bv32;
+  var v24$2: bv32;
+  var v25$1: bv32;
+  var v25$2: bv32;
+  var v26$1: bv32;
+  var v26$2: bv32;
+  var v27$1: bv32;
+  var v27$2: bv32;
+  var v28$1: bv32;
+  var v28$2: bv32;
+  var v29$1: bv32;
+  var v29$2: bv32;
+  var v30$1: bv32;
+  var v30$2: bv32;
+  var v31$1: bv32;
+  var v31$2: bv32;
+  var v32$1: bv32;
+  var v32$2: bv32;
+  var v33$1: bv32;
+  var v33$2: bv32;
+  var v34$1: bv32;
+  var v34$2: bv32;
+  var v35$1: bv32;
+  var v35$2: bv32;
+  var v36$1: bv32;
+  var v36$2: bv32;
   var v37$1: bool;
   var v37$2: bool;
   var v38$1: bool;
   var v38$2: bool;
+  var v39$1: bv32;
+  var v39$2: bv32;
   var _abstracted_call_arg_0$1: bv32;
   var _abstracted_call_arg_0$2: bv32;
   var _abstracted_call_arg_1$1: bv32;
@@ -236,10 +236,10 @@ implementation {:source_name "histogramKernel"} {:kernel} $histogramKernel($n4Ve
   var p7$2: bool;
   var _HAVOC_bv32$1: bv32;
   var _HAVOC_bv32$2: bv32;
-  var _WRITE_HAS_OCCURRED_$$histogramKernel.subhists$ghost$$for.cond: bool;
+  var _WRITE_HAS_OCCURRED_$$histogramKernel.subhists$ghost$$11: bool;
 
 
-  $entry:
+  $0:
     v0$1 := local_id_x$1;
     v0$2 := local_id_x$2;
     v1$1 := BV32_UREM(v0$1, 16bv32);
@@ -257,54 +257,54 @@ implementation {:source_name "histogramKernel"} {:kernel} $histogramKernel($n4Ve
 
   $falsebb:
     assume {:partition} !v2;
-    $cond := BV32_UDIV(group_size_x, 4096bv32);
-    goto $cond.end;
+    $0 := BV32_UDIV(group_size_x, 4096bv32);
+    goto $3;
 
-  $cond.end:
-    v3 := BV32_UGT(1bv32, BV32_UDIV($cond, 4096bv32));
+  $3:
+    v3 := BV32_UGT(1bv32, BV32_UDIV($0, 4096bv32));
     goto $truebb0, $falsebb0;
 
   $falsebb0:
     assume {:partition} !v3;
-    $cond12 := BV32_UDIV($cond, 4096bv32);
-    goto $cond.end.11;
+    $1 := BV32_UDIV($0, 4096bv32);
+    goto $6;
 
-  $cond.end.11:
-    v4 := BV32_UDIV(4096bv32, $cond12);
+  $6:
+    v4 := BV32_UDIV(4096bv32, $1);
     v5 := BV32_ULT(group_size_x, v4);
     goto $truebb1, $falsebb1;
 
   $falsebb1:
     assume {:partition} !v5;
-    $cond20 := v4;
-    goto $cond.end.19;
+    $2 := v4;
+    goto $9;
 
-  $cond.end.19:
-    v6$1 := BV32_ULT(v0$1, $cond20);
-    v6$2 := BV32_ULT(v0$2, $cond20);
+  $9:
+    v6$1 := BV32_ULT(v0$1, $2);
+    v6$2 := BV32_ULT(v0$2, $2);
     p0$1 := (if v6$1 then v6$1 else p0$1);
     p0$2 := (if v6$2 then v6$2 else p0$2);
     $i.0$1, $idx.0$1 := (if p0$1 then 0bv32 else $i.0$1), (if p0$1 then v0$1 else $idx.0$1);
     $i.0$2, $idx.0$2 := (if p0$2 then 0bv32 else $i.0$2), (if p0$2 then v0$2 else $idx.0$2);
     p1$1 := (if p0$1 then true else p1$1);
     p1$2 := (if p0$2 then true else p1$2);
-    _WRITE_HAS_OCCURRED_$$histogramKernel.subhists$ghost$$for.cond := _WRITE_HAS_OCCURRED_$$histogramKernel.subhists;
+    _WRITE_HAS_OCCURRED_$$histogramKernel.subhists$ghost$$11 := _WRITE_HAS_OCCURRED_$$histogramKernel.subhists;
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond;
+    goto $11;
 
-  $for.cond:
+  $11:
     assume {:captureState "loop_head_state_2"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b20 ==> !p0$1 ==> _WRITE_HAS_OCCURRED_$$histogramKernel.subhists$ghost$$for.cond == _WRITE_HAS_OCCURRED_$$histogramKernel.subhists;
+    assert {:tag "disabledMaintainsInstrumentation"} _b20 ==> !p0$1 ==> _WRITE_HAS_OCCURRED_$$histogramKernel.subhists$ghost$$11 == _WRITE_HAS_OCCURRED_$$histogramKernel.subhists;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b19 ==> _WRITE_HAS_OCCURRED_$$histogramKernel.subhists ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_MUL(0bv32, 4bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 4bv32), 1bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 4bv32), 2bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 4bv32), 3bv32));
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$histogramKernel.subhists ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$histogramKernel.subhists ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$histogramKernel.subhists ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assume {:predicate "p1"} {:dominator_predicate "p0"} true;
-    assert {:do_not_predicate} {:tag "accessOnlyIfEnabledInEnclosingScopes"} {:thread 1} _b18 ==> _WRITE_HAS_OCCURRED_$$histogramKernel.subhists ==> BV32_ULT(local_id_x$1, $cond20);
-    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 1} _b17 ==> BV32_ULT(local_id_x$1, $cond20) && BV32_ULT($i.0$1, BV32_UDIV(BV32_UDIV(4096bv32, $cond20), 4bv32)) ==> p1$1;
-    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 2} _b17 ==> BV32_ULT(local_id_x$2, $cond20) && BV32_ULT($i.0$2, BV32_UDIV(BV32_UDIV(4096bv32, $cond20), 4bv32)) ==> p1$2;
-    assert {:tag "conditionsImpliedByEnabledness"} {:thread 1} p1$1 ==> _b16 ==> p1$1 ==> BV32_ULT(local_id_x$1, $cond20);
-    assert {:tag "conditionsImpliedByEnabledness"} {:thread 2} p1$2 ==> _b16 ==> p1$2 ==> BV32_ULT(local_id_x$2, $cond20);
+    assert {:do_not_predicate} {:tag "accessOnlyIfEnabledInEnclosingScopes"} {:thread 1} _b18 ==> _WRITE_HAS_OCCURRED_$$histogramKernel.subhists ==> BV32_ULT(local_id_x$1, $2);
+    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 1} _b17 ==> BV32_ULT(local_id_x$1, $2) && BV32_ULT($i.0$1, BV32_UDIV(BV32_UDIV(4096bv32, $2), 4bv32)) ==> p1$1;
+    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 2} _b17 ==> BV32_ULT(local_id_x$2, $2) && BV32_ULT($i.0$2, BV32_UDIV(BV32_UDIV(4096bv32, $2), 4bv32)) ==> p1$2;
+    assert {:tag "conditionsImpliedByEnabledness"} {:thread 1} p1$1 ==> _b16 ==> p1$1 ==> BV32_ULT(local_id_x$1, $2);
+    assert {:tag "conditionsImpliedByEnabledness"} {:thread 2} p1$2 ==> _b16 ==> p1$2 ==> BV32_ULT(local_id_x$2, $2);
     assert {:tag "loopBound"} {:thread 1} p1$1 ==> _b15 ==> BV32_UGE($i.0$1, 0bv32);
     assert {:tag "loopBound"} {:thread 2} p1$2 ==> _b15 ==> BV32_UGE($i.0$2, 0bv32);
     assert {:tag "loopBound"} {:thread 1} p1$1 ==> _b14 ==> BV32_ULE($i.0$1, 0bv32);
@@ -314,11 +314,11 @@ implementation {:source_name "histogramKernel"} {:kernel} $histogramKernel($n4Ve
     assert {:tag "loopBound"} {:thread 1} p1$1 ==> _b12 ==> BV32_SLE($i.0$1, 0bv32);
     assert {:tag "loopBound"} {:thread 2} p1$2 ==> _b12 ==> BV32_SLE($i.0$2, 0bv32);
     assert {:block_sourceloc} {:sourceloc_num 11} p1$1 ==> true;
-    assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 12} {:thread 1} (if _WRITE_HAS_OCCURRED_$$histogramKernel.subhists ==> BV32_UREM(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 16bv32), $cond20) == v0$1 then 1bv1 else 0bv1) != 0bv1;
-    assert {:originated_from_invariant} {:sourceloc_num 13} {:thread 1} p1$1 ==> (if BV32_UREM($idx.0$1, $cond20) == v0$1 then 1bv1 else 0bv1) != 0bv1;
-    assert {:originated_from_invariant} {:sourceloc_num 13} {:thread 2} p1$2 ==> (if BV32_UREM($idx.0$2, $cond20) == v0$2 then 1bv1 else 0bv1) != 0bv1;
-    v7$1 := (if p1$1 then BV32_ULT($i.0$1, BV32_UDIV(BV32_UDIV(4096bv32, $cond20), 4bv32)) else v7$1);
-    v7$2 := (if p1$2 then BV32_ULT($i.0$2, BV32_UDIV(BV32_UDIV(4096bv32, $cond20), 4bv32)) else v7$2);
+    assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 12} {:thread 1} (if _WRITE_HAS_OCCURRED_$$histogramKernel.subhists ==> BV32_UREM(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 16bv32), $2) == v0$1 then 1bv1 else 0bv1) != 0bv1;
+    assert {:originated_from_invariant} {:sourceloc_num 13} {:thread 1} p1$1 ==> (if BV32_UREM($idx.0$1, $2) == v0$1 then 1bv1 else 0bv1) != 0bv1;
+    assert {:originated_from_invariant} {:sourceloc_num 13} {:thread 2} p1$2 ==> (if BV32_UREM($idx.0$2, $2) == v0$2 then 1bv1 else 0bv1) != 0bv1;
+    v7$1 := (if p1$1 then BV32_ULT($i.0$1, BV32_UDIV(BV32_UDIV(4096bv32, $2), 4bv32)) else v7$1);
+    v7$2 := (if p1$2 then BV32_ULT($i.0$2, BV32_UDIV(BV32_UDIV(4096bv32, $2), 4bv32)) else v7$2);
     p2$1 := false;
     p2$2 := false;
     p2$1 := (if p1$1 && v7$1 then v7$1 else p2$1);
@@ -357,41 +357,41 @@ implementation {:source_name "histogramKernel"} {:kernel} $histogramKernel($n4Ve
     assume {:do_not_predicate} {:check_id "check_state_21"} {:captureState "check_state_21"} {:sourceloc} {:sourceloc_num 18} true;
     call {:check_id "check_state_21"} {:sourceloc} {:sourceloc_num 18} _CHECK_WRITE_$$histogramKernel.subhists(p2$2, BV32_ADD(BV32_MUL($idx.0$2, 4bv32), 3bv32), 0bv32);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$histogramKernel.subhists"} true;
-    $i.0$1, $idx.0$1 := (if p2$1 then BV32_ADD($i.0$1, 1bv32) else $i.0$1), (if p2$1 then BV32_ADD($idx.0$1, $cond20) else $idx.0$1);
-    $i.0$2, $idx.0$2 := (if p2$2 then BV32_ADD($i.0$2, 1bv32) else $i.0$2), (if p2$2 then BV32_ADD($idx.0$2, $cond20) else $idx.0$2);
+    $i.0$1, $idx.0$1 := (if p2$1 then BV32_ADD($i.0$1, 1bv32) else $i.0$1), (if p2$1 then BV32_ADD($idx.0$1, $2) else $idx.0$1);
+    $i.0$2, $idx.0$2 := (if p2$2 then BV32_ADD($i.0$2, 1bv32) else $i.0$2), (if p2$2 then BV32_ADD($idx.0$2, $2) else $idx.0$2);
     p1$1 := (if p2$1 then true else p1$1);
     p1$2 := (if p2$2 then true else p1$2);
-    goto $for.cond.backedge, __partitioned_block_$for.cond.tail_0;
+    goto $11.backedge, __partitioned_block_$11.tail_0;
 
-  __partitioned_block_$for.cond.tail_0:
+  __partitioned_block_$11.tail_0:
     assume !p1$1 && !p1$2;
-    goto __partitioned_block_$for.cond.tail_1;
+    goto __partitioned_block_$11.tail_1;
 
-  __partitioned_block_$for.cond.tail_1:
+  __partitioned_block_$11.tail_1:
     call {:sourceloc_num 22} $bugle_barrier_duplicated_0(1bv1, 0bv1);
     $i.1, $idx.1$1 := 0bv32, BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
     $idx.1$2 := BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2);
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.33;
+    goto $16;
 
-  $for.cond.33:
+  $16:
     assume {:captureState "loop_head_state_1"} true;
-    assert {:tag "pow2NotZero"} _b68 ==> v27$2 != 0bv32;
-    assert {:tag "pow2"} _b67 ==> v27$2 == 0bv32 || BV32_AND(v27$2, BV32_SUB(v27$2, 1bv32)) == 0bv32;
-    assert {:tag "pow2NotZero"} _b66 ==> v27$1 != 0bv32;
-    assert {:tag "pow2"} _b65 ==> v27$1 == 0bv32 || BV32_AND(v27$1, BV32_SUB(v27$1, 1bv32)) == 0bv32;
-    assert {:tag "pow2NotZero"} _b64 ==> v25$2 != 0bv32;
-    assert {:tag "pow2"} _b63 ==> v25$2 == 0bv32 || BV32_AND(v25$2, BV32_SUB(v25$2, 1bv32)) == 0bv32;
-    assert {:tag "pow2NotZero"} _b62 ==> v25$1 != 0bv32;
-    assert {:tag "pow2"} _b61 ==> v25$1 == 0bv32 || BV32_AND(v25$1, BV32_SUB(v25$1, 1bv32)) == 0bv32;
-    assert {:tag "pow2NotZero"} _b60 ==> v28$2 != 0bv32;
-    assert {:tag "pow2"} _b59 ==> v28$2 == 0bv32 || BV32_AND(v28$2, BV32_SUB(v28$2, 1bv32)) == 0bv32;
-    assert {:tag "pow2NotZero"} _b58 ==> v28$1 != 0bv32;
-    assert {:tag "pow2"} _b57 ==> v28$1 == 0bv32 || BV32_AND(v28$1, BV32_SUB(v28$1, 1bv32)) == 0bv32;
-    assert {:tag "pow2NotZero"} _b56 ==> v26$2 != 0bv32;
-    assert {:tag "pow2"} _b55 ==> v26$2 == 0bv32 || BV32_AND(v26$2, BV32_SUB(v26$2, 1bv32)) == 0bv32;
-    assert {:tag "pow2NotZero"} _b54 ==> v26$1 != 0bv32;
-    assert {:tag "pow2"} _b53 ==> v26$1 == 0bv32 || BV32_AND(v26$1, BV32_SUB(v26$1, 1bv32)) == 0bv32;
+    assert {:tag "pow2NotZero"} _b68 ==> v28$2 != 0bv32;
+    assert {:tag "pow2"} _b67 ==> v28$2 == 0bv32 || BV32_AND(v28$2, BV32_SUB(v28$2, 1bv32)) == 0bv32;
+    assert {:tag "pow2NotZero"} _b66 ==> v28$1 != 0bv32;
+    assert {:tag "pow2"} _b65 ==> v28$1 == 0bv32 || BV32_AND(v28$1, BV32_SUB(v28$1, 1bv32)) == 0bv32;
+    assert {:tag "pow2NotZero"} _b64 ==> v27$2 != 0bv32;
+    assert {:tag "pow2"} _b63 ==> v27$2 == 0bv32 || BV32_AND(v27$2, BV32_SUB(v27$2, 1bv32)) == 0bv32;
+    assert {:tag "pow2NotZero"} _b62 ==> v27$1 != 0bv32;
+    assert {:tag "pow2"} _b61 ==> v27$1 == 0bv32 || BV32_AND(v27$1, BV32_SUB(v27$1, 1bv32)) == 0bv32;
+    assert {:tag "pow2NotZero"} _b60 ==> v26$2 != 0bv32;
+    assert {:tag "pow2"} _b59 ==> v26$2 == 0bv32 || BV32_AND(v26$2, BV32_SUB(v26$2, 1bv32)) == 0bv32;
+    assert {:tag "pow2NotZero"} _b58 ==> v26$1 != 0bv32;
+    assert {:tag "pow2"} _b57 ==> v26$1 == 0bv32 || BV32_AND(v26$1, BV32_SUB(v26$1, 1bv32)) == 0bv32;
+    assert {:tag "pow2NotZero"} _b56 ==> v25$2 != 0bv32;
+    assert {:tag "pow2"} _b55 ==> v25$2 == 0bv32 || BV32_AND(v25$2, BV32_SUB(v25$2, 1bv32)) == 0bv32;
+    assert {:tag "pow2NotZero"} _b54 ==> v25$1 != 0bv32;
+    assert {:tag "pow2"} _b53 ==> v25$1 == 0bv32 || BV32_AND(v25$1, BV32_SUB(v25$1, 1bv32)) == 0bv32;
     assert {:tag "pow2NotZero"} _b52 ==> v20$2 != 0bv32;
     assert {:tag "pow2"} _b51 ==> v20$2 == 0bv32 || BV32_AND(v20$2, BV32_SUB(v20$2, 1bv32)) == 0bv32;
     assert {:tag "pow2NotZero"} _b50 ==> v20$1 != 0bv32;
@@ -400,30 +400,30 @@ implementation {:source_name "histogramKernel"} {:kernel} $histogramKernel($n4Ve
     assert {:tag "pow2"} _b47 ==> v19$2 == 0bv32 || BV32_AND(v19$2, BV32_SUB(v19$2, 1bv32)) == 0bv32;
     assert {:tag "pow2NotZero"} _b46 ==> v19$1 != 0bv32;
     assert {:tag "pow2"} _b45 ==> v19$1 == 0bv32 || BV32_AND(v19$1, BV32_SUB(v19$1, 1bv32)) == 0bv32;
-    assert {:tag "pow2NotZero"} _b44 ==> v18$2 != 0bv32;
-    assert {:tag "pow2"} _b43 ==> v18$2 == 0bv32 || BV32_AND(v18$2, BV32_SUB(v18$2, 1bv32)) == 0bv32;
-    assert {:tag "pow2NotZero"} _b42 ==> v18$1 != 0bv32;
-    assert {:tag "pow2"} _b41 ==> v18$1 == 0bv32 || BV32_AND(v18$1, BV32_SUB(v18$1, 1bv32)) == 0bv32;
-    assert {:tag "pow2NotZero"} _b40 ==> v17$2 != 0bv32;
-    assert {:tag "pow2"} _b39 ==> v17$2 == 0bv32 || BV32_AND(v17$2, BV32_SUB(v17$2, 1bv32)) == 0bv32;
-    assert {:tag "pow2NotZero"} _b38 ==> v17$1 != 0bv32;
-    assert {:tag "pow2"} _b37 ==> v17$1 == 0bv32 || BV32_AND(v17$1, BV32_SUB(v17$1, 1bv32)) == 0bv32;
-    assert {:tag "pow2NotZero"} _b36 ==> v10$2 != 0bv32;
-    assert {:tag "pow2"} _b35 ==> v10$2 == 0bv32 || BV32_AND(v10$2, BV32_SUB(v10$2, 1bv32)) == 0bv32;
-    assert {:tag "pow2NotZero"} _b34 ==> v10$1 != 0bv32;
-    assert {:tag "pow2"} _b33 ==> v10$1 == 0bv32 || BV32_AND(v10$1, BV32_SUB(v10$1, 1bv32)) == 0bv32;
-    assert {:tag "pow2NotZero"} _b32 ==> v12$2 != 0bv32;
-    assert {:tag "pow2"} _b31 ==> v12$2 == 0bv32 || BV32_AND(v12$2, BV32_SUB(v12$2, 1bv32)) == 0bv32;
-    assert {:tag "pow2NotZero"} _b30 ==> v12$1 != 0bv32;
-    assert {:tag "pow2"} _b29 ==> v12$1 == 0bv32 || BV32_AND(v12$1, BV32_SUB(v12$1, 1bv32)) == 0bv32;
-    assert {:tag "pow2NotZero"} _b28 ==> v9$2 != 0bv32;
-    assert {:tag "pow2"} _b27 ==> v9$2 == 0bv32 || BV32_AND(v9$2, BV32_SUB(v9$2, 1bv32)) == 0bv32;
-    assert {:tag "pow2NotZero"} _b26 ==> v9$1 != 0bv32;
-    assert {:tag "pow2"} _b25 ==> v9$1 == 0bv32 || BV32_AND(v9$1, BV32_SUB(v9$1, 1bv32)) == 0bv32;
-    assert {:tag "pow2NotZero"} _b24 ==> v11$2 != 0bv32;
-    assert {:tag "pow2"} _b23 ==> v11$2 == 0bv32 || BV32_AND(v11$2, BV32_SUB(v11$2, 1bv32)) == 0bv32;
-    assert {:tag "pow2NotZero"} _b22 ==> v11$1 != 0bv32;
-    assert {:tag "pow2"} _b21 ==> v11$1 == 0bv32 || BV32_AND(v11$1, BV32_SUB(v11$1, 1bv32)) == 0bv32;
+    assert {:tag "pow2NotZero"} _b44 ==> v17$2 != 0bv32;
+    assert {:tag "pow2"} _b43 ==> v17$2 == 0bv32 || BV32_AND(v17$2, BV32_SUB(v17$2, 1bv32)) == 0bv32;
+    assert {:tag "pow2NotZero"} _b42 ==> v17$1 != 0bv32;
+    assert {:tag "pow2"} _b41 ==> v17$1 == 0bv32 || BV32_AND(v17$1, BV32_SUB(v17$1, 1bv32)) == 0bv32;
+    assert {:tag "pow2NotZero"} _b40 ==> v18$2 != 0bv32;
+    assert {:tag "pow2"} _b39 ==> v18$2 == 0bv32 || BV32_AND(v18$2, BV32_SUB(v18$2, 1bv32)) == 0bv32;
+    assert {:tag "pow2NotZero"} _b38 ==> v18$1 != 0bv32;
+    assert {:tag "pow2"} _b37 ==> v18$1 == 0bv32 || BV32_AND(v18$1, BV32_SUB(v18$1, 1bv32)) == 0bv32;
+    assert {:tag "pow2NotZero"} _b36 ==> v12$2 != 0bv32;
+    assert {:tag "pow2"} _b35 ==> v12$2 == 0bv32 || BV32_AND(v12$2, BV32_SUB(v12$2, 1bv32)) == 0bv32;
+    assert {:tag "pow2NotZero"} _b34 ==> v12$1 != 0bv32;
+    assert {:tag "pow2"} _b33 ==> v12$1 == 0bv32 || BV32_AND(v12$1, BV32_SUB(v12$1, 1bv32)) == 0bv32;
+    assert {:tag "pow2NotZero"} _b32 ==> v11$2 != 0bv32;
+    assert {:tag "pow2"} _b31 ==> v11$2 == 0bv32 || BV32_AND(v11$2, BV32_SUB(v11$2, 1bv32)) == 0bv32;
+    assert {:tag "pow2NotZero"} _b30 ==> v11$1 != 0bv32;
+    assert {:tag "pow2"} _b29 ==> v11$1 == 0bv32 || BV32_AND(v11$1, BV32_SUB(v11$1, 1bv32)) == 0bv32;
+    assert {:tag "pow2NotZero"} _b28 ==> v10$2 != 0bv32;
+    assert {:tag "pow2"} _b27 ==> v10$2 == 0bv32 || BV32_AND(v10$2, BV32_SUB(v10$2, 1bv32)) == 0bv32;
+    assert {:tag "pow2NotZero"} _b26 ==> v10$1 != 0bv32;
+    assert {:tag "pow2"} _b25 ==> v10$1 == 0bv32 || BV32_AND(v10$1, BV32_SUB(v10$1, 1bv32)) == 0bv32;
+    assert {:tag "pow2NotZero"} _b24 ==> v9$2 != 0bv32;
+    assert {:tag "pow2"} _b23 ==> v9$2 == 0bv32 || BV32_AND(v9$2, BV32_SUB(v9$2, 1bv32)) == 0bv32;
+    assert {:tag "pow2NotZero"} _b22 ==> v9$1 != 0bv32;
+    assert {:tag "pow2"} _b21 ==> v9$1 == 0bv32 || BV32_AND(v9$1, BV32_SUB(v9$1, 1bv32)) == 0bv32;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$histogramKernel.subhists ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$histogramKernel.subhists ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$histogramKernel.subhists ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -456,9 +456,9 @@ implementation {:source_name "histogramKernel"} {:kernel} $histogramKernel($n4Ve
     p5$1 := (if p4$1 then true else p5$1);
     p5$2 := (if p4$2 then true else p5$2);
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.92;
+    goto $21;
 
-  $for.cond.92:
+  $21:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$histogramKernel.subhists ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$histogramKernel.subhists ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -500,9 +500,9 @@ implementation {:source_name "histogramKernel"} {:kernel} $histogramKernel($n4Ve
     $i.2$2, $bin.0$2 := (if p6$2 then BV32_ADD($i.2$2, 1bv32) else $i.2$2), (if p6$2 then BV32_ADD($bin.0$2, v39$2) else $bin.0$2);
     p5$1 := (if p6$1 then true else p5$1);
     p5$2 := (if p6$2 then true else p5$2);
-    goto $for.cond.92.backedge, $for.cond.92.tail;
+    goto $21.backedge, $21.tail;
 
-  $for.cond.92.tail:
+  $21.tail:
     assume !p5$1 && !p5$2;
     call {:sourceloc} {:sourceloc_num 54} _LOG_WRITE_$$Histogram(p4$1, BV32_ADD(BV32_MUL(group_id_x$1, 256bv32), v0$1), $bin.0$1, $$Histogram[BV32_ADD(BV32_MUL(group_id_x$1, 256bv32), v0$1)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$Histogram(p4$2, BV32_ADD(BV32_MUL(group_id_x$2, 256bv32), v0$2));
@@ -513,10 +513,10 @@ implementation {:source_name "histogramKernel"} {:kernel} $histogramKernel($n4Ve
     $$Histogram[BV32_ADD(BV32_MUL(group_id_x$2, 256bv32), v0$2)] := (if p4$2 then $bin.0$2 else $$Histogram[BV32_ADD(BV32_MUL(group_id_x$2, 256bv32), v0$2)]);
     return;
 
-  $for.cond.92.backedge:
+  $21.backedge:
     assume {:backedge} p5$1 || p5$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.92;
+    goto $21;
 
   $truebb4:
     assume {:partition} v8;
@@ -687,27 +687,27 @@ implementation {:source_name "histogramKernel"} {:kernel} $histogramKernel($n4Ve
     $i.1, $idx.1$1 := BV32_ADD($i.1, 1bv32), BV32_ADD($idx.1$1, BV32_MUL(group_size_x, num_groups_x));
     $idx.1$2 := BV32_ADD($idx.1$2, BV32_MUL(group_size_x, num_groups_x));
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.33;
+    goto $16;
 
-  $for.cond.backedge:
+  $11.backedge:
     assume {:backedge} p1$1 || p1$2;
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond;
+    goto $11;
 
   $truebb1:
     assume {:partition} v5;
-    $cond20 := group_size_x;
-    goto $cond.end.19;
+    $2 := group_size_x;
+    goto $9;
 
   $truebb0:
     assume {:partition} v3;
-    $cond12 := 1bv32;
-    goto $cond.end.11;
+    $1 := 1bv32;
+    goto $6;
 
   $truebb:
     assume {:partition} v2;
-    $cond := 1bv32;
-    goto $cond.end;
+    $0 := 1bv32;
+    goto $3;
 }
 
 

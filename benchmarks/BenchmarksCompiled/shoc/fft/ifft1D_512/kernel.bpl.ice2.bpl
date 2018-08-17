@@ -112,7 +112,7 @@ axiom {:array_info "$$storex8.reversed"} {:elem_width 32} {:source_name "storex8
 
 axiom {:array_info "$$storey8.reversed"} {:elem_width 32} {:source_name "storey8.reversed"} {:source_elem_width 32} {:source_dimensions "8"} true;
 
-axiom {:array_info "$$ifft1D_512.reversed81"} {:elem_width 32} {:source_name "ifft1D_512.reversed81"} {:source_elem_width 32} {:source_dimensions "8"} true;
+axiom {:array_info "$$ifft1D_512.reversed8.1"} {:elem_width 32} {:source_name "ifft1D_512.reversed8.1"} {:source_elem_width 32} {:source_dimensions "8"} true;
 
 axiom {:array_info "$$globalStores8.reversed"} {:elem_width 32} {:source_name "globalStores8.reversed"} {:source_elem_width 32} {:source_dimensions "8"} true;
 
@@ -231,22 +231,22 @@ procedure {:source_name "ifft1D_512"} {:kernel} $ifft1D_512();
   requires $$storey8.reversed$6bv32$2 == 3bv32;
   requires $$storey8.reversed$7bv32$1 == 7bv32;
   requires $$storey8.reversed$7bv32$2 == 7bv32;
-  requires $$ifft1D_512.reversed81$0bv32$1 == 0bv32;
-  requires $$ifft1D_512.reversed81$0bv32$2 == 0bv32;
-  requires $$ifft1D_512.reversed81$1bv32$1 == 4bv32;
-  requires $$ifft1D_512.reversed81$1bv32$2 == 4bv32;
-  requires $$ifft1D_512.reversed81$2bv32$1 == 2bv32;
-  requires $$ifft1D_512.reversed81$2bv32$2 == 2bv32;
-  requires $$ifft1D_512.reversed81$3bv32$1 == 6bv32;
-  requires $$ifft1D_512.reversed81$3bv32$2 == 6bv32;
-  requires $$ifft1D_512.reversed81$4bv32$1 == 1bv32;
-  requires $$ifft1D_512.reversed81$4bv32$2 == 1bv32;
-  requires $$ifft1D_512.reversed81$5bv32$1 == 5bv32;
-  requires $$ifft1D_512.reversed81$5bv32$2 == 5bv32;
-  requires $$ifft1D_512.reversed81$6bv32$1 == 3bv32;
-  requires $$ifft1D_512.reversed81$6bv32$2 == 3bv32;
-  requires $$ifft1D_512.reversed81$7bv32$1 == 7bv32;
-  requires $$ifft1D_512.reversed81$7bv32$2 == 7bv32;
+  requires $$ifft1D_512.reversed8.1$0bv32$1 == 0bv32;
+  requires $$ifft1D_512.reversed8.1$0bv32$2 == 0bv32;
+  requires $$ifft1D_512.reversed8.1$1bv32$1 == 4bv32;
+  requires $$ifft1D_512.reversed8.1$1bv32$2 == 4bv32;
+  requires $$ifft1D_512.reversed8.1$2bv32$1 == 2bv32;
+  requires $$ifft1D_512.reversed8.1$2bv32$2 == 2bv32;
+  requires $$ifft1D_512.reversed8.1$3bv32$1 == 6bv32;
+  requires $$ifft1D_512.reversed8.1$3bv32$2 == 6bv32;
+  requires $$ifft1D_512.reversed8.1$4bv32$1 == 1bv32;
+  requires $$ifft1D_512.reversed8.1$4bv32$2 == 1bv32;
+  requires $$ifft1D_512.reversed8.1$5bv32$1 == 5bv32;
+  requires $$ifft1D_512.reversed8.1$5bv32$2 == 5bv32;
+  requires $$ifft1D_512.reversed8.1$6bv32$1 == 3bv32;
+  requires $$ifft1D_512.reversed8.1$6bv32$2 == 3bv32;
+  requires $$ifft1D_512.reversed8.1$7bv32$1 == 7bv32;
+  requires $$ifft1D_512.reversed8.1$7bv32$2 == 7bv32;
   requires $$globalStores8.reversed$0bv32$1 == 0bv32;
   requires $$globalStores8.reversed$0bv32$2 == 0bv32;
   requires $$globalStores8.reversed$1bv32$1 == 4bv32;
@@ -315,9 +315,6 @@ implementation {:source_name "ifft1D_512"} {:kernel} $ifft1D_512()
   var $i.i39.0: bv32;
   var $i.0: bv32;
   var $i.i38.0: bv32;
-  var v3$1: bv32;
-  var v3$2: bv32;
-  var v372: bool;
   var v4: bool;
   var v5$1: bv32;
   var v5$2: bv32;
@@ -347,12 +344,6 @@ implementation {:source_name "ifft1D_512"} {:kernel} $ifft1D_512()
   var v17$2: bv32;
   var v18$1: bv32;
   var v18$2: bv32;
-  var v0$1: bv32;
-  var v0$2: bv32;
-  var v1$1: bv32;
-  var v1$2: bv32;
-  var v2$1: bv32;
-  var v2$2: bv32;
   var v19$1: bv32;
   var v19$2: bv32;
   var v20$1: bv32;
@@ -387,6 +378,14 @@ implementation {:source_name "ifft1D_512"} {:kernel} $ifft1D_512()
   var v53$2: bv32;
   var v54$1: bv32;
   var v54$2: bv32;
+  var v0$1: bv32;
+  var v0$2: bv32;
+  var v1$1: bv32;
+  var v1$2: bv32;
+  var v2$1: bv32;
+  var v2$2: bv32;
+  var v3$1: bv32;
+  var v3$2: bv32;
   var v33$1: bv32;
   var v33$2: bv32;
   var v34$1: bv32;
@@ -493,8 +492,7 @@ implementation {:source_name "ifft1D_512"} {:kernel} $ifft1D_512()
   var v87$2: bv32;
   var v88$1: bv32;
   var v88$2: bv32;
-  var v105$1: bv32;
-  var v105$2: bv32;
+  var v97: bool;
   var v89$1: bv32;
   var v89$2: bv32;
   var v90$1: bv32;
@@ -511,7 +509,6 @@ implementation {:source_name "ifft1D_512"} {:kernel} $ifft1D_512()
   var v95$2: bv32;
   var v96$1: bv32;
   var v96$2: bv32;
-  var v97: bool;
   var v98$1: bv32;
   var v98$2: bv32;
   var v99$1: bv32;
@@ -526,10 +523,10 @@ implementation {:source_name "ifft1D_512"} {:kernel} $ifft1D_512()
   var v103$2: bv32;
   var v104$1: bv32;
   var v104$2: bv32;
+  var v105$1: bv32;
+  var v105$2: bv32;
   var v106$1: bv32;
   var v106$2: bv32;
-  var v111$1: bv32;
-  var v111$2: bv32;
   var v107$1: bv32;
   var v107$2: bv32;
   var v108$1: bv32;
@@ -538,6 +535,8 @@ implementation {:source_name "ifft1D_512"} {:kernel} $ifft1D_512()
   var v109$2: bv32;
   var v110$1: bv32;
   var v110$2: bv32;
+  var v111$1: bv32;
+  var v111$2: bv32;
   var v112$1: bv32;
   var v112$2: bv32;
   var v113: bool;
@@ -560,8 +559,6 @@ implementation {:source_name "ifft1D_512"} {:kernel} $ifft1D_512()
   var v122$2: bv32;
   var v123$1: bv32;
   var v123$2: bv32;
-  var v364$1: bv32;
-  var v364$2: bv32;
   var v124$1: bv32;
   var v124$2: bv32;
   var v125$1: bv32;
@@ -756,6 +753,7 @@ implementation {:source_name "ifft1D_512"} {:kernel} $ifft1D_512()
   var v220$2: bv32;
   var v221$1: bv32;
   var v221$2: bv32;
+  var v230: bool;
   var v222$1: bv32;
   var v222$2: bv32;
   var v223$1: bv32;
@@ -772,7 +770,6 @@ implementation {:source_name "ifft1D_512"} {:kernel} $ifft1D_512()
   var v228$2: bv32;
   var v229$1: bv32;
   var v229$2: bv32;
-  var v230: bool;
   var v231$1: bv32;
   var v231$2: bv32;
   var v232$1: bv32;
@@ -791,8 +788,6 @@ implementation {:source_name "ifft1D_512"} {:kernel} $ifft1D_512()
   var v238$2: bv32;
   var v239$1: bv32;
   var v239$2: bv32;
-  var v244$1: bv32;
-  var v244$2: bv32;
   var v240$1: bv32;
   var v240$2: bv32;
   var v241$1: bv32;
@@ -801,6 +796,8 @@ implementation {:source_name "ifft1D_512"} {:kernel} $ifft1D_512()
   var v242$2: bv32;
   var v243$1: bv32;
   var v243$2: bv32;
+  var v244$1: bv32;
+  var v244$2: bv32;
   var v245$1: bv32;
   var v245$2: bv32;
   var v246: bool;
@@ -1034,6 +1031,8 @@ implementation {:source_name "ifft1D_512"} {:kernel} $ifft1D_512()
   var v362$2: bv32;
   var v363$1: bv32;
   var v363$2: bv32;
+  var v364$1: bv32;
+  var v364$2: bv32;
   var v365$1: bv32;
   var v365$2: bv32;
   var v366$1: bv32;
@@ -1048,6 +1047,7 @@ implementation {:source_name "ifft1D_512"} {:kernel} $ifft1D_512()
   var v370$2: bv32;
   var v371$1: bv32;
   var v371$2: bv32;
+  var v372: bool;
   var v373$1: bv32;
   var v373$2: bv32;
   var v374$1: bv32;
@@ -1883,36 +1883,36 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     $$data$2[14bv32] := FSUB32(v216$2, v220$2);
     $$data$1[15bv32] := FSUB32(v217$1, v221$1);
     $$data$2[15bv32] := FSUB32(v217$2, v221$2);
-    v222$1 := $$ifft1D_512.reversed81$0bv32$1;
-    v222$2 := $$ifft1D_512.reversed81$0bv32$2;
+    v222$1 := $$ifft1D_512.reversed8.1$0bv32$1;
+    v222$2 := $$ifft1D_512.reversed8.1$0bv32$2;
     $$reversed824$1[0bv32] := v222$1;
     $$reversed824$2[0bv32] := v222$2;
-    v223$1 := $$ifft1D_512.reversed81$1bv32$1;
-    v223$2 := $$ifft1D_512.reversed81$1bv32$2;
+    v223$1 := $$ifft1D_512.reversed8.1$1bv32$1;
+    v223$2 := $$ifft1D_512.reversed8.1$1bv32$2;
     $$reversed824$1[1bv32] := v223$1;
     $$reversed824$2[1bv32] := v223$2;
-    v224$1 := $$ifft1D_512.reversed81$2bv32$1;
-    v224$2 := $$ifft1D_512.reversed81$2bv32$2;
+    v224$1 := $$ifft1D_512.reversed8.1$2bv32$1;
+    v224$2 := $$ifft1D_512.reversed8.1$2bv32$2;
     $$reversed824$1[2bv32] := v224$1;
     $$reversed824$2[2bv32] := v224$2;
-    v225$1 := $$ifft1D_512.reversed81$3bv32$1;
-    v225$2 := $$ifft1D_512.reversed81$3bv32$2;
+    v225$1 := $$ifft1D_512.reversed8.1$3bv32$1;
+    v225$2 := $$ifft1D_512.reversed8.1$3bv32$2;
     $$reversed824$1[3bv32] := v225$1;
     $$reversed824$2[3bv32] := v225$2;
-    v226$1 := $$ifft1D_512.reversed81$4bv32$1;
-    v226$2 := $$ifft1D_512.reversed81$4bv32$2;
+    v226$1 := $$ifft1D_512.reversed8.1$4bv32$1;
+    v226$2 := $$ifft1D_512.reversed8.1$4bv32$2;
     $$reversed824$1[4bv32] := v226$1;
     $$reversed824$2[4bv32] := v226$2;
-    v227$1 := $$ifft1D_512.reversed81$5bv32$1;
-    v227$2 := $$ifft1D_512.reversed81$5bv32$2;
+    v227$1 := $$ifft1D_512.reversed8.1$5bv32$1;
+    v227$2 := $$ifft1D_512.reversed8.1$5bv32$2;
     $$reversed824$1[5bv32] := v227$1;
     $$reversed824$2[5bv32] := v227$2;
-    v228$1 := $$ifft1D_512.reversed81$6bv32$1;
-    v228$2 := $$ifft1D_512.reversed81$6bv32$2;
+    v228$1 := $$ifft1D_512.reversed8.1$6bv32$1;
+    v228$2 := $$ifft1D_512.reversed8.1$6bv32$2;
     $$reversed824$1[6bv32] := v228$1;
     $$reversed824$2[6bv32] := v228$2;
-    v229$1 := $$ifft1D_512.reversed81$7bv32$1;
-    v229$2 := $$ifft1D_512.reversed81$7bv32$2;
+    v229$1 := $$ifft1D_512.reversed8.1$7bv32$1;
+    v229$2 := $$ifft1D_512.reversed8.1$7bv32$2;
     $$reversed824$1[7bv32] := v229$1;
     $$reversed824$2[7bv32] := v229$2;
     $j25.0 := 1bv32;
@@ -2525,10 +2525,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
 
   $truebb9:
     assume {:partition} v269;
-    call {:sourceloc} {:sourceloc_num 471} _LOG_READ_$$ifft1D_512.smem(true, BV32_ADD(v268$1, BV32_MUL($i.i39.0, 8bv32)), $$ifft1D_512.smem[1bv1][BV32_ADD(v268$1, BV32_MUL($i.i39.0, 8bv32))]);
     assume {:do_not_predicate} {:check_id "check_state_2"} {:captureState "check_state_2"} {:sourceloc} {:sourceloc_num 471} true;
-    call {:check_id "check_state_2"} {:sourceloc} {:sourceloc_num 471} _CHECK_READ_$$ifft1D_512.smem(true, BV32_ADD(v268$2, BV32_MUL($i.i39.0, 8bv32)), $$ifft1D_512.smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v268$2, BV32_MUL($i.i39.0, 8bv32))]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$ifft1D_512.smem"} true;
     v270$1 := $$ifft1D_512.smem[1bv1][BV32_ADD(v268$1, BV32_MUL($i.i39.0, 8bv32))];
     v270$2 := $$ifft1D_512.smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v268$2, BV32_MUL($i.i39.0, 8bv32))];
     v271$1 := $$data$1[BV32_MUL($i.i39.0, 2bv32)];
@@ -2918,37 +2915,37 @@ var $$storey8.reversed$7bv32$1: bv32;
 
 var $$storey8.reversed$7bv32$2: bv32;
 
-var $$ifft1D_512.reversed81$0bv32$1: bv32;
+var $$ifft1D_512.reversed8.1$0bv32$1: bv32;
 
-var $$ifft1D_512.reversed81$0bv32$2: bv32;
+var $$ifft1D_512.reversed8.1$0bv32$2: bv32;
 
-var $$ifft1D_512.reversed81$1bv32$1: bv32;
+var $$ifft1D_512.reversed8.1$1bv32$1: bv32;
 
-var $$ifft1D_512.reversed81$1bv32$2: bv32;
+var $$ifft1D_512.reversed8.1$1bv32$2: bv32;
 
-var $$ifft1D_512.reversed81$2bv32$1: bv32;
+var $$ifft1D_512.reversed8.1$2bv32$1: bv32;
 
-var $$ifft1D_512.reversed81$2bv32$2: bv32;
+var $$ifft1D_512.reversed8.1$2bv32$2: bv32;
 
-var $$ifft1D_512.reversed81$3bv32$1: bv32;
+var $$ifft1D_512.reversed8.1$3bv32$1: bv32;
 
-var $$ifft1D_512.reversed81$3bv32$2: bv32;
+var $$ifft1D_512.reversed8.1$3bv32$2: bv32;
 
-var $$ifft1D_512.reversed81$4bv32$1: bv32;
+var $$ifft1D_512.reversed8.1$4bv32$1: bv32;
 
-var $$ifft1D_512.reversed81$4bv32$2: bv32;
+var $$ifft1D_512.reversed8.1$4bv32$2: bv32;
 
-var $$ifft1D_512.reversed81$5bv32$1: bv32;
+var $$ifft1D_512.reversed8.1$5bv32$1: bv32;
 
-var $$ifft1D_512.reversed81$5bv32$2: bv32;
+var $$ifft1D_512.reversed8.1$5bv32$2: bv32;
 
-var $$ifft1D_512.reversed81$6bv32$1: bv32;
+var $$ifft1D_512.reversed8.1$6bv32$1: bv32;
 
-var $$ifft1D_512.reversed81$6bv32$2: bv32;
+var $$ifft1D_512.reversed8.1$6bv32$2: bv32;
 
-var $$ifft1D_512.reversed81$7bv32$1: bv32;
+var $$ifft1D_512.reversed8.1$7bv32$1: bv32;
 
-var $$ifft1D_512.reversed81$7bv32$2: bv32;
+var $$ifft1D_512.reversed8.1$7bv32$2: bv32;
 
 var $$globalStores8.reversed$0bv32$1: bv32;
 

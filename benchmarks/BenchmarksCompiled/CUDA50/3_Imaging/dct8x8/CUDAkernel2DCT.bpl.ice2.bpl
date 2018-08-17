@@ -157,6 +157,8 @@ implementation {:source_name "CUDAkernel2DCT"} {:kernel} $_Z14CUDAkernel2DCTPfS_
 {
   var $i.0: bv32;
   var $i1.0: bv32;
+  var v0$1: bv32;
+  var v0$2: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
   var v2$1: bv32;
@@ -166,8 +168,6 @@ implementation {:source_name "CUDAkernel2DCT"} {:kernel} $_Z14CUDAkernel2DCTPfS_
   var v4$1: bv32;
   var v4$2: bv32;
   var v5: bool;
-  var v0$1: bv32;
-  var v0$2: bv32;
   var v6$1: bv32;
   var v6$2: bv32;
   var v7$1: bv32;

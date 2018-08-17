@@ -137,10 +137,10 @@ implementation {:source_name "scanExclusiveShared2"} {:kernel} $_Z20scanExclusiv
   var $idata.0$1: bv32;
   var $idata.0$2: bv32;
   var $offset.i.i.0: bv32;
-  var v1$1: bool;
-  var v1$2: bool;
   var v0$1: bv32;
   var v0$2: bv32;
+  var v1$1: bool;
+  var v1$2: bool;
   var v2$1: bv32;
   var v2$2: bv32;
   var v3$1: bv32;

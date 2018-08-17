@@ -144,49 +144,49 @@ implementation {:source_name "BlackScholesGPU"} {:kernel} $_Z15BlackScholesGPUPf
   var $opt.0$2: bv32;
   var $cnd.i.i.0$1: bv32;
   var $cnd.i.i.0$2: bv32;
-  var $cnd.i.31.i.0$1: bv32;
-  var $cnd.i.31.i.0$2: bv32;
-  var v1: bv32;
+  var $cnd.i8.i.0$1: bv32;
+  var $cnd.i8.i.0$2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
+  var v1: bv32;
+  var v2$1: bool;
+  var v2$2: bool;
   var v3$1: bv32;
   var v3$2: bv32;
   var v4$1: bv32;
   var v4$2: bv32;
-  var v7$1: bv32;
-  var v7$2: bv32;
-  var v17$1: bv32;
-  var v17$2: bv32;
-  var v12$1: bv32;
-  var v12$2: bv32;
-  var v20$1: bv32;
-  var v20$2: bv32;
-  var v15$1: bv32;
-  var v15$2: bv32;
-  var v10$1: bv32;
-  var v10$2: bv32;
   var v5$1: bv32;
   var v5$2: bv32;
-  var v2$1: bool;
-  var v2$2: bool;
   var v6$1: bv32;
   var v6$2: bv32;
+  var v7$1: bv32;
+  var v7$2: bv32;
   var v8$1: bv32;
   var v8$2: bv32;
-  var v11$1: bv32;
-  var v11$2: bv32;
-  var v13$1: bv32;
-  var v13$2: bv32;
   var v9$1: bv32;
   var v9$2: bv32;
+  var v10$1: bv32;
+  var v10$2: bv32;
+  var v11$1: bv32;
+  var v11$2: bv32;
+  var v12$1: bv32;
+  var v12$2: bv32;
+  var v13$1: bv32;
+  var v13$2: bv32;
   var v14$1: bool;
   var v14$2: bool;
-  var v18$1: bv32;
-  var v18$2: bv32;
+  var v15$1: bv32;
+  var v15$2: bv32;
   var v16$1: bv32;
   var v16$2: bv32;
+  var v17$1: bv32;
+  var v17$2: bv32;
+  var v18$1: bv32;
+  var v18$2: bv32;
   var v19$1: bool;
   var v19$2: bool;
+  var v20$1: bv32;
+  var v20$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -205,7 +205,7 @@ implementation {:source_name "BlackScholesGPU"} {:kernel} $_Z15BlackScholesGPUPf
   var _HAVOC_bv32$2: bv32;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_MUL(group_size_x, group_id_x$1), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_size_x, group_id_x$2), local_id_x$2);
     v1 := BV32_MUL(group_size_x, num_groups_x);
@@ -216,9 +216,9 @@ implementation {:source_name "BlackScholesGPU"} {:kernel} $_Z15BlackScholesGPUPf
     p0$1 := true;
     p0$2 := true;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b8 ==> _WRITE_HAS_OCCURRED_$$d_PutResult ==> BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), v0$1);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b7 ==> _WRITE_HAS_OCCURRED_$$d_CallResult ==> BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), v0$1);
@@ -307,40 +307,40 @@ implementation {:source_name "BlackScholesGPU"} {:kernel} $_Z15BlackScholesGPUPf
     p5$2 := (if p1$2 && v19$2 then v19$2 else p5$2);
     p4$1 := (if p1$1 && !v19$1 then !v19$1 else p4$1);
     p4$2 := (if p1$2 && !v19$2 then !v19$2 else p4$2);
-    $cnd.i.31.i.0$1 := (if p4$1 then v18$1 else $cnd.i.31.i.0$1);
-    $cnd.i.31.i.0$2 := (if p4$2 then v18$2 else $cnd.i.31.i.0$2);
-    $cnd.i.31.i.0$1 := (if p5$1 then FSUB32(1065353216bv32, v18$1) else $cnd.i.31.i.0$1);
-    $cnd.i.31.i.0$2 := (if p5$2 then FSUB32(1065353216bv32, v18$2) else $cnd.i.31.i.0$2);
+    $cnd.i8.i.0$1 := (if p4$1 then v18$1 else $cnd.i8.i.0$1);
+    $cnd.i8.i.0$2 := (if p4$2 then v18$2 else $cnd.i8.i.0$2);
+    $cnd.i8.i.0$1 := (if p5$1 then FSUB32(1065353216bv32, v18$1) else $cnd.i8.i.0$1);
+    $cnd.i8.i.0$2 := (if p5$2 then FSUB32(1065353216bv32, v18$2) else $cnd.i8.i.0$2);
     call {:sourceloc_num 19} v20$1, v20$2 := $__expf(p1$1, FMUL32(FSUB32(2147483648bv32, $Riskfree), v5$1), p1$2, FMUL32(FSUB32(2147483648bv32, $Riskfree), v5$2));
     assume {:captureState "call_return_state_0"} {:procedureName "$__expf"} true;
-    call {:sourceloc} {:sourceloc_num 20} _LOG_WRITE_$$d_CallResult(p1$1, $opt.0$1, FSUB32(FMUL32(v3$1, $cnd.i.i.0$1), FMUL32(FMUL32(v4$1, v20$1), $cnd.i.31.i.0$1)), $$d_CallResult[$opt.0$1]);
+    call {:sourceloc} {:sourceloc_num 20} _LOG_WRITE_$$d_CallResult(p1$1, $opt.0$1, FSUB32(FMUL32(v3$1, $cnd.i.i.0$1), FMUL32(FMUL32(v4$1, v20$1), $cnd.i8.i.0$1)), $$d_CallResult[$opt.0$1]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$d_CallResult(p1$2, $opt.0$2);
     assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 20} true;
-    call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 20} _CHECK_WRITE_$$d_CallResult(p1$2, $opt.0$2, FSUB32(FMUL32(v3$2, $cnd.i.i.0$2), FMUL32(FMUL32(v4$2, v20$2), $cnd.i.31.i.0$2)));
+    call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 20} _CHECK_WRITE_$$d_CallResult(p1$2, $opt.0$2, FSUB32(FMUL32(v3$2, $cnd.i.i.0$2), FMUL32(FMUL32(v4$2, v20$2), $cnd.i8.i.0$2)));
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$d_CallResult"} true;
-    $$d_CallResult[$opt.0$1] := (if p1$1 then FSUB32(FMUL32(v3$1, $cnd.i.i.0$1), FMUL32(FMUL32(v4$1, v20$1), $cnd.i.31.i.0$1)) else $$d_CallResult[$opt.0$1]);
-    $$d_CallResult[$opt.0$2] := (if p1$2 then FSUB32(FMUL32(v3$2, $cnd.i.i.0$2), FMUL32(FMUL32(v4$2, v20$2), $cnd.i.31.i.0$2)) else $$d_CallResult[$opt.0$2]);
-    call {:sourceloc} {:sourceloc_num 21} _LOG_WRITE_$$d_PutResult(p1$1, $opt.0$1, FSUB32(FMUL32(FMUL32(v4$1, v20$1), FSUB32(1065353216bv32, $cnd.i.31.i.0$1)), FMUL32(v3$1, FSUB32(1065353216bv32, $cnd.i.i.0$1))), $$d_PutResult[$opt.0$1]);
+    $$d_CallResult[$opt.0$1] := (if p1$1 then FSUB32(FMUL32(v3$1, $cnd.i.i.0$1), FMUL32(FMUL32(v4$1, v20$1), $cnd.i8.i.0$1)) else $$d_CallResult[$opt.0$1]);
+    $$d_CallResult[$opt.0$2] := (if p1$2 then FSUB32(FMUL32(v3$2, $cnd.i.i.0$2), FMUL32(FMUL32(v4$2, v20$2), $cnd.i8.i.0$2)) else $$d_CallResult[$opt.0$2]);
+    call {:sourceloc} {:sourceloc_num 21} _LOG_WRITE_$$d_PutResult(p1$1, $opt.0$1, FSUB32(FMUL32(FMUL32(v4$1, v20$1), FSUB32(1065353216bv32, $cnd.i8.i.0$1)), FMUL32(v3$1, FSUB32(1065353216bv32, $cnd.i.i.0$1))), $$d_PutResult[$opt.0$1]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$d_PutResult(p1$2, $opt.0$2);
     assume {:do_not_predicate} {:check_id "check_state_1"} {:captureState "check_state_1"} {:sourceloc} {:sourceloc_num 21} true;
-    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 21} _CHECK_WRITE_$$d_PutResult(p1$2, $opt.0$2, FSUB32(FMUL32(FMUL32(v4$2, v20$2), FSUB32(1065353216bv32, $cnd.i.31.i.0$2)), FMUL32(v3$2, FSUB32(1065353216bv32, $cnd.i.i.0$2))));
+    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 21} _CHECK_WRITE_$$d_PutResult(p1$2, $opt.0$2, FSUB32(FMUL32(FMUL32(v4$2, v20$2), FSUB32(1065353216bv32, $cnd.i8.i.0$2)), FMUL32(v3$2, FSUB32(1065353216bv32, $cnd.i.i.0$2))));
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$d_PutResult"} true;
-    $$d_PutResult[$opt.0$1] := (if p1$1 then FSUB32(FMUL32(FMUL32(v4$1, v20$1), FSUB32(1065353216bv32, $cnd.i.31.i.0$1)), FMUL32(v3$1, FSUB32(1065353216bv32, $cnd.i.i.0$1))) else $$d_PutResult[$opt.0$1]);
-    $$d_PutResult[$opt.0$2] := (if p1$2 then FSUB32(FMUL32(FMUL32(v4$2, v20$2), FSUB32(1065353216bv32, $cnd.i.31.i.0$2)), FMUL32(v3$2, FSUB32(1065353216bv32, $cnd.i.i.0$2))) else $$d_PutResult[$opt.0$2]);
+    $$d_PutResult[$opt.0$1] := (if p1$1 then FSUB32(FMUL32(FMUL32(v4$1, v20$1), FSUB32(1065353216bv32, $cnd.i8.i.0$1)), FMUL32(v3$1, FSUB32(1065353216bv32, $cnd.i.i.0$1))) else $$d_PutResult[$opt.0$1]);
+    $$d_PutResult[$opt.0$2] := (if p1$2 then FSUB32(FMUL32(FMUL32(v4$2, v20$2), FSUB32(1065353216bv32, $cnd.i8.i.0$2)), FMUL32(v3$2, FSUB32(1065353216bv32, $cnd.i.i.0$2))) else $$d_PutResult[$opt.0$2]);
     $opt.0$1 := (if p1$1 then BV32_ADD($opt.0$1, v1) else $opt.0$1);
     $opt.0$2 := (if p1$2 then BV32_ADD($opt.0$2, v1) else $opt.0$2);
     p0$1 := (if p1$1 then true else p0$1);
     p0$2 := (if p1$2 then true else p0$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $1.backedge, $1.tail;
 
-  $for.cond.tail:
+  $1.tail:
     assume !p0$1 && !p0$2;
     return;
 
-  $for.cond.backedge:
+  $1.backedge:
     assume {:backedge} p0$1 || p0$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

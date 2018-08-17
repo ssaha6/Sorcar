@@ -290,10 +290,7 @@ assert  my_inv (  (  BV32_SLE($stride.0, 512bv32) ) ,  (  BV32_SGE($stride.0, 51
 
   __partitioned_block_$falsebb_1:
     call {:sourceloc_num 28} $bugle_barrier_duplicated_0(1bv1, 1bv1);
-    call {:sourceloc} {:sourceloc_num 29} _LOG_READ_$$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_key(true, local_id_x$1, $$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_key[1bv1][local_id_x$1]);
     assume {:do_not_predicate} {:check_id "check_state_4"} {:captureState "check_state_4"} {:sourceloc} {:sourceloc_num 29} true;
-    call {:check_id "check_state_4"} {:sourceloc} {:sourceloc_num 29} _CHECK_READ_$$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_key(true, local_id_x$2, $$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_key[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_key"} true;
     v19$1 := $$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_key[1bv1][local_id_x$1];
     v19$2 := $$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_key[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2];
     call {:sourceloc} {:sourceloc_num 30} _LOG_WRITE_$$d_DstKey(true, v2$1, v19$1, $$d_DstKey[v2$1]);
@@ -303,10 +300,7 @@ assert  my_inv (  (  BV32_SLE($stride.0, 512bv32) ) ,  (  BV32_SGE($stride.0, 51
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$d_DstKey"} true;
     $$d_DstKey[v2$1] := v19$1;
     $$d_DstKey[v2$2] := v19$2;
-    call {:sourceloc} {:sourceloc_num 31} _LOG_READ_$$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_val(true, local_id_x$1, $$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_val[1bv1][local_id_x$1]);
     assume {:do_not_predicate} {:check_id "check_state_6"} {:captureState "check_state_6"} {:sourceloc} {:sourceloc_num 31} true;
-    call {:check_id "check_state_6"} {:sourceloc} {:sourceloc_num 31} _CHECK_READ_$$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_val(true, local_id_x$2, $$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_val[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_val"} true;
     v20$1 := $$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_val[1bv1][local_id_x$1];
     v20$2 := $$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_val[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2];
     call {:sourceloc} {:sourceloc_num 32} _LOG_WRITE_$$d_DstVal(true, v3$1, v20$1, $$d_DstVal[v3$1]);
@@ -316,10 +310,7 @@ assert  my_inv (  (  BV32_SLE($stride.0, 512bv32) ) ,  (  BV32_SGE($stride.0, 51
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$d_DstVal"} true;
     $$d_DstVal[v3$1] := v20$1;
     $$d_DstVal[v3$2] := v20$2;
-    call {:sourceloc} {:sourceloc_num 33} _LOG_READ_$$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_key(true, BV32_ADD(local_id_x$1, 512bv32), $$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_key[1bv1][BV32_ADD(local_id_x$1, 512bv32)]);
     assume {:do_not_predicate} {:check_id "check_state_8"} {:captureState "check_state_8"} {:sourceloc} {:sourceloc_num 33} true;
-    call {:check_id "check_state_8"} {:sourceloc} {:sourceloc_num 33} _CHECK_READ_$$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_key(true, BV32_ADD(local_id_x$2, 512bv32), $$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_key[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(local_id_x$2, 512bv32)]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_key"} true;
     v21$1 := $$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_key[1bv1][BV32_ADD(local_id_x$1, 512bv32)];
     v21$2 := $$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_key[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(local_id_x$2, 512bv32)];
     call {:sourceloc} {:sourceloc_num 34} _LOG_WRITE_$$d_DstKey(true, BV32_ADD(v2$1, 512bv32), v21$1, $$d_DstKey[BV32_ADD(v2$1, 512bv32)]);
@@ -329,10 +320,7 @@ assert  my_inv (  (  BV32_SLE($stride.0, 512bv32) ) ,  (  BV32_SGE($stride.0, 51
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$d_DstKey"} true;
     $$d_DstKey[BV32_ADD(v2$1, 512bv32)] := v21$1;
     $$d_DstKey[BV32_ADD(v2$2, 512bv32)] := v21$2;
-    call {:sourceloc} {:sourceloc_num 35} _LOG_READ_$$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_val(true, BV32_ADD(local_id_x$1, 512bv32), $$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_val[1bv1][BV32_ADD(local_id_x$1, 512bv32)]);
     assume {:do_not_predicate} {:check_id "check_state_10"} {:captureState "check_state_10"} {:sourceloc} {:sourceloc_num 35} true;
-    call {:check_id "check_state_10"} {:sourceloc} {:sourceloc_num 35} _CHECK_READ_$$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_val(true, BV32_ADD(local_id_x$2, 512bv32), $$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_val[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(local_id_x$2, 512bv32)]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_val"} true;
     v22$1 := $$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_val[1bv1][BV32_ADD(local_id_x$1, 512bv32)];
     v22$2 := $$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_val[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(local_id_x$2, 512bv32)];
     call {:sourceloc} {:sourceloc_num 36} _LOG_WRITE_$$d_DstVal(true, BV32_ADD(v3$1, 512bv32), v22$1, $$d_DstVal[BV32_ADD(v3$1, 512bv32)]);

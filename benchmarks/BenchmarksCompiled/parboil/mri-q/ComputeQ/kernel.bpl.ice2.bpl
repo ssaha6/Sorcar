@@ -377,12 +377,12 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  (  BV32_SLE(0bv32, $tx
     v17$2 := FMUL32(1086918619bv32, FADD32(FMUL32(v11$2, v16$2), FADD32(FMUL32(v9$2, v14$2), FMUL32(v10$2, v15$2))));
     v18$1 := $$sQr$1[$tx1.0];
     v18$2 := $$sQr$2[$tx1.0];
-    $$sQr$1[$tx1.0] := FADD32(v18$1, FMUL32(v12$1, FCOS32(v17$1)));
-    $$sQr$2[$tx1.0] := FADD32(v18$2, FMUL32(v12$2, FCOS32(v17$2)));
+    $$sQr$1[$tx1.0] := FADD32(FMUL32(v12$1, FCOS32(v17$1)), v18$1);
+    $$sQr$2[$tx1.0] := FADD32(FMUL32(v12$2, FCOS32(v17$2)), v18$2);
     v19$1 := $$sQi$1[$tx1.0];
     v19$2 := $$sQi$2[$tx1.0];
-    $$sQi$1[$tx1.0] := FADD32(v19$1, FMUL32(v12$1, FSIN32(v17$1)));
-    $$sQi$2[$tx1.0] := FADD32(v19$2, FMUL32(v12$2, FSIN32(v17$2)));
+    $$sQi$1[$tx1.0] := FADD32(FMUL32(v12$1, FSIN32(v17$1)), v19$1);
+    $$sQi$2[$tx1.0] := FADD32(FMUL32(v12$2, FSIN32(v17$2)), v19$2);
     $tx1.0 := BV32_ADD($tx1.0, 1bv32);
     assume {:captureState "loop_back_edge_state_2_0"} true;
     goto $9;

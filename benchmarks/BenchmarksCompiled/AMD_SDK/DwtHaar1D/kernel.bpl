@@ -155,7 +155,7 @@ implementation {:source_name "dwtHaar1D"} {:kernel} $dwtHaar1D($tLevels: bv32, $
   var $t0.0$2: bv32;
   var $t1.0$1: bv32;
   var $t1.0$2: bv32;
-  var $cond: bv32;
+  var $0: bv32;
   var $activeThreads.0: bv32;
   var $midOutPos.0$1: bv32;
   var $midOutPos.0$2: bv32;
@@ -181,14 +181,8 @@ implementation {:source_name "dwtHaar1D"} {:kernel} $dwtHaar1D($tLevels: bv32, $
   var v4$2: bv32;
   var v5: bool;
   var v6: bv32;
-  var v13$1: bv32;
-  var v13$2: bv32;
-  var v14$1: bv32;
-  var v14$2: bv32;
-  var v17$1: bv32;
-  var v17$2: bv32;
-  var v8: bv32;
   var v7: bool;
+  var v8: bv32;
   var v9$1: bv32;
   var v9$2: bv32;
   var v10$1: bv32;
@@ -196,10 +190,16 @@ implementation {:source_name "dwtHaar1D"} {:kernel} $dwtHaar1D($tLevels: bv32, $
   var v11: bool;
   var v12$1: bool;
   var v12$2: bool;
+  var v13$1: bv32;
+  var v13$2: bv32;
+  var v14$1: bv32;
+  var v14$2: bv32;
   var v15$1: bool;
   var v15$2: bool;
   var v16$1: bool;
   var v16$2: bool;
+  var v17$1: bv32;
+  var v17$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -214,7 +214,7 @@ implementation {:source_name "dwtHaar1D"} {:kernel} $dwtHaar1D($tLevels: bv32, $
   var p5$2: bool;
 
 
-  $entry:
+  $0:
     v0$1 := local_id_x$1;
     v0$2 := local_id_x$2;
     v1$1 := group_id_x$1;
@@ -229,9 +229,9 @@ implementation {:source_name "dwtHaar1D"} {:kernel} $dwtHaar1D($tLevels: bv32, $
     assume {:partition} !v5;
     $t0.0$1, $t1.0$1 := v3$1, v4$1;
     $t0.0$2, $t1.0$2 := v3$2, v4$2;
-    goto __partitioned_block_$if.end_0;
+    goto __partitioned_block_$2_0;
 
-  __partitioned_block_$if.end_0:
+  __partitioned_block_$2_0:
     call {:sourceloc} {:sourceloc_num 8} _LOG_WRITE_$$sharedArray(true, v0$1, $t0.0$1, $$sharedArray[1bv1][v0$1]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$sharedArray(true, v0$2);
     assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 8} true;
@@ -246,28 +246,28 @@ implementation {:source_name "dwtHaar1D"} {:kernel} $dwtHaar1D($tLevels: bv32, $
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$sharedArray"} true;
     $$sharedArray[1bv1][BV32_ADD(v2, v0$1)] := $t1.0$1;
     $$sharedArray[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v2, v0$2)] := $t1.0$2;
-    goto __partitioned_block_$if.end_1;
+    goto __partitioned_block_$2_1;
 
-  __partitioned_block_$if.end_1:
+  __partitioned_block_$2_1:
     call {:sourceloc_num 10} $bugle_barrier_duplicated_0(1bv1, 0bv1);
     v7 := BV32_UGT($tLevels, $mLevels);
     goto $truebb0, $falsebb0;
 
   $falsebb0:
     assume {:partition} !v7;
-    $cond := $tLevels;
-    goto $cond.end;
+    $0 := $tLevels;
+    goto $5;
 
-  $cond.end:
+  $5:
     v8 := FDIV32(1065353216bv32, FSQRT32(1073741824bv32));
     havoc v9$1, v9$2;
     havoc v10$1, v10$2;
-    $activeThreads.0, $midOutPos.0$1, $i.0, $data0.0$1, $data1.0$1 := BV32_SDIV(BV32_SHL(1bv32, BV32_AND($cond, 31bv32)), 2bv32), BV32_UDIV($signalLength, 2bv32), 0bv32, v9$1, v10$1;
+    $activeThreads.0, $midOutPos.0$1, $i.0, $data0.0$1, $data1.0$1 := BV32_SDIV(BV32_SHL(1bv32, BV32_AND($0, 31bv32)), 2bv32), BV32_UDIV($signalLength, 2bv32), 0bv32, v9$1, v10$1;
     $midOutPos.0$2, $data0.0$2, $data1.0$2 := BV32_UDIV($signalLength, 2bv32), v9$2, v10$2;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $6;
 
-  $for.cond:
+  $6:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b22 ==> _WRITE_HAS_OCCURRED_$$sharedArray ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b21 ==> _READ_HAS_OCCURRED_$$sharedArray ==> _WATCHED_OFFSET == BV32_MUL(2bv32, local_id_x$1) || _WATCHED_OFFSET == BV32_ADD(BV32_MUL(2bv32, local_id_x$1), 1bv32);
@@ -287,16 +287,16 @@ implementation {:source_name "dwtHaar1D"} {:kernel} $dwtHaar1D($tLevels: bv32, $
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$sharedArray ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$sharedArray ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$sharedArray ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
-    assert {:tag "loopBound"} {:thread 1} _b7 ==> BV32_UGE($activeThreads.0, BV32_SDIV(BV32_SHL(1bv32, BV32_AND($cond, 31bv32)), 2bv32));
-    assert {:tag "loopBound"} {:thread 1} _b6 ==> BV32_ULE($activeThreads.0, BV32_SDIV(BV32_SHL(1bv32, BV32_AND($cond, 31bv32)), 2bv32));
-    assert {:tag "loopBound"} {:thread 1} _b5 ==> BV32_SGE($activeThreads.0, BV32_SDIV(BV32_SHL(1bv32, BV32_AND($cond, 31bv32)), 2bv32));
-    assert {:tag "loopBound"} {:thread 1} _b4 ==> BV32_SLE($activeThreads.0, BV32_SDIV(BV32_SHL(1bv32, BV32_AND($cond, 31bv32)), 2bv32));
+    assert {:tag "loopBound"} {:thread 1} _b7 ==> BV32_UGE($activeThreads.0, BV32_SDIV(BV32_SHL(1bv32, BV32_AND($0, 31bv32)), 2bv32));
+    assert {:tag "loopBound"} {:thread 1} _b6 ==> BV32_ULE($activeThreads.0, BV32_SDIV(BV32_SHL(1bv32, BV32_AND($0, 31bv32)), 2bv32));
+    assert {:tag "loopBound"} {:thread 1} _b5 ==> BV32_SGE($activeThreads.0, BV32_SDIV(BV32_SHL(1bv32, BV32_AND($0, 31bv32)), 2bv32));
+    assert {:tag "loopBound"} {:thread 1} _b4 ==> BV32_SLE($activeThreads.0, BV32_SDIV(BV32_SHL(1bv32, BV32_AND($0, 31bv32)), 2bv32));
     assert {:tag "loopBound"} {:thread 1} _b3 ==> BV32_UGE($i.0, 0bv32);
     assert {:tag "loopBound"} {:thread 1} _b2 ==> BV32_ULE($i.0, 0bv32);
     assert {:tag "loopBound"} {:thread 1} _b1 ==> BV32_SGE($i.0, 0bv32);
     assert {:tag "loopBound"} {:thread 1} _b0 ==> BV32_SLE($i.0, 0bv32);
     assert {:block_sourceloc} {:sourceloc_num 14} true;
-    assert {:originated_from_invariant} {:sourceloc_num 15} {:thread 1} (if $activeThreads.0 == BV32_SDIV(BV32_SHL(1bv32, BV32_AND(BV32_SUB($cond, $i.0), 31bv32)), 2bv32) then 1bv1 else 0bv1) != 0bv1;
+    assert {:originated_from_invariant} {:sourceloc_num 15} {:thread 1} (if $activeThreads.0 == BV32_SDIV(BV32_SHL(1bv32, BV32_AND(BV32_SUB($0, $i.0), 31bv32)), 2bv32) then 1bv1 else 0bv1) != 0bv1;
     assert {:originated_from_invariant} {:sourceloc_num 16} {:thread 1} (if BV32_ULT(v0$1, $activeThreads.0) ==> $midOutPos.0$1 == BV32_LSHR(BV32_UDIV($signalLength, 2bv32), BV32_AND($i.0, 31bv32)) then 1bv1 else 0bv1) != 0bv1;
     assert {:originated_from_invariant} {:sourceloc_num 16} {:thread 2} (if BV32_ULT(v0$2, $activeThreads.0) ==> $midOutPos.0$2 == BV32_LSHR(BV32_UDIV($signalLength, 2bv32), BV32_AND($i.0, 31bv32)) then 1bv1 else 0bv1) != 0bv1;
     assert {:originated_from_invariant} {:sourceloc_num 17} {:thread 1} (if _WRITE_HAS_OCCURRED_$$coefsSignal ==> BV32_UGE(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), BV32_ADD(BV32_ADD(BV32_SHL($midOutPos.0$1, 1bv32), BV32_MUL(v1$1, BV32_SHL($activeThreads.0, 1bv32))), v0$1)) then 1bv1 else 0bv1) != 0bv1;
@@ -305,8 +305,8 @@ implementation {:source_name "dwtHaar1D"} {:kernel} $dwtHaar1D($tLevels: bv32, $
     assert {:originated_from_invariant} {:sourceloc_num 20} {:thread 1} (if BV32_UGE(v0$1, 4bv32) ==> _WRITE_HAS_OCCURRED_$$coefsSignal ==> BV32_UGE(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), BV32_ADD(BV32_ADD(128bv32, BV32_MUL(v1$1, 8bv32)), v0$1)) then 1bv1 else 0bv1) != 0bv1;
     assert {:originated_from_invariant} {:sourceloc_num 21} {:thread 1} (if BV32_UGE(v0$1, 2bv32) ==> _WRITE_HAS_OCCURRED_$$coefsSignal ==> BV32_UGE(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), BV32_ADD(BV32_ADD(64bv32, BV32_MUL(v1$1, 4bv32)), v0$1)) then 1bv1 else 0bv1) != 0bv1;
     assert {:originated_from_invariant} {:sourceloc_num 22} {:thread 1} (if BV32_UGE(v0$1, 1bv32) ==> _WRITE_HAS_OCCURRED_$$coefsSignal ==> BV32_UGE(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), BV32_ADD(BV32_ADD(32bv32, BV32_MUL(v1$1, 2bv32)), v0$1)) then 1bv1 else 0bv1) != 0bv1;
-    assert {:originated_from_invariant} {:sourceloc_num 23} {:thread 1} (if BV32_UGE(v0$1, BV32_SDIV(BV32_SHL(1bv32, BV32_AND($cond, 31bv32)), 2bv32)) ==> BV1_XOR((if _WRITE_HAS_OCCURRED_$$coefsSignal then 1bv1 else 0bv1), 1bv1) == 1bv1 then 1bv1 else 0bv1) != 0bv1;
-    v11 := BV32_ULT($i.0, $cond);
+    assert {:originated_from_invariant} {:sourceloc_num 23} {:thread 1} (if BV32_UGE(v0$1, BV32_SDIV(BV32_SHL(1bv32, BV32_AND($0, 31bv32)), 2bv32)) ==> BV1_XOR((if _WRITE_HAS_OCCURRED_$$coefsSignal then 1bv1 else 0bv1), 1bv1) == 1bv1 then 1bv1 else 0bv1) != 0bv1;
+    v11 := BV32_ULT($i.0, $0);
     p0$1 := false;
     p0$2 := false;
     p1$1 := false;
@@ -401,19 +401,19 @@ implementation {:source_name "dwtHaar1D"} {:kernel} $dwtHaar1D($tLevels: bv32, $
     $activeThreads.0, $midOutPos.0$1, $i.0, $data0.0$1, $data1.0$1 := BV32_LSHR($activeThreads.0, 1bv32), $midOutPos.1$1, BV32_ADD($i.0, 1bv32), $data0.1$1, $data1.1$1;
     $midOutPos.0$2, $data0.0$2, $data1.0$2 := $midOutPos.1$2, $data0.1$2, $data1.1$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $6;
 
   $truebb0:
     assume {:partition} v7;
-    $cond := $mLevels;
-    goto $cond.end;
+    $0 := $mLevels;
+    goto $5;
 
   $truebb:
     assume {:partition} v5;
     v6 := FDIV32(1065353216bv32, FSQRT32(UI32_TO_FP32($signalLength)));
     $t0.0$1, $t1.0$1 := FMUL32(v3$1, v6), FMUL32(v4$1, v6);
     $t0.0$2, $t1.0$2 := FMUL32(v3$2, v6), FMUL32(v4$2, v6);
-    goto __partitioned_block_$if.end_0;
+    goto __partitioned_block_$2_0;
 }
 
 

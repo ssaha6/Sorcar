@@ -145,34 +145,32 @@ procedure {:source_name "mergeSortSharedKernel<1>"} {:kernel} $_Z21mergeSortShar
 implementation {:source_name "mergeSortSharedKernel<1>"} {:kernel} $_Z21mergeSortSharedKernelILj1EEvPjS0_S0_S0_j($arrayLength: bv32)
 {
   var $stride.0: bv32;
-  var $retval.i.0$1: bv32;
-  var $retval.i.0$2: bv32;
-  var $stride.addr.i.0: bv32;
+  var $.02$1: bv32;
+  var $.02$2: bv32;
+  var $.03: bv32;
   var $pos.i.0$1: bv32;
   var $pos.i.0$2: bv32;
-  var $cond.i$1: bv32;
-  var $cond.i$2: bv32;
+  var $0$1: bv32;
+  var $0$2: bv32;
   var $pos.i.1$1: bv32;
   var $pos.i.1$2: bv32;
-  var $retval.i.56.0$1: bv32;
-  var $retval.i.56.0$2: bv32;
-  var $pos.i.61.0$1: bv32;
-  var $pos.i.61.0$2: bv32;
-  var $stride.addr.i.60.0: bv32;
-  var $cond.i.74$1: bv32;
-  var $cond.i.74$2: bv32;
-  var $pos.i.61.1$1: bv32;
-  var $pos.i.61.1$2: bv32;
-  var v12$1: bv32;
-  var v12$2: bv32;
-  var v2$1: bv32;
-  var v2$2: bv32;
-  var v1$1: bv32;
-  var v1$2: bv32;
-  var v3$1: bv32;
-  var v3$2: bv32;
+  var $.0$1: bv32;
+  var $.0$2: bv32;
+  var $pos.i1.0$1: bv32;
+  var $pos.i1.0$2: bv32;
+  var $.01: bv32;
+  var $1$1: bv32;
+  var $1$2: bv32;
+  var $pos.i1.1$1: bv32;
+  var $pos.i1.1$2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
+  var v1$1: bv32;
+  var v1$2: bv32;
+  var v2$1: bv32;
+  var v2$2: bv32;
+  var v3$1: bv32;
+  var v3$2: bv32;
   var v4$1: bv32;
   var v4$2: bv32;
   var v5$1: bv32;
@@ -181,47 +179,49 @@ implementation {:source_name "mergeSortSharedKernel<1>"} {:kernel} $_Z21mergeSor
   var v6$2: bv32;
   var v7$1: bv32;
   var v7$2: bv32;
-  var v13$1: bv32;
-  var v13$2: bv32;
+  var v8: bool;
   var v9$1: bv32;
   var v9$2: bv32;
   var v10$1: bv32;
   var v10$2: bv32;
-  var v8: bool;
   var v11$1: bv32;
   var v11$2: bv32;
-  var v25$1: bv32;
-  var v25$2: bv32;
-  var v19$1: bv32;
-  var v19$2: bv32;
-  var v31$1: bv32;
-  var v31$2: bv32;
-  var v28$1: bv32;
-  var v28$2: bv32;
-  var v30$1: bv32;
-  var v30$2: bv32;
-  var v29$1: bv32;
-  var v29$2: bv32;
+  var v12$1: bv32;
+  var v12$2: bv32;
+  var v13$1: bv32;
+  var v13$2: bv32;
   var v14$1: bv32;
   var v14$2: bv32;
   var v15$1: bv32;
   var v15$2: bv32;
-  var v18$1: bool;
-  var v18$2: bool;
   var v16: bool;
   var v17: bool;
+  var v18$1: bool;
+  var v18$2: bool;
+  var v19$1: bv32;
+  var v19$2: bv32;
   var v20$1: bool;
   var v20$2: bool;
-  var v23: bool;
-  var v24$1: bool;
-  var v24$2: bool;
   var v21$1: bv32;
   var v21$2: bv32;
   var v22: bool;
-  var v27$1: bv32;
-  var v27$2: bv32;
+  var v23: bool;
+  var v24$1: bool;
+  var v24$2: bool;
+  var v25$1: bv32;
+  var v25$2: bv32;
   var v26$1: bool;
   var v26$2: bool;
+  var v27$1: bv32;
+  var v27$2: bv32;
+  var v28$1: bv32;
+  var v28$2: bv32;
+  var v29$1: bv32;
+  var v29$2: bv32;
+  var v30$1: bv32;
+  var v30$2: bv32;
+  var v31$1: bv32;
+  var v31$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -240,7 +240,7 @@ implementation {:source_name "mergeSortSharedKernel<1>"} {:kernel} $_Z21mergeSor
   var p7$2: bool;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, 1024bv32), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, 1024bv32), local_id_x$2);
     v1$1 := BV32_ADD(BV32_MUL(group_id_x$1, 1024bv32), local_id_x$1);
@@ -283,16 +283,16 @@ implementation {:source_name "mergeSortSharedKernel<1>"} {:kernel} $_Z21mergeSor
     $$_ZZ21mergeSortSharedKernelILj1EEvPjS0_S0_S0_jE5s_val[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(local_id_x$2, 512bv32)] := v7$2;
     $stride.0 := 1bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "nowrite"} _b27 ==> !_WRITE_HAS_OCCURRED_$$_ZZ21mergeSortSharedKernelILj1EEvPjS0_S0_S0_jE5s_val;
     assert {:tag "nowrite"} _b26 ==> !_WRITE_HAS_OCCURRED_$$_ZZ21mergeSortSharedKernelILj1EEvPjS0_S0_S0_jE5s_key;
-    assert {:tag "pow2NotZero"} _b25 ==> $stride.addr.i.60.0 != 0bv32;
-    assert {:tag "pow2"} _b24 ==> $stride.addr.i.60.0 == 0bv32 || BV32_AND($stride.addr.i.60.0, BV32_SUB($stride.addr.i.60.0, 1bv32)) == 0bv32;
-    assert {:tag "pow2NotZero"} _b23 ==> $stride.addr.i.0 != 0bv32;
-    assert {:tag "pow2"} _b22 ==> $stride.addr.i.0 == 0bv32 || BV32_AND($stride.addr.i.0, BV32_SUB($stride.addr.i.0, 1bv32)) == 0bv32;
+    assert {:tag "pow2NotZero"} _b25 ==> $.01 != 0bv32;
+    assert {:tag "pow2"} _b24 ==> $.01 == 0bv32 || BV32_AND($.01, BV32_SUB($.01, 1bv32)) == 0bv32;
+    assert {:tag "pow2NotZero"} _b23 ==> $.03 != 0bv32;
+    assert {:tag "pow2"} _b22 ==> $.03 == 0bv32 || BV32_AND($.03, BV32_SUB($.03, 1bv32)) == 0bv32;
     assert {:tag "pow2NotZero"} _b21 ==> $stride.0 != 0bv32;
     assert {:tag "pow2"} _b20 ==> $stride.0 == 0bv32 || BV32_AND($stride.0, BV32_SUB($stride.0, 1bv32)) == 0bv32;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ21mergeSortSharedKernelILj1EEvPjS0_S0_S0_jE5s_val ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -386,15 +386,15 @@ implementation {:source_name "mergeSortSharedKernel<1>"} {:kernel} $_Z21mergeSor
 
   $falsebb0:
     assume {:partition} !v16;
-    $stride.addr.i.0, $pos.i.0$1 := $stride.0, 0bv32;
+    $.03, $pos.i.0$1 := $stride.0, 0bv32;
     $pos.i.0$2 := 0bv32;
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond.i;
+    goto $5;
 
-  $for.cond.i:
+  $5:
     assume {:captureState "loop_head_state_2"} true;
-    assert {:tag "pow2NotZero"} _b29 ==> $stride.addr.i.0 != 0bv32;
-    assert {:tag "pow2"} _b28 ==> $stride.addr.i.0 == 0bv32 || BV32_AND($stride.addr.i.0, BV32_SUB($stride.addr.i.0, 1bv32)) == 0bv32;
+    assert {:tag "pow2NotZero"} _b29 ==> $.03 != 0bv32;
+    assert {:tag "pow2"} _b28 ==> $.03 == 0bv32 || BV32_AND($.03, BV32_SUB($.03, 1bv32)) == 0bv32;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ21mergeSortSharedKernelILj1EEvPjS0_S0_S0_jE5s_val ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ21mergeSortSharedKernelILj1EEvPjS0_S0_S0_jE5s_val ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$_ZZ21mergeSortSharedKernelILj1EEvPjS0_S0_S0_jE5s_val ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -409,12 +409,12 @@ implementation {:source_name "mergeSortSharedKernel<1>"} {:kernel} $_Z21mergeSor
     assert {:tag "loopBound"} {:thread 2} _b9 ==> BV32_SGE($pos.i.0$2, 0bv32);
     assert {:tag "loopBound"} {:thread 1} _b8 ==> BV32_SLE($pos.i.0$1, 0bv32);
     assert {:tag "loopBound"} {:thread 2} _b8 ==> BV32_SLE($pos.i.0$2, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b7 ==> BV32_UGE($stride.addr.i.0, $stride.0);
-    assert {:tag "loopBound"} {:thread 1} _b6 ==> BV32_ULE($stride.addr.i.0, $stride.0);
-    assert {:tag "loopBound"} {:thread 1} _b5 ==> BV32_SGE($stride.addr.i.0, $stride.0);
-    assert {:tag "loopBound"} {:thread 1} _b4 ==> BV32_SLE($stride.addr.i.0, $stride.0);
+    assert {:tag "loopBound"} {:thread 1} _b7 ==> BV32_UGE($.03, $stride.0);
+    assert {:tag "loopBound"} {:thread 1} _b6 ==> BV32_ULE($.03, $stride.0);
+    assert {:tag "loopBound"} {:thread 1} _b5 ==> BV32_SGE($.03, $stride.0);
+    assert {:tag "loopBound"} {:thread 1} _b4 ==> BV32_SLE($.03, $stride.0);
     assert {:block_sourceloc} {:sourceloc_num 18} true;
-    v17 := BV32_UGT($stride.addr.i.0, 0bv32);
+    v17 := BV32_UGT($.03, 0bv32);
     p0$1 := false;
     p0$2 := false;
     p1$1 := false;
@@ -427,47 +427,47 @@ implementation {:source_name "mergeSortSharedKernel<1>"} {:kernel} $_Z21mergeSor
 
   $falsebb1:
     assume {:partition} !v17;
-    $retval.i.0$1 := $pos.i.0$1;
-    $retval.i.0$2 := $pos.i.0$2;
+    $.02$1 := $pos.i.0$1;
+    $.02$2 := $pos.i.0$2;
     goto $_ZL21binarySearchExclusiveILj1EEjjPjjj.exit;
 
   $_ZL21binarySearchExclusiveILj1EEjjPjjj.exit:
-    v21$1 := BV32_ADD($retval.i.0$1, v9$1);
-    v21$2 := BV32_ADD($retval.i.0$2, v9$2);
+    v21$1 := BV32_ADD($.02$1, v9$1);
+    v21$2 := BV32_ADD($.02$2, v9$2);
     v22 := $stride.0 == 0bv32;
     goto $truebb4, $falsebb4;
 
   $falsebb4:
     assume {:partition} !v22;
-    $pos.i.61.0$1, $stride.addr.i.60.0 := 0bv32, $stride.0;
-    $pos.i.61.0$2 := 0bv32;
+    $pos.i1.0$1, $.01 := 0bv32, $stride.0;
+    $pos.i1.0$2 := 0bv32;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.i.67;
+    goto $15;
 
-  $for.cond.i.67:
+  $15:
     assume {:captureState "loop_head_state_1"} true;
-    assert {:tag "pow2NotZero"} _b31 ==> $stride.addr.i.60.0 != 0bv32;
-    assert {:tag "pow2"} _b30 ==> $stride.addr.i.60.0 == 0bv32 || BV32_AND($stride.addr.i.60.0, BV32_SUB($stride.addr.i.60.0, 1bv32)) == 0bv32;
+    assert {:tag "pow2NotZero"} _b31 ==> $.01 != 0bv32;
+    assert {:tag "pow2"} _b30 ==> $.01 == 0bv32 || BV32_AND($.01, BV32_SUB($.01, 1bv32)) == 0bv32;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ21mergeSortSharedKernelILj1EEvPjS0_S0_S0_jE5s_val ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ21mergeSortSharedKernelILj1EEvPjS0_S0_S0_jE5s_val ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$_ZZ21mergeSortSharedKernelILj1EEvPjS0_S0_S0_jE5s_val ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ21mergeSortSharedKernelILj1EEvPjS0_S0_S0_jE5s_key ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ21mergeSortSharedKernelILj1EEvPjS0_S0_S0_jE5s_key ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$_ZZ21mergeSortSharedKernelILj1EEvPjS0_S0_S0_jE5s_key ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
-    assert {:tag "loopBound"} {:thread 1} _b19 ==> BV32_UGE($pos.i.61.0$1, 0bv32);
-    assert {:tag "loopBound"} {:thread 2} _b19 ==> BV32_UGE($pos.i.61.0$2, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b18 ==> BV32_ULE($pos.i.61.0$1, 0bv32);
-    assert {:tag "loopBound"} {:thread 2} _b18 ==> BV32_ULE($pos.i.61.0$2, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b17 ==> BV32_SGE($pos.i.61.0$1, 0bv32);
-    assert {:tag "loopBound"} {:thread 2} _b17 ==> BV32_SGE($pos.i.61.0$2, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b16 ==> BV32_SLE($pos.i.61.0$1, 0bv32);
-    assert {:tag "loopBound"} {:thread 2} _b16 ==> BV32_SLE($pos.i.61.0$2, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b15 ==> BV32_UGE($stride.addr.i.60.0, $stride.0);
-    assert {:tag "loopBound"} {:thread 1} _b14 ==> BV32_ULE($stride.addr.i.60.0, $stride.0);
-    assert {:tag "loopBound"} {:thread 1} _b13 ==> BV32_SGE($stride.addr.i.60.0, $stride.0);
-    assert {:tag "loopBound"} {:thread 1} _b12 ==> BV32_SLE($stride.addr.i.60.0, $stride.0);
+    assert {:tag "loopBound"} {:thread 1} _b19 ==> BV32_UGE($pos.i1.0$1, 0bv32);
+    assert {:tag "loopBound"} {:thread 2} _b19 ==> BV32_UGE($pos.i1.0$2, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b18 ==> BV32_ULE($pos.i1.0$1, 0bv32);
+    assert {:tag "loopBound"} {:thread 2} _b18 ==> BV32_ULE($pos.i1.0$2, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b17 ==> BV32_SGE($pos.i1.0$1, 0bv32);
+    assert {:tag "loopBound"} {:thread 2} _b17 ==> BV32_SGE($pos.i1.0$2, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b16 ==> BV32_SLE($pos.i1.0$1, 0bv32);
+    assert {:tag "loopBound"} {:thread 2} _b16 ==> BV32_SLE($pos.i1.0$2, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b15 ==> BV32_UGE($.01, $stride.0);
+    assert {:tag "loopBound"} {:thread 1} _b14 ==> BV32_ULE($.01, $stride.0);
+    assert {:tag "loopBound"} {:thread 1} _b13 ==> BV32_SGE($.01, $stride.0);
+    assert {:tag "loopBound"} {:thread 1} _b12 ==> BV32_SLE($.01, $stride.0);
     assert {:block_sourceloc} {:sourceloc_num 30} true;
-    v23 := BV32_UGT($stride.addr.i.60.0, 0bv32);
+    v23 := BV32_UGT($.01, 0bv32);
     p4$1 := false;
     p4$2 := false;
     p5$1 := false;
@@ -480,13 +480,13 @@ implementation {:source_name "mergeSortSharedKernel<1>"} {:kernel} $_Z21mergeSor
 
   $falsebb5:
     assume {:partition} !v23;
-    $retval.i.56.0$1 := $pos.i.61.0$1;
-    $retval.i.56.0$2 := $pos.i.61.0$2;
+    $.0$1 := $pos.i1.0$1;
+    $.0$2 := $pos.i1.0$2;
     goto __partitioned_block_$_ZL21binarySearchInclusiveILj1EEjjPjjj.exit_0;
 
   __partitioned_block_$_ZL21binarySearchInclusiveILj1EEjjPjjj.exit_0:
-    v27$1 := BV32_ADD($retval.i.56.0$1, v9$1);
-    v27$2 := BV32_ADD($retval.i.56.0$2, v9$2);
+    v27$1 := BV32_ADD($.0$1, v9$1);
+    v27$2 := BV32_ADD($.0$2, v9$2);
     goto __partitioned_block_$_ZL21binarySearchInclusiveILj1EEjjPjjj.exit_1;
 
   __partitioned_block_$_ZL21binarySearchInclusiveILj1EEjjPjjj.exit_1:
@@ -521,59 +521,59 @@ implementation {:source_name "mergeSortSharedKernel<1>"} {:kernel} $_Z21mergeSor
     $$_ZZ21mergeSortSharedKernelILj1EEvPjS0_S0_S0_jE5s_val[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v11$2, v27$2)] := v15$2;
     $stride.0 := BV32_SHL($stride.0, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
   $truebb5:
     assume {:partition} v23;
-    v24$1 := BV32_ULT(BV32_ADD($pos.i.61.0$1, $stride.addr.i.60.0), $stride.0);
-    v24$2 := BV32_ULT(BV32_ADD($pos.i.61.0$2, $stride.addr.i.60.0), $stride.0);
+    v24$1 := BV32_ULT(BV32_ADD($pos.i1.0$1, $.01), $stride.0);
+    v24$2 := BV32_ULT(BV32_ADD($pos.i1.0$2, $.01), $stride.0);
     p5$1 := (if v24$1 then v24$1 else p5$1);
     p5$2 := (if v24$2 then v24$2 else p5$2);
     p4$1 := (if !v24$1 then !v24$1 else p4$1);
     p4$2 := (if !v24$2 then !v24$2 else p4$2);
-    $cond.i.74$1 := (if p4$1 then $stride.0 else $cond.i.74$1);
-    $cond.i.74$2 := (if p4$2 then $stride.0 else $cond.i.74$2);
-    $cond.i.74$1 := (if p5$1 then BV32_ADD($pos.i.61.0$1, $stride.addr.i.60.0) else $cond.i.74$1);
-    $cond.i.74$2 := (if p5$2 then BV32_ADD($pos.i.61.0$2, $stride.addr.i.60.0) else $cond.i.74$2);
+    $1$1 := (if p4$1 then $stride.0 else $1$1);
+    $1$2 := (if p4$2 then $stride.0 else $1$2);
+    $1$1 := (if p5$1 then BV32_ADD($pos.i1.0$1, $.01) else $1$1);
+    $1$2 := (if p5$2 then BV32_ADD($pos.i1.0$2, $.01) else $1$2);
     assume {:do_not_predicate} {:check_id "check_state_20"} {:captureState "check_state_20"} {:sourceloc} {:sourceloc_num 35} true;
-    v25$1 := $$_ZZ21mergeSortSharedKernelILj1EEvPjS0_S0_S0_jE5s_key[1bv1][BV32_ADD(v10$1, BV32_SUB($cond.i.74$1, 1bv32))];
-    v25$2 := $$_ZZ21mergeSortSharedKernelILj1EEvPjS0_S0_S0_jE5s_key[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v10$2, BV32_SUB($cond.i.74$2, 1bv32))];
+    v25$1 := $$_ZZ21mergeSortSharedKernelILj1EEvPjS0_S0_S0_jE5s_key[1bv1][BV32_ADD(v10$1, BV32_SUB($1$1, 1bv32))];
+    v25$2 := $$_ZZ21mergeSortSharedKernelILj1EEvPjS0_S0_S0_jE5s_key[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v10$2, BV32_SUB($1$2, 1bv32))];
     v26$1 := BV32_ULE(v25$1, v14$1);
     v26$2 := BV32_ULE(v25$2, v14$2);
     p7$1 := (if v26$1 then v26$1 else p7$1);
     p7$2 := (if v26$2 then v26$2 else p7$2);
     p6$1 := (if !v26$1 then !v26$1 else p6$1);
     p6$2 := (if !v26$2 then !v26$2 else p6$2);
-    $pos.i.61.1$1 := (if p6$1 then $pos.i.61.0$1 else $pos.i.61.1$1);
-    $pos.i.61.1$2 := (if p6$2 then $pos.i.61.0$2 else $pos.i.61.1$2);
-    $pos.i.61.1$1 := (if p7$1 then $cond.i.74$1 else $pos.i.61.1$1);
-    $pos.i.61.1$2 := (if p7$2 then $cond.i.74$2 else $pos.i.61.1$2);
-    $pos.i.61.0$1, $stride.addr.i.60.0 := $pos.i.61.1$1, BV32_LSHR($stride.addr.i.60.0, 1bv32);
-    $pos.i.61.0$2 := $pos.i.61.1$2;
+    $pos.i1.1$1 := (if p6$1 then $pos.i1.0$1 else $pos.i1.1$1);
+    $pos.i1.1$2 := (if p6$2 then $pos.i1.0$2 else $pos.i1.1$2);
+    $pos.i1.1$1 := (if p7$1 then $1$1 else $pos.i1.1$1);
+    $pos.i1.1$2 := (if p7$2 then $1$2 else $pos.i1.1$2);
+    $pos.i1.0$1, $.01 := $pos.i1.1$1, BV32_LSHR($.01, 1bv32);
+    $pos.i1.0$2 := $pos.i1.1$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.i.67;
+    goto $15;
 
   $truebb4:
     assume {:partition} v22;
-    $retval.i.56.0$1 := 0bv32;
-    $retval.i.56.0$2 := 0bv32;
+    $.0$1 := 0bv32;
+    $.0$2 := 0bv32;
     goto __partitioned_block_$_ZL21binarySearchInclusiveILj1EEjjPjjj.exit_0;
 
   $truebb1:
     assume {:partition} v17;
-    v18$1 := BV32_ULT(BV32_ADD($pos.i.0$1, $stride.addr.i.0), $stride.0);
-    v18$2 := BV32_ULT(BV32_ADD($pos.i.0$2, $stride.addr.i.0), $stride.0);
+    v18$1 := BV32_ULT(BV32_ADD($pos.i.0$1, $.03), $stride.0);
+    v18$2 := BV32_ULT(BV32_ADD($pos.i.0$2, $.03), $stride.0);
     p1$1 := (if v18$1 then v18$1 else p1$1);
     p1$2 := (if v18$2 then v18$2 else p1$2);
     p0$1 := (if !v18$1 then !v18$1 else p0$1);
     p0$2 := (if !v18$2 then !v18$2 else p0$2);
-    $cond.i$1 := (if p0$1 then $stride.0 else $cond.i$1);
-    $cond.i$2 := (if p0$2 then $stride.0 else $cond.i$2);
-    $cond.i$1 := (if p1$1 then BV32_ADD($pos.i.0$1, $stride.addr.i.0) else $cond.i$1);
-    $cond.i$2 := (if p1$2 then BV32_ADD($pos.i.0$2, $stride.addr.i.0) else $cond.i$2);
+    $0$1 := (if p0$1 then $stride.0 else $0$1);
+    $0$2 := (if p0$2 then $stride.0 else $0$2);
+    $0$1 := (if p1$1 then BV32_ADD($pos.i.0$1, $.03) else $0$1);
+    $0$2 := (if p1$2 then BV32_ADD($pos.i.0$2, $.03) else $0$2);
     assume {:do_not_predicate} {:check_id "check_state_21"} {:captureState "check_state_21"} {:sourceloc} {:sourceloc_num 23} true;
-    v19$1 := $$_ZZ21mergeSortSharedKernelILj1EEvPjS0_S0_S0_jE5s_key[1bv1][BV32_ADD(BV32_ADD(v10$1, $stride.0), BV32_SUB($cond.i$1, 1bv32))];
-    v19$2 := $$_ZZ21mergeSortSharedKernelILj1EEvPjS0_S0_S0_jE5s_key[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_ADD(v10$2, $stride.0), BV32_SUB($cond.i$2, 1bv32))];
+    v19$1 := $$_ZZ21mergeSortSharedKernelILj1EEvPjS0_S0_S0_jE5s_key[1bv1][BV32_ADD(BV32_ADD(v10$1, $stride.0), BV32_SUB($0$1, 1bv32))];
+    v19$2 := $$_ZZ21mergeSortSharedKernelILj1EEvPjS0_S0_S0_jE5s_key[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_ADD(v10$2, $stride.0), BV32_SUB($0$2, 1bv32))];
     v20$1 := BV32_ULT(v19$1, v12$1);
     v20$2 := BV32_ULT(v19$2, v12$2);
     p3$1 := (if v20$1 then v20$1 else p3$1);
@@ -582,17 +582,17 @@ implementation {:source_name "mergeSortSharedKernel<1>"} {:kernel} $_Z21mergeSor
     p2$2 := (if !v20$2 then !v20$2 else p2$2);
     $pos.i.1$1 := (if p2$1 then $pos.i.0$1 else $pos.i.1$1);
     $pos.i.1$2 := (if p2$2 then $pos.i.0$2 else $pos.i.1$2);
-    $pos.i.1$1 := (if p3$1 then $cond.i$1 else $pos.i.1$1);
-    $pos.i.1$2 := (if p3$2 then $cond.i$2 else $pos.i.1$2);
-    $stride.addr.i.0, $pos.i.0$1 := BV32_LSHR($stride.addr.i.0, 1bv32), $pos.i.1$1;
+    $pos.i.1$1 := (if p3$1 then $0$1 else $pos.i.1$1);
+    $pos.i.1$2 := (if p3$2 then $0$2 else $pos.i.1$2);
+    $.03, $pos.i.0$1 := BV32_LSHR($.03, 1bv32), $pos.i.1$1;
     $pos.i.0$2 := $pos.i.1$2;
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond.i;
+    goto $5;
 
   $truebb0:
     assume {:partition} v16;
-    $retval.i.0$1 := 0bv32;
-    $retval.i.0$2 := 0bv32;
+    $.02$1 := 0bv32;
+    $.02$2 := 0bv32;
     goto $_ZL21binarySearchExclusiveILj1EEjjPjjj.exit;
 }
 

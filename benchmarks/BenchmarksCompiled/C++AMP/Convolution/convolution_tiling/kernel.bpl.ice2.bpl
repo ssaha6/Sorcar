@@ -8,8 +8,7 @@ function {:existential true} my_inv (
  b0006: bool,
  b0007: bool,
  b0008: bool,
- b0009: bool,
- b0010: bool
+ b0009: bool
  ) : bool;
 type _SIZE_T_TYPE = bv32;
 
@@ -199,7 +198,6 @@ implementation {:source_name "convolution_tiling"} {:kernel} $_Z18convolution_ti
   var p13$2: bool;
   var _HAVOC_bv32$1: bv32;
   var _HAVOC_bv32$2: bv32;
-  var _READ_HAS_OCCURRED_$$_ZZ18convolution_tilingPKfS0_PfE9local_buf$ghost$$12: bool;
 
 
   __partitioned_block_$0_0:
@@ -285,16 +283,11 @@ implementation {:source_name "convolution_tiling"} {:kernel} $_Z18convolution_ti
     $sum.0$2, $k.0$2 := (if p8$2 then 0bv32 else $sum.0$2), (if p8$2 then 4294967289bv32 else $k.0$2);
     p9$1 := (if p8$1 then true else p9$1);
     p9$2 := (if p8$2 then true else p9$2);
-    _READ_HAS_OCCURRED_$$_ZZ18convolution_tilingPKfS0_PfE9local_buf$ghost$$12 := _READ_HAS_OCCURRED_$$_ZZ18convolution_tilingPKfS0_PfE9local_buf;
     assume {:captureState "loop_entry_state_0_0"} true;
     goto $12;
 
   $12:
     assume {:captureState "loop_head_state_0"} true;
-    
-assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  !p8$1 ==> _READ_HAS_OCCURRED_$$_ZZ18convolution_tilingPKfS0_PfE9local_buf$ghost$$12 == _READ_HAS_OCCURRED_$$_ZZ18convolution_tilingPKfS0_PfE9local_buf )  ); 
-
-
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ18convolution_tilingPKfS0_PfE9local_buf ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ18convolution_tilingPKfS0_PfE9local_buf ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$_ZZ18convolution_tilingPKfS0_PfE9local_buf ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -316,7 +309,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     
     
     
-assert  my_inv (  ( p9$1 ==> BV32_SLE(0bv32, $k.0$1) )  && ( p9$2 ==> BV32_SLE(0bv32, $k.0$2) ) ,  ( p9$1 ==> BV32_SLE($k.0$1, 4294967289bv32) )  && ( p9$2 ==> BV32_SLE($k.0$2, 4294967289bv32) ) ,  ( p9$1 ==> BV32_SGE($k.0$1, 4294967289bv32) )  && ( p9$2 ==> BV32_SGE($k.0$2, 4294967289bv32) ) ,  ( p9$1 ==> BV32_ULE($k.0$1, 4294967289bv32) )  && ( p9$2 ==> BV32_ULE($k.0$2, 4294967289bv32) ) ,  ( p9$1 ==> BV32_UGE($k.0$1, 4294967289bv32) )  && ( p9$2 ==> BV32_UGE($k.0$2, 4294967289bv32) ) ,  ( p9$1 ==> p9$1 ==> BV32_SGE(local_id_y$1, 7bv32) && BV32_SLT(local_id_y$1, 121bv32) && BV32_SLT(BV32_SUB(BV32_ADD(BV32_MUL(group_id_y$1, 114bv32), local_id_y$1), 7bv32), 512bv32) )  && ( p9$2 ==> p9$2 ==> BV32_SGE(local_id_y$2, 7bv32) && BV32_SLT(local_id_y$2, 121bv32) && BV32_SLT(BV32_SUB(BV32_ADD(BV32_MUL(group_id_y$2, 114bv32), local_id_y$2), 7bv32), 512bv32) ) ,  (  BV32_SGE(local_id_y$1, 7bv32) && BV32_SLT(local_id_y$1, 121bv32) && BV32_SLT(BV32_SUB(BV32_ADD(BV32_MUL(group_id_y$1, 114bv32), local_id_y$1), 7bv32), 512bv32) && BV32_SLE($k.0$1, 7bv32) ==> p9$1 )  && (  BV32_SGE(local_id_y$2, 7bv32) && BV32_SLT(local_id_y$2, 121bv32) && BV32_SLT(BV32_SUB(BV32_ADD(BV32_MUL(group_id_y$2, 114bv32), local_id_y$2), 7bv32), 512bv32) && BV32_SLE($k.0$2, 7bv32) ==> p9$2 ) ,  (  _READ_HAS_OCCURRED_$$_ZZ18convolution_tilingPKfS0_PfE9local_buf ==> BV32_SGE(local_id_y$1, 7bv32) ) ,  (  _READ_HAS_OCCURRED_$$_ZZ18convolution_tilingPKfS0_PfE9local_buf ==> BV32_SLT(local_id_y$1, 121bv32) ) ,  (  _READ_HAS_OCCURRED_$$_ZZ18convolution_tilingPKfS0_PfE9local_buf ==> BV32_SLT(BV32_SUB(BV32_ADD(BV32_MUL(group_id_y$1, 114bv32), local_id_y$1), 7bv32), 512bv32) ) ,  true  ); 
+assert  my_inv (  ( p9$1 ==> BV32_SLE(0bv32, $k.0$1) )  && ( p9$2 ==> BV32_SLE(0bv32, $k.0$2) ) ,  ( p9$1 ==> BV32_SLE($k.0$1, 4294967289bv32) )  && ( p9$2 ==> BV32_SLE($k.0$2, 4294967289bv32) ) ,  ( p9$1 ==> BV32_SGE($k.0$1, 4294967289bv32) )  && ( p9$2 ==> BV32_SGE($k.0$2, 4294967289bv32) ) ,  ( p9$1 ==> BV32_ULE($k.0$1, 4294967289bv32) )  && ( p9$2 ==> BV32_ULE($k.0$2, 4294967289bv32) ) ,  ( p9$1 ==> BV32_UGE($k.0$1, 4294967289bv32) )  && ( p9$2 ==> BV32_UGE($k.0$2, 4294967289bv32) ) ,  ( p9$1 ==> p9$1 ==> BV32_SGE(local_id_y$1, 7bv32) && BV32_SLT(local_id_y$1, 121bv32) && BV32_SLT(BV32_SUB(BV32_ADD(BV32_MUL(group_id_y$1, 114bv32), local_id_y$1), 7bv32), 512bv32) )  && ( p9$2 ==> p9$2 ==> BV32_SGE(local_id_y$2, 7bv32) && BV32_SLT(local_id_y$2, 121bv32) && BV32_SLT(BV32_SUB(BV32_ADD(BV32_MUL(group_id_y$2, 114bv32), local_id_y$2), 7bv32), 512bv32) ) ,  (  BV32_SGE(local_id_y$1, 7bv32) && BV32_SLT(local_id_y$1, 121bv32) && BV32_SLT(BV32_SUB(BV32_ADD(BV32_MUL(group_id_y$1, 114bv32), local_id_y$1), 7bv32), 512bv32) && BV32_SLE($k.0$1, 7bv32) ==> p9$1 )  && (  BV32_SGE(local_id_y$2, 7bv32) && BV32_SLT(local_id_y$2, 121bv32) && BV32_SLT(BV32_SUB(BV32_ADD(BV32_MUL(group_id_y$2, 114bv32), local_id_y$2), 7bv32), 512bv32) && BV32_SLE($k.0$2, 7bv32) ==> p9$2 ) ,  (  _READ_HAS_OCCURRED_$$_ZZ18convolution_tilingPKfS0_PfE9local_buf ==> BV32_SGE(local_id_y$1, 7bv32) ) ,  (  _READ_HAS_OCCURRED_$$_ZZ18convolution_tilingPKfS0_PfE9local_buf ==> BV32_SLT(local_id_y$1, 121bv32) ) ,  (  _READ_HAS_OCCURRED_$$_ZZ18convolution_tilingPKfS0_PfE9local_buf ==> BV32_SLT(BV32_SUB(BV32_ADD(BV32_MUL(group_id_y$1, 114bv32), local_id_y$1), 7bv32), 512bv32) )  ); 
 
 
     assert {:block_sourceloc} {:sourceloc_num 15} p9$1 ==> true;
@@ -328,10 +321,7 @@ assert  my_inv (  ( p9$1 ==> BV32_SLE(0bv32, $k.0$1) )  && ( p9$2 ==> BV32_SLE(0
     p10$2 := (if p9$2 && v8$2 then v8$2 else p10$2);
     p9$1 := (if p9$1 && !v8$1 then v8$1 else p9$1);
     p9$2 := (if p9$2 && !v8$2 then v8$2 else p9$2);
-    call {:sourceloc} {:sourceloc_num 17} _LOG_READ_$$_ZZ18convolution_tilingPKfS0_PfE9local_buf(p10$1, BV32_ADD(local_id_y$1, $k.0$1), $$_ZZ18convolution_tilingPKfS0_PfE9local_buf[1bv1][BV32_ADD(local_id_y$1, $k.0$1)]);
     assume {:do_not_predicate} {:check_id "check_state_1"} {:captureState "check_state_1"} {:sourceloc} {:sourceloc_num 17} true;
-    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 17} _CHECK_READ_$$_ZZ18convolution_tilingPKfS0_PfE9local_buf(p10$2, BV32_ADD(local_id_y$2, $k.0$2), $$_ZZ18convolution_tilingPKfS0_PfE9local_buf[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(local_id_y$2, $k.0$2)]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ18convolution_tilingPKfS0_PfE9local_buf"} true;
     v9$1 := (if p10$1 then $$_ZZ18convolution_tilingPKfS0_PfE9local_buf[1bv1][BV32_ADD(local_id_y$1, $k.0$1)] else v9$1);
     v9$2 := (if p10$2 then $$_ZZ18convolution_tilingPKfS0_PfE9local_buf[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(local_id_y$2, $k.0$2)] else v9$2);
     havoc _HAVOC_bv32$1, _HAVOC_bv32$2;
@@ -812,7 +802,5 @@ implementation {:inline 1} $bugle_barrier_duplicated_0($0: bv1, $1: bv1)
   __Disabled:
     return;
 }
-
-
 
 

@@ -136,41 +136,41 @@ implementation {:source_name "histogram64Kernel"} {:kernel} $_Z17histogram64Kern
   var $accumPos.0$2: bv32;
   var $accumPos.1$1: bv32;
   var $accumPos.1$2: bv32;
-  var v1: bool;
   var v0$1: bv32;
   var v0$2: bv32;
+  var v1: bool;
   var v2$1: bv32;
   var v2$2: bv32;
-  var v8$1: bv8;
-  var v8$2: bv8;
-  var v6$1: bv8;
-  var v6$2: bv8;
-  var v10$1: bv8;
-  var v10$2: bv8;
-  var v4$1: bv32;
-  var v4$2: bv32;
-  var v12$1: bv8;
-  var v12$2: bv8;
-  var v15$1: bv8;
-  var v15$2: bv8;
-  var v5$1: bv32;
-  var v5$2: bv32;
   var v3$1: bool;
   var v3$2: bool;
+  var v4$1: bv32;
+  var v4$2: bv32;
+  var v5$1: bv32;
+  var v5$2: bv32;
+  var v6$1: bv8;
+  var v6$2: bv8;
   var v7$1: bv32;
   var v7$2: bv32;
-  var v14$1: bool;
-  var v14$2: bool;
-  var v17$1: bool;
-  var v17$2: bool;
-  var v16$1: bv32;
-  var v16$2: bv32;
-  var v13$1: bool;
-  var v13$2: bool;
+  var v8$1: bv8;
+  var v8$2: bv8;
   var v9$1: bv32;
   var v9$2: bv32;
+  var v10$1: bv8;
+  var v10$2: bv8;
   var v11$1: bv32;
   var v11$2: bv32;
+  var v12$1: bv8;
+  var v12$2: bv8;
+  var v13$1: bool;
+  var v13$2: bool;
+  var v14$1: bool;
+  var v14$2: bool;
+  var v15$1: bv8;
+  var v15$2: bv8;
+  var v16$1: bv32;
+  var v16$2: bv32;
+  var v17$1: bool;
+  var v17$2: bool;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -191,7 +191,7 @@ implementation {:source_name "histogram64Kernel"} {:kernel} $_Z17histogram64Kern
   var p8$2: bool;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_OR(BV32_OR(BV32_LSHR(BV32_AND(local_id_x$1, 4294967232bv32), 0bv32), BV32_SHL(BV32_AND(local_id_x$1, 15bv32), 2bv32)), BV32_LSHR(BV32_AND(local_id_x$1, 48bv32), 4bv32));
     v0$2 := BV32_OR(BV32_OR(BV32_LSHR(BV32_AND(local_id_x$2, 4294967232bv32), 0bv32), BV32_SHL(BV32_AND(local_id_x$2, 15bv32), 2bv32)), BV32_LSHR(BV32_AND(local_id_x$2, 48bv32), 4bv32));
     $i.0 := 0bv32;
@@ -200,9 +200,9 @@ implementation {:source_name "histogram64Kernel"} {:kernel} $_Z17histogram64Kern
     p4$1 := false;
     p4$2 := false;
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_2"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b24 ==> _WRITE_HAS_OCCURRED_$$_ZZ17histogram64KernelPjS_iE6s_Hist ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 128bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 128bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 128bv32), local_id_x$1));
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ17histogram64KernelPjS_iE6s_Hist ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -229,9 +229,9 @@ implementation {:source_name "histogram64Kernel"} {:kernel} $_Z17histogram64Kern
     p0$1 := true;
     p0$2 := true;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.7;
+    goto $5;
 
-  $for.cond.7:
+  $5:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ17histogram64KernelPjS_iE6s_Hist ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ17histogram64KernelPjS_iE6s_Hist ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -333,13 +333,13 @@ implementation {:source_name "histogram64Kernel"} {:kernel} $_Z17histogram64Kern
     $data4.0$2, $pos.0$2 := (if p1$2 then v4$2 else $data4.0$2), (if p1$2 then BV32_ADD($pos.0$2, BV32_MUL(group_size_x, num_groups_x)) else $pos.0$2);
     p0$1 := (if p1$1 then true else p0$1);
     p0$2 := (if p1$2 then true else p0$2);
-    goto $for.cond.7.backedge, __partitioned_block_$for.cond.7.tail_0;
+    goto $5.backedge, __partitioned_block_$5.tail_0;
 
-  __partitioned_block_$for.cond.7.tail_0:
+  __partitioned_block_$5.tail_0:
     assume !p0$1 && !p0$2;
-    goto __partitioned_block_$for.cond.7.tail_1;
+    goto __partitioned_block_$5.tail_1;
 
-  __partitioned_block_$for.cond.7.tail_1:
+  __partitioned_block_$5.tail_1:
     call {:sourceloc_num 22} $bugle_barrier_duplicated_1(1bv1, 1bv1);
     v13$1 := BV32_ULT(local_id_x$1, 64bv32);
     v13$2 := BV32_ULT(local_id_x$2, 64bv32);
@@ -350,9 +350,9 @@ implementation {:source_name "histogram64Kernel"} {:kernel} $_Z17histogram64Kern
     p4$1 := (if p3$1 then true else p4$1);
     p4$2 := (if p3$2 then true else p4$2);
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.45;
+    goto $10;
 
-  $for.cond.45:
+  $10:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ17histogram64KernelPjS_iE6s_Hist ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ17histogram64KernelPjS_iE6s_Hist ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -413,9 +413,9 @@ implementation {:source_name "histogram64Kernel"} {:kernel} $_Z17histogram64Kern
     $sum.0$2, $j.0$2, $accumPos.0$2 := (if p5$2 then BV32_ADD($sum.0$2, BV8_ZEXT32(v15$2)) else $sum.0$2), (if p5$2 then BV32_ADD($j.0$2, 1bv32) else $j.0$2), (if p5$2 then $accumPos.1$2 else $accumPos.0$2);
     p4$1 := (if p5$1 then true else p4$1);
     p4$2 := (if p5$2 then true else p4$2);
-    goto $for.cond.45.backedge, $for.cond.45.tail;
+    goto $10.backedge, $10.tail;
 
-  $for.cond.45.tail:
+  $10.tail:
     assume !p4$1 && !p4$2;
     call {:sourceloc} {:sourceloc_num 31} _LOG_WRITE_$$d_Result(p3$1, BV32_ADD(BV32_MUL(group_id_x$1, 64bv32), local_id_x$1), $sum.0$1, $$d_Result[BV32_ADD(BV32_MUL(group_id_x$1, 64bv32), local_id_x$1)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$d_Result(p3$2, BV32_ADD(BV32_MUL(group_id_x$2, 64bv32), local_id_x$2));
@@ -426,15 +426,15 @@ implementation {:source_name "histogram64Kernel"} {:kernel} $_Z17histogram64Kern
     $$d_Result[BV32_ADD(BV32_MUL(group_id_x$2, 64bv32), local_id_x$2)] := (if p3$2 then $sum.0$2 else $$d_Result[BV32_ADD(BV32_MUL(group_id_x$2, 64bv32), local_id_x$2)]);
     return;
 
-  $for.cond.45.backedge:
+  $10.backedge:
     assume {:backedge} p4$1 || p4$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.45;
+    goto $10;
 
-  $for.cond.7.backedge:
+  $5.backedge:
     assume {:backedge} p0$1 || p0$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.7;
+    goto $5;
 
   $truebb:
     assume {:partition} v1;
@@ -447,7 +447,7 @@ implementation {:source_name "histogram64Kernel"} {:kernel} $_Z17histogram64Kern
     $$_ZZ17histogram64KernelPjS_iE6s_Hist[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(local_id_x$2, BV32_MUL($i.0, 128bv32))] := 0bv8;
     $i.0 := BV32_ADD($i.0, 1bv32);
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

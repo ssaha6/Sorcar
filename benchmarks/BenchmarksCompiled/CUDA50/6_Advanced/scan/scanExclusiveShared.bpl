@@ -22,21 +22,21 @@ var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 128} {:sourc
 
 var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_Src: bool;
 
-axiom {:array_info "$$retval.i.i"} {:elem_width 32} {:source_name "retval.i.i"} {:source_elem_width 128} {:source_dimensions "1"} true;
+axiom {:array_info "$$0"} {:elem_width 32} {:source_name ""} {:source_elem_width 128} {:source_dimensions "1"} true;
 
-axiom {:array_info "$$agg.tmp8.i"} {:elem_width 32} {:source_name "agg.tmp8.i"} {:source_elem_width 128} {:source_dimensions "1"} true;
+axiom {:array_info "$$1"} {:elem_width 32} {:source_name ""} {:source_elem_width 128} {:source_dimensions "1"} true;
 
-axiom {:array_info "$$retval.i"} {:elem_width 32} {:source_name "retval.i"} {:source_elem_width 128} {:source_dimensions "1"} true;
+axiom {:array_info "$$2"} {:elem_width 32} {:source_name ""} {:source_elem_width 128} {:source_dimensions "1"} true;
 
-axiom {:array_info "$$agg.tmp.i"} {:elem_width 32} {:source_name "agg.tmp.i"} {:source_elem_width 128} {:source_dimensions "1"} true;
+axiom {:array_info "$$3"} {:elem_width 32} {:source_name ""} {:source_elem_width 128} {:source_dimensions "1"} true;
 
-axiom {:array_info "$$agg.tmp2"} {:elem_width 32} {:source_name "agg.tmp2"} {:source_elem_width 128} {:source_dimensions "1"} true;
+axiom {:array_info "$$4"} {:elem_width 32} {:source_name ""} {:source_elem_width 128} {:source_dimensions "1"} true;
 
 axiom {:array_info "$$idata4"} {:elem_width 32} {:source_name "idata4"} {:source_elem_width 128} {:source_dimensions "1"} true;
 
 axiom {:array_info "$$odata4"} {:elem_width 32} {:source_name "odata4"} {:source_elem_width 128} {:source_dimensions "1"} true;
 
-axiom {:array_info "$$agg.tmp"} {:elem_width 32} {:source_name "agg.tmp"} {:source_elem_width 128} {:source_dimensions "1"} true;
+axiom {:array_info "$$5"} {:elem_width 32} {:source_name ""} {:source_elem_width 128} {:source_dimensions "1"} true;
 
 var {:source_name "s_Data"} {:group_shared} $$_ZZ19scanExclusiveSharedP5uint4S0_jE6s_Data: [bv1][bv32]bv32;
 
@@ -131,18 +131,18 @@ procedure {:source_name "scanExclusiveShared"} {:kernel} $_Z19scanExclusiveShare
 implementation {:source_name "scanExclusiveShared"} {:kernel} $_Z19scanExclusiveSharedP5uint4S0_j($size: bv32)
 {
   var $offset.i.i.i.i.0: bv32;
-  var v10$1: bv32;
-  var v10$2: bv32;
+  var v0$1: bv32;
+  var v0$2: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
   var v2$1: bv32;
   var v2$2: bv32;
   var v3$1: bv32;
   var v3$2: bv32;
-  var v5$1: bv32;
-  var v5$2: bv32;
   var v4$1: bv32;
   var v4$2: bv32;
+  var v5$1: bv32;
+  var v5$2: bv32;
   var v6$1: bv32;
   var v6$2: bv32;
   var v7$1: bv32;
@@ -151,115 +151,115 @@ implementation {:source_name "scanExclusiveShared"} {:kernel} $_Z19scanExclusive
   var v8$2: bv32;
   var v9$1: bv32;
   var v9$2: bv32;
+  var v10$1: bv32;
+  var v10$2: bv32;
+  var v11$1: bv32;
+  var v11$2: bv32;
+  var v12$1: bv32;
+  var v12$2: bv32;
+  var v13$1: bv32;
+  var v13$2: bv32;
+  var v14$1: bv32;
+  var v14$2: bv32;
+  var v15$1: bv32;
+  var v15$2: bv32;
+  var v16$1: bv32;
+  var v16$2: bv32;
+  var v17$1: bv32;
+  var v17$2: bv32;
+  var v18$1: bv32;
+  var v18$2: bv32;
+  var v19$1: bv32;
+  var v19$2: bv32;
+  var v20$1: bv32;
+  var v20$2: bv32;
+  var v21$1: bv32;
+  var v21$2: bv32;
+  var v22$1: bv32;
+  var v22$2: bv32;
+  var v23$1: bv32;
+  var v23$2: bv32;
+  var v24$1: bv32;
+  var v24$2: bv32;
+  var v25$1: bv32;
+  var v25$2: bv32;
+  var v26$1: bv32;
+  var v26$2: bv32;
+  var v27$1: bv32;
+  var v27$2: bv32;
   var v28: bv32;
   var v29$1: bv32;
   var v29$2: bv32;
   var v30$1: bv32;
   var v30$2: bv32;
-  var v0$1: bv32;
-  var v0$2: bv32;
-  var v20$1: bv32;
-  var v20$2: bv32;
-  var v12$1: bv32;
-  var v12$2: bv32;
-  var v15$1: bv32;
-  var v15$2: bv32;
-  var v13$1: bv32;
-  var v13$2: bv32;
-  var v14$1: bv32;
-  var v14$2: bv32;
-  var v16$1: bv32;
-  var v16$2: bv32;
-  var v19$1: bv32;
-  var v19$2: bv32;
-  var v17$1: bv32;
-  var v17$2: bv32;
-  var v18$1: bv32;
-  var v18$2: bv32;
-  var v11$1: bv32;
-  var v11$2: bv32;
-  var v24$1: bv32;
-  var v24$2: bv32;
-  var v23$1: bv32;
-  var v23$2: bv32;
-  var v27$1: bv32;
-  var v27$2: bv32;
-  var v21$1: bv32;
-  var v21$2: bv32;
-  var v22$1: bv32;
-  var v22$2: bv32;
-  var v26$1: bv32;
-  var v26$2: bv32;
-  var v25$1: bv32;
-  var v25$2: bv32;
-  var v34$1: bv32;
-  var v34$2: bv32;
-  var v33$1: bv32;
-  var v33$2: bv32;
+  var v31: bool;
   var v32$1: bv32;
   var v32$2: bv32;
-  var v36$1: bv32;
-  var v36$2: bv32;
-  var v31: bool;
+  var v33$1: bv32;
+  var v33$2: bv32;
+  var v34$1: bv32;
+  var v34$2: bv32;
   var v35$1: bv32;
   var v35$2: bv32;
-  var v43$1: bv32;
-  var v43$2: bv32;
-  var v50$1: bv32;
-  var v50$2: bv32;
-  var v44$1: bv32;
-  var v44$2: bv32;
-  var v42$1: bv32;
-  var v42$2: bv32;
-  var v45$1: bv32;
-  var v45$2: bv32;
-  var v47$1: bv32;
-  var v47$2: bv32;
-  var v48$1: bv32;
-  var v48$2: bv32;
-  var v46$1: bv32;
-  var v46$2: bv32;
-  var v49$1: bv32;
-  var v49$2: bv32;
-  var v58$1: bv32;
-  var v58$2: bv32;
-  var v52$1: bv32;
-  var v52$2: bv32;
-  var v51$1: bv32;
-  var v51$2: bv32;
-  var v56$1: bv32;
-  var v56$2: bv32;
-  var v57$1: bv32;
-  var v57$2: bv32;
-  var v53$1: bv32;
-  var v53$2: bv32;
-  var v55$1: bv32;
-  var v55$2: bv32;
-  var v54$1: bv32;
-  var v54$2: bv32;
-  var v59$1: bv32;
-  var v59$2: bv32;
+  var v36$1: bv32;
+  var v36$2: bv32;
+  var v37$1: bv32;
+  var v37$2: bv32;
+  var v38$1: bv32;
+  var v38$2: bv32;
+  var v39$1: bv32;
+  var v39$2: bv32;
   var v40$1: bv32;
   var v40$2: bv32;
   var v41$1: bv32;
   var v41$2: bv32;
-  var v38$1: bv32;
-  var v38$2: bv32;
-  var v37$1: bv32;
-  var v37$2: bv32;
-  var v39$1: bv32;
-  var v39$2: bv32;
-  var v62$1: bv32;
-  var v62$2: bv32;
-  var v63$1: bv32;
-  var v63$2: bv32;
+  var v42$1: bv32;
+  var v42$2: bv32;
+  var v43$1: bv32;
+  var v43$2: bv32;
+  var v44$1: bv32;
+  var v44$2: bv32;
+  var v45$1: bv32;
+  var v45$2: bv32;
+  var v46$1: bv32;
+  var v46$2: bv32;
+  var v47$1: bv32;
+  var v47$2: bv32;
+  var v48$1: bv32;
+  var v48$2: bv32;
+  var v49$1: bv32;
+  var v49$2: bv32;
+  var v50$1: bv32;
+  var v50$2: bv32;
+  var v51$1: bv32;
+  var v51$2: bv32;
+  var v52$1: bv32;
+  var v52$2: bv32;
+  var v53$1: bv32;
+  var v53$2: bv32;
+  var v54$1: bv32;
+  var v54$2: bv32;
+  var v55$1: bv32;
+  var v55$2: bv32;
+  var v56$1: bv32;
+  var v56$2: bv32;
+  var v57$1: bv32;
+  var v57$2: bv32;
+  var v58$1: bv32;
+  var v58$2: bv32;
+  var v59$1: bv32;
+  var v59$2: bv32;
   var v60$1: bv32;
   var v60$2: bv32;
   var v61$1: bv32;
   var v61$2: bv32;
+  var v62$1: bv32;
+  var v62$2: bv32;
+  var v63$1: bv32;
+  var v63$2: bv32;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2);
     havoc v1$1, v1$2;
@@ -276,88 +276,88 @@ implementation {:source_name "scanExclusiveShared"} {:kernel} $_Z19scanExclusive
     $$idata4$3bv32$2 := v4$2;
     v5$1 := $$idata4$0bv32$1;
     v5$2 := $$idata4$0bv32$2;
-    $$agg.tmp$0bv32$1 := v5$1;
-    $$agg.tmp$0bv32$2 := v5$2;
+    $$5$0bv32$1 := v5$1;
+    $$5$0bv32$2 := v5$2;
     v6$1 := $$idata4$1bv32$1;
     v6$2 := $$idata4$1bv32$2;
-    $$agg.tmp$1bv32$1 := v6$1;
-    $$agg.tmp$1bv32$2 := v6$2;
+    $$5$1bv32$1 := v6$1;
+    $$5$1bv32$2 := v6$2;
     v7$1 := $$idata4$2bv32$1;
     v7$2 := $$idata4$2bv32$2;
-    $$agg.tmp$2bv32$1 := v7$1;
-    $$agg.tmp$2bv32$2 := v7$2;
+    $$5$2bv32$1 := v7$1;
+    $$5$2bv32$2 := v7$2;
     v8$1 := $$idata4$3bv32$1;
     v8$2 := $$idata4$3bv32$2;
-    $$agg.tmp$3bv32$1 := v8$1;
-    $$agg.tmp$3bv32$2 := v8$2;
-    v9$1 := $$agg.tmp$0bv32$1;
-    v9$2 := $$agg.tmp$0bv32$2;
-    $$agg.tmp2$0bv32$1 := v9$1;
-    $$agg.tmp2$0bv32$2 := v9$2;
-    v10$1 := $$agg.tmp$1bv32$1;
-    v10$2 := $$agg.tmp$1bv32$2;
-    $$agg.tmp2$1bv32$1 := v10$1;
-    $$agg.tmp2$1bv32$2 := v10$2;
-    v11$1 := $$agg.tmp$2bv32$1;
-    v11$2 := $$agg.tmp$2bv32$2;
-    $$agg.tmp2$2bv32$1 := v11$1;
-    $$agg.tmp2$2bv32$2 := v11$2;
-    v12$1 := $$agg.tmp$3bv32$1;
-    v12$2 := $$agg.tmp$3bv32$2;
-    $$agg.tmp2$3bv32$1 := v12$1;
-    $$agg.tmp2$3bv32$2 := v12$2;
-    v13$1 := $$agg.tmp2$0bv32$1;
-    v13$2 := $$agg.tmp2$0bv32$2;
-    $$agg.tmp.i$0bv32$1 := v13$1;
-    $$agg.tmp.i$0bv32$2 := v13$2;
-    v14$1 := $$agg.tmp2$1bv32$1;
-    v14$2 := $$agg.tmp2$1bv32$2;
-    $$agg.tmp.i$1bv32$1 := v14$1;
-    $$agg.tmp.i$1bv32$2 := v14$2;
-    v15$1 := $$agg.tmp2$2bv32$1;
-    v15$2 := $$agg.tmp2$2bv32$2;
-    $$agg.tmp.i$2bv32$1 := v15$1;
-    $$agg.tmp.i$2bv32$2 := v15$2;
-    v16$1 := $$agg.tmp2$3bv32$1;
-    v16$2 := $$agg.tmp2$3bv32$2;
-    $$agg.tmp.i$3bv32$1 := v16$1;
-    $$agg.tmp.i$3bv32$2 := v16$2;
-    v17$1 := $$agg.tmp.i$0bv32$1;
-    v17$2 := $$agg.tmp.i$0bv32$2;
-    $$agg.tmp8.i$0bv32$1 := v17$1;
-    $$agg.tmp8.i$0bv32$2 := v17$2;
-    v18$1 := $$agg.tmp.i$1bv32$1;
-    v18$2 := $$agg.tmp.i$1bv32$2;
-    $$agg.tmp8.i$1bv32$1 := v18$1;
-    $$agg.tmp8.i$1bv32$2 := v18$2;
-    v19$1 := $$agg.tmp.i$2bv32$1;
-    v19$2 := $$agg.tmp.i$2bv32$2;
-    $$agg.tmp8.i$2bv32$1 := v19$1;
-    $$agg.tmp8.i$2bv32$2 := v19$2;
-    v20$1 := $$agg.tmp.i$3bv32$1;
-    v20$2 := $$agg.tmp.i$3bv32$2;
-    $$agg.tmp8.i$3bv32$1 := v20$1;
-    $$agg.tmp8.i$3bv32$2 := v20$2;
-    v21$1 := $$agg.tmp8.i$0bv32$1;
-    v21$2 := $$agg.tmp8.i$0bv32$2;
-    v22$1 := $$agg.tmp8.i$1bv32$1;
-    v22$2 := $$agg.tmp8.i$1bv32$2;
-    $$agg.tmp8.i$1bv32$1 := BV32_ADD(v22$1, v21$1);
-    $$agg.tmp8.i$1bv32$2 := BV32_ADD(v22$2, v21$2);
-    v23$1 := $$agg.tmp8.i$1bv32$1;
-    v23$2 := $$agg.tmp8.i$1bv32$2;
-    v24$1 := $$agg.tmp8.i$2bv32$1;
-    v24$2 := $$agg.tmp8.i$2bv32$2;
-    $$agg.tmp8.i$2bv32$1 := BV32_ADD(v24$1, v23$1);
-    $$agg.tmp8.i$2bv32$2 := BV32_ADD(v24$2, v23$2);
-    v25$1 := $$agg.tmp8.i$2bv32$1;
-    v25$2 := $$agg.tmp8.i$2bv32$2;
-    v26$1 := $$agg.tmp8.i$3bv32$1;
-    v26$2 := $$agg.tmp8.i$3bv32$2;
-    $$agg.tmp8.i$3bv32$1 := BV32_ADD(v26$1, v25$1);
-    $$agg.tmp8.i$3bv32$2 := BV32_ADD(v26$2, v25$2);
-    v27$1 := $$agg.tmp8.i$3bv32$1;
-    v27$2 := $$agg.tmp8.i$3bv32$2;
+    $$5$3bv32$1 := v8$1;
+    $$5$3bv32$2 := v8$2;
+    v9$1 := $$5$0bv32$1;
+    v9$2 := $$5$0bv32$2;
+    $$4$0bv32$1 := v9$1;
+    $$4$0bv32$2 := v9$2;
+    v10$1 := $$5$1bv32$1;
+    v10$2 := $$5$1bv32$2;
+    $$4$1bv32$1 := v10$1;
+    $$4$1bv32$2 := v10$2;
+    v11$1 := $$5$2bv32$1;
+    v11$2 := $$5$2bv32$2;
+    $$4$2bv32$1 := v11$1;
+    $$4$2bv32$2 := v11$2;
+    v12$1 := $$5$3bv32$1;
+    v12$2 := $$5$3bv32$2;
+    $$4$3bv32$1 := v12$1;
+    $$4$3bv32$2 := v12$2;
+    v13$1 := $$4$0bv32$1;
+    v13$2 := $$4$0bv32$2;
+    $$3$0bv32$1 := v13$1;
+    $$3$0bv32$2 := v13$2;
+    v14$1 := $$4$1bv32$1;
+    v14$2 := $$4$1bv32$2;
+    $$3$1bv32$1 := v14$1;
+    $$3$1bv32$2 := v14$2;
+    v15$1 := $$4$2bv32$1;
+    v15$2 := $$4$2bv32$2;
+    $$3$2bv32$1 := v15$1;
+    $$3$2bv32$2 := v15$2;
+    v16$1 := $$4$3bv32$1;
+    v16$2 := $$4$3bv32$2;
+    $$3$3bv32$1 := v16$1;
+    $$3$3bv32$2 := v16$2;
+    v17$1 := $$3$0bv32$1;
+    v17$2 := $$3$0bv32$2;
+    $$1$0bv32$1 := v17$1;
+    $$1$0bv32$2 := v17$2;
+    v18$1 := $$3$1bv32$1;
+    v18$2 := $$3$1bv32$2;
+    $$1$1bv32$1 := v18$1;
+    $$1$1bv32$2 := v18$2;
+    v19$1 := $$3$2bv32$1;
+    v19$2 := $$3$2bv32$2;
+    $$1$2bv32$1 := v19$1;
+    $$1$2bv32$2 := v19$2;
+    v20$1 := $$3$3bv32$1;
+    v20$2 := $$3$3bv32$2;
+    $$1$3bv32$1 := v20$1;
+    $$1$3bv32$2 := v20$2;
+    v21$1 := $$1$0bv32$1;
+    v21$2 := $$1$0bv32$2;
+    v22$1 := $$1$1bv32$1;
+    v22$2 := $$1$1bv32$2;
+    $$1$1bv32$1 := BV32_ADD(v22$1, v21$1);
+    $$1$1bv32$2 := BV32_ADD(v22$2, v21$2);
+    v23$1 := $$1$1bv32$1;
+    v23$2 := $$1$1bv32$2;
+    v24$1 := $$1$2bv32$1;
+    v24$2 := $$1$2bv32$2;
+    $$1$2bv32$1 := BV32_ADD(v24$1, v23$1);
+    $$1$2bv32$2 := BV32_ADD(v24$2, v23$2);
+    v25$1 := $$1$2bv32$1;
+    v25$2 := $$1$2bv32$2;
+    v26$1 := $$1$3bv32$1;
+    v26$2 := $$1$3bv32$2;
+    $$1$3bv32$1 := BV32_ADD(v26$1, v25$1);
+    $$1$3bv32$2 := BV32_ADD(v26$2, v25$2);
+    v27$1 := $$1$3bv32$1;
+    v27$2 := $$1$3bv32$2;
     v28 := BV32_UDIV($size, 4bv32);
     v29$1 := BV32_SUB(BV32_MUL(2bv32, local_id_x$1), BV32_AND(local_id_x$1, BV32_SUB(v28, 1bv32)));
     v29$2 := BV32_SUB(BV32_MUL(2bv32, local_id_x$2), BV32_AND(local_id_x$2, BV32_SUB(v28, 1bv32)));
@@ -379,9 +379,9 @@ implementation {:source_name "scanExclusiveShared"} {:kernel} $_Z19scanExclusive
     $$_ZZ19scanExclusiveSharedP5uint4S0_jE6s_Data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v30$2] := v27$2;
     $offset.i.i.i.i.0 := 1bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.i.i.i.i;
+    goto $1;
 
-  $for.cond.i.i.i.i:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b7 ==> _WRITE_HAS_OCCURRED_$$_ZZ19scanExclusiveSharedP5uint4S0_jE6s_Data ==> _WATCHED_OFFSET == BV32_ADD(BV32_SUB(BV32_MUL(2bv32, local_id_x$1), BV32_AND(local_id_x$1, BV32_SUB(BV32_UDIV($size, 4bv32), 1bv32))), BV32_UDIV($size, 4bv32));
     assert {:tag "nowrite"} _b6 ==> !_WRITE_HAS_OCCURRED_$$_ZZ19scanExclusiveSharedP5uint4S0_jE6s_Data;
@@ -409,86 +409,86 @@ implementation {:source_name "scanExclusiveShared"} {:kernel} $_Z19scanExclusive
     v34$2 := $$_ZZ19scanExclusiveSharedP5uint4S0_jE6s_Data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v30$2];
     v35$1 := BV32_SUB(v34$1, v27$1);
     v35$2 := BV32_SUB(v34$2, v27$2);
-    v36$1 := $$agg.tmp8.i$0bv32$1;
-    v36$2 := $$agg.tmp8.i$0bv32$2;
-    $$agg.tmp8.i$0bv32$1 := BV32_ADD(v36$1, v35$1);
-    $$agg.tmp8.i$0bv32$2 := BV32_ADD(v36$2, v35$2);
-    v37$1 := $$agg.tmp8.i$1bv32$1;
-    v37$2 := $$agg.tmp8.i$1bv32$2;
-    $$agg.tmp8.i$1bv32$1 := BV32_ADD(v37$1, v35$1);
-    $$agg.tmp8.i$1bv32$2 := BV32_ADD(v37$2, v35$2);
-    v38$1 := $$agg.tmp8.i$2bv32$1;
-    v38$2 := $$agg.tmp8.i$2bv32$2;
-    $$agg.tmp8.i$2bv32$1 := BV32_ADD(v38$1, v35$1);
-    $$agg.tmp8.i$2bv32$2 := BV32_ADD(v38$2, v35$2);
-    v39$1 := $$agg.tmp8.i$3bv32$1;
-    v39$2 := $$agg.tmp8.i$3bv32$2;
-    $$agg.tmp8.i$3bv32$1 := BV32_ADD(v39$1, v35$1);
-    $$agg.tmp8.i$3bv32$2 := BV32_ADD(v39$2, v35$2);
-    v40$1 := $$agg.tmp8.i$0bv32$1;
-    v40$2 := $$agg.tmp8.i$0bv32$2;
-    $$retval.i.i$0bv32$1 := v40$1;
-    $$retval.i.i$0bv32$2 := v40$2;
-    v41$1 := $$agg.tmp8.i$1bv32$1;
-    v41$2 := $$agg.tmp8.i$1bv32$2;
-    $$retval.i.i$1bv32$1 := v41$1;
-    $$retval.i.i$1bv32$2 := v41$2;
-    v42$1 := $$agg.tmp8.i$2bv32$1;
-    v42$2 := $$agg.tmp8.i$2bv32$2;
-    $$retval.i.i$2bv32$1 := v42$1;
-    $$retval.i.i$2bv32$2 := v42$2;
-    v43$1 := $$agg.tmp8.i$3bv32$1;
-    v43$2 := $$agg.tmp8.i$3bv32$2;
-    $$retval.i.i$3bv32$1 := v43$1;
-    $$retval.i.i$3bv32$2 := v43$2;
-    v44$1 := $$retval.i.i$0bv32$1;
-    v44$2 := $$retval.i.i$0bv32$2;
-    v45$1 := $$retval.i.i$1bv32$1;
-    v45$2 := $$retval.i.i$1bv32$2;
-    v46$1 := $$retval.i.i$2bv32$1;
-    v46$2 := $$retval.i.i$2bv32$2;
-    v47$1 := $$retval.i.i$3bv32$1;
-    v47$2 := $$retval.i.i$3bv32$2;
-    $$retval.i$0bv32$1 := v44$1;
-    $$retval.i$0bv32$2 := v44$2;
-    $$retval.i$1bv32$1 := v45$1;
-    $$retval.i$1bv32$2 := v45$2;
-    $$retval.i$2bv32$1 := v46$1;
-    $$retval.i$2bv32$2 := v46$2;
-    $$retval.i$3bv32$1 := v47$1;
-    $$retval.i$3bv32$2 := v47$2;
-    v48$1 := $$agg.tmp2$0bv32$1;
-    v48$2 := $$agg.tmp2$0bv32$2;
-    v49$1 := $$retval.i$0bv32$1;
-    v49$2 := $$retval.i$0bv32$2;
-    $$retval.i$0bv32$1 := BV32_SUB(v49$1, v48$1);
-    $$retval.i$0bv32$2 := BV32_SUB(v49$2, v48$2);
-    v50$1 := $$agg.tmp2$1bv32$1;
-    v50$2 := $$agg.tmp2$1bv32$2;
-    v51$1 := $$retval.i$1bv32$1;
-    v51$2 := $$retval.i$1bv32$2;
-    $$retval.i$1bv32$1 := BV32_SUB(v51$1, v50$1);
-    $$retval.i$1bv32$2 := BV32_SUB(v51$2, v50$2);
-    v52$1 := $$agg.tmp2$2bv32$1;
-    v52$2 := $$agg.tmp2$2bv32$2;
-    v53$1 := $$retval.i$2bv32$1;
-    v53$2 := $$retval.i$2bv32$2;
-    $$retval.i$2bv32$1 := BV32_SUB(v53$1, v52$1);
-    $$retval.i$2bv32$2 := BV32_SUB(v53$2, v52$2);
-    v54$1 := $$agg.tmp2$3bv32$1;
-    v54$2 := $$agg.tmp2$3bv32$2;
-    v55$1 := $$retval.i$3bv32$1;
-    v55$2 := $$retval.i$3bv32$2;
-    $$retval.i$3bv32$1 := BV32_SUB(v55$1, v54$1);
-    $$retval.i$3bv32$2 := BV32_SUB(v55$2, v54$2);
-    v56$1 := $$retval.i$0bv32$1;
-    v56$2 := $$retval.i$0bv32$2;
-    v57$1 := $$retval.i$1bv32$1;
-    v57$2 := $$retval.i$1bv32$2;
-    v58$1 := $$retval.i$2bv32$1;
-    v58$2 := $$retval.i$2bv32$2;
-    v59$1 := $$retval.i$3bv32$1;
-    v59$2 := $$retval.i$3bv32$2;
+    v36$1 := $$1$0bv32$1;
+    v36$2 := $$1$0bv32$2;
+    $$1$0bv32$1 := BV32_ADD(v36$1, v35$1);
+    $$1$0bv32$2 := BV32_ADD(v36$2, v35$2);
+    v37$1 := $$1$1bv32$1;
+    v37$2 := $$1$1bv32$2;
+    $$1$1bv32$1 := BV32_ADD(v37$1, v35$1);
+    $$1$1bv32$2 := BV32_ADD(v37$2, v35$2);
+    v38$1 := $$1$2bv32$1;
+    v38$2 := $$1$2bv32$2;
+    $$1$2bv32$1 := BV32_ADD(v38$1, v35$1);
+    $$1$2bv32$2 := BV32_ADD(v38$2, v35$2);
+    v39$1 := $$1$3bv32$1;
+    v39$2 := $$1$3bv32$2;
+    $$1$3bv32$1 := BV32_ADD(v39$1, v35$1);
+    $$1$3bv32$2 := BV32_ADD(v39$2, v35$2);
+    v40$1 := $$1$0bv32$1;
+    v40$2 := $$1$0bv32$2;
+    $$0$0bv32$1 := v40$1;
+    $$0$0bv32$2 := v40$2;
+    v41$1 := $$1$1bv32$1;
+    v41$2 := $$1$1bv32$2;
+    $$0$1bv32$1 := v41$1;
+    $$0$1bv32$2 := v41$2;
+    v42$1 := $$1$2bv32$1;
+    v42$2 := $$1$2bv32$2;
+    $$0$2bv32$1 := v42$1;
+    $$0$2bv32$2 := v42$2;
+    v43$1 := $$1$3bv32$1;
+    v43$2 := $$1$3bv32$2;
+    $$0$3bv32$1 := v43$1;
+    $$0$3bv32$2 := v43$2;
+    v44$1 := $$0$0bv32$1;
+    v44$2 := $$0$0bv32$2;
+    v45$1 := $$0$1bv32$1;
+    v45$2 := $$0$1bv32$2;
+    v46$1 := $$0$2bv32$1;
+    v46$2 := $$0$2bv32$2;
+    v47$1 := $$0$3bv32$1;
+    v47$2 := $$0$3bv32$2;
+    $$2$0bv32$1 := v44$1;
+    $$2$0bv32$2 := v44$2;
+    $$2$1bv32$1 := v45$1;
+    $$2$1bv32$2 := v45$2;
+    $$2$2bv32$1 := v46$1;
+    $$2$2bv32$2 := v46$2;
+    $$2$3bv32$1 := v47$1;
+    $$2$3bv32$2 := v47$2;
+    v48$1 := $$4$0bv32$1;
+    v48$2 := $$4$0bv32$2;
+    v49$1 := $$2$0bv32$1;
+    v49$2 := $$2$0bv32$2;
+    $$2$0bv32$1 := BV32_SUB(v49$1, v48$1);
+    $$2$0bv32$2 := BV32_SUB(v49$2, v48$2);
+    v50$1 := $$4$1bv32$1;
+    v50$2 := $$4$1bv32$2;
+    v51$1 := $$2$1bv32$1;
+    v51$2 := $$2$1bv32$2;
+    $$2$1bv32$1 := BV32_SUB(v51$1, v50$1);
+    $$2$1bv32$2 := BV32_SUB(v51$2, v50$2);
+    v52$1 := $$4$2bv32$1;
+    v52$2 := $$4$2bv32$2;
+    v53$1 := $$2$2bv32$1;
+    v53$2 := $$2$2bv32$2;
+    $$2$2bv32$1 := BV32_SUB(v53$1, v52$1);
+    $$2$2bv32$2 := BV32_SUB(v53$2, v52$2);
+    v54$1 := $$4$3bv32$1;
+    v54$2 := $$4$3bv32$2;
+    v55$1 := $$2$3bv32$1;
+    v55$2 := $$2$3bv32$2;
+    $$2$3bv32$1 := BV32_SUB(v55$1, v54$1);
+    $$2$3bv32$2 := BV32_SUB(v55$2, v54$2);
+    v56$1 := $$2$0bv32$1;
+    v56$2 := $$2$0bv32$2;
+    v57$1 := $$2$1bv32$1;
+    v57$2 := $$2$1bv32$2;
+    v58$1 := $$2$2bv32$1;
+    v58$2 := $$2$2bv32$2;
+    v59$1 := $$2$3bv32$1;
+    v59$2 := $$2$3bv32$2;
     $$odata4$0bv32$1 := v56$1;
     $$odata4$0bv32$2 := v56$2;
     $$odata4$1bv32$1 := v57$1;
@@ -560,7 +560,7 @@ implementation {:source_name "scanExclusiveShared"} {:kernel} $_Z19scanExclusive
     $$_ZZ19scanExclusiveSharedP5uint4S0_jE6s_Data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v30$2] := BV32_ADD(v32$2, v33$2);
     $offset.i.i.i.i.0 := BV32_SHL($offset.i.i.i.i.0, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.i.i.i.i;
+    goto $1;
 }
 
 
@@ -607,85 +607,85 @@ procedure {:inline 1} {:safe_barrier} {:source_name "bugle_barrier"} {:barrier} 
 
 
 
-var $$retval.i.i$0bv32$1: bv32;
+var $$0$0bv32$1: bv32;
 
-var $$retval.i.i$0bv32$2: bv32;
+var $$0$0bv32$2: bv32;
 
-var $$retval.i.i$1bv32$1: bv32;
+var $$0$1bv32$1: bv32;
 
-var $$retval.i.i$1bv32$2: bv32;
+var $$0$1bv32$2: bv32;
 
-var $$retval.i.i$2bv32$1: bv32;
+var $$0$2bv32$1: bv32;
 
-var $$retval.i.i$2bv32$2: bv32;
+var $$0$2bv32$2: bv32;
 
-var $$retval.i.i$3bv32$1: bv32;
+var $$0$3bv32$1: bv32;
 
-var $$retval.i.i$3bv32$2: bv32;
+var $$0$3bv32$2: bv32;
 
-var $$agg.tmp8.i$0bv32$1: bv32;
+var $$1$0bv32$1: bv32;
 
-var $$agg.tmp8.i$0bv32$2: bv32;
+var $$1$0bv32$2: bv32;
 
-var $$agg.tmp8.i$1bv32$1: bv32;
+var $$1$1bv32$1: bv32;
 
-var $$agg.tmp8.i$1bv32$2: bv32;
+var $$1$1bv32$2: bv32;
 
-var $$agg.tmp8.i$2bv32$1: bv32;
+var $$1$2bv32$1: bv32;
 
-var $$agg.tmp8.i$2bv32$2: bv32;
+var $$1$2bv32$2: bv32;
 
-var $$agg.tmp8.i$3bv32$1: bv32;
+var $$1$3bv32$1: bv32;
 
-var $$agg.tmp8.i$3bv32$2: bv32;
+var $$1$3bv32$2: bv32;
 
-var $$retval.i$0bv32$1: bv32;
+var $$2$0bv32$1: bv32;
 
-var $$retval.i$0bv32$2: bv32;
+var $$2$0bv32$2: bv32;
 
-var $$retval.i$1bv32$1: bv32;
+var $$2$1bv32$1: bv32;
 
-var $$retval.i$1bv32$2: bv32;
+var $$2$1bv32$2: bv32;
 
-var $$retval.i$2bv32$1: bv32;
+var $$2$2bv32$1: bv32;
 
-var $$retval.i$2bv32$2: bv32;
+var $$2$2bv32$2: bv32;
 
-var $$retval.i$3bv32$1: bv32;
+var $$2$3bv32$1: bv32;
 
-var $$retval.i$3bv32$2: bv32;
+var $$2$3bv32$2: bv32;
 
-var $$agg.tmp.i$0bv32$1: bv32;
+var $$3$0bv32$1: bv32;
 
-var $$agg.tmp.i$0bv32$2: bv32;
+var $$3$0bv32$2: bv32;
 
-var $$agg.tmp.i$1bv32$1: bv32;
+var $$3$1bv32$1: bv32;
 
-var $$agg.tmp.i$1bv32$2: bv32;
+var $$3$1bv32$2: bv32;
 
-var $$agg.tmp.i$2bv32$1: bv32;
+var $$3$2bv32$1: bv32;
 
-var $$agg.tmp.i$2bv32$2: bv32;
+var $$3$2bv32$2: bv32;
 
-var $$agg.tmp.i$3bv32$1: bv32;
+var $$3$3bv32$1: bv32;
 
-var $$agg.tmp.i$3bv32$2: bv32;
+var $$3$3bv32$2: bv32;
 
-var $$agg.tmp2$0bv32$1: bv32;
+var $$4$0bv32$1: bv32;
 
-var $$agg.tmp2$0bv32$2: bv32;
+var $$4$0bv32$2: bv32;
 
-var $$agg.tmp2$1bv32$1: bv32;
+var $$4$1bv32$1: bv32;
 
-var $$agg.tmp2$1bv32$2: bv32;
+var $$4$1bv32$2: bv32;
 
-var $$agg.tmp2$2bv32$1: bv32;
+var $$4$2bv32$1: bv32;
 
-var $$agg.tmp2$2bv32$2: bv32;
+var $$4$2bv32$2: bv32;
 
-var $$agg.tmp2$3bv32$1: bv32;
+var $$4$3bv32$1: bv32;
 
-var $$agg.tmp2$3bv32$2: bv32;
+var $$4$3bv32$2: bv32;
 
 var $$idata4$0bv32$1: bv32;
 
@@ -719,21 +719,21 @@ var $$odata4$3bv32$1: bv32;
 
 var $$odata4$3bv32$2: bv32;
 
-var $$agg.tmp$0bv32$1: bv32;
+var $$5$0bv32$1: bv32;
 
-var $$agg.tmp$0bv32$2: bv32;
+var $$5$0bv32$2: bv32;
 
-var $$agg.tmp$1bv32$1: bv32;
+var $$5$1bv32$1: bv32;
 
-var $$agg.tmp$1bv32$2: bv32;
+var $$5$1bv32$2: bv32;
 
-var $$agg.tmp$2bv32$1: bv32;
+var $$5$2bv32$1: bv32;
 
-var $$agg.tmp$2bv32$2: bv32;
+var $$5$2bv32$2: bv32;
 
-var $$agg.tmp$3bv32$1: bv32;
+var $$5$3bv32$1: bv32;
 
-var $$agg.tmp$3bv32$2: bv32;
+var $$5$3bv32$2: bv32;
 
 function {:bvbuiltin "bvsle"} BV32_SLE(bv32, bv32) : bool;
 

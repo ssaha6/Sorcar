@@ -163,60 +163,60 @@ implementation {:source_name "kernel0"} {:kernel} $kernel0($m: bv32, $n: bv32)
   var $c0.0$2: bv64;
   var $c3.0$1: bv64;
   var $c3.0$2: bv64;
-  var $cond$1: bv32;
-  var $cond$2: bv32;
+  var $0$1: bv32;
+  var $0$2: bv32;
   var $c1.0$1: bv64;
   var $c1.0$2: bv64;
-  var $c374.0$1: bv64;
-  var $c374.0$2: bv64;
-  var $cond87$1: bv64;
-  var $cond87$2: bv64;
+  var $c31.0$1: bv64;
+  var $c31.0$2: bv64;
+  var $1$1: bv64;
+  var $1$2: bv64;
+  var v0$1: bv64;
+  var v0$2: bv64;
   var v1$1: bv32;
   var v1$2: bv32;
+  var v2$1: bv64;
+  var v2$2: bv64;
+  var v3$1: bool;
+  var v3$2: bool;
+  var v4$1: bool;
+  var v4$2: bool;
   var v5$1: bv64;
   var v5$2: bv64;
+  var v6$1: bool;
+  var v6$2: bool;
+  var v7$1: bool;
+  var v7$2: bool;
+  var v8$1: bool;
+  var v8$2: bool;
   var v9$1: bv64;
   var v9$2: bv64;
   var v10$1: bv64;
   var v10$2: bv64;
   var v11$1: bv64;
   var v11$2: bv64;
-  var v14$1: bv64;
-  var v14$2: bv64;
-  var v4$1: bool;
-  var v4$2: bool;
-  var v3$1: bool;
-  var v3$2: bool;
-  var v2$1: bv64;
-  var v2$2: bv64;
-  var v0$1: bv64;
-  var v0$2: bv64;
-  var v8$1: bool;
-  var v8$2: bool;
-  var v7$1: bool;
-  var v7$2: bool;
-  var v6$1: bool;
-  var v6$2: bool;
   var v12$1: bool;
   var v12$2: bool;
   var v13$1: bool;
   var v13$2: bool;
+  var v14$1: bv64;
+  var v14$2: bv64;
   var v15$1: bool;
   var v15$2: bool;
   var v16$1: bool;
   var v16$2: bool;
+  var v17$1: bool;
+  var v17$2: bool;
+  var v18$1: bv64;
+  var v18$2: bv64;
   var v19$1: bv64;
   var v19$2: bv64;
   var v20$1: bv64;
   var v20$2: bv64;
-  var v22$1: bv64;
-  var v22$2: bv64;
-  var v18$1: bv64;
-  var v18$2: bv64;
-  var v17$1: bool;
-  var v17$2: bool;
   var v21$1: bool;
   var v21$2: bool;
+  var v22$1: bv64;
+  var v22$2: bv64;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -265,13 +265,13 @@ implementation {:source_name "kernel0"} {:kernel} $kernel0($m: bv32, $n: bv32)
   var p22$2: bool;
   var _HAVOC_bv64$1: bv64;
   var _HAVOC_bv64$2: bv64;
-  var _READ_HAS_OCCURRED_$$kernel0.shared_r$ghost$$for.cond.30: bool;
-  var _READ_HAS_OCCURRED_$$kernel0.shared_r$ghost$__partitioned_block_$for.cond.51_0: bool;
-  var _WRITE_HAS_OCCURRED_$$kernel0.shared_r$ghost$__partitioned_block_$for.cond.51_0: bool;
-  var _READ_HAS_OCCURRED_$$kernel0.shared_r$ghost$$for.cond.75: bool;
+  var _READ_HAS_OCCURRED_$$kernel0.shared_r$ghost$$6: bool;
+  var _READ_HAS_OCCURRED_$$kernel0.shared_r$ghost$__partitioned_block_$14_0: bool;
+  var _WRITE_HAS_OCCURRED_$$kernel0.shared_r$ghost$__partitioned_block_$14_0: bool;
+  var _READ_HAS_OCCURRED_$$kernel0.shared_r$ghost$$19: bool;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ZEXT64(group_id_x$1);
     v0$2 := BV32_ZEXT64(group_id_x$2);
     v1$1 := local_id_x$1;
@@ -285,9 +285,9 @@ implementation {:source_name "kernel0"} {:kernel} $kernel0($m: bv32, $n: bv32)
     p0$1 := true;
     p0$2 := true;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto __partitioned_block_$for.cond_0;
+    goto __partitioned_block_$1_0;
 
-  __partitioned_block_$for.cond_0:
+  __partitioned_block_$1_0:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b75 ==> _WRITE_HAS_OCCURRED_$$kernel0.shared_r ==> _WATCHED_OFFSET == local_id_x$1 || _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b74 ==> _READ_HAS_OCCURRED_$$kernel0.shared_r ==> BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), 0bv64[32:0]) || BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), 0bv64[32:0]);
@@ -295,30 +295,30 @@ implementation {:source_name "kernel0"} {:kernel} $kernel0($m: bv32, $n: bv32)
     assert {:tag "noread"} _b72 ==> !_READ_HAS_OCCURRED_$$kernel0.shared_r;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b71 ==> _WRITE_HAS_OCCURRED_$$s ==> BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), 0bv64[32:0]);
     assert {:tag "nowrite"} _b70 ==> !_WRITE_HAS_OCCURRED_$$s;
-    assert {:tag "predicatedEquality"} _b69 ==> p0$1 && p0$2 ==> v21$1 == v21$2;
-    assert {:tag "predicatedEquality"} _b68 ==> p0$1 && p0$2 ==> v17$1 == v17$2;
-    assert {:tag "predicatedEquality"} _b67 ==> p0$1 && p0$2 ==> v18$1 == v18$2;
-    assert {:tag "predicatedEquality"} _b66 ==> p0$1 && p0$2 ==> v22$1 == v22$2;
-    assert {:tag "predicatedEquality"} _b65 ==> p0$1 && p0$2 ==> v20$1 == v20$2;
-    assert {:tag "predicatedEquality"} _b64 ==> p0$1 && p0$2 ==> v19$1 == v19$2;
+    assert {:tag "predicatedEquality"} _b69 ==> p0$1 && p0$2 ==> v22$1 == v22$2;
+    assert {:tag "predicatedEquality"} _b68 ==> p0$1 && p0$2 ==> v21$1 == v21$2;
+    assert {:tag "predicatedEquality"} _b67 ==> p0$1 && p0$2 ==> v20$1 == v20$2;
+    assert {:tag "predicatedEquality"} _b66 ==> p0$1 && p0$2 ==> v19$1 == v19$2;
+    assert {:tag "predicatedEquality"} _b65 ==> p0$1 && p0$2 ==> v18$1 == v18$2;
+    assert {:tag "predicatedEquality"} _b64 ==> p0$1 && p0$2 ==> v17$1 == v17$2;
     assert {:tag "predicatedEquality"} _b63 ==> p0$1 && p0$2 ==> v16$1 == v16$2;
     assert {:tag "predicatedEquality"} _b62 ==> p0$1 && p0$2 ==> v15$1 == v15$2;
-    assert {:tag "predicatedEquality"} _b61 ==> p0$1 && p0$2 ==> v13$1 == v13$2;
-    assert {:tag "predicatedEquality"} _b60 ==> p0$1 && p0$2 ==> v12$1 == v12$2;
-    assert {:tag "predicatedEquality"} _b59 ==> p0$1 && p0$2 ==> v6$1 == v6$2;
-    assert {:tag "predicatedEquality"} _b58 ==> p0$1 && p0$2 ==> v7$1 == v7$2;
-    assert {:tag "predicatedEquality"} _b57 ==> p0$1 && p0$2 ==> v8$1 == v8$2;
-    assert {:tag "predicatedEquality"} _b56 ==> p0$1 && p0$2 ==> v3$1 == v3$2;
-    assert {:tag "predicatedEquality"} _b55 ==> p0$1 && p0$2 ==> v4$1 == v4$2;
-    assert {:tag "predicatedEquality"} _b54 ==> p0$1 && p0$2 ==> v14$1 == v14$2;
-    assert {:tag "predicatedEquality"} _b53 ==> p0$1 && p0$2 ==> v11$1 == v11$2;
-    assert {:tag "predicatedEquality"} _b52 ==> p0$1 && p0$2 ==> v10$1 == v10$2;
-    assert {:tag "predicatedEquality"} _b51 ==> p0$1 && p0$2 ==> v9$1 == v9$2;
-    assert {:tag "predicatedEquality"} _b50 ==> p0$1 && p0$2 ==> v5$1 == v5$2;
-    assert {:tag "predicatedEquality"} _b49 ==> p0$1 && p0$2 ==> $cond87$1 == $cond87$2;
-    assert {:tag "predicatedEquality"} _b48 ==> p0$1 && p0$2 ==> $c374.0$1 == $c374.0$2;
+    assert {:tag "predicatedEquality"} _b61 ==> p0$1 && p0$2 ==> v14$1 == v14$2;
+    assert {:tag "predicatedEquality"} _b60 ==> p0$1 && p0$2 ==> v13$1 == v13$2;
+    assert {:tag "predicatedEquality"} _b59 ==> p0$1 && p0$2 ==> v12$1 == v12$2;
+    assert {:tag "predicatedEquality"} _b58 ==> p0$1 && p0$2 ==> v11$1 == v11$2;
+    assert {:tag "predicatedEquality"} _b57 ==> p0$1 && p0$2 ==> v10$1 == v10$2;
+    assert {:tag "predicatedEquality"} _b56 ==> p0$1 && p0$2 ==> v9$1 == v9$2;
+    assert {:tag "predicatedEquality"} _b55 ==> p0$1 && p0$2 ==> v8$1 == v8$2;
+    assert {:tag "predicatedEquality"} _b54 ==> p0$1 && p0$2 ==> v7$1 == v7$2;
+    assert {:tag "predicatedEquality"} _b53 ==> p0$1 && p0$2 ==> v6$1 == v6$2;
+    assert {:tag "predicatedEquality"} _b52 ==> p0$1 && p0$2 ==> v5$1 == v5$2;
+    assert {:tag "predicatedEquality"} _b51 ==> p0$1 && p0$2 ==> v4$1 == v4$2;
+    assert {:tag "predicatedEquality"} _b50 ==> p0$1 && p0$2 ==> v3$1 == v3$2;
+    assert {:tag "predicatedEquality"} _b49 ==> p0$1 && p0$2 ==> $1$1 == $1$2;
+    assert {:tag "predicatedEquality"} _b48 ==> p0$1 && p0$2 ==> $c31.0$1 == $c31.0$2;
     assert {:tag "predicatedEquality"} _b47 ==> p0$1 && p0$2 ==> $c1.0$1 == $c1.0$2;
-    assert {:tag "predicatedEquality"} _b46 ==> p0$1 && p0$2 ==> $cond$1 == $cond$2;
+    assert {:tag "predicatedEquality"} _b46 ==> p0$1 && p0$2 ==> $0$1 == $0$2;
     assert {:tag "predicatedEquality"} _b45 ==> p0$1 && p0$2 ==> $c3.0$1 == $c3.0$2;
     assert {:tag "predicatedEquality"} _b44 ==> p0$1 && p0$2 ==> $c0.0$1 == $c0.0$2;
     assert {:tag "loopPredicateEquality"} _b43 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 ==> p0$1 == p0$2;
@@ -385,9 +385,9 @@ implementation {:source_name "kernel0"} {:kernel} $kernel0($m: bv32, $n: bv32)
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$kernel0.shared_r"} true;
     $$kernel0.shared_r[1bv1][v1$1] := (if p3$1 then v5$1 else $$kernel0.shared_r[1bv1][v1$1]);
     $$kernel0.shared_r[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v1$2] := (if p3$2 then v5$2 else $$kernel0.shared_r[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v1$2]);
-    goto __partitioned_block_$for.cond_1;
+    goto __partitioned_block_$1_1;
 
-  __partitioned_block_$for.cond_1:
+  __partitioned_block_$1_1:
     call {:sourceloc_num 14} $bugle_barrier_duplicated_0(1bv1, 1bv1, p1$1, p1$2);
     v6$1 := (if p1$1 then BV64_SGE(BV32_SEXT64($m), BV64_ADD(BV64_ADD(v2$1, $c0.0$1), 1bv64)) else v6$1);
     v6$2 := (if p1$2 then BV64_SGE(BV32_SEXT64($m), BV64_ADD(BV64_ADD(v2$2, $c0.0$2), 1bv64)) else v6$2);
@@ -399,13 +399,13 @@ implementation {:source_name "kernel0"} {:kernel} $kernel0($m: bv32, $n: bv32)
     $c3.0$2 := (if p5$2 then 0bv64 else $c3.0$2);
     p6$1 := (if p5$1 then true else p6$1);
     p6$2 := (if p5$2 then true else p6$2);
-    _READ_HAS_OCCURRED_$$kernel0.shared_r$ghost$$for.cond.30 := _READ_HAS_OCCURRED_$$kernel0.shared_r;
+    _READ_HAS_OCCURRED_$$kernel0.shared_r$ghost$$6 := _READ_HAS_OCCURRED_$$kernel0.shared_r;
     assume {:captureState "loop_entry_state_3_0"} true;
-    goto $for.cond.30;
+    goto $6;
 
-  $for.cond.30:
+  $6:
     assume {:captureState "loop_head_state_3"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b77 ==> !p5$1 ==> _READ_HAS_OCCURRED_$$kernel0.shared_r$ghost$$for.cond.30 == _READ_HAS_OCCURRED_$$kernel0.shared_r;
+    assert {:tag "disabledMaintainsInstrumentation"} _b77 ==> !p5$1 ==> _READ_HAS_OCCURRED_$$kernel0.shared_r$ghost$$6 == _READ_HAS_OCCURRED_$$kernel0.shared_r;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b76 ==> _READ_HAS_OCCURRED_$$kernel0.shared_r ==> BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), 0bv64[32:0]);
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$kernel0.shared_r ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$kernel0.shared_r ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -415,8 +415,8 @@ implementation {:source_name "kernel0"} {:kernel} $kernel0($m: bv32, $n: bv32)
     assert p6$2 ==> p0$2;
     assert {:do_not_predicate} {:tag "accessOnlyIfEnabledInEnclosingScopes"} {:thread 1} _b41 ==> _READ_HAS_OCCURRED_$$kernel0.shared_r ==> BV64_SGE(BV32_SEXT64($m), BV64_ADD(BV64_ADD(BV32_ZEXT64(local_id_x$1), $c0.0$1), 1bv64));
     assert {:do_not_predicate} {:tag "accessOnlyIfEnabledInEnclosingScopes"} {:thread 1} _b40 ==> _READ_HAS_OCCURRED_$$kernel0.shared_r ==> BV64_SLT($c0.0$1, BV32_SEXT64($m));
-    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 1} _b39 ==> BV64_SLT($c0.0$1, BV32_SEXT64($m)) && BV64_SGE(BV32_SEXT64($m), BV64_ADD(BV64_ADD(BV32_ZEXT64(local_id_x$1), $c0.0$1), 1bv64)) && BV64_SLE($c3.0$1, BV32_SEXT64($cond$1)) ==> p6$1;
-    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 2} _b39 ==> BV64_SLT($c0.0$2, BV32_SEXT64($m)) && BV64_SGE(BV32_SEXT64($m), BV64_ADD(BV64_ADD(BV32_ZEXT64(local_id_x$2), $c0.0$2), 1bv64)) && BV64_SLE($c3.0$2, BV32_SEXT64($cond$2)) ==> p6$2;
+    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 1} _b39 ==> BV64_SLT($c0.0$1, BV32_SEXT64($m)) && BV64_SGE(BV32_SEXT64($m), BV64_ADD(BV64_ADD(BV32_ZEXT64(local_id_x$1), $c0.0$1), 1bv64)) && BV64_SLE($c3.0$1, BV32_SEXT64($0$1)) ==> p6$1;
+    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 2} _b39 ==> BV64_SLT($c0.0$2, BV32_SEXT64($m)) && BV64_SGE(BV32_SEXT64($m), BV64_ADD(BV64_ADD(BV32_ZEXT64(local_id_x$2), $c0.0$2), 1bv64)) && BV64_SLE($c3.0$2, BV32_SEXT64($0$2)) ==> p6$2;
     assert {:tag "conditionsImpliedByEnabledness"} {:thread 1} p6$1 ==> _b38 ==> p6$1 ==> BV64_SLT($c0.0$1, BV32_SEXT64($m)) && BV64_SGE(BV32_SEXT64($m), BV64_ADD(BV64_ADD(BV32_ZEXT64(local_id_x$1), $c0.0$1), 1bv64));
     assert {:tag "conditionsImpliedByEnabledness"} {:thread 2} p6$2 ==> _b38 ==> p6$2 ==> BV64_SLT($c0.0$2, BV32_SEXT64($m)) && BV64_SGE(BV32_SEXT64($m), BV64_ADD(BV64_ADD(BV32_ZEXT64(local_id_x$2), $c0.0$2), 1bv64));
     assert {:tag "loopBound"} {:thread 1} p6$1 ==> _b37 ==> BV64_UGE($c3.0$1, 0bv64);
@@ -427,8 +427,8 @@ implementation {:source_name "kernel0"} {:kernel} $kernel0($m: bv32, $n: bv32)
     assert {:tag "loopBound"} {:thread 2} p6$2 ==> _b35 ==> BV64_SGE($c3.0$2, 0bv64);
     assert {:tag "loopBound"} {:thread 1} p6$1 ==> _b34 ==> BV64_SLE($c3.0$1, 0bv64);
     assert {:tag "loopBound"} {:thread 2} p6$2 ==> _b34 ==> BV64_SLE($c3.0$2, 0bv64);
-    assert {:tag "guardNonNeg"} {:thread 1} p6$1 ==> _b33 ==> BV32_SLE(0bv32, $cond$1);
-    assert {:tag "guardNonNeg"} {:thread 2} p6$2 ==> _b33 ==> BV32_SLE(0bv32, $cond$2);
+    assert {:tag "guardNonNeg"} {:thread 1} p6$1 ==> _b33 ==> BV32_SLE(0bv32, $0$1);
+    assert {:tag "guardNonNeg"} {:thread 2} p6$2 ==> _b33 ==> BV32_SLE(0bv32, $0$2);
     assert {:tag "guardNonNeg"} {:thread 1} p6$1 ==> _b32 ==> BV64_SLE(0bv64, $c3.0$1);
     assert {:tag "guardNonNeg"} {:thread 2} p6$2 ==> _b32 ==> BV64_SLE(0bv64, $c3.0$2);
     assert {:procedure_wide_invariant} {:do_not_predicate} {:sourceloc_num 6} {:thread 1} (if _READ_HAS_OCCURRED_$$r ==> BV32_AND(BV32_AND(BV1_ZEXT32((if BV32_UGE($n, BV32_ADD(BV32_UREM(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $n), 1bv32)) then 1bv1 else 0bv1)), BV1_ZEXT32((if BV64_SGE(BV32_ZEXT64(BV32_UREM(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $n)), BV32_ZEXT64(local_id_x$1)) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV64_SREM(BV64_SUB(BV32_ZEXT64(local_id_x$1), BV32_ZEXT64(BV32_UREM(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $n))), 32bv64) == 0bv64 then 1bv1 else 0bv1))) != 0bv32 then 1bv1 else 0bv1) != 0bv1;
@@ -448,12 +448,12 @@ implementation {:source_name "kernel0"} {:kernel} $kernel0($m: bv32, $n: bv32)
     p8$2 := (if p6$2 && v7$2 then v7$2 else p8$2);
     p7$1 := (if p6$1 && !v7$1 then !v7$1 else p7$1);
     p7$2 := (if p6$2 && !v7$2 then !v7$2 else p7$2);
-    $cond$1 := (if p7$1 then BV32_SUB($n, 1bv32) else $cond$1);
-    $cond$2 := (if p7$2 then BV32_SUB($n, 1bv32) else $cond$2);
-    $cond$1 := (if p8$1 then 31bv32 else $cond$1);
-    $cond$2 := (if p8$2 then 31bv32 else $cond$2);
-    v8$1 := (if p6$1 then BV64_SLE($c3.0$1, BV32_SEXT64($cond$1)) else v8$1);
-    v8$2 := (if p6$2 then BV64_SLE($c3.0$2, BV32_SEXT64($cond$2)) else v8$2);
+    $0$1 := (if p7$1 then BV32_SUB($n, 1bv32) else $0$1);
+    $0$2 := (if p7$2 then BV32_SUB($n, 1bv32) else $0$2);
+    $0$1 := (if p8$1 then 31bv32 else $0$1);
+    $0$2 := (if p8$2 then 31bv32 else $0$2);
+    v8$1 := (if p6$1 then BV64_SLE($c3.0$1, BV32_SEXT64($0$1)) else v8$1);
+    v8$2 := (if p6$2 then BV64_SLE($c3.0$2, BV32_SEXT64($0$2)) else v8$2);
     p9$1 := (if p6$1 && v8$1 then v8$1 else p9$1);
     p9$2 := (if p6$2 && v8$2 then v8$2 else p9$2);
     p6$1 := (if p6$1 && !v8$1 then v8$1 else p6$1);
@@ -475,42 +475,42 @@ implementation {:source_name "kernel0"} {:kernel} $kernel0($m: bv32, $n: bv32)
     $c3.0$2 := (if p9$2 then BV64_ADD($c3.0$2, 1bv64) else $c3.0$2);
     p6$1 := (if p9$1 then true else p6$1);
     p6$2 := (if p9$2 then true else p6$2);
-    goto $for.cond.30.backedge, __partitioned_block_$for.cond.30.tail_0;
+    goto $6.backedge, __partitioned_block_$6.tail_0;
 
-  __partitioned_block_$for.cond.30.tail_0:
+  __partitioned_block_$6.tail_0:
     assume !p6$1 && !p6$2;
-    goto __partitioned_block_$for.cond.30.tail_1;
+    goto __partitioned_block_$6.tail_1;
 
-  __partitioned_block_$for.cond.30.tail_1:
+  __partitioned_block_$6.tail_1:
     call {:sourceloc_num 29} $bugle_barrier_duplicated_1(1bv1, 1bv1, p1$1, p1$2);
     $c1.0$1 := (if p1$1 then 32bv64 else $c1.0$1);
     $c1.0$2 := (if p1$2 then 32bv64 else $c1.0$2);
     p10$1 := (if p1$1 then true else p10$1);
     p10$2 := (if p1$2 then true else p10$2);
-    _READ_HAS_OCCURRED_$$kernel0.shared_r$ghost$__partitioned_block_$for.cond.51_0 := _READ_HAS_OCCURRED_$$kernel0.shared_r;
-    _WRITE_HAS_OCCURRED_$$kernel0.shared_r$ghost$__partitioned_block_$for.cond.51_0 := _WRITE_HAS_OCCURRED_$$kernel0.shared_r;
+    _READ_HAS_OCCURRED_$$kernel0.shared_r$ghost$__partitioned_block_$14_0 := _READ_HAS_OCCURRED_$$kernel0.shared_r;
+    _WRITE_HAS_OCCURRED_$$kernel0.shared_r$ghost$__partitioned_block_$14_0 := _WRITE_HAS_OCCURRED_$$kernel0.shared_r;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto __partitioned_block_$for.cond.51_0;
+    goto __partitioned_block_$14_0;
 
-  __partitioned_block_$for.cond.51_0:
+  __partitioned_block_$14_0:
     assume {:captureState "loop_head_state_1"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b97 ==> !p1$1 ==> _WRITE_HAS_OCCURRED_$$kernel0.shared_r$ghost$__partitioned_block_$for.cond.51_0 == _WRITE_HAS_OCCURRED_$$kernel0.shared_r;
-    assert {:tag "disabledMaintainsInstrumentation"} _b96 ==> !p1$1 ==> _READ_HAS_OCCURRED_$$kernel0.shared_r$ghost$__partitioned_block_$for.cond.51_0 == _READ_HAS_OCCURRED_$$kernel0.shared_r;
+    assert {:tag "disabledMaintainsInstrumentation"} _b97 ==> !p1$1 ==> _WRITE_HAS_OCCURRED_$$kernel0.shared_r$ghost$__partitioned_block_$14_0 == _WRITE_HAS_OCCURRED_$$kernel0.shared_r;
+    assert {:tag "disabledMaintainsInstrumentation"} _b96 ==> !p1$1 ==> _READ_HAS_OCCURRED_$$kernel0.shared_r$ghost$__partitioned_block_$14_0 == _READ_HAS_OCCURRED_$$kernel0.shared_r;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b95 ==> _WRITE_HAS_OCCURRED_$$kernel0.shared_r ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b94 ==> _READ_HAS_OCCURRED_$$kernel0.shared_r ==> BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), 0bv64[32:0]);
     assert {:tag "nowrite"} _b93 ==> !_WRITE_HAS_OCCURRED_$$kernel0.shared_r;
     assert {:tag "noread"} _b92 ==> !_READ_HAS_OCCURRED_$$kernel0.shared_r;
-    assert {:tag "predicatedEquality"} _b91 ==> p10$1 && p10$2 ==> v17$1 == v17$2;
-    assert {:tag "predicatedEquality"} _b90 ==> p10$1 && p10$2 ==> v18$1 == v18$2;
-    assert {:tag "predicatedEquality"} _b89 ==> p10$1 && p10$2 ==> v20$1 == v20$2;
-    assert {:tag "predicatedEquality"} _b88 ==> p10$1 && p10$2 ==> v19$1 == v19$2;
+    assert {:tag "predicatedEquality"} _b91 ==> p10$1 && p10$2 ==> v20$1 == v20$2;
+    assert {:tag "predicatedEquality"} _b90 ==> p10$1 && p10$2 ==> v19$1 == v19$2;
+    assert {:tag "predicatedEquality"} _b89 ==> p10$1 && p10$2 ==> v18$1 == v18$2;
+    assert {:tag "predicatedEquality"} _b88 ==> p10$1 && p10$2 ==> v17$1 == v17$2;
     assert {:tag "predicatedEquality"} _b87 ==> p10$1 && p10$2 ==> v16$1 == v16$2;
     assert {:tag "predicatedEquality"} _b86 ==> p10$1 && p10$2 ==> v15$1 == v15$2;
-    assert {:tag "predicatedEquality"} _b85 ==> p10$1 && p10$2 ==> v13$1 == v13$2;
-    assert {:tag "predicatedEquality"} _b84 ==> p10$1 && p10$2 ==> v12$1 == v12$2;
-    assert {:tag "predicatedEquality"} _b83 ==> p10$1 && p10$2 ==> v14$1 == v14$2;
-    assert {:tag "predicatedEquality"} _b82 ==> p10$1 && p10$2 ==> $cond87$1 == $cond87$2;
-    assert {:tag "predicatedEquality"} _b81 ==> p10$1 && p10$2 ==> $c374.0$1 == $c374.0$2;
+    assert {:tag "predicatedEquality"} _b85 ==> p10$1 && p10$2 ==> v14$1 == v14$2;
+    assert {:tag "predicatedEquality"} _b84 ==> p10$1 && p10$2 ==> v13$1 == v13$2;
+    assert {:tag "predicatedEquality"} _b83 ==> p10$1 && p10$2 ==> v12$1 == v12$2;
+    assert {:tag "predicatedEquality"} _b82 ==> p10$1 && p10$2 ==> $1$1 == $1$2;
+    assert {:tag "predicatedEquality"} _b81 ==> p10$1 && p10$2 ==> $c31.0$1 == $c31.0$2;
     assert {:tag "predicatedEquality"} _b80 ==> p10$1 && p10$2 ==> $c1.0$1 == $c1.0$2;
     assert {:tag "loopPredicateEquality"} _b79 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 ==> p10$1 == p10$2;
     assert {:tag "loopPredicateEquality"} _b78 ==> p10$1 == p10$2;
@@ -583,25 +583,25 @@ implementation {:source_name "kernel0"} {:kernel} $kernel0($m: bv32, $n: bv32)
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$kernel0.shared_r"} true;
     $$kernel0.shared_r[1bv1][v1$1] := (if p13$1 then v14$1 else $$kernel0.shared_r[1bv1][v1$1]);
     $$kernel0.shared_r[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v1$2] := (if p13$2 then v14$2 else $$kernel0.shared_r[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v1$2]);
-    goto __partitioned_block_$for.cond.51_1;
+    goto __partitioned_block_$14_1;
 
-  __partitioned_block_$for.cond.51_1:
+  __partitioned_block_$14_1:
     call {:sourceloc_num 36} $bugle_barrier_duplicated_3(1bv1, 1bv1, p11$1, p11$2);
     v15$1 := (if p11$1 then BV64_SGE(BV32_SEXT64($m), BV64_ADD(BV64_ADD(v2$1, $c0.0$1), 1bv64)) else v15$1);
     v15$2 := (if p11$2 then BV64_SGE(BV32_SEXT64($m), BV64_ADD(BV64_ADD(v2$2, $c0.0$2), 1bv64)) else v15$2);
     p15$1 := (if p11$1 && v15$1 then v15$1 else p15$1);
     p15$2 := (if p11$2 && v15$2 then v15$2 else p15$2);
-    $c374.0$1 := (if p15$1 then 0bv64 else $c374.0$1);
-    $c374.0$2 := (if p15$2 then 0bv64 else $c374.0$2);
+    $c31.0$1 := (if p15$1 then 0bv64 else $c31.0$1);
+    $c31.0$2 := (if p15$2 then 0bv64 else $c31.0$2);
     p16$1 := (if p15$1 then true else p16$1);
     p16$2 := (if p15$2 then true else p16$2);
-    _READ_HAS_OCCURRED_$$kernel0.shared_r$ghost$$for.cond.75 := _READ_HAS_OCCURRED_$$kernel0.shared_r;
+    _READ_HAS_OCCURRED_$$kernel0.shared_r$ghost$$19 := _READ_HAS_OCCURRED_$$kernel0.shared_r;
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond.75;
+    goto $19;
 
-  $for.cond.75:
+  $19:
     assume {:captureState "loop_head_state_2"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b99 ==> !p15$1 ==> _READ_HAS_OCCURRED_$$kernel0.shared_r$ghost$$for.cond.75 == _READ_HAS_OCCURRED_$$kernel0.shared_r;
+    assert {:tag "disabledMaintainsInstrumentation"} _b99 ==> !p15$1 ==> _READ_HAS_OCCURRED_$$kernel0.shared_r$ghost$$19 == _READ_HAS_OCCURRED_$$kernel0.shared_r;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b98 ==> _READ_HAS_OCCURRED_$$kernel0.shared_r ==> BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), 0bv64[32:0]);
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$kernel0.shared_r ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$kernel0.shared_r ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -614,22 +614,22 @@ implementation {:source_name "kernel0"} {:kernel} $kernel0($m: bv32, $n: bv32)
     assert {:do_not_predicate} {:tag "accessOnlyIfEnabledInEnclosingScopes"} {:thread 1} _b31 ==> _READ_HAS_OCCURRED_$$kernel0.shared_r ==> BV64_SGE(BV32_SEXT64($m), BV64_ADD(BV64_ADD(BV32_ZEXT64(local_id_x$1), $c0.0$1), 1bv64));
     assert {:do_not_predicate} {:tag "accessOnlyIfEnabledInEnclosingScopes"} {:thread 1} _b30 ==> _READ_HAS_OCCURRED_$$kernel0.shared_r ==> BV64_SLT($c1.0$1, BV32_SEXT64($n));
     assert {:do_not_predicate} {:tag "accessOnlyIfEnabledInEnclosingScopes"} {:thread 1} _b29 ==> _READ_HAS_OCCURRED_$$kernel0.shared_r ==> BV64_SLT($c0.0$1, BV32_SEXT64($m));
-    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 1} _b28 ==> BV64_SLT($c0.0$1, BV32_SEXT64($m)) && BV64_SLT($c1.0$1, BV32_SEXT64($n)) && BV64_SGE(BV32_SEXT64($m), BV64_ADD(BV64_ADD(BV32_ZEXT64(local_id_x$1), $c0.0$1), 1bv64)) && BV64_SLE($c374.0$1, $cond87$1) ==> p16$1;
-    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 2} _b28 ==> BV64_SLT($c0.0$2, BV32_SEXT64($m)) && BV64_SLT($c1.0$2, BV32_SEXT64($n)) && BV64_SGE(BV32_SEXT64($m), BV64_ADD(BV64_ADD(BV32_ZEXT64(local_id_x$2), $c0.0$2), 1bv64)) && BV64_SLE($c374.0$2, $cond87$2) ==> p16$2;
+    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 1} _b28 ==> BV64_SLT($c0.0$1, BV32_SEXT64($m)) && BV64_SLT($c1.0$1, BV32_SEXT64($n)) && BV64_SGE(BV32_SEXT64($m), BV64_ADD(BV64_ADD(BV32_ZEXT64(local_id_x$1), $c0.0$1), 1bv64)) && BV64_SLE($c31.0$1, $1$1) ==> p16$1;
+    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 2} _b28 ==> BV64_SLT($c0.0$2, BV32_SEXT64($m)) && BV64_SLT($c1.0$2, BV32_SEXT64($n)) && BV64_SGE(BV32_SEXT64($m), BV64_ADD(BV64_ADD(BV32_ZEXT64(local_id_x$2), $c0.0$2), 1bv64)) && BV64_SLE($c31.0$2, $1$2) ==> p16$2;
     assert {:tag "conditionsImpliedByEnabledness"} {:thread 1} p16$1 ==> _b27 ==> p16$1 ==> BV64_SLT($c0.0$1, BV32_SEXT64($m)) && BV64_SLT($c1.0$1, BV32_SEXT64($n)) && BV64_SGE(BV32_SEXT64($m), BV64_ADD(BV64_ADD(BV32_ZEXT64(local_id_x$1), $c0.0$1), 1bv64));
     assert {:tag "conditionsImpliedByEnabledness"} {:thread 2} p16$2 ==> _b27 ==> p16$2 ==> BV64_SLT($c0.0$2, BV32_SEXT64($m)) && BV64_SLT($c1.0$2, BV32_SEXT64($n)) && BV64_SGE(BV32_SEXT64($m), BV64_ADD(BV64_ADD(BV32_ZEXT64(local_id_x$2), $c0.0$2), 1bv64));
-    assert {:tag "loopBound"} {:thread 1} p16$1 ==> _b26 ==> BV64_UGE($c374.0$1, 0bv64);
-    assert {:tag "loopBound"} {:thread 2} p16$2 ==> _b26 ==> BV64_UGE($c374.0$2, 0bv64);
-    assert {:tag "loopBound"} {:thread 1} p16$1 ==> _b25 ==> BV64_ULE($c374.0$1, 0bv64);
-    assert {:tag "loopBound"} {:thread 2} p16$2 ==> _b25 ==> BV64_ULE($c374.0$2, 0bv64);
-    assert {:tag "loopBound"} {:thread 1} p16$1 ==> _b24 ==> BV64_SGE($c374.0$1, 0bv64);
-    assert {:tag "loopBound"} {:thread 2} p16$2 ==> _b24 ==> BV64_SGE($c374.0$2, 0bv64);
-    assert {:tag "loopBound"} {:thread 1} p16$1 ==> _b23 ==> BV64_SLE($c374.0$1, 0bv64);
-    assert {:tag "loopBound"} {:thread 2} p16$2 ==> _b23 ==> BV64_SLE($c374.0$2, 0bv64);
-    assert {:tag "guardNonNeg"} {:thread 1} p16$1 ==> _b22 ==> BV64_SLE(0bv64, $cond87$1);
-    assert {:tag "guardNonNeg"} {:thread 2} p16$2 ==> _b22 ==> BV64_SLE(0bv64, $cond87$2);
-    assert {:tag "guardNonNeg"} {:thread 1} p16$1 ==> _b21 ==> BV64_SLE(0bv64, $c374.0$1);
-    assert {:tag "guardNonNeg"} {:thread 2} p16$2 ==> _b21 ==> BV64_SLE(0bv64, $c374.0$2);
+    assert {:tag "loopBound"} {:thread 1} p16$1 ==> _b26 ==> BV64_UGE($c31.0$1, 0bv64);
+    assert {:tag "loopBound"} {:thread 2} p16$2 ==> _b26 ==> BV64_UGE($c31.0$2, 0bv64);
+    assert {:tag "loopBound"} {:thread 1} p16$1 ==> _b25 ==> BV64_ULE($c31.0$1, 0bv64);
+    assert {:tag "loopBound"} {:thread 2} p16$2 ==> _b25 ==> BV64_ULE($c31.0$2, 0bv64);
+    assert {:tag "loopBound"} {:thread 1} p16$1 ==> _b24 ==> BV64_SGE($c31.0$1, 0bv64);
+    assert {:tag "loopBound"} {:thread 2} p16$2 ==> _b24 ==> BV64_SGE($c31.0$2, 0bv64);
+    assert {:tag "loopBound"} {:thread 1} p16$1 ==> _b23 ==> BV64_SLE($c31.0$1, 0bv64);
+    assert {:tag "loopBound"} {:thread 2} p16$2 ==> _b23 ==> BV64_SLE($c31.0$2, 0bv64);
+    assert {:tag "guardNonNeg"} {:thread 1} p16$1 ==> _b22 ==> BV64_SLE(0bv64, $1$1);
+    assert {:tag "guardNonNeg"} {:thread 2} p16$2 ==> _b22 ==> BV64_SLE(0bv64, $1$2);
+    assert {:tag "guardNonNeg"} {:thread 1} p16$1 ==> _b21 ==> BV64_SLE(0bv64, $c31.0$1);
+    assert {:tag "guardNonNeg"} {:thread 2} p16$2 ==> _b21 ==> BV64_SLE(0bv64, $c31.0$2);
     assert {:procedure_wide_invariant} {:do_not_predicate} {:sourceloc_num 6} {:thread 1} (if _READ_HAS_OCCURRED_$$r ==> BV32_AND(BV32_AND(BV1_ZEXT32((if BV32_UGE($n, BV32_ADD(BV32_UREM(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $n), 1bv32)) then 1bv1 else 0bv1)), BV1_ZEXT32((if BV64_SGE(BV32_ZEXT64(BV32_UREM(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $n)), BV32_ZEXT64(local_id_x$1)) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV64_SREM(BV64_SUB(BV32_ZEXT64(local_id_x$1), BV32_ZEXT64(BV32_UREM(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $n))), 32bv64) == 0bv64 then 1bv1 else 0bv1))) != 0bv32 then 1bv1 else 0bv1) != 0bv1;
     assert {:procedure_wide_invariant} {:do_not_predicate} {:sourceloc_num 5} {:thread 1} (if _READ_HAS_OCCURRED_$$A ==> BV32_AND(BV32_AND(BV32_AND(BV32_AND(BV32_AND(BV32_AND(BV1_ZEXT32((if BV64_SGE(BV64_ADD(BV64_MUL(32bv64, BV32_ZEXT64(group_id_x$1)), BV32_ZEXT64(local_id_x$1)), 0bv64) then 1bv1 else 0bv1)), BV1_ZEXT32((if BV64_SLE(BV64_ADD(BV64_MUL(32bv64, BV32_ZEXT64(group_id_x$1)), BV32_ZEXT64(local_id_x$1)), 1048575bv64) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV32_UGE($n, BV32_ADD(BV32_UREM(BV32_UDIV(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $m), $n), 1bv32)) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV32_UGE(BV32_UREM(BV32_UDIV(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $m), $n), 0bv32) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV32_UGE($m, BV32_ADD(BV32_UREM(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $m), 1bv32)) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV32_UGE(BV32_UREM(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $m), 0bv32) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV64_SREM(BV64_SUB(BV64_ADD(BV64_MUL(32bv64, BV32_ZEXT64(group_id_x$1)), BV32_ZEXT64(local_id_x$1)), BV32_ZEXT64(BV32_UREM(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $m))), 1048576bv64) == 0bv64 then 1bv1 else 0bv1))) != 0bv32 then 1bv1 else 0bv1) != 0bv1;
     assert {:procedure_wide_invariant} {:do_not_predicate} {:sourceloc_num 4} {:thread 1} (if _READ_HAS_OCCURRED_$$s ==> BV32_AND(BV32_AND(BV32_AND(BV32_AND(BV32_AND(BV1_ZEXT32((if BV32_SGE($n, 1bv32) then 1bv1 else 0bv1)), BV1_ZEXT32((if BV64_SGE(BV64_ADD(BV64_MUL(32bv64, BV32_ZEXT64(group_id_x$1)), BV32_ZEXT64(local_id_x$1)), 0bv64) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV64_SLE(BV64_ADD(BV64_MUL(32bv64, BV32_ZEXT64(group_id_x$1)), BV32_ZEXT64(local_id_x$1)), 1048575bv64) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV32_UGE($m, BV32_ADD(BV32_UREM(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $m), 1bv32)) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV32_UGE(BV32_UREM(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $m), 0bv32) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV64_SREM(BV64_SUB(BV64_ADD(BV64_MUL(32bv64, BV32_ZEXT64(group_id_x$1)), BV32_ZEXT64(local_id_x$1)), BV32_ZEXT64(BV32_UREM(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $m))), 1048576bv64) == 0bv64 then 1bv1 else 0bv1))) != 0bv32 then 1bv1 else 0bv1) != 0bv1;
@@ -647,48 +647,48 @@ implementation {:source_name "kernel0"} {:kernel} $kernel0($m: bv32, $n: bv32)
     p18$2 := (if p16$2 && v16$2 then v16$2 else p18$2);
     p17$1 := (if p16$1 && !v16$1 then !v16$1 else p17$1);
     p17$2 := (if p16$2 && !v16$2 then !v16$2 else p17$2);
-    $cond87$1 := (if p17$1 then BV64_SUB(BV64_SUB(BV32_SEXT64($n), $c1.0$1), 1bv64) else $cond87$1);
-    $cond87$2 := (if p17$2 then BV64_SUB(BV64_SUB(BV32_SEXT64($n), $c1.0$2), 1bv64) else $cond87$2);
-    $cond87$1 := (if p18$1 then 31bv64 else $cond87$1);
-    $cond87$2 := (if p18$2 then 31bv64 else $cond87$2);
-    v17$1 := (if p16$1 then BV64_SLE($c374.0$1, $cond87$1) else v17$1);
-    v17$2 := (if p16$2 then BV64_SLE($c374.0$2, $cond87$2) else v17$2);
+    $1$1 := (if p17$1 then BV64_SUB(BV64_SUB(BV32_SEXT64($n), $c1.0$1), 1bv64) else $1$1);
+    $1$2 := (if p17$2 then BV64_SUB(BV64_SUB(BV32_SEXT64($n), $c1.0$2), 1bv64) else $1$2);
+    $1$1 := (if p18$1 then 31bv64 else $1$1);
+    $1$2 := (if p18$2 then 31bv64 else $1$2);
+    v17$1 := (if p16$1 then BV64_SLE($c31.0$1, $1$1) else v17$1);
+    v17$2 := (if p16$2 then BV64_SLE($c31.0$2, $1$2) else v17$2);
     p19$1 := (if p16$1 && v17$1 then v17$1 else p19$1);
     p19$2 := (if p16$2 && v17$2 then v17$2 else p19$2);
     p16$1 := (if p16$1 && !v17$1 then v17$1 else p16$1);
     p16$2 := (if p16$2 && !v17$2 then v17$2 else p16$2);
     v18$1 := (if p19$1 then $$private_s$0bv32$1 else v18$1);
     v18$2 := (if p19$2 then $$private_s$0bv32$2 else v18$2);
-    call {:sourceloc} {:sourceloc_num 44} _LOG_READ_$$kernel0.shared_r(p19$1, $c374.0$1[32:0], $$kernel0.shared_r[1bv1][$c374.0$1[32:0]]);
+    call {:sourceloc} {:sourceloc_num 44} _LOG_READ_$$kernel0.shared_r(p19$1, $c31.0$1[32:0], $$kernel0.shared_r[1bv1][$c31.0$1[32:0]]);
     assume {:do_not_predicate} {:check_id "check_state_1"} {:captureState "check_state_1"} {:sourceloc} {:sourceloc_num 44} true;
-    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 44} _CHECK_READ_$$kernel0.shared_r(p19$2, $c374.0$2[32:0], $$kernel0.shared_r[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][$c374.0$2[32:0]]);
+    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 44} _CHECK_READ_$$kernel0.shared_r(p19$2, $c31.0$2[32:0], $$kernel0.shared_r[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][$c31.0$2[32:0]]);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$kernel0.shared_r"} true;
-    v19$1 := (if p19$1 then $$kernel0.shared_r[1bv1][$c374.0$1[32:0]] else v19$1);
-    v19$2 := (if p19$2 then $$kernel0.shared_r[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][$c374.0$2[32:0]] else v19$2);
+    v19$1 := (if p19$1 then $$kernel0.shared_r[1bv1][$c31.0$1[32:0]] else v19$1);
+    v19$2 := (if p19$2 then $$kernel0.shared_r[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][$c31.0$2[32:0]] else v19$2);
     havoc _HAVOC_bv64$1, _HAVOC_bv64$2;
     v20$1 := (if p19$1 then _HAVOC_bv64$1 else v20$1);
     v20$2 := (if p19$2 then _HAVOC_bv64$2 else v20$2);
     $$private_s$0bv32$1 := (if p19$1 then FADD64(FMUL64(v19$1, v20$1), v18$1) else $$private_s$0bv32$1);
     $$private_s$0bv32$2 := (if p19$2 then FADD64(FMUL64(v19$2, v20$2), v18$2) else $$private_s$0bv32$2);
-    $c374.0$1 := (if p19$1 then BV64_ADD($c374.0$1, 1bv64) else $c374.0$1);
-    $c374.0$2 := (if p19$2 then BV64_ADD($c374.0$2, 1bv64) else $c374.0$2);
+    $c31.0$1 := (if p19$1 then BV64_ADD($c31.0$1, 1bv64) else $c31.0$1);
+    $c31.0$2 := (if p19$2 then BV64_ADD($c31.0$2, 1bv64) else $c31.0$2);
     p16$1 := (if p19$1 then true else p16$1);
     p16$2 := (if p19$2 then true else p16$2);
-    goto $for.cond.75.backedge, __partitioned_block_$for.cond.75.tail_0;
+    goto $19.backedge, __partitioned_block_$19.tail_0;
 
-  __partitioned_block_$for.cond.75.tail_0:
+  __partitioned_block_$19.tail_0:
     assume !p16$1 && !p16$2;
-    goto __partitioned_block_$for.cond.75.tail_1;
+    goto __partitioned_block_$19.tail_1;
 
-  __partitioned_block_$for.cond.75.tail_1:
+  __partitioned_block_$19.tail_1:
     call {:sourceloc_num 50} $bugle_barrier_duplicated_4(1bv1, 1bv1, p11$1, p11$2);
     $c1.0$1 := (if p11$1 then BV64_ADD($c1.0$1, 32bv64) else $c1.0$1);
     $c1.0$2 := (if p11$2 then BV64_ADD($c1.0$2, 32bv64) else $c1.0$2);
     p10$1 := (if p11$1 then true else p10$1);
     p10$2 := (if p11$2 then true else p10$2);
-    goto $for.cond.51.backedge, __partitioned_block_$for.cond.51.tail_0;
+    goto $14.backedge, __partitioned_block_$14.tail_0;
 
-  __partitioned_block_$for.cond.51.tail_0:
+  __partitioned_block_$14.tail_0:
     assume !p10$1 && !p10$2;
     v21$1 := (if p1$1 then BV64_SGE(BV32_SEXT64($m), BV64_ADD(BV64_ADD(v2$1, $c0.0$1), 1bv64)) else v21$1);
     v21$2 := (if p1$2 then BV64_SGE(BV32_SEXT64($m), BV64_ADD(BV64_ADD(v2$2, $c0.0$2), 1bv64)) else v21$2);
@@ -703,39 +703,39 @@ implementation {:source_name "kernel0"} {:kernel} $kernel0($m: bv32, $n: bv32)
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$s"} true;
     $$s[BV64_ADD(v2$1, $c0.0$1)[32:0]] := (if p21$1 then v22$1 else $$s[BV64_ADD(v2$1, $c0.0$1)[32:0]]);
     $$s[BV64_ADD(v2$2, $c0.0$2)[32:0]] := (if p21$2 then v22$2 else $$s[BV64_ADD(v2$2, $c0.0$2)[32:0]]);
-    goto __partitioned_block_$for.cond.51.tail_1;
+    goto __partitioned_block_$14.tail_1;
 
-  __partitioned_block_$for.cond.51.tail_1:
+  __partitioned_block_$14.tail_1:
     call {:sourceloc_num 57} $bugle_barrier_duplicated_2(1bv1, 1bv1, p1$1, p1$2);
     $c0.0$1 := (if p1$1 then BV64_ADD($c0.0$1, 1048576bv64) else $c0.0$1);
     $c0.0$2 := (if p1$2 then BV64_ADD($c0.0$2, 1048576bv64) else $c0.0$2);
     p0$1 := (if p1$1 then true else p0$1);
     p0$2 := (if p1$2 then true else p0$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $1.backedge, $1.tail;
 
-  $for.cond.tail:
+  $1.tail:
     assume !p0$1 && !p0$2;
     return;
 
-  $for.cond.backedge:
+  $1.backedge:
     assume {:backedge} p0$1 || p0$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto __partitioned_block_$for.cond_0;
+    goto __partitioned_block_$1_0;
 
-  $for.cond.51.backedge:
+  $14.backedge:
     assume {:backedge} p10$1 || p10$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto __partitioned_block_$for.cond.51_0;
+    goto __partitioned_block_$14_0;
 
-  $for.cond.75.backedge:
+  $19.backedge:
     assume {:backedge} p16$1 || p16$2;
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond.75;
+    goto $19;
 
-  $for.cond.30.backedge:
+  $6.backedge:
     assume {:backedge} p6$1 || p6$2;
     assume {:captureState "loop_back_edge_state_3_0"} true;
-    goto $for.cond.30;
+    goto $6;
 }
 
 

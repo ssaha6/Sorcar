@@ -120,14 +120,14 @@ implementation {:source_name "CopyRect"} {:kernel} $CopyRect($doffset: bv32, $dp
 {
   var $c.0$1: bv32;
   var $c.0$2: bv32;
-  var v3$1: bv32;
-  var v3$2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
   var v1$1: bool;
   var v1$2: bool;
   var v2$1: bool;
   var v2$2: bool;
+  var v3$1: bv32;
+  var v3$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;

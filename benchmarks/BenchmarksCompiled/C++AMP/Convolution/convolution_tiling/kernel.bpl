@@ -126,10 +126,10 @@ procedure {:source_name "convolution_tiling"} {:kernel} $_Z18convolution_tilingP
 
 implementation {:source_name "convolution_tiling"} {:kernel} $_Z18convolution_tilingPKfS0_Pf()
 {
-  var $cond7$1: bv32;
-  var $cond7$2: bv32;
-  var $cond$1: bv32;
-  var $cond$2: bv32;
+  var $0$1: bv32;
+  var $0$2: bv32;
+  var $1$1: bv32;
+  var $1$2: bv32;
   var $sum.0$1: bv32;
   var $sum.0$2: bv32;
   var $k.0$1: bv32;
@@ -140,22 +140,22 @@ implementation {:source_name "convolution_tiling"} {:kernel} $_Z18convolution_ti
   var v1$2: bool;
   var v2$1: bool;
   var v2$2: bool;
-  var v10$1: bv32;
-  var v10$2: bv32;
-  var v4$1: bv32;
-  var v4$2: bv32;
-  var v9$1: bv32;
-  var v9$2: bv32;
-  var v7$1: bool;
-  var v7$2: bool;
-  var v6$1: bool;
-  var v6$2: bool;
-  var v5$1: bool;
-  var v5$2: bool;
   var v3$1: bool;
   var v3$2: bool;
+  var v4$1: bv32;
+  var v4$2: bv32;
+  var v5$1: bool;
+  var v5$2: bool;
+  var v6$1: bool;
+  var v6$2: bool;
+  var v7$1: bool;
+  var v7$2: bool;
   var v8$1: bool;
   var v8$2: bool;
+  var v9$1: bv32;
+  var v9$2: bv32;
+  var v10$1: bv32;
+  var v10$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -188,7 +188,7 @@ implementation {:source_name "convolution_tiling"} {:kernel} $_Z18convolution_ti
   var _HAVOC_bv32$2: bv32;
 
 
-  __partitioned_block_$entry_0:
+  __partitioned_block_$0_0:
     v0$1 := BV32_SUB(BV32_ADD(BV32_MUL(group_id_y$1, 114bv32), local_id_y$1), 7bv32);
     v0$2 := BV32_SUB(BV32_ADD(BV32_MUL(group_id_y$2, 114bv32), local_id_y$2), 7bv32);
     v1$1 := BV32_SLT(v0$1, 0bv32);
@@ -223,20 +223,20 @@ implementation {:source_name "convolution_tiling"} {:kernel} $_Z18convolution_ti
     p0$2 := (if v1$2 then v1$2 else p0$2);
     p1$1 := (if !v1$1 then !v1$1 else p1$1);
     p1$2 := (if !v1$2 then !v1$2 else p1$2);
-    $cond7$1 := (if p0$1 then 0bv32 else $cond7$1);
-    $cond7$2 := (if p0$2 then 0bv32 else $cond7$2);
+    $0$1 := (if p0$1 then 0bv32 else $0$1);
+    $0$2 := (if p0$2 then 0bv32 else $0$2);
     v2$1 := (if p1$1 then BV32_SGT(v0$1, 511bv32) else v2$1);
     v2$2 := (if p1$2 then BV32_SGT(v0$2, 511bv32) else v2$2);
     p2$1 := (if p1$1 && v2$1 then v2$1 else p2$1);
     p2$2 := (if p1$2 && v2$2 then v2$2 else p2$2);
     p3$1 := (if p1$1 && !v2$1 then !v2$1 else p3$1);
     p3$2 := (if p1$2 && !v2$2 then !v2$2 else p3$2);
-    $cond$1 := (if p2$1 then 511bv32 else $cond$1);
-    $cond$2 := (if p2$2 then 511bv32 else $cond$2);
-    $cond$1 := (if p3$1 then v0$1 else $cond$1);
-    $cond$2 := (if p3$2 then v0$2 else $cond$2);
-    $cond7$1 := (if p1$1 then $cond$1 else $cond7$1);
-    $cond7$2 := (if p1$2 then $cond$2 else $cond7$2);
+    $1$1 := (if p2$1 then 511bv32 else $1$1);
+    $1$2 := (if p2$2 then 511bv32 else $1$2);
+    $1$1 := (if p3$1 then v0$1 else $1$1);
+    $1$2 := (if p3$2 then v0$2 else $1$2);
+    $0$1 := (if p1$1 then $1$1 else $0$1);
+    $0$2 := (if p1$2 then $1$2 else $0$2);
     v3$1 := BV32_SLT(v0$1, 519bv32);
     v3$2 := BV32_SLT(v0$2, 519bv32);
     p4$1 := (if v3$1 then v3$1 else p4$1);
@@ -251,9 +251,9 @@ implementation {:source_name "convolution_tiling"} {:kernel} $_Z18convolution_ti
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$_ZZ18convolution_tilingPKfS0_PfE9local_buf"} true;
     $$_ZZ18convolution_tilingPKfS0_PfE9local_buf[1bv1][local_id_y$1] := (if p4$1 then v4$1 else $$_ZZ18convolution_tilingPKfS0_PfE9local_buf[1bv1][local_id_y$1]);
     $$_ZZ18convolution_tilingPKfS0_PfE9local_buf[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_y$2] := (if p4$2 then v4$2 else $$_ZZ18convolution_tilingPKfS0_PfE9local_buf[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_y$2]);
-    goto __partitioned_block_$entry_1;
+    goto __partitioned_block_$0_1;
 
-  __partitioned_block_$entry_1:
+  __partitioned_block_$0_1:
     call {:sourceloc_num 11} $bugle_barrier_duplicated_0(1bv1, 1bv1);
     v5$1 := BV32_SGE(local_id_y$1, 7bv32);
     v5$2 := BV32_SGE(local_id_y$2, 7bv32);
@@ -272,9 +272,9 @@ implementation {:source_name "convolution_tiling"} {:kernel} $_Z18convolution_ti
     p9$1 := (if p8$1 then true else p9$1);
     p9$2 := (if p8$2 then true else p9$2);
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $12;
 
-  $for.cond:
+  $12:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ18convolution_tilingPKfS0_PfE9local_buf ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ18convolution_tilingPKfS0_PfE9local_buf ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -316,23 +316,23 @@ implementation {:source_name "convolution_tiling"} {:kernel} $_Z18convolution_ti
     $sum.0$2, $k.0$2 := (if p10$2 then FADD32($sum.0$2, FMUL32(v9$2, v10$2)) else $sum.0$2), (if p10$2 then BV32_ADD($k.0$2, 1bv32) else $k.0$2);
     p9$1 := (if p10$1 then true else p9$1);
     p9$2 := (if p10$2 then true else p9$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $12.backedge, $12.tail;
 
-  $for.cond.tail:
+  $12.tail:
     assume !p9$1 && !p9$2;
-    call {:sourceloc} {:sourceloc_num 21} _LOG_WRITE_$$result(p8$1, BV32_ADD(BV32_MUL($cond7$1, 512bv32), group_id_x$1), $sum.0$1, $$result[BV32_ADD(BV32_MUL($cond7$1, 512bv32), group_id_x$1)]);
-    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$result(p8$2, BV32_ADD(BV32_MUL($cond7$2, 512bv32), group_id_x$2));
+    call {:sourceloc} {:sourceloc_num 21} _LOG_WRITE_$$result(p8$1, BV32_ADD(BV32_MUL($0$1, 512bv32), group_id_x$1), $sum.0$1, $$result[BV32_ADD(BV32_MUL($0$1, 512bv32), group_id_x$1)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$result(p8$2, BV32_ADD(BV32_MUL($0$2, 512bv32), group_id_x$2));
     assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 21} true;
-    call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 21} _CHECK_WRITE_$$result(p8$2, BV32_ADD(BV32_MUL($cond7$2, 512bv32), group_id_x$2), $sum.0$2);
+    call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 21} _CHECK_WRITE_$$result(p8$2, BV32_ADD(BV32_MUL($0$2, 512bv32), group_id_x$2), $sum.0$2);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$result"} true;
-    $$result[BV32_ADD(BV32_MUL($cond7$1, 512bv32), group_id_x$1)] := (if p8$1 then $sum.0$1 else $$result[BV32_ADD(BV32_MUL($cond7$1, 512bv32), group_id_x$1)]);
-    $$result[BV32_ADD(BV32_MUL($cond7$2, 512bv32), group_id_x$2)] := (if p8$2 then $sum.0$2 else $$result[BV32_ADD(BV32_MUL($cond7$2, 512bv32), group_id_x$2)]);
+    $$result[BV32_ADD(BV32_MUL($0$1, 512bv32), group_id_x$1)] := (if p8$1 then $sum.0$1 else $$result[BV32_ADD(BV32_MUL($0$1, 512bv32), group_id_x$1)]);
+    $$result[BV32_ADD(BV32_MUL($0$2, 512bv32), group_id_x$2)] := (if p8$2 then $sum.0$2 else $$result[BV32_ADD(BV32_MUL($0$2, 512bv32), group_id_x$2)]);
     return;
 
-  $for.cond.backedge:
+  $12.backedge:
     assume {:backedge} p9$1 || p9$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $12;
 }
 
 

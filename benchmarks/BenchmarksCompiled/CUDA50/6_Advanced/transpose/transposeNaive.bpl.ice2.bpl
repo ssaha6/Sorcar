@@ -122,10 +122,10 @@ implementation {:source_name "transposeNaive"} {:kernel} $_Z14transposeNaivePfS_
 {
   var $r.0: bv32;
   var $i.0: bv32;
-  var v0$1: bv32;
-  var v0$2: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
+  var v0$1: bv32;
+  var v0$2: bv32;
   var v2: bool;
   var v3: bool;
   var v4$1: bv32;

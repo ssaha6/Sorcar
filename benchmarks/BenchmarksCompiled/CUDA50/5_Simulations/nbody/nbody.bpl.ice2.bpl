@@ -150,43 +150,43 @@ var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 128} {:sourc
 
 axiom {:array_info "$$0"} {:elem_width 32} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
 
-axiom {:array_info "$$ai.i.i.i"} {:elem_width 32} {:source_name "ai.i.i.i"} {:source_elem_width 96} {:source_dimensions "1"} true;
-
-axiom {:array_info "$$bi.i.i.i"} {:elem_width 32} {:source_name "bi.i.i.i"} {:source_elem_width 128} {:source_dimensions "1"} true;
-
-axiom {:array_info "$$bj.i.i.i"} {:elem_width 32} {:source_name "bj.i.i.i"} {:source_elem_width 128} {:source_dimensions "1"} true;
-
 axiom {:array_info "$$r.i.i.i"} {:elem_width 32} {:source_name "r.i.i.i"} {:source_elem_width 96} {:source_dimensions "1"} true;
 
-axiom {:array_info "$$1"} {:elem_width 32} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
+axiom {:array_info "$$1"} {:elem_width 32} {:source_name ""} {:source_elem_width 128} {:source_dimensions "1"} true;
 
-axiom {:array_info "$$iPos.i.i"} {:elem_width 32} {:source_name "iPos.i.i"} {:source_elem_width 128} {:source_dimensions "1"} true;
-
-axiom {:array_info "$$accel.i.i"} {:elem_width 32} {:source_name "accel.i.i"} {:source_elem_width 96} {:source_dimensions "1"} true;
-
-axiom {:array_info "$$2"} {:elem_width 32} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
+axiom {:array_info "$$2"} {:elem_width 32} {:source_name ""} {:source_elem_width 128} {:source_dimensions "1"} true;
 
 axiom {:array_info "$$3"} {:elem_width 32} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
 
-axiom {:array_info "$$4"} {:elem_width 32} {:source_name ""} {:source_elem_width 128} {:source_dimensions "1"} true;
+axiom {:array_info "$$4"} {:elem_width 32} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
 
-axiom {:array_info "$$5"} {:elem_width 32} {:source_name ""} {:source_elem_width 128} {:source_dimensions "1"} true;
+axiom {:array_info "$$5"} {:elem_width 32} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
 
 axiom {:array_info "$$6"} {:elem_width 32} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
 
-axiom {:array_info "$$bodyPos.i"} {:elem_width 32} {:source_name "bodyPos.i"} {:source_elem_width 128} {:source_dimensions "1"} true;
-
-axiom {:array_info "$$7"} {:elem_width 32} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
+axiom {:array_info "$$7"} {:elem_width 32} {:source_name ""} {:source_elem_width 128} {:source_dimensions "1"} true;
 
 axiom {:array_info "$$8"} {:elem_width 32} {:source_name ""} {:source_elem_width 128} {:source_dimensions "1"} true;
 
 axiom {:array_info "$$9"} {:elem_width 32} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
 
+axiom {:array_info "$$10"} {:elem_width 32} {:source_name ""} {:source_elem_width 128} {:source_dimensions "1"} true;
+
+axiom {:array_info "$$11"} {:elem_width 32} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
+
+axiom {:array_info "$$12"} {:elem_width 32} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
+
+axiom {:array_info "$$13"} {:elem_width 32} {:source_name ""} {:source_elem_width 128} {:source_dimensions "1"} true;
+
+axiom {:array_info "$$14"} {:elem_width 32} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
+
+axiom {:array_info "$$15"} {:elem_width 32} {:source_name ""} {:source_elem_width 128} {:source_dimensions "1"} true;
+
 axiom {:array_info "$$position"} {:elem_width 32} {:source_name "position"} {:source_elem_width 128} {:source_dimensions "1"} true;
 
 axiom {:array_info "$$accel"} {:elem_width 32} {:source_name "accel"} {:source_elem_width 96} {:source_dimensions "1"} true;
 
-axiom {:array_info "$$10"} {:elem_width 32} {:source_name ""} {:source_elem_width 128} {:source_dimensions "1"} true;
+axiom {:array_info "$$16"} {:elem_width 32} {:source_name ""} {:source_elem_width 128} {:source_dimensions "1"} true;
 
 axiom {:array_info "$$velocity"} {:elem_width 32} {:source_name "velocity"} {:source_elem_width 128} {:source_dimensions "1"} true;
 
@@ -244,8 +244,6 @@ function FSUB32(bv32, bv32) : bv32;
 
 function {:bvbuiltin "bvadd"} BV32_ADD(bv32, bv32) : bv32;
 
-function {:bvbuiltin "bvadd"} BV64_ADD(bv64, bv64) : bv64;
-
 function {:bvbuiltin "bvmul"} BV32_MUL(bv32, bv32) : bv32;
 
 function {:bvbuiltin "bvsdiv"} BV32_SDIV(bv32, bv32) : bv32;
@@ -255,8 +253,6 @@ function {:bvbuiltin "bvsub"} BV32_SUB(bv32, bv32) : bv32;
 function {:bvbuiltin "bvuge"} BV32_UGE(bv32, bv32) : bool;
 
 function {:bvbuiltin "bvult"} BV32_ULT(bv32, bv32) : bool;
-
-function {:bvbuiltin "zero_extend 32"} BV32_ZEXT64(bv32) : bv64;
 
 procedure {:source_name "integrateBodies<float, false>"} {:kernel} $_Z15integrateBodiesIfLb0EEvPN4vec4IT_E4TypeES4_S4_jjffi($deviceOffset: bv32, $deviceNumBodies: bv32, $deltaTime: bv32, $damping: bv32, $totalNumBodies: bv32);
   requires {:sourceloc_num 0} {:thread 1} (if $deviceNumBodies == 13824bv32 then 1bv1 else 0bv1) != 0bv1;
@@ -305,24 +301,20 @@ implementation {:source_name "integrateBodies<float, false>"} {:kernel} $_Z15int
   var $tile.i.0$2: bv32;
   var $0$1: bv32;
   var $0$2: bv32;
-  var $j.i.i.0$1: bv64;
-  var $j.i.i.0$2: bv64;
+  var $j.i.i.0$1: bv32;
+  var $j.i.i.0$2: bv32;
   var $counter.i.i.0$1: bv32;
   var $counter.i.i.0$2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
   var v1$1: bool;
   var v1$2: bool;
-  var v73$1: bv32;
-  var v73$2: bv32;
   var v2$1: bv32;
   var v2$2: bv32;
   var v3$1: bv32;
   var v3$2: bv32;
   var v4$1: bv32;
   var v4$2: bv32;
-  var v9$1: bv32;
-  var v9$2: bv32;
   var v5$1: bv32;
   var v5$2: bv32;
   var v6$1: bv32;
@@ -331,6 +323,8 @@ implementation {:source_name "integrateBodies<float, false>"} {:kernel} $_Z15int
   var v7$2: bv32;
   var v8$1: bv32;
   var v8$2: bv32;
+  var v9$1: bv32;
+  var v9$2: bv32;
   var v10$1: bv32;
   var v10$2: bv32;
   var v11$1: bv32;
@@ -349,14 +343,14 @@ implementation {:source_name "integrateBodies<float, false>"} {:kernel} $_Z15int
   var v17$2: bv32;
   var v18$1: bv32;
   var v18$2: bv32;
-  var v22$1: bv32;
-  var v22$2: bv32;
   var v19$1: bv32;
   var v19$2: bv32;
   var v20$1: bv32;
   var v20$2: bv32;
   var v21$1: bv32;
   var v21$2: bv32;
+  var v22$1: bv32;
+  var v22$2: bv32;
   var v23$1: bv32;
   var v23$2: bv32;
   var v24$1: bv32;
@@ -425,8 +419,6 @@ implementation {:source_name "integrateBodies<float, false>"} {:kernel} $_Z15int
   var v55$2: bv32;
   var v56$1: bv32;
   var v56$2: bv32;
-  var v76$1: bv32;
-  var v76$2: bv32;
   var v57$1: bv32;
   var v57$2: bv32;
   var v58$1: bv32;
@@ -459,10 +451,14 @@ implementation {:source_name "integrateBodies<float, false>"} {:kernel} $_Z15int
   var v71$2: bv32;
   var v72$1: bv32;
   var v72$2: bv32;
+  var v73$1: bv32;
+  var v73$2: bv32;
   var v74$1: bv32;
   var v74$2: bv32;
   var v75$1: bv32;
   var v75$2: bv32;
+  var v76$1: bv32;
+  var v76$2: bv32;
   var v77$1: bv32;
   var v77$2: bv32;
   var v78$1: bv32;
@@ -525,8 +521,6 @@ implementation {:source_name "integrateBodies<float, false>"} {:kernel} $_Z15int
   var v106$2: bv32;
   var v107$1: bv32;
   var v107$2: bv32;
-  var v116$1: bv32;
-  var v116$2: bv32;
   var v108$1: bv32;
   var v108$2: bv32;
   var v109$1: bv32;
@@ -543,6 +537,8 @@ implementation {:source_name "integrateBodies<float, false>"} {:kernel} $_Z15int
   var v114$2: bv32;
   var v115$1: bv32;
   var v115$2: bv32;
+  var v116$1: bv32;
+  var v116$2: bv32;
   var v117$1: bv32;
   var v117$2: bv32;
   var v118$1: bv32;
@@ -621,53 +617,53 @@ implementation {:source_name "integrateBodies<float, false>"} {:kernel} $_Z15int
     $$position$3bv32$2 := (if p1$2 then v5$2 else $$position$3bv32$2);
     v6$1 := (if p1$1 then $$position$0bv32$1 else v6$1);
     v6$2 := (if p1$2 then $$position$0bv32$2 else v6$2);
-    $$10$0bv32$1 := (if p1$1 then v6$1 else $$10$0bv32$1);
-    $$10$0bv32$2 := (if p1$2 then v6$2 else $$10$0bv32$2);
+    $$16$0bv32$1 := (if p1$1 then v6$1 else $$16$0bv32$1);
+    $$16$0bv32$2 := (if p1$2 then v6$2 else $$16$0bv32$2);
     v7$1 := (if p1$1 then $$position$1bv32$1 else v7$1);
     v7$2 := (if p1$2 then $$position$1bv32$2 else v7$2);
-    $$10$1bv32$1 := (if p1$1 then v7$1 else $$10$1bv32$1);
-    $$10$1bv32$2 := (if p1$2 then v7$2 else $$10$1bv32$2);
+    $$16$1bv32$1 := (if p1$1 then v7$1 else $$16$1bv32$1);
+    $$16$1bv32$2 := (if p1$2 then v7$2 else $$16$1bv32$2);
     v8$1 := (if p1$1 then $$position$2bv32$1 else v8$1);
     v8$2 := (if p1$2 then $$position$2bv32$2 else v8$2);
-    $$10$2bv32$1 := (if p1$1 then v8$1 else $$10$2bv32$1);
-    $$10$2bv32$2 := (if p1$2 then v8$2 else $$10$2bv32$2);
+    $$16$2bv32$1 := (if p1$1 then v8$1 else $$16$2bv32$1);
+    $$16$2bv32$2 := (if p1$2 then v8$2 else $$16$2bv32$2);
     v9$1 := (if p1$1 then $$position$3bv32$1 else v9$1);
     v9$2 := (if p1$2 then $$position$3bv32$2 else v9$2);
-    $$10$3bv32$1 := (if p1$1 then v9$1 else $$10$3bv32$1);
-    $$10$3bv32$2 := (if p1$2 then v9$2 else $$10$3bv32$2);
-    v10$1 := (if p1$1 then $$10$0bv32$1 else v10$1);
-    v10$2 := (if p1$2 then $$10$0bv32$2 else v10$2);
-    v11$1 := (if p1$1 then $$10$1bv32$1 else v11$1);
-    v11$2 := (if p1$2 then $$10$1bv32$2 else v11$2);
-    v12$1 := (if p1$1 then $$10$2bv32$1 else v12$1);
-    v12$2 := (if p1$2 then $$10$2bv32$2 else v12$2);
-    v13$1 := (if p1$1 then $$10$3bv32$1 else v13$1);
-    v13$2 := (if p1$2 then $$10$3bv32$2 else v13$2);
-    $$bodyPos.i$0bv32$1 := (if p1$1 then v10$1 else $$bodyPos.i$0bv32$1);
-    $$bodyPos.i$0bv32$2 := (if p1$2 then v10$2 else $$bodyPos.i$0bv32$2);
-    $$bodyPos.i$1bv32$1 := (if p1$1 then v11$1 else $$bodyPos.i$1bv32$1);
-    $$bodyPos.i$1bv32$2 := (if p1$2 then v11$2 else $$bodyPos.i$1bv32$2);
-    $$bodyPos.i$2bv32$1 := (if p1$1 then v12$1 else $$bodyPos.i$2bv32$1);
-    $$bodyPos.i$2bv32$2 := (if p1$2 then v12$2 else $$bodyPos.i$2bv32$2);
-    $$bodyPos.i$3bv32$1 := (if p1$1 then v13$1 else $$bodyPos.i$3bv32$1);
-    $$bodyPos.i$3bv32$2 := (if p1$2 then v13$2 else $$bodyPos.i$3bv32$2);
-    $$6$0bv32$1 := (if p1$1 then 0bv32 else $$6$0bv32$1);
-    $$6$0bv32$2 := (if p1$2 then 0bv32 else $$6$0bv32$2);
-    $$6$1bv32$1 := (if p1$1 then 0bv32 else $$6$1bv32$1);
-    $$6$1bv32$2 := (if p1$2 then 0bv32 else $$6$1bv32$2);
-    $$6$2bv32$1 := (if p1$1 then 0bv32 else $$6$2bv32$1);
-    $$6$2bv32$2 := (if p1$2 then 0bv32 else $$6$2bv32$2);
+    $$16$3bv32$1 := (if p1$1 then v9$1 else $$16$3bv32$1);
+    $$16$3bv32$2 := (if p1$2 then v9$2 else $$16$3bv32$2);
+    v10$1 := (if p1$1 then $$16$0bv32$1 else v10$1);
+    v10$2 := (if p1$2 then $$16$0bv32$2 else v10$2);
+    $$15$0bv32$1 := (if p1$1 then v10$1 else $$15$0bv32$1);
+    $$15$0bv32$2 := (if p1$2 then v10$2 else $$15$0bv32$2);
+    v11$1 := (if p1$1 then $$16$1bv32$1 else v11$1);
+    v11$2 := (if p1$2 then $$16$1bv32$2 else v11$2);
+    $$15$1bv32$1 := (if p1$1 then v11$1 else $$15$1bv32$1);
+    $$15$1bv32$2 := (if p1$2 then v11$2 else $$15$1bv32$2);
+    v12$1 := (if p1$1 then $$16$2bv32$1 else v12$1);
+    v12$2 := (if p1$2 then $$16$2bv32$2 else v12$2);
+    $$15$2bv32$1 := (if p1$1 then v12$1 else $$15$2bv32$1);
+    $$15$2bv32$2 := (if p1$2 then v12$2 else $$15$2bv32$2);
+    v13$1 := (if p1$1 then $$16$3bv32$1 else v13$1);
+    v13$2 := (if p1$2 then $$16$3bv32$2 else v13$2);
+    $$15$3bv32$1 := (if p1$1 then v13$1 else $$15$3bv32$1);
+    $$15$3bv32$2 := (if p1$2 then v13$2 else $$15$3bv32$2);
+    $$11$0bv32$1 := (if p1$1 then 0bv32 else $$11$0bv32$1);
+    $$11$0bv32$2 := (if p1$2 then 0bv32 else $$11$0bv32$2);
+    $$11$1bv32$1 := (if p1$1 then 0bv32 else $$11$1bv32$1);
+    $$11$1bv32$2 := (if p1$2 then 0bv32 else $$11$1bv32$2);
+    $$11$2bv32$1 := (if p1$1 then 0bv32 else $$11$2bv32$1);
+    $$11$2bv32$2 := (if p1$2 then 0bv32 else $$11$2bv32$2);
     $tile.i.0$1 := (if p1$1 then group_id_y$1 else $tile.i.0$1);
     $tile.i.0$2 := (if p1$2 then group_id_y$2 else $tile.i.0$2);
     p2$1 := (if p1$1 then true else p2$1);
     p2$2 := (if p1$2 then true else p2$2);
     _READ_HAS_OCCURRED_$$__smem$ghost$__partitioned_block_$3_0 := _READ_HAS_OCCURRED_$$__smem;
     _WRITE_HAS_OCCURRED_$$__smem$ghost$__partitioned_block_$3_0 := _WRITE_HAS_OCCURRED_$$__smem;
-    assume true;
+    assume {:captureState "loop_entry_state_0_0"} true;
     goto __partitioned_block_$3_0;
 
   __partitioned_block_$3_0:
-    assume true;
+    assume {:captureState "loop_head_state_0"} true;
     
     
     
@@ -762,13 +758,13 @@ implementation {:source_name "integrateBodies<float, false>"} {:kernel} $_Z15int
     
     
     
-assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  p2$1 == p2$2 ) ,  (  group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 ==> p2$1 == p2$2 ) ,  (  p2$1 && p2$2 ==> $tile.i.0$1 == $tile.i.0$2 ) ,  (  p2$1 && p2$2 ==> $0$1 == $0$2 ) ,  (  p2$1 && p2$2 ==> $j.i.i.0$1 == $j.i.i.0$2 ) ,  (  p2$1 && p2$2 ==> $counter.i.i.0$1 == $counter.i.i.0$2 ) ,  (  p2$1 && p2$2 ==> v73$1 == v73$2 ) ,  (  p2$1 && p2$2 ==> v14$1 == v14$2 ) ,  (  p2$1 && p2$2 ==> v15$1 == v15$2 ) ,  (  p2$1 && p2$2 ==> v16$1 == v16$2 ) ,  (  p2$1 && p2$2 ==> v17$1 == v17$2 ) ,  (  p2$1 && p2$2 ==> v18$1 == v18$2 ) ,  (  p2$1 && p2$2 ==> v22$1 == v22$2 ) ,  (  p2$1 && p2$2 ==> v19$1 == v19$2 ) ,  (  p2$1 && p2$2 ==> v20$1 == v20$2 ) ,  (  p2$1 && p2$2 ==> v21$1 == v21$2 ) ,  (  p2$1 && p2$2 ==> v23$1 == v23$2 ) ,  (  p2$1 && p2$2 ==> v24$1 == v24$2 ) ,  (  p2$1 && p2$2 ==> v25$1 == v25$2 ) ,  (  p2$1 && p2$2 ==> v26$1 == v26$2 ) ,  (  p2$1 && p2$2 ==> v27$1 == v27$2 ) ,  (  p2$1 && p2$2 ==> v28$1 == v28$2 ) ,  (  p2$1 && p2$2 ==> v29$1 == v29$2 ) ,  (  p2$1 && p2$2 ==> v30$1 == v30$2 ) ,  (  p2$1 && p2$2 ==> v31$1 == v31$2 ) ,  (  p2$1 && p2$2 ==> v32$1 == v32$2 ) ,  (  p2$1 && p2$2 ==> v33$1 == v33$2 ) ,  (  p2$1 && p2$2 ==> v34$1 == v34$2 ) ,  (  p2$1 && p2$2 ==> v35$1 == v35$2 ) ,  (  p2$1 && p2$2 ==> v36$1 == v36$2 ) ,  (  p2$1 && p2$2 ==> v37$1 == v37$2 ) ,  (  p2$1 && p2$2 ==> v38$1 == v38$2 ) ,  (  p2$1 && p2$2 ==> v39$1 == v39$2 ) ,  (  p2$1 && p2$2 ==> v40$1 == v40$2 ) ,  (  p2$1 && p2$2 ==> v41$1 == v41$2 ) ,  (  p2$1 && p2$2 ==> v42$1 == v42$2 ) ,  (  p2$1 && p2$2 ==> v43$1 == v43$2 ) ,  (  p2$1 && p2$2 ==> v44$1 == v44$2 ) ,  (  p2$1 && p2$2 ==> v45$1 == v45$2 ) ,  (  p2$1 && p2$2 ==> v46$1 == v46$2 ) ,  (  p2$1 && p2$2 ==> v47$1 == v47$2 ) ,  (  p2$1 && p2$2 ==> v48$1 == v48$2 ) ,  (  p2$1 && p2$2 ==> v49$1 == v49$2 ) ,  (  p2$1 && p2$2 ==> v50$1 == v50$2 ) ,  (  p2$1 && p2$2 ==> v51$1 == v51$2 ) ,  (  p2$1 && p2$2 ==> v52$1 == v52$2 ) ,  (  p2$1 && p2$2 ==> v53$1 == v53$2 ) ,  (  p2$1 && p2$2 ==> v54$1 == v54$2 ) ,  (  p2$1 && p2$2 ==> v55$1 == v55$2 ) ,  (  p2$1 && p2$2 ==> v56$1 == v56$2 ) ,  (  p2$1 && p2$2 ==> v76$1 == v76$2 ) ,  (  p2$1 && p2$2 ==> v57$1 == v57$2 ) ,  (  p2$1 && p2$2 ==> v58$1 == v58$2 ) ,  (  p2$1 && p2$2 ==> v59$1 == v59$2 ) ,  (  p2$1 && p2$2 ==> v60$1 == v60$2 ) ,  (  p2$1 && p2$2 ==> v61$1 == v61$2 ) ,  (  p2$1 && p2$2 ==> v62$1 == v62$2 ) ,  (  p2$1 && p2$2 ==> v63$1 == v63$2 ) ,  (  p2$1 && p2$2 ==> v64$1 == v64$2 ) ,  (  p2$1 && p2$2 ==> v65$1 == v65$2 ) ,  (  p2$1 && p2$2 ==> v66$1 == v66$2 ) ,  (  p2$1 && p2$2 ==> v67$1 == v67$2 ) ,  (  p2$1 && p2$2 ==> v68$1 == v68$2 ) ,  (  p2$1 && p2$2 ==> v69$1 == v69$2 ) ,  (  p2$1 && p2$2 ==> v71$1 == v71$2 ) ,  (  p2$1 && p2$2 ==> v72$1 == v72$2 ) ,  (  p2$1 && p2$2 ==> v74$1 == v74$2 ) ,  (  p2$1 && p2$2 ==> v75$1 == v75$2 ) ,  (  p2$1 && p2$2 ==> v77$1 == v77$2 ) ,  (  p2$1 && p2$2 ==> v78$1 == v78$2 ) ,  (  p2$1 && p2$2 ==> v79$1 == v79$2 ) ,  (  p2$1 && p2$2 ==> v80$1 == v80$2 ) ,  (  p2$1 && p2$2 ==> v81$1 == v81$2 ) ,  (  p2$1 && p2$2 ==> v82$1 == v82$2 ) ,  (  p2$1 && p2$2 ==> v83$1 == v83$2 ) ,  (  p2$1 && p2$2 ==> v84$1 == v84$2 ) ,  (  p2$1 && p2$2 ==> v85$1 == v85$2 ) ,  (  p2$1 && p2$2 ==> v86$1 == v86$2 ) ,  (  p2$1 && p2$2 ==> v87$1 == v87$2 ) ,  (  p2$1 && p2$2 ==> v88$1 == v88$2 ) ,  (  p2$1 && p2$2 ==> v89$1 == v89$2 ) ,  (  p2$1 && p2$2 ==> v90$1 == v90$2 ) ,  (  p2$1 && p2$2 ==> v91$1 == v91$2 ) ,  (  p2$1 && p2$2 ==> v92$1 == v92$2 ) ,  (  p2$1 && p2$2 ==> v93$1 == v93$2 ) ,  (  p2$1 && p2$2 ==> v94$1 == v94$2 ) ,  (  p2$1 && p2$2 ==> v95$1 == v95$2 ) ,  (  p2$1 && p2$2 ==> v96$1 == v96$2 ) ,  (  !_READ_HAS_OCCURRED_$$__smem ) ,  (  !_WRITE_HAS_OCCURRED_$$__smem ) ,  (  _READ_HAS_OCCURRED_$$__smem ==> BV32_AND(BV32_SUB(BV32_MUL(1bv64[32:0], 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv64[32:0], 4bv32), 1bv32), BV32_MUL(0bv64[32:0], 4bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv64[32:0], 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv64[32:0], 4bv32), 1bv32), BV32_ADD(BV32_MUL(0bv64[32:0], 4bv32), 1bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv64[32:0], 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv64[32:0], 4bv32), 1bv32), BV32_ADD(BV32_MUL(0bv64[32:0], 4bv32), 2bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv64[32:0], 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv64[32:0], 4bv32), 1bv32), BV32_ADD(BV32_MUL(0bv64[32:0], 4bv32), 3bv32)) ) ,  (  _WRITE_HAS_OCCURRED_$$__smem ==> _WATCHED_OFFSET == BV32_MUL(BV32_ADD(local_id_x$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32) || _WATCHED_OFFSET == BV32_ADD(BV32_MUL(BV32_ADD(local_id_x$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 1bv32) || _WATCHED_OFFSET == BV32_ADD(BV32_MUL(BV32_ADD(local_id_x$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 2bv32) || _WATCHED_OFFSET == BV32_ADD(BV32_MUL(BV32_ADD(local_id_x$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 3bv32) ) ,  (  !p1$1 ==> _READ_HAS_OCCURRED_$$__smem$ghost$__partitioned_block_$3_0 == _READ_HAS_OCCURRED_$$__smem ) ,  (  !p1$1 ==> _WRITE_HAS_OCCURRED_$$__smem$ghost$__partitioned_block_$3_0 == _WRITE_HAS_OCCURRED_$$__smem ) ,  true ,  true  ); 
+assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  p2$1 == p2$2 ) ,  (  group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 ==> p2$1 == p2$2 ) ,  (  p2$1 && p2$2 ==> $tile.i.0$1 == $tile.i.0$2 ) ,  (  p2$1 && p2$2 ==> $0$1 == $0$2 ) ,  (  p2$1 && p2$2 ==> $j.i.i.0$1 == $j.i.i.0$2 ) ,  (  p2$1 && p2$2 ==> $counter.i.i.0$1 == $counter.i.i.0$2 ) ,  (  p2$1 && p2$2 ==> v14$1 == v14$2 ) ,  (  p2$1 && p2$2 ==> v15$1 == v15$2 ) ,  (  p2$1 && p2$2 ==> v16$1 == v16$2 ) ,  (  p2$1 && p2$2 ==> v17$1 == v17$2 ) ,  (  p2$1 && p2$2 ==> v18$1 == v18$2 ) ,  (  p2$1 && p2$2 ==> v19$1 == v19$2 ) ,  (  p2$1 && p2$2 ==> v20$1 == v20$2 ) ,  (  p2$1 && p2$2 ==> v21$1 == v21$2 ) ,  (  p2$1 && p2$2 ==> v22$1 == v22$2 ) ,  (  p2$1 && p2$2 ==> v23$1 == v23$2 ) ,  (  p2$1 && p2$2 ==> v24$1 == v24$2 ) ,  (  p2$1 && p2$2 ==> v25$1 == v25$2 ) ,  (  p2$1 && p2$2 ==> v26$1 == v26$2 ) ,  (  p2$1 && p2$2 ==> v27$1 == v27$2 ) ,  (  p2$1 && p2$2 ==> v28$1 == v28$2 ) ,  (  p2$1 && p2$2 ==> v29$1 == v29$2 ) ,  (  p2$1 && p2$2 ==> v30$1 == v30$2 ) ,  (  p2$1 && p2$2 ==> v31$1 == v31$2 ) ,  (  p2$1 && p2$2 ==> v32$1 == v32$2 ) ,  (  p2$1 && p2$2 ==> v33$1 == v33$2 ) ,  (  p2$1 && p2$2 ==> v34$1 == v34$2 ) ,  (  p2$1 && p2$2 ==> v35$1 == v35$2 ) ,  (  p2$1 && p2$2 ==> v36$1 == v36$2 ) ,  (  p2$1 && p2$2 ==> v37$1 == v37$2 ) ,  (  p2$1 && p2$2 ==> v38$1 == v38$2 ) ,  (  p2$1 && p2$2 ==> v39$1 == v39$2 ) ,  (  p2$1 && p2$2 ==> v40$1 == v40$2 ) ,  (  p2$1 && p2$2 ==> v41$1 == v41$2 ) ,  (  p2$1 && p2$2 ==> v42$1 == v42$2 ) ,  (  p2$1 && p2$2 ==> v43$1 == v43$2 ) ,  (  p2$1 && p2$2 ==> v44$1 == v44$2 ) ,  (  p2$1 && p2$2 ==> v45$1 == v45$2 ) ,  (  p2$1 && p2$2 ==> v46$1 == v46$2 ) ,  (  p2$1 && p2$2 ==> v47$1 == v47$2 ) ,  (  p2$1 && p2$2 ==> v48$1 == v48$2 ) ,  (  p2$1 && p2$2 ==> v49$1 == v49$2 ) ,  (  p2$1 && p2$2 ==> v50$1 == v50$2 ) ,  (  p2$1 && p2$2 ==> v51$1 == v51$2 ) ,  (  p2$1 && p2$2 ==> v52$1 == v52$2 ) ,  (  p2$1 && p2$2 ==> v53$1 == v53$2 ) ,  (  p2$1 && p2$2 ==> v54$1 == v54$2 ) ,  (  p2$1 && p2$2 ==> v55$1 == v55$2 ) ,  (  p2$1 && p2$2 ==> v56$1 == v56$2 ) ,  (  p2$1 && p2$2 ==> v57$1 == v57$2 ) ,  (  p2$1 && p2$2 ==> v58$1 == v58$2 ) ,  (  p2$1 && p2$2 ==> v59$1 == v59$2 ) ,  (  p2$1 && p2$2 ==> v60$1 == v60$2 ) ,  (  p2$1 && p2$2 ==> v61$1 == v61$2 ) ,  (  p2$1 && p2$2 ==> v62$1 == v62$2 ) ,  (  p2$1 && p2$2 ==> v63$1 == v63$2 ) ,  (  p2$1 && p2$2 ==> v64$1 == v64$2 ) ,  (  p2$1 && p2$2 ==> v65$1 == v65$2 ) ,  (  p2$1 && p2$2 ==> v66$1 == v66$2 ) ,  (  p2$1 && p2$2 ==> v67$1 == v67$2 ) ,  (  p2$1 && p2$2 ==> v68$1 == v68$2 ) ,  (  p2$1 && p2$2 ==> v69$1 == v69$2 ) ,  (  p2$1 && p2$2 ==> v71$1 == v71$2 ) ,  (  p2$1 && p2$2 ==> v72$1 == v72$2 ) ,  (  p2$1 && p2$2 ==> v73$1 == v73$2 ) ,  (  p2$1 && p2$2 ==> v74$1 == v74$2 ) ,  (  p2$1 && p2$2 ==> v75$1 == v75$2 ) ,  (  p2$1 && p2$2 ==> v76$1 == v76$2 ) ,  (  p2$1 && p2$2 ==> v77$1 == v77$2 ) ,  (  p2$1 && p2$2 ==> v78$1 == v78$2 ) ,  (  p2$1 && p2$2 ==> v79$1 == v79$2 ) ,  (  p2$1 && p2$2 ==> v80$1 == v80$2 ) ,  (  p2$1 && p2$2 ==> v81$1 == v81$2 ) ,  (  p2$1 && p2$2 ==> v82$1 == v82$2 ) ,  (  p2$1 && p2$2 ==> v83$1 == v83$2 ) ,  (  p2$1 && p2$2 ==> v84$1 == v84$2 ) ,  (  p2$1 && p2$2 ==> v85$1 == v85$2 ) ,  (  p2$1 && p2$2 ==> v86$1 == v86$2 ) ,  (  p2$1 && p2$2 ==> v87$1 == v87$2 ) ,  (  p2$1 && p2$2 ==> v88$1 == v88$2 ) ,  (  p2$1 && p2$2 ==> v89$1 == v89$2 ) ,  (  p2$1 && p2$2 ==> v90$1 == v90$2 ) ,  (  p2$1 && p2$2 ==> v91$1 == v91$2 ) ,  (  p2$1 && p2$2 ==> v92$1 == v92$2 ) ,  (  p2$1 && p2$2 ==> v93$1 == v93$2 ) ,  (  p2$1 && p2$2 ==> v94$1 == v94$2 ) ,  (  p2$1 && p2$2 ==> v95$1 == v95$2 ) ,  (  p2$1 && p2$2 ==> v96$1 == v96$2 ) ,  (  !_READ_HAS_OCCURRED_$$__smem ) ,  (  !_WRITE_HAS_OCCURRED_$$__smem ) ,  (  _READ_HAS_OCCURRED_$$__smem ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_MUL(BV32_ADD(0bv32, BV32_MUL(group_size_x, local_id_y$1)), 4bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 1bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 2bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 3bv32)) ) ,  (  _WRITE_HAS_OCCURRED_$$__smem ==> _WATCHED_OFFSET == BV32_MUL(BV32_ADD(local_id_x$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32) || _WATCHED_OFFSET == BV32_ADD(BV32_MUL(BV32_ADD(local_id_x$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 1bv32) || _WATCHED_OFFSET == BV32_ADD(BV32_MUL(BV32_ADD(local_id_x$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 2bv32) || _WATCHED_OFFSET == BV32_ADD(BV32_MUL(BV32_ADD(local_id_x$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 3bv32) ) ,  (  !p1$1 ==> _READ_HAS_OCCURRED_$$__smem$ghost$__partitioned_block_$3_0 == _READ_HAS_OCCURRED_$$__smem ) ,  (  !p1$1 ==> _WRITE_HAS_OCCURRED_$$__smem$ghost$__partitioned_block_$3_0 == _WRITE_HAS_OCCURRED_$$__smem ) ,  true ,  true  ); 
 
 
-    assert _ATOMIC_HAS_OCCURRED_$$__smem ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
-    assert _WRITE_HAS_OCCURRED_$$__smem ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
-    assert _READ_HAS_OCCURRED_$$__smem ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
-    assume true;
+    assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$__smem ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
+    assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$__smem ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
+    assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$__smem ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
+    assume {:predicate "p2"} {:dominator_predicate "p1"} true;
     
     
     
@@ -790,7 +786,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
 assert  my_inv (  ( p2$1 ==> BV32_SUB($tile.i.0$1, group_id_y$1) == BV32_SUB($tile.i.0$2, group_id_y$2) )  && ( p2$2 ==> BV32_SUB($tile.i.0$2, group_id_y$2) == BV32_SUB($tile.i.0$1, group_id_y$1) ) ,  ( p2$1 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 ==> BV32_SUB($tile.i.0$1, group_id_y$1) == BV32_SUB($tile.i.0$2, group_id_y$2) )  && ( p2$2 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 ==> BV32_SUB($tile.i.0$2, group_id_y$2) == BV32_SUB($tile.i.0$1, group_id_y$1) ) ,  ( p2$1 ==> BV32_SLE($tile.i.0$1, group_id_y$1) )  && ( p2$2 ==> BV32_SLE($tile.i.0$2, group_id_y$2) ) ,  ( p2$1 ==> BV32_SGE($tile.i.0$1, group_id_y$1) )  && ( p2$2 ==> BV32_SGE($tile.i.0$2, group_id_y$2) ) ,  ( p2$1 ==> BV32_ULE($tile.i.0$1, group_id_y$1) )  && ( p2$2 ==> BV32_ULE($tile.i.0$2, group_id_y$2) ) ,  ( p2$1 ==> BV32_UGE($tile.i.0$1, group_id_y$1) )  && ( p2$2 ==> BV32_UGE($tile.i.0$2, group_id_y$2) ) ,  ( p2$1 ==> p2$1 ==> !BV32_UGE(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), $deviceNumBodies) )  && ( p2$2 ==> p2$2 ==> !BV32_UGE(BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2), $deviceNumBodies) ) ,  (  !BV32_UGE(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), $deviceNumBodies) && BV32_ULT($tile.i.0$1, BV32_ADD(BV32_SDIV($totalNumBodies, BV32_MUL(group_size_x, group_size_y)), group_id_y$1)) ==> p2$1 )  && (  !BV32_UGE(BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2), $deviceNumBodies) && BV32_ULT($tile.i.0$2, BV32_ADD(BV32_SDIV($totalNumBodies, BV32_MUL(group_size_x, group_size_y)), group_id_y$2)) ==> p2$2 ) ,  (  _READ_HAS_OCCURRED_$$__smem ==> !BV32_UGE(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), $deviceNumBodies) ) ,  (  _WRITE_HAS_OCCURRED_$$__smem ==> !BV32_UGE(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), $deviceNumBodies) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true  ); 
 
 
-    assert p2$1 ==> true;
+    assert {:block_sourceloc} {:sourceloc_num 31} p2$1 ==> true;
     v14$1 := (if p2$1 then BV32_ULT($tile.i.0$1, BV32_ADD(BV32_SDIV($totalNumBodies, BV32_MUL(group_size_x, group_size_y)), group_id_y$1)) else v14$1);
     v14$2 := (if p2$2 then BV32_ULT($tile.i.0$2, BV32_ADD(BV32_SDIV($totalNumBodies, BV32_MUL(group_size_x, group_size_y)), group_id_y$2)) else v14$2);
     p3$1 := false;
@@ -820,9 +816,9 @@ assert  my_inv (  ( p2$1 ==> BV32_SUB($tile.i.0$1, group_id_y$1) == BV32_SUB($ti
     v16$2 := (if p3$2 then _HAVOC_bv32$2 else v16$2);
     call {:sourceloc} {:sourceloc_num 37} _LOG_WRITE_$$__smem(p3$1, BV32_MUL(BV32_ADD(local_id_x$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), v16$1, $$__smem[1bv1][BV32_MUL(BV32_ADD(local_id_x$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$__smem(p3$2, BV32_MUL(BV32_ADD(local_id_x$2, BV32_MUL(group_size_x, local_id_y$2)), 4bv32));
-    assume true;
+    assume {:do_not_predicate} {:check_id "check_state_12"} {:captureState "check_state_12"} {:sourceloc} {:sourceloc_num 37} true;
     call {:check_id "check_state_12"} {:sourceloc} {:sourceloc_num 37} _CHECK_WRITE_$$__smem(p3$2, BV32_MUL(BV32_ADD(local_id_x$2, BV32_MUL(group_size_x, local_id_y$2)), 4bv32), v16$2);
-    assume true;
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$__smem"} true;
     $$__smem[1bv1][BV32_MUL(BV32_ADD(local_id_x$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32)] := (if p3$1 then v16$1 else $$__smem[1bv1][BV32_MUL(BV32_ADD(local_id_x$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32)]);
     $$__smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_MUL(BV32_ADD(local_id_x$2, BV32_MUL(group_size_x, local_id_y$2)), 4bv32)] := (if p3$2 then v16$2 else $$__smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_MUL(BV32_ADD(local_id_x$2, BV32_MUL(group_size_x, local_id_y$2)), 4bv32)]);
     havoc _HAVOC_bv32$1, _HAVOC_bv32$2;
@@ -830,9 +826,9 @@ assert  my_inv (  ( p2$1 ==> BV32_SUB($tile.i.0$1, group_id_y$1) == BV32_SUB($ti
     v17$2 := (if p3$2 then _HAVOC_bv32$2 else v17$2);
     call {:sourceloc} {:sourceloc_num 39} _LOG_WRITE_$$__smem(p3$1, BV32_ADD(BV32_MUL(BV32_ADD(local_id_x$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 1bv32), v17$1, $$__smem[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(local_id_x$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 1bv32)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$__smem(p3$2, BV32_ADD(BV32_MUL(BV32_ADD(local_id_x$2, BV32_MUL(group_size_x, local_id_y$2)), 4bv32), 1bv32));
-    assume true;
+    assume {:do_not_predicate} {:check_id "check_state_13"} {:captureState "check_state_13"} {:sourceloc} {:sourceloc_num 39} true;
     call {:check_id "check_state_13"} {:sourceloc} {:sourceloc_num 39} _CHECK_WRITE_$$__smem(p3$2, BV32_ADD(BV32_MUL(BV32_ADD(local_id_x$2, BV32_MUL(group_size_x, local_id_y$2)), 4bv32), 1bv32), v17$2);
-    assume true;
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$__smem"} true;
     $$__smem[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(local_id_x$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 1bv32)] := (if p3$1 then v17$1 else $$__smem[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(local_id_x$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 1bv32)]);
     $$__smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(local_id_x$2, BV32_MUL(group_size_x, local_id_y$2)), 4bv32), 1bv32)] := (if p3$2 then v17$2 else $$__smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(local_id_x$2, BV32_MUL(group_size_x, local_id_y$2)), 4bv32), 1bv32)]);
     havoc _HAVOC_bv32$1, _HAVOC_bv32$2;
@@ -840,9 +836,9 @@ assert  my_inv (  ( p2$1 ==> BV32_SUB($tile.i.0$1, group_id_y$1) == BV32_SUB($ti
     v18$2 := (if p3$2 then _HAVOC_bv32$2 else v18$2);
     call {:sourceloc} {:sourceloc_num 41} _LOG_WRITE_$$__smem(p3$1, BV32_ADD(BV32_MUL(BV32_ADD(local_id_x$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 2bv32), v18$1, $$__smem[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(local_id_x$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 2bv32)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$__smem(p3$2, BV32_ADD(BV32_MUL(BV32_ADD(local_id_x$2, BV32_MUL(group_size_x, local_id_y$2)), 4bv32), 2bv32));
-    assume true;
+    assume {:do_not_predicate} {:check_id "check_state_14"} {:captureState "check_state_14"} {:sourceloc} {:sourceloc_num 41} true;
     call {:check_id "check_state_14"} {:sourceloc} {:sourceloc_num 41} _CHECK_WRITE_$$__smem(p3$2, BV32_ADD(BV32_MUL(BV32_ADD(local_id_x$2, BV32_MUL(group_size_x, local_id_y$2)), 4bv32), 2bv32), v18$2);
-    assume true;
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$__smem"} true;
     $$__smem[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(local_id_x$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 2bv32)] := (if p3$1 then v18$1 else $$__smem[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(local_id_x$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 2bv32)]);
     $$__smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(local_id_x$2, BV32_MUL(group_size_x, local_id_y$2)), 4bv32), 2bv32)] := (if p3$2 then v18$2 else $$__smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(local_id_x$2, BV32_MUL(group_size_x, local_id_y$2)), 4bv32), 2bv32)]);
     havoc _HAVOC_bv32$1, _HAVOC_bv32$2;
@@ -850,90 +846,90 @@ assert  my_inv (  ( p2$1 ==> BV32_SUB($tile.i.0$1, group_id_y$1) == BV32_SUB($ti
     v19$2 := (if p3$2 then _HAVOC_bv32$2 else v19$2);
     call {:sourceloc} {:sourceloc_num 43} _LOG_WRITE_$$__smem(p3$1, BV32_ADD(BV32_MUL(BV32_ADD(local_id_x$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 3bv32), v19$1, $$__smem[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(local_id_x$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 3bv32)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$__smem(p3$2, BV32_ADD(BV32_MUL(BV32_ADD(local_id_x$2, BV32_MUL(group_size_x, local_id_y$2)), 4bv32), 3bv32));
-    assume true;
+    assume {:do_not_predicate} {:check_id "check_state_15"} {:captureState "check_state_15"} {:sourceloc} {:sourceloc_num 43} true;
     call {:check_id "check_state_15"} {:sourceloc} {:sourceloc_num 43} _CHECK_WRITE_$$__smem(p3$2, BV32_ADD(BV32_MUL(BV32_ADD(local_id_x$2, BV32_MUL(group_size_x, local_id_y$2)), 4bv32), 3bv32), v19$2);
-    assume true;
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$__smem"} true;
     $$__smem[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(local_id_x$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 3bv32)] := (if p3$1 then v19$1 else $$__smem[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(local_id_x$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 3bv32)]);
     $$__smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(local_id_x$2, BV32_MUL(group_size_x, local_id_y$2)), 4bv32), 3bv32)] := (if p3$2 then v19$2 else $$__smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(local_id_x$2, BV32_MUL(group_size_x, local_id_y$2)), 4bv32), 3bv32)]);
     goto __partitioned_block_$3_1;
 
   __partitioned_block_$3_1:
     call {:sourceloc_num 44} $bugle_barrier_duplicated_0(1bv1, 1bv1, p3$1, p3$2);
-    v20$1 := (if p3$1 then $$bodyPos.i$0bv32$1 else v20$1);
-    v20$2 := (if p3$2 then $$bodyPos.i$0bv32$2 else v20$2);
-    $$8$0bv32$1 := (if p3$1 then v20$1 else $$8$0bv32$1);
-    $$8$0bv32$2 := (if p3$2 then v20$2 else $$8$0bv32$2);
-    v21$1 := (if p3$1 then $$bodyPos.i$1bv32$1 else v21$1);
-    v21$2 := (if p3$2 then $$bodyPos.i$1bv32$2 else v21$2);
-    $$8$1bv32$1 := (if p3$1 then v21$1 else $$8$1bv32$1);
-    $$8$1bv32$2 := (if p3$2 then v21$2 else $$8$1bv32$2);
-    v22$1 := (if p3$1 then $$bodyPos.i$2bv32$1 else v22$1);
-    v22$2 := (if p3$2 then $$bodyPos.i$2bv32$2 else v22$2);
-    $$8$2bv32$1 := (if p3$1 then v22$1 else $$8$2bv32$1);
-    $$8$2bv32$2 := (if p3$2 then v22$2 else $$8$2bv32$2);
-    v23$1 := (if p3$1 then $$bodyPos.i$3bv32$1 else v23$1);
-    v23$2 := (if p3$2 then $$bodyPos.i$3bv32$2 else v23$2);
-    $$8$3bv32$1 := (if p3$1 then v23$1 else $$8$3bv32$1);
-    $$8$3bv32$2 := (if p3$2 then v23$2 else $$8$3bv32$2);
-    v24$1 := (if p3$1 then $$6$0bv32$1 else v24$1);
-    v24$2 := (if p3$2 then $$6$0bv32$2 else v24$2);
-    $$9$0bv32$1 := (if p3$1 then v24$1 else $$9$0bv32$1);
-    $$9$0bv32$2 := (if p3$2 then v24$2 else $$9$0bv32$2);
-    v25$1 := (if p3$1 then $$6$1bv32$1 else v25$1);
-    v25$2 := (if p3$2 then $$6$1bv32$2 else v25$2);
-    $$9$1bv32$1 := (if p3$1 then v25$1 else $$9$1bv32$1);
-    $$9$1bv32$2 := (if p3$2 then v25$2 else $$9$1bv32$2);
-    v26$1 := (if p3$1 then $$6$2bv32$1 else v26$1);
-    v26$2 := (if p3$2 then $$6$2bv32$2 else v26$2);
-    $$9$2bv32$1 := (if p3$1 then v26$1 else $$9$2bv32$1);
-    $$9$2bv32$2 := (if p3$2 then v26$2 else $$9$2bv32$2);
-    v27$1 := (if p3$1 then $$8$0bv32$1 else v27$1);
-    v27$2 := (if p3$2 then $$8$0bv32$2 else v27$2);
-    v28$1 := (if p3$1 then $$8$1bv32$1 else v28$1);
-    v28$2 := (if p3$2 then $$8$1bv32$2 else v28$2);
-    v29$1 := (if p3$1 then $$8$2bv32$1 else v29$1);
-    v29$2 := (if p3$2 then $$8$2bv32$2 else v29$2);
-    v30$1 := (if p3$1 then $$8$3bv32$1 else v30$1);
-    v30$2 := (if p3$2 then $$8$3bv32$2 else v30$2);
-    v31$1 := (if p3$1 then $$9$0bv32$1 else v31$1);
-    v31$2 := (if p3$2 then $$9$0bv32$2 else v31$2);
-    v32$1 := (if p3$1 then $$9$1bv32$1 else v32$1);
-    v32$2 := (if p3$2 then $$9$1bv32$2 else v32$2);
-    v33$1 := (if p3$1 then $$9$2bv32$1 else v33$1);
-    v33$2 := (if p3$2 then $$9$2bv32$2 else v33$2);
-    $$iPos.i.i$0bv32$1 := (if p3$1 then v27$1 else $$iPos.i.i$0bv32$1);
-    $$iPos.i.i$0bv32$2 := (if p3$2 then v27$2 else $$iPos.i.i$0bv32$2);
-    $$iPos.i.i$1bv32$1 := (if p3$1 then v28$1 else $$iPos.i.i$1bv32$1);
-    $$iPos.i.i$1bv32$2 := (if p3$2 then v28$2 else $$iPos.i.i$1bv32$2);
-    $$iPos.i.i$2bv32$1 := (if p3$1 then v29$1 else $$iPos.i.i$2bv32$1);
-    $$iPos.i.i$2bv32$2 := (if p3$2 then v29$2 else $$iPos.i.i$2bv32$2);
-    $$iPos.i.i$3bv32$1 := (if p3$1 then v30$1 else $$iPos.i.i$3bv32$1);
-    $$iPos.i.i$3bv32$2 := (if p3$2 then v30$2 else $$iPos.i.i$3bv32$2);
-    $$accel.i.i$0bv32$1 := (if p3$1 then v31$1 else $$accel.i.i$0bv32$1);
-    $$accel.i.i$0bv32$2 := (if p3$2 then v31$2 else $$accel.i.i$0bv32$2);
-    $$accel.i.i$1bv32$1 := (if p3$1 then v32$1 else $$accel.i.i$1bv32$1);
-    $$accel.i.i$1bv32$2 := (if p3$2 then v32$2 else $$accel.i.i$1bv32$2);
-    $$accel.i.i$2bv32$1 := (if p3$1 then v33$1 else $$accel.i.i$2bv32$1);
-    $$accel.i.i$2bv32$2 := (if p3$2 then v33$2 else $$accel.i.i$2bv32$2);
-    $j.i.i.0$1, $counter.i.i.0$1 := (if p3$1 then 0bv64 else $j.i.i.0$1), (if p3$1 then 0bv32 else $counter.i.i.0$1);
-    $j.i.i.0$2, $counter.i.i.0$2 := (if p3$2 then 0bv64 else $j.i.i.0$2), (if p3$2 then 0bv32 else $counter.i.i.0$2);
+    v20$1 := (if p3$1 then $$15$0bv32$1 else v20$1);
+    v20$2 := (if p3$2 then $$15$0bv32$2 else v20$2);
+    $$13$0bv32$1 := (if p3$1 then v20$1 else $$13$0bv32$1);
+    $$13$0bv32$2 := (if p3$2 then v20$2 else $$13$0bv32$2);
+    v21$1 := (if p3$1 then $$15$1bv32$1 else v21$1);
+    v21$2 := (if p3$2 then $$15$1bv32$2 else v21$2);
+    $$13$1bv32$1 := (if p3$1 then v21$1 else $$13$1bv32$1);
+    $$13$1bv32$2 := (if p3$2 then v21$2 else $$13$1bv32$2);
+    v22$1 := (if p3$1 then $$15$2bv32$1 else v22$1);
+    v22$2 := (if p3$2 then $$15$2bv32$2 else v22$2);
+    $$13$2bv32$1 := (if p3$1 then v22$1 else $$13$2bv32$1);
+    $$13$2bv32$2 := (if p3$2 then v22$2 else $$13$2bv32$2);
+    v23$1 := (if p3$1 then $$15$3bv32$1 else v23$1);
+    v23$2 := (if p3$2 then $$15$3bv32$2 else v23$2);
+    $$13$3bv32$1 := (if p3$1 then v23$1 else $$13$3bv32$1);
+    $$13$3bv32$2 := (if p3$2 then v23$2 else $$13$3bv32$2);
+    v24$1 := (if p3$1 then $$11$0bv32$1 else v24$1);
+    v24$2 := (if p3$2 then $$11$0bv32$2 else v24$2);
+    $$14$0bv32$1 := (if p3$1 then v24$1 else $$14$0bv32$1);
+    $$14$0bv32$2 := (if p3$2 then v24$2 else $$14$0bv32$2);
+    v25$1 := (if p3$1 then $$11$1bv32$1 else v25$1);
+    v25$2 := (if p3$2 then $$11$1bv32$2 else v25$2);
+    $$14$1bv32$1 := (if p3$1 then v25$1 else $$14$1bv32$1);
+    $$14$1bv32$2 := (if p3$2 then v25$2 else $$14$1bv32$2);
+    v26$1 := (if p3$1 then $$11$2bv32$1 else v26$1);
+    v26$2 := (if p3$2 then $$11$2bv32$2 else v26$2);
+    $$14$2bv32$1 := (if p3$1 then v26$1 else $$14$2bv32$1);
+    $$14$2bv32$2 := (if p3$2 then v26$2 else $$14$2bv32$2);
+    v27$1 := (if p3$1 then $$14$0bv32$1 else v27$1);
+    v27$2 := (if p3$2 then $$14$0bv32$2 else v27$2);
+    $$9$0bv32$1 := (if p3$1 then v27$1 else $$9$0bv32$1);
+    $$9$0bv32$2 := (if p3$2 then v27$2 else $$9$0bv32$2);
+    v28$1 := (if p3$1 then $$14$1bv32$1 else v28$1);
+    v28$2 := (if p3$2 then $$14$1bv32$2 else v28$2);
+    $$9$1bv32$1 := (if p3$1 then v28$1 else $$9$1bv32$1);
+    $$9$1bv32$2 := (if p3$2 then v28$2 else $$9$1bv32$2);
+    v29$1 := (if p3$1 then $$14$2bv32$1 else v29$1);
+    v29$2 := (if p3$2 then $$14$2bv32$2 else v29$2);
+    $$9$2bv32$1 := (if p3$1 then v29$1 else $$9$2bv32$1);
+    $$9$2bv32$2 := (if p3$2 then v29$2 else $$9$2bv32$2);
+    v30$1 := (if p3$1 then $$13$0bv32$1 else v30$1);
+    v30$2 := (if p3$2 then $$13$0bv32$2 else v30$2);
+    $$10$0bv32$1 := (if p3$1 then v30$1 else $$10$0bv32$1);
+    $$10$0bv32$2 := (if p3$2 then v30$2 else $$10$0bv32$2);
+    v31$1 := (if p3$1 then $$13$1bv32$1 else v31$1);
+    v31$2 := (if p3$2 then $$13$1bv32$2 else v31$2);
+    $$10$1bv32$1 := (if p3$1 then v31$1 else $$10$1bv32$1);
+    $$10$1bv32$2 := (if p3$2 then v31$2 else $$10$1bv32$2);
+    v32$1 := (if p3$1 then $$13$2bv32$1 else v32$1);
+    v32$2 := (if p3$2 then $$13$2bv32$2 else v32$2);
+    $$10$2bv32$1 := (if p3$1 then v32$1 else $$10$2bv32$1);
+    $$10$2bv32$2 := (if p3$2 then v32$2 else $$10$2bv32$2);
+    v33$1 := (if p3$1 then $$13$3bv32$1 else v33$1);
+    v33$2 := (if p3$2 then $$13$3bv32$2 else v33$2);
+    $$10$3bv32$1 := (if p3$1 then v33$1 else $$10$3bv32$1);
+    $$10$3bv32$2 := (if p3$2 then v33$2 else $$10$3bv32$2);
+    $j.i.i.0$1, $counter.i.i.0$1 := (if p3$1 then 0bv32 else $j.i.i.0$1), (if p3$1 then 0bv32 else $counter.i.i.0$1);
+    $j.i.i.0$2, $counter.i.i.0$2 := (if p3$2 then 0bv32 else $j.i.i.0$2), (if p3$2 then 0bv32 else $counter.i.i.0$2);
     p6$1 := (if p3$1 then true else p6$1);
     p6$2 := (if p3$2 then true else p6$2);
     _READ_HAS_OCCURRED_$$__smem$ghost$$8 := _READ_HAS_OCCURRED_$$__smem;
-    assume true;
+    assume {:captureState "loop_entry_state_1_0"} true;
     goto $8;
 
   $8:
-    assume true;
+    assume {:captureState "loop_head_state_1"} true;
     
     
-assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  _READ_HAS_OCCURRED_$$__smem ==> BV32_AND(BV32_SUB(BV32_MUL(1bv64[32:0], 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv64[32:0], 4bv32), 1bv32), BV32_MUL(0bv64[32:0], 4bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv64[32:0], 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv64[32:0], 4bv32), 1bv32), BV32_ADD(BV32_MUL(0bv64[32:0], 4bv32), 1bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv64[32:0], 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv64[32:0], 4bv32), 1bv32), BV32_ADD(BV32_MUL(0bv64[32:0], 4bv32), 2bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv64[32:0], 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv64[32:0], 4bv32), 1bv32), BV32_ADD(BV32_MUL(0bv64[32:0], 4bv32), 3bv32)) ) ,  (  !p3$1 ==> _READ_HAS_OCCURRED_$$__smem$ghost$$8 == _READ_HAS_OCCURRED_$$__smem )  ); 
+assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  _READ_HAS_OCCURRED_$$__smem ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_MUL(BV32_ADD(0bv32, BV32_MUL(group_size_x, local_id_y$1)), 4bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 1bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 2bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 3bv32)) ) ,  (  !p3$1 ==> _READ_HAS_OCCURRED_$$__smem$ghost$$8 == _READ_HAS_OCCURRED_$$__smem )  ); 
 
 
-    assert _ATOMIC_HAS_OCCURRED_$$__smem ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
-    assert _WRITE_HAS_OCCURRED_$$__smem ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
-    assert _READ_HAS_OCCURRED_$$__smem ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
-    assume true;
+    assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$__smem ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
+    assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$__smem ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
+    assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$__smem ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
+    assume {:predicate "p6"} {:dominator_predicate "p3"} true;
     assert p6$1 ==> p2$1;
     assert p6$2 ==> p2$2;
     
@@ -953,7 +949,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
 assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  ( p6$1 ==> BV32_SLE($counter.i.i.0$1, 0bv32) )  && ( p6$2 ==> BV32_SLE($counter.i.i.0$2, 0bv32) ) ,  ( p6$1 ==> BV32_SGE($counter.i.i.0$1, 0bv32) )  && ( p6$2 ==> BV32_SGE($counter.i.i.0$2, 0bv32) ) ,  ( p6$1 ==> BV32_ULE($counter.i.i.0$1, 0bv32) )  && ( p6$2 ==> BV32_ULE($counter.i.i.0$2, 0bv32) ) ,  ( p6$1 ==> BV32_UGE($counter.i.i.0$1, 0bv32) )  && ( p6$2 ==> BV32_UGE($counter.i.i.0$2, 0bv32) ) ,  ( p6$1 ==> p6$1 ==> !BV32_UGE(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), $deviceNumBodies) && BV32_ULT($tile.i.0$1, BV32_ADD(BV32_SDIV($totalNumBodies, BV32_MUL(group_size_x, group_size_y)), group_id_y$1)) )  && ( p6$2 ==> p6$2 ==> !BV32_UGE(BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2), $deviceNumBodies) && BV32_ULT($tile.i.0$2, BV32_ADD(BV32_SDIV($totalNumBodies, BV32_MUL(group_size_x, group_size_y)), group_id_y$2)) ) ,  (  !BV32_UGE(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), $deviceNumBodies) && BV32_ULT($tile.i.0$1, BV32_ADD(BV32_SDIV($totalNumBodies, BV32_MUL(group_size_x, group_size_y)), group_id_y$1)) && BV32_ULT($counter.i.i.0$1, group_size_x) ==> p6$1 )  && (  !BV32_UGE(BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2), $deviceNumBodies) && BV32_ULT($tile.i.0$2, BV32_ADD(BV32_SDIV($totalNumBodies, BV32_MUL(group_size_x, group_size_y)), group_id_y$2)) && BV32_ULT($counter.i.i.0$2, group_size_x) ==> p6$2 ) ,  (  _READ_HAS_OCCURRED_$$__smem ==> !BV32_UGE(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), $deviceNumBodies) ) ,  (  _READ_HAS_OCCURRED_$$__smem ==> BV32_ULT($tile.i.0$1, BV32_ADD(BV32_SDIV($totalNumBodies, BV32_MUL(group_size_x, group_size_y)), group_id_y$1)) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true  ); 
 
 
-    assert p6$1 ==> true;
+    assert {:block_sourceloc} {:sourceloc_num 73} p6$1 ==> true;
     v34$1 := (if p6$1 then BV32_ULT($counter.i.i.0$1, group_size_x) else v34$1);
     v34$2 := (if p6$2 then BV32_ULT($counter.i.i.0$2, group_size_x) else v34$2);
     p7$1 := false;
@@ -962,126 +958,126 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     p7$2 := (if p6$2 && v34$2 then v34$2 else p7$2);
     p6$1 := (if p6$1 && !v34$1 then v34$1 else p6$1);
     p6$2 := (if p6$2 && !v34$2 then v34$2 else p6$2);
-    v35$1 := (if p7$1 then $$accel.i.i$0bv32$1 else v35$1);
-    v35$2 := (if p7$2 then $$accel.i.i$0bv32$2 else v35$2);
-    $$3$0bv32$1 := (if p7$1 then v35$1 else $$3$0bv32$1);
-    $$3$0bv32$2 := (if p7$2 then v35$2 else $$3$0bv32$2);
-    v36$1 := (if p7$1 then $$accel.i.i$1bv32$1 else v36$1);
-    v36$2 := (if p7$2 then $$accel.i.i$1bv32$2 else v36$2);
-    $$3$1bv32$1 := (if p7$1 then v36$1 else $$3$1bv32$1);
-    $$3$1bv32$2 := (if p7$2 then v36$2 else $$3$1bv32$2);
-    v37$1 := (if p7$1 then $$accel.i.i$2bv32$1 else v37$1);
-    v37$2 := (if p7$2 then $$accel.i.i$2bv32$2 else v37$2);
-    $$3$2bv32$1 := (if p7$1 then v37$1 else $$3$2bv32$1);
-    $$3$2bv32$2 := (if p7$2 then v37$2 else $$3$2bv32$2);
-    v38$1 := (if p7$1 then $$iPos.i.i$0bv32$1 else v38$1);
-    v38$2 := (if p7$2 then $$iPos.i.i$0bv32$2 else v38$2);
-    $$4$0bv32$1 := (if p7$1 then v38$1 else $$4$0bv32$1);
-    $$4$0bv32$2 := (if p7$2 then v38$2 else $$4$0bv32$2);
-    v39$1 := (if p7$1 then $$iPos.i.i$1bv32$1 else v39$1);
-    v39$2 := (if p7$2 then $$iPos.i.i$1bv32$2 else v39$2);
-    $$4$1bv32$1 := (if p7$1 then v39$1 else $$4$1bv32$1);
-    $$4$1bv32$2 := (if p7$2 then v39$2 else $$4$1bv32$2);
-    v40$1 := (if p7$1 then $$iPos.i.i$2bv32$1 else v40$1);
-    v40$2 := (if p7$2 then $$iPos.i.i$2bv32$2 else v40$2);
-    $$4$2bv32$1 := (if p7$1 then v40$1 else $$4$2bv32$1);
-    $$4$2bv32$2 := (if p7$2 then v40$2 else $$4$2bv32$2);
-    v41$1 := (if p7$1 then $$iPos.i.i$3bv32$1 else v41$1);
-    v41$2 := (if p7$2 then $$iPos.i.i$3bv32$2 else v41$2);
-    $$4$3bv32$1 := (if p7$1 then v41$1 else $$4$3bv32$1);
-    $$4$3bv32$2 := (if p7$2 then v41$2 else $$4$3bv32$2);
-    call {:sourceloc} {:sourceloc_num 89} _LOG_READ_$$__smem(p7$1, BV32_MUL(BV64_ADD($j.i.i.0$1, BV32_ZEXT64(BV32_MUL(group_size_x, local_id_y$1)))[32:0], 4bv32), $$__smem[1bv1][BV32_MUL(BV64_ADD($j.i.i.0$1, BV32_ZEXT64(BV32_MUL(group_size_x, local_id_y$1)))[32:0], 4bv32)]);
-    assume true;
-    call {:check_id "check_state_16"} {:sourceloc} {:sourceloc_num 89} _CHECK_READ_$$__smem(p7$2, BV32_MUL(BV64_ADD($j.i.i.0$2, BV32_ZEXT64(BV32_MUL(group_size_x, local_id_y$2)))[32:0], 4bv32), $$__smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_MUL(BV64_ADD($j.i.i.0$2, BV32_ZEXT64(BV32_MUL(group_size_x, local_id_y$2)))[32:0], 4bv32)]);
-    assume true;
-    v42$1 := (if p7$1 then $$__smem[1bv1][BV32_MUL(BV64_ADD($j.i.i.0$1, BV32_ZEXT64(BV32_MUL(group_size_x, local_id_y$1)))[32:0], 4bv32)] else v42$1);
-    v42$2 := (if p7$2 then $$__smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_MUL(BV64_ADD($j.i.i.0$2, BV32_ZEXT64(BV32_MUL(group_size_x, local_id_y$2)))[32:0], 4bv32)] else v42$2);
-    $$5$0bv32$1 := (if p7$1 then v42$1 else $$5$0bv32$1);
-    $$5$0bv32$2 := (if p7$2 then v42$2 else $$5$0bv32$2);
-    call {:sourceloc} {:sourceloc_num 91} _LOG_READ_$$__smem(p7$1, BV32_ADD(BV32_MUL(BV64_ADD($j.i.i.0$1, BV32_ZEXT64(BV32_MUL(group_size_x, local_id_y$1)))[32:0], 4bv32), 1bv32), $$__smem[1bv1][BV32_ADD(BV32_MUL(BV64_ADD($j.i.i.0$1, BV32_ZEXT64(BV32_MUL(group_size_x, local_id_y$1)))[32:0], 4bv32), 1bv32)]);
-    assume true;
-    call {:check_id "check_state_17"} {:sourceloc} {:sourceloc_num 91} _CHECK_READ_$$__smem(p7$2, BV32_ADD(BV32_MUL(BV64_ADD($j.i.i.0$2, BV32_ZEXT64(BV32_MUL(group_size_x, local_id_y$2)))[32:0], 4bv32), 1bv32), $$__smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV64_ADD($j.i.i.0$2, BV32_ZEXT64(BV32_MUL(group_size_x, local_id_y$2)))[32:0], 4bv32), 1bv32)]);
-    assume true;
-    v43$1 := (if p7$1 then $$__smem[1bv1][BV32_ADD(BV32_MUL(BV64_ADD($j.i.i.0$1, BV32_ZEXT64(BV32_MUL(group_size_x, local_id_y$1)))[32:0], 4bv32), 1bv32)] else v43$1);
-    v43$2 := (if p7$2 then $$__smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV64_ADD($j.i.i.0$2, BV32_ZEXT64(BV32_MUL(group_size_x, local_id_y$2)))[32:0], 4bv32), 1bv32)] else v43$2);
-    $$5$1bv32$1 := (if p7$1 then v43$1 else $$5$1bv32$1);
-    $$5$1bv32$2 := (if p7$2 then v43$2 else $$5$1bv32$2);
-    call {:sourceloc} {:sourceloc_num 93} _LOG_READ_$$__smem(p7$1, BV32_ADD(BV32_MUL(BV64_ADD($j.i.i.0$1, BV32_ZEXT64(BV32_MUL(group_size_x, local_id_y$1)))[32:0], 4bv32), 2bv32), $$__smem[1bv1][BV32_ADD(BV32_MUL(BV64_ADD($j.i.i.0$1, BV32_ZEXT64(BV32_MUL(group_size_x, local_id_y$1)))[32:0], 4bv32), 2bv32)]);
-    assume true;
-    call {:check_id "check_state_18"} {:sourceloc} {:sourceloc_num 93} _CHECK_READ_$$__smem(p7$2, BV32_ADD(BV32_MUL(BV64_ADD($j.i.i.0$2, BV32_ZEXT64(BV32_MUL(group_size_x, local_id_y$2)))[32:0], 4bv32), 2bv32), $$__smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV64_ADD($j.i.i.0$2, BV32_ZEXT64(BV32_MUL(group_size_x, local_id_y$2)))[32:0], 4bv32), 2bv32)]);
-    assume true;
-    v44$1 := (if p7$1 then $$__smem[1bv1][BV32_ADD(BV32_MUL(BV64_ADD($j.i.i.0$1, BV32_ZEXT64(BV32_MUL(group_size_x, local_id_y$1)))[32:0], 4bv32), 2bv32)] else v44$1);
-    v44$2 := (if p7$2 then $$__smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV64_ADD($j.i.i.0$2, BV32_ZEXT64(BV32_MUL(group_size_x, local_id_y$2)))[32:0], 4bv32), 2bv32)] else v44$2);
-    $$5$2bv32$1 := (if p7$1 then v44$1 else $$5$2bv32$1);
-    $$5$2bv32$2 := (if p7$2 then v44$2 else $$5$2bv32$2);
-    call {:sourceloc} {:sourceloc_num 95} _LOG_READ_$$__smem(p7$1, BV32_ADD(BV32_MUL(BV64_ADD($j.i.i.0$1, BV32_ZEXT64(BV32_MUL(group_size_x, local_id_y$1)))[32:0], 4bv32), 3bv32), $$__smem[1bv1][BV32_ADD(BV32_MUL(BV64_ADD($j.i.i.0$1, BV32_ZEXT64(BV32_MUL(group_size_x, local_id_y$1)))[32:0], 4bv32), 3bv32)]);
-    assume true;
-    call {:check_id "check_state_19"} {:sourceloc} {:sourceloc_num 95} _CHECK_READ_$$__smem(p7$2, BV32_ADD(BV32_MUL(BV64_ADD($j.i.i.0$2, BV32_ZEXT64(BV32_MUL(group_size_x, local_id_y$2)))[32:0], 4bv32), 3bv32), $$__smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV64_ADD($j.i.i.0$2, BV32_ZEXT64(BV32_MUL(group_size_x, local_id_y$2)))[32:0], 4bv32), 3bv32)]);
-    assume true;
-    v45$1 := (if p7$1 then $$__smem[1bv1][BV32_ADD(BV32_MUL(BV64_ADD($j.i.i.0$1, BV32_ZEXT64(BV32_MUL(group_size_x, local_id_y$1)))[32:0], 4bv32), 3bv32)] else v45$1);
-    v45$2 := (if p7$2 then $$__smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV64_ADD($j.i.i.0$2, BV32_ZEXT64(BV32_MUL(group_size_x, local_id_y$2)))[32:0], 4bv32), 3bv32)] else v45$2);
-    $$5$3bv32$1 := (if p7$1 then v45$1 else $$5$3bv32$1);
-    $$5$3bv32$2 := (if p7$2 then v45$2 else $$5$3bv32$2);
-    v46$1 := (if p7$1 then $$3$0bv32$1 else v46$1);
-    v46$2 := (if p7$2 then $$3$0bv32$2 else v46$2);
-    v47$1 := (if p7$1 then $$3$1bv32$1 else v47$1);
-    v47$2 := (if p7$2 then $$3$1bv32$2 else v47$2);
-    v48$1 := (if p7$1 then $$3$2bv32$1 else v48$1);
-    v48$2 := (if p7$2 then $$3$2bv32$2 else v48$2);
-    v49$1 := (if p7$1 then $$4$0bv32$1 else v49$1);
-    v49$2 := (if p7$2 then $$4$0bv32$2 else v49$2);
-    v50$1 := (if p7$1 then $$4$1bv32$1 else v50$1);
-    v50$2 := (if p7$2 then $$4$1bv32$2 else v50$2);
-    v51$1 := (if p7$1 then $$4$2bv32$1 else v51$1);
-    v51$2 := (if p7$2 then $$4$2bv32$2 else v51$2);
-    v52$1 := (if p7$1 then $$4$3bv32$1 else v52$1);
-    v52$2 := (if p7$2 then $$4$3bv32$2 else v52$2);
-    v53$1 := (if p7$1 then $$5$0bv32$1 else v53$1);
-    v53$2 := (if p7$2 then $$5$0bv32$2 else v53$2);
-    v54$1 := (if p7$1 then $$5$1bv32$1 else v54$1);
-    v54$2 := (if p7$2 then $$5$1bv32$2 else v54$2);
-    v55$1 := (if p7$1 then $$5$2bv32$1 else v55$1);
-    v55$2 := (if p7$2 then $$5$2bv32$2 else v55$2);
-    v56$1 := (if p7$1 then $$5$3bv32$1 else v56$1);
-    v56$2 := (if p7$2 then $$5$3bv32$2 else v56$2);
-    $$ai.i.i.i$0bv32$1 := (if p7$1 then v46$1 else $$ai.i.i.i$0bv32$1);
-    $$ai.i.i.i$0bv32$2 := (if p7$2 then v46$2 else $$ai.i.i.i$0bv32$2);
-    $$ai.i.i.i$1bv32$1 := (if p7$1 then v47$1 else $$ai.i.i.i$1bv32$1);
-    $$ai.i.i.i$1bv32$2 := (if p7$2 then v47$2 else $$ai.i.i.i$1bv32$2);
-    $$ai.i.i.i$2bv32$1 := (if p7$1 then v48$1 else $$ai.i.i.i$2bv32$1);
-    $$ai.i.i.i$2bv32$2 := (if p7$2 then v48$2 else $$ai.i.i.i$2bv32$2);
-    $$bi.i.i.i$0bv32$1 := (if p7$1 then v49$1 else $$bi.i.i.i$0bv32$1);
-    $$bi.i.i.i$0bv32$2 := (if p7$2 then v49$2 else $$bi.i.i.i$0bv32$2);
-    $$bi.i.i.i$1bv32$1 := (if p7$1 then v50$1 else $$bi.i.i.i$1bv32$1);
-    $$bi.i.i.i$1bv32$2 := (if p7$2 then v50$2 else $$bi.i.i.i$1bv32$2);
-    $$bi.i.i.i$2bv32$1 := (if p7$1 then v51$1 else $$bi.i.i.i$2bv32$1);
-    $$bi.i.i.i$2bv32$2 := (if p7$2 then v51$2 else $$bi.i.i.i$2bv32$2);
-    $$bi.i.i.i$3bv32$1 := (if p7$1 then v52$1 else $$bi.i.i.i$3bv32$1);
-    $$bi.i.i.i$3bv32$2 := (if p7$2 then v52$2 else $$bi.i.i.i$3bv32$2);
-    $$bj.i.i.i$0bv32$1 := (if p7$1 then v53$1 else $$bj.i.i.i$0bv32$1);
-    $$bj.i.i.i$0bv32$2 := (if p7$2 then v53$2 else $$bj.i.i.i$0bv32$2);
-    $$bj.i.i.i$1bv32$1 := (if p7$1 then v54$1 else $$bj.i.i.i$1bv32$1);
-    $$bj.i.i.i$1bv32$2 := (if p7$2 then v54$2 else $$bj.i.i.i$1bv32$2);
-    $$bj.i.i.i$2bv32$1 := (if p7$1 then v55$1 else $$bj.i.i.i$2bv32$1);
-    $$bj.i.i.i$2bv32$2 := (if p7$2 then v55$2 else $$bj.i.i.i$2bv32$2);
-    $$bj.i.i.i$3bv32$1 := (if p7$1 then v56$1 else $$bj.i.i.i$3bv32$1);
-    $$bj.i.i.i$3bv32$2 := (if p7$2 then v56$2 else $$bj.i.i.i$3bv32$2);
-    v57$1 := (if p7$1 then $$bj.i.i.i$0bv32$1 else v57$1);
-    v57$2 := (if p7$2 then $$bj.i.i.i$0bv32$2 else v57$2);
-    v58$1 := (if p7$1 then $$bi.i.i.i$0bv32$1 else v58$1);
-    v58$2 := (if p7$2 then $$bi.i.i.i$0bv32$2 else v58$2);
+    v35$1 := (if p7$1 then $$9$0bv32$1 else v35$1);
+    v35$2 := (if p7$2 then $$9$0bv32$2 else v35$2);
+    $$6$0bv32$1 := (if p7$1 then v35$1 else $$6$0bv32$1);
+    $$6$0bv32$2 := (if p7$2 then v35$2 else $$6$0bv32$2);
+    v36$1 := (if p7$1 then $$9$1bv32$1 else v36$1);
+    v36$2 := (if p7$2 then $$9$1bv32$2 else v36$2);
+    $$6$1bv32$1 := (if p7$1 then v36$1 else $$6$1bv32$1);
+    $$6$1bv32$2 := (if p7$2 then v36$2 else $$6$1bv32$2);
+    v37$1 := (if p7$1 then $$9$2bv32$1 else v37$1);
+    v37$2 := (if p7$2 then $$9$2bv32$2 else v37$2);
+    $$6$2bv32$1 := (if p7$1 then v37$1 else $$6$2bv32$1);
+    $$6$2bv32$2 := (if p7$2 then v37$2 else $$6$2bv32$2);
+    v38$1 := (if p7$1 then $$10$0bv32$1 else v38$1);
+    v38$2 := (if p7$2 then $$10$0bv32$2 else v38$2);
+    $$7$0bv32$1 := (if p7$1 then v38$1 else $$7$0bv32$1);
+    $$7$0bv32$2 := (if p7$2 then v38$2 else $$7$0bv32$2);
+    v39$1 := (if p7$1 then $$10$1bv32$1 else v39$1);
+    v39$2 := (if p7$2 then $$10$1bv32$2 else v39$2);
+    $$7$1bv32$1 := (if p7$1 then v39$1 else $$7$1bv32$1);
+    $$7$1bv32$2 := (if p7$2 then v39$2 else $$7$1bv32$2);
+    v40$1 := (if p7$1 then $$10$2bv32$1 else v40$1);
+    v40$2 := (if p7$2 then $$10$2bv32$2 else v40$2);
+    $$7$2bv32$1 := (if p7$1 then v40$1 else $$7$2bv32$1);
+    $$7$2bv32$2 := (if p7$2 then v40$2 else $$7$2bv32$2);
+    v41$1 := (if p7$1 then $$10$3bv32$1 else v41$1);
+    v41$2 := (if p7$2 then $$10$3bv32$2 else v41$2);
+    $$7$3bv32$1 := (if p7$1 then v41$1 else $$7$3bv32$1);
+    $$7$3bv32$2 := (if p7$2 then v41$2 else $$7$3bv32$2);
+    call {:sourceloc} {:sourceloc_num 89} _LOG_READ_$$__smem(p7$1, BV32_MUL(BV32_ADD($j.i.i.0$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), $$__smem[1bv1][BV32_MUL(BV32_ADD($j.i.i.0$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32)]);
+    assume {:do_not_predicate} {:check_id "check_state_16"} {:captureState "check_state_16"} {:sourceloc} {:sourceloc_num 89} true;
+    call {:check_id "check_state_16"} {:sourceloc} {:sourceloc_num 89} _CHECK_READ_$$__smem(p7$2, BV32_MUL(BV32_ADD($j.i.i.0$2, BV32_MUL(group_size_x, local_id_y$2)), 4bv32), $$__smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_MUL(BV32_ADD($j.i.i.0$2, BV32_MUL(group_size_x, local_id_y$2)), 4bv32)]);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$__smem"} true;
+    v42$1 := (if p7$1 then $$__smem[1bv1][BV32_MUL(BV32_ADD($j.i.i.0$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32)] else v42$1);
+    v42$2 := (if p7$2 then $$__smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_MUL(BV32_ADD($j.i.i.0$2, BV32_MUL(group_size_x, local_id_y$2)), 4bv32)] else v42$2);
+    $$8$0bv32$1 := (if p7$1 then v42$1 else $$8$0bv32$1);
+    $$8$0bv32$2 := (if p7$2 then v42$2 else $$8$0bv32$2);
+    call {:sourceloc} {:sourceloc_num 91} _LOG_READ_$$__smem(p7$1, BV32_ADD(BV32_MUL(BV32_ADD($j.i.i.0$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 1bv32), $$__smem[1bv1][BV32_ADD(BV32_MUL(BV32_ADD($j.i.i.0$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 1bv32)]);
+    assume {:do_not_predicate} {:check_id "check_state_17"} {:captureState "check_state_17"} {:sourceloc} {:sourceloc_num 91} true;
+    call {:check_id "check_state_17"} {:sourceloc} {:sourceloc_num 91} _CHECK_READ_$$__smem(p7$2, BV32_ADD(BV32_MUL(BV32_ADD($j.i.i.0$2, BV32_MUL(group_size_x, local_id_y$2)), 4bv32), 1bv32), $$__smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD($j.i.i.0$2, BV32_MUL(group_size_x, local_id_y$2)), 4bv32), 1bv32)]);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$__smem"} true;
+    v43$1 := (if p7$1 then $$__smem[1bv1][BV32_ADD(BV32_MUL(BV32_ADD($j.i.i.0$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 1bv32)] else v43$1);
+    v43$2 := (if p7$2 then $$__smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD($j.i.i.0$2, BV32_MUL(group_size_x, local_id_y$2)), 4bv32), 1bv32)] else v43$2);
+    $$8$1bv32$1 := (if p7$1 then v43$1 else $$8$1bv32$1);
+    $$8$1bv32$2 := (if p7$2 then v43$2 else $$8$1bv32$2);
+    call {:sourceloc} {:sourceloc_num 93} _LOG_READ_$$__smem(p7$1, BV32_ADD(BV32_MUL(BV32_ADD($j.i.i.0$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 2bv32), $$__smem[1bv1][BV32_ADD(BV32_MUL(BV32_ADD($j.i.i.0$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 2bv32)]);
+    assume {:do_not_predicate} {:check_id "check_state_18"} {:captureState "check_state_18"} {:sourceloc} {:sourceloc_num 93} true;
+    call {:check_id "check_state_18"} {:sourceloc} {:sourceloc_num 93} _CHECK_READ_$$__smem(p7$2, BV32_ADD(BV32_MUL(BV32_ADD($j.i.i.0$2, BV32_MUL(group_size_x, local_id_y$2)), 4bv32), 2bv32), $$__smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD($j.i.i.0$2, BV32_MUL(group_size_x, local_id_y$2)), 4bv32), 2bv32)]);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$__smem"} true;
+    v44$1 := (if p7$1 then $$__smem[1bv1][BV32_ADD(BV32_MUL(BV32_ADD($j.i.i.0$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 2bv32)] else v44$1);
+    v44$2 := (if p7$2 then $$__smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD($j.i.i.0$2, BV32_MUL(group_size_x, local_id_y$2)), 4bv32), 2bv32)] else v44$2);
+    $$8$2bv32$1 := (if p7$1 then v44$1 else $$8$2bv32$1);
+    $$8$2bv32$2 := (if p7$2 then v44$2 else $$8$2bv32$2);
+    call {:sourceloc} {:sourceloc_num 95} _LOG_READ_$$__smem(p7$1, BV32_ADD(BV32_MUL(BV32_ADD($j.i.i.0$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 3bv32), $$__smem[1bv1][BV32_ADD(BV32_MUL(BV32_ADD($j.i.i.0$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 3bv32)]);
+    assume {:do_not_predicate} {:check_id "check_state_19"} {:captureState "check_state_19"} {:sourceloc} {:sourceloc_num 95} true;
+    call {:check_id "check_state_19"} {:sourceloc} {:sourceloc_num 95} _CHECK_READ_$$__smem(p7$2, BV32_ADD(BV32_MUL(BV32_ADD($j.i.i.0$2, BV32_MUL(group_size_x, local_id_y$2)), 4bv32), 3bv32), $$__smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD($j.i.i.0$2, BV32_MUL(group_size_x, local_id_y$2)), 4bv32), 3bv32)]);
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$__smem"} true;
+    v45$1 := (if p7$1 then $$__smem[1bv1][BV32_ADD(BV32_MUL(BV32_ADD($j.i.i.0$1, BV32_MUL(group_size_x, local_id_y$1)), 4bv32), 3bv32)] else v45$1);
+    v45$2 := (if p7$2 then $$__smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD($j.i.i.0$2, BV32_MUL(group_size_x, local_id_y$2)), 4bv32), 3bv32)] else v45$2);
+    $$8$3bv32$1 := (if p7$1 then v45$1 else $$8$3bv32$1);
+    $$8$3bv32$2 := (if p7$2 then v45$2 else $$8$3bv32$2);
+    v46$1 := (if p7$1 then $$8$0bv32$1 else v46$1);
+    v46$2 := (if p7$2 then $$8$0bv32$2 else v46$2);
+    $$1$0bv32$1 := (if p7$1 then v46$1 else $$1$0bv32$1);
+    $$1$0bv32$2 := (if p7$2 then v46$2 else $$1$0bv32$2);
+    v47$1 := (if p7$1 then $$8$1bv32$1 else v47$1);
+    v47$2 := (if p7$2 then $$8$1bv32$2 else v47$2);
+    $$1$1bv32$1 := (if p7$1 then v47$1 else $$1$1bv32$1);
+    $$1$1bv32$2 := (if p7$2 then v47$2 else $$1$1bv32$2);
+    v48$1 := (if p7$1 then $$8$2bv32$1 else v48$1);
+    v48$2 := (if p7$2 then $$8$2bv32$2 else v48$2);
+    $$1$2bv32$1 := (if p7$1 then v48$1 else $$1$2bv32$1);
+    $$1$2bv32$2 := (if p7$2 then v48$2 else $$1$2bv32$2);
+    v49$1 := (if p7$1 then $$8$3bv32$1 else v49$1);
+    v49$2 := (if p7$2 then $$8$3bv32$2 else v49$2);
+    $$1$3bv32$1 := (if p7$1 then v49$1 else $$1$3bv32$1);
+    $$1$3bv32$2 := (if p7$2 then v49$2 else $$1$3bv32$2);
+    v50$1 := (if p7$1 then $$7$0bv32$1 else v50$1);
+    v50$2 := (if p7$2 then $$7$0bv32$2 else v50$2);
+    $$2$0bv32$1 := (if p7$1 then v50$1 else $$2$0bv32$1);
+    $$2$0bv32$2 := (if p7$2 then v50$2 else $$2$0bv32$2);
+    v51$1 := (if p7$1 then $$7$1bv32$1 else v51$1);
+    v51$2 := (if p7$2 then $$7$1bv32$2 else v51$2);
+    $$2$1bv32$1 := (if p7$1 then v51$1 else $$2$1bv32$1);
+    $$2$1bv32$2 := (if p7$2 then v51$2 else $$2$1bv32$2);
+    v52$1 := (if p7$1 then $$7$2bv32$1 else v52$1);
+    v52$2 := (if p7$2 then $$7$2bv32$2 else v52$2);
+    $$2$2bv32$1 := (if p7$1 then v52$1 else $$2$2bv32$1);
+    $$2$2bv32$2 := (if p7$2 then v52$2 else $$2$2bv32$2);
+    v53$1 := (if p7$1 then $$7$3bv32$1 else v53$1);
+    v53$2 := (if p7$2 then $$7$3bv32$2 else v53$2);
+    $$2$3bv32$1 := (if p7$1 then v53$1 else $$2$3bv32$1);
+    $$2$3bv32$2 := (if p7$2 then v53$2 else $$2$3bv32$2);
+    v54$1 := (if p7$1 then $$6$0bv32$1 else v54$1);
+    v54$2 := (if p7$2 then $$6$0bv32$2 else v54$2);
+    $$3$0bv32$1 := (if p7$1 then v54$1 else $$3$0bv32$1);
+    $$3$0bv32$2 := (if p7$2 then v54$2 else $$3$0bv32$2);
+    v55$1 := (if p7$1 then $$6$1bv32$1 else v55$1);
+    v55$2 := (if p7$2 then $$6$1bv32$2 else v55$2);
+    $$3$1bv32$1 := (if p7$1 then v55$1 else $$3$1bv32$1);
+    $$3$1bv32$2 := (if p7$2 then v55$2 else $$3$1bv32$2);
+    v56$1 := (if p7$1 then $$6$2bv32$1 else v56$1);
+    v56$2 := (if p7$2 then $$6$2bv32$2 else v56$2);
+    $$3$2bv32$1 := (if p7$1 then v56$1 else $$3$2bv32$1);
+    $$3$2bv32$2 := (if p7$2 then v56$2 else $$3$2bv32$2);
+    v57$1 := (if p7$1 then $$1$0bv32$1 else v57$1);
+    v57$2 := (if p7$2 then $$1$0bv32$2 else v57$2);
+    v58$1 := (if p7$1 then $$2$0bv32$1 else v58$1);
+    v58$2 := (if p7$2 then $$2$0bv32$2 else v58$2);
     $$r.i.i.i$0bv32$1 := (if p7$1 then FSUB32(v57$1, v58$1) else $$r.i.i.i$0bv32$1);
     $$r.i.i.i$0bv32$2 := (if p7$2 then FSUB32(v57$2, v58$2) else $$r.i.i.i$0bv32$2);
-    v59$1 := (if p7$1 then $$bj.i.i.i$1bv32$1 else v59$1);
-    v59$2 := (if p7$2 then $$bj.i.i.i$1bv32$2 else v59$2);
-    v60$1 := (if p7$1 then $$bi.i.i.i$1bv32$1 else v60$1);
-    v60$2 := (if p7$2 then $$bi.i.i.i$1bv32$2 else v60$2);
+    v59$1 := (if p7$1 then $$1$1bv32$1 else v59$1);
+    v59$2 := (if p7$2 then $$1$1bv32$2 else v59$2);
+    v60$1 := (if p7$1 then $$2$1bv32$1 else v60$1);
+    v60$2 := (if p7$2 then $$2$1bv32$2 else v60$2);
     $$r.i.i.i$1bv32$1 := (if p7$1 then FSUB32(v59$1, v60$1) else $$r.i.i.i$1bv32$1);
     $$r.i.i.i$1bv32$2 := (if p7$2 then FSUB32(v59$2, v60$2) else $$r.i.i.i$1bv32$2);
-    v61$1 := (if p7$1 then $$bj.i.i.i$2bv32$1 else v61$1);
-    v61$2 := (if p7$2 then $$bj.i.i.i$2bv32$2 else v61$2);
-    v62$1 := (if p7$1 then $$bi.i.i.i$2bv32$1 else v62$1);
-    v62$2 := (if p7$2 then $$bi.i.i.i$2bv32$2 else v62$2);
+    v61$1 := (if p7$1 then $$1$2bv32$1 else v61$1);
+    v61$2 := (if p7$2 then $$1$2bv32$2 else v61$2);
+    v62$1 := (if p7$1 then $$2$2bv32$1 else v62$1);
+    v62$2 := (if p7$2 then $$2$2bv32$2 else v62$2);
     $$r.i.i.i$2bv32$1 := (if p7$1 then FSUB32(v61$1, v62$1) else $$r.i.i.i$2bv32$1);
     $$r.i.i.i$2bv32$2 := (if p7$2 then FSUB32(v61$2, v62$2) else $$r.i.i.i$2bv32$2);
     v63$1 := (if p7$1 then $$r.i.i.i$0bv32$1 else v63$1);
@@ -1099,39 +1095,39 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     v69$1 := (if p7$1 then $$softeningSquared$1[0bv32] else v69$1);
     v69$2 := (if p7$2 then $$softeningSquared$2[0bv32] else v69$2);
     call {:sourceloc_num 135} v70$1, v70$2 := $rsqrtf(p7$1, FADD32(FADD32(FADD32(FMUL32(v63$1, v64$1), FMUL32(v65$1, v66$1)), FMUL32(v67$1, v68$1)), v69$1), p7$2, FADD32(FADD32(FADD32(FMUL32(v63$2, v64$2), FMUL32(v65$2, v66$2)), FMUL32(v67$2, v68$2)), v69$2));
-    assume true;
-    v71$1 := (if p7$1 then $$bj.i.i.i$3bv32$1 else v71$1);
-    v71$2 := (if p7$2 then $$bj.i.i.i$3bv32$2 else v71$2);
+    assume {:captureState "call_return_state_0"} {:procedureName "$rsqrtf"} true;
+    v71$1 := (if p7$1 then $$1$3bv32$1 else v71$1);
+    v71$2 := (if p7$2 then $$1$3bv32$2 else v71$2);
     v72$1 := (if p7$1 then FMUL32(v71$1, FMUL32(FMUL32(v70$1, v70$1), v70$1)) else v72$1);
     v72$2 := (if p7$2 then FMUL32(v71$2, FMUL32(FMUL32(v70$2, v70$2), v70$2)) else v72$2);
     v73$1 := (if p7$1 then $$r.i.i.i$0bv32$1 else v73$1);
     v73$2 := (if p7$2 then $$r.i.i.i$0bv32$2 else v73$2);
-    v74$1 := (if p7$1 then $$ai.i.i.i$0bv32$1 else v74$1);
-    v74$2 := (if p7$2 then $$ai.i.i.i$0bv32$2 else v74$2);
-    $$ai.i.i.i$0bv32$1 := (if p7$1 then FADD32(v74$1, FMUL32(v73$1, v72$1)) else $$ai.i.i.i$0bv32$1);
-    $$ai.i.i.i$0bv32$2 := (if p7$2 then FADD32(v74$2, FMUL32(v73$2, v72$2)) else $$ai.i.i.i$0bv32$2);
+    v74$1 := (if p7$1 then $$3$0bv32$1 else v74$1);
+    v74$2 := (if p7$2 then $$3$0bv32$2 else v74$2);
+    $$3$0bv32$1 := (if p7$1 then FADD32(v74$1, FMUL32(v73$1, v72$1)) else $$3$0bv32$1);
+    $$3$0bv32$2 := (if p7$2 then FADD32(v74$2, FMUL32(v73$2, v72$2)) else $$3$0bv32$2);
     v75$1 := (if p7$1 then $$r.i.i.i$1bv32$1 else v75$1);
     v75$2 := (if p7$2 then $$r.i.i.i$1bv32$2 else v75$2);
-    v76$1 := (if p7$1 then $$ai.i.i.i$1bv32$1 else v76$1);
-    v76$2 := (if p7$2 then $$ai.i.i.i$1bv32$2 else v76$2);
-    $$ai.i.i.i$1bv32$1 := (if p7$1 then FADD32(v76$1, FMUL32(v75$1, v72$1)) else $$ai.i.i.i$1bv32$1);
-    $$ai.i.i.i$1bv32$2 := (if p7$2 then FADD32(v76$2, FMUL32(v75$2, v72$2)) else $$ai.i.i.i$1bv32$2);
+    v76$1 := (if p7$1 then $$3$1bv32$1 else v76$1);
+    v76$2 := (if p7$2 then $$3$1bv32$2 else v76$2);
+    $$3$1bv32$1 := (if p7$1 then FADD32(v76$1, FMUL32(v75$1, v72$1)) else $$3$1bv32$1);
+    $$3$1bv32$2 := (if p7$2 then FADD32(v76$2, FMUL32(v75$2, v72$2)) else $$3$1bv32$2);
     v77$1 := (if p7$1 then $$r.i.i.i$2bv32$1 else v77$1);
     v77$2 := (if p7$2 then $$r.i.i.i$2bv32$2 else v77$2);
-    v78$1 := (if p7$1 then $$ai.i.i.i$2bv32$1 else v78$1);
-    v78$2 := (if p7$2 then $$ai.i.i.i$2bv32$2 else v78$2);
-    $$ai.i.i.i$2bv32$1 := (if p7$1 then FADD32(v78$1, FMUL32(v77$1, v72$1)) else $$ai.i.i.i$2bv32$1);
-    $$ai.i.i.i$2bv32$2 := (if p7$2 then FADD32(v78$2, FMUL32(v77$2, v72$2)) else $$ai.i.i.i$2bv32$2);
-    v79$1 := (if p7$1 then $$ai.i.i.i$0bv32$1 else v79$1);
-    v79$2 := (if p7$2 then $$ai.i.i.i$0bv32$2 else v79$2);
+    v78$1 := (if p7$1 then $$3$2bv32$1 else v78$1);
+    v78$2 := (if p7$2 then $$3$2bv32$2 else v78$2);
+    $$3$2bv32$1 := (if p7$1 then FADD32(v78$1, FMUL32(v77$1, v72$1)) else $$3$2bv32$1);
+    $$3$2bv32$2 := (if p7$2 then FADD32(v78$2, FMUL32(v77$2, v72$2)) else $$3$2bv32$2);
+    v79$1 := (if p7$1 then $$3$0bv32$1 else v79$1);
+    v79$2 := (if p7$2 then $$3$0bv32$2 else v79$2);
     $$0$0bv32$1 := (if p7$1 then v79$1 else $$0$0bv32$1);
     $$0$0bv32$2 := (if p7$2 then v79$2 else $$0$0bv32$2);
-    v80$1 := (if p7$1 then $$ai.i.i.i$1bv32$1 else v80$1);
-    v80$2 := (if p7$2 then $$ai.i.i.i$1bv32$2 else v80$2);
+    v80$1 := (if p7$1 then $$3$1bv32$1 else v80$1);
+    v80$2 := (if p7$2 then $$3$1bv32$2 else v80$2);
     $$0$1bv32$1 := (if p7$1 then v80$1 else $$0$1bv32$1);
     $$0$1bv32$2 := (if p7$2 then v80$2 else $$0$1bv32$2);
-    v81$1 := (if p7$1 then $$ai.i.i.i$2bv32$1 else v81$1);
-    v81$2 := (if p7$2 then $$ai.i.i.i$2bv32$2 else v81$2);
+    v81$1 := (if p7$1 then $$3$2bv32$1 else v81$1);
+    v81$2 := (if p7$2 then $$3$2bv32$2 else v81$2);
     $$0$2bv32$1 := (if p7$1 then v81$1 else $$0$2bv32$1);
     $$0$2bv32$2 := (if p7$2 then v81$2 else $$0$2bv32$2);
     v82$1 := (if p7$1 then $$0$0bv32$1 else v82$1);
@@ -1140,68 +1136,68 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     v83$2 := (if p7$2 then $$0$1bv32$2 else v83$2);
     v84$1 := (if p7$1 then $$0$2bv32$1 else v84$1);
     v84$2 := (if p7$2 then $$0$2bv32$2 else v84$2);
-    $$2$0bv32$1 := (if p7$1 then v82$1 else $$2$0bv32$1);
-    $$2$0bv32$2 := (if p7$2 then v82$2 else $$2$0bv32$2);
-    $$2$1bv32$1 := (if p7$1 then v83$1 else $$2$1bv32$1);
-    $$2$1bv32$2 := (if p7$2 then v83$2 else $$2$1bv32$2);
-    $$2$2bv32$1 := (if p7$1 then v84$1 else $$2$2bv32$1);
-    $$2$2bv32$2 := (if p7$2 then v84$2 else $$2$2bv32$2);
-    v85$1 := (if p7$1 then $$2$0bv32$1 else v85$1);
-    v85$2 := (if p7$2 then $$2$0bv32$2 else v85$2);
-    $$accel.i.i$0bv32$1 := (if p7$1 then v85$1 else $$accel.i.i$0bv32$1);
-    $$accel.i.i$0bv32$2 := (if p7$2 then v85$2 else $$accel.i.i$0bv32$2);
-    v86$1 := (if p7$1 then $$2$1bv32$1 else v86$1);
-    v86$2 := (if p7$2 then $$2$1bv32$2 else v86$2);
-    $$accel.i.i$1bv32$1 := (if p7$1 then v86$1 else $$accel.i.i$1bv32$1);
-    $$accel.i.i$1bv32$2 := (if p7$2 then v86$2 else $$accel.i.i$1bv32$2);
-    v87$1 := (if p7$1 then $$2$2bv32$1 else v87$1);
-    v87$2 := (if p7$2 then $$2$2bv32$2 else v87$2);
-    $$accel.i.i$2bv32$1 := (if p7$1 then v87$1 else $$accel.i.i$2bv32$1);
-    $$accel.i.i$2bv32$2 := (if p7$2 then v87$2 else $$accel.i.i$2bv32$2);
-    $j.i.i.0$1, $counter.i.i.0$1 := (if p7$1 then BV64_ADD($j.i.i.0$1, 1bv64) else $j.i.i.0$1), (if p7$1 then BV32_ADD($counter.i.i.0$1, 1bv32) else $counter.i.i.0$1);
-    $j.i.i.0$2, $counter.i.i.0$2 := (if p7$2 then BV64_ADD($j.i.i.0$2, 1bv64) else $j.i.i.0$2), (if p7$2 then BV32_ADD($counter.i.i.0$2, 1bv32) else $counter.i.i.0$2);
+    $$5$0bv32$1 := (if p7$1 then v82$1 else $$5$0bv32$1);
+    $$5$0bv32$2 := (if p7$2 then v82$2 else $$5$0bv32$2);
+    $$5$1bv32$1 := (if p7$1 then v83$1 else $$5$1bv32$1);
+    $$5$1bv32$2 := (if p7$2 then v83$2 else $$5$1bv32$2);
+    $$5$2bv32$1 := (if p7$1 then v84$1 else $$5$2bv32$1);
+    $$5$2bv32$2 := (if p7$2 then v84$2 else $$5$2bv32$2);
+    v85$1 := (if p7$1 then $$5$0bv32$1 else v85$1);
+    v85$2 := (if p7$2 then $$5$0bv32$2 else v85$2);
+    $$9$0bv32$1 := (if p7$1 then v85$1 else $$9$0bv32$1);
+    $$9$0bv32$2 := (if p7$2 then v85$2 else $$9$0bv32$2);
+    v86$1 := (if p7$1 then $$5$1bv32$1 else v86$1);
+    v86$2 := (if p7$2 then $$5$1bv32$2 else v86$2);
+    $$9$1bv32$1 := (if p7$1 then v86$1 else $$9$1bv32$1);
+    $$9$1bv32$2 := (if p7$2 then v86$2 else $$9$1bv32$2);
+    v87$1 := (if p7$1 then $$5$2bv32$1 else v87$1);
+    v87$2 := (if p7$2 then $$5$2bv32$2 else v87$2);
+    $$9$2bv32$1 := (if p7$1 then v87$1 else $$9$2bv32$1);
+    $$9$2bv32$2 := (if p7$2 then v87$2 else $$9$2bv32$2);
+    $j.i.i.0$1, $counter.i.i.0$1 := (if p7$1 then BV32_ADD($j.i.i.0$1, 1bv32) else $j.i.i.0$1), (if p7$1 then BV32_ADD($counter.i.i.0$1, 1bv32) else $counter.i.i.0$1);
+    $j.i.i.0$2, $counter.i.i.0$2 := (if p7$2 then BV32_ADD($j.i.i.0$2, 1bv32) else $j.i.i.0$2), (if p7$2 then BV32_ADD($counter.i.i.0$2, 1bv32) else $counter.i.i.0$2);
     p6$1 := (if p7$1 then true else p6$1);
     p6$2 := (if p7$2 then true else p6$2);
     goto $8.backedge, __partitioned_block_$8.tail_0;
 
   __partitioned_block_$8.tail_0:
     assume !p6$1 && !p6$2;
-    v88$1 := (if p3$1 then $$accel.i.i$0bv32$1 else v88$1);
-    v88$2 := (if p3$2 then $$accel.i.i$0bv32$2 else v88$2);
-    $$1$0bv32$1 := (if p3$1 then v88$1 else $$1$0bv32$1);
-    $$1$0bv32$2 := (if p3$2 then v88$2 else $$1$0bv32$2);
-    v89$1 := (if p3$1 then $$accel.i.i$1bv32$1 else v89$1);
-    v89$2 := (if p3$2 then $$accel.i.i$1bv32$2 else v89$2);
-    $$1$1bv32$1 := (if p3$1 then v89$1 else $$1$1bv32$1);
-    $$1$1bv32$2 := (if p3$2 then v89$2 else $$1$1bv32$2);
-    v90$1 := (if p3$1 then $$accel.i.i$2bv32$1 else v90$1);
-    v90$2 := (if p3$2 then $$accel.i.i$2bv32$2 else v90$2);
-    $$1$2bv32$1 := (if p3$1 then v90$1 else $$1$2bv32$1);
-    $$1$2bv32$2 := (if p3$2 then v90$2 else $$1$2bv32$2);
-    v91$1 := (if p3$1 then $$1$0bv32$1 else v91$1);
-    v91$2 := (if p3$2 then $$1$0bv32$2 else v91$2);
-    v92$1 := (if p3$1 then $$1$1bv32$1 else v92$1);
-    v92$2 := (if p3$2 then $$1$1bv32$2 else v92$2);
-    v93$1 := (if p3$1 then $$1$2bv32$1 else v93$1);
-    v93$2 := (if p3$2 then $$1$2bv32$2 else v93$2);
-    $$7$0bv32$1 := (if p3$1 then v91$1 else $$7$0bv32$1);
-    $$7$0bv32$2 := (if p3$2 then v91$2 else $$7$0bv32$2);
-    $$7$1bv32$1 := (if p3$1 then v92$1 else $$7$1bv32$1);
-    $$7$1bv32$2 := (if p3$2 then v92$2 else $$7$1bv32$2);
-    $$7$2bv32$1 := (if p3$1 then v93$1 else $$7$2bv32$1);
-    $$7$2bv32$2 := (if p3$2 then v93$2 else $$7$2bv32$2);
-    v94$1 := (if p3$1 then $$7$0bv32$1 else v94$1);
-    v94$2 := (if p3$2 then $$7$0bv32$2 else v94$2);
-    $$6$0bv32$1 := (if p3$1 then v94$1 else $$6$0bv32$1);
-    $$6$0bv32$2 := (if p3$2 then v94$2 else $$6$0bv32$2);
-    v95$1 := (if p3$1 then $$7$1bv32$1 else v95$1);
-    v95$2 := (if p3$2 then $$7$1bv32$2 else v95$2);
-    $$6$1bv32$1 := (if p3$1 then v95$1 else $$6$1bv32$1);
-    $$6$1bv32$2 := (if p3$2 then v95$2 else $$6$1bv32$2);
-    v96$1 := (if p3$1 then $$7$2bv32$1 else v96$1);
-    v96$2 := (if p3$2 then $$7$2bv32$2 else v96$2);
-    $$6$2bv32$1 := (if p3$1 then v96$1 else $$6$2bv32$1);
-    $$6$2bv32$2 := (if p3$2 then v96$2 else $$6$2bv32$2);
+    v88$1 := (if p3$1 then $$9$0bv32$1 else v88$1);
+    v88$2 := (if p3$2 then $$9$0bv32$2 else v88$2);
+    $$4$0bv32$1 := (if p3$1 then v88$1 else $$4$0bv32$1);
+    $$4$0bv32$2 := (if p3$2 then v88$2 else $$4$0bv32$2);
+    v89$1 := (if p3$1 then $$9$1bv32$1 else v89$1);
+    v89$2 := (if p3$2 then $$9$1bv32$2 else v89$2);
+    $$4$1bv32$1 := (if p3$1 then v89$1 else $$4$1bv32$1);
+    $$4$1bv32$2 := (if p3$2 then v89$2 else $$4$1bv32$2);
+    v90$1 := (if p3$1 then $$9$2bv32$1 else v90$1);
+    v90$2 := (if p3$2 then $$9$2bv32$2 else v90$2);
+    $$4$2bv32$1 := (if p3$1 then v90$1 else $$4$2bv32$1);
+    $$4$2bv32$2 := (if p3$2 then v90$2 else $$4$2bv32$2);
+    v91$1 := (if p3$1 then $$4$0bv32$1 else v91$1);
+    v91$2 := (if p3$2 then $$4$0bv32$2 else v91$2);
+    v92$1 := (if p3$1 then $$4$1bv32$1 else v92$1);
+    v92$2 := (if p3$2 then $$4$1bv32$2 else v92$2);
+    v93$1 := (if p3$1 then $$4$2bv32$1 else v93$1);
+    v93$2 := (if p3$2 then $$4$2bv32$2 else v93$2);
+    $$12$0bv32$1 := (if p3$1 then v91$1 else $$12$0bv32$1);
+    $$12$0bv32$2 := (if p3$2 then v91$2 else $$12$0bv32$2);
+    $$12$1bv32$1 := (if p3$1 then v92$1 else $$12$1bv32$1);
+    $$12$1bv32$2 := (if p3$2 then v92$2 else $$12$1bv32$2);
+    $$12$2bv32$1 := (if p3$1 then v93$1 else $$12$2bv32$1);
+    $$12$2bv32$2 := (if p3$2 then v93$2 else $$12$2bv32$2);
+    v94$1 := (if p3$1 then $$12$0bv32$1 else v94$1);
+    v94$2 := (if p3$2 then $$12$0bv32$2 else v94$2);
+    $$11$0bv32$1 := (if p3$1 then v94$1 else $$11$0bv32$1);
+    $$11$0bv32$2 := (if p3$2 then v94$2 else $$11$0bv32$2);
+    v95$1 := (if p3$1 then $$12$1bv32$1 else v95$1);
+    v95$2 := (if p3$2 then $$12$1bv32$2 else v95$2);
+    $$11$1bv32$1 := (if p3$1 then v95$1 else $$11$1bv32$1);
+    $$11$1bv32$2 := (if p3$2 then v95$2 else $$11$1bv32$2);
+    v96$1 := (if p3$1 then $$12$2bv32$1 else v96$1);
+    v96$2 := (if p3$2 then $$12$2bv32$2 else v96$2);
+    $$11$2bv32$1 := (if p3$1 then v96$1 else $$11$2bv32$1);
+    $$11$2bv32$2 := (if p3$2 then v96$2 else $$11$2bv32$2);
     goto __partitioned_block_$8.tail_1;
 
   __partitioned_block_$8.tail_1:
@@ -1214,12 +1210,12 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
 
   $3.tail:
     assume !p2$1 && !p2$2;
-    v97$1 := (if p1$1 then $$6$0bv32$1 else v97$1);
-    v97$2 := (if p1$2 then $$6$0bv32$2 else v97$2);
-    v98$1 := (if p1$1 then $$6$1bv32$1 else v98$1);
-    v98$2 := (if p1$2 then $$6$1bv32$2 else v98$2);
-    v99$1 := (if p1$1 then $$6$2bv32$1 else v99$1);
-    v99$2 := (if p1$2 then $$6$2bv32$2 else v99$2);
+    v97$1 := (if p1$1 then $$11$0bv32$1 else v97$1);
+    v97$2 := (if p1$2 then $$11$0bv32$2 else v97$2);
+    v98$1 := (if p1$1 then $$11$1bv32$1 else v98$1);
+    v98$2 := (if p1$2 then $$11$1bv32$2 else v98$2);
+    v99$1 := (if p1$1 then $$11$2bv32$1 else v99$1);
+    v99$2 := (if p1$2 then $$11$2bv32$2 else v99$2);
     $$accel$0bv32$1 := (if p1$1 then v97$1 else $$accel$0bv32$1);
     $$accel$0bv32$2 := (if p1$2 then v97$2 else $$accel$0bv32$2);
     $$accel$1bv32$1 := (if p1$1 then v98$1 else $$accel$1bv32$1);
@@ -1227,33 +1223,33 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     $$accel$2bv32$1 := (if p1$1 then v99$1 else $$accel$2bv32$1);
     $$accel$2bv32$2 := (if p1$2 then v99$2 else $$accel$2bv32$2);
     call {:sourceloc} {:sourceloc_num 191} _LOG_READ_$$vel(p1$1, BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), $$vel[BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32)]);
-    assume true;
+    assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 191} true;
     call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 191} _CHECK_READ_$$vel(p1$2, BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), $$vel[BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32)]);
-    assume true;
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$vel"} true;
     v100$1 := (if p1$1 then $$vel[BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32)] else v100$1);
     v100$2 := (if p1$2 then $$vel[BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32)] else v100$2);
     $$velocity$0bv32$1 := (if p1$1 then v100$1 else $$velocity$0bv32$1);
     $$velocity$0bv32$2 := (if p1$2 then v100$2 else $$velocity$0bv32$2);
     call {:sourceloc} {:sourceloc_num 193} _LOG_READ_$$vel(p1$1, BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 1bv32), $$vel[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 1bv32)]);
-    assume true;
+    assume {:do_not_predicate} {:check_id "check_state_1"} {:captureState "check_state_1"} {:sourceloc} {:sourceloc_num 193} true;
     call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 193} _CHECK_READ_$$vel(p1$2, BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 1bv32), $$vel[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 1bv32)]);
-    assume true;
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$vel"} true;
     v101$1 := (if p1$1 then $$vel[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 1bv32)] else v101$1);
     v101$2 := (if p1$2 then $$vel[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 1bv32)] else v101$2);
     $$velocity$1bv32$1 := (if p1$1 then v101$1 else $$velocity$1bv32$1);
     $$velocity$1bv32$2 := (if p1$2 then v101$2 else $$velocity$1bv32$2);
     call {:sourceloc} {:sourceloc_num 195} _LOG_READ_$$vel(p1$1, BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 2bv32), $$vel[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 2bv32)]);
-    assume true;
+    assume {:do_not_predicate} {:check_id "check_state_2"} {:captureState "check_state_2"} {:sourceloc} {:sourceloc_num 195} true;
     call {:check_id "check_state_2"} {:sourceloc} {:sourceloc_num 195} _CHECK_READ_$$vel(p1$2, BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 2bv32), $$vel[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 2bv32)]);
-    assume true;
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$vel"} true;
     v102$1 := (if p1$1 then $$vel[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 2bv32)] else v102$1);
     v102$2 := (if p1$2 then $$vel[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 2bv32)] else v102$2);
     $$velocity$2bv32$1 := (if p1$1 then v102$1 else $$velocity$2bv32$1);
     $$velocity$2bv32$2 := (if p1$2 then v102$2 else $$velocity$2bv32$2);
     call {:sourceloc} {:sourceloc_num 197} _LOG_READ_$$vel(p1$1, BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 3bv32), $$vel[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 3bv32)]);
-    assume true;
+    assume {:do_not_predicate} {:check_id "check_state_3"} {:captureState "check_state_3"} {:sourceloc} {:sourceloc_num 197} true;
     call {:check_id "check_state_3"} {:sourceloc} {:sourceloc_num 197} _CHECK_READ_$$vel(p1$2, BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 3bv32), $$vel[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 3bv32)]);
-    assume true;
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$vel"} true;
     v103$1 := (if p1$1 then $$vel[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 3bv32)] else v103$1);
     v103$2 := (if p1$2 then $$vel[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 3bv32)] else v103$2);
     $$velocity$3bv32$1 := (if p1$1 then v103$1 else $$velocity$3bv32$1);
@@ -1310,84 +1306,84 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     v119$2 := (if p1$2 then $$position$0bv32$2 else v119$2);
     call {:sourceloc} {:sourceloc_num 224} _LOG_WRITE_$$newPos(p1$1, BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), v119$1, $$newPos[BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$newPos(p1$2, BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32));
-    assume true;
+    assume {:do_not_predicate} {:check_id "check_state_4"} {:captureState "check_state_4"} {:sourceloc} {:sourceloc_num 224} true;
     call {:check_id "check_state_4"} {:sourceloc} {:sourceloc_num 224} _CHECK_WRITE_$$newPos(p1$2, BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), v119$2);
-    assume true;
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$newPos"} true;
     $$newPos[BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32)] := (if p1$1 then v119$1 else $$newPos[BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32)]);
     $$newPos[BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32)] := (if p1$2 then v119$2 else $$newPos[BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32)]);
     v120$1 := (if p1$1 then $$position$1bv32$1 else v120$1);
     v120$2 := (if p1$2 then $$position$1bv32$2 else v120$2);
     call {:sourceloc} {:sourceloc_num 226} _LOG_WRITE_$$newPos(p1$1, BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 1bv32), v120$1, $$newPos[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 1bv32)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$newPos(p1$2, BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 1bv32));
-    assume true;
+    assume {:do_not_predicate} {:check_id "check_state_5"} {:captureState "check_state_5"} {:sourceloc} {:sourceloc_num 226} true;
     call {:check_id "check_state_5"} {:sourceloc} {:sourceloc_num 226} _CHECK_WRITE_$$newPos(p1$2, BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 1bv32), v120$2);
-    assume true;
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$newPos"} true;
     $$newPos[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 1bv32)] := (if p1$1 then v120$1 else $$newPos[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 1bv32)]);
     $$newPos[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 1bv32)] := (if p1$2 then v120$2 else $$newPos[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 1bv32)]);
     v121$1 := (if p1$1 then $$position$2bv32$1 else v121$1);
     v121$2 := (if p1$2 then $$position$2bv32$2 else v121$2);
     call {:sourceloc} {:sourceloc_num 228} _LOG_WRITE_$$newPos(p1$1, BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 2bv32), v121$1, $$newPos[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 2bv32)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$newPos(p1$2, BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 2bv32));
-    assume true;
+    assume {:do_not_predicate} {:check_id "check_state_6"} {:captureState "check_state_6"} {:sourceloc} {:sourceloc_num 228} true;
     call {:check_id "check_state_6"} {:sourceloc} {:sourceloc_num 228} _CHECK_WRITE_$$newPos(p1$2, BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 2bv32), v121$2);
-    assume true;
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$newPos"} true;
     $$newPos[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 2bv32)] := (if p1$1 then v121$1 else $$newPos[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 2bv32)]);
     $$newPos[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 2bv32)] := (if p1$2 then v121$2 else $$newPos[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 2bv32)]);
     v122$1 := (if p1$1 then $$position$3bv32$1 else v122$1);
     v122$2 := (if p1$2 then $$position$3bv32$2 else v122$2);
     call {:sourceloc} {:sourceloc_num 230} _LOG_WRITE_$$newPos(p1$1, BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 3bv32), v122$1, $$newPos[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 3bv32)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$newPos(p1$2, BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 3bv32));
-    assume true;
+    assume {:do_not_predicate} {:check_id "check_state_7"} {:captureState "check_state_7"} {:sourceloc} {:sourceloc_num 230} true;
     call {:check_id "check_state_7"} {:sourceloc} {:sourceloc_num 230} _CHECK_WRITE_$$newPos(p1$2, BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 3bv32), v122$2);
-    assume true;
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$newPos"} true;
     $$newPos[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 3bv32)] := (if p1$1 then v122$1 else $$newPos[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 3bv32)]);
     $$newPos[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 3bv32)] := (if p1$2 then v122$2 else $$newPos[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 3bv32)]);
     v123$1 := (if p1$1 then $$velocity$0bv32$1 else v123$1);
     v123$2 := (if p1$2 then $$velocity$0bv32$2 else v123$2);
     call {:sourceloc} {:sourceloc_num 232} _LOG_WRITE_$$vel(p1$1, BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), v123$1, $$vel[BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$vel(p1$2, BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32));
-    assume true;
+    assume {:do_not_predicate} {:check_id "check_state_8"} {:captureState "check_state_8"} {:sourceloc} {:sourceloc_num 232} true;
     call {:check_id "check_state_8"} {:sourceloc} {:sourceloc_num 232} _CHECK_WRITE_$$vel(p1$2, BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), v123$2);
-    assume true;
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$vel"} true;
     $$vel[BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32)] := (if p1$1 then v123$1 else $$vel[BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32)]);
     $$vel[BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32)] := (if p1$2 then v123$2 else $$vel[BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32)]);
     v124$1 := (if p1$1 then $$velocity$1bv32$1 else v124$1);
     v124$2 := (if p1$2 then $$velocity$1bv32$2 else v124$2);
     call {:sourceloc} {:sourceloc_num 234} _LOG_WRITE_$$vel(p1$1, BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 1bv32), v124$1, $$vel[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 1bv32)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$vel(p1$2, BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 1bv32));
-    assume true;
+    assume {:do_not_predicate} {:check_id "check_state_9"} {:captureState "check_state_9"} {:sourceloc} {:sourceloc_num 234} true;
     call {:check_id "check_state_9"} {:sourceloc} {:sourceloc_num 234} _CHECK_WRITE_$$vel(p1$2, BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 1bv32), v124$2);
-    assume true;
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$vel"} true;
     $$vel[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 1bv32)] := (if p1$1 then v124$1 else $$vel[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 1bv32)]);
     $$vel[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 1bv32)] := (if p1$2 then v124$2 else $$vel[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 1bv32)]);
     v125$1 := (if p1$1 then $$velocity$2bv32$1 else v125$1);
     v125$2 := (if p1$2 then $$velocity$2bv32$2 else v125$2);
     call {:sourceloc} {:sourceloc_num 236} _LOG_WRITE_$$vel(p1$1, BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 2bv32), v125$1, $$vel[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 2bv32)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$vel(p1$2, BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 2bv32));
-    assume true;
+    assume {:do_not_predicate} {:check_id "check_state_10"} {:captureState "check_state_10"} {:sourceloc} {:sourceloc_num 236} true;
     call {:check_id "check_state_10"} {:sourceloc} {:sourceloc_num 236} _CHECK_WRITE_$$vel(p1$2, BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 2bv32), v125$2);
-    assume true;
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$vel"} true;
     $$vel[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 2bv32)] := (if p1$1 then v125$1 else $$vel[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 2bv32)]);
     $$vel[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 2bv32)] := (if p1$2 then v125$2 else $$vel[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 2bv32)]);
     v126$1 := (if p1$1 then $$velocity$3bv32$1 else v126$1);
     v126$2 := (if p1$2 then $$velocity$3bv32$2 else v126$2);
     call {:sourceloc} {:sourceloc_num 238} _LOG_WRITE_$$vel(p1$1, BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 3bv32), v126$1, $$vel[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 3bv32)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$vel(p1$2, BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 3bv32));
-    assume true;
+    assume {:do_not_predicate} {:check_id "check_state_11"} {:captureState "check_state_11"} {:sourceloc} {:sourceloc_num 238} true;
     call {:check_id "check_state_11"} {:sourceloc} {:sourceloc_num 238} _CHECK_WRITE_$$vel(p1$2, BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 3bv32), v126$2);
-    assume true;
+    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$vel"} true;
     $$vel[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 3bv32)] := (if p1$1 then v126$1 else $$vel[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$1), 4bv32), 3bv32)]);
     $$vel[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 3bv32)] := (if p1$2 then v126$2 else $$vel[BV32_ADD(BV32_MUL(BV32_ADD($deviceOffset, v0$2), 4bv32), 3bv32)]);
     return;
 
   $3.backedge:
-    assume p2$1 || p2$2;
-    assume true;
+    assume {:backedge} p2$1 || p2$2;
+    assume {:captureState "loop_back_edge_state_0_0"} true;
     goto __partitioned_block_$3_0;
 
   $8.backedge:
-    assume p6$1 || p6$2;
-    assume true;
+    assume {:backedge} p6$1 || p6$2;
+    assume {:captureState "loop_back_edge_state_1_0"} true;
     goto $8;
 }
 
@@ -1449,50 +1445,6 @@ var $$0$2bv32$1: bv32;
 
 var $$0$2bv32$2: bv32;
 
-var $$ai.i.i.i$0bv32$1: bv32;
-
-var $$ai.i.i.i$0bv32$2: bv32;
-
-var $$ai.i.i.i$1bv32$1: bv32;
-
-var $$ai.i.i.i$1bv32$2: bv32;
-
-var $$ai.i.i.i$2bv32$1: bv32;
-
-var $$ai.i.i.i$2bv32$2: bv32;
-
-var $$bi.i.i.i$0bv32$1: bv32;
-
-var $$bi.i.i.i$0bv32$2: bv32;
-
-var $$bi.i.i.i$1bv32$1: bv32;
-
-var $$bi.i.i.i$1bv32$2: bv32;
-
-var $$bi.i.i.i$2bv32$1: bv32;
-
-var $$bi.i.i.i$2bv32$2: bv32;
-
-var $$bi.i.i.i$3bv32$1: bv32;
-
-var $$bi.i.i.i$3bv32$2: bv32;
-
-var $$bj.i.i.i$0bv32$1: bv32;
-
-var $$bj.i.i.i$0bv32$2: bv32;
-
-var $$bj.i.i.i$1bv32$1: bv32;
-
-var $$bj.i.i.i$1bv32$2: bv32;
-
-var $$bj.i.i.i$2bv32$1: bv32;
-
-var $$bj.i.i.i$2bv32$2: bv32;
-
-var $$bj.i.i.i$3bv32$1: bv32;
-
-var $$bj.i.i.i$3bv32$2: bv32;
-
 var $$r.i.i.i$0bv32$1: bv32;
 
 var $$r.i.i.i$0bv32$2: bv32;
@@ -1517,33 +1469,9 @@ var $$1$2bv32$1: bv32;
 
 var $$1$2bv32$2: bv32;
 
-var $$iPos.i.i$0bv32$1: bv32;
+var $$1$3bv32$1: bv32;
 
-var $$iPos.i.i$0bv32$2: bv32;
-
-var $$iPos.i.i$1bv32$1: bv32;
-
-var $$iPos.i.i$1bv32$2: bv32;
-
-var $$iPos.i.i$2bv32$1: bv32;
-
-var $$iPos.i.i$2bv32$2: bv32;
-
-var $$iPos.i.i$3bv32$1: bv32;
-
-var $$iPos.i.i$3bv32$2: bv32;
-
-var $$accel.i.i$0bv32$1: bv32;
-
-var $$accel.i.i$0bv32$2: bv32;
-
-var $$accel.i.i$1bv32$1: bv32;
-
-var $$accel.i.i$1bv32$2: bv32;
-
-var $$accel.i.i$2bv32$1: bv32;
-
-var $$accel.i.i$2bv32$2: bv32;
+var $$1$3bv32$2: bv32;
 
 var $$2$0bv32$1: bv32;
 
@@ -1556,6 +1484,10 @@ var $$2$1bv32$2: bv32;
 var $$2$2bv32$1: bv32;
 
 var $$2$2bv32$2: bv32;
+
+var $$2$3bv32$1: bv32;
+
+var $$2$3bv32$2: bv32;
 
 var $$3$0bv32$1: bv32;
 
@@ -1581,10 +1513,6 @@ var $$4$2bv32$1: bv32;
 
 var $$4$2bv32$2: bv32;
 
-var $$4$3bv32$1: bv32;
-
-var $$4$3bv32$2: bv32;
-
 var $$5$0bv32$1: bv32;
 
 var $$5$0bv32$2: bv32;
@@ -1596,10 +1524,6 @@ var $$5$1bv32$2: bv32;
 var $$5$2bv32$1: bv32;
 
 var $$5$2bv32$2: bv32;
-
-var $$5$3bv32$1: bv32;
-
-var $$5$3bv32$2: bv32;
 
 var $$6$0bv32$1: bv32;
 
@@ -1613,22 +1537,6 @@ var $$6$2bv32$1: bv32;
 
 var $$6$2bv32$2: bv32;
 
-var $$bodyPos.i$0bv32$1: bv32;
-
-var $$bodyPos.i$0bv32$2: bv32;
-
-var $$bodyPos.i$1bv32$1: bv32;
-
-var $$bodyPos.i$1bv32$2: bv32;
-
-var $$bodyPos.i$2bv32$1: bv32;
-
-var $$bodyPos.i$2bv32$2: bv32;
-
-var $$bodyPos.i$3bv32$1: bv32;
-
-var $$bodyPos.i$3bv32$2: bv32;
-
 var $$7$0bv32$1: bv32;
 
 var $$7$0bv32$2: bv32;
@@ -1640,6 +1548,10 @@ var $$7$1bv32$2: bv32;
 var $$7$2bv32$1: bv32;
 
 var $$7$2bv32$2: bv32;
+
+var $$7$3bv32$1: bv32;
+
+var $$7$3bv32$2: bv32;
 
 var $$8$0bv32$1: bv32;
 
@@ -1669,6 +1581,90 @@ var $$9$2bv32$1: bv32;
 
 var $$9$2bv32$2: bv32;
 
+var $$10$0bv32$1: bv32;
+
+var $$10$0bv32$2: bv32;
+
+var $$10$1bv32$1: bv32;
+
+var $$10$1bv32$2: bv32;
+
+var $$10$2bv32$1: bv32;
+
+var $$10$2bv32$2: bv32;
+
+var $$10$3bv32$1: bv32;
+
+var $$10$3bv32$2: bv32;
+
+var $$11$0bv32$1: bv32;
+
+var $$11$0bv32$2: bv32;
+
+var $$11$1bv32$1: bv32;
+
+var $$11$1bv32$2: bv32;
+
+var $$11$2bv32$1: bv32;
+
+var $$11$2bv32$2: bv32;
+
+var $$12$0bv32$1: bv32;
+
+var $$12$0bv32$2: bv32;
+
+var $$12$1bv32$1: bv32;
+
+var $$12$1bv32$2: bv32;
+
+var $$12$2bv32$1: bv32;
+
+var $$12$2bv32$2: bv32;
+
+var $$13$0bv32$1: bv32;
+
+var $$13$0bv32$2: bv32;
+
+var $$13$1bv32$1: bv32;
+
+var $$13$1bv32$2: bv32;
+
+var $$13$2bv32$1: bv32;
+
+var $$13$2bv32$2: bv32;
+
+var $$13$3bv32$1: bv32;
+
+var $$13$3bv32$2: bv32;
+
+var $$14$0bv32$1: bv32;
+
+var $$14$0bv32$2: bv32;
+
+var $$14$1bv32$1: bv32;
+
+var $$14$1bv32$2: bv32;
+
+var $$14$2bv32$1: bv32;
+
+var $$14$2bv32$2: bv32;
+
+var $$15$0bv32$1: bv32;
+
+var $$15$0bv32$2: bv32;
+
+var $$15$1bv32$1: bv32;
+
+var $$15$1bv32$2: bv32;
+
+var $$15$2bv32$1: bv32;
+
+var $$15$2bv32$2: bv32;
+
+var $$15$3bv32$1: bv32;
+
+var $$15$3bv32$2: bv32;
+
 var $$position$0bv32$1: bv32;
 
 var $$position$0bv32$2: bv32;
@@ -1697,21 +1693,21 @@ var $$accel$2bv32$1: bv32;
 
 var $$accel$2bv32$2: bv32;
 
-var $$10$0bv32$1: bv32;
+var $$16$0bv32$1: bv32;
 
-var $$10$0bv32$2: bv32;
+var $$16$0bv32$2: bv32;
 
-var $$10$1bv32$1: bv32;
+var $$16$1bv32$1: bv32;
 
-var $$10$1bv32$2: bv32;
+var $$16$1bv32$2: bv32;
 
-var $$10$2bv32$1: bv32;
+var $$16$2bv32$1: bv32;
 
-var $$10$2bv32$2: bv32;
+var $$16$2bv32$2: bv32;
 
-var $$10$3bv32$1: bv32;
+var $$16$3bv32$1: bv32;
 
-var $$10$3bv32$2: bv32;
+var $$16$3bv32$2: bv32;
 
 var $$velocity$0bv32$1: bv32;
 
@@ -2116,7 +2112,7 @@ implementation {:inline 1} $bugle_barrier_duplicated_0($0: bv1, $1: bv1, _P$1: b
     goto anon9_Then, anon9_Else;
 
   anon9_Else:
-    assume !((!_P$1 && !_P$2) || (group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && (!_P$1 || !_P$2)));
+    assume {:partition} !((!_P$1 && !_P$2) || (group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && (!_P$1 || !_P$2)));
     goto anon0;
 
   anon0:
@@ -2129,7 +2125,7 @@ implementation {:inline 1} $bugle_barrier_duplicated_0($0: bv1, $1: bv1, _P$1: b
     goto anon10_Then, anon10_Else;
 
   anon10_Else:
-    assume !((_P$1 && $0 != 0bv1) || (_P$2 && $0 != 0bv1));
+    assume {:partition} !((_P$1 && $0 != 0bv1) || (_P$2 && $0 != 0bv1));
     goto anon3;
 
   anon3:
@@ -2148,7 +2144,7 @@ implementation {:inline 1} $bugle_barrier_duplicated_0($0: bv1, $1: bv1, _P$1: b
     goto anon11_Then, anon11_Else;
 
   anon11_Else:
-    assume !(group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && _P$1 && _P$2 && ($1 != 0bv1 || $1 != 0bv1));
+    assume {:partition} !(group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && _P$1 && _P$2 && ($1 != 0bv1 || $1 != 0bv1));
     goto anon8;
 
   anon8:
@@ -2156,7 +2152,7 @@ implementation {:inline 1} $bugle_barrier_duplicated_0($0: bv1, $1: bv1, _P$1: b
     return;
 
   anon11_Then:
-    assume group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && _P$1 && _P$2 && ($1 != 0bv1 || $1 != 0bv1);
+    assume {:partition} group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && _P$1 && _P$2 && ($1 != 0bv1 || $1 != 0bv1);
     havoc $$newPos;
     goto anon7;
 
@@ -2165,12 +2161,12 @@ implementation {:inline 1} $bugle_barrier_duplicated_0($0: bv1, $1: bv1, _P$1: b
     goto anon8;
 
   anon10_Then:
-    assume (_P$1 && $0 != 0bv1) || (_P$2 && $0 != 0bv1);
+    assume {:partition} (_P$1 && $0 != 0bv1) || (_P$2 && $0 != 0bv1);
     havoc $$__smem;
     goto anon3;
 
   anon9_Then:
-    assume (!_P$1 && !_P$2) || (group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && (!_P$1 || !_P$2));
+    assume {:partition} (!_P$1 && !_P$2) || (group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && (!_P$1 || !_P$2));
     goto __Disabled;
 
   __Disabled:
@@ -2186,7 +2182,7 @@ implementation {:inline 1} $bugle_barrier_duplicated_1($0: bv1, $1: bv1, _P$1: b
     goto anon9_Then, anon9_Else;
 
   anon9_Else:
-    assume !((!_P$1 && !_P$2) || (group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && (!_P$1 || !_P$2)));
+    assume {:partition} !((!_P$1 && !_P$2) || (group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && (!_P$1 || !_P$2)));
     goto anon0;
 
   anon0:
@@ -2199,7 +2195,7 @@ implementation {:inline 1} $bugle_barrier_duplicated_1($0: bv1, $1: bv1, _P$1: b
     goto anon10_Then, anon10_Else;
 
   anon10_Else:
-    assume !((_P$1 && $0 != 0bv1) || (_P$2 && $0 != 0bv1));
+    assume {:partition} !((_P$1 && $0 != 0bv1) || (_P$2 && $0 != 0bv1));
     goto anon3;
 
   anon3:
@@ -2218,7 +2214,7 @@ implementation {:inline 1} $bugle_barrier_duplicated_1($0: bv1, $1: bv1, _P$1: b
     goto anon11_Then, anon11_Else;
 
   anon11_Else:
-    assume !(group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && _P$1 && _P$2 && ($1 != 0bv1 || $1 != 0bv1));
+    assume {:partition} !(group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && _P$1 && _P$2 && ($1 != 0bv1 || $1 != 0bv1));
     goto anon8;
 
   anon8:
@@ -2226,7 +2222,7 @@ implementation {:inline 1} $bugle_barrier_duplicated_1($0: bv1, $1: bv1, _P$1: b
     return;
 
   anon11_Then:
-    assume group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && _P$1 && _P$2 && ($1 != 0bv1 || $1 != 0bv1);
+    assume {:partition} group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && _P$1 && _P$2 && ($1 != 0bv1 || $1 != 0bv1);
     havoc $$newPos;
     goto anon7;
 
@@ -2235,12 +2231,12 @@ implementation {:inline 1} $bugle_barrier_duplicated_1($0: bv1, $1: bv1, _P$1: b
     goto anon8;
 
   anon10_Then:
-    assume (_P$1 && $0 != 0bv1) || (_P$2 && $0 != 0bv1);
+    assume {:partition} (_P$1 && $0 != 0bv1) || (_P$2 && $0 != 0bv1);
     havoc $$__smem;
     goto anon3;
 
   anon9_Then:
-    assume (!_P$1 && !_P$2) || (group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && (!_P$1 || !_P$2));
+    assume {:partition} (!_P$1 && !_P$2) || (group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && (!_P$1 || !_P$2));
     goto __Disabled;
 
   __Disabled:

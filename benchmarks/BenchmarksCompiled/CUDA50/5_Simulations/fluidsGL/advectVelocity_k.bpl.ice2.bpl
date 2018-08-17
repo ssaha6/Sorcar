@@ -37,6 +37,10 @@ var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source
 
 var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 64} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$v: bool;
 
+const $arrayId$$v: arrayId;
+
+axiom $arrayId$$v == 1bv4;
+
 var {:source_name "vx"} {:global} $$vx: [bv32]bv32;
 
 axiom {:array_info "$$vx"} {:global} {:elem_width 32} {:source_name "vx"} {:source_elem_width 32} {:source_dimensions "*"} true;
@@ -46,6 +50,10 @@ var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source
 var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$vx: bool;
 
 var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$vx: bool;
+
+const $arrayId$$vx: arrayId;
+
+axiom $arrayId$$vx == 2bv4;
 
 var {:source_name "vy"} {:global} $$vy: [bv32]bv32;
 
@@ -57,17 +65,45 @@ var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source
 
 var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$vy: bool;
 
+const $arrayId$$vy: arrayId;
+
+axiom $arrayId$$vy == 3bv4;
+
 axiom {:array_info "$$vterm"} {:elem_width 32} {:source_name "vterm"} {:source_elem_width 64} {:source_dimensions "1"} true;
+
+const $arrayId$$vterm: arrayId;
+
+axiom $arrayId$$vterm == 4bv4;
 
 axiom {:array_info "$$ploc"} {:elem_width 32} {:source_name "ploc"} {:source_elem_width 64} {:source_dimensions "1"} true;
 
+const $arrayId$$ploc: arrayId;
+
+axiom $arrayId$$ploc == 5bv4;
+
 axiom {:array_info "$$0"} {:elem_width 32} {:source_name ""} {:source_elem_width 64} {:source_dimensions "1"} true;
+
+const $arrayId$$0: arrayId;
+
+axiom $arrayId$$0 == 6bv4;
 
 axiom {:array_info "$$1"} {:elem_width 8} {:source_name ""} {:source_elem_width 128} {:source_dimensions "1"} true;
 
+const $arrayId$$1: arrayId;
+
+axiom $arrayId$$1 == 7bv4;
+
 axiom {:array_info "$$2"} {:elem_width 32} {:source_name ""} {:source_elem_width 64} {:source_dimensions "1"} true;
 
+const $arrayId$$2: arrayId;
+
+axiom $arrayId$$2 == 8bv4;
+
 axiom {:array_info "$$3"} {:elem_width 8} {:source_name ""} {:source_elem_width 128} {:source_dimensions "1"} true;
+
+const $arrayId$$3: arrayId;
+
+axiom $arrayId$$3 == 9bv4;
 
 axiom {:array_info "$$texref"} {:global} {:elem_width 8} {:source_name "texref"} {:source_elem_width 128} {:source_dimensions "1"} true;
 
@@ -76,6 +112,33 @@ var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 128} {:source
 var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 128} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$texref: bool;
 
 var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 128} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$texref: bool;
+
+const $arrayId$$texref: arrayId;
+
+axiom $arrayId$$texref == 10bv4;
+
+type ptr = bv32;
+
+type arrayId = bv4;
+
+function {:inline true} MKPTR(base: arrayId, offset: bv32) : ptr
+{
+  base ++ offset[28:0]
+}
+
+function {:inline true} base#MKPTR(p: ptr) : arrayId
+{
+  p[32:28]
+}
+
+function {:inline true} offset#MKPTR(p: ptr) : bv32
+{
+  0bv4 ++ p[28:0]
+}
+
+const $arrayId$$null$: arrayId;
+
+axiom $arrayId$$null$ == 0bv4;
 
 const _WATCHED_OFFSET: bv32;
 
@@ -191,8 +254,6 @@ implementation {:source_name "advectVelocity_k"} {:kernel} $_Z16advectVelocity_k
   var v7$2: bv8;
   var v8$1: bv8;
   var v8$2: bv8;
-  var v13$1: bv8;
-  var v13$2: bv8;
   var v9$1: bv8;
   var v9$2: bv8;
   var v10$1: bv8;
@@ -201,8 +262,8 @@ implementation {:source_name "advectVelocity_k"} {:kernel} $_Z16advectVelocity_k
   var v11$2: bv8;
   var v12$1: bv8;
   var v12$2: bv8;
-  var v21$1: bv8;
-  var v21$2: bv8;
+  var v13$1: bv8;
+  var v13$2: bv8;
   var v14$1: bv8;
   var v14$2: bv8;
   var v15$1: bv8;
@@ -217,16 +278,18 @@ implementation {:source_name "advectVelocity_k"} {:kernel} $_Z16advectVelocity_k
   var v19$2: bv8;
   var v20$1: bv8;
   var v20$2: bv8;
-  var v22$1: bv8;
-  var v22$2: bv8;
-  var v23$1: bv8;
-  var v23$2: bv8;
-  var v24$1: bv8;
-  var v24$2: bv8;
-  var v25$1: bv8;
-  var v25$2: bv8;
-  var v26$1: bv8;
-  var v26$2: bv8;
+  var v21$1: bv8;
+  var v21$2: bv8;
+  var v22$1: bv64;
+  var v22$2: bv64;
+  var v23$1: bv32;
+  var v23$2: bv32;
+  var v24$1: bv32;
+  var v24$2: bv32;
+  var v25$1: bv32;
+  var v25$2: bv32;
+  var v26$1: bv32;
+  var v26$2: bv32;
   var v27$1: bv8;
   var v27$2: bv8;
   var v28$1: bv8;
@@ -249,94 +312,30 @@ implementation {:source_name "advectVelocity_k"} {:kernel} $_Z16advectVelocity_k
   var v36$2: bv8;
   var v37$1: bv8;
   var v37$2: bv8;
-  var v38$1: bv64;
-  var v38$2: bv64;
-  var v63$1: bv8;
-  var v63$2: bv8;
-  var v64$1: bv8;
-  var v64$2: bv8;
-  var v65$1: bv8;
-  var v65$2: bv8;
-  var v66$1: bv8;
-  var v66$2: bv8;
-  var v67$1: bv8;
-  var v67$2: bv8;
-  var v68$1: bv8;
-  var v68$2: bv8;
-  var v39$1: bv32;
-  var v39$2: bv32;
-  var v40$1: bv32;
-  var v40$2: bv32;
-  var v41$1: bv32;
-  var v41$2: bv32;
-  var v42$1: bv32;
-  var v42$2: bv32;
-  var v43$1: bv8;
-  var v43$2: bv8;
-  var v44$1: bv8;
-  var v44$2: bv8;
-  var v45$1: bv8;
-  var v45$2: bv8;
-  var v46$1: bv8;
-  var v46$2: bv8;
-  var v47$1: bv8;
-  var v47$2: bv8;
-  var v48$1: bv8;
-  var v48$2: bv8;
-  var v49$1: bv8;
-  var v49$2: bv8;
-  var v50$1: bv8;
-  var v50$2: bv8;
-  var v51$1: bv8;
-  var v51$2: bv8;
-  var v52$1: bv8;
-  var v52$2: bv8;
-  var v53$1: bv8;
-  var v53$2: bv8;
-  var v54$1: bv8;
-  var v54$2: bv8;
-  var v55$1: bv8;
-  var v55$2: bv8;
-  var v56$1: bv8;
-  var v56$2: bv8;
-  var v57$1: bv8;
-  var v57$2: bv8;
-  var v58$1: bv8;
-  var v58$2: bv8;
-  var v59$1: bv32;
-  var v59$2: bv32;
-  var v60$1: bv32;
-  var v60$2: bv32;
-  var v61$1: bv8;
-  var v61$2: bv8;
-  var v62$1: bv8;
-  var v62$2: bv8;
-  var v69$1: bv8;
-  var v69$2: bv8;
-  var v70$1: bv8;
-  var v70$2: bv8;
-  var v71$1: bv8;
-  var v71$2: bv8;
-  var v72$1: bv8;
-  var v72$2: bv8;
-  var v73$1: bv8;
-  var v73$2: bv8;
-  var v74$1: bv8;
-  var v74$2: bv8;
-  var v75$1: bv8;
-  var v75$2: bv8;
-  var v76$1: bv8;
-  var v76$2: bv8;
-  var v77$1: bv64;
-  var v77$2: bv64;
-  var v78$1: bv32;
-  var v78$2: bv32;
-  var v79$1: bv32;
-  var v79$2: bv32;
-  var v80$1: bv32;
-  var v80$2: bv32;
-  var v81$1: bv32;
-  var v81$2: bv32;
+  var v38$1: bv8;
+  var v38$2: bv8;
+  var v39$1: bv8;
+  var v39$2: bv8;
+  var v40$1: bv8;
+  var v40$2: bv8;
+  var v41$1: bv8;
+  var v41$2: bv8;
+  var v42$1: bv8;
+  var v42$2: bv8;
+  var v43$1: bv32;
+  var v43$2: bv32;
+  var v44$1: bv32;
+  var v44$2: bv32;
+  var v45$1: bv64;
+  var v45$2: bv64;
+  var v46$1: bv32;
+  var v46$2: bv32;
+  var v47$1: bv32;
+  var v47$2: bv32;
+  var v48$1: bv32;
+  var v48$2: bv32;
+  var v49$1: bv32;
+  var v49$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -515,208 +514,144 @@ assert  my_inv (  ( p1$1 ==> BV32_SLE(0bv32, $p.0$1) )  && ( p1$2 ==> BV32_SLE(0
     v21$2 := (if p4$2 then _HAVOC_bv8$2 else v21$2);
     $$1$15bv32$1 := (if p4$1 then v21$1 else $$1$15bv32$1);
     $$1$15bv32$2 := (if p4$2 then v21$2 else $$1$15bv32$2);
-    v22$1 := (if p4$1 then $$1$0bv32$1 else v22$1);
-    v22$2 := (if p4$2 then $$1$0bv32$2 else v22$2);
-    v23$1 := (if p4$1 then $$1$1bv32$1 else v23$1);
-    v23$2 := (if p4$2 then $$1$1bv32$2 else v23$2);
-    v24$1 := (if p4$1 then $$1$2bv32$1 else v24$1);
-    v24$2 := (if p4$2 then $$1$2bv32$2 else v24$2);
-    v25$1 := (if p4$1 then $$1$3bv32$1 else v25$1);
-    v25$2 := (if p4$2 then $$1$3bv32$2 else v25$2);
-    v26$1 := (if p4$1 then $$1$4bv32$1 else v26$1);
-    v26$2 := (if p4$2 then $$1$4bv32$2 else v26$2);
-    v27$1 := (if p4$1 then $$1$5bv32$1 else v27$1);
-    v27$2 := (if p4$2 then $$1$5bv32$2 else v27$2);
-    v28$1 := (if p4$1 then $$1$6bv32$1 else v28$1);
-    v28$2 := (if p4$2 then $$1$6bv32$2 else v28$2);
-    v29$1 := (if p4$1 then $$1$7bv32$1 else v29$1);
-    v29$2 := (if p4$2 then $$1$7bv32$2 else v29$2);
-    v30$1 := (if p4$1 then $$1$8bv32$1 else v30$1);
-    v30$2 := (if p4$2 then $$1$8bv32$2 else v30$2);
-    v31$1 := (if p4$1 then $$1$9bv32$1 else v31$1);
-    v31$2 := (if p4$2 then $$1$9bv32$2 else v31$2);
-    v32$1 := (if p4$1 then $$1$10bv32$1 else v32$1);
-    v32$2 := (if p4$2 then $$1$10bv32$2 else v32$2);
-    v33$1 := (if p4$1 then $$1$11bv32$1 else v33$1);
-    v33$2 := (if p4$2 then $$1$11bv32$2 else v33$2);
-    v34$1 := (if p4$1 then $$1$12bv32$1 else v34$1);
-    v34$2 := (if p4$2 then $$1$12bv32$2 else v34$2);
-    v35$1 := (if p4$1 then $$1$13bv32$1 else v35$1);
-    v35$2 := (if p4$2 then $$1$13bv32$2 else v35$2);
-    v36$1 := (if p4$1 then $$1$14bv32$1 else v36$1);
-    v36$2 := (if p4$2 then $$1$14bv32$2 else v36$2);
-    v37$1 := (if p4$1 then $$1$15bv32$1 else v37$1);
-    v37$2 := (if p4$2 then $$1$15bv32$2 else v37$2);
-    call {:sourceloc_num 59} v38$1, v38$2 := $_Z5tex2DI6float2ET_7textureIS1_Li2EL19cudaTextureReadMode0EEff(p4$1, v29$1 ++ v28$1 ++ v27$1 ++ v26$1 ++ v25$1 ++ v24$1 ++ v23$1 ++ v22$1, v33$1 ++ v32$1 ++ v31$1 ++ v30$1, v37$1 ++ v36$1 ++ v35$1 ++ v34$1, SI32_TO_FP32(v0$1), SI32_TO_FP32(v3$1), p4$2, v29$2 ++ v28$2 ++ v27$2 ++ v26$2 ++ v25$2 ++ v24$2 ++ v23$2 ++ v22$2, v33$2 ++ v32$2 ++ v31$2 ++ v30$2, v37$2 ++ v36$2 ++ v35$2 ++ v34$2, SI32_TO_FP32(v0$2), SI32_TO_FP32(v3$2));
+    call {:sourceloc_num 43} v22$1, v22$2 := $_Z5tex2DI6float2ET_7textureIS1_Li2EL19cudaTextureReadMode0EEff(MKPTR($arrayId$$1, 0bv32), p4$1, SI32_TO_FP32(v0$1), SI32_TO_FP32(v3$1), p4$2, SI32_TO_FP32(v0$2), SI32_TO_FP32(v3$2));
     assume {:captureState "call_return_state_0"} {:procedureName "$_Z5tex2DI6float2ET_7textureIS1_Li2EL19cudaTextureReadMode0EEff"} true;
-    $$0$0bv32$1 := (if p4$1 then v38$1[32:0] else $$0$0bv32$1);
-    $$0$0bv32$2 := (if p4$2 then v38$2[32:0] else $$0$0bv32$2);
-    $$0$1bv32$1 := (if p4$1 then v38$1[64:32] else $$0$1bv32$1);
-    $$0$1bv32$2 := (if p4$2 then v38$2[64:32] else $$0$1bv32$2);
-    v39$1 := (if p4$1 then $$0$0bv32$1 else v39$1);
-    v39$2 := (if p4$2 then $$0$0bv32$2 else v39$2);
-    $$vterm$0bv32$1 := (if p4$1 then v39$1 else $$vterm$0bv32$1);
-    $$vterm$0bv32$2 := (if p4$2 then v39$2 else $$vterm$0bv32$2);
-    v40$1 := (if p4$1 then $$0$1bv32$1 else v40$1);
-    v40$2 := (if p4$2 then $$0$1bv32$2 else v40$2);
-    $$vterm$1bv32$1 := (if p4$1 then v40$1 else $$vterm$1bv32$1);
-    $$vterm$1bv32$2 := (if p4$2 then v40$2 else $$vterm$1bv32$2);
-    v41$1 := (if p4$1 then $$vterm$0bv32$1 else v41$1);
-    v41$2 := (if p4$2 then $$vterm$0bv32$2 else v41$2);
-    $$ploc$0bv32$1 := (if p4$1 then FSUB32(FADD32(SI32_TO_FP32(v0$1), 1056964608bv32), FMUL32(FMUL32($dt, v41$1), SI32_TO_FP32($dx))) else $$ploc$0bv32$1);
-    $$ploc$0bv32$2 := (if p4$2 then FSUB32(FADD32(SI32_TO_FP32(v0$2), 1056964608bv32), FMUL32(FMUL32($dt, v41$2), SI32_TO_FP32($dx))) else $$ploc$0bv32$2);
-    v42$1 := (if p4$1 then $$vterm$1bv32$1 else v42$1);
-    v42$2 := (if p4$2 then $$vterm$1bv32$2 else v42$2);
-    $$ploc$1bv32$1 := (if p4$1 then FSUB32(FADD32(SI32_TO_FP32(v3$1), 1056964608bv32), FMUL32(FMUL32($dt, v42$1), SI32_TO_FP32($dy))) else $$ploc$1bv32$1);
-    $$ploc$1bv32$2 := (if p4$2 then FSUB32(FADD32(SI32_TO_FP32(v3$2), 1056964608bv32), FMUL32(FMUL32($dt, v42$2), SI32_TO_FP32($dy))) else $$ploc$1bv32$2);
+    $$0$0bv32$1 := (if p4$1 then v22$1[32:0] else $$0$0bv32$1);
+    $$0$0bv32$2 := (if p4$2 then v22$2[32:0] else $$0$0bv32$2);
+    $$0$1bv32$1 := (if p4$1 then v22$1[64:32] else $$0$1bv32$1);
+    $$0$1bv32$2 := (if p4$2 then v22$2[64:32] else $$0$1bv32$2);
+    v23$1 := (if p4$1 then $$0$0bv32$1 else v23$1);
+    v23$2 := (if p4$2 then $$0$0bv32$2 else v23$2);
+    $$vterm$0bv32$1 := (if p4$1 then v23$1 else $$vterm$0bv32$1);
+    $$vterm$0bv32$2 := (if p4$2 then v23$2 else $$vterm$0bv32$2);
+    v24$1 := (if p4$1 then $$0$1bv32$1 else v24$1);
+    v24$2 := (if p4$2 then $$0$1bv32$2 else v24$2);
+    $$vterm$1bv32$1 := (if p4$1 then v24$1 else $$vterm$1bv32$1);
+    $$vterm$1bv32$2 := (if p4$2 then v24$2 else $$vterm$1bv32$2);
+    v25$1 := (if p4$1 then $$vterm$0bv32$1 else v25$1);
+    v25$2 := (if p4$2 then $$vterm$0bv32$2 else v25$2);
+    $$ploc$0bv32$1 := (if p4$1 then FSUB32(FADD32(SI32_TO_FP32(v0$1), 1056964608bv32), FMUL32(FMUL32($dt, v25$1), SI32_TO_FP32($dx))) else $$ploc$0bv32$1);
+    $$ploc$0bv32$2 := (if p4$2 then FSUB32(FADD32(SI32_TO_FP32(v0$2), 1056964608bv32), FMUL32(FMUL32($dt, v25$2), SI32_TO_FP32($dx))) else $$ploc$0bv32$2);
+    v26$1 := (if p4$1 then $$vterm$1bv32$1 else v26$1);
+    v26$2 := (if p4$2 then $$vterm$1bv32$2 else v26$2);
+    $$ploc$1bv32$1 := (if p4$1 then FSUB32(FADD32(SI32_TO_FP32(v3$1), 1056964608bv32), FMUL32(FMUL32($dt, v26$1), SI32_TO_FP32($dy))) else $$ploc$1bv32$1);
+    $$ploc$1bv32$2 := (if p4$2 then FSUB32(FADD32(SI32_TO_FP32(v3$2), 1056964608bv32), FMUL32(FMUL32($dt, v26$2), SI32_TO_FP32($dy))) else $$ploc$1bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
-    v43$1 := (if p4$1 then _HAVOC_bv8$1 else v43$1);
-    v43$2 := (if p4$2 then _HAVOC_bv8$2 else v43$2);
-    $$3$0bv32$1 := (if p4$1 then v43$1 else $$3$0bv32$1);
-    $$3$0bv32$2 := (if p4$2 then v43$2 else $$3$0bv32$2);
+    v27$1 := (if p4$1 then _HAVOC_bv8$1 else v27$1);
+    v27$2 := (if p4$2 then _HAVOC_bv8$2 else v27$2);
+    $$3$0bv32$1 := (if p4$1 then v27$1 else $$3$0bv32$1);
+    $$3$0bv32$2 := (if p4$2 then v27$2 else $$3$0bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
-    v44$1 := (if p4$1 then _HAVOC_bv8$1 else v44$1);
-    v44$2 := (if p4$2 then _HAVOC_bv8$2 else v44$2);
-    $$3$1bv32$1 := (if p4$1 then v44$1 else $$3$1bv32$1);
-    $$3$1bv32$2 := (if p4$2 then v44$2 else $$3$1bv32$2);
+    v28$1 := (if p4$1 then _HAVOC_bv8$1 else v28$1);
+    v28$2 := (if p4$2 then _HAVOC_bv8$2 else v28$2);
+    $$3$1bv32$1 := (if p4$1 then v28$1 else $$3$1bv32$1);
+    $$3$1bv32$2 := (if p4$2 then v28$2 else $$3$1bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
-    v45$1 := (if p4$1 then _HAVOC_bv8$1 else v45$1);
-    v45$2 := (if p4$2 then _HAVOC_bv8$2 else v45$2);
-    $$3$2bv32$1 := (if p4$1 then v45$1 else $$3$2bv32$1);
-    $$3$2bv32$2 := (if p4$2 then v45$2 else $$3$2bv32$2);
+    v29$1 := (if p4$1 then _HAVOC_bv8$1 else v29$1);
+    v29$2 := (if p4$2 then _HAVOC_bv8$2 else v29$2);
+    $$3$2bv32$1 := (if p4$1 then v29$1 else $$3$2bv32$1);
+    $$3$2bv32$2 := (if p4$2 then v29$2 else $$3$2bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
-    v46$1 := (if p4$1 then _HAVOC_bv8$1 else v46$1);
-    v46$2 := (if p4$2 then _HAVOC_bv8$2 else v46$2);
-    $$3$3bv32$1 := (if p4$1 then v46$1 else $$3$3bv32$1);
-    $$3$3bv32$2 := (if p4$2 then v46$2 else $$3$3bv32$2);
+    v30$1 := (if p4$1 then _HAVOC_bv8$1 else v30$1);
+    v30$2 := (if p4$2 then _HAVOC_bv8$2 else v30$2);
+    $$3$3bv32$1 := (if p4$1 then v30$1 else $$3$3bv32$1);
+    $$3$3bv32$2 := (if p4$2 then v30$2 else $$3$3bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
-    v47$1 := (if p4$1 then _HAVOC_bv8$1 else v47$1);
-    v47$2 := (if p4$2 then _HAVOC_bv8$2 else v47$2);
-    $$3$4bv32$1 := (if p4$1 then v47$1 else $$3$4bv32$1);
-    $$3$4bv32$2 := (if p4$2 then v47$2 else $$3$4bv32$2);
+    v31$1 := (if p4$1 then _HAVOC_bv8$1 else v31$1);
+    v31$2 := (if p4$2 then _HAVOC_bv8$2 else v31$2);
+    $$3$4bv32$1 := (if p4$1 then v31$1 else $$3$4bv32$1);
+    $$3$4bv32$2 := (if p4$2 then v31$2 else $$3$4bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
-    v48$1 := (if p4$1 then _HAVOC_bv8$1 else v48$1);
-    v48$2 := (if p4$2 then _HAVOC_bv8$2 else v48$2);
-    $$3$5bv32$1 := (if p4$1 then v48$1 else $$3$5bv32$1);
-    $$3$5bv32$2 := (if p4$2 then v48$2 else $$3$5bv32$2);
+    v32$1 := (if p4$1 then _HAVOC_bv8$1 else v32$1);
+    v32$2 := (if p4$2 then _HAVOC_bv8$2 else v32$2);
+    $$3$5bv32$1 := (if p4$1 then v32$1 else $$3$5bv32$1);
+    $$3$5bv32$2 := (if p4$2 then v32$2 else $$3$5bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
-    v49$1 := (if p4$1 then _HAVOC_bv8$1 else v49$1);
-    v49$2 := (if p4$2 then _HAVOC_bv8$2 else v49$2);
-    $$3$6bv32$1 := (if p4$1 then v49$1 else $$3$6bv32$1);
-    $$3$6bv32$2 := (if p4$2 then v49$2 else $$3$6bv32$2);
+    v33$1 := (if p4$1 then _HAVOC_bv8$1 else v33$1);
+    v33$2 := (if p4$2 then _HAVOC_bv8$2 else v33$2);
+    $$3$6bv32$1 := (if p4$1 then v33$1 else $$3$6bv32$1);
+    $$3$6bv32$2 := (if p4$2 then v33$2 else $$3$6bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
-    v50$1 := (if p4$1 then _HAVOC_bv8$1 else v50$1);
-    v50$2 := (if p4$2 then _HAVOC_bv8$2 else v50$2);
-    $$3$7bv32$1 := (if p4$1 then v50$1 else $$3$7bv32$1);
-    $$3$7bv32$2 := (if p4$2 then v50$2 else $$3$7bv32$2);
+    v34$1 := (if p4$1 then _HAVOC_bv8$1 else v34$1);
+    v34$2 := (if p4$2 then _HAVOC_bv8$2 else v34$2);
+    $$3$7bv32$1 := (if p4$1 then v34$1 else $$3$7bv32$1);
+    $$3$7bv32$2 := (if p4$2 then v34$2 else $$3$7bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
-    v51$1 := (if p4$1 then _HAVOC_bv8$1 else v51$1);
-    v51$2 := (if p4$2 then _HAVOC_bv8$2 else v51$2);
-    $$3$8bv32$1 := (if p4$1 then v51$1 else $$3$8bv32$1);
-    $$3$8bv32$2 := (if p4$2 then v51$2 else $$3$8bv32$2);
+    v35$1 := (if p4$1 then _HAVOC_bv8$1 else v35$1);
+    v35$2 := (if p4$2 then _HAVOC_bv8$2 else v35$2);
+    $$3$8bv32$1 := (if p4$1 then v35$1 else $$3$8bv32$1);
+    $$3$8bv32$2 := (if p4$2 then v35$2 else $$3$8bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
-    v52$1 := (if p4$1 then _HAVOC_bv8$1 else v52$1);
-    v52$2 := (if p4$2 then _HAVOC_bv8$2 else v52$2);
-    $$3$9bv32$1 := (if p4$1 then v52$1 else $$3$9bv32$1);
-    $$3$9bv32$2 := (if p4$2 then v52$2 else $$3$9bv32$2);
+    v36$1 := (if p4$1 then _HAVOC_bv8$1 else v36$1);
+    v36$2 := (if p4$2 then _HAVOC_bv8$2 else v36$2);
+    $$3$9bv32$1 := (if p4$1 then v36$1 else $$3$9bv32$1);
+    $$3$9bv32$2 := (if p4$2 then v36$2 else $$3$9bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
-    v53$1 := (if p4$1 then _HAVOC_bv8$1 else v53$1);
-    v53$2 := (if p4$2 then _HAVOC_bv8$2 else v53$2);
-    $$3$10bv32$1 := (if p4$1 then v53$1 else $$3$10bv32$1);
-    $$3$10bv32$2 := (if p4$2 then v53$2 else $$3$10bv32$2);
+    v37$1 := (if p4$1 then _HAVOC_bv8$1 else v37$1);
+    v37$2 := (if p4$2 then _HAVOC_bv8$2 else v37$2);
+    $$3$10bv32$1 := (if p4$1 then v37$1 else $$3$10bv32$1);
+    $$3$10bv32$2 := (if p4$2 then v37$2 else $$3$10bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
-    v54$1 := (if p4$1 then _HAVOC_bv8$1 else v54$1);
-    v54$2 := (if p4$2 then _HAVOC_bv8$2 else v54$2);
-    $$3$11bv32$1 := (if p4$1 then v54$1 else $$3$11bv32$1);
-    $$3$11bv32$2 := (if p4$2 then v54$2 else $$3$11bv32$2);
+    v38$1 := (if p4$1 then _HAVOC_bv8$1 else v38$1);
+    v38$2 := (if p4$2 then _HAVOC_bv8$2 else v38$2);
+    $$3$11bv32$1 := (if p4$1 then v38$1 else $$3$11bv32$1);
+    $$3$11bv32$2 := (if p4$2 then v38$2 else $$3$11bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
-    v55$1 := (if p4$1 then _HAVOC_bv8$1 else v55$1);
-    v55$2 := (if p4$2 then _HAVOC_bv8$2 else v55$2);
-    $$3$12bv32$1 := (if p4$1 then v55$1 else $$3$12bv32$1);
-    $$3$12bv32$2 := (if p4$2 then v55$2 else $$3$12bv32$2);
+    v39$1 := (if p4$1 then _HAVOC_bv8$1 else v39$1);
+    v39$2 := (if p4$2 then _HAVOC_bv8$2 else v39$2);
+    $$3$12bv32$1 := (if p4$1 then v39$1 else $$3$12bv32$1);
+    $$3$12bv32$2 := (if p4$2 then v39$2 else $$3$12bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
-    v56$1 := (if p4$1 then _HAVOC_bv8$1 else v56$1);
-    v56$2 := (if p4$2 then _HAVOC_bv8$2 else v56$2);
-    $$3$13bv32$1 := (if p4$1 then v56$1 else $$3$13bv32$1);
-    $$3$13bv32$2 := (if p4$2 then v56$2 else $$3$13bv32$2);
+    v40$1 := (if p4$1 then _HAVOC_bv8$1 else v40$1);
+    v40$2 := (if p4$2 then _HAVOC_bv8$2 else v40$2);
+    $$3$13bv32$1 := (if p4$1 then v40$1 else $$3$13bv32$1);
+    $$3$13bv32$2 := (if p4$2 then v40$2 else $$3$13bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
-    v57$1 := (if p4$1 then _HAVOC_bv8$1 else v57$1);
-    v57$2 := (if p4$2 then _HAVOC_bv8$2 else v57$2);
-    $$3$14bv32$1 := (if p4$1 then v57$1 else $$3$14bv32$1);
-    $$3$14bv32$2 := (if p4$2 then v57$2 else $$3$14bv32$2);
+    v41$1 := (if p4$1 then _HAVOC_bv8$1 else v41$1);
+    v41$2 := (if p4$2 then _HAVOC_bv8$2 else v41$2);
+    $$3$14bv32$1 := (if p4$1 then v41$1 else $$3$14bv32$1);
+    $$3$14bv32$2 := (if p4$2 then v41$2 else $$3$14bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
-    v58$1 := (if p4$1 then _HAVOC_bv8$1 else v58$1);
-    v58$2 := (if p4$2 then _HAVOC_bv8$2 else v58$2);
-    $$3$15bv32$1 := (if p4$1 then v58$1 else $$3$15bv32$1);
-    $$3$15bv32$2 := (if p4$2 then v58$2 else $$3$15bv32$2);
-    v59$1 := (if p4$1 then $$ploc$0bv32$1 else v59$1);
-    v59$2 := (if p4$2 then $$ploc$0bv32$2 else v59$2);
-    v60$1 := (if p4$1 then $$ploc$1bv32$1 else v60$1);
-    v60$2 := (if p4$2 then $$ploc$1bv32$2 else v60$2);
-    v61$1 := (if p4$1 then $$3$0bv32$1 else v61$1);
-    v61$2 := (if p4$2 then $$3$0bv32$2 else v61$2);
-    v62$1 := (if p4$1 then $$3$1bv32$1 else v62$1);
-    v62$2 := (if p4$2 then $$3$1bv32$2 else v62$2);
-    v63$1 := (if p4$1 then $$3$2bv32$1 else v63$1);
-    v63$2 := (if p4$2 then $$3$2bv32$2 else v63$2);
-    v64$1 := (if p4$1 then $$3$3bv32$1 else v64$1);
-    v64$2 := (if p4$2 then $$3$3bv32$2 else v64$2);
-    v65$1 := (if p4$1 then $$3$4bv32$1 else v65$1);
-    v65$2 := (if p4$2 then $$3$4bv32$2 else v65$2);
-    v66$1 := (if p4$1 then $$3$5bv32$1 else v66$1);
-    v66$2 := (if p4$2 then $$3$5bv32$2 else v66$2);
-    v67$1 := (if p4$1 then $$3$6bv32$1 else v67$1);
-    v67$2 := (if p4$2 then $$3$6bv32$2 else v67$2);
-    v68$1 := (if p4$1 then $$3$7bv32$1 else v68$1);
-    v68$2 := (if p4$2 then $$3$7bv32$2 else v68$2);
-    v69$1 := (if p4$1 then $$3$8bv32$1 else v69$1);
-    v69$2 := (if p4$2 then $$3$8bv32$2 else v69$2);
-    v70$1 := (if p4$1 then $$3$9bv32$1 else v70$1);
-    v70$2 := (if p4$2 then $$3$9bv32$2 else v70$2);
-    v71$1 := (if p4$1 then $$3$10bv32$1 else v71$1);
-    v71$2 := (if p4$2 then $$3$10bv32$2 else v71$2);
-    v72$1 := (if p4$1 then $$3$11bv32$1 else v72$1);
-    v72$2 := (if p4$2 then $$3$11bv32$2 else v72$2);
-    v73$1 := (if p4$1 then $$3$12bv32$1 else v73$1);
-    v73$2 := (if p4$2 then $$3$12bv32$2 else v73$2);
-    v74$1 := (if p4$1 then $$3$13bv32$1 else v74$1);
-    v74$2 := (if p4$2 then $$3$13bv32$2 else v74$2);
-    v75$1 := (if p4$1 then $$3$14bv32$1 else v75$1);
-    v75$2 := (if p4$2 then $$3$14bv32$2 else v75$2);
-    v76$1 := (if p4$1 then $$3$15bv32$1 else v76$1);
-    v76$2 := (if p4$2 then $$3$15bv32$2 else v76$2);
-    call {:sourceloc_num 120} v77$1, v77$2 := $_Z5tex2DI6float2ET_7textureIS1_Li2EL19cudaTextureReadMode0EEff(p4$1, v68$1 ++ v67$1 ++ v66$1 ++ v65$1 ++ v64$1 ++ v63$1 ++ v62$1 ++ v61$1, v72$1 ++ v71$1 ++ v70$1 ++ v69$1, v76$1 ++ v75$1 ++ v74$1 ++ v73$1, v59$1, v60$1, p4$2, v68$2 ++ v67$2 ++ v66$2 ++ v65$2 ++ v64$2 ++ v63$2 ++ v62$2 ++ v61$2, v72$2 ++ v71$2 ++ v70$2 ++ v69$2, v76$2 ++ v75$2 ++ v74$2 ++ v73$2, v59$2, v60$2);
+    v42$1 := (if p4$1 then _HAVOC_bv8$1 else v42$1);
+    v42$2 := (if p4$2 then _HAVOC_bv8$2 else v42$2);
+    $$3$15bv32$1 := (if p4$1 then v42$1 else $$3$15bv32$1);
+    $$3$15bv32$2 := (if p4$2 then v42$2 else $$3$15bv32$2);
+    v43$1 := (if p4$1 then $$ploc$0bv32$1 else v43$1);
+    v43$2 := (if p4$2 then $$ploc$0bv32$2 else v43$2);
+    v44$1 := (if p4$1 then $$ploc$1bv32$1 else v44$1);
+    v44$2 := (if p4$2 then $$ploc$1bv32$2 else v44$2);
+    call {:sourceloc_num 88} v45$1, v45$2 := $_Z5tex2DI6float2ET_7textureIS1_Li2EL19cudaTextureReadMode0EEff(MKPTR($arrayId$$3, 0bv32), p4$1, v43$1, v44$1, p4$2, v43$2, v44$2);
     assume {:captureState "call_return_state_0"} {:procedureName "$_Z5tex2DI6float2ET_7textureIS1_Li2EL19cudaTextureReadMode0EEff"} true;
-    $$2$0bv32$1 := (if p4$1 then v77$1[32:0] else $$2$0bv32$1);
-    $$2$0bv32$2 := (if p4$2 then v77$2[32:0] else $$2$0bv32$2);
-    $$2$1bv32$1 := (if p4$1 then v77$1[64:32] else $$2$1bv32$1);
-    $$2$1bv32$2 := (if p4$2 then v77$2[64:32] else $$2$1bv32$2);
-    v78$1 := (if p4$1 then $$2$0bv32$1 else v78$1);
-    v78$2 := (if p4$2 then $$2$0bv32$2 else v78$2);
-    $$vterm$0bv32$1 := (if p4$1 then v78$1 else $$vterm$0bv32$1);
-    $$vterm$0bv32$2 := (if p4$2 then v78$2 else $$vterm$0bv32$2);
-    v79$1 := (if p4$1 then $$2$1bv32$1 else v79$1);
-    v79$2 := (if p4$2 then $$2$1bv32$2 else v79$2);
-    $$vterm$1bv32$1 := (if p4$1 then v79$1 else $$vterm$1bv32$1);
-    $$vterm$1bv32$2 := (if p4$2 then v79$2 else $$vterm$1bv32$2);
-    v80$1 := (if p4$1 then $$vterm$0bv32$1 else v80$1);
-    v80$2 := (if p4$2 then $$vterm$0bv32$2 else v80$2);
-    v81$1 := (if p4$1 then $$vterm$1bv32$1 else v81$1);
-    v81$2 := (if p4$2 then $$vterm$1bv32$2 else v81$2);
-    call {:sourceloc} {:sourceloc_num 129} _LOG_WRITE_$$vx(p4$1, v5$1, v80$1, $$vx[v5$1]);
+    $$2$0bv32$1 := (if p4$1 then v45$1[32:0] else $$2$0bv32$1);
+    $$2$0bv32$2 := (if p4$2 then v45$2[32:0] else $$2$0bv32$2);
+    $$2$1bv32$1 := (if p4$1 then v45$1[64:32] else $$2$1bv32$1);
+    $$2$1bv32$2 := (if p4$2 then v45$2[64:32] else $$2$1bv32$2);
+    v46$1 := (if p4$1 then $$2$0bv32$1 else v46$1);
+    v46$2 := (if p4$2 then $$2$0bv32$2 else v46$2);
+    $$vterm$0bv32$1 := (if p4$1 then v46$1 else $$vterm$0bv32$1);
+    $$vterm$0bv32$2 := (if p4$2 then v46$2 else $$vterm$0bv32$2);
+    v47$1 := (if p4$1 then $$2$1bv32$1 else v47$1);
+    v47$2 := (if p4$2 then $$2$1bv32$2 else v47$2);
+    $$vterm$1bv32$1 := (if p4$1 then v47$1 else $$vterm$1bv32$1);
+    $$vterm$1bv32$2 := (if p4$2 then v47$2 else $$vterm$1bv32$2);
+    v48$1 := (if p4$1 then $$vterm$0bv32$1 else v48$1);
+    v48$2 := (if p4$2 then $$vterm$0bv32$2 else v48$2);
+    v49$1 := (if p4$1 then $$vterm$1bv32$1 else v49$1);
+    v49$2 := (if p4$2 then $$vterm$1bv32$2 else v49$2);
+    call {:sourceloc} {:sourceloc_num 97} _LOG_WRITE_$$vx(p4$1, v5$1, v48$1, $$vx[v5$1]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$vx(p4$2, v5$2);
-    assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 129} true;
-    call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 129} _CHECK_WRITE_$$vx(p4$2, v5$2, v80$2);
+    assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 97} true;
+    call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 97} _CHECK_WRITE_$$vx(p4$2, v5$2, v48$2);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$vx"} true;
-    $$vx[v5$1] := (if p4$1 then v80$1 else $$vx[v5$1]);
-    $$vx[v5$2] := (if p4$2 then v80$2 else $$vx[v5$2]);
-    call {:sourceloc} {:sourceloc_num 130} _LOG_WRITE_$$vy(p4$1, v5$1, v81$1, $$vy[v5$1]);
+    $$vx[v5$1] := (if p4$1 then v48$1 else $$vx[v5$1]);
+    $$vx[v5$2] := (if p4$2 then v48$2 else $$vx[v5$2]);
+    call {:sourceloc} {:sourceloc_num 98} _LOG_WRITE_$$vy(p4$1, v5$1, v49$1, $$vy[v5$1]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$vy(p4$2, v5$2);
-    assume {:do_not_predicate} {:check_id "check_state_1"} {:captureState "check_state_1"} {:sourceloc} {:sourceloc_num 130} true;
-    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 130} _CHECK_WRITE_$$vy(p4$2, v5$2, v81$2);
+    assume {:do_not_predicate} {:check_id "check_state_1"} {:captureState "check_state_1"} {:sourceloc} {:sourceloc_num 98} true;
+    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 98} _CHECK_WRITE_$$vy(p4$2, v5$2, v49$2);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$vy"} true;
-    $$vy[v5$1] := (if p4$1 then v81$1 else $$vy[v5$1]);
-    $$vy[v5$2] := (if p4$2 then v81$2 else $$vy[v5$2]);
+    $$vy[v5$1] := (if p4$1 then v49$1 else $$vy[v5$1]);
+    $$vy[v5$2] := (if p4$2 then v49$2 else $$vy[v5$2]);
     $p.0$1 := (if p2$1 then BV32_ADD($p.0$1, 1bv32) else $p.0$1);
     $p.0$2 := (if p2$2 then BV32_ADD($p.0$2, 1bv32) else $p.0$2);
     p1$1 := (if p2$1 then true else p1$1);
@@ -735,7 +670,7 @@ assert  my_inv (  ( p1$1 ==> BV32_SLE(0bv32, $p.0$1) )  && ( p1$2 ==> BV32_SLE(0
 
 
 
-procedure {:source_name "_Z5tex2DI6float2ET_7textureIS1_Li2EL19cudaTextureReadMode0EEff"} $_Z5tex2DI6float2ET_7textureIS1_Li2EL19cudaTextureReadMode0EEff(_P$1: bool, $0$1: bv64, $1$1: bv32, $2$1: bv32, $3$1: bv32, $4$1: bv32, _P$2: bool, $0$2: bv64, $1$2: bv32, $2$2: bv32, $3$2: bv32, $4$2: bv32) returns ($ret$1: bv64, $ret$2: bv64);
+procedure {:source_name "_Z5tex2DI6float2ET_7textureIS1_Li2EL19cudaTextureReadMode0EEff"} $_Z5tex2DI6float2ET_7textureIS1_Li2EL19cudaTextureReadMode0EEff($0: ptr, _P$1: bool, $1$1: bv32, $2$1: bv32, _P$2: bool, $1$2: bv32, $2$2: bv32) returns ($ret$1: bv64, $ret$2: bv64);
 
 
 

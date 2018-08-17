@@ -113,15 +113,13 @@ function {:bvbuiltin "bvadd"} BV32_ADD(bv32, bv32) : bv32;
 
 function {:bvbuiltin "bvmul"} BV32_MUL(bv32, bv32) : bv32;
 
-function {:bvbuiltin "bvsub"} BV64_SUB(bv64, bv64) : bv64;
+function {:bvbuiltin "bvsub"} BV32_SUB(bv32, bv32) : bv32;
 
 function {:bvbuiltin "bvudiv"} BV32_UDIV(bv32, bv32) : bv32;
 
-function {:bvbuiltin "bvuge"} BV64_UGE(bv64, bv64) : bool;
+function {:bvbuiltin "bvuge"} BV32_UGE(bv32, bv32) : bool;
 
 function {:bvbuiltin "bvult"} BV32_ULT(bv32, bv32) : bool;
-
-function {:bvbuiltin "zero_extend 32"} BV32_ZEXT64(bv32) : bv64;
 
 procedure {:source_name "inverseCNDKernel"} {:kernel} $_Z16inverseCNDKernelPfPjj($pathN: bv32);
   requires !_READ_HAS_OCCURRED_$$d_Output && !_WRITE_HAS_OCCURRED_$$d_Output && !_ATOMIC_HAS_OCCURRED_$$d_Output;
@@ -183,12 +181,12 @@ implementation {:source_name "inverseCNDKernel"} {:kernel} $_Z16inverseCNDKernel
   var $z.i.0$2: bv32;
   var $1$1: bv32;
   var $1$2: bv32;
-  var v3$1: bool;
-  var v3$2: bool;
-  var v1: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
+  var v1: bv32;
   var v2: bool;
+  var v3$1: bool;
+  var v3$2: bool;
   var v4$1: bv32;
   var v4$2: bv32;
   var v5$1: bool;
@@ -213,12 +211,12 @@ implementation {:source_name "inverseCNDKernel"} {:kernel} $_Z16inverseCNDKernel
   var v14$2: bv32;
   var v15$1: bool;
   var v15$2: bool;
+  var v18$1: bool;
+  var v18$2: bool;
   var v16$1: bv32;
   var v16$2: bv32;
   var v17$1: bv32;
   var v17$2: bv32;
-  var v18$1: bool;
-  var v18$2: bool;
   var v19$1: bv32;
   var v19$2: bv32;
   var v20$1: bv32;
@@ -331,16 +329,16 @@ assert  my_inv (  ( p9$1 ==> BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups
     p9$2 := (if p9$2 && !v13$2 then v13$2 else p9$2);
     v14$1 := (if p10$1 then BV32_MUL(BV32_ADD($pos1.0$1, 1bv32), BV32_UDIV(4294967295bv32, BV32_ADD($pathN, 1bv32))) else v14$1);
     v14$2 := (if p10$2 then BV32_MUL(BV32_ADD($pos1.0$2, 1bv32), BV32_UDIV(4294967295bv32, BV32_ADD($pathN, 1bv32))) else v14$2);
-    v15$1 := (if p10$1 then BV64_UGE(BV32_ZEXT64(v14$1), 2147483648bv64) else v15$1);
-    v15$2 := (if p10$2 then BV64_UGE(BV32_ZEXT64(v14$2), 2147483648bv64) else v15$2);
+    v15$1 := (if p10$1 then BV32_UGE(v14$1, 2147483648bv32) else v15$1);
+    v15$2 := (if p10$2 then BV32_UGE(v14$2, 2147483648bv32) else v15$2);
     p12$1 := (if p10$1 && v15$1 then v15$1 else p12$1);
     p12$2 := (if p10$2 && v15$2 then v15$2 else p12$2);
     p11$1 := (if p10$1 && !v15$1 then !v15$1 else p11$1);
     p11$2 := (if p10$2 && !v15$2 then !v15$2 else p11$2);
     $.01$1, $negate.i.0$1 := (if p11$1 then v14$1 else $.01$1), (if p11$1 then 0bv8 else $negate.i.0$1);
     $.01$2, $negate.i.0$2 := (if p11$2 then v14$2 else $.01$2), (if p11$2 then 0bv8 else $negate.i.0$2);
-    $.01$1, $negate.i.0$1 := (if p12$1 then BV64_SUB(4294967295bv64, BV32_ZEXT64(v14$1))[32:0] else $.01$1), (if p12$1 then 1bv8 else $negate.i.0$1);
-    $.01$2, $negate.i.0$2 := (if p12$2 then BV64_SUB(4294967295bv64, BV32_ZEXT64(v14$2))[32:0] else $.01$2), (if p12$2 then 1bv8 else $negate.i.0$2);
+    $.01$1, $negate.i.0$1 := (if p12$1 then BV32_SUB(4294967295bv32, v14$1) else $.01$1), (if p12$1 then 1bv8 else $negate.i.0$1);
+    $.01$2, $negate.i.0$2 := (if p12$2 then BV32_SUB(4294967295bv32, v14$2) else $.01$2), (if p12$2 then 1bv8 else $negate.i.0$2);
     v16$1 := (if p10$1 then FADD32(FMUL32(UI32_TO_FP32($.01$1), 796917760bv32), 788529152bv32) else v16$1);
     v16$2 := (if p10$2 then FADD32(FMUL32(UI32_TO_FP32($.01$2), 796917760bv32), 788529152bv32) else v16$2);
     v17$1 := (if p10$1 then FSUB32(v16$1, 1056964608bv32) else v17$1);
@@ -451,16 +449,16 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     p0$2 := (if p0$2 && !v3$2 then v3$2 else p0$2);
     v4$1 := (if p1$1 then $$d_Input[$pos.0$1] else v4$1);
     v4$2 := (if p1$2 then $$d_Input[$pos.0$2] else v4$2);
-    v5$1 := (if p1$1 then BV64_UGE(BV32_ZEXT64(v4$1), 2147483648bv64) else v5$1);
-    v5$2 := (if p1$2 then BV64_UGE(BV32_ZEXT64(v4$2), 2147483648bv64) else v5$2);
+    v5$1 := (if p1$1 then BV32_UGE(v4$1, 2147483648bv32) else v5$1);
+    v5$2 := (if p1$2 then BV32_UGE(v4$2, 2147483648bv32) else v5$2);
     p3$1 := (if p1$1 && v5$1 then v5$1 else p3$1);
     p3$2 := (if p1$2 && v5$2 then v5$2 else p3$2);
     p2$1 := (if p1$1 && !v5$1 then !v5$1 else p2$1);
     p2$2 := (if p1$2 && !v5$2 then !v5$2 else p2$2);
     $negate.i21.0$1, $.0$1 := (if p2$1 then 0bv8 else $negate.i21.0$1), (if p2$1 then v4$1 else $.0$1);
     $negate.i21.0$2, $.0$2 := (if p2$2 then 0bv8 else $negate.i21.0$2), (if p2$2 then v4$2 else $.0$2);
-    $negate.i21.0$1, $.0$1 := (if p3$1 then 1bv8 else $negate.i21.0$1), (if p3$1 then BV64_SUB(4294967295bv64, BV32_ZEXT64(v4$1))[32:0] else $.0$1);
-    $negate.i21.0$2, $.0$2 := (if p3$2 then 1bv8 else $negate.i21.0$2), (if p3$2 then BV64_SUB(4294967295bv64, BV32_ZEXT64(v4$2))[32:0] else $.0$2);
+    $negate.i21.0$1, $.0$1 := (if p3$1 then 1bv8 else $negate.i21.0$1), (if p3$1 then BV32_SUB(4294967295bv32, v4$1) else $.0$1);
+    $negate.i21.0$2, $.0$2 := (if p3$2 then 1bv8 else $negate.i21.0$2), (if p3$2 then BV32_SUB(4294967295bv32, v4$2) else $.0$2);
     v6$1 := (if p1$1 then FADD32(FMUL32(UI32_TO_FP32($.0$1), 796917760bv32), 788529152bv32) else v6$1);
     v6$2 := (if p1$2 then FADD32(FMUL32(UI32_TO_FP32($.0$2), 796917760bv32), 788529152bv32) else v6$2);
     v7$1 := (if p1$1 then FSUB32(v6$1, 1056964608bv32) else v7$1);
@@ -548,8 +546,6 @@ const {:group_id_z} group_id_z$1: bv32;
 
 const {:group_id_z} group_id_z$2: bv32;
 
-function {:bvbuiltin "bvsub"} BV32_SUB(bv32, bv32) : bv32;
-
 function {:bvbuiltin "bvand"} BV32_AND(bv32, bv32) : bv32;
 
 
@@ -565,8 +561,6 @@ function {:bvbuiltin "bvsge"} BV32_SGE(bv32, bv32) : bool;
 function {:bvbuiltin "bvule"} BV32_ULE(bv32, bv32) : bool;
 
 
-
-function {:bvbuiltin "bvuge"} BV32_UGE(bv32, bv32) : bool;
 
 
 

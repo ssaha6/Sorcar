@@ -113,16 +113,16 @@ implementation {:source_name "writeKernel"} {:kernel} $writeKernel($ni: bv32, $v
   var $idx.0$2: bv32;
   var v0$1: bool;
   var v0$2: bool;
+  var v1$1: bv32;
+  var v1$2: bv32;
+  var v2$1: bv32;
+  var v2$2: bv32;
   var v3$1: bv32;
   var v3$2: bv32;
   var v4$1: bv32;
   var v4$2: bv32;
-  var v1$1: bv32;
-  var v1$2: bv32;
   var v5$1: bv32;
   var v5$2: bv32;
-  var v2$1: bv32;
-  var v2$2: bv32;
   var v6: bool;
   var v7: bool;
   var p0$1: bool;
@@ -133,7 +133,7 @@ implementation {:source_name "writeKernel"} {:kernel} $writeKernel($ni: bv32, $v
   var _HAVOC_bv32$2: bv32;
 
 
-  __partitioned_block_$entry_0:
+  __partitioned_block_$0_0:
     v0$1 := local_id_x$1 == 0bv32;
     v0$2 := local_id_x$2 == 0bv32;
     p0$1 := false;
@@ -152,9 +152,9 @@ implementation {:source_name "writeKernel"} {:kernel} $writeKernel($ni: bv32, $v
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$writeKernel.lval"} true;
     $$writeKernel.lval[1bv1][0bv32] := (if p0$1 then v1$1 else $$writeKernel.lval[1bv1][0bv32]);
     $$writeKernel.lval[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][0bv32] := (if p0$2 then v1$2 else $$writeKernel.lval[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][0bv32]);
-    goto __partitioned_block_$entry_1;
+    goto __partitioned_block_$0_1;
 
-  __partitioned_block_$entry_1:
+  __partitioned_block_$0_1:
     call {:sourceloc_num 5} $bugle_barrier_duplicated_0(1bv1, 0bv1);
     assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 6} true;
     v2$1 := $$writeKernel.lval[1bv1][0bv32];
@@ -170,9 +170,9 @@ implementation {:source_name "writeKernel"} {:kernel} $writeKernel($ni: bv32, $v
     v5$2 := $$writeKernel.lval[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][0bv32];
     $n.0 := 0bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $3;
 
-  $for.cond:
+  $3:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b9 ==> _WRITE_HAS_OCCURRED_$$out ==> BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), 4bv32)) || BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), 4bv32), 1bv32)) || BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), 4bv32), 2bv32)) || BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), 4bv32), 3bv32));
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$writeKernel.lval ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -195,9 +195,9 @@ implementation {:source_name "writeKernel"} {:kernel} $writeKernel($ni: bv32, $v
     $i.0, $idx.0$1 := 0bv32, BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
     $idx.0$2 := BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2);
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.7;
+    goto $5;
 
-  $for.cond.7:
+  $5:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b10 ==> _WRITE_HAS_OCCURRED_$$out ==> BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), 4bv32)) || BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), 4bv32), 1bv32)) || BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), 4bv32), 2bv32)) || BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), 4bv32), 3bv32));
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$writeKernel.lval ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -217,7 +217,7 @@ implementation {:source_name "writeKernel"} {:kernel} $writeKernel($ni: bv32, $v
     assume {:partition} !v7;
     $n.0 := BV32_ADD($n.0, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $3;
 
   $truebb1:
     assume {:partition} v7;
@@ -252,7 +252,7 @@ implementation {:source_name "writeKernel"} {:kernel} $writeKernel($ni: bv32, $v
     $i.0, $idx.0$1 := BV32_ADD($i.0, 1bv32), BV32_ADD($idx.0$1, BV32_MUL(group_size_x, num_groups_x));
     $idx.0$2 := BV32_ADD($idx.0$2, BV32_MUL(group_size_x, num_groups_x));
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.7;
+    goto $5;
 }
 
 

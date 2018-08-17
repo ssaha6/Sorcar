@@ -140,29 +140,25 @@ implementation {:source_name "scan"} {:kernel} $scan($n: bv32, $blockIndex: bv32
   var $bIndex.0$2: bv32;
   var $stride.0: bv32;
   var $d.0: bv32;
-  var $cond$1: bv32;
-  var $cond$2: bv32;
+  var $0$1: bv32;
+  var $0$2: bv32;
   var $stride.1: bv32;
-  var $d63.0: bv32;
-  var v13$1: bv32;
-  var v13$2: bv32;
-  var v5$1: bv32;
-  var v5$2: bv32;
-  var v12$1: bv32;
-  var v12$2: bv32;
-  var v7$1: bv32;
-  var v7$2: bv32;
-  var v6$1: bool;
-  var v6$2: bool;
+  var $d1.0: bv32;
   var v0: bool;
-  var v2$1: bv32;
-  var v2$2: bv32;
-  var v4$1: bv32;
-  var v4$2: bv32;
-  var v3$1: bv32;
-  var v3$2: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
+  var v2$1: bv32;
+  var v2$2: bv32;
+  var v3$1: bv32;
+  var v3$2: bv32;
+  var v4$1: bv32;
+  var v4$2: bv32;
+  var v5$1: bv32;
+  var v5$2: bv32;
+  var v6$1: bool;
+  var v6$2: bool;
+  var v7$1: bv32;
+  var v7$2: bv32;
   var v8: bool;
   var v9$1: bool;
   var v9$2: bool;
@@ -170,17 +166,27 @@ implementation {:source_name "scan"} {:kernel} $scan($n: bv32, $blockIndex: bv32
   var v11$2: bv32;
   var v10$1: bv32;
   var v10$2: bv32;
+  var v12$1: bv32;
+  var v12$2: bv32;
+  var v13$1: bv32;
+  var v13$2: bv32;
   var v14: bool;
-  var v19: bool;
-  var v21$1: bool;
-  var v21$2: bool;
-  var v20: bv32;
   var v15$1: bool;
   var v15$2: bool;
-  var v17$1: bool;
-  var v17$2: bool;
   var v16$1: bv32;
   var v16$2: bv32;
+  var v17$1: bool;
+  var v17$2: bool;
+  var v18$1: bv32;
+  var v18$2: bv32;
+  var v19: bool;
+  var v20: bv32;
+  var v21$1: bool;
+  var v21$2: bool;
+  var v23$1: bv32;
+  var v23$2: bv32;
+  var v22$1: bv32;
+  var v22$2: bv32;
   var v24$1: bv32;
   var v24$2: bv32;
   var v25$1: bv32;
@@ -189,16 +195,10 @@ implementation {:source_name "scan"} {:kernel} $scan($n: bv32, $blockIndex: bv32
   var v26$2: bv32;
   var v27$1: bv32;
   var v27$2: bv32;
-  var v18$1: bv32;
-  var v18$2: bv32;
-  var v29$1: bv32;
-  var v29$2: bv32;
-  var v23$1: bv32;
-  var v23$2: bv32;
-  var v22$1: bv32;
-  var v22$2: bv32;
   var v28$1: bool;
   var v28$2: bool;
+  var v29$1: bv32;
+  var v29$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -227,7 +227,7 @@ implementation {:source_name "scan"} {:kernel} $scan($n: bv32, $blockIndex: bv32
   var _HAVOC_bv32$2: bv32;
 
 
-  $entry:
+  $0:
     v0 := $baseIndex == 0bv32;
     p0$1 := false;
     p0$2 := false;
@@ -239,9 +239,9 @@ implementation {:source_name "scan"} {:kernel} $scan($n: bv32, $blockIndex: bv32
     assume {:partition} !v0;
     $bIndex.0$1 := $baseIndex;
     $bIndex.0$2 := $baseIndex;
-    goto $if.end;
+    goto $3;
 
-  $if.end:
+  $3:
     v1$1 := local_id_x$1;
     v1$2 := local_id_x$2;
     v2$1 := BV32_ADD($bIndex.0$1, v1$1);
@@ -283,9 +283,9 @@ implementation {:source_name "scan"} {:kernel} $scan($n: bv32, $blockIndex: bv32
     $$s_data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v4$2] := (if p1$2 then 0bv32 else $$s_data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v4$2]);
     $stride.0, $d.0 := 1bv32, group_size_x;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond;
+    goto $7;
 
-  $for.cond:
+  $7:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "accessBreak"} _b47 ==> _WRITE_HAS_OCCURRED_$$s_data ==> local_id_x$1 == BV32_DIV(BV32_DIV(_WATCHED_OFFSET, 2bv32), $stride.0);
     assert {:tag "nowrite"} _b46 ==> !_WRITE_HAS_OCCURRED_$$s_data;
@@ -359,11 +359,11 @@ implementation {:source_name "scan"} {:kernel} $scan($n: bv32, $blockIndex: bv32
 
   $falsebb3:
     assume {:partition} !v14;
-    $cond$1 := $blockIndex;
-    $cond$2 := $blockIndex;
-    goto __partitioned_block_$cond.end_0;
+    $0$1 := $blockIndex;
+    $0$2 := $blockIndex;
+    goto __partitioned_block_$15_0;
 
-  __partitioned_block_$cond.end_0:
+  __partitioned_block_$15_0:
     v15$1 := local_id_x$1 == 0bv32;
     v15$2 := local_id_x$2 == 0bv32;
     p4$1 := (if v15$1 then v15$1 else p4$1);
@@ -380,13 +380,13 @@ implementation {:source_name "scan"} {:kernel} $scan($n: bv32, $blockIndex: bv32
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$s_data"} true;
     v18$1 := (if p5$1 then $$s_data[1bv1][v16$1] else v18$1);
     v18$2 := (if p5$2 then $$s_data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v16$2] else v18$2);
-    call {:sourceloc} {:sourceloc_num 30} _LOG_WRITE_$$g_blockSums(p5$1, $cond$1, v18$1, $$g_blockSums[$cond$1]);
-    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$g_blockSums(p5$2, $cond$2);
+    call {:sourceloc} {:sourceloc_num 30} _LOG_WRITE_$$g_blockSums(p5$1, $0$1, v18$1, $$g_blockSums[$0$1]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$g_blockSums(p5$2, $0$2);
     assume {:do_not_predicate} {:check_id "check_state_13"} {:captureState "check_state_13"} {:sourceloc} {:sourceloc_num 30} true;
-    call {:check_id "check_state_13"} {:sourceloc} {:sourceloc_num 30} _CHECK_WRITE_$$g_blockSums(p5$2, $cond$2, v18$2);
+    call {:check_id "check_state_13"} {:sourceloc} {:sourceloc_num 30} _CHECK_WRITE_$$g_blockSums(p5$2, $0$2, v18$2);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$g_blockSums"} true;
-    $$g_blockSums[$cond$1] := (if p5$1 then v18$1 else $$g_blockSums[$cond$1]);
-    $$g_blockSums[$cond$2] := (if p5$2 then v18$2 else $$g_blockSums[$cond$2]);
+    $$g_blockSums[$0$1] := (if p5$1 then v18$1 else $$g_blockSums[$0$1]);
+    $$g_blockSums[$0$2] := (if p5$2 then v18$2 else $$g_blockSums[$0$2]);
     call {:sourceloc} {:sourceloc_num 32} _LOG_WRITE_$$s_data(p4$1, v16$1, 0bv32, $$s_data[1bv1][v16$1]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$s_data(p4$2, v16$2);
     assume {:do_not_predicate} {:check_id "check_state_11"} {:captureState "check_state_11"} {:sourceloc} {:sourceloc_num 32} true;
@@ -394,65 +394,65 @@ implementation {:source_name "scan"} {:kernel} $scan($n: bv32, $blockIndex: bv32
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$s_data"} true;
     $$s_data[1bv1][v16$1] := (if p4$1 then 0bv32 else $$s_data[1bv1][v16$1]);
     $$s_data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v16$2] := (if p4$2 then 0bv32 else $$s_data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v16$2]);
-    goto __partitioned_block_$cond.end_1;
+    goto __partitioned_block_$15_1;
 
-  __partitioned_block_$cond.end_1:
+  __partitioned_block_$15_1:
     call {:sourceloc_num 34} $bugle_barrier_duplicated_0(1bv1, 0bv1);
-    $stride.1, $d63.0 := $stride.0, 1bv32;
+    $stride.1, $d1.0 := $stride.0, 1bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.64;
+    goto $20;
 
-  $for.cond.64:
+  $20:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "nowrite"} _b87 ==> !_WRITE_HAS_OCCURRED_$$s_data;
     assert {:tag "noread"} _b86 ==> !_READ_HAS_OCCURRED_$$s_data;
-    assert {:tag "relationalPow2"} _b85 ==> ($stride.1 == 0bv32 && $d63.0 == 2bv32) || BV32_MUL($d63.0, $stride.1) == 1bv32;
-    assert {:tag "relationalPow2"} _b84 ==> BV32_MUL($d63.0, $stride.1) == 1bv32;
-    assert {:tag "relationalPow2"} _b83 ==> ($stride.1 == 0bv32 && $d63.0 == 4bv32) || BV32_MUL($d63.0, $stride.1) == 2bv32;
-    assert {:tag "relationalPow2"} _b82 ==> BV32_MUL($d63.0, $stride.1) == 2bv32;
-    assert {:tag "relationalPow2"} _b81 ==> ($stride.1 == 0bv32 && $d63.0 == 8bv32) || BV32_MUL($d63.0, $stride.1) == 4bv32;
-    assert {:tag "relationalPow2"} _b80 ==> BV32_MUL($d63.0, $stride.1) == 4bv32;
-    assert {:tag "relationalPow2"} _b79 ==> ($stride.1 == 0bv32 && $d63.0 == 16bv32) || BV32_MUL($d63.0, $stride.1) == 8bv32;
-    assert {:tag "relationalPow2"} _b78 ==> BV32_MUL($d63.0, $stride.1) == 8bv32;
-    assert {:tag "relationalPow2"} _b77 ==> ($stride.1 == 0bv32 && $d63.0 == 32bv32) || BV32_MUL($d63.0, $stride.1) == 16bv32;
-    assert {:tag "relationalPow2"} _b76 ==> BV32_MUL($d63.0, $stride.1) == 16bv32;
-    assert {:tag "relationalPow2"} _b75 ==> ($stride.1 == 0bv32 && $d63.0 == 64bv32) || BV32_MUL($d63.0, $stride.1) == 32bv32;
-    assert {:tag "relationalPow2"} _b74 ==> BV32_MUL($d63.0, $stride.1) == 32bv32;
-    assert {:tag "relationalPow2"} _b73 ==> ($stride.1 == 0bv32 && $d63.0 == 128bv32) || BV32_MUL($d63.0, $stride.1) == 64bv32;
-    assert {:tag "relationalPow2"} _b72 ==> BV32_MUL($d63.0, $stride.1) == 64bv32;
-    assert {:tag "relationalPow2"} _b71 ==> ($stride.1 == 0bv32 && $d63.0 == 256bv32) || BV32_MUL($d63.0, $stride.1) == 128bv32;
-    assert {:tag "relationalPow2"} _b70 ==> BV32_MUL($d63.0, $stride.1) == 128bv32;
-    assert {:tag "relationalPow2"} _b69 ==> ($stride.1 == 0bv32 && $d63.0 == 512bv32) || BV32_MUL($d63.0, $stride.1) == 256bv32;
-    assert {:tag "relationalPow2"} _b68 ==> BV32_MUL($d63.0, $stride.1) == 256bv32;
-    assert {:tag "relationalPow2"} _b67 ==> ($stride.1 == 0bv32 && $d63.0 == 1024bv32) || BV32_MUL($d63.0, $stride.1) == 512bv32;
-    assert {:tag "relationalPow2"} _b66 ==> BV32_MUL($d63.0, $stride.1) == 512bv32;
-    assert {:tag "relationalPow2"} _b65 ==> ($stride.1 == 0bv32 && $d63.0 == 2048bv32) || BV32_MUL($d63.0, $stride.1) == 1024bv32;
-    assert {:tag "relationalPow2"} _b64 ==> BV32_MUL($d63.0, $stride.1) == 1024bv32;
-    assert {:tag "relationalPow2"} _b63 ==> ($stride.1 == 0bv32 && $d63.0 == 4096bv32) || BV32_MUL($d63.0, $stride.1) == 2048bv32;
-    assert {:tag "relationalPow2"} _b62 ==> BV32_MUL($d63.0, $stride.1) == 2048bv32;
-    assert {:tag "relationalPow2"} _b61 ==> ($stride.1 == 0bv32 && $d63.0 == 8192bv32) || BV32_MUL($d63.0, $stride.1) == 4096bv32;
-    assert {:tag "relationalPow2"} _b60 ==> BV32_MUL($d63.0, $stride.1) == 4096bv32;
-    assert {:tag "relationalPow2"} _b59 ==> ($stride.1 == 0bv32 && $d63.0 == 16384bv32) || BV32_MUL($d63.0, $stride.1) == 8192bv32;
-    assert {:tag "relationalPow2"} _b58 ==> BV32_MUL($d63.0, $stride.1) == 8192bv32;
-    assert {:tag "relationalPow2"} _b57 ==> ($stride.1 == 0bv32 && $d63.0 == 32768bv32) || BV32_MUL($d63.0, $stride.1) == 16384bv32;
-    assert {:tag "relationalPow2"} _b56 ==> BV32_MUL($d63.0, $stride.1) == 16384bv32;
-    assert {:tag "relationalPow2"} _b55 ==> ($stride.1 == 0bv32 && $d63.0 == 65536bv32) || BV32_MUL($d63.0, $stride.1) == 32768bv32;
-    assert {:tag "relationalPow2"} _b54 ==> BV32_MUL($d63.0, $stride.1) == 32768bv32;
+    assert {:tag "relationalPow2"} _b85 ==> ($stride.1 == 0bv32 && $d1.0 == 2bv32) || BV32_MUL($d1.0, $stride.1) == 1bv32;
+    assert {:tag "relationalPow2"} _b84 ==> BV32_MUL($d1.0, $stride.1) == 1bv32;
+    assert {:tag "relationalPow2"} _b83 ==> ($stride.1 == 0bv32 && $d1.0 == 4bv32) || BV32_MUL($d1.0, $stride.1) == 2bv32;
+    assert {:tag "relationalPow2"} _b82 ==> BV32_MUL($d1.0, $stride.1) == 2bv32;
+    assert {:tag "relationalPow2"} _b81 ==> ($stride.1 == 0bv32 && $d1.0 == 8bv32) || BV32_MUL($d1.0, $stride.1) == 4bv32;
+    assert {:tag "relationalPow2"} _b80 ==> BV32_MUL($d1.0, $stride.1) == 4bv32;
+    assert {:tag "relationalPow2"} _b79 ==> ($stride.1 == 0bv32 && $d1.0 == 16bv32) || BV32_MUL($d1.0, $stride.1) == 8bv32;
+    assert {:tag "relationalPow2"} _b78 ==> BV32_MUL($d1.0, $stride.1) == 8bv32;
+    assert {:tag "relationalPow2"} _b77 ==> ($stride.1 == 0bv32 && $d1.0 == 32bv32) || BV32_MUL($d1.0, $stride.1) == 16bv32;
+    assert {:tag "relationalPow2"} _b76 ==> BV32_MUL($d1.0, $stride.1) == 16bv32;
+    assert {:tag "relationalPow2"} _b75 ==> ($stride.1 == 0bv32 && $d1.0 == 64bv32) || BV32_MUL($d1.0, $stride.1) == 32bv32;
+    assert {:tag "relationalPow2"} _b74 ==> BV32_MUL($d1.0, $stride.1) == 32bv32;
+    assert {:tag "relationalPow2"} _b73 ==> ($stride.1 == 0bv32 && $d1.0 == 128bv32) || BV32_MUL($d1.0, $stride.1) == 64bv32;
+    assert {:tag "relationalPow2"} _b72 ==> BV32_MUL($d1.0, $stride.1) == 64bv32;
+    assert {:tag "relationalPow2"} _b71 ==> ($stride.1 == 0bv32 && $d1.0 == 256bv32) || BV32_MUL($d1.0, $stride.1) == 128bv32;
+    assert {:tag "relationalPow2"} _b70 ==> BV32_MUL($d1.0, $stride.1) == 128bv32;
+    assert {:tag "relationalPow2"} _b69 ==> ($stride.1 == 0bv32 && $d1.0 == 512bv32) || BV32_MUL($d1.0, $stride.1) == 256bv32;
+    assert {:tag "relationalPow2"} _b68 ==> BV32_MUL($d1.0, $stride.1) == 256bv32;
+    assert {:tag "relationalPow2"} _b67 ==> ($stride.1 == 0bv32 && $d1.0 == 1024bv32) || BV32_MUL($d1.0, $stride.1) == 512bv32;
+    assert {:tag "relationalPow2"} _b66 ==> BV32_MUL($d1.0, $stride.1) == 512bv32;
+    assert {:tag "relationalPow2"} _b65 ==> ($stride.1 == 0bv32 && $d1.0 == 2048bv32) || BV32_MUL($d1.0, $stride.1) == 1024bv32;
+    assert {:tag "relationalPow2"} _b64 ==> BV32_MUL($d1.0, $stride.1) == 1024bv32;
+    assert {:tag "relationalPow2"} _b63 ==> ($stride.1 == 0bv32 && $d1.0 == 4096bv32) || BV32_MUL($d1.0, $stride.1) == 2048bv32;
+    assert {:tag "relationalPow2"} _b62 ==> BV32_MUL($d1.0, $stride.1) == 2048bv32;
+    assert {:tag "relationalPow2"} _b61 ==> ($stride.1 == 0bv32 && $d1.0 == 8192bv32) || BV32_MUL($d1.0, $stride.1) == 4096bv32;
+    assert {:tag "relationalPow2"} _b60 ==> BV32_MUL($d1.0, $stride.1) == 4096bv32;
+    assert {:tag "relationalPow2"} _b59 ==> ($stride.1 == 0bv32 && $d1.0 == 16384bv32) || BV32_MUL($d1.0, $stride.1) == 8192bv32;
+    assert {:tag "relationalPow2"} _b58 ==> BV32_MUL($d1.0, $stride.1) == 8192bv32;
+    assert {:tag "relationalPow2"} _b57 ==> ($stride.1 == 0bv32 && $d1.0 == 32768bv32) || BV32_MUL($d1.0, $stride.1) == 16384bv32;
+    assert {:tag "relationalPow2"} _b56 ==> BV32_MUL($d1.0, $stride.1) == 16384bv32;
+    assert {:tag "relationalPow2"} _b55 ==> ($stride.1 == 0bv32 && $d1.0 == 65536bv32) || BV32_MUL($d1.0, $stride.1) == 32768bv32;
+    assert {:tag "relationalPow2"} _b54 ==> BV32_MUL($d1.0, $stride.1) == 32768bv32;
     assert {:tag "pow2NotZero"} _b53 ==> v20 != 0bv32;
     assert {:tag "pow2"} _b52 ==> v20 == 0bv32 || BV32_AND(v20, BV32_SUB(v20, 1bv32)) == 0bv32;
-    assert {:tag "pow2NotZero"} _b51 ==> $d63.0 != 0bv32;
-    assert {:tag "pow2"} _b50 ==> $d63.0 == 0bv32 || BV32_AND($d63.0, BV32_SUB($d63.0, 1bv32)) == 0bv32;
+    assert {:tag "pow2NotZero"} _b51 ==> $d1.0 != 0bv32;
+    assert {:tag "pow2"} _b50 ==> $d1.0 == 0bv32 || BV32_AND($d1.0, BV32_SUB($d1.0, 1bv32)) == 0bv32;
     assert {:tag "pow2NotZero"} _b49 ==> $stride.1 != 0bv32;
     assert {:tag "pow2"} _b48 ==> $stride.1 == 0bv32 || BV32_AND($stride.1, BV32_SUB($stride.1, 1bv32)) == 0bv32;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$s_data ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$s_data ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$s_data ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
-    assert {:tag "loopBound"} {:thread 1} _b8 ==> BV32_UGE($d63.0, 1bv32);
-    assert {:tag "loopBound"} {:thread 1} _b7 ==> BV32_ULE($d63.0, 1bv32);
-    assert {:tag "loopBound"} {:thread 1} _b6 ==> BV32_SGE($d63.0, 1bv32);
-    assert {:tag "loopBound"} {:thread 1} _b5 ==> BV32_SLE($d63.0, 1bv32);
+    assert {:tag "loopBound"} {:thread 1} _b8 ==> BV32_UGE($d1.0, 1bv32);
+    assert {:tag "loopBound"} {:thread 1} _b7 ==> BV32_ULE($d1.0, 1bv32);
+    assert {:tag "loopBound"} {:thread 1} _b6 ==> BV32_SGE($d1.0, 1bv32);
+    assert {:tag "loopBound"} {:thread 1} _b5 ==> BV32_SLE($d1.0, 1bv32);
     assert {:block_sourceloc} {:sourceloc_num 35} true;
-    v19 := BV32_ULE($d63.0, group_size_x);
+    v19 := BV32_ULE($d1.0, group_size_x);
     p8$1 := false;
     p8$2 := false;
     p9$1 := false;
@@ -502,8 +502,8 @@ implementation {:source_name "scan"} {:kernel} $scan($n: bv32, $blockIndex: bv32
 
   __partitioned_block_$truebb6_1:
     call {:sourceloc_num 37} $bugle_barrier_duplicated_2(1bv1, 0bv1);
-    v21$1 := BV32_SLT(v1$1, $d63.0);
-    v21$2 := BV32_SLT(v1$2, $d63.0);
+    v21$1 := BV32_SLT(v1$1, $d1.0);
+    v21$2 := BV32_SLT(v1$2, $d1.0);
     p9$1 := (if v21$1 then v21$1 else p9$1);
     p9$2 := (if v21$2 then v21$2 else p9$2);
     v22$1 := (if p9$1 then BV32_SUB(BV32_ADD(BV32_MUL(BV32_MUL(2bv32, v20), v1$1), v20), 1bv32) else v22$1);
@@ -542,15 +542,15 @@ implementation {:source_name "scan"} {:kernel} $scan($n: bv32, $blockIndex: bv32
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$s_data"} true;
     $$s_data[1bv1][v23$1] := (if p9$1 then FADD32(v26$1, v24$1) else $$s_data[1bv1][v23$1]);
     $$s_data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v23$2] := (if p9$2 then FADD32(v26$2, v24$2) else $$s_data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v23$2]);
-    $stride.1, $d63.0 := v20, BV32_MUL($d63.0, 2bv32);
+    $stride.1, $d1.0 := v20, BV32_MUL($d1.0, 2bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.64;
+    goto $20;
 
   $truebb3:
     assume {:partition} v14;
-    $cond$1 := group_id_x$1;
-    $cond$2 := group_id_x$2;
-    goto __partitioned_block_$cond.end_0;
+    $0$1 := group_id_x$1;
+    $0$2 := group_id_x$2;
+    goto __partitioned_block_$15_0;
 
   __partitioned_block_$truebb1_0:
     assume {:partition} v8;
@@ -587,13 +587,13 @@ implementation {:source_name "scan"} {:kernel} $scan($n: bv32, $blockIndex: bv32
     $$s_data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v11$2] := (if p3$2 then FADD32(v13$2, v12$2) else $$s_data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v11$2]);
     $stride.0, $d.0 := BV32_MUL($stride.0, 2bv32), BV32_ASHR($d.0, 1bv32);
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond;
+    goto $7;
 
   $truebb:
     assume {:partition} v0;
     $bIndex.0$1 := BV32_MUL(group_id_x$1, BV32_SHL(group_size_x, 1bv32));
     $bIndex.0$2 := BV32_MUL(group_id_x$2, BV32_SHL(group_size_x, 1bv32));
-    goto $if.end;
+    goto $3;
 }
 
 

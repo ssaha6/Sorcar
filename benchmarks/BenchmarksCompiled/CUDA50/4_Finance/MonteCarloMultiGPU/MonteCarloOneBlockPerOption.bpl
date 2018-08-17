@@ -143,132 +143,132 @@ implementation {:source_name "MonteCarloOneBlockPerOption"} {:kernel} $_Z27Monte
   var $iSum.0$2: bv32;
   var $i.0$1: bv32;
   var $i.0$2: bv32;
-  var $cond.i$1: bv32;
-  var $cond.i$2: bv32;
+  var $0$1: bv32;
+  var $0$2: bv32;
   var $pos.i.0$1: bv32;
   var $pos.i.0$2: bv32;
-  var v16$1: bv32;
-  var v16$2: bv32;
-  var v17$1: bv32;
-  var v17$2: bv32;
-  var v15$1: bv32;
-  var v15$2: bv32;
-  var v10$1: bv32;
-  var v10$2: bv32;
-  var v18$1: bv32;
-  var v18$2: bv32;
-  var v12$1: bv32;
-  var v12$2: bv32;
-  var v11$1: bv32;
-  var v11$2: bv32;
-  var v5$1: bv32;
-  var v5$2: bv32;
-  var v2$1: bv32;
-  var v2$2: bv32;
-  var v1$1: bv32;
-  var v1$2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
+  var v1$1: bv32;
+  var v1$2: bv32;
+  var v2$1: bv32;
+  var v2$2: bv32;
   var v3$1: bv32;
   var v3$2: bv32;
+  var v4$1: bv32;
+  var v4$2: bv32;
+  var v6$1: bool;
+  var v6$2: bool;
+  var v5$1: bv32;
+  var v5$2: bv32;
+  var v7$1: bool;
+  var v7$2: bool;
   var v8$1: bv32;
   var v8$2: bv32;
   var v9$1: bv32;
   var v9$2: bv32;
-  var v6$1: bool;
-  var v6$2: bool;
-  var v4$1: bv32;
-  var v4$2: bv32;
-  var v7$1: bool;
-  var v7$2: bool;
-  var v20$1: bool;
-  var v20$2: bool;
+  var v10$1: bv32;
+  var v10$2: bv32;
+  var v11$1: bv32;
+  var v11$2: bv32;
+  var v12$1: bv32;
+  var v12$2: bv32;
   var v13$1: bv32;
   var v13$2: bv32;
   var v14$1: bool;
   var v14$2: bool;
-  var v46$1: bv32;
-  var v46$2: bv32;
-  var v37$1: bv32;
-  var v37$2: bv32;
-  var v50$1: bv32;
-  var v50$2: bv32;
-  var v40$1: bv32;
-  var v40$2: bv32;
-  var v48$1: bv32;
-  var v48$2: bv32;
-  var v38$1: bv32;
-  var v38$2: bv32;
-  var v44$1: bv32;
-  var v44$2: bv32;
-  var v51$1: bv32;
-  var v51$2: bv32;
-  var v52$1: bv32;
-  var v52$2: bv32;
-  var v49$1: bv32;
-  var v49$2: bv32;
-  var v41$1: bv32;
-  var v41$2: bv32;
-  var v39$1: bv32;
-  var v39$2: bv32;
-  var v43$1: bv32;
-  var v43$2: bv32;
-  var v45$1: bv32;
-  var v45$2: bv32;
-  var v42$1: bv32;
-  var v42$2: bv32;
-  var v47$1: bv32;
-  var v47$2: bv32;
+  var v15$1: bv32;
+  var v15$2: bv32;
+  var v16$1: bv32;
+  var v16$2: bv32;
+  var v17$1: bv32;
+  var v17$2: bv32;
+  var v18$1: bv32;
+  var v18$2: bv32;
   var v19$1: bv32;
   var v19$2: bv32;
-  var v27$1: bv32;
-  var v27$2: bv32;
+  var v20$1: bool;
+  var v20$2: bool;
+  var v21$1: bool;
+  var v21$2: bool;
   var v22$1: bv32;
   var v22$2: bv32;
   var v23$1: bv32;
   var v23$2: bv32;
-  var v25$1: bv32;
-  var v25$2: bv32;
   var v24$1: bv32;
   var v24$2: bv32;
+  var v25$1: bv32;
+  var v25$2: bv32;
+  var v26$1: bool;
+  var v26$2: bool;
+  var v27$1: bv32;
+  var v27$2: bv32;
+  var v28$1: bv32;
+  var v28$2: bv32;
   var v29$1: bv32;
   var v29$2: bv32;
   var v30$1: bv32;
   var v30$2: bv32;
-  var v33$1: bv32;
-  var v33$2: bv32;
+  var v31$1: bool;
+  var v31$2: bool;
   var v32$1: bv32;
   var v32$2: bv32;
+  var v33$1: bv32;
+  var v33$2: bv32;
   var v34$1: bv32;
   var v34$2: bv32;
-  var v28$1: bv32;
-  var v28$2: bv32;
   var v35$1: bv32;
   var v35$2: bv32;
   var v36$1: bv32;
   var v36$2: bv32;
-  var v21$1: bool;
-  var v21$2: bool;
-  var v26$1: bool;
-  var v26$2: bool;
-  var v31$1: bool;
-  var v31$2: bool;
+  var v37$1: bv32;
+  var v37$2: bv32;
+  var v38$1: bv32;
+  var v38$2: bv32;
+  var v39$1: bv32;
+  var v39$2: bv32;
+  var v40$1: bv32;
+  var v40$2: bv32;
+  var v41$1: bv32;
+  var v41$2: bv32;
+  var v42$1: bv32;
+  var v42$2: bv32;
+  var v43$1: bv32;
+  var v43$2: bv32;
+  var v44$1: bv32;
+  var v44$2: bv32;
+  var v45$1: bv32;
+  var v45$2: bv32;
+  var v46$1: bv32;
+  var v46$2: bv32;
+  var v47$1: bv32;
+  var v47$2: bv32;
+  var v48$1: bv32;
+  var v48$2: bv32;
+  var v49$1: bv32;
+  var v49$2: bv32;
+  var v50$1: bv32;
+  var v50$2: bv32;
+  var v51$1: bv32;
+  var v51$2: bv32;
+  var v52$1: bv32;
+  var v52$2: bv32;
+  var v53$1: bv32;
+  var v53$2: bv32;
+  var v54$1: bv32;
+  var v54$2: bv32;
+  var v55$1: bv32;
+  var v55$2: bv32;
   var v56$1: bool;
   var v56$2: bool;
+  var v57$1: bv32;
+  var v57$2: bv32;
   var v58$1: bv32;
   var v58$2: bv32;
   var v59$1: bv32;
   var v59$2: bv32;
   var v60$1: bv32;
   var v60$2: bv32;
-  var v54$1: bv32;
-  var v54$2: bv32;
-  var v55$1: bv32;
-  var v55$2: bv32;
-  var v57$1: bv32;
-  var v57$2: bv32;
-  var v53$1: bv32;
-  var v53$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -305,7 +305,7 @@ implementation {:source_name "MonteCarloOneBlockPerOption"} {:kernel} $_Z27Monte
   var p16$2: bool;
 
 
-  $entry:
+  $0:
     v0$1 := $$d_OptionData[BV32_MUL(group_id_x$1, 4bv32)];
     v0$2 := $$d_OptionData[BV32_MUL(group_id_x$2, 4bv32)];
     v1$1 := $$d_OptionData[BV32_ADD(BV32_MUL(group_id_x$1, 4bv32), 1bv32)];
@@ -335,9 +335,9 @@ implementation {:source_name "MonteCarloOneBlockPerOption"} {:kernel} $_Z27Monte
     p0$1 := true;
     p0$2 := true;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b43 ==> _WRITE_HAS_OCCURRED_$$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call ==> BV32_AND(BV32_SUB(group_size_x, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(group_size_x, 1bv32), local_id_x$1);
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b42 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_WRITE_HAS_OCCURRED_$$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call;
@@ -351,16 +351,16 @@ implementation {:source_name "MonteCarloOneBlockPerOption"} {:kernel} $_Z27Monte
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b34 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_READ_HAS_OCCURRED_$$d_CallValue;
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b33 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_WRITE_HAS_OCCURRED_$$d_OptionData;
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b32 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_READ_HAS_OCCURRED_$$d_OptionData;
-    assert {:tag "predicatedEquality"} _b31 ==> p0$1 && p0$2 ==> v14$1 == v14$2;
-    assert {:tag "predicatedEquality"} _b30 ==> p0$1 && p0$2 ==> v13$1 == v13$2;
-    assert {:tag "predicatedEquality"} _b29 ==> p0$1 && p0$2 ==> v7$1 == v7$2;
-    assert {:tag "predicatedEquality"} _b28 ==> p0$1 && p0$2 ==> v6$1 == v6$2;
-    assert {:tag "predicatedEquality"} _b27 ==> p0$1 && p0$2 ==> v9$1 == v9$2;
-    assert {:tag "predicatedEquality"} _b26 ==> p0$1 && p0$2 ==> v18$1 == v18$2;
-    assert {:tag "predicatedEquality"} _b25 ==> p0$1 && p0$2 ==> v15$1 == v15$2;
-    assert {:tag "predicatedEquality"} _b24 ==> p0$1 && p0$2 ==> v17$1 == v17$2;
-    assert {:tag "predicatedEquality"} _b23 ==> p0$1 && p0$2 ==> v16$1 == v16$2;
-    assert {:tag "predicatedEquality"} _b22 ==> p0$1 && p0$2 ==> $cond.i$1 == $cond.i$2;
+    assert {:tag "predicatedEquality"} _b31 ==> p0$1 && p0$2 ==> v18$1 == v18$2;
+    assert {:tag "predicatedEquality"} _b30 ==> p0$1 && p0$2 ==> v17$1 == v17$2;
+    assert {:tag "predicatedEquality"} _b29 ==> p0$1 && p0$2 ==> v16$1 == v16$2;
+    assert {:tag "predicatedEquality"} _b28 ==> p0$1 && p0$2 ==> v15$1 == v15$2;
+    assert {:tag "predicatedEquality"} _b27 ==> p0$1 && p0$2 ==> v14$1 == v14$2;
+    assert {:tag "predicatedEquality"} _b26 ==> p0$1 && p0$2 ==> v13$1 == v13$2;
+    assert {:tag "predicatedEquality"} _b25 ==> p0$1 && p0$2 ==> v9$1 == v9$2;
+    assert {:tag "predicatedEquality"} _b24 ==> p0$1 && p0$2 ==> v7$1 == v7$2;
+    assert {:tag "predicatedEquality"} _b23 ==> p0$1 && p0$2 ==> v6$1 == v6$2;
+    assert {:tag "predicatedEquality"} _b22 ==> p0$1 && p0$2 ==> $0$1 == $0$2;
     assert {:tag "predicatedEquality"} _b21 ==> p0$1 && p0$2 ==> $i.0$1 == $i.0$2;
     assert {:tag "predicatedEquality"} _b20 ==> p0$1 && p0$2 ==> $iSum.0$1 == $iSum.0$2;
     assert {:tag "loopPredicateEquality"} _b19 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 ==> p0$1 == p0$2;
@@ -411,9 +411,9 @@ implementation {:source_name "MonteCarloOneBlockPerOption"} {:kernel} $_Z27Monte
     p2$1 := (if p1$1 then true else p2$1);
     p2$2 := (if p1$2 then true else p2$2);
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond.9;
+    goto $3;
 
-  $for.cond.9:
+  $3:
     assume {:captureState "loop_head_state_2"} true;
     assume {:invGenSkippedLoop} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -458,25 +458,25 @@ implementation {:source_name "MonteCarloOneBlockPerOption"} {:kernel} $_Z27Monte
     p5$2 := (if p3$2 && v14$2 then v14$2 else p5$2);
     p4$1 := (if p3$1 && !v14$1 then !v14$1 else p4$1);
     p4$2 := (if p3$2 && !v14$2 then !v14$2 else p4$2);
-    $cond.i$1 := (if p4$1 then 0bv32 else $cond.i$1);
-    $cond.i$2 := (if p4$2 then 0bv32 else $cond.i$2);
-    $cond.i$1 := (if p5$1 then v13$1 else $cond.i$1);
-    $cond.i$2 := (if p5$2 then v13$2 else $cond.i$2);
+    $0$1 := (if p4$1 then 0bv32 else $0$1);
+    $0$2 := (if p4$2 then 0bv32 else $0$2);
+    $0$1 := (if p5$1 then v13$1 else $0$1);
+    $0$2 := (if p5$2 then v13$2 else $0$2);
     v15$1 := (if p3$1 then $$sumCall$0bv32$1 else v15$1);
     v15$2 := (if p3$2 then $$sumCall$0bv32$2 else v15$2);
-    $$sumCall$0bv32$1 := (if p3$1 then FADD32(v15$1, $cond.i$1) else $$sumCall$0bv32$1);
-    $$sumCall$0bv32$2 := (if p3$2 then FADD32(v15$2, $cond.i$2) else $$sumCall$0bv32$2);
+    $$sumCall$0bv32$1 := (if p3$1 then FADD32(v15$1, $0$1) else $$sumCall$0bv32$1);
+    $$sumCall$0bv32$2 := (if p3$2 then FADD32(v15$2, $0$2) else $$sumCall$0bv32$2);
     v16$1 := (if p3$1 then $$sumCall$1bv32$1 else v16$1);
     v16$2 := (if p3$2 then $$sumCall$1bv32$2 else v16$2);
-    $$sumCall$1bv32$1 := (if p3$1 then FADD32(v16$1, FMUL32($cond.i$1, $cond.i$1)) else $$sumCall$1bv32$1);
-    $$sumCall$1bv32$2 := (if p3$2 then FADD32(v16$2, FMUL32($cond.i$2, $cond.i$2)) else $$sumCall$1bv32$2);
+    $$sumCall$1bv32$1 := (if p3$1 then FADD32(v16$1, FMUL32($0$1, $0$1)) else $$sumCall$1bv32$1);
+    $$sumCall$1bv32$2 := (if p3$2 then FADD32(v16$2, FMUL32($0$2, $0$2)) else $$sumCall$1bv32$2);
     $i.0$1 := (if p3$1 then BV32_ADD($i.0$1, 256bv32) else $i.0$1);
     $i.0$2 := (if p3$2 then BV32_ADD($i.0$2, 256bv32) else $i.0$2);
     p2$1 := (if p3$1 then true else p2$1);
     p2$2 := (if p3$2 then true else p2$2);
-    goto $for.cond.9.backedge, $for.cond.9.tail;
+    goto $3.backedge, $3.tail;
 
-  $for.cond.9.tail:
+  $3.tail:
     assume !p2$1 && !p2$2;
     v17$1 := (if p1$1 then $$sumCall$0bv32$1 else v17$1);
     v17$2 := (if p1$2 then $$sumCall$0bv32$2 else v17$2);
@@ -504,9 +504,9 @@ implementation {:source_name "MonteCarloOneBlockPerOption"} {:kernel} $_Z27Monte
     $iSum.0$2 := (if p1$2 then BV32_ADD($iSum.0$2, group_size_x) else $iSum.0$2);
     p0$1 := (if p1$1 then true else p0$1);
     p0$2 := (if p1$2 then true else p0$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $1.backedge, $1.tail;
 
-  $for.cond.tail:
+  $1.tail:
     assume !p0$1 && !p0$2;
     v19$1 := $$localState$0bv32$1;
     v19$2 := $$localState$0bv32$2;
@@ -524,9 +524,9 @@ implementation {:source_name "MonteCarloOneBlockPerOption"} {:kernel} $_Z27Monte
     p7$1 := true;
     p7$2 := true;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto __partitioned_block_$for.cond.i_0;
+    goto __partitioned_block_$11_0;
 
-  __partitioned_block_$for.cond.i_0:
+  __partitioned_block_$11_0:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b100 ==> _WRITE_HAS_OCCURRED_$$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call ==> BV32_AND(BV32_SUB(256bv32, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(256bv32, 1bv32), local_id_x$1) || BV32_AND(BV32_SUB(256bv32, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(256bv32, 1bv32), local_id_x$1) || BV32_AND(BV32_SUB(256bv32, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(256bv32, 1bv32), local_id_x$1) || BV32_AND(BV32_SUB(256bv32, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(256bv32, 1bv32), local_id_x$1) || BV32_AND(BV32_SUB(256bv32, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(256bv32, 1bv32), local_id_x$1) || BV32_AND(BV32_SUB(256bv32, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(256bv32, 1bv32), local_id_x$1) || BV32_AND(BV32_SUB(256bv32, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(256bv32, 1bv32), local_id_x$1) || BV32_AND(BV32_SUB(256bv32, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(256bv32, 1bv32), local_id_x$1);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b99 ==> _READ_HAS_OCCURRED_$$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call ==> BV32_AND(BV32_SUB(256bv32, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(256bv32, 1bv32), BV32_ADD(local_id_x$1, 32bv32)) || BV32_AND(BV32_SUB(256bv32, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(256bv32, 1bv32), local_id_x$1) || BV32_AND(BV32_SUB(256bv32, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(256bv32, 1bv32), BV32_ADD(local_id_x$1, 16bv32)) || BV32_AND(BV32_SUB(256bv32, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(256bv32, 1bv32), local_id_x$1) || BV32_AND(BV32_SUB(256bv32, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(256bv32, 1bv32), BV32_ADD(local_id_x$1, 8bv32)) || BV32_AND(BV32_SUB(256bv32, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(256bv32, 1bv32), local_id_x$1) || BV32_AND(BV32_SUB(256bv32, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(256bv32, 1bv32), BV32_ADD(local_id_x$1, 4bv32)) || BV32_AND(BV32_SUB(256bv32, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(256bv32, 1bv32), local_id_x$1) || BV32_AND(BV32_SUB(256bv32, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(256bv32, 1bv32), BV32_ADD(local_id_x$1, 2bv32)) || BV32_AND(BV32_SUB(256bv32, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(256bv32, 1bv32), local_id_x$1) || BV32_AND(BV32_SUB(256bv32, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(256bv32, 1bv32), BV32_ADD(local_id_x$1, 1bv32)) || BV32_AND(BV32_SUB(256bv32, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(256bv32, 1bv32), local_id_x$1) || BV32_AND(BV32_SUB(256bv32, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(256bv32, 1bv32), BV32_ADD(local_id_x$1, 64bv32)) || BV32_AND(BV32_SUB(256bv32, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(256bv32, 1bv32), local_id_x$1) || BV32_AND(BV32_SUB(256bv32, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(256bv32, 1bv32), BV32_ADD(local_id_x$1, 128bv32)) || BV32_AND(BV32_SUB(256bv32, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(256bv32, 1bv32), local_id_x$1);
@@ -546,41 +546,41 @@ implementation {:source_name "MonteCarloOneBlockPerOption"} {:kernel} $_Z27Monte
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b85 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_READ_HAS_OCCURRED_$$d_CallValue;
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b84 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_WRITE_HAS_OCCURRED_$$d_OptionData;
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b83 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_READ_HAS_OCCURRED_$$d_OptionData;
-    assert {:tag "predicatedEquality"} _b82 ==> p7$1 && p7$2 ==> v53$1 == v53$2;
-    assert {:tag "predicatedEquality"} _b81 ==> p7$1 && p7$2 ==> v55$1 == v55$2;
-    assert {:tag "predicatedEquality"} _b80 ==> p7$1 && p7$2 ==> v54$1 == v54$2;
-    assert {:tag "predicatedEquality"} _b79 ==> p7$1 && p7$2 ==> v31$1 == v31$2;
-    assert {:tag "predicatedEquality"} _b78 ==> p7$1 && p7$2 ==> v26$1 == v26$2;
-    assert {:tag "predicatedEquality"} _b77 ==> p7$1 && p7$2 ==> v21$1 == v21$2;
-    assert {:tag "predicatedEquality"} _b76 ==> p7$1 && p7$2 ==> v36$1 == v36$2;
-    assert {:tag "predicatedEquality"} _b75 ==> p7$1 && p7$2 ==> v35$1 == v35$2;
-    assert {:tag "predicatedEquality"} _b74 ==> p7$1 && p7$2 ==> v28$1 == v28$2;
-    assert {:tag "predicatedEquality"} _b73 ==> p7$1 && p7$2 ==> v34$1 == v34$2;
-    assert {:tag "predicatedEquality"} _b72 ==> p7$1 && p7$2 ==> v32$1 == v32$2;
-    assert {:tag "predicatedEquality"} _b71 ==> p7$1 && p7$2 ==> v33$1 == v33$2;
-    assert {:tag "predicatedEquality"} _b70 ==> p7$1 && p7$2 ==> v30$1 == v30$2;
-    assert {:tag "predicatedEquality"} _b69 ==> p7$1 && p7$2 ==> v29$1 == v29$2;
-    assert {:tag "predicatedEquality"} _b68 ==> p7$1 && p7$2 ==> v24$1 == v24$2;
-    assert {:tag "predicatedEquality"} _b67 ==> p7$1 && p7$2 ==> v25$1 == v25$2;
-    assert {:tag "predicatedEquality"} _b66 ==> p7$1 && p7$2 ==> v23$1 == v23$2;
-    assert {:tag "predicatedEquality"} _b65 ==> p7$1 && p7$2 ==> v22$1 == v22$2;
-    assert {:tag "predicatedEquality"} _b64 ==> p7$1 && p7$2 ==> v27$1 == v27$2;
-    assert {:tag "predicatedEquality"} _b63 ==> p7$1 && p7$2 ==> v47$1 == v47$2;
-    assert {:tag "predicatedEquality"} _b62 ==> p7$1 && p7$2 ==> v42$1 == v42$2;
-    assert {:tag "predicatedEquality"} _b61 ==> p7$1 && p7$2 ==> v45$1 == v45$2;
-    assert {:tag "predicatedEquality"} _b60 ==> p7$1 && p7$2 ==> v43$1 == v43$2;
-    assert {:tag "predicatedEquality"} _b59 ==> p7$1 && p7$2 ==> v39$1 == v39$2;
-    assert {:tag "predicatedEquality"} _b58 ==> p7$1 && p7$2 ==> v41$1 == v41$2;
-    assert {:tag "predicatedEquality"} _b57 ==> p7$1 && p7$2 ==> v49$1 == v49$2;
-    assert {:tag "predicatedEquality"} _b56 ==> p7$1 && p7$2 ==> v52$1 == v52$2;
-    assert {:tag "predicatedEquality"} _b55 ==> p7$1 && p7$2 ==> v51$1 == v51$2;
-    assert {:tag "predicatedEquality"} _b54 ==> p7$1 && p7$2 ==> v44$1 == v44$2;
-    assert {:tag "predicatedEquality"} _b53 ==> p7$1 && p7$2 ==> v38$1 == v38$2;
-    assert {:tag "predicatedEquality"} _b52 ==> p7$1 && p7$2 ==> v48$1 == v48$2;
-    assert {:tag "predicatedEquality"} _b51 ==> p7$1 && p7$2 ==> v40$1 == v40$2;
-    assert {:tag "predicatedEquality"} _b50 ==> p7$1 && p7$2 ==> v50$1 == v50$2;
-    assert {:tag "predicatedEquality"} _b49 ==> p7$1 && p7$2 ==> v37$1 == v37$2;
-    assert {:tag "predicatedEquality"} _b48 ==> p7$1 && p7$2 ==> v46$1 == v46$2;
+    assert {:tag "predicatedEquality"} _b82 ==> p7$1 && p7$2 ==> v55$1 == v55$2;
+    assert {:tag "predicatedEquality"} _b81 ==> p7$1 && p7$2 ==> v54$1 == v54$2;
+    assert {:tag "predicatedEquality"} _b80 ==> p7$1 && p7$2 ==> v53$1 == v53$2;
+    assert {:tag "predicatedEquality"} _b79 ==> p7$1 && p7$2 ==> v52$1 == v52$2;
+    assert {:tag "predicatedEquality"} _b78 ==> p7$1 && p7$2 ==> v51$1 == v51$2;
+    assert {:tag "predicatedEquality"} _b77 ==> p7$1 && p7$2 ==> v50$1 == v50$2;
+    assert {:tag "predicatedEquality"} _b76 ==> p7$1 && p7$2 ==> v49$1 == v49$2;
+    assert {:tag "predicatedEquality"} _b75 ==> p7$1 && p7$2 ==> v48$1 == v48$2;
+    assert {:tag "predicatedEquality"} _b74 ==> p7$1 && p7$2 ==> v47$1 == v47$2;
+    assert {:tag "predicatedEquality"} _b73 ==> p7$1 && p7$2 ==> v46$1 == v46$2;
+    assert {:tag "predicatedEquality"} _b72 ==> p7$1 && p7$2 ==> v45$1 == v45$2;
+    assert {:tag "predicatedEquality"} _b71 ==> p7$1 && p7$2 ==> v44$1 == v44$2;
+    assert {:tag "predicatedEquality"} _b70 ==> p7$1 && p7$2 ==> v43$1 == v43$2;
+    assert {:tag "predicatedEquality"} _b69 ==> p7$1 && p7$2 ==> v42$1 == v42$2;
+    assert {:tag "predicatedEquality"} _b68 ==> p7$1 && p7$2 ==> v41$1 == v41$2;
+    assert {:tag "predicatedEquality"} _b67 ==> p7$1 && p7$2 ==> v40$1 == v40$2;
+    assert {:tag "predicatedEquality"} _b66 ==> p7$1 && p7$2 ==> v39$1 == v39$2;
+    assert {:tag "predicatedEquality"} _b65 ==> p7$1 && p7$2 ==> v38$1 == v38$2;
+    assert {:tag "predicatedEquality"} _b64 ==> p7$1 && p7$2 ==> v37$1 == v37$2;
+    assert {:tag "predicatedEquality"} _b63 ==> p7$1 && p7$2 ==> v36$1 == v36$2;
+    assert {:tag "predicatedEquality"} _b62 ==> p7$1 && p7$2 ==> v35$1 == v35$2;
+    assert {:tag "predicatedEquality"} _b61 ==> p7$1 && p7$2 ==> v34$1 == v34$2;
+    assert {:tag "predicatedEquality"} _b60 ==> p7$1 && p7$2 ==> v33$1 == v33$2;
+    assert {:tag "predicatedEquality"} _b59 ==> p7$1 && p7$2 ==> v32$1 == v32$2;
+    assert {:tag "predicatedEquality"} _b58 ==> p7$1 && p7$2 ==> v31$1 == v31$2;
+    assert {:tag "predicatedEquality"} _b57 ==> p7$1 && p7$2 ==> v30$1 == v30$2;
+    assert {:tag "predicatedEquality"} _b56 ==> p7$1 && p7$2 ==> v29$1 == v29$2;
+    assert {:tag "predicatedEquality"} _b55 ==> p7$1 && p7$2 ==> v28$1 == v28$2;
+    assert {:tag "predicatedEquality"} _b54 ==> p7$1 && p7$2 ==> v27$1 == v27$2;
+    assert {:tag "predicatedEquality"} _b53 ==> p7$1 && p7$2 ==> v26$1 == v26$2;
+    assert {:tag "predicatedEquality"} _b52 ==> p7$1 && p7$2 ==> v25$1 == v25$2;
+    assert {:tag "predicatedEquality"} _b51 ==> p7$1 && p7$2 ==> v24$1 == v24$2;
+    assert {:tag "predicatedEquality"} _b50 ==> p7$1 && p7$2 ==> v23$1 == v23$2;
+    assert {:tag "predicatedEquality"} _b49 ==> p7$1 && p7$2 ==> v22$1 == v22$2;
+    assert {:tag "predicatedEquality"} _b48 ==> p7$1 && p7$2 ==> v21$1 == v21$2;
     assert {:tag "predicatedEquality"} _b47 ==> p7$1 && p7$2 ==> v20$1 == v20$2;
     assert {:tag "predicatedEquality"} _b46 ==> p7$1 && p7$2 ==> $pos.i.0$1 == $pos.i.0$2;
     assert {:tag "loopPredicateEquality"} _b45 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 ==> p7$1 == p7$2;
@@ -634,9 +634,9 @@ implementation {:source_name "MonteCarloOneBlockPerOption"} {:kernel} $_Z27Monte
     p8$2 := (if p7$2 && v20$2 then v20$2 else p8$2);
     p7$1 := (if p7$1 && !v20$1 then v20$1 else p7$1);
     p7$2 := (if p7$2 && !v20$2 then v20$2 else p7$2);
-    goto __partitioned_block_$for.cond.i_1;
+    goto __partitioned_block_$11_1;
 
-  __partitioned_block_$for.cond.i_1:
+  __partitioned_block_$11_1:
     call {:sourceloc_num 38} $bugle_barrier_duplicated_0(1bv1, 1bv1, p8$1, p8$2);
     v21$1 := (if p8$1 then BV32_SLT($pos.i.0$1, 128bv32) else v21$1);
     v21$2 := (if p8$2 then BV32_SLT($pos.i.0$2, 128bv32) else v21$2);
@@ -692,9 +692,9 @@ implementation {:source_name "MonteCarloOneBlockPerOption"} {:kernel} $_Z27Monte
     call _POST_WARP_SYNC_$$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call_WRITE(p10$1, p10$2);
     $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[1bv1][$pos.i.0$1] := (if p10$1 then FADD32(v25$1, v24$1) else $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[1bv1][$pos.i.0$1]);
     $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][$pos.i.0$2] := (if p10$2 then FADD32(v25$2, v24$2) else $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][$pos.i.0$2]);
-    goto __partitioned_block_$for.cond.i_2;
+    goto __partitioned_block_$11_2;
 
-  __partitioned_block_$for.cond.i_2:
+  __partitioned_block_$11_2:
     call {:sourceloc_num 47} $bugle_barrier_duplicated_1(1bv1, 1bv1, p8$1, p8$2);
     v26$1 := (if p8$1 then BV32_SLT($pos.i.0$1, 64bv32) else v26$1);
     v26$2 := (if p8$2 then BV32_SLT($pos.i.0$2, 64bv32) else v26$2);
@@ -750,9 +750,9 @@ implementation {:source_name "MonteCarloOneBlockPerOption"} {:kernel} $_Z27Monte
     call _POST_WARP_SYNC_$$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call_WRITE(p12$1, p12$2);
     $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[1bv1][$pos.i.0$1] := (if p12$1 then FADD32(v30$1, v29$1) else $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[1bv1][$pos.i.0$1]);
     $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][$pos.i.0$2] := (if p12$2 then FADD32(v30$2, v29$2) else $$_ZZ27MonteCarloOneBlockPerOptionP13__TOptionDataP14__TOptionValueP17curandStateXORWOWiE10s_Sum2Call[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][$pos.i.0$2]);
-    goto __partitioned_block_$for.cond.i_3;
+    goto __partitioned_block_$11_3;
 
-  __partitioned_block_$for.cond.i_3:
+  __partitioned_block_$11_3:
     call {:sourceloc_num 56} $bugle_barrier_duplicated_2(1bv1, 1bv1, p8$1, p8$2);
     v31$1 := (if p8$1 then BV32_SLT($pos.i.0$1, 32bv32) else v31$1);
     v31$2 := (if p8$2 then BV32_SLT($pos.i.0$2, 32bv32) else v31$2);
@@ -1062,9 +1062,9 @@ implementation {:source_name "MonteCarloOneBlockPerOption"} {:kernel} $_Z27Monte
     $pos.i.0$2 := (if p8$2 then BV32_ADD($pos.i.0$2, 256bv32) else $pos.i.0$2);
     p7$1 := (if p8$1 then true else p7$1);
     p7$2 := (if p8$2 then true else p7$2);
-    goto $for.cond.i.backedge, $for.cond.i.tail;
+    goto $11.backedge, $11.tail;
 
-  $for.cond.i.tail:
+  $11.tail:
     assume !p7$1 && !p7$2;
     v56$1 := local_id_x$1 == 0bv32;
     v56$2 := local_id_x$2 == 0bv32;
@@ -1114,20 +1114,20 @@ implementation {:source_name "MonteCarloOneBlockPerOption"} {:kernel} $_Z27Monte
     $$d_CallValue[BV32_ADD(BV32_MUL(group_id_x$2, 2bv32), 1bv32)] := (if p15$2 then v60$2 else $$d_CallValue[BV32_ADD(BV32_MUL(group_id_x$2, 2bv32), 1bv32)]);
     return;
 
-  $for.cond.i.backedge:
+  $11.backedge:
     assume {:backedge} p7$1 || p7$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto __partitioned_block_$for.cond.i_0;
+    goto __partitioned_block_$11_0;
 
-  $for.cond.backedge:
+  $1.backedge:
     assume {:backedge} p0$1 || p0$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond.9.backedge:
+  $3.backedge:
     assume {:backedge} p2$1 || p2$2;
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond.9;
+    goto $3;
 }
 
 

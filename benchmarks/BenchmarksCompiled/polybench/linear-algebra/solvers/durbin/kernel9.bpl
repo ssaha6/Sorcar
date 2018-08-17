@@ -170,32 +170,32 @@ implementation {:source_name "kernel9"} {:kernel} $kernel9($n: bv32, $c0: bv64)
 {
   var $c1.0$1: bv64;
   var $c1.0$2: bv64;
-  var v1$1: bv32;
-  var v1$2: bv32;
-  var v6$1: bool;
-  var v6$2: bool;
-  var v4$1: bool;
-  var v4$2: bool;
-  var v7$1: bool;
-  var v7$2: bool;
-  var v3$1: bool;
-  var v3$2: bool;
   var v0$1: bv64;
   var v0$2: bv64;
+  var v1$1: bv32;
+  var v1$2: bv32;
   var v2$1: bv64;
   var v2$2: bv64;
+  var v3$1: bool;
+  var v3$2: bool;
+  var v4$1: bool;
+  var v4$2: bool;
   var v5$1: bv64;
   var v5$2: bv64;
+  var v6$1: bool;
+  var v6$2: bool;
+  var v7$1: bool;
+  var v7$2: bool;
   var v8$1: bv64;
   var v8$2: bv64;
+  var v9$1: bool;
+  var v9$2: bool;
   var v10$1: bv64;
   var v10$2: bv64;
   var v11$1: bv64;
   var v11$2: bv64;
   var v12$1: bv64;
   var v12$2: bv64;
-  var v9$1: bool;
-  var v9$2: bool;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -222,7 +222,7 @@ implementation {:source_name "kernel9"} {:kernel} $kernel9($n: bv32, $c0: bv64)
   var _HAVOC_bv64$2: bv64;
 
 
-  __partitioned_block_$entry_0:
+  __partitioned_block_$0_0:
     v0$1 := BV32_ZEXT64(group_id_x$1);
     v0$2 := BV32_ZEXT64(group_id_x$2);
     v1$1 := local_id_x$1;
@@ -257,18 +257,18 @@ implementation {:source_name "kernel9"} {:kernel} $kernel9($n: bv32, $c0: bv64)
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$kernel9.shared_alpha"} true;
     $$kernel9.shared_alpha[1bv1][0bv32] := (if p1$1 then v5$1 else $$kernel9.shared_alpha[1bv1][0bv32]);
     $$kernel9.shared_alpha[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][0bv32] := (if p1$2 then v5$2 else $$kernel9.shared_alpha[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][0bv32]);
-    goto __partitioned_block_$entry_1;
+    goto __partitioned_block_$0_1;
 
-  __partitioned_block_$entry_1:
+  __partitioned_block_$0_1:
     call {:sourceloc_num 11} $bugle_barrier_duplicated_0(1bv1, 1bv1);
     $c1.0$1 := BV64_MUL(32bv64, v0$1);
     $c1.0$2 := BV64_MUL(32bv64, v0$2);
     p4$1 := true;
     p4$2 := true;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto __partitioned_block_$for.cond_0;
+    goto __partitioned_block_$4_0;
 
-  __partitioned_block_$for.cond_0:
+  __partitioned_block_$4_0:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b24 ==> _WRITE_HAS_OCCURRED_$$kernel9.shared_y_1 ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b23 ==> _READ_HAS_OCCURRED_$$kernel9.shared_y_1 ==> _WATCHED_OFFSET == BV64_ADD(BV64_SUB(0bv64, BV32_ZEXT64(local_id_x$1)), 31bv64)[32:0];
@@ -276,10 +276,10 @@ implementation {:source_name "kernel9"} {:kernel} $kernel9($n: bv32, $c0: bv64)
     assert {:tag "noread"} _b21 ==> !_READ_HAS_OCCURRED_$$kernel9.shared_y_1;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b20 ==> _WRITE_HAS_OCCURRED_$$z ==> BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), 0bv64[32:0]);
     assert {:tag "nowrite"} _b19 ==> !_WRITE_HAS_OCCURRED_$$z;
-    assert {:tag "predicatedEquality"} _b18 ==> p4$1 && p4$2 ==> v9$1 == v9$2;
-    assert {:tag "predicatedEquality"} _b17 ==> p4$1 && p4$2 ==> v12$1 == v12$2;
-    assert {:tag "predicatedEquality"} _b16 ==> p4$1 && p4$2 ==> v11$1 == v11$2;
-    assert {:tag "predicatedEquality"} _b15 ==> p4$1 && p4$2 ==> v10$1 == v10$2;
+    assert {:tag "predicatedEquality"} _b18 ==> p4$1 && p4$2 ==> v12$1 == v12$2;
+    assert {:tag "predicatedEquality"} _b17 ==> p4$1 && p4$2 ==> v11$1 == v11$2;
+    assert {:tag "predicatedEquality"} _b16 ==> p4$1 && p4$2 ==> v10$1 == v10$2;
+    assert {:tag "predicatedEquality"} _b15 ==> p4$1 && p4$2 ==> v9$1 == v9$2;
     assert {:tag "predicatedEquality"} _b14 ==> p4$1 && p4$2 ==> v8$1 == v8$2;
     assert {:tag "predicatedEquality"} _b13 ==> p4$1 && p4$2 ==> v7$1 == v7$2;
     assert {:tag "predicatedEquality"} _b12 ==> p4$1 && p4$2 ==> v6$1 == v6$2;
@@ -345,9 +345,9 @@ implementation {:source_name "kernel9"} {:kernel} $kernel9($n: bv32, $c0: bv64)
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$kernel9.shared_y_1"} true;
     $$kernel9.shared_y_1[1bv1][v1$1] := (if p7$1 then v8$1 else $$kernel9.shared_y_1[1bv1][v1$1]);
     $$kernel9.shared_y_1[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v1$2] := (if p7$2 then v8$2 else $$kernel9.shared_y_1[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v1$2]);
-    goto __partitioned_block_$for.cond_1;
+    goto __partitioned_block_$4_1;
 
-  __partitioned_block_$for.cond_1:
+  __partitioned_block_$4_1:
     call {:sourceloc_num 18} $bugle_barrier_duplicated_1(1bv1, 1bv1, p5$1, p5$2);
     v9$1 := (if p5$1 then BV64_SGE($c0, BV64_ADD(BV64_ADD(v2$1, $c1.0$1), 1bv64)) else v9$1);
     v9$2 := (if p5$2 then BV64_SGE($c0, BV64_ADD(BV64_ADD(v2$2, $c1.0$2), 1bv64)) else v9$2);
@@ -372,24 +372,24 @@ implementation {:source_name "kernel9"} {:kernel} $kernel9($n: bv32, $c0: bv64)
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$z"} true;
     $$z[BV64_ADD(v2$1, $c1.0$1)[32:0]] := (if p9$1 then FADD64(FMUL64(v11$1, v12$1), v10$1) else $$z[BV64_ADD(v2$1, $c1.0$1)[32:0]]);
     $$z[BV64_ADD(v2$2, $c1.0$2)[32:0]] := (if p9$2 then FADD64(FMUL64(v11$2, v12$2), v10$2) else $$z[BV64_ADD(v2$2, $c1.0$2)[32:0]]);
-    goto __partitioned_block_$for.cond_2;
+    goto __partitioned_block_$4_2;
 
-  __partitioned_block_$for.cond_2:
+  __partitioned_block_$4_2:
     call {:sourceloc_num 25} $bugle_barrier_duplicated_2(1bv1, 1bv1, p5$1, p5$2);
     $c1.0$1 := (if p5$1 then BV64_ADD($c1.0$1, 1048576bv64) else $c1.0$1);
     $c1.0$2 := (if p5$2 then BV64_ADD($c1.0$2, 1048576bv64) else $c1.0$2);
     p4$1 := (if p5$1 then true else p4$1);
     p4$2 := (if p5$2 then true else p4$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $4.backedge, $4.tail;
 
-  $for.cond.tail:
+  $4.tail:
     assume !p4$1 && !p4$2;
     return;
 
-  $for.cond.backedge:
+  $4.backedge:
     assume {:backedge} p4$1 || p4$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto __partitioned_block_$for.cond_0;
+    goto __partitioned_block_$4_0;
 }
 
 

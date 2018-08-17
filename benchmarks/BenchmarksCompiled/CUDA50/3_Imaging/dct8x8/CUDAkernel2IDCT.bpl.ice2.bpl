@@ -157,6 +157,8 @@ implementation {:source_name "CUDAkernel2IDCT"} {:kernel} $_Z15CUDAkernel2IDCTPf
 {
   var $i.0: bv32;
   var $i1.0: bv32;
+  var v0$1: bv32;
+  var v0$2: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
   var v2$1: bv32;
@@ -166,8 +168,6 @@ implementation {:source_name "CUDAkernel2IDCT"} {:kernel} $_Z15CUDAkernel2IDCTPf
   var v4$1: bv32;
   var v4$2: bv32;
   var v5: bool;
-  var v0$1: bv32;
-  var v0$2: bv32;
   var v6$1: bv32;
   var v6$2: bv32;
   var v7$1: bv32;
@@ -234,8 +234,6 @@ implementation {:source_name "CUDAkernel2IDCT"} {:kernel} $_Z15CUDAkernel2IDCTPf
   var v37$2: bv32;
   var v38$1: bv32;
   var v38$2: bv32;
-  var v57$1: bv32;
-  var v57$2: bv32;
   var v39$1: bv32;
   var v39$2: bv32;
   var v40$1: bv32;
@@ -272,6 +270,8 @@ implementation {:source_name "CUDAkernel2IDCT"} {:kernel} $_Z15CUDAkernel2IDCTPf
   var v55$2: bv32;
   var v56$1: bv32;
   var v56$2: bv32;
+  var v57$1: bv32;
+  var v57$2: bv32;
   var v58$1: bv32;
   var v58$2: bv32;
   var v59$1: bv32;

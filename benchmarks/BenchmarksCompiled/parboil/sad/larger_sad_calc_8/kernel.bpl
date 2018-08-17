@@ -152,89 +152,89 @@ implementation {:source_name "larger_sad_calc_8"} {:kernel} $larger_sad_calc_8($
   var $bo_4.0$2: ptr;
   var $search_pos.0$1: bv32;
   var $search_pos.0$2: bv32;
+  var v0$1: bv32;
+  var v0$2: bv32;
+  var v1$1: bv32;
+  var v1$2: bv32;
+  var v5$1: bool;
+  var v5$2: bool;
+  var v9$1: bv8;
+  var v9$2: bv8;
+  var v10$1: bv8;
+  var v10$2: bv8;
+  var v11$1: bv16;
+  var v11$2: bv16;
+  var v12$1: bv8;
+  var v12$2: bv8;
+  var v13$1: bv8;
+  var v13$2: bv8;
+  var v14$1: bv16;
+  var v14$2: bv16;
+  var v15$1: bv8;
+  var v15$2: bv8;
+  var v16$1: bv8;
+  var v16$2: bv8;
+  var v17$1: bv16;
+  var v17$2: bv16;
+  var v8$1: bv16;
+  var v8$2: bv16;
+  var v6$1: bv8;
+  var v6$2: bv8;
+  var v7$1: bv8;
+  var v7$2: bv8;
   var v2: bv32;
   var v3$1: bv32;
   var v3$2: bv32;
-  var v1$1: bv32;
-  var v1$2: bv32;
-  var v0$1: bv32;
-  var v0$2: bv32;
+  var v4$1: bool;
+  var v4$2: bool;
   var v41$1: ptr;
   var v41$2: ptr;
   var v40$1: ptr;
   var v40$2: ptr;
-  var v27$1: bv8;
-  var v27$2: bv8;
+  var v18$1: bv8;
+  var v18$2: bv8;
+  var v19$1: bv8;
+  var v19$2: bv8;
+  var v20$1: bv16;
+  var v20$2: bv16;
   var v21$1: bv8;
   var v21$2: bv8;
   var v22$1: bv8;
   var v22$2: bv8;
-  var v28$1: bv8;
-  var v28$2: bv8;
-  var v16$1: bv8;
-  var v16$2: bv8;
-  var v15$1: bv8;
-  var v15$2: bv8;
-  var v19$1: bv8;
-  var v19$2: bv8;
+  var v23$1: bv16;
+  var v23$2: bv16;
   var v24$1: bv8;
   var v24$2: bv8;
   var v25$1: bv8;
   var v25$2: bv8;
-  var v18$1: bv8;
-  var v18$2: bv8;
-  var v10$1: bv8;
-  var v10$2: bv8;
-  var v7$1: bv8;
-  var v7$2: bv8;
-  var v13$1: bv8;
-  var v13$2: bv8;
-  var v9$1: bv8;
-  var v9$2: bv8;
-  var v12$1: bv8;
-  var v12$2: bv8;
-  var v6$1: bv8;
-  var v6$2: bv8;
-  var v4$1: bool;
-  var v4$2: bool;
-  var v8$1: bv16;
-  var v8$2: bv16;
-  var v11$1: bv16;
-  var v11$2: bv16;
-  var v5$1: bool;
-  var v5$2: bool;
-  var v20$1: bv16;
-  var v20$2: bv16;
-  var v17$1: bv16;
-  var v17$2: bv16;
-  var v14$1: bv16;
-  var v14$2: bv16;
-  var v23$1: bv16;
-  var v23$2: bv16;
-  var v31$1: bv16;
-  var v31$2: bv16;
   var v26$1: bv16;
   var v26$2: bv16;
-  var v30$1: bv16;
-  var v30$2: bv16;
+  var v27$1: bv8;
+  var v27$2: bv8;
+  var v28$1: bv8;
+  var v28$2: bv8;
   var v29$1: bv16;
   var v29$2: bv16;
-  var v34$1: bv16;
-  var v34$2: bv16;
-  var v36$1: bv16;
-  var v36$2: bv16;
-  var v33$1: bv16;
-  var v33$2: bv16;
-  var v35$1: bv16;
-  var v35$2: bv16;
-  var v37$1: bv16;
-  var v37$2: bv16;
+  var v30$1: bv16;
+  var v30$2: bv16;
+  var v31$1: bv16;
+  var v31$2: bv16;
   var v32$1: bv16;
   var v32$2: bv16;
-  var v39$1: bv16;
-  var v39$2: bv16;
+  var v33$1: bv16;
+  var v33$2: bv16;
+  var v34$1: bv16;
+  var v34$2: bv16;
+  var v35$1: bv16;
+  var v35$2: bv16;
+  var v36$1: bv16;
+  var v36$2: bv16;
+  var v37$1: bv16;
+  var v37$2: bv16;
   var v38$1: bv16;
   var v38$2: bv16;
+  var v39$1: bv16;
+  var v39$2: bv16;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -297,7 +297,7 @@ implementation {:source_name "larger_sad_calc_8"} {:kernel} $larger_sad_calc_8($
   var _HAVOC_ptr$2: ptr;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_AND(local_id_y$1, 1bv32);
     v0$2 := BV32_AND(local_id_y$2, 1bv32);
     v1$1 := BV32_LSHR(local_id_y$1, 1bv32);
@@ -332,9 +332,9 @@ implementation {:source_name "larger_sad_calc_8"} {:kernel} $larger_sad_calc_8($
     p2$1 := true;
     p2$2 := true;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $3;
 
-  $for.cond:
+  $3:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b7 ==> _WRITE_HAS_OCCURRED_$$blk_sad ==> BV32_AND(BV32_SUB(BV32_MUL(32bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(32bv32, 4bv32), 1bv32), BV32_MUL(local_id_x$1, 4bv32)) || BV32_AND(BV32_SUB(BV32_MUL(32bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(32bv32, 4bv32), 1bv32), BV32_MUL(BV32_ADD(local_id_x$1, 1096bv32), 4bv32)) || BV32_AND(BV32_SUB(BV32_MUL(32bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(32bv32, 4bv32), 1bv32), BV32_MUL(local_id_x$1, 4bv32));
     assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 1} _b6 ==> BV32_SLT($search_pos.0$1, 545bv32) ==> p2$1;
@@ -760,16 +760,16 @@ implementation {:source_name "larger_sad_calc_8"} {:kernel} $larger_sad_calc_8($
     $search_pos.0$2 := (if p3$2 then BV32_ADD($search_pos.0$2, 32bv32) else $search_pos.0$2);
     p2$1 := (if p3$1 then true else p2$1);
     p2$2 := (if p3$2 then true else p2$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $3.backedge, $3.tail;
 
-  $for.cond.tail:
+  $3.tail:
     assume !p2$1 && !p2$2;
     return;
 
-  $for.cond.backedge:
+  $3.backedge:
     assume {:backedge} p2$1 || p2$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $3;
 }
 
 

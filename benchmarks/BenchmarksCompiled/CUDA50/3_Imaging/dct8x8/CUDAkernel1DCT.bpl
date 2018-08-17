@@ -22,11 +22,11 @@ const $arrayId$$Dst: arrayId;
 
 axiom $arrayId$$Dst == 1bv3;
 
-axiom {:array_info "$$agg.tmp"} {:elem_width 8} {:source_name "agg.tmp"} {:source_elem_width 96} {:source_dimensions "1"} true;
+axiom {:array_info "$$0"} {:elem_width 8} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
 
-const $arrayId$$agg.tmp: arrayId;
+const $arrayId$$0: arrayId;
 
-axiom $arrayId$$agg.tmp == 2bv3;
+axiom $arrayId$$0 == 2bv3;
 
 axiom {:array_info "$$TexSrc"} {:global} {:elem_width 8} {:source_name "TexSrc"} {:source_elem_width 96} {:source_dimensions "1"} true;
 
@@ -201,93 +201,93 @@ implementation {:source_name "CUDAkernel1DCT"} {:kernel} $_Z14CUDAkernel1DCTPfii
   var $DCTv8matrixIndex.1$2: bv32;
   var $CurBlockLocal2Index.0$1: bv32;
   var $CurBlockLocal2Index.0$2: bv32;
-  var $i24.0: bv32;
-  var v11$1: bv8;
-  var v11$2: bv8;
-  var v1$1: bv32;
-  var v1$2: bv32;
+  var $i1.0: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
+  var v1$1: bv32;
+  var v1$2: bv32;
   var v2$1: bv8;
   var v2$2: bv8;
-  var v7$1: bv8;
-  var v7$2: bv8;
-  var v10$1: bv8;
-  var v10$2: bv8;
   var v3$1: bv8;
   var v3$2: bv8;
-  var v6$1: bv8;
-  var v6$2: bv8;
-  var v9$1: bv8;
-  var v9$2: bv8;
-  var v5$1: bv8;
-  var v5$2: bv8;
   var v4$1: bv8;
   var v4$2: bv8;
+  var v5$1: bv8;
+  var v5$2: bv8;
+  var v6$1: bv8;
+  var v6$2: bv8;
+  var v7$1: bv8;
+  var v7$2: bv8;
   var v8$1: bv8;
   var v8$2: bv8;
+  var v9$1: bv8;
+  var v9$2: bv8;
+  var v10$1: bv8;
+  var v10$2: bv8;
+  var v11$1: bv8;
+  var v11$2: bv8;
   var v12$1: bv8;
   var v12$2: bv8;
-  var v14$1: bv32;
-  var v14$2: bv32;
-  var v17$1: bv32;
-  var v17$2: bv32;
-  var v16$1: bv32;
-  var v16$2: bv32;
   var v13$1: bv8;
   var v13$2: bv8;
+  var v14$1: bv32;
+  var v14$2: bv32;
+  var v15: bool;
+  var v16$1: bv32;
+  var v16$2: bv32;
+  var v17$1: bv32;
+  var v17$2: bv32;
+  var v18: bool;
   var v19$1: bv32;
   var v19$2: bv32;
   var v20$1: bv32;
   var v20$2: bv32;
   var v21$1: bv32;
   var v21$2: bv32;
-  var v15: bool;
-  var v18: bool;
 
 
-  __partitioned_block_$entry_0:
+  __partitioned_block_$0_0:
     v0$1 := BV32_ADD(group_id_x$1, $OffsetXBlocks);
     v0$2 := BV32_ADD(group_id_x$2, $OffsetXBlocks);
     v1$1 := BV32_ADD(group_id_y$1, $OffsetYBlocks);
     v1$2 := BV32_ADD(group_id_y$2, $OffsetYBlocks);
     havoc v2$1, v2$2;
-    $$agg.tmp$0bv32$1 := v2$1;
-    $$agg.tmp$0bv32$2 := v2$2;
+    $$0$0bv32$1 := v2$1;
+    $$0$0bv32$2 := v2$2;
     havoc v3$1, v3$2;
-    $$agg.tmp$1bv32$1 := v3$1;
-    $$agg.tmp$1bv32$2 := v3$2;
+    $$0$1bv32$1 := v3$1;
+    $$0$1bv32$2 := v3$2;
     havoc v4$1, v4$2;
-    $$agg.tmp$2bv32$1 := v4$1;
-    $$agg.tmp$2bv32$2 := v4$2;
+    $$0$2bv32$1 := v4$1;
+    $$0$2bv32$2 := v4$2;
     havoc v5$1, v5$2;
-    $$agg.tmp$3bv32$1 := v5$1;
-    $$agg.tmp$3bv32$2 := v5$2;
+    $$0$3bv32$1 := v5$1;
+    $$0$3bv32$2 := v5$2;
     havoc v6$1, v6$2;
-    $$agg.tmp$4bv32$1 := v6$1;
-    $$agg.tmp$4bv32$2 := v6$2;
+    $$0$4bv32$1 := v6$1;
+    $$0$4bv32$2 := v6$2;
     havoc v7$1, v7$2;
-    $$agg.tmp$5bv32$1 := v7$1;
-    $$agg.tmp$5bv32$2 := v7$2;
+    $$0$5bv32$1 := v7$1;
+    $$0$5bv32$2 := v7$2;
     havoc v8$1, v8$2;
-    $$agg.tmp$6bv32$1 := v8$1;
-    $$agg.tmp$6bv32$2 := v8$2;
+    $$0$6bv32$1 := v8$1;
+    $$0$6bv32$2 := v8$2;
     havoc v9$1, v9$2;
-    $$agg.tmp$7bv32$1 := v9$1;
-    $$agg.tmp$7bv32$2 := v9$2;
+    $$0$7bv32$1 := v9$1;
+    $$0$7bv32$2 := v9$2;
     havoc v10$1, v10$2;
-    $$agg.tmp$8bv32$1 := v10$1;
-    $$agg.tmp$8bv32$2 := v10$2;
+    $$0$8bv32$1 := v10$1;
+    $$0$8bv32$2 := v10$2;
     havoc v11$1, v11$2;
-    $$agg.tmp$9bv32$1 := v11$1;
-    $$agg.tmp$9bv32$2 := v11$2;
+    $$0$9bv32$1 := v11$1;
+    $$0$9bv32$2 := v11$2;
     havoc v12$1, v12$2;
-    $$agg.tmp$10bv32$1 := v12$1;
-    $$agg.tmp$10bv32$2 := v12$2;
+    $$0$10bv32$1 := v12$1;
+    $$0$10bv32$2 := v12$2;
     havoc v13$1, v13$2;
-    $$agg.tmp$11bv32$1 := v13$1;
-    $$agg.tmp$11bv32$2 := v13$2;
-    call {:sourceloc_num 26} v14$1, v14$2 := $_Z5tex2DIfET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(MKPTR($arrayId$$agg.tmp, 0bv32), FADD32(SI32_TO_FP32(BV32_ADD(BV32_SHL(v0$1, 3bv32), local_id_x$1)), 1056964608bv32), FADD32(SI32_TO_FP32(BV32_ADD(BV32_SHL(v1$1, 3bv32), local_id_y$1)), 1056964608bv32), FADD32(SI32_TO_FP32(BV32_ADD(BV32_SHL(v0$2, 3bv32), local_id_x$2)), 1056964608bv32), FADD32(SI32_TO_FP32(BV32_ADD(BV32_SHL(v1$2, 3bv32), local_id_y$2)), 1056964608bv32));
+    $$0$11bv32$1 := v13$1;
+    $$0$11bv32$2 := v13$2;
+    call {:sourceloc_num 26} v14$1, v14$2 := $_Z5tex2DIfET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(MKPTR($arrayId$$0, 0bv32), FADD32(SI32_TO_FP32(BV32_ADD(BV32_SHL(v0$1, 3bv32), local_id_x$1)), 1056964608bv32), FADD32(SI32_TO_FP32(BV32_ADD(BV32_SHL(v1$1, 3bv32), local_id_y$1)), 1056964608bv32), FADD32(SI32_TO_FP32(BV32_ADD(BV32_SHL(v0$2, 3bv32), local_id_x$2)), 1056964608bv32), FADD32(SI32_TO_FP32(BV32_ADD(BV32_SHL(v1$2, 3bv32), local_id_y$2)), 1056964608bv32));
     assume {:captureState "call_return_state_0"} {:procedureName "$_Z5tex2DIfET_7textureIS0_Li2EL19cudaTextureReadMode0EEff"} true;
     call {:sourceloc} {:sourceloc_num 27} _LOG_WRITE_$$CurBlockLocal1(true, BV32_ADD(BV32_SHL(local_id_y$1, 3bv32), local_id_x$1), v14$1, $$CurBlockLocal1[1bv1][BV32_ADD(BV32_SHL(local_id_y$1, 3bv32), local_id_x$1)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$CurBlockLocal1(true, BV32_ADD(BV32_SHL(local_id_y$2, 3bv32), local_id_x$2));
@@ -296,16 +296,16 @@ implementation {:source_name "CUDAkernel1DCT"} {:kernel} $_Z14CUDAkernel1DCTPfii
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$CurBlockLocal1"} true;
     $$CurBlockLocal1[1bv1][BV32_ADD(BV32_SHL(local_id_y$1, 3bv32), local_id_x$1)] := v14$1;
     $$CurBlockLocal1[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_SHL(local_id_y$2, 3bv32), local_id_x$2)] := v14$2;
-    goto __partitioned_block_$entry_1;
+    goto __partitioned_block_$0_1;
 
-  __partitioned_block_$entry_1:
+  __partitioned_block_$0_1:
     call {:sourceloc_num 28} $bugle_barrier_duplicated_0(1bv1, 1bv1);
     $curelem.0$1, $DCTv8matrixIndex.0$1, $CurBlockLocal1Index.0$1, $i.0 := 0bv32, local_id_y$1, local_id_x$1, 0bv32;
     $curelem.0$2, $DCTv8matrixIndex.0$2, $CurBlockLocal1Index.0$2 := 0bv32, local_id_y$2, local_id_x$2;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$CurBlockLocal2 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$CurBlockLocal2 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -339,12 +339,12 @@ implementation {:source_name "CUDAkernel1DCT"} {:kernel} $_Z14CUDAkernel1DCTPfii
 
   __partitioned_block_$falsebb_1:
     call {:sourceloc_num 36} $bugle_barrier_duplicated_1(1bv1, 1bv1);
-    $curelem.1$1, $DCTv8matrixIndex.1$1, $CurBlockLocal2Index.0$1, $i24.0 := 0bv32, local_id_x$1, BV32_SHL(local_id_y$1, 3bv32), 0bv32;
+    $curelem.1$1, $DCTv8matrixIndex.1$1, $CurBlockLocal2Index.0$1, $i1.0 := 0bv32, local_id_x$1, BV32_SHL(local_id_y$1, 3bv32), 0bv32;
     $curelem.1$2, $DCTv8matrixIndex.1$2, $CurBlockLocal2Index.0$2 := 0bv32, local_id_x$2, BV32_SHL(local_id_y$2, 3bv32);
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.25;
+    goto $5;
 
-  $for.cond.25:
+  $5:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "pow2NotZero"} _b16 ==> $CurBlockLocal2Index.0$2 != 0bv32;
     assert {:tag "pow2"} _b15 ==> $CurBlockLocal2Index.0$2 == 0bv32 || BV32_AND($CurBlockLocal2Index.0$2, BV32_SUB($CurBlockLocal2Index.0$2, 1bv32)) == 0bv32;
@@ -356,15 +356,15 @@ implementation {:source_name "CUDAkernel1DCT"} {:kernel} $_Z14CUDAkernel1DCTPfii
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$CurBlockLocal1 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$CurBlockLocal1 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$CurBlockLocal1 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
-    assert {:tag "loopBound"} {:thread 1} _b12 ==> BV32_UGE($i24.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b11 ==> BV32_ULE($i24.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b10 ==> BV32_SGE($i24.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b9 ==> BV32_SLE($i24.0, 0bv32);
-    assert {:tag "guardNonNeg"} {:thread 1} _b8 ==> BV32_SLE(0bv32, $i24.0);
+    assert {:tag "loopBound"} {:thread 1} _b12 ==> BV32_UGE($i1.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b11 ==> BV32_ULE($i1.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b10 ==> BV32_SGE($i1.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b9 ==> BV32_SLE($i1.0, 0bv32);
+    assert {:tag "guardNonNeg"} {:thread 1} _b8 ==> BV32_SLE(0bv32, $i1.0);
     assert {:tag "loopCounterIsStrided"} {:thread 1} _b7 ==> BV32_AND(BV32_SUB(8bv32, 1bv32), $DCTv8matrixIndex.1$1) == BV32_AND(BV32_SUB(8bv32, 1bv32), local_id_x$1);
     assert {:tag "loopCounterIsStrided"} {:thread 2} _b7 ==> BV32_AND(BV32_SUB(8bv32, 1bv32), $DCTv8matrixIndex.1$2) == BV32_AND(BV32_SUB(8bv32, 1bv32), local_id_x$2);
     assert {:block_sourceloc} {:sourceloc_num 37} true;
-    v18 := BV32_SLT($i24.0, 8bv32);
+    v18 := BV32_SLT($i1.0, 8bv32);
     goto $truebb0, __partitioned_block_$falsebb0_0;
 
   __partitioned_block_$falsebb0_0:
@@ -399,10 +399,10 @@ implementation {:source_name "CUDAkernel1DCT"} {:kernel} $_Z14CUDAkernel1DCTPfii
     v19$2 := $$CurBlockLocal2[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][$CurBlockLocal2Index.0$2];
     v20$1 := $$DCTv8matrix$1[$DCTv8matrixIndex.1$1];
     v20$2 := $$DCTv8matrix$2[$DCTv8matrixIndex.1$2];
-    $curelem.1$1, $DCTv8matrixIndex.1$1, $CurBlockLocal2Index.0$1, $i24.0 := FADD32($curelem.1$1, FMUL32(v19$1, v20$1)), BV32_ADD($DCTv8matrixIndex.1$1, 8bv32), BV32_ADD($CurBlockLocal2Index.0$1, 1bv32), BV32_ADD($i24.0, 1bv32);
+    $curelem.1$1, $DCTv8matrixIndex.1$1, $CurBlockLocal2Index.0$1, $i1.0 := FADD32($curelem.1$1, FMUL32(v19$1, v20$1)), BV32_ADD($DCTv8matrixIndex.1$1, 8bv32), BV32_ADD($CurBlockLocal2Index.0$1, 1bv32), BV32_ADD($i1.0, 1bv32);
     $curelem.1$2, $DCTv8matrixIndex.1$2, $CurBlockLocal2Index.0$2 := FADD32($curelem.1$2, FMUL32(v19$2, v20$2)), BV32_ADD($DCTv8matrixIndex.1$2, 8bv32), BV32_ADD($CurBlockLocal2Index.0$2, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.25;
+    goto $5;
 
   $truebb:
     assume {:partition} v15;
@@ -414,7 +414,7 @@ implementation {:source_name "CUDAkernel1DCT"} {:kernel} $_Z14CUDAkernel1DCTPfii
     $curelem.0$1, $DCTv8matrixIndex.0$1, $CurBlockLocal1Index.0$1, $i.0 := FADD32($curelem.0$1, FMUL32(v16$1, v17$1)), BV32_ADD($DCTv8matrixIndex.0$1, 8bv32), BV32_ADD($CurBlockLocal1Index.0$1, 8bv32), BV32_ADD($i.0, 1bv32);
     $curelem.0$2, $DCTv8matrixIndex.0$2, $CurBlockLocal1Index.0$2 := FADD32($curelem.0$2, FMUL32(v16$2, v17$2)), BV32_ADD($DCTv8matrixIndex.0$2, 8bv32), BV32_ADD($CurBlockLocal1Index.0$2, 8bv32);
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 
@@ -464,53 +464,53 @@ procedure {:inline 1} {:safe_barrier} {:source_name "bugle_barrier"} {:barrier} 
 
 
 
-var $$agg.tmp$0bv32$1: bv8;
+var $$0$0bv32$1: bv8;
 
-var $$agg.tmp$0bv32$2: bv8;
+var $$0$0bv32$2: bv8;
 
-var $$agg.tmp$1bv32$1: bv8;
+var $$0$1bv32$1: bv8;
 
-var $$agg.tmp$1bv32$2: bv8;
+var $$0$1bv32$2: bv8;
 
-var $$agg.tmp$2bv32$1: bv8;
+var $$0$2bv32$1: bv8;
 
-var $$agg.tmp$2bv32$2: bv8;
+var $$0$2bv32$2: bv8;
 
-var $$agg.tmp$3bv32$1: bv8;
+var $$0$3bv32$1: bv8;
 
-var $$agg.tmp$3bv32$2: bv8;
+var $$0$3bv32$2: bv8;
 
-var $$agg.tmp$4bv32$1: bv8;
+var $$0$4bv32$1: bv8;
 
-var $$agg.tmp$4bv32$2: bv8;
+var $$0$4bv32$2: bv8;
 
-var $$agg.tmp$5bv32$1: bv8;
+var $$0$5bv32$1: bv8;
 
-var $$agg.tmp$5bv32$2: bv8;
+var $$0$5bv32$2: bv8;
 
-var $$agg.tmp$6bv32$1: bv8;
+var $$0$6bv32$1: bv8;
 
-var $$agg.tmp$6bv32$2: bv8;
+var $$0$6bv32$2: bv8;
 
-var $$agg.tmp$7bv32$1: bv8;
+var $$0$7bv32$1: bv8;
 
-var $$agg.tmp$7bv32$2: bv8;
+var $$0$7bv32$2: bv8;
 
-var $$agg.tmp$8bv32$1: bv8;
+var $$0$8bv32$1: bv8;
 
-var $$agg.tmp$8bv32$2: bv8;
+var $$0$8bv32$2: bv8;
 
-var $$agg.tmp$9bv32$1: bv8;
+var $$0$9bv32$1: bv8;
 
-var $$agg.tmp$9bv32$2: bv8;
+var $$0$9bv32$2: bv8;
 
-var $$agg.tmp$10bv32$1: bv8;
+var $$0$10bv32$1: bv8;
 
-var $$agg.tmp$10bv32$2: bv8;
+var $$0$10bv32$2: bv8;
 
-var $$agg.tmp$11bv32$1: bv8;
+var $$0$11bv32$1: bv8;
 
-var $$agg.tmp$11bv32$2: bv8;
+var $$0$11bv32$2: bv8;
 
 function {:bvbuiltin "bvsub"} BV32_SUB(bv32, bv32) : bv32;
 

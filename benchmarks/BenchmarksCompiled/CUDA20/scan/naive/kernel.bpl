@@ -106,27 +106,27 @@ procedure {:source_name "kernel"} {:kernel} $_Z6kernelPfS_i($n: bv32);
 
 implementation {:source_name "kernel"} {:kernel} $_Z6kernelPfS_i($n: bv32)
 {
-  var $cond$1: bv32;
-  var $cond$2: bv32;
+  var $0$1: bv32;
+  var $0$2: bv32;
   var $pout.0: bv32;
   var $offset.0: bv32;
   var v0$1: bool;
   var v0$2: bool;
   var v1$1: bv32;
   var v1$2: bv32;
-  var v5$1: bv32;
-  var v5$2: bv32;
-  var v9$1: bv32;
-  var v9$2: bv32;
-  var v7$1: bv32;
-  var v7$2: bv32;
   var v2: bool;
   var v3: bv32;
   var v4: bv32;
+  var v5$1: bv32;
+  var v5$2: bv32;
   var v6$1: bool;
   var v6$2: bool;
+  var v7$1: bv32;
+  var v7$2: bv32;
   var v8$1: bv32;
   var v8$2: bv32;
+  var v9$1: bv32;
+  var v9$2: bv32;
   var v10$1: bv32;
   var v10$2: bv32;
   var p0$1: bool;
@@ -141,7 +141,7 @@ implementation {:source_name "kernel"} {:kernel} $_Z6kernelPfS_i($n: bv32)
   var _HAVOC_bv32$2: bv32;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_SGT(local_id_x$1, 0bv32);
     v0$2 := BV32_SGT(local_id_x$2, 0bv32);
     p0$1 := false;
@@ -155,22 +155,22 @@ implementation {:source_name "kernel"} {:kernel} $_Z6kernelPfS_i($n: bv32)
     havoc _HAVOC_bv32$1, _HAVOC_bv32$2;
     v1$1 := (if p0$1 then _HAVOC_bv32$1 else v1$1);
     v1$2 := (if p0$2 then _HAVOC_bv32$2 else v1$2);
-    $cond$1 := (if p0$1 then v1$1 else $cond$1);
-    $cond$2 := (if p0$2 then v1$2 else $cond$2);
-    $cond$1 := (if p1$1 then 0bv32 else $cond$1);
-    $cond$2 := (if p1$2 then 0bv32 else $cond$2);
-    call {:sourceloc} {:sourceloc_num 6} _LOG_WRITE_$$_ZZ6kernelPfS_iE4temp(true, BV32_ADD(BV32_MUL(0bv32, $n), local_id_x$1), $cond$1, $$_ZZ6kernelPfS_iE4temp[1bv1][BV32_ADD(BV32_MUL(0bv32, $n), local_id_x$1)]);
+    $0$1 := (if p0$1 then v1$1 else $0$1);
+    $0$2 := (if p0$2 then v1$2 else $0$2);
+    $0$1 := (if p1$1 then 0bv32 else $0$1);
+    $0$2 := (if p1$2 then 0bv32 else $0$2);
+    call {:sourceloc} {:sourceloc_num 6} _LOG_WRITE_$$_ZZ6kernelPfS_iE4temp(true, BV32_ADD(BV32_MUL(0bv32, $n), local_id_x$1), $0$1, $$_ZZ6kernelPfS_iE4temp[1bv1][BV32_ADD(BV32_MUL(0bv32, $n), local_id_x$1)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$_ZZ6kernelPfS_iE4temp(true, BV32_ADD(BV32_MUL(0bv32, $n), local_id_x$2));
     assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 6} true;
-    call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 6} _CHECK_WRITE_$$_ZZ6kernelPfS_iE4temp(true, BV32_ADD(BV32_MUL(0bv32, $n), local_id_x$2), $cond$2);
+    call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 6} _CHECK_WRITE_$$_ZZ6kernelPfS_iE4temp(true, BV32_ADD(BV32_MUL(0bv32, $n), local_id_x$2), $0$2);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$_ZZ6kernelPfS_iE4temp"} true;
-    $$_ZZ6kernelPfS_iE4temp[1bv1][BV32_ADD(BV32_MUL(0bv32, $n), local_id_x$1)] := $cond$1;
-    $$_ZZ6kernelPfS_iE4temp[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(0bv32, $n), local_id_x$2)] := $cond$2;
+    $$_ZZ6kernelPfS_iE4temp[1bv1][BV32_ADD(BV32_MUL(0bv32, $n), local_id_x$1)] := $0$1;
+    $$_ZZ6kernelPfS_iE4temp[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(0bv32, $n), local_id_x$2)] := $0$2;
     $pout.0, $offset.0 := 0bv32, 1bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $4;
 
-  $for.cond:
+  $4:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b10 ==> _WRITE_HAS_OCCURRED_$$_ZZ6kernelPfS_iE4temp ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, $n), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, $n), 1bv32), BV32_ADD(BV32_MUL(0bv32, $n), local_id_x$1)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, $n), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, $n), 1bv32), BV32_ADD(BV32_MUL(0bv32, $n), local_id_x$1));
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b9 ==> _READ_HAS_OCCURRED_$$_ZZ6kernelPfS_iE4temp ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, $n), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, $n), 1bv32), BV32_ADD(BV32_MUL(0bv32, $n), local_id_x$1)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, $n), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, $n), 1bv32), BV32_ADD(BV32_MUL(0bv32, $n), local_id_x$1));
@@ -260,7 +260,7 @@ implementation {:source_name "kernel"} {:kernel} $_Z6kernelPfS_i($n: bv32)
     $$_ZZ6kernelPfS_iE4temp[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v8$2] := (if p3$2 then FADD32(v9$2, v7$2) else $$_ZZ6kernelPfS_iE4temp[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v8$2]);
     $pout.0, $offset.0 := v3, BV32_MUL($offset.0, 2bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $4;
 }
 
 

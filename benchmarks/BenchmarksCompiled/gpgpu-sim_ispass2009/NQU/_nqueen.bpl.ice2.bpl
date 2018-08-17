@@ -237,10 +237,10 @@ implementation {:source_name "solve_nqueen_cuda_kernel"} {:kernel} $_Z24solve_nq
   var v8$2: bv32;
   var v9$1: bool;
   var v9$2: bool;
-  var v11$1: bool;
-  var v11$2: bool;
   var v10$1: bv32;
   var v10$2: bv32;
+  var v11$1: bool;
+  var v11$2: bool;
   var v12$1: bv32;
   var v12$2: bv32;
   var v13$1: bv32;
@@ -928,10 +928,7 @@ assert  my_inv (  ( p1$1 ==> BV32_SLE(0bv32, $i.0$1) )  && ( p1$2 ==> BV32_SLE(0
     v46$2 := local_id_x$2 == 0bv32;
     p26$1 := (if v46$1 then v46$1 else p26$1);
     p26$2 := (if v46$2 then v46$2 else p26$2);
-    call {:sourceloc} {:sourceloc_num 87} _LOG_READ_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum(p26$1, 0bv32, $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[1bv1][0bv32]);
     assume {:do_not_predicate} {:check_id "check_state_1"} {:captureState "check_state_1"} {:sourceloc} {:sourceloc_num 87} true;
-    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 87} _CHECK_READ_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum(p26$2, 0bv32, $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][0bv32]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum"} true;
     v47$1 := (if p26$1 then $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[1bv1][0bv32] else v47$1);
     v47$2 := (if p26$2 then $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][0bv32] else v47$2);
     call {:sourceloc} {:sourceloc_num 88} _LOG_WRITE_$$results(p26$1, group_id_x$1, v47$1, $$results[group_id_x$1]);

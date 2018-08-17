@@ -169,28 +169,16 @@ implementation {:source_name "writeKernel"} {:kernel} $writeKernel($ni: bv32, $v
 
   __partitioned_block_$0_1:
     call {:sourceloc_num 5} $bugle_barrier_duplicated_0(1bv1, 0bv1);
-    call {:sourceloc} {:sourceloc_num 6} _LOG_READ_$$writeKernel.lval(true, 0bv32, $$writeKernel.lval[1bv1][0bv32]);
     assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 6} true;
-    call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 6} _CHECK_READ_$$writeKernel.lval(true, 0bv32, $$writeKernel.lval[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][0bv32]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$writeKernel.lval"} true;
     v2$1 := $$writeKernel.lval[1bv1][0bv32];
     v2$2 := $$writeKernel.lval[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][0bv32];
-    call {:sourceloc} {:sourceloc_num 7} _LOG_READ_$$writeKernel.lval(true, 0bv32, $$writeKernel.lval[1bv1][0bv32]);
     assume {:do_not_predicate} {:check_id "check_state_1"} {:captureState "check_state_1"} {:sourceloc} {:sourceloc_num 7} true;
-    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 7} _CHECK_READ_$$writeKernel.lval(true, 0bv32, $$writeKernel.lval[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][0bv32]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$writeKernel.lval"} true;
     v3$1 := $$writeKernel.lval[1bv1][0bv32];
     v3$2 := $$writeKernel.lval[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][0bv32];
-    call {:sourceloc} {:sourceloc_num 8} _LOG_READ_$$writeKernel.lval(true, 0bv32, $$writeKernel.lval[1bv1][0bv32]);
     assume {:do_not_predicate} {:check_id "check_state_2"} {:captureState "check_state_2"} {:sourceloc} {:sourceloc_num 8} true;
-    call {:check_id "check_state_2"} {:sourceloc} {:sourceloc_num 8} _CHECK_READ_$$writeKernel.lval(true, 0bv32, $$writeKernel.lval[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][0bv32]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$writeKernel.lval"} true;
     v4$1 := $$writeKernel.lval[1bv1][0bv32];
     v4$2 := $$writeKernel.lval[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][0bv32];
-    call {:sourceloc} {:sourceloc_num 9} _LOG_READ_$$writeKernel.lval(true, 0bv32, $$writeKernel.lval[1bv1][0bv32]);
     assume {:do_not_predicate} {:check_id "check_state_3"} {:captureState "check_state_3"} {:sourceloc} {:sourceloc_num 9} true;
-    call {:check_id "check_state_3"} {:sourceloc} {:sourceloc_num 9} _CHECK_READ_$$writeKernel.lval(true, 0bv32, $$writeKernel.lval[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][0bv32]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$writeKernel.lval"} true;
     v5$1 := $$writeKernel.lval[1bv1][0bv32];
     v5$2 := $$writeKernel.lval[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][0bv32];
     $n.0 := 0bv32;
