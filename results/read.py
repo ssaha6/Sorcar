@@ -204,24 +204,36 @@ def read_file(file, timeout, benchmark_pattern):
                     time = round(float(timereg.group(1))*60+float(timereg.group(2)), 1)
 
 
+            # ~~~ check.. may nto be correct
             num_predicates = 0
-            if re.search('b([0-9]{4}):\s*bool\s*\)\s*:\s*bool', output, re.IGNORECASE) != None:
-                num_predicates = int(re.search('b([0-9]{4}):\s*bool\s*\)\s*:\s*bool', output, re.IGNORECASE).group(1).strip())
+            try:
+                num_pred_all = re.findall('my_inv\(b[0-9]{4}\:\s*bool(?:,\s+b[0-9]{4}\:\s*bool)*\)\s*:\s*bool', output, re.MULTILINE)[0]
+                num_predicates = len(re.findall('b[0-9]{4}', num_pred_all)) 
+                # -1 as converting a bpl file to ice format requires adding an extra pred, which is set to true.
+            except:
+                pass
+
+            # also correct... 
+            # num_predicates = 0
+            # if re.search('b([0-9]{4}):\s*bool\s*\)\s*:\s*bool', output, re.IGNORECASE) != None:
+            #     num_predicates = int(re.search('b([0-9]{4}):\s*bool\s*\)\s*:\s*bool', output, re.IGNORECASE).group(1).strip())
                 
 
+            # ~~ check.. may not be correct
             num_rounds = 0
-            if re.search('Number of C5 Learner queries = ([0-9]+)', output, re.IGNORECASE) != None:
-                num_rounds = int(re.search('Number of C5 Learner queries = ([0-9]+)', output, re.IGNORECASE).group(1).strip())
-            elif re.search('Number of prover queries = ([0-9]+)', output, re.IGNORECASE) != None:
+            # if re.search('Number of C5 Learner queries = ([0-9]+)', output, re.IGNORECASE) != None:
+            #     num_rounds = int(re.search('Number of C5 Learner queries = ([0-9]+)', output, re.IGNORECASE).group(1).strip())
+            if re.search('Number of prover queries = ([0-9]+)', output, re.IGNORECASE) != None:
                 num_rounds = int(re.search('Number of prover queries = ([0-9]+)', output, re.IGNORECASE).group(1).strip())
-            else:
-                num_rounds = 0
+            # else:
+            #     num_rounds = 0
 
 
             prover_time = 0.0
             if re.search('Prover time\s*=\s*([0-9\.]+)', output, re.IGNORECASE) != None:
                 prover_time = round(float(re.search('Prover time\s*=\s*([0-9\.]+)', output, re.IGNORECASE).group(1).strip()),1)
              
+             # ~~ correct
             num_final_pred = 0 
             all_pred = re.findall('\{(\s*(?:b[0-9]{4}\s*\&\&\s*)*(?:b[0-9]{4}))\s*\}',output, re.MULTILINE)
             if all_pred:
@@ -438,7 +450,8 @@ def analyze(read_list, union_of_files, file_list, write_workbook=False):
 
 def main():
     
-    files = ["vanila_gpuverify.txt",
+    files = [
+            "vanila_gpuverify.txt",
             "variants2/ahorndini.txt",
             "variants2/ahorndinif.txt",
             "variants2/ahorndinit.txt",
@@ -504,15 +517,15 @@ def main():
 
 
     ##############LOAD DATA##############
-    # read_list = read_all_files(files, timeout, benchmark_pattern, write_pickle=True)
-    # union_of_files = compute_union_of_files(read_list,  write_pickle=True)
-    # print_result(read_list, union_of_files, files)
+    read_list = read_all_files(files, timeout, benchmark_pattern, write_pickle=True)
+    union_of_files = compute_union_of_files(read_list,  write_pickle=True)
+    print_result(read_list, union_of_files, files)
 
-    read_list = read_pickle('read_list.pickle')
-    union_of_files = read_pickle('union_of_files.pickle')
-    sorted_files = analyze(read_list, union_of_files, files, write_workbook=True)
+    # read_list = read_pickle('read_list.pickle')
+    # union_of_files = read_pickle('union_of_files.pickle')
+    # sorted_files = analyze(read_list, union_of_files, files, write_workbook=True)
 
-    print_result(read_list, union_of_files, sorted_files)
+    # print_result(read_list, union_of_files, sorted_files)
     ##############LOAD DATA##############
 
 
