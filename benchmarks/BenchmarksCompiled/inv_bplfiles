@@ -1,5 +1,3 @@
-AMD_SDK/AESEncryptDecrypt/kernel1/kernel.bpl
-AMD_SDK/AESEncryptDecrypt/kernel2/kernel.bpl
 AMD_SDK/BinarySearch/kernel2/kernel.bpl
 AMD_SDK/BinomialOption/kernel.bpl
 AMD_SDK/BinomialOptionMultiGPU/kernel.bpl
@@ -134,7 +132,6 @@ CUDA50/7_CUDALibraries/MC_EstimatePiInlineP/computeValue.bpl
 CUDA50/7_CUDALibraries/MC_SingleAsianOptionP/generatePaths.bpl
 gpgpu-sim_ispass2009/AES/aesEncrypt128_kernel/kernel.bpl
 gpgpu-sim_ispass2009/AES/aesEncrypt256_kernel/kernel.bpl
-gpgpu-sim_ispass2009/BFS/_kernel.bpl
 gpgpu-sim_ispass2009/DG/MaxwellsGPU_SURF_Kernel3D/kernel.bpl
 gpgpu-sim_ispass2009/DG/MaxwellsGPU_VOL_Kernel3D/kernel.bpl
 gpgpu-sim_ispass2009/LIB/Pathcalc_Portfolio_KernelGPU/kernel.bpl
@@ -148,7 +145,6 @@ gpgpu-sim_ispass2009/STO/md5.bpl
 gpgpu-sim_ispass2009/STO/md5_overlap.bpl
 gpgpu-sim_ispass2009/STO/sha1.bpl
 gpgpu-sim_ispass2009/STO/sha1_overlap.bpl
-parboil/bfs/BFS_kernel/_kernel.bpl
 parboil/cutcp/opencl_cutoff_potential_lattice/kernel.bpl
 parboil/histo/histo_final/kernel.bpl
 parboil/histo/histo_intermediates/kernel.bpl
@@ -256,7 +252,6 @@ polybench/stencils/seidel-2d/kernel0.bpl
 rodinia_2.4/b+tree/findK/_kernel.bpl
 rodinia_2.4/b+tree/findRangeK/_kernel.bpl
 rodinia_2.4/backprop/bpnn_layerforward/kernel.bpl
-rodinia_2.4/bfs/BFS_1/_kernel.bpl
 rodinia_2.4/cfd/initialize_variables/kernel.bpl
 rodinia_2.4/kmeans/kmeans_swap/kernel.bpl
 rodinia_2.4/lavaMD/_kernel.bpl
@@ -267,13 +262,10 @@ rodinia_2.4/lud/lud_perimeter/kernel.bpl
 rodinia_2.4/nw/nw1/kernel.bpl
 rodinia_2.4/nw/nw2/kernel.bpl
 rodinia_2.4/particlefilter/likelihood_single/kernel.bpl
-rodinia_2.4/particlefilter/normalize_weights_single/kernel.bpl
 rodinia_2.4/particlefilter/sum_single/kernel.bpl
 rodinia_2.4/pathfinder/dynproc/_kernel.bpl
 rodinia_2.4/srad/reduce/kernel.bpl
-rodinia_2.4/streamcluster/pgain/_kernel.bpl
 shoc/bfs/iiit/_kernel.bpl
-shoc/bfs/uiuc_spill/BFS_kernel_multi_block/_kernel.bpl
 shoc/bfs/uiuc_spill/BFS_kernel_one_block/_kernel.bpl
 shoc/bfs/uiuc_spill/BFS_kernel_SM_block/_kernel.bpl
 shoc/devicememory/readLocalMemory/kernel.bpl
