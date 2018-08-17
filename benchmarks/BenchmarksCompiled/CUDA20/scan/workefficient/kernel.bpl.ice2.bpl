@@ -429,10 +429,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  (  BV32_SLE(0bv32, $d1
 
   __partitioned_block_$falsebb2_1:
     call {:sourceloc_num 35} $bugle_barrier_duplicated_0(1bv1, 1bv1);
-    call {:sourceloc} {:sourceloc_num 36} _LOG_READ_$$_ZZ25scan_workefficient_kernelPfS_iE4temp(true, BV32_MUL(2bv32, local_id_x$1), $$_ZZ25scan_workefficient_kernelPfS_iE4temp[1bv1][BV32_MUL(2bv32, local_id_x$1)]);
     assume {:do_not_predicate} {:check_id "check_state_2"} {:captureState "check_state_2"} {:sourceloc} {:sourceloc_num 36} true;
-    call {:check_id "check_state_2"} {:sourceloc} {:sourceloc_num 36} _CHECK_READ_$$_ZZ25scan_workefficient_kernelPfS_iE4temp(true, BV32_MUL(2bv32, local_id_x$2), $$_ZZ25scan_workefficient_kernelPfS_iE4temp[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_MUL(2bv32, local_id_x$2)]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ25scan_workefficient_kernelPfS_iE4temp"} true;
     v17$1 := $$_ZZ25scan_workefficient_kernelPfS_iE4temp[1bv1][BV32_MUL(2bv32, local_id_x$1)];
     v17$2 := $$_ZZ25scan_workefficient_kernelPfS_iE4temp[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_MUL(2bv32, local_id_x$2)];
     call {:sourceloc} {:sourceloc_num 37} _LOG_WRITE_$$g_odata(true, BV32_MUL(2bv32, local_id_x$1), v17$1, $$g_odata[BV32_MUL(2bv32, local_id_x$1)]);
@@ -442,10 +439,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  (  BV32_SLE(0bv32, $d1
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$g_odata"} true;
     $$g_odata[BV32_MUL(2bv32, local_id_x$1)] := v17$1;
     $$g_odata[BV32_MUL(2bv32, local_id_x$2)] := v17$2;
-    call {:sourceloc} {:sourceloc_num 38} _LOG_READ_$$_ZZ25scan_workefficient_kernelPfS_iE4temp(true, BV32_ADD(BV32_MUL(2bv32, local_id_x$1), 1bv32), $$_ZZ25scan_workefficient_kernelPfS_iE4temp[1bv1][BV32_ADD(BV32_MUL(2bv32, local_id_x$1), 1bv32)]);
     assume {:do_not_predicate} {:check_id "check_state_4"} {:captureState "check_state_4"} {:sourceloc} {:sourceloc_num 38} true;
-    call {:check_id "check_state_4"} {:sourceloc} {:sourceloc_num 38} _CHECK_READ_$$_ZZ25scan_workefficient_kernelPfS_iE4temp(true, BV32_ADD(BV32_MUL(2bv32, local_id_x$2), 1bv32), $$_ZZ25scan_workefficient_kernelPfS_iE4temp[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(2bv32, local_id_x$2), 1bv32)]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ25scan_workefficient_kernelPfS_iE4temp"} true;
     v18$1 := $$_ZZ25scan_workefficient_kernelPfS_iE4temp[1bv1][BV32_ADD(BV32_MUL(2bv32, local_id_x$1), 1bv32)];
     v18$2 := $$_ZZ25scan_workefficient_kernelPfS_iE4temp[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(2bv32, local_id_x$2), 1bv32)];
     call {:sourceloc} {:sourceloc_num 39} _LOG_WRITE_$$g_odata(true, BV32_ADD(BV32_MUL(2bv32, local_id_x$1), 1bv32), v18$1, $$g_odata[BV32_ADD(BV32_MUL(2bv32, local_id_x$1), 1bv32)]);

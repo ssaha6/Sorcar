@@ -23,8 +23,7 @@ function {:existential true} my_inv (
  b0021: bool,
  b0022: bool,
  b0023: bool,
- b0024: bool,
- b0025: bool
+ b0024: bool
  ) : bool;
 type _SIZE_T_TYPE = bv32;
 
@@ -166,8 +165,6 @@ implementation {:source_name "histogram64Kernel"} {:kernel} $_Z17histogram64Kern
   var $accumPos.1$2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
-  var v15$1: bv8;
-  var v15$2: bv8;
   var v1: bool;
   var v2$1: bv32;
   var v2$2: bv32;
@@ -195,6 +192,8 @@ implementation {:source_name "histogram64Kernel"} {:kernel} $_Z17histogram64Kern
   var v13$2: bool;
   var v14$1: bool;
   var v14$2: bool;
+  var v15$1: bv8;
+  var v15$2: bv8;
   var v16$1: bv32;
   var v16$2: bv32;
   var v17$1: bool;
@@ -217,7 +216,6 @@ implementation {:source_name "histogram64Kernel"} {:kernel} $_Z17histogram64Kern
   var p7$2: bool;
   var p8$1: bool;
   var p8$2: bool;
-  var _READ_HAS_OCCURRED_$$_ZZ17histogram64KernelPjS_iE6s_Hist$ghost$$10: bool;
 
 
   $0:
@@ -242,7 +240,7 @@ implementation {:source_name "histogram64Kernel"} {:kernel} $_Z17histogram64Kern
     
     
     
-assert  my_inv (  (  BV32_SLE(0bv32, $i.0) ) ,  (  BV32_SLE($i.0, 0bv32) ) ,  (  BV32_SGE($i.0, 0bv32) ) ,  (  BV32_ULE($i.0, 0bv32) ) ,  (  BV32_UGE($i.0, 0bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  _WRITE_HAS_OCCURRED_$$_ZZ17histogram64KernelPjS_iE6s_Hist ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 128bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 128bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 128bv32), local_id_x$1)) ) ,  true  ); 
+assert  my_inv (  (  BV32_SLE(0bv32, $i.0) ) ,  (  BV32_SLE($i.0, 0bv32) ) ,  (  BV32_SGE($i.0, 0bv32) ) ,  (  BV32_ULE($i.0, 0bv32) ) ,  (  BV32_UGE($i.0, 0bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  _WRITE_HAS_OCCURRED_$$_ZZ17histogram64KernelPjS_iE6s_Hist ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 128bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 128bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 128bv32), local_id_x$1)) )  ); 
 
 
     assert {:block_sourceloc} {:sourceloc_num 1} true;
@@ -282,7 +280,7 @@ assert  my_inv (  (  BV32_SLE(0bv32, $i.0) ) ,  (  BV32_SLE($i.0, 0bv32) ) ,  ( 
     
     
     
-assert  my_inv (  true ,  true ,  true ,  true ,  true ,  ( p0$1 ==> BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), $pos.0$1) == BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1)) )  && ( p0$2 ==> BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), $pos.0$2) == BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2)) ) ,  ( p0$1 ==> BV32_SLE(0bv32, $pos.0$1) )  && ( p0$2 ==> BV32_SLE(0bv32, $pos.0$2) ) ,  ( p0$1 ==> BV32_SLE($pos.0$1, BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1)) )  && ( p0$2 ==> BV32_SLE($pos.0$2, BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2)) ) ,  ( p0$1 ==> BV32_SGE($pos.0$1, BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1)) )  && ( p0$2 ==> BV32_SGE($pos.0$2, BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2)) ) ,  ( p0$1 ==> BV32_ULE($pos.0$1, BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1)) )  && ( p0$2 ==> BV32_ULE($pos.0$2, BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2)) ) ,  ( p0$1 ==> BV32_UGE($pos.0$1, BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1)) )  && ( p0$2 ==> BV32_UGE($pos.0$2, BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2)) ) ,  (  BV32_SLT($pos.0$1, $dataN) ==> p0$1 )  && (  BV32_SLT($pos.0$2, $dataN) ==> p0$2 ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true  ); 
+assert  my_inv (  true ,  true ,  true ,  true ,  true ,  ( p0$1 ==> BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), $pos.0$1) == BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1)) )  && ( p0$2 ==> BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), $pos.0$2) == BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2)) ) ,  ( p0$1 ==> BV32_SLE(0bv32, $pos.0$1) )  && ( p0$2 ==> BV32_SLE(0bv32, $pos.0$2) ) ,  ( p0$1 ==> BV32_SLE($pos.0$1, BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1)) )  && ( p0$2 ==> BV32_SLE($pos.0$2, BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2)) ) ,  ( p0$1 ==> BV32_SGE($pos.0$1, BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1)) )  && ( p0$2 ==> BV32_SGE($pos.0$2, BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2)) ) ,  ( p0$1 ==> BV32_ULE($pos.0$1, BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1)) )  && ( p0$2 ==> BV32_ULE($pos.0$2, BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2)) ) ,  ( p0$1 ==> BV32_UGE($pos.0$1, BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1)) )  && ( p0$2 ==> BV32_UGE($pos.0$2, BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2)) ) ,  (  BV32_SLT($pos.0$1, $dataN) ==> p0$1 )  && (  BV32_SLT($pos.0$2, $dataN) ==> p0$2 ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true  ); 
 
 
     assert {:block_sourceloc} {:sourceloc_num 7} p0$1 ==> true;
@@ -384,16 +382,11 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  ( p0$1 ==> BV32_AND(BV
     $sum.0$2, $j.0$2, $accumPos.0$2 := (if p3$2 then 0bv32 else $sum.0$2), (if p3$2 then 0bv32 else $j.0$2), (if p3$2 then BV32_MUL(BV32_AND(local_id_x$2, 15bv32), 4bv32) else $accumPos.0$2);
     p4$1 := (if p3$1 then true else p4$1);
     p4$2 := (if p3$2 then true else p4$2);
-    _READ_HAS_OCCURRED_$$_ZZ17histogram64KernelPjS_iE6s_Hist$ghost$$10 := _READ_HAS_OCCURRED_$$_ZZ17histogram64KernelPjS_iE6s_Hist;
     assume {:captureState "loop_entry_state_0_0"} true;
     goto $10;
 
   $10:
     assume {:captureState "loop_head_state_0"} true;
-    
-assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  !p3$1 ==> _READ_HAS_OCCURRED_$$_ZZ17histogram64KernelPjS_iE6s_Hist$ghost$$10 == _READ_HAS_OCCURRED_$$_ZZ17histogram64KernelPjS_iE6s_Hist )  ); 
-
-
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ17histogram64KernelPjS_iE6s_Hist ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ17histogram64KernelPjS_iE6s_Hist ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$_ZZ17histogram64KernelPjS_iE6s_Hist ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -421,7 +414,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     
     
     
-assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  ( p4$1 ==> BV32_SLE(0bv32, $j.0$1) )  && ( p4$2 ==> BV32_SLE(0bv32, $j.0$2) ) ,  ( p4$1 ==> BV32_SLE($j.0$1, 0bv32) )  && ( p4$2 ==> BV32_SLE($j.0$2, 0bv32) ) ,  ( p4$1 ==> BV32_SGE($j.0$1, 0bv32) )  && ( p4$2 ==> BV32_SGE($j.0$2, 0bv32) ) ,  ( p4$1 ==> BV32_ULE($j.0$1, 0bv32) )  && ( p4$2 ==> BV32_ULE($j.0$2, 0bv32) ) ,  ( p4$1 ==> BV32_UGE($j.0$1, 0bv32) )  && ( p4$2 ==> BV32_UGE($j.0$2, 0bv32) ) ,  ( p4$1 ==> BV32_SLE($accumPos.0$1, BV32_MUL(BV32_AND(local_id_x$1, 15bv32), 4bv32)) )  && ( p4$2 ==> BV32_SLE($accumPos.0$2, BV32_MUL(BV32_AND(local_id_x$2, 15bv32), 4bv32)) ) ,  ( p4$1 ==> BV32_SGE($accumPos.0$1, BV32_MUL(BV32_AND(local_id_x$1, 15bv32), 4bv32)) )  && ( p4$2 ==> BV32_SGE($accumPos.0$2, BV32_MUL(BV32_AND(local_id_x$2, 15bv32), 4bv32)) ) ,  ( p4$1 ==> BV32_ULE($accumPos.0$1, BV32_MUL(BV32_AND(local_id_x$1, 15bv32), 4bv32)) )  && ( p4$2 ==> BV32_ULE($accumPos.0$2, BV32_MUL(BV32_AND(local_id_x$2, 15bv32), 4bv32)) ) ,  ( p4$1 ==> BV32_UGE($accumPos.0$1, BV32_MUL(BV32_AND(local_id_x$1, 15bv32), 4bv32)) )  && ( p4$2 ==> BV32_UGE($accumPos.0$2, BV32_MUL(BV32_AND(local_id_x$2, 15bv32), 4bv32)) ) ,  ( p4$1 ==> p4$1 ==> BV32_ULT(local_id_x$1, 64bv32) )  && ( p4$2 ==> p4$2 ==> BV32_ULT(local_id_x$2, 64bv32) ) ,  (  BV32_ULT(local_id_x$1, 64bv32) && BV32_SLT($j.0$1, 128bv32) ==> p4$1 )  && (  BV32_ULT(local_id_x$2, 64bv32) && BV32_SLT($j.0$2, 128bv32) ==> p4$2 ) ,  (  _READ_HAS_OCCURRED_$$_ZZ17histogram64KernelPjS_iE6s_Hist ==> BV32_ULT(local_id_x$1, 64bv32) ) ,  true ,  true  ); 
+assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  ( p4$1 ==> BV32_SLE(0bv32, $j.0$1) )  && ( p4$2 ==> BV32_SLE(0bv32, $j.0$2) ) ,  ( p4$1 ==> BV32_SLE($j.0$1, 0bv32) )  && ( p4$2 ==> BV32_SLE($j.0$2, 0bv32) ) ,  ( p4$1 ==> BV32_SGE($j.0$1, 0bv32) )  && ( p4$2 ==> BV32_SGE($j.0$2, 0bv32) ) ,  ( p4$1 ==> BV32_ULE($j.0$1, 0bv32) )  && ( p4$2 ==> BV32_ULE($j.0$2, 0bv32) ) ,  ( p4$1 ==> BV32_UGE($j.0$1, 0bv32) )  && ( p4$2 ==> BV32_UGE($j.0$2, 0bv32) ) ,  ( p4$1 ==> BV32_SLE($accumPos.0$1, BV32_MUL(BV32_AND(local_id_x$1, 15bv32), 4bv32)) )  && ( p4$2 ==> BV32_SLE($accumPos.0$2, BV32_MUL(BV32_AND(local_id_x$2, 15bv32), 4bv32)) ) ,  ( p4$1 ==> BV32_SGE($accumPos.0$1, BV32_MUL(BV32_AND(local_id_x$1, 15bv32), 4bv32)) )  && ( p4$2 ==> BV32_SGE($accumPos.0$2, BV32_MUL(BV32_AND(local_id_x$2, 15bv32), 4bv32)) ) ,  ( p4$1 ==> BV32_ULE($accumPos.0$1, BV32_MUL(BV32_AND(local_id_x$1, 15bv32), 4bv32)) )  && ( p4$2 ==> BV32_ULE($accumPos.0$2, BV32_MUL(BV32_AND(local_id_x$2, 15bv32), 4bv32)) ) ,  ( p4$1 ==> BV32_UGE($accumPos.0$1, BV32_MUL(BV32_AND(local_id_x$1, 15bv32), 4bv32)) )  && ( p4$2 ==> BV32_UGE($accumPos.0$2, BV32_MUL(BV32_AND(local_id_x$2, 15bv32), 4bv32)) ) ,  ( p4$1 ==> p4$1 ==> BV32_ULT(local_id_x$1, 64bv32) )  && ( p4$2 ==> p4$2 ==> BV32_ULT(local_id_x$2, 64bv32) ) ,  (  BV32_ULT(local_id_x$1, 64bv32) && BV32_SLT($j.0$1, 128bv32) ==> p4$1 )  && (  BV32_ULT(local_id_x$2, 64bv32) && BV32_SLT($j.0$2, 128bv32) ==> p4$2 ) ,  (  _READ_HAS_OCCURRED_$$_ZZ17histogram64KernelPjS_iE6s_Hist ==> BV32_ULT(local_id_x$1, 64bv32) ) ,  true  ); 
 
 
     assert {:block_sourceloc} {:sourceloc_num 24} p4$1 ==> true;
@@ -437,10 +430,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     p5$2 := (if p4$2 && v14$2 then v14$2 else p5$2);
     p4$1 := (if p4$1 && !v14$1 then v14$1 else p4$1);
     p4$2 := (if p4$2 && !v14$2 then v14$2 else p4$2);
-    call {:sourceloc} {:sourceloc_num 26} _LOG_READ_$$_ZZ17histogram64KernelPjS_iE6s_Hist(p5$1, BV32_ADD(BV32_MUL(local_id_x$1, 128bv32), $accumPos.0$1), $$_ZZ17histogram64KernelPjS_iE6s_Hist[1bv1][BV32_ADD(BV32_MUL(local_id_x$1, 128bv32), $accumPos.0$1)]);
     assume {:do_not_predicate} {:check_id "check_state_1"} {:captureState "check_state_1"} {:sourceloc} {:sourceloc_num 26} true;
-    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 26} _CHECK_READ_$$_ZZ17histogram64KernelPjS_iE6s_Hist(p5$2, BV32_ADD(BV32_MUL(local_id_x$2, 128bv32), $accumPos.0$2), $$_ZZ17histogram64KernelPjS_iE6s_Hist[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(local_id_x$2, 128bv32), $accumPos.0$2)]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ17histogram64KernelPjS_iE6s_Hist"} true;
     v15$1 := (if p5$1 then $$_ZZ17histogram64KernelPjS_iE6s_Hist[1bv1][BV32_ADD(BV32_MUL(local_id_x$1, 128bv32), $accumPos.0$1)] else v15$1);
     v15$2 := (if p5$2 then $$_ZZ17histogram64KernelPjS_iE6s_Hist[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(local_id_x$2, 128bv32), $accumPos.0$2)] else v15$2);
     v16$1 := (if p5$1 then BV32_ADD($accumPos.0$1, 1bv32) else v16$1);
@@ -971,7 +961,5 @@ implementation {:inline 1} $bugle_barrier_duplicated_1($0: bv1, $1: bv1)
 
 
 function {:bvbuiltin "bvsgt"} BV32_SGT(bv32, bv32) : bool;
-
-
 
 

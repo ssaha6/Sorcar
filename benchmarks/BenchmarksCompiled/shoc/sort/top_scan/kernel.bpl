@@ -120,32 +120,32 @@ implementation {:source_name "top_scan"} {:kernel} $top_scan($n: bv32)
   var $val.0$1: bv32;
   var $val.0$2: bv32;
   var $i.i.0: bv32;
-  var v4$1: bv32;
-  var v4$2: bv32;
   var v0$1: bool;
   var v0$2: bool;
+  var v1: bool;
+  var v2$1: bool;
+  var v2$2: bool;
   var v3$1: bv32;
   var v3$2: bv32;
+  var v4$1: bv32;
+  var v4$2: bv32;
+  var v5$1: bv32;
+  var v5$2: bv32;
+  var v6: bool;
+  var v7$1: bv32;
+  var v7$2: bv32;
   var v8$1: bv32;
   var v8$2: bv32;
   var v9$1: bv32;
   var v9$2: bv32;
-  var v7$1: bv32;
-  var v7$2: bv32;
-  var v11$1: bv32;
-  var v11$2: bv32;
-  var v13$1: bv32;
-  var v13$2: bv32;
-  var v1: bool;
-  var v5$1: bv32;
-  var v5$2: bv32;
-  var v2$1: bool;
-  var v2$2: bool;
-  var v6: bool;
   var v10$1: bool;
   var v10$2: bool;
+  var v11$1: bv32;
+  var v11$2: bv32;
   var v12$1: bool;
   var v12$2: bool;
+  var v13$1: bv32;
+  var v13$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -164,7 +164,7 @@ implementation {:source_name "top_scan"} {:kernel} $top_scan($n: bv32)
   var p7$2: bool;
 
 
-  __partitioned_block_$entry_0:
+  __partitioned_block_$0_0:
     call {:sourceloc} {:sourceloc_num 2} _LOG_WRITE_$$top_scan.s_seed(true, 0bv32, 0bv32, $$top_scan.s_seed[1bv1][0bv32]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$top_scan.s_seed(true, 0bv32);
     assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 2} true;
@@ -172,9 +172,9 @@ implementation {:source_name "top_scan"} {:kernel} $top_scan($n: bv32)
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$top_scan.s_seed"} true;
     $$top_scan.s_seed[1bv1][0bv32] := 0bv32;
     $$top_scan.s_seed[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][0bv32] := 0bv32;
-    goto __partitioned_block_$entry_1;
+    goto __partitioned_block_$0_1;
 
-  __partitioned_block_$entry_1:
+  __partitioned_block_$0_1:
     call {:sourceloc_num 3} $bugle_barrier_duplicated_0(1bv1, 0bv1);
     v0$1 := BV32_ULT(local_id_x$1, $n);
     v0$2 := BV32_ULT(local_id_x$2, $n);
@@ -192,9 +192,9 @@ implementation {:source_name "top_scan"} {:kernel} $top_scan($n: bv32)
     $0$2 := (if p1$2 then 0bv1 else $0$2);
     $d.0 := 0bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $3;
 
-  $for.cond:
+  $3:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b22 ==> _WRITE_HAS_OCCURRED_$$top_scan.s_seed ==> _WATCHED_OFFSET == 0bv32;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b21 ==> _READ_HAS_OCCURRED_$$top_scan.s_seed ==> _WATCHED_OFFSET == 0bv32;
@@ -277,9 +277,9 @@ implementation {:source_name "top_scan"} {:kernel} $top_scan($n: bv32)
     call {:sourceloc_num 15} $bugle_barrier_duplicated_1(1bv1, 0bv1);
     $i.i.0 := 1bv32;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.i;
+    goto $7;
 
-  $for.cond.i:
+  $7:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b28 ==> _WRITE_HAS_OCCURRED_$$lmem ==> _WATCHED_OFFSET == BV32_ADD(local_id_x$1, group_size_x);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b27 ==> _READ_HAS_OCCURRED_$$lmem ==> _WATCHED_OFFSET == BV32_ADD(local_id_x$1, group_size_x);
@@ -358,7 +358,7 @@ implementation {:source_name "top_scan"} {:kernel} $top_scan($n: bv32)
     call {:sourceloc_num 34} $bugle_barrier_duplicated_3(1bv1, 0bv1);
     $d.0 := BV32_ADD($d.0, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $3;
 
   __partitioned_block_$truebb2_0:
     assume {:partition} v6;
@@ -391,7 +391,7 @@ implementation {:source_name "top_scan"} {:kernel} $top_scan($n: bv32)
     call {:sourceloc_num 22} $bugle_barrier_duplicated_5(1bv1, 0bv1);
     $i.i.0 := BV32_MUL($i.i.0, 2bv32);
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.i;
+    goto $7;
 }
 
 

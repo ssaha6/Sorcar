@@ -238,9 +238,9 @@ implementation {:source_name "FiniteDifferencesKernel"} {:kernel} $_Z23FiniteDif
   var v19: bool;
   var v20$1: bv32;
   var v20$2: bv32;
+  var v22: bool;
   var v21$1: bv32;
   var v21$2: bv32;
-  var v22: bool;
   var v23$1: bv32;
   var v23$2: bv32;
   var v24$1: bool;

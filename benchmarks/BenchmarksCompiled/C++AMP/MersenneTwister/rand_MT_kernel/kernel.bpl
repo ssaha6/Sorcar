@@ -111,53 +111,53 @@ implementation {:source_name "rand_MT_kernel"} {:kernel} $_Z14rand_MT_kernelPfjj
   var $mti_1.0$1: bv32;
   var $mti_1.0$2: bv32;
   var $out.0: bv32;
-  var $state6.0: bv32;
+  var $state1.0: bv32;
   var $state_1.0: bv32;
   var $state_M.0: bv32;
-  var $cond$1: bv32;
-  var $cond$2: bv32;
+  var $0$1: bv32;
+  var $0$2: bv32;
   var v0: bool;
-  var v5: bv32;
-  var v7: bool;
-  var v6: bv32;
-  var v4: bool;
-  var v10$1: bv32;
-  var v10$2: bv32;
-  var v9$1: bv32;
-  var v9$2: bv32;
+  var v1$1: bv32;
+  var v1$2: bv32;
   var v2$1: bv32;
   var v2$2: bv32;
   var v3$1: bv32;
   var v3$2: bv32;
-  var v1$1: bv32;
-  var v1$2: bv32;
+  var v4: bool;
+  var v5: bv32;
+  var v6: bv32;
+  var v7: bool;
   var v8: bool;
+  var v9$1: bv32;
+  var v9$2: bv32;
+  var v10$1: bv32;
+  var v10$2: bv32;
   var v11$1: bv32;
   var v11$2: bv32;
   var v12$1: bool;
   var v12$2: bool;
+  var v13$1: bv32;
+  var v13$2: bv32;
+  var v14$1: bv32;
+  var v14$2: bv32;
   var v15$1: bv32;
   var v15$2: bv32;
   var v16$1: bv32;
   var v16$2: bv32;
-  var v14$1: bv32;
-  var v14$2: bv32;
-  var v13$1: bv32;
-  var v13$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
   var p1$2: bool;
 
 
-  $entry:
+  $0:
     $$mt$1[0bv32] := $seed;
     $$mt$2[0bv32] := $seed;
     $state.0 := 1bv32;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_1"} true;
     assume {:invGenSkippedLoop} true;
     assert {:block_sourceloc} {:sourceloc_num 2} true;
@@ -168,21 +168,21 @@ implementation {:source_name "rand_MT_kernel"} {:kernel} $_Z14rand_MT_kernelPfjj
     assume {:partition} !v0;
     v3$1 := $$mt$1[0bv32];
     v3$2 := $$mt$2[0bv32];
-    $mti_1.0$1, $out.0, $state6.0 := v3$1, 0bv32, 0bv32;
+    $mti_1.0$1, $out.0, $state1.0 := v3$1, 0bv32, 0bv32;
     $mti_1.0$2 := v3$2;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.7;
+    goto $5;
 
-  $for.cond.7:
+  $5:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessBreak"} _b16 ==> _WRITE_HAS_OCCURRED_$$random_nums ==> group_id_x$1 == BV32_DIV(_WATCHED_OFFSET, group_size_x);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b15 ==> _WRITE_HAS_OCCURRED_$$random_nums ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4096bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4096bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 4096bv32), BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1)));
     assert {:tag "accessUpperBoundBlock"} _b14 ==> _WRITE_HAS_OCCURRED_$$random_nums ==> BV32_SLT(_WATCHED_OFFSET, BV32_ADD(BV32_MUL(BV32_ADD(group_id_x$1, 1bv32), group_size_x), local_id_x$1));
     assert {:tag "accessLowerBoundBlock"} _b13 ==> _WRITE_HAS_OCCURRED_$$random_nums ==> BV32_SLE(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), _WATCHED_OFFSET);
-    assert {:tag "loopBound"} {:thread 1} _b12 ==> BV32_UGE($state6.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b11 ==> BV32_ULE($state6.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b10 ==> BV32_SGE($state6.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b9 ==> BV32_SLE($state6.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b12 ==> BV32_UGE($state1.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b11 ==> BV32_ULE($state1.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b10 ==> BV32_SGE($state1.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b9 ==> BV32_SLE($state1.0, 0bv32);
     assert {:tag "loopBound"} {:thread 1} _b8 ==> BV32_UGE($mti_1.0$1, v3$1);
     assert {:tag "loopBound"} {:thread 2} _b8 ==> BV32_UGE($mti_1.0$2, v3$2);
     assert {:tag "loopBound"} {:thread 1} _b7 ==> BV32_ULE($mti_1.0$1, v3$1);
@@ -210,26 +210,26 @@ implementation {:source_name "rand_MT_kernel"} {:kernel} $_Z14rand_MT_kernelPfjj
 
   $truebb0:
     assume {:partition} v4;
-    v5 := BV32_ADD($state6.0, 1bv32);
-    v6 := BV32_ADD($state6.0, 9bv32);
+    v5 := BV32_ADD($state1.0, 1bv32);
+    v6 := BV32_ADD($state1.0, 9bv32);
     v7 := BV32_SGE(v5, 19bv32);
     goto $truebb1, $falsebb1;
 
   $falsebb1:
     assume {:partition} !v7;
     $state_1.0 := v5;
-    goto $if.end;
+    goto $8;
 
-  $if.end:
+  $8:
     v8 := BV32_SGE(v6, 19bv32);
     goto $truebb2, $falsebb2;
 
   $falsebb2:
     assume {:partition} !v8;
     $state_M.0 := v6;
-    goto $if.end.17;
+    goto $10;
 
-  $if.end.17:
+  $10:
     v9$1 := $$mt$1[$state_1.0];
     v9$2 := $$mt$2[$state_1.0];
     v10$1 := $$mt$1[$state_M.0];
@@ -242,14 +242,14 @@ implementation {:source_name "rand_MT_kernel"} {:kernel} $_Z14rand_MT_kernelPfjj
     p1$2 := (if v12$2 then v12$2 else p1$2);
     p0$1 := (if !v12$1 then !v12$1 else p0$1);
     p0$2 := (if !v12$2 then !v12$2 else p0$2);
-    $cond$1 := (if p0$1 then 0bv32 else $cond$1);
-    $cond$2 := (if p0$2 then 0bv32 else $cond$2);
-    $cond$1 := (if p1$1 then $matrix_a else $cond$1);
-    $cond$2 := (if p1$2 then $matrix_a else $cond$2);
-    v13$1 := BV32_XOR(BV32_XOR(v10$1, BV32_LSHR(v11$1, 1bv32)), $cond$1);
-    v13$2 := BV32_XOR(BV32_XOR(v10$2, BV32_LSHR(v11$2, 1bv32)), $cond$2);
-    $$mt$1[$state6.0] := v13$1;
-    $$mt$2[$state6.0] := v13$2;
+    $0$1 := (if p0$1 then 0bv32 else $0$1);
+    $0$2 := (if p0$2 then 0bv32 else $0$2);
+    $0$1 := (if p1$1 then $matrix_a else $0$1);
+    $0$2 := (if p1$2 then $matrix_a else $0$2);
+    v13$1 := BV32_XOR(BV32_XOR(v10$1, BV32_LSHR(v11$1, 1bv32)), $0$1);
+    v13$2 := BV32_XOR(BV32_XOR(v10$2, BV32_LSHR(v11$2, 1bv32)), $0$2);
+    $$mt$1[$state1.0] := v13$1;
+    $$mt$2[$state1.0] := v13$2;
     v14$1 := BV32_XOR(v13$1, BV32_LSHR(v13$1, 12bv32));
     v14$2 := BV32_XOR(v13$2, BV32_LSHR(v13$2, 12bv32));
     v15$1 := BV32_XOR(v14$1, BV32_AND(BV32_SHL(v14$1, 7bv32), $mask_b));
@@ -263,20 +263,20 @@ implementation {:source_name "rand_MT_kernel"} {:kernel} $_Z14rand_MT_kernelPfjj
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$random_nums"} true;
     $$random_nums[BV32_ADD(BV32_MUL($out.0, 4096bv32), BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1))] := FDIV32(FADD32(UI32_TO_FP32(BV32_XOR(v16$1, BV32_LSHR(v16$1, 18bv32))), 1065353216bv32), 1333788672bv32);
     $$random_nums[BV32_ADD(BV32_MUL($out.0, 4096bv32), BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2))] := FDIV32(FADD32(UI32_TO_FP32(BV32_XOR(v16$2, BV32_LSHR(v16$2, 18bv32))), 1065353216bv32), 1333788672bv32);
-    $mti_1.0$1, $out.0, $state6.0 := v9$1, BV32_ADD($out.0, 1bv32), $state_1.0;
+    $mti_1.0$1, $out.0, $state1.0 := v9$1, BV32_ADD($out.0, 1bv32), $state_1.0;
     $mti_1.0$2 := v9$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.7;
+    goto $5;
 
   $truebb2:
     assume {:partition} v8;
     $state_M.0 := BV32_SUB(v6, 19bv32);
-    goto $if.end.17;
+    goto $10;
 
   $truebb1:
     assume {:partition} v7;
     $state_1.0 := BV32_SUB(v5, 19bv32);
-    goto $if.end;
+    goto $8;
 
   $truebb:
     assume {:partition} v0;
@@ -288,7 +288,7 @@ implementation {:source_name "rand_MT_kernel"} {:kernel} $_Z14rand_MT_kernelPfjj
     $$mt$2[$state.0] := BV32_ADD(BV32_MUL(1812433253bv32, BV32_XOR(v1$2, BV32_LSHR(v2$2, 30bv32))), $state.0);
     $state.0 := BV32_ADD($state.0, 1bv32);
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

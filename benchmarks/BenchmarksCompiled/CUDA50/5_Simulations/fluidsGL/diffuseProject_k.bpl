@@ -127,74 +127,74 @@ implementation {:source_name "diffuseProject_k"} {:kernel} $_Z16diffuseProject_k
 {
   var $p.0$1: bv32;
   var $p.0$2: bv32;
-  var $cond$1: bv32;
-  var $cond$2: bv32;
+  var $0$1: bv32;
+  var $0$2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
-  var v6$1: bv32;
-  var v6$2: bv32;
-  var v7$1: bv32;
-  var v7$2: bv32;
-  var v10$1: bool;
-  var v10$2: bool;
-  var v5$1: bv32;
-  var v5$2: bv32;
-  var v11$1: bv32;
-  var v11$2: bv32;
-  var v3$1: bv32;
-  var v3$2: bv32;
-  var v4$1: bool;
-  var v4$2: bool;
   var v1$1: bool;
   var v1$2: bool;
   var v2$1: bool;
   var v2$2: bool;
-  var v19$1: bv32;
-  var v19$2: bv32;
-  var v26$1: bv32;
-  var v26$2: bv32;
+  var v3$1: bv32;
+  var v3$2: bv32;
+  var v4$1: bool;
+  var v4$2: bool;
+  var v5$1: bv32;
+  var v5$2: bv32;
+  var v6$1: bv32;
+  var v6$2: bv32;
+  var v7$1: bv32;
+  var v7$2: bv32;
+  var v8$1: bv32;
+  var v8$2: bv32;
+  var v9$1: bv32;
+  var v9$2: bv32;
+  var v10$1: bool;
+  var v10$2: bool;
+  var v11$1: bv32;
+  var v11$2: bv32;
+  var v12$1: bv32;
+  var v12$2: bv32;
+  var v13$1: bv32;
+  var v13$2: bv32;
   var v14$1: bv32;
   var v14$2: bv32;
+  var v15$1: bv32;
+  var v15$2: bv32;
   var v16$1: bv32;
   var v16$2: bv32;
+  var v17$1: bool;
+  var v17$2: bool;
+  var v18$1: bv32;
+  var v18$2: bv32;
+  var v19$1: bv32;
+  var v19$2: bv32;
+  var v20$1: bv32;
+  var v20$2: bv32;
+  var v21$1: bv32;
+  var v21$2: bv32;
   var v22$1: bv32;
   var v22$2: bv32;
   var v23$1: bv32;
   var v23$2: bv32;
-  var v20$1: bv32;
-  var v20$2: bv32;
-  var v15$1: bv32;
-  var v15$2: bv32;
+  var v24$1: bv32;
+  var v24$2: bv32;
   var v25$1: bv32;
   var v25$2: bv32;
+  var v26$1: bv32;
+  var v26$2: bv32;
   var v27$1: bv32;
   var v27$2: bv32;
   var v28$1: bv32;
   var v28$2: bv32;
-  var v32$1: bv32;
-  var v32$2: bv32;
-  var v30$1: bv32;
-  var v30$2: bv32;
   var v29$1: bv32;
   var v29$2: bv32;
+  var v30$1: bv32;
+  var v30$2: bv32;
   var v31$1: bv32;
   var v31$2: bv32;
-  var v13$1: bv32;
-  var v13$2: bv32;
-  var v9$1: bv32;
-  var v9$2: bv32;
-  var v8$1: bv32;
-  var v8$2: bv32;
-  var v21$1: bv32;
-  var v21$2: bv32;
-  var v24$1: bv32;
-  var v24$2: bv32;
-  var v18$1: bv32;
-  var v18$2: bv32;
-  var v12$1: bv32;
-  var v12$2: bv32;
-  var v17$1: bool;
-  var v17$2: bool;
+  var v32$1: bv32;
+  var v32$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -215,13 +215,13 @@ implementation {:source_name "diffuseProject_k"} {:kernel} $_Z16diffuseProject_k
   var p8$2: bool;
   var p9$1: bool;
   var p9$2: bool;
-  var _READ_HAS_OCCURRED_$$vx$ghost$$for.cond: bool;
-  var _WRITE_HAS_OCCURRED_$$vx$ghost$$for.cond: bool;
-  var _READ_HAS_OCCURRED_$$vy$ghost$$for.cond: bool;
-  var _WRITE_HAS_OCCURRED_$$vy$ghost$$for.cond: bool;
+  var _READ_HAS_OCCURRED_$$vx$ghost$$2: bool;
+  var _WRITE_HAS_OCCURRED_$$vx$ghost$$2: bool;
+  var _READ_HAS_OCCURRED_$$vy$ghost$$2: bool;
+  var _WRITE_HAS_OCCURRED_$$vy$ghost$$2: bool;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2);
     v1$1 := BV32_SLT(v0$1, $dx);
@@ -238,17 +238,17 @@ implementation {:source_name "diffuseProject_k"} {:kernel} $_Z16diffuseProject_k
     $p.0$2 := (if p0$2 then 0bv32 else $p.0$2);
     p1$1 := (if p0$1 then true else p1$1);
     p1$2 := (if p0$2 then true else p1$2);
-    _READ_HAS_OCCURRED_$$vx$ghost$$for.cond := _READ_HAS_OCCURRED_$$vx;
-    _WRITE_HAS_OCCURRED_$$vx$ghost$$for.cond := _WRITE_HAS_OCCURRED_$$vx;
-    _READ_HAS_OCCURRED_$$vy$ghost$$for.cond := _READ_HAS_OCCURRED_$$vy;
-    _WRITE_HAS_OCCURRED_$$vy$ghost$$for.cond := _WRITE_HAS_OCCURRED_$$vy;
+    _READ_HAS_OCCURRED_$$vx$ghost$$2 := _READ_HAS_OCCURRED_$$vx;
+    _WRITE_HAS_OCCURRED_$$vx$ghost$$2 := _WRITE_HAS_OCCURRED_$$vx;
+    _READ_HAS_OCCURRED_$$vy$ghost$$2 := _READ_HAS_OCCURRED_$$vy;
+    _WRITE_HAS_OCCURRED_$$vy$ghost$$2 := _WRITE_HAS_OCCURRED_$$vy;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $2;
 
-  $for.cond:
+  $2:
     assume {:captureState "loop_head_state_0"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b34 ==> !p0$1 ==> _WRITE_HAS_OCCURRED_$$vy$ghost$$for.cond == _WRITE_HAS_OCCURRED_$$vy;
-    assert {:tag "disabledMaintainsInstrumentation"} _b33 ==> !p0$1 ==> _READ_HAS_OCCURRED_$$vy$ghost$$for.cond == _READ_HAS_OCCURRED_$$vy;
+    assert {:tag "disabledMaintainsInstrumentation"} _b34 ==> !p0$1 ==> _WRITE_HAS_OCCURRED_$$vy$ghost$$2 == _WRITE_HAS_OCCURRED_$$vy;
+    assert {:tag "disabledMaintainsInstrumentation"} _b33 ==> !p0$1 ==> _READ_HAS_OCCURRED_$$vy$ghost$$2 == _READ_HAS_OCCURRED_$$vy;
     assert {:tag "accessBreak"} _b32 ==> _WRITE_HAS_OCCURRED_$$vy ==> local_id_x$1 == BV32_SUB(BV32_SUB(BV32_SUB(BV32_DIV(_WATCHED_OFFSET, 2bv32), BV32_MUL(BV32_MUL(BV32_MUL(group_id_y$1, $dx), $lb), group_size_y)), BV32_MUL(BV32_MUL(local_id_y$1, $dx), $lb)), BV32_MUL(group_id_x$1, group_size_x));
     assert {:tag "accessBreak"} _b31 ==> _WRITE_HAS_OCCURRED_$$vy ==> group_id_x$1 == BV32_SUB(BV32_SUB(BV32_SUB(BV32_DIV(BV32_DIV(_WATCHED_OFFSET, 2bv32), group_size_x), BV32_DIV(BV32_MUL(BV32_MUL(BV32_MUL(group_id_y$1, $dx), $lb), group_size_y), group_size_x)), BV32_DIV(BV32_MUL(BV32_MUL(local_id_y$1, $dx), $lb), group_size_x)), BV32_DIV(local_id_x$1, group_size_x));
     assert {:tag "accessBreak"} _b30 ==> _WRITE_HAS_OCCURRED_$$vy ==> local_id_y$1 == BV32_SUB(BV32_SUB(BV32_SUB(BV32_DIV(BV32_DIV(BV32_DIV(_WATCHED_OFFSET, 2bv32), $dx), $lb), BV32_DIV(BV32_MUL(BV32_MUL(group_id_y$1, $lb), group_size_y), $lb)), BV32_DIV(BV32_DIV(BV32_MUL(group_id_x$1, group_size_x), $dx), $lb)), BV32_DIV(BV32_DIV(local_id_x$1, $dx), $lb));
@@ -259,8 +259,8 @@ implementation {:source_name "diffuseProject_k"} {:kernel} $_Z16diffuseProject_k
     assert {:tag "accessBreak"} _b25 ==> _READ_HAS_OCCURRED_$$vy ==> group_id_y$1 == BV32_SUB(BV32_SUB(BV32_SUB(BV32_DIV(BV32_DIV(BV32_DIV(BV32_DIV(_WATCHED_OFFSET, 2bv32), $dx), $lb), group_size_y), BV32_DIV(BV32_DIV(BV32_MUL(local_id_y$1, $lb), $lb), group_size_y)), BV32_DIV(BV32_DIV(BV32_DIV(BV32_MUL(group_id_x$1, group_size_x), $dx), $lb), group_size_y)), BV32_DIV(BV32_DIV(BV32_DIV(local_id_x$1, $dx), $lb), group_size_y));
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b24 ==> _WRITE_HAS_OCCURRED_$$vy ==> BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, $dx), 2bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, $dx), 2bv32), 1bv32), BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(0bv32, BV32_ADD(BV32_MUL(group_id_y$1, BV32_MUL($lb, group_size_y)), BV32_MUL(local_id_y$1, $lb))), $dx), BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1)), 2bv32)) || BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, $dx), 2bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, $dx), 2bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(0bv32, BV32_ADD(BV32_MUL(group_id_y$1, BV32_MUL($lb, group_size_y)), BV32_MUL(local_id_y$1, $lb))), $dx), BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1)), 2bv32), 1bv32));
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b23 ==> _READ_HAS_OCCURRED_$$vy ==> BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, $dx), 2bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, $dx), 2bv32), 1bv32), BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(0bv32, BV32_ADD(BV32_MUL(group_id_y$1, BV32_MUL($lb, group_size_y)), BV32_MUL(local_id_y$1, $lb))), $dx), BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1)), 2bv32)) || BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, $dx), 2bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, $dx), 2bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(0bv32, BV32_ADD(BV32_MUL(group_id_y$1, BV32_MUL($lb, group_size_y)), BV32_MUL(local_id_y$1, $lb))), $dx), BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1)), 2bv32), 1bv32));
-    assert {:tag "disabledMaintainsInstrumentation"} _b22 ==> !p0$1 ==> _WRITE_HAS_OCCURRED_$$vx$ghost$$for.cond == _WRITE_HAS_OCCURRED_$$vx;
-    assert {:tag "disabledMaintainsInstrumentation"} _b21 ==> !p0$1 ==> _READ_HAS_OCCURRED_$$vx$ghost$$for.cond == _READ_HAS_OCCURRED_$$vx;
+    assert {:tag "disabledMaintainsInstrumentation"} _b22 ==> !p0$1 ==> _WRITE_HAS_OCCURRED_$$vx$ghost$$2 == _WRITE_HAS_OCCURRED_$$vx;
+    assert {:tag "disabledMaintainsInstrumentation"} _b21 ==> !p0$1 ==> _READ_HAS_OCCURRED_$$vx$ghost$$2 == _READ_HAS_OCCURRED_$$vx;
     assert {:tag "accessBreak"} _b20 ==> _WRITE_HAS_OCCURRED_$$vx ==> local_id_x$1 == BV32_SUB(BV32_SUB(BV32_SUB(BV32_DIV(_WATCHED_OFFSET, 2bv32), BV32_MUL(BV32_MUL(BV32_MUL(group_id_y$1, $dx), $lb), group_size_y)), BV32_MUL(BV32_MUL(local_id_y$1, $dx), $lb)), BV32_MUL(group_id_x$1, group_size_x));
     assert {:tag "accessBreak"} _b19 ==> _WRITE_HAS_OCCURRED_$$vx ==> group_id_x$1 == BV32_SUB(BV32_SUB(BV32_SUB(BV32_DIV(BV32_DIV(_WATCHED_OFFSET, 2bv32), group_size_x), BV32_DIV(BV32_MUL(BV32_MUL(BV32_MUL(group_id_y$1, $dx), $lb), group_size_y), group_size_x)), BV32_DIV(BV32_MUL(BV32_MUL(local_id_y$1, $dx), $lb), group_size_x)), BV32_DIV(local_id_x$1, group_size_x));
     assert {:tag "accessBreak"} _b18 ==> _WRITE_HAS_OCCURRED_$$vx ==> local_id_y$1 == BV32_SUB(BV32_SUB(BV32_SUB(BV32_DIV(BV32_DIV(BV32_DIV(_WATCHED_OFFSET, 2bv32), $dx), $lb), BV32_DIV(BV32_MUL(BV32_MUL(group_id_y$1, $lb), group_size_y), $lb)), BV32_DIV(BV32_DIV(BV32_MUL(group_id_x$1, group_size_x), $dx), $lb)), BV32_DIV(BV32_DIV(local_id_x$1, $dx), $lb));
@@ -357,12 +357,12 @@ implementation {:source_name "diffuseProject_k"} {:kernel} $_Z16diffuseProject_k
     p6$2 := (if p4$2 && v10$2 then v10$2 else p6$2);
     p5$1 := (if p4$1 && !v10$1 then !v10$1 else p5$1);
     p5$2 := (if p4$2 && !v10$2 then !v10$2 else p5$2);
-    $cond$1 := (if p5$1 then v3$1 else $cond$1);
-    $cond$2 := (if p5$2 then v3$2 else $cond$2);
-    $cond$1 := (if p6$1 then BV32_SUB(v3$1, $dy) else $cond$1);
-    $cond$2 := (if p6$2 then BV32_SUB(v3$2, $dy) else $cond$2);
-    v11$1 := (if p4$1 then SI32_TO_FP32(BV32_ADD(BV32_MUL(v0$1, v0$1), BV32_MUL($cond$1, $cond$1))) else v11$1);
-    v11$2 := (if p4$2 then SI32_TO_FP32(BV32_ADD(BV32_MUL(v0$2, v0$2), BV32_MUL($cond$2, $cond$2))) else v11$2);
+    $0$1 := (if p5$1 then v3$1 else $0$1);
+    $0$2 := (if p5$2 then v3$2 else $0$2);
+    $0$1 := (if p6$1 then BV32_SUB(v3$1, $dy) else $0$1);
+    $0$2 := (if p6$2 then BV32_SUB(v3$2, $dy) else $0$2);
+    v11$1 := (if p4$1 then SI32_TO_FP32(BV32_ADD(BV32_MUL(v0$1, v0$1), BV32_MUL($0$1, $0$1))) else v11$1);
+    v11$2 := (if p4$2 then SI32_TO_FP32(BV32_ADD(BV32_MUL(v0$2, v0$2), BV32_MUL($0$2, $0$2))) else v11$2);
     v12$1 := (if p4$1 then FDIV32(1065353216bv32, FADD32(1065353216bv32, FMUL32(FMUL32($visc, $dt), v11$1))) else v12$1);
     v12$2 := (if p4$2 then FDIV32(1065353216bv32, FADD32(1065353216bv32, FMUL32(FMUL32($visc, $dt), v11$2))) else v12$2);
     v13$1 := (if p4$1 then $$xterm$0bv32$1 else v13$1);
@@ -391,14 +391,14 @@ implementation {:source_name "diffuseProject_k"} {:kernel} $_Z16diffuseProject_k
     v19$2 := (if p8$2 then $$xterm$0bv32$2 else v19$2);
     v20$1 := (if p8$1 then $$yterm$0bv32$1 else v20$1);
     v20$2 := (if p8$2 then $$yterm$0bv32$2 else v20$2);
-    v21$1 := (if p8$1 then FADD32(FMUL32(SI32_TO_FP32(v0$1), v19$1), FMUL32(SI32_TO_FP32($cond$1), v20$1)) else v21$1);
-    v21$2 := (if p8$2 then FADD32(FMUL32(SI32_TO_FP32(v0$2), v19$2), FMUL32(SI32_TO_FP32($cond$2), v20$2)) else v21$2);
+    v21$1 := (if p8$1 then FADD32(FMUL32(SI32_TO_FP32(v0$1), v19$1), FMUL32(SI32_TO_FP32($0$1), v20$1)) else v21$1);
+    v21$2 := (if p8$2 then FADD32(FMUL32(SI32_TO_FP32(v0$2), v19$2), FMUL32(SI32_TO_FP32($0$2), v20$2)) else v21$2);
     v22$1 := (if p8$1 then $$xterm$1bv32$1 else v22$1);
     v22$2 := (if p8$2 then $$xterm$1bv32$2 else v22$2);
     v23$1 := (if p8$1 then $$yterm$1bv32$1 else v23$1);
     v23$2 := (if p8$2 then $$yterm$1bv32$2 else v23$2);
-    v24$1 := (if p8$1 then FADD32(FMUL32(SI32_TO_FP32(v0$1), v22$1), FMUL32(SI32_TO_FP32($cond$1), v23$1)) else v24$1);
-    v24$2 := (if p8$2 then FADD32(FMUL32(SI32_TO_FP32(v0$2), v22$2), FMUL32(SI32_TO_FP32($cond$2), v23$2)) else v24$2);
+    v24$1 := (if p8$1 then FADD32(FMUL32(SI32_TO_FP32(v0$1), v22$1), FMUL32(SI32_TO_FP32($0$1), v23$1)) else v24$1);
+    v24$2 := (if p8$2 then FADD32(FMUL32(SI32_TO_FP32(v0$2), v22$2), FMUL32(SI32_TO_FP32($0$2), v23$2)) else v24$2);
     v25$1 := (if p8$1 then $$xterm$0bv32$1 else v25$1);
     v25$2 := (if p8$2 then $$xterm$0bv32$2 else v25$2);
     $$xterm$0bv32$1 := (if p8$1 then FSUB32(v25$1, FMUL32(FMUL32(v18$1, v21$1), SI32_TO_FP32(v0$1))) else $$xterm$0bv32$1);
@@ -409,12 +409,12 @@ implementation {:source_name "diffuseProject_k"} {:kernel} $_Z16diffuseProject_k
     $$xterm$1bv32$2 := (if p8$2 then FSUB32(v26$2, FMUL32(FMUL32(v18$2, v24$2), SI32_TO_FP32(v0$2))) else $$xterm$1bv32$2);
     v27$1 := (if p8$1 then $$yterm$0bv32$1 else v27$1);
     v27$2 := (if p8$2 then $$yterm$0bv32$2 else v27$2);
-    $$yterm$0bv32$1 := (if p8$1 then FSUB32(v27$1, FMUL32(FMUL32(v18$1, v21$1), SI32_TO_FP32($cond$1))) else $$yterm$0bv32$1);
-    $$yterm$0bv32$2 := (if p8$2 then FSUB32(v27$2, FMUL32(FMUL32(v18$2, v21$2), SI32_TO_FP32($cond$2))) else $$yterm$0bv32$2);
+    $$yterm$0bv32$1 := (if p8$1 then FSUB32(v27$1, FMUL32(FMUL32(v18$1, v21$1), SI32_TO_FP32($0$1))) else $$yterm$0bv32$1);
+    $$yterm$0bv32$2 := (if p8$2 then FSUB32(v27$2, FMUL32(FMUL32(v18$2, v21$2), SI32_TO_FP32($0$2))) else $$yterm$0bv32$2);
     v28$1 := (if p8$1 then $$yterm$1bv32$1 else v28$1);
     v28$2 := (if p8$2 then $$yterm$1bv32$2 else v28$2);
-    $$yterm$1bv32$1 := (if p8$1 then FSUB32(v28$1, FMUL32(FMUL32(v18$1, v24$1), SI32_TO_FP32($cond$1))) else $$yterm$1bv32$1);
-    $$yterm$1bv32$2 := (if p8$2 then FSUB32(v28$2, FMUL32(FMUL32(v18$2, v24$2), SI32_TO_FP32($cond$2))) else $$yterm$1bv32$2);
+    $$yterm$1bv32$1 := (if p8$1 then FSUB32(v28$1, FMUL32(FMUL32(v18$1, v24$1), SI32_TO_FP32($0$1))) else $$yterm$1bv32$1);
+    $$yterm$1bv32$2 := (if p8$2 then FSUB32(v28$2, FMUL32(FMUL32(v18$2, v24$2), SI32_TO_FP32($0$2))) else $$yterm$1bv32$2);
     v29$1 := (if p4$1 then $$xterm$0bv32$1 else v29$1);
     v29$2 := (if p4$2 then $$xterm$0bv32$2 else v29$2);
     call {:sourceloc} {:sourceloc_num 42} _LOG_WRITE_$$vx(p4$1, BV32_MUL(v5$1, 2bv32), v29$1, $$vx[BV32_MUL(v5$1, 2bv32)]);
@@ -455,16 +455,16 @@ implementation {:source_name "diffuseProject_k"} {:kernel} $_Z16diffuseProject_k
     $p.0$2 := (if p2$2 then BV32_ADD($p.0$2, 1bv32) else $p.0$2);
     p1$1 := (if p2$1 then true else p1$1);
     p1$2 := (if p2$2 then true else p1$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $2.backedge, $2.tail;
 
-  $for.cond.tail:
+  $2.tail:
     assume !p1$1 && !p1$2;
     return;
 
-  $for.cond.backedge:
+  $2.backedge:
     assume {:backedge} p1$1 || p1$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $2;
 }
 
 

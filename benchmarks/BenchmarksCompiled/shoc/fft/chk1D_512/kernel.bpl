@@ -118,34 +118,34 @@ implementation {:source_name "chk1D_512"} {:kernel} $chk1D_512($half_n_cmplx: bv
   var v0$1: bv32;
   var v0$2: bv32;
   var v1: bool;
-  var v6$1: bv32;
-  var v6$2: bv32;
   var v2$1: bv32;
   var v2$2: bv32;
   var v3$1: bv32;
   var v3$2: bv32;
+  var v4: bool;
   var v5$1: bv32;
   var v5$2: bv32;
+  var v6$1: bv32;
+  var v6$2: bv32;
+  var v7: bool;
+  var v8$1: bv32;
+  var v8$2: bv32;
   var v9$1: bv32;
   var v9$2: bv32;
-  var v14$1: bv32;
-  var v14$2: bv32;
-  var v13$1: bv32;
-  var v13$2: bv32;
-  var v16$1: bv32;
-  var v16$2: bv32;
   var v10$1: bv32;
   var v10$2: bv32;
   var v11$1: bv32;
   var v11$2: bv32;
-  var v15$1: bv32;
-  var v15$2: bv32;
-  var v8$1: bv32;
-  var v8$2: bv32;
-  var v4: bool;
-  var v7: bool;
   var v12$1: bool;
   var v12$2: bool;
+  var v13$1: bv32;
+  var v13$2: bv32;
+  var v14$1: bv32;
+  var v14$2: bv32;
+  var v15$1: bv32;
+  var v15$2: bv32;
+  var v16$1: bv32;
+  var v16$2: bv32;
   var v17$1: bool;
   var v17$2: bool;
   var p0$1: bool;
@@ -160,14 +160,14 @@ implementation {:source_name "chk1D_512"} {:kernel} $chk1D_512($half_n_cmplx: bv
   var p4$2: bool;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, 512bv32), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, 512bv32), local_id_x$2);
     $i.0 := 0bv32;
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_2"} true;
     assume {:invGenSkippedLoop} true;
     assert {:block_sourceloc} {:sourceloc_num 1} true;
@@ -178,9 +178,9 @@ implementation {:source_name "chk1D_512"} {:kernel} $chk1D_512($half_n_cmplx: bv
     assume {:partition} !v1;
     $i.1 := 0bv32;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.4;
+    goto $5;
 
-  $for.cond.4:
+  $5:
     assume {:captureState "loop_head_state_1"} true;
     assume {:invGenSkippedLoop} true;
     assert {:block_sourceloc} {:sourceloc_num 9} true;
@@ -191,9 +191,9 @@ implementation {:source_name "chk1D_512"} {:kernel} $chk1D_512($half_n_cmplx: bv
     assume {:partition} !v4;
     $i.2 := 0bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.14;
+    goto $9;
 
-  $for.cond.14:
+  $9:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b5 ==> _WRITE_HAS_OCCURRED_$$fail ==> _WATCHED_OFFSET == 0bv32;
     assert {:tag "loopBound"} {:thread 1} _b4 ==> BV32_UGE($i.2, 0bv32);
@@ -260,7 +260,7 @@ implementation {:source_name "chk1D_512"} {:kernel} $chk1D_512($half_n_cmplx: bv
     $$fail[0bv32] := (if p4$2 then 1bv32 else $$fail[0bv32]);
     $i.2 := BV32_ADD($i.2, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.14;
+    goto $9;
 
   $truebb0:
     assume {:partition} v4;
@@ -272,7 +272,7 @@ implementation {:source_name "chk1D_512"} {:kernel} $chk1D_512($half_n_cmplx: bv
     $$b$2[BV32_ADD(BV32_MUL($i.1, 2bv32), 1bv32)] := v6$2;
     $i.1 := BV32_ADD($i.1, 1bv32);
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.4;
+    goto $5;
 
   $truebb:
     assume {:partition} v1;
@@ -284,7 +284,7 @@ implementation {:source_name "chk1D_512"} {:kernel} $chk1D_512($half_n_cmplx: bv
     $$a$2[BV32_ADD(BV32_MUL($i.0, 2bv32), 1bv32)] := v3$2;
     $i.0 := BV32_ADD($i.0, 1bv32);
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

@@ -221,12 +221,12 @@ implementation {:source_name "scan_L1_kernel"} {:kernel} $scan_L1_kernel($n: bv3
   var $d.0: bv32;
   var $stride.1: bv32;
   var $d1.0: bv32;
+  var v0$1: bv32;
+  var v0$2: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
   var v2$1: bv32;
   var v2$2: bv32;
-  var v0$1: bv32;
-  var v0$2: bv32;
   var v3$1: bv32;
   var v3$2: bv32;
   var v4$1: bv32;
@@ -589,10 +589,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  (  BV32_SLE($d1.0, 1bv32) ) , 
     v38$2 := BV32_ULT(v1$2, $n);
     p10$1 := (if v38$1 then v38$1 else p10$1);
     p10$2 := (if v38$2 then v38$2 else p10$2);
-    call {:sourceloc} {:sourceloc_num 42} _LOG_READ_$$scan_L1_kernel.s_data(p10$1, v5$1, $$scan_L1_kernel.s_data[1bv1][v5$1]);
     assume {:do_not_predicate} {:check_id "check_state_4"} {:captureState "check_state_4"} {:sourceloc} {:sourceloc_num 42} true;
-    call {:check_id "check_state_4"} {:sourceloc} {:sourceloc_num 42} _CHECK_READ_$$scan_L1_kernel.s_data(p10$2, v5$2, $$scan_L1_kernel.s_data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v5$2]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$scan_L1_kernel.s_data"} true;
     v39$1 := (if p10$1 then $$scan_L1_kernel.s_data[1bv1][v5$1] else v39$1);
     v39$2 := (if p10$2 then $$scan_L1_kernel.s_data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v5$2] else v39$2);
     call {:sourceloc} {:sourceloc_num 43} _LOG_WRITE_$$dataBase(p10$1, BV32_ADD($data_offset, v1$1), v39$1, $$dataBase[BV32_ADD($data_offset, v1$1)]);
@@ -606,10 +603,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  (  BV32_SLE($d1.0, 1bv32) ) , 
     v40$2 := BV32_ULT(v2$2, $n);
     p12$1 := (if v40$1 then v40$1 else p12$1);
     p12$2 := (if v40$2 then v40$2 else p12$2);
-    call {:sourceloc} {:sourceloc_num 46} _LOG_READ_$$scan_L1_kernel.s_data(p12$1, v7$1, $$scan_L1_kernel.s_data[1bv1][v7$1]);
     assume {:do_not_predicate} {:check_id "check_state_2"} {:captureState "check_state_2"} {:sourceloc} {:sourceloc_num 46} true;
-    call {:check_id "check_state_2"} {:sourceloc} {:sourceloc_num 46} _CHECK_READ_$$scan_L1_kernel.s_data(p12$2, v7$2, $$scan_L1_kernel.s_data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v7$2]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$scan_L1_kernel.s_data"} true;
     v41$1 := (if p12$1 then $$scan_L1_kernel.s_data[1bv1][v7$1] else v41$1);
     v41$2 := (if p12$2 then $$scan_L1_kernel.s_data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v7$2] else v41$2);
     call {:sourceloc} {:sourceloc_num 47} _LOG_WRITE_$$dataBase(p12$1, BV32_ADD($data_offset, v2$1), v41$1, $$dataBase[BV32_ADD($data_offset, v2$1)]);

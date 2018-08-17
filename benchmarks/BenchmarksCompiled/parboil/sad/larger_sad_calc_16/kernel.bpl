@@ -126,22 +126,22 @@ implementation {:source_name "larger_sad_calc_16"} {:kernel} $larger_sad_calc_16
   var v4$2: bv32;
   var v5$1: bool;
   var v5$2: bool;
-  var v8$1: bv16;
-  var v8$2: bv16;
-  var v7$1: bv16;
-  var v7$2: bv16;
-  var v11$1: bv16;
-  var v11$2: bv16;
-  var v9$1: bv16;
-  var v9$2: bv16;
   var v6$1: bv16;
   var v6$2: bv16;
+  var v7$1: bv16;
+  var v7$2: bv16;
+  var v8$1: bv16;
+  var v8$2: bv16;
+  var v9$1: bv16;
+  var v9$2: bv16;
+  var v10$1: bv16;
+  var v10$2: bv16;
+  var v11$1: bv16;
+  var v11$2: bv16;
   var v12$1: bv16;
   var v12$2: bv16;
   var v13$1: bv16;
   var v13$2: bv16;
-  var v10$1: bv16;
-  var v10$2: bv16;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -150,7 +150,7 @@ implementation {:source_name "larger_sad_calc_16"} {:kernel} $larger_sad_calc_16
   var p2$2: bool;
 
 
-  $entry:
+  $0:
     v0 := BV32_MUL(BV32_MUL(BV32_ASHR(BV32_SHL($mb_height, 8bv32), 8bv32), BV32_ASHR(BV32_SHL($mb_width, 8bv32), 8bv32)), 1096bv32);
     v1$1 := BV32_MUL(BV32_ADD(BV32_MUL(BV32_ASHR(BV32_SHL($mb_width, 8bv32), 8bv32), BV32_ASHR(BV32_SHL(group_id_y$1, 8bv32), 8bv32)), group_id_x$1), 1096bv32);
     v1$2 := BV32_MUL(BV32_ADD(BV32_MUL(BV32_ASHR(BV32_SHL($mb_width, 8bv32), 8bv32), BV32_ASHR(BV32_SHL(group_id_y$2, 8bv32), 8bv32)), group_id_x$2), 1096bv32);
@@ -167,9 +167,9 @@ implementation {:source_name "larger_sad_calc_16"} {:kernel} $larger_sad_calc_16
     p0$1 := true;
     p0$2 := true;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 1} _b6 ==> BV32_SLT($search_pos.0$1, 545bv32) ==> p0$1;
     assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 2} _b6 ==> BV32_SLT($search_pos.0$2, 545bv32) ==> p0$2;
@@ -320,16 +320,16 @@ implementation {:source_name "larger_sad_calc_16"} {:kernel} $larger_sad_calc_16
     $search_pos.0$2 := (if p1$2 then BV32_ADD($search_pos.0$2, 32bv32) else $search_pos.0$2);
     p0$1 := (if p1$1 then true else p0$1);
     p0$2 := (if p1$2 then true else p0$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $1.backedge, $1.tail;
 
-  $for.cond.tail:
+  $1.tail:
     assume !p0$1 && !p0$2;
     return;
 
-  $for.cond.backedge:
+  $1.backedge:
     assume {:backedge} p0$1 || p0$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

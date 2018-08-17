@@ -199,155 +199,155 @@ implementation {:source_name "IMGVF_kernel"} {:kernel} $IMGVF_kernel($vx: bv32, 
   var $new_val.0$2: bv32;
   var $old_val.0$1: bv32;
   var $old_val.0$2: bv32;
-  var $cond$1: bv32;
-  var $cond$2: bv32;
-  var $cond57$1: bv32;
-  var $cond57$2: bv32;
-  var $cond64$1: bv32;
-  var $cond64$2: bv32;
-  var $cond73$1: bv32;
-  var $cond73$2: bv32;
+  var $1$1: bv32;
+  var $1$2: bv32;
+  var $2$1: bv32;
+  var $2$2: bv32;
+  var $3$1: bv32;
+  var $3$2: bv32;
+  var $4$1: bv32;
+  var $4$2: bv32;
   var $th.0$1: bv32;
   var $th.0$2: bv32;
   var $thread_block.2$1: bv32;
   var $thread_block.2$2: bv32;
-  var v7$1: bool;
-  var v7$2: bool;
-  var v9$1: bv32;
-  var v9$2: bv32;
-  var v10$1: bv32;
-  var v10$2: bv32;
-  var v8$1: bv32;
-  var v8$2: bv32;
-  var v11$1: bool;
-  var v11$2: bool;
-  var v4$1: bv32;
-  var v4$2: bv32;
-  var v12$1: bv32;
-  var v12$2: bv32;
-  var v3$1: bv32;
-  var v3$2: bv32;
+  var v57$1: bool;
+  var v57$2: bool;
+  var v0$1: bv32;
+  var v0$2: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
   var v2$1: bv32;
   var v2$2: bv32;
-  var v16$1: bv32;
-  var v16$2: bv32;
-  var v0$1: bv32;
-  var v0$2: bv32;
+  var v3$1: bv32;
+  var v3$2: bv32;
+  var v4$1: bv32;
+  var v4$2: bv32;
   var v5$1: bv32;
   var v5$2: bv32;
   var v6$1: bv32;
   var v6$2: bv32;
+  var v7$1: bool;
+  var v7$2: bool;
+  var v8$1: bv32;
+  var v8$2: bv32;
+  var v9$1: bv32;
+  var v9$2: bv32;
+  var v10$1: bv32;
+  var v10$2: bv32;
+  var v11$1: bool;
+  var v11$2: bool;
+  var v12$1: bv32;
+  var v12$2: bv32;
+  var v13$1: bool;
+  var v13$2: bool;
   var v14$1: bv32;
   var v14$2: bv32;
   var v15: bv32;
-  var v13$1: bool;
-  var v13$2: bool;
-  var v18$1: bool;
-  var v18$2: bool;
+  var v16$1: bv32;
+  var v16$2: bv32;
   var v17$1: bool;
   var v17$2: bool;
+  var v18$1: bool;
+  var v18$2: bool;
   var v19$1: bool;
   var v19$2: bool;
-  var v22$1: bool;
-  var v22$2: bool;
   var v20$1: bv32;
   var v20$2: bv32;
   var v21$1: bv32;
   var v21$2: bv32;
-  var v24$1: bool;
-  var v24$2: bool;
+  var v22$1: bool;
+  var v22$2: bool;
   var v23$1: bool;
   var v23$2: bool;
-  var v32$1: bv32;
-  var v32$2: bv32;
-  var v36$1: bv32;
-  var v36$2: bv32;
-  var v34$1: bv32;
-  var v34$2: bv32;
-  var v30$1: bv32;
-  var v30$2: bv32;
-  var v38$1: bv32;
-  var v38$2: bv32;
-  var v40$1: bv32;
-  var v40$2: bv32;
-  var v42$1: bv32;
-  var v42$2: bv32;
-  var v44$1: bv32;
-  var v44$2: bv32;
-  var v27$1: bool;
-  var v27$2: bool;
+  var v24$1: bool;
+  var v24$2: bool;
   var v25$1: bool;
   var v25$2: bool;
   var v26$1: bool;
   var v26$2: bool;
-  var v33$1: bv32;
-  var v33$2: bv32;
-  var v39$1: bv32;
-  var v39$2: bv32;
+  var v27$1: bool;
+  var v27$2: bool;
   var v28$1: bv32;
   var v28$2: bv32;
-  var v31$1: bv32;
-  var v31$2: bv32;
-  var v35$1: bv32;
-  var v35$2: bv32;
-  var v41$1: bv32;
-  var v41$2: bv32;
-  var v43$1: bv32;
-  var v43$2: bv32;
-  var v37$1: bv32;
-  var v37$2: bv32;
   var v29$1: bv32;
   var v29$2: bv32;
-  var v46$1: bv32;
-  var v46$2: bv32;
-  var v58$1: bv32;
-  var v58$2: bv32;
-  var v53$1: bv32;
-  var v53$2: bv32;
-  var v55$1: bv32;
-  var v55$2: bv32;
-  var v49$1: bv32;
-  var v49$2: bv32;
-  var v59$1: bv32;
-  var v59$2: bv32;
-  var v68$1: bv32;
-  var v68$2: bv32;
-  var v61$1: bv32;
-  var v61$2: bv32;
+  var v30$1: bv32;
+  var v30$2: bv32;
+  var v31$1: bv32;
+  var v31$2: bv32;
+  var v32$1: bv32;
+  var v32$2: bv32;
+  var v33$1: bv32;
+  var v33$2: bv32;
+  var v34$1: bv32;
+  var v34$2: bv32;
+  var v35$1: bv32;
+  var v35$2: bv32;
+  var v36$1: bv32;
+  var v36$2: bv32;
+  var v37$1: bv32;
+  var v37$2: bv32;
+  var v38$1: bv32;
+  var v38$2: bv32;
+  var v39$1: bv32;
+  var v39$2: bv32;
+  var v40$1: bv32;
+  var v40$2: bv32;
+  var v41$1: bv32;
+  var v41$2: bv32;
+  var v42$1: bv32;
+  var v42$2: bv32;
+  var v43$1: bv32;
+  var v43$2: bv32;
+  var v44$1: bv32;
+  var v44$2: bv32;
   var v45$1: bv32;
   var v45$2: bv32;
-  var v48$1: bool;
-  var v48$2: bool;
+  var v46$1: bv32;
+  var v46$2: bv32;
   var v47$1: bool;
   var v47$2: bool;
-  var v51$1: bool;
-  var v51$2: bool;
+  var v48$1: bool;
+  var v48$2: bool;
+  var v49$1: bv32;
+  var v49$2: bv32;
   var v50$1: bool;
   var v50$2: bool;
+  var v51$1: bool;
+  var v51$2: bool;
   var v52$1: bool;
   var v52$2: bool;
+  var v53$1: bv32;
+  var v53$2: bv32;
   var v54$1: bv32;
   var v54$2: bv32;
+  var v55$1: bv32;
+  var v55$2: bv32;
   var v56$1: bool;
   var v56$2: bool;
-  var v57$1: bool;
-  var v57$2: bool;
+  var v58$1: bv32;
+  var v58$2: bv32;
+  var v59$1: bv32;
+  var v59$2: bv32;
   var v60$1: bool;
   var v60$2: bool;
+  var v61$1: bv32;
+  var v61$2: bv32;
   var v62$1: bool;
   var v62$2: bool;
-  var v66$1: bv32;
-  var v66$2: bv32;
-  var v67$1: bool;
-  var v67$2: bool;
   var v63$1: bool;
   var v63$2: bool;
   var v64$1: bv32;
   var v64$2: bv32;
   var v65$1: bv32;
   var v65$2: bv32;
+  var v66$1: bv32;
+  var v66$2: bv32;
+  var v67$1: bool;
+  var v67$2: bool;
+  var v68$1: bv32;
+  var v68$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -444,15 +444,15 @@ implementation {:source_name "IMGVF_kernel"} {:kernel} $IMGVF_kernel($vx: bv32, 
   var p46$2: bool;
   var _HAVOC_bv32$1: bv32;
   var _HAVOC_bv32$2: bv32;
-  var _READ_HAS_OCCURRED_$$IMGVF_kernel.IMGVF$ghost$__partitioned_block_$for.cond.27_0: bool;
-  var _WRITE_HAS_OCCURRED_$$IMGVF_kernel.IMGVF$ghost$__partitioned_block_$for.cond.27_0: bool;
-  var _READ_HAS_OCCURRED_$$IMGVF_kernel.buffer$ghost$__partitioned_block_$for.cond.27_0: bool;
-  var _WRITE_HAS_OCCURRED_$$IMGVF_kernel.buffer$ghost$__partitioned_block_$for.cond.27_0: bool;
-  var _READ_HAS_OCCURRED_$$IMGVF_kernel.buffer$ghost$__partitioned_block_$for.cond.200_0: bool;
-  var _WRITE_HAS_OCCURRED_$$IMGVF_kernel.buffer$ghost$__partitioned_block_$for.cond.200_0: bool;
+  var _READ_HAS_OCCURRED_$$IMGVF_kernel.IMGVF$ghost$__partitioned_block_$13_0: bool;
+  var _WRITE_HAS_OCCURRED_$$IMGVF_kernel.IMGVF$ghost$__partitioned_block_$13_0: bool;
+  var _READ_HAS_OCCURRED_$$IMGVF_kernel.buffer$ghost$__partitioned_block_$13_0: bool;
+  var _WRITE_HAS_OCCURRED_$$IMGVF_kernel.buffer$ghost$__partitioned_block_$13_0: bool;
+  var _READ_HAS_OCCURRED_$$IMGVF_kernel.buffer$ghost$__partitioned_block_$44_0: bool;
+  var _WRITE_HAS_OCCURRED_$$IMGVF_kernel.buffer$ghost$__partitioned_block_$44_0: bool;
 
 
-  $entry:
+  $0:
     v0$1 := group_id_x$1;
     v0$2 := group_id_x$2;
     v1$1 := $$I_offsets$1[v0$1];
@@ -477,9 +477,9 @@ implementation {:source_name "IMGVF_kernel"} {:kernel} $IMGVF_kernel($vx: bv32, 
     p0$1 := true;
     p0$2 := true;
     assume {:captureState "loop_entry_state_4_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_4"} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$IMGVF_kernel.buffer ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$IMGVF_kernel.buffer ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -548,13 +548,13 @@ implementation {:source_name "IMGVF_kernel"} {:kernel} $IMGVF_kernel($vx: bv32, 
     $thread_block.0$2, $i.0$2 := (if p1$2 then BV32_ADD($thread_block.0$2, 1bv32) else $thread_block.0$2), (if p1$2 then v9$2 else $i.0$2);
     p0$1 := (if p1$1 then true else p0$1);
     p0$2 := (if p1$2 then true else p0$2);
-    goto $for.cond.backedge, __partitioned_block_$for.cond.tail_0;
+    goto $1.backedge, __partitioned_block_$1.tail_0;
 
-  __partitioned_block_$for.cond.tail_0:
+  __partitioned_block_$1.tail_0:
     assume !p0$1 && !p0$2;
-    goto __partitioned_block_$for.cond.tail_1;
+    goto __partitioned_block_$1.tail_1;
 
-  __partitioned_block_$for.cond.tail_1:
+  __partitioned_block_$1.tail_1:
     call {:sourceloc_num 12} $bugle_barrier_duplicated_0(1bv1, 0bv1);
     v13$1 := v5$1 == 0bv32;
     v13$2 := v5$2 == 0bv32;
@@ -567,9 +567,9 @@ implementation {:source_name "IMGVF_kernel"} {:kernel} $IMGVF_kernel($vx: bv32, 
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$IMGVF_kernel.cell_converged"} true;
     $$IMGVF_kernel.cell_converged[1bv1][0bv32] := (if p5$1 then 0bv32 else $$IMGVF_kernel.cell_converged[1bv1][0bv32]);
     $$IMGVF_kernel.cell_converged[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][0bv32] := (if p5$2 then 0bv32 else $$IMGVF_kernel.cell_converged[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][0bv32]);
-    goto __partitioned_block_$for.cond.tail_2;
+    goto __partitioned_block_$1.tail_2;
 
-  __partitioned_block_$for.cond.tail_2:
+  __partitioned_block_$1.tail_2:
     call {:sourceloc_num 16} $bugle_barrier_duplicated_1(1bv1, 0bv1);
     v14$1 := BV32_SREM(256bv32, v3$1);
     v14$2 := BV32_SREM(256bv32, v3$2);
@@ -579,9 +579,9 @@ implementation {:source_name "IMGVF_kernel"} {:kernel} $IMGVF_kernel($vx: bv32, 
     p7$1 := true;
     p7$2 := true;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $while.cond;
+    goto $9;
 
-  $while.cond:
+  $9:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b122 ==> _WRITE_HAS_OCCURRED_$$IMGVF_kernel.buffer ==> _WATCHED_OFFSET == local_id_x$1 || _WATCHED_OFFSET == BV32_SUB(local_id_x$1, 256bv32) || _WATCHED_OFFSET == local_id_x$1 || _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b121 ==> _READ_HAS_OCCURRED_$$IMGVF_kernel.buffer ==> _WATCHED_OFFSET == local_id_x$1 || _WATCHED_OFFSET == local_id_x$1 || _WATCHED_OFFSET == local_id_x$1 || _WATCHED_OFFSET == BV32_SUB(local_id_x$1, 256bv32) || _WATCHED_OFFSET == local_id_x$1;
@@ -594,57 +594,57 @@ implementation {:source_name "IMGVF_kernel"} {:kernel} $IMGVF_kernel($vx: bv32, 
     assert {:tag "nowrite"} _b114 ==> !_WRITE_HAS_OCCURRED_$$IMGVF_kernel.IMGVF;
     assert {:tag "noread"} _b113 ==> !_READ_HAS_OCCURRED_$$IMGVF_kernel.IMGVF;
     assert {:tag "predicatedEquality"} _b112 ==> p7$1 && p7$2 ==> v62$1 == v62$2;
-    assert {:tag "predicatedEquality"} _b111 ==> p7$1 && p7$2 ==> v60$1 == v60$2;
-    assert {:tag "predicatedEquality"} _b110 ==> p7$1 && p7$2 ==> v57$1 == v57$2;
-    assert {:tag "predicatedEquality"} _b109 ==> p7$1 && p7$2 ==> v56$1 == v56$2;
-    assert {:tag "predicatedEquality"} _b108 ==> p7$1 && p7$2 ==> v54$1 == v54$2;
-    assert {:tag "predicatedEquality"} _b107 ==> p7$1 && p7$2 ==> v52$1 == v52$2;
-    assert {:tag "predicatedEquality"} _b106 ==> p7$1 && p7$2 ==> v50$1 == v50$2;
-    assert {:tag "predicatedEquality"} _b105 ==> p7$1 && p7$2 ==> v51$1 == v51$2;
-    assert {:tag "predicatedEquality"} _b104 ==> p7$1 && p7$2 ==> v47$1 == v47$2;
-    assert {:tag "predicatedEquality"} _b103 ==> p7$1 && p7$2 ==> v48$1 == v48$2;
-    assert {:tag "predicatedEquality"} _b102 ==> p7$1 && p7$2 ==> v45$1 == v45$2;
-    assert {:tag "predicatedEquality"} _b101 ==> p7$1 && p7$2 ==> v61$1 == v61$2;
-    assert {:tag "predicatedEquality"} _b100 ==> p7$1 && p7$2 ==> v59$1 == v59$2;
-    assert {:tag "predicatedEquality"} _b99 ==> p7$1 && p7$2 ==> v49$1 == v49$2;
-    assert {:tag "predicatedEquality"} _b98 ==> p7$1 && p7$2 ==> v55$1 == v55$2;
-    assert {:tag "predicatedEquality"} _b97 ==> p7$1 && p7$2 ==> v53$1 == v53$2;
-    assert {:tag "predicatedEquality"} _b96 ==> p7$1 && p7$2 ==> v58$1 == v58$2;
-    assert {:tag "predicatedEquality"} _b95 ==> p7$1 && p7$2 ==> v46$1 == v46$2;
-    assert {:tag "predicatedEquality"} _b94 ==> p7$1 && p7$2 ==> v29$1 == v29$2;
-    assert {:tag "predicatedEquality"} _b93 ==> p7$1 && p7$2 ==> v37$1 == v37$2;
-    assert {:tag "predicatedEquality"} _b92 ==> p7$1 && p7$2 ==> v43$1 == v43$2;
-    assert {:tag "predicatedEquality"} _b91 ==> p7$1 && p7$2 ==> v41$1 == v41$2;
-    assert {:tag "predicatedEquality"} _b90 ==> p7$1 && p7$2 ==> v35$1 == v35$2;
-    assert {:tag "predicatedEquality"} _b89 ==> p7$1 && p7$2 ==> v31$1 == v31$2;
-    assert {:tag "predicatedEquality"} _b88 ==> p7$1 && p7$2 ==> v28$1 == v28$2;
-    assert {:tag "predicatedEquality"} _b87 ==> p7$1 && p7$2 ==> v39$1 == v39$2;
-    assert {:tag "predicatedEquality"} _b86 ==> p7$1 && p7$2 ==> v33$1 == v33$2;
-    assert {:tag "predicatedEquality"} _b85 ==> p7$1 && p7$2 ==> v26$1 == v26$2;
-    assert {:tag "predicatedEquality"} _b84 ==> p7$1 && p7$2 ==> v25$1 == v25$2;
-    assert {:tag "predicatedEquality"} _b83 ==> p7$1 && p7$2 ==> v27$1 == v27$2;
-    assert {:tag "predicatedEquality"} _b82 ==> p7$1 && p7$2 ==> v44$1 == v44$2;
-    assert {:tag "predicatedEquality"} _b81 ==> p7$1 && p7$2 ==> v42$1 == v42$2;
-    assert {:tag "predicatedEquality"} _b80 ==> p7$1 && p7$2 ==> v40$1 == v40$2;
-    assert {:tag "predicatedEquality"} _b79 ==> p7$1 && p7$2 ==> v38$1 == v38$2;
-    assert {:tag "predicatedEquality"} _b78 ==> p7$1 && p7$2 ==> v30$1 == v30$2;
-    assert {:tag "predicatedEquality"} _b77 ==> p7$1 && p7$2 ==> v34$1 == v34$2;
-    assert {:tag "predicatedEquality"} _b76 ==> p7$1 && p7$2 ==> v36$1 == v36$2;
-    assert {:tag "predicatedEquality"} _b75 ==> p7$1 && p7$2 ==> v32$1 == v32$2;
+    assert {:tag "predicatedEquality"} _b111 ==> p7$1 && p7$2 ==> v61$1 == v61$2;
+    assert {:tag "predicatedEquality"} _b110 ==> p7$1 && p7$2 ==> v60$1 == v60$2;
+    assert {:tag "predicatedEquality"} _b109 ==> p7$1 && p7$2 ==> v59$1 == v59$2;
+    assert {:tag "predicatedEquality"} _b108 ==> p7$1 && p7$2 ==> v58$1 == v58$2;
+    assert {:tag "predicatedEquality"} _b107 ==> p7$1 && p7$2 ==> v56$1 == v56$2;
+    assert {:tag "predicatedEquality"} _b106 ==> p7$1 && p7$2 ==> v55$1 == v55$2;
+    assert {:tag "predicatedEquality"} _b105 ==> p7$1 && p7$2 ==> v54$1 == v54$2;
+    assert {:tag "predicatedEquality"} _b104 ==> p7$1 && p7$2 ==> v53$1 == v53$2;
+    assert {:tag "predicatedEquality"} _b103 ==> p7$1 && p7$2 ==> v52$1 == v52$2;
+    assert {:tag "predicatedEquality"} _b102 ==> p7$1 && p7$2 ==> v51$1 == v51$2;
+    assert {:tag "predicatedEquality"} _b101 ==> p7$1 && p7$2 ==> v50$1 == v50$2;
+    assert {:tag "predicatedEquality"} _b100 ==> p7$1 && p7$2 ==> v49$1 == v49$2;
+    assert {:tag "predicatedEquality"} _b99 ==> p7$1 && p7$2 ==> v48$1 == v48$2;
+    assert {:tag "predicatedEquality"} _b98 ==> p7$1 && p7$2 ==> v47$1 == v47$2;
+    assert {:tag "predicatedEquality"} _b97 ==> p7$1 && p7$2 ==> v46$1 == v46$2;
+    assert {:tag "predicatedEquality"} _b96 ==> p7$1 && p7$2 ==> v45$1 == v45$2;
+    assert {:tag "predicatedEquality"} _b95 ==> p7$1 && p7$2 ==> v44$1 == v44$2;
+    assert {:tag "predicatedEquality"} _b94 ==> p7$1 && p7$2 ==> v43$1 == v43$2;
+    assert {:tag "predicatedEquality"} _b93 ==> p7$1 && p7$2 ==> v42$1 == v42$2;
+    assert {:tag "predicatedEquality"} _b92 ==> p7$1 && p7$2 ==> v41$1 == v41$2;
+    assert {:tag "predicatedEquality"} _b91 ==> p7$1 && p7$2 ==> v40$1 == v40$2;
+    assert {:tag "predicatedEquality"} _b90 ==> p7$1 && p7$2 ==> v39$1 == v39$2;
+    assert {:tag "predicatedEquality"} _b89 ==> p7$1 && p7$2 ==> v38$1 == v38$2;
+    assert {:tag "predicatedEquality"} _b88 ==> p7$1 && p7$2 ==> v37$1 == v37$2;
+    assert {:tag "predicatedEquality"} _b87 ==> p7$1 && p7$2 ==> v36$1 == v36$2;
+    assert {:tag "predicatedEquality"} _b86 ==> p7$1 && p7$2 ==> v35$1 == v35$2;
+    assert {:tag "predicatedEquality"} _b85 ==> p7$1 && p7$2 ==> v34$1 == v34$2;
+    assert {:tag "predicatedEquality"} _b84 ==> p7$1 && p7$2 ==> v33$1 == v33$2;
+    assert {:tag "predicatedEquality"} _b83 ==> p7$1 && p7$2 ==> v32$1 == v32$2;
+    assert {:tag "predicatedEquality"} _b82 ==> p7$1 && p7$2 ==> v31$1 == v31$2;
+    assert {:tag "predicatedEquality"} _b81 ==> p7$1 && p7$2 ==> v30$1 == v30$2;
+    assert {:tag "predicatedEquality"} _b80 ==> p7$1 && p7$2 ==> v29$1 == v29$2;
+    assert {:tag "predicatedEquality"} _b79 ==> p7$1 && p7$2 ==> v28$1 == v28$2;
+    assert {:tag "predicatedEquality"} _b78 ==> p7$1 && p7$2 ==> v27$1 == v27$2;
+    assert {:tag "predicatedEquality"} _b77 ==> p7$1 && p7$2 ==> v26$1 == v26$2;
+    assert {:tag "predicatedEquality"} _b76 ==> p7$1 && p7$2 ==> v25$1 == v25$2;
+    assert {:tag "predicatedEquality"} _b75 ==> p7$1 && p7$2 ==> v24$1 == v24$2;
     assert {:tag "predicatedEquality"} _b74 ==> p7$1 && p7$2 ==> v23$1 == v23$2;
-    assert {:tag "predicatedEquality"} _b73 ==> p7$1 && p7$2 ==> v24$1 == v24$2;
+    assert {:tag "predicatedEquality"} _b73 ==> p7$1 && p7$2 ==> v22$1 == v22$2;
     assert {:tag "predicatedEquality"} _b72 ==> p7$1 && p7$2 ==> v21$1 == v21$2;
     assert {:tag "predicatedEquality"} _b71 ==> p7$1 && p7$2 ==> v20$1 == v20$2;
-    assert {:tag "predicatedEquality"} _b70 ==> p7$1 && p7$2 ==> v22$1 == v22$2;
-    assert {:tag "predicatedEquality"} _b69 ==> p7$1 && p7$2 ==> v19$1 == v19$2;
+    assert {:tag "predicatedEquality"} _b70 ==> p7$1 && p7$2 ==> v19$1 == v19$2;
+    assert {:tag "predicatedEquality"} _b69 ==> p7$1 && p7$2 ==> v18$1 == v18$2;
     assert {:tag "predicatedEquality"} _b68 ==> p7$1 && p7$2 ==> v17$1 == v17$2;
-    assert {:tag "predicatedEquality"} _b67 ==> p7$1 && p7$2 ==> v18$1 == v18$2;
-    assert {:tag "predicatedEquality"} _b66 ==> p7$1 && p7$2 ==> v16$1 == v16$2;
+    assert {:tag "predicatedEquality"} _b67 ==> p7$1 && p7$2 ==> v16$1 == v16$2;
+    assert {:tag "predicatedEquality"} _b66 ==> p7$1 && p7$2 ==> v57$1 == v57$2;
     assert {:tag "predicatedEquality"} _b65 ==> p7$1 && p7$2 ==> $th.0$1 == $th.0$2;
-    assert {:tag "predicatedEquality"} _b64 ==> p7$1 && p7$2 ==> $cond73$1 == $cond73$2;
-    assert {:tag "predicatedEquality"} _b63 ==> p7$1 && p7$2 ==> $cond64$1 == $cond64$2;
-    assert {:tag "predicatedEquality"} _b62 ==> p7$1 && p7$2 ==> $cond57$1 == $cond57$2;
-    assert {:tag "predicatedEquality"} _b61 ==> p7$1 && p7$2 ==> $cond$1 == $cond$2;
+    assert {:tag "predicatedEquality"} _b64 ==> p7$1 && p7$2 ==> $4$1 == $4$2;
+    assert {:tag "predicatedEquality"} _b63 ==> p7$1 && p7$2 ==> $3$1 == $3$2;
+    assert {:tag "predicatedEquality"} _b62 ==> p7$1 && p7$2 ==> $2$1 == $2$2;
+    assert {:tag "predicatedEquality"} _b61 ==> p7$1 && p7$2 ==> $1$1 == $1$2;
     assert {:tag "predicatedEquality"} _b60 ==> p7$1 && p7$2 ==> $old_val.0$1 == $old_val.0$2;
     assert {:tag "predicatedEquality"} _b59 ==> p7$1 && p7$2 ==> $new_val.0$1 == $new_val.0$2;
     assert {:tag "predicatedEquality"} _b58 ==> p7$1 && p7$2 ==> $j.1$1 == $j.1$2;
@@ -709,62 +709,62 @@ implementation {:source_name "IMGVF_kernel"} {:kernel} $IMGVF_kernel($vx: bv32, 
     $thread_block.1$2, $i.2$2, $j.0$2, $total_diff.0$2 := (if p10$2 then 0bv32 else $thread_block.1$2), (if p10$2 then $i.1$2 else $i.2$2), (if p10$2 then BV32_SUB(BV32_SREM(v5$2, v3$2), v14$2) else $j.0$2), (if p10$2 then 0bv32 else $total_diff.0$2);
     p11$1 := (if p10$1 then true else p11$1);
     p11$2 := (if p10$2 then true else p11$2);
-    _READ_HAS_OCCURRED_$$IMGVF_kernel.IMGVF$ghost$__partitioned_block_$for.cond.27_0 := _READ_HAS_OCCURRED_$$IMGVF_kernel.IMGVF;
-    _WRITE_HAS_OCCURRED_$$IMGVF_kernel.IMGVF$ghost$__partitioned_block_$for.cond.27_0 := _WRITE_HAS_OCCURRED_$$IMGVF_kernel.IMGVF;
-    _READ_HAS_OCCURRED_$$IMGVF_kernel.buffer$ghost$__partitioned_block_$for.cond.27_0 := _READ_HAS_OCCURRED_$$IMGVF_kernel.buffer;
-    _WRITE_HAS_OCCURRED_$$IMGVF_kernel.buffer$ghost$__partitioned_block_$for.cond.27_0 := _WRITE_HAS_OCCURRED_$$IMGVF_kernel.buffer;
+    _READ_HAS_OCCURRED_$$IMGVF_kernel.IMGVF$ghost$__partitioned_block_$13_0 := _READ_HAS_OCCURRED_$$IMGVF_kernel.IMGVF;
+    _WRITE_HAS_OCCURRED_$$IMGVF_kernel.IMGVF$ghost$__partitioned_block_$13_0 := _WRITE_HAS_OCCURRED_$$IMGVF_kernel.IMGVF;
+    _READ_HAS_OCCURRED_$$IMGVF_kernel.buffer$ghost$__partitioned_block_$13_0 := _READ_HAS_OCCURRED_$$IMGVF_kernel.buffer;
+    _WRITE_HAS_OCCURRED_$$IMGVF_kernel.buffer$ghost$__partitioned_block_$13_0 := _WRITE_HAS_OCCURRED_$$IMGVF_kernel.buffer;
     assume {:captureState "loop_entry_state_3_0"} true;
-    goto __partitioned_block_$for.cond.27_0;
+    goto __partitioned_block_$13_0;
 
-  __partitioned_block_$for.cond.27_0:
+  __partitioned_block_$13_0:
     assume {:captureState "loop_head_state_3"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b178 ==> !p10$1 ==> _WRITE_HAS_OCCURRED_$$IMGVF_kernel.buffer$ghost$__partitioned_block_$for.cond.27_0 == _WRITE_HAS_OCCURRED_$$IMGVF_kernel.buffer;
-    assert {:tag "disabledMaintainsInstrumentation"} _b177 ==> !p10$1 ==> _READ_HAS_OCCURRED_$$IMGVF_kernel.buffer$ghost$__partitioned_block_$for.cond.27_0 == _READ_HAS_OCCURRED_$$IMGVF_kernel.buffer;
+    assert {:tag "disabledMaintainsInstrumentation"} _b178 ==> !p10$1 ==> _WRITE_HAS_OCCURRED_$$IMGVF_kernel.buffer$ghost$__partitioned_block_$13_0 == _WRITE_HAS_OCCURRED_$$IMGVF_kernel.buffer;
+    assert {:tag "disabledMaintainsInstrumentation"} _b177 ==> !p10$1 ==> _READ_HAS_OCCURRED_$$IMGVF_kernel.buffer$ghost$__partitioned_block_$13_0 == _READ_HAS_OCCURRED_$$IMGVF_kernel.buffer;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b176 ==> _WRITE_HAS_OCCURRED_$$IMGVF_kernel.buffer ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b175 ==> _READ_HAS_OCCURRED_$$IMGVF_kernel.buffer ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "nowrite"} _b174 ==> !_WRITE_HAS_OCCURRED_$$IMGVF_kernel.buffer;
     assert {:tag "noread"} _b173 ==> !_READ_HAS_OCCURRED_$$IMGVF_kernel.buffer;
-    assert {:tag "disabledMaintainsInstrumentation"} _b172 ==> !p10$1 ==> _WRITE_HAS_OCCURRED_$$IMGVF_kernel.IMGVF$ghost$__partitioned_block_$for.cond.27_0 == _WRITE_HAS_OCCURRED_$$IMGVF_kernel.IMGVF;
-    assert {:tag "disabledMaintainsInstrumentation"} _b171 ==> !p10$1 ==> _READ_HAS_OCCURRED_$$IMGVF_kernel.IMGVF$ghost$__partitioned_block_$for.cond.27_0 == _READ_HAS_OCCURRED_$$IMGVF_kernel.IMGVF;
+    assert {:tag "disabledMaintainsInstrumentation"} _b172 ==> !p10$1 ==> _WRITE_HAS_OCCURRED_$$IMGVF_kernel.IMGVF$ghost$__partitioned_block_$13_0 == _WRITE_HAS_OCCURRED_$$IMGVF_kernel.IMGVF;
+    assert {:tag "disabledMaintainsInstrumentation"} _b171 ==> !p10$1 ==> _READ_HAS_OCCURRED_$$IMGVF_kernel.IMGVF$ghost$__partitioned_block_$13_0 == _READ_HAS_OCCURRED_$$IMGVF_kernel.IMGVF;
     assert {:tag "nowrite"} _b170 ==> !_WRITE_HAS_OCCURRED_$$IMGVF_kernel.IMGVF;
     assert {:tag "noread"} _b169 ==> !_READ_HAS_OCCURRED_$$IMGVF_kernel.IMGVF;
-    assert {:tag "predicatedEquality"} _b168 ==> p11$1 && p11$2 ==> v50$1 == v50$2;
-    assert {:tag "predicatedEquality"} _b167 ==> p11$1 && p11$2 ==> v51$1 == v51$2;
-    assert {:tag "predicatedEquality"} _b166 ==> p11$1 && p11$2 ==> v47$1 == v47$2;
+    assert {:tag "predicatedEquality"} _b168 ==> p11$1 && p11$2 ==> v51$1 == v51$2;
+    assert {:tag "predicatedEquality"} _b167 ==> p11$1 && p11$2 ==> v50$1 == v50$2;
+    assert {:tag "predicatedEquality"} _b166 ==> p11$1 && p11$2 ==> v49$1 == v49$2;
     assert {:tag "predicatedEquality"} _b165 ==> p11$1 && p11$2 ==> v48$1 == v48$2;
-    assert {:tag "predicatedEquality"} _b164 ==> p11$1 && p11$2 ==> v45$1 == v45$2;
-    assert {:tag "predicatedEquality"} _b163 ==> p11$1 && p11$2 ==> v49$1 == v49$2;
-    assert {:tag "predicatedEquality"} _b162 ==> p11$1 && p11$2 ==> v46$1 == v46$2;
-    assert {:tag "predicatedEquality"} _b161 ==> p11$1 && p11$2 ==> v29$1 == v29$2;
-    assert {:tag "predicatedEquality"} _b160 ==> p11$1 && p11$2 ==> v37$1 == v37$2;
-    assert {:tag "predicatedEquality"} _b159 ==> p11$1 && p11$2 ==> v43$1 == v43$2;
+    assert {:tag "predicatedEquality"} _b164 ==> p11$1 && p11$2 ==> v47$1 == v47$2;
+    assert {:tag "predicatedEquality"} _b163 ==> p11$1 && p11$2 ==> v46$1 == v46$2;
+    assert {:tag "predicatedEquality"} _b162 ==> p11$1 && p11$2 ==> v45$1 == v45$2;
+    assert {:tag "predicatedEquality"} _b161 ==> p11$1 && p11$2 ==> v44$1 == v44$2;
+    assert {:tag "predicatedEquality"} _b160 ==> p11$1 && p11$2 ==> v43$1 == v43$2;
+    assert {:tag "predicatedEquality"} _b159 ==> p11$1 && p11$2 ==> v42$1 == v42$2;
     assert {:tag "predicatedEquality"} _b158 ==> p11$1 && p11$2 ==> v41$1 == v41$2;
-    assert {:tag "predicatedEquality"} _b157 ==> p11$1 && p11$2 ==> v35$1 == v35$2;
-    assert {:tag "predicatedEquality"} _b156 ==> p11$1 && p11$2 ==> v31$1 == v31$2;
-    assert {:tag "predicatedEquality"} _b155 ==> p11$1 && p11$2 ==> v28$1 == v28$2;
-    assert {:tag "predicatedEquality"} _b154 ==> p11$1 && p11$2 ==> v39$1 == v39$2;
-    assert {:tag "predicatedEquality"} _b153 ==> p11$1 && p11$2 ==> v33$1 == v33$2;
-    assert {:tag "predicatedEquality"} _b152 ==> p11$1 && p11$2 ==> v26$1 == v26$2;
-    assert {:tag "predicatedEquality"} _b151 ==> p11$1 && p11$2 ==> v25$1 == v25$2;
-    assert {:tag "predicatedEquality"} _b150 ==> p11$1 && p11$2 ==> v27$1 == v27$2;
-    assert {:tag "predicatedEquality"} _b149 ==> p11$1 && p11$2 ==> v44$1 == v44$2;
-    assert {:tag "predicatedEquality"} _b148 ==> p11$1 && p11$2 ==> v42$1 == v42$2;
-    assert {:tag "predicatedEquality"} _b147 ==> p11$1 && p11$2 ==> v40$1 == v40$2;
-    assert {:tag "predicatedEquality"} _b146 ==> p11$1 && p11$2 ==> v38$1 == v38$2;
-    assert {:tag "predicatedEquality"} _b145 ==> p11$1 && p11$2 ==> v30$1 == v30$2;
-    assert {:tag "predicatedEquality"} _b144 ==> p11$1 && p11$2 ==> v34$1 == v34$2;
-    assert {:tag "predicatedEquality"} _b143 ==> p11$1 && p11$2 ==> v36$1 == v36$2;
-    assert {:tag "predicatedEquality"} _b142 ==> p11$1 && p11$2 ==> v32$1 == v32$2;
-    assert {:tag "predicatedEquality"} _b141 ==> p11$1 && p11$2 ==> v23$1 == v23$2;
-    assert {:tag "predicatedEquality"} _b140 ==> p11$1 && p11$2 ==> v24$1 == v24$2;
-    assert {:tag "predicatedEquality"} _b139 ==> p11$1 && p11$2 ==> v21$1 == v21$2;
-    assert {:tag "predicatedEquality"} _b138 ==> p11$1 && p11$2 ==> v20$1 == v20$2;
-    assert {:tag "predicatedEquality"} _b137 ==> p11$1 && p11$2 ==> v22$1 == v22$2;
+    assert {:tag "predicatedEquality"} _b157 ==> p11$1 && p11$2 ==> v40$1 == v40$2;
+    assert {:tag "predicatedEquality"} _b156 ==> p11$1 && p11$2 ==> v39$1 == v39$2;
+    assert {:tag "predicatedEquality"} _b155 ==> p11$1 && p11$2 ==> v38$1 == v38$2;
+    assert {:tag "predicatedEquality"} _b154 ==> p11$1 && p11$2 ==> v37$1 == v37$2;
+    assert {:tag "predicatedEquality"} _b153 ==> p11$1 && p11$2 ==> v36$1 == v36$2;
+    assert {:tag "predicatedEquality"} _b152 ==> p11$1 && p11$2 ==> v35$1 == v35$2;
+    assert {:tag "predicatedEquality"} _b151 ==> p11$1 && p11$2 ==> v34$1 == v34$2;
+    assert {:tag "predicatedEquality"} _b150 ==> p11$1 && p11$2 ==> v33$1 == v33$2;
+    assert {:tag "predicatedEquality"} _b149 ==> p11$1 && p11$2 ==> v32$1 == v32$2;
+    assert {:tag "predicatedEquality"} _b148 ==> p11$1 && p11$2 ==> v31$1 == v31$2;
+    assert {:tag "predicatedEquality"} _b147 ==> p11$1 && p11$2 ==> v30$1 == v30$2;
+    assert {:tag "predicatedEquality"} _b146 ==> p11$1 && p11$2 ==> v29$1 == v29$2;
+    assert {:tag "predicatedEquality"} _b145 ==> p11$1 && p11$2 ==> v28$1 == v28$2;
+    assert {:tag "predicatedEquality"} _b144 ==> p11$1 && p11$2 ==> v27$1 == v27$2;
+    assert {:tag "predicatedEquality"} _b143 ==> p11$1 && p11$2 ==> v26$1 == v26$2;
+    assert {:tag "predicatedEquality"} _b142 ==> p11$1 && p11$2 ==> v25$1 == v25$2;
+    assert {:tag "predicatedEquality"} _b141 ==> p11$1 && p11$2 ==> v24$1 == v24$2;
+    assert {:tag "predicatedEquality"} _b140 ==> p11$1 && p11$2 ==> v23$1 == v23$2;
+    assert {:tag "predicatedEquality"} _b139 ==> p11$1 && p11$2 ==> v22$1 == v22$2;
+    assert {:tag "predicatedEquality"} _b138 ==> p11$1 && p11$2 ==> v21$1 == v21$2;
+    assert {:tag "predicatedEquality"} _b137 ==> p11$1 && p11$2 ==> v20$1 == v20$2;
     assert {:tag "predicatedEquality"} _b136 ==> p11$1 && p11$2 ==> v19$1 == v19$2;
-    assert {:tag "predicatedEquality"} _b135 ==> p11$1 && p11$2 ==> $cond73$1 == $cond73$2;
-    assert {:tag "predicatedEquality"} _b134 ==> p11$1 && p11$2 ==> $cond64$1 == $cond64$2;
-    assert {:tag "predicatedEquality"} _b133 ==> p11$1 && p11$2 ==> $cond57$1 == $cond57$2;
-    assert {:tag "predicatedEquality"} _b132 ==> p11$1 && p11$2 ==> $cond$1 == $cond$2;
+    assert {:tag "predicatedEquality"} _b135 ==> p11$1 && p11$2 ==> $4$1 == $4$2;
+    assert {:tag "predicatedEquality"} _b134 ==> p11$1 && p11$2 ==> $3$1 == $3$2;
+    assert {:tag "predicatedEquality"} _b133 ==> p11$1 && p11$2 ==> $2$1 == $2$2;
+    assert {:tag "predicatedEquality"} _b132 ==> p11$1 && p11$2 ==> $1$1 == $1$2;
     assert {:tag "predicatedEquality"} _b131 ==> p11$1 && p11$2 ==> $old_val.0$1 == $old_val.0$2;
     assert {:tag "predicatedEquality"} _b130 ==> p11$1 && p11$2 ==> $new_val.0$1 == $new_val.0$2;
     assert {:tag "predicatedEquality"} _b129 ==> p11$1 && p11$2 ==> $j.1$1 == $j.1$2;
@@ -905,108 +905,108 @@ implementation {:source_name "IMGVF_kernel"} {:kernel} $IMGVF_kernel($vx: bv32, 
     p18$2 := (if p16$2 && v24$2 then v24$2 else p18$2);
     p17$1 := (if p16$1 && !v24$1 then !v24$1 else p17$1);
     p17$2 := (if p16$2 && !v24$2 then !v24$2 else p17$2);
-    $cond$1 := (if p17$1 then BV32_SUB(v20$1, 1bv32) else $cond$1);
-    $cond$2 := (if p17$2 then BV32_SUB(v20$2, 1bv32) else $cond$2);
-    $cond$1 := (if p18$1 then 0bv32 else $cond$1);
-    $cond$2 := (if p18$2 then 0bv32 else $cond$2);
+    $1$1 := (if p17$1 then BV32_SUB(v20$1, 1bv32) else $1$1);
+    $1$2 := (if p17$2 then BV32_SUB(v20$2, 1bv32) else $1$2);
+    $1$1 := (if p18$1 then 0bv32 else $1$1);
+    $1$2 := (if p18$2 then 0bv32 else $1$2);
     v25$1 := (if p16$1 then v20$1 == BV32_SUB(v2$1, 1bv32) else v25$1);
     v25$2 := (if p16$2 then v20$2 == BV32_SUB(v2$2, 1bv32) else v25$2);
     p20$1 := (if p16$1 && v25$1 then v25$1 else p20$1);
     p20$2 := (if p16$2 && v25$2 then v25$2 else p20$2);
     p19$1 := (if p16$1 && !v25$1 then !v25$1 else p19$1);
     p19$2 := (if p16$2 && !v25$2 then !v25$2 else p19$2);
-    $cond57$1 := (if p19$1 then BV32_ADD(v20$1, 1bv32) else $cond57$1);
-    $cond57$2 := (if p19$2 then BV32_ADD(v20$2, 1bv32) else $cond57$2);
-    $cond57$1 := (if p20$1 then BV32_SUB(v2$1, 1bv32) else $cond57$1);
-    $cond57$2 := (if p20$2 then BV32_SUB(v2$2, 1bv32) else $cond57$2);
+    $2$1 := (if p19$1 then BV32_ADD(v20$1, 1bv32) else $2$1);
+    $2$2 := (if p19$2 then BV32_ADD(v20$2, 1bv32) else $2$2);
+    $2$1 := (if p20$1 then BV32_SUB(v2$1, 1bv32) else $2$1);
+    $2$2 := (if p20$2 then BV32_SUB(v2$2, 1bv32) else $2$2);
     v26$1 := (if p16$1 then $j.1$1 == 0bv32 else v26$1);
     v26$2 := (if p16$2 then $j.1$2 == 0bv32 else v26$2);
     p22$1 := (if p16$1 && v26$1 then v26$1 else p22$1);
     p22$2 := (if p16$2 && v26$2 then v26$2 else p22$2);
     p21$1 := (if p16$1 && !v26$1 then !v26$1 else p21$1);
     p21$2 := (if p16$2 && !v26$2 then !v26$2 else p21$2);
-    $cond64$1 := (if p21$1 then BV32_SUB($j.1$1, 1bv32) else $cond64$1);
-    $cond64$2 := (if p21$2 then BV32_SUB($j.1$2, 1bv32) else $cond64$2);
-    $cond64$1 := (if p22$1 then 0bv32 else $cond64$1);
-    $cond64$2 := (if p22$2 then 0bv32 else $cond64$2);
+    $3$1 := (if p21$1 then BV32_SUB($j.1$1, 1bv32) else $3$1);
+    $3$2 := (if p21$2 then BV32_SUB($j.1$2, 1bv32) else $3$2);
+    $3$1 := (if p22$1 then 0bv32 else $3$1);
+    $3$2 := (if p22$2 then 0bv32 else $3$2);
     v27$1 := (if p16$1 then $j.1$1 == BV32_SUB(v3$1, 1bv32) else v27$1);
     v27$2 := (if p16$2 then $j.1$2 == BV32_SUB(v3$2, 1bv32) else v27$2);
     p24$1 := (if p16$1 && v27$1 then v27$1 else p24$1);
     p24$2 := (if p16$2 && v27$2 then v27$2 else p24$2);
     p23$1 := (if p16$1 && !v27$1 then !v27$1 else p23$1);
     p23$2 := (if p16$2 && !v27$2 then !v27$2 else p23$2);
-    $cond73$1 := (if p23$1 then BV32_ADD($j.1$1, 1bv32) else $cond73$1);
-    $cond73$2 := (if p23$2 then BV32_ADD($j.1$2, 1bv32) else $cond73$2);
-    $cond73$1 := (if p24$1 then BV32_SUB(v3$1, 1bv32) else $cond73$1);
-    $cond73$2 := (if p24$2 then BV32_SUB(v3$2, 1bv32) else $cond73$2);
+    $4$1 := (if p23$1 then BV32_ADD($j.1$1, 1bv32) else $4$1);
+    $4$2 := (if p23$2 then BV32_ADD($j.1$2, 1bv32) else $4$2);
+    $4$1 := (if p24$1 then BV32_SUB(v3$1, 1bv32) else $4$1);
+    $4$2 := (if p24$2 then BV32_SUB(v3$2, 1bv32) else $4$2);
     call {:sourceloc} {:sourceloc_num 39} _LOG_READ_$$IMGVF_kernel.IMGVF(p16$1, BV32_ADD(BV32_MUL(v20$1, v3$1), $j.1$1), $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL(v20$1, v3$1), $j.1$1)]);
     assume {:do_not_predicate} {:check_id "check_state_16"} {:captureState "check_state_16"} {:sourceloc} {:sourceloc_num 39} true;
     call {:check_id "check_state_16"} {:sourceloc} {:sourceloc_num 39} _CHECK_READ_$$IMGVF_kernel.IMGVF(p16$2, BV32_ADD(BV32_MUL(v20$2, v3$2), $j.1$2), $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(v20$2, v3$2), $j.1$2)]);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$IMGVF_kernel.IMGVF"} true;
     v28$1 := (if p16$1 then $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL(v20$1, v3$1), $j.1$1)] else v28$1);
     v28$2 := (if p16$2 then $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(v20$2, v3$2), $j.1$2)] else v28$2);
-    call {:sourceloc} {:sourceloc_num 40} _LOG_READ_$$IMGVF_kernel.IMGVF(p16$1, BV32_ADD(BV32_MUL($cond$1, v3$1), $j.1$1), $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL($cond$1, v3$1), $j.1$1)]);
+    call {:sourceloc} {:sourceloc_num 40} _LOG_READ_$$IMGVF_kernel.IMGVF(p16$1, BV32_ADD(BV32_MUL($1$1, v3$1), $j.1$1), $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL($1$1, v3$1), $j.1$1)]);
     assume {:do_not_predicate} {:check_id "check_state_17"} {:captureState "check_state_17"} {:sourceloc} {:sourceloc_num 40} true;
-    call {:check_id "check_state_17"} {:sourceloc} {:sourceloc_num 40} _CHECK_READ_$$IMGVF_kernel.IMGVF(p16$2, BV32_ADD(BV32_MUL($cond$2, v3$2), $j.1$2), $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($cond$2, v3$2), $j.1$2)]);
+    call {:check_id "check_state_17"} {:sourceloc} {:sourceloc_num 40} _CHECK_READ_$$IMGVF_kernel.IMGVF(p16$2, BV32_ADD(BV32_MUL($1$2, v3$2), $j.1$2), $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($1$2, v3$2), $j.1$2)]);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$IMGVF_kernel.IMGVF"} true;
-    v29$1 := (if p16$1 then $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL($cond$1, v3$1), $j.1$1)] else v29$1);
-    v29$2 := (if p16$2 then $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($cond$2, v3$2), $j.1$2)] else v29$2);
+    v29$1 := (if p16$1 then $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL($1$1, v3$1), $j.1$1)] else v29$1);
+    v29$2 := (if p16$2 then $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($1$2, v3$2), $j.1$2)] else v29$2);
     v30$1 := (if p16$1 then FSUB32(v29$1, v28$1) else v30$1);
     v30$2 := (if p16$2 then FSUB32(v29$2, v28$2) else v30$2);
-    call {:sourceloc} {:sourceloc_num 41} _LOG_READ_$$IMGVF_kernel.IMGVF(p16$1, BV32_ADD(BV32_MUL($cond57$1, v3$1), $j.1$1), $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL($cond57$1, v3$1), $j.1$1)]);
+    call {:sourceloc} {:sourceloc_num 41} _LOG_READ_$$IMGVF_kernel.IMGVF(p16$1, BV32_ADD(BV32_MUL($2$1, v3$1), $j.1$1), $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL($2$1, v3$1), $j.1$1)]);
     assume {:do_not_predicate} {:check_id "check_state_18"} {:captureState "check_state_18"} {:sourceloc} {:sourceloc_num 41} true;
-    call {:check_id "check_state_18"} {:sourceloc} {:sourceloc_num 41} _CHECK_READ_$$IMGVF_kernel.IMGVF(p16$2, BV32_ADD(BV32_MUL($cond57$2, v3$2), $j.1$2), $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($cond57$2, v3$2), $j.1$2)]);
+    call {:check_id "check_state_18"} {:sourceloc} {:sourceloc_num 41} _CHECK_READ_$$IMGVF_kernel.IMGVF(p16$2, BV32_ADD(BV32_MUL($2$2, v3$2), $j.1$2), $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($2$2, v3$2), $j.1$2)]);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$IMGVF_kernel.IMGVF"} true;
-    v31$1 := (if p16$1 then $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL($cond57$1, v3$1), $j.1$1)] else v31$1);
-    v31$2 := (if p16$2 then $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($cond57$2, v3$2), $j.1$2)] else v31$2);
+    v31$1 := (if p16$1 then $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL($2$1, v3$1), $j.1$1)] else v31$1);
+    v31$2 := (if p16$2 then $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($2$2, v3$2), $j.1$2)] else v31$2);
     v32$1 := (if p16$1 then FSUB32(v31$1, v28$1) else v32$1);
     v32$2 := (if p16$2 then FSUB32(v31$2, v28$2) else v32$2);
-    call {:sourceloc} {:sourceloc_num 42} _LOG_READ_$$IMGVF_kernel.IMGVF(p16$1, BV32_ADD(BV32_MUL(v20$1, v3$1), $cond64$1), $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL(v20$1, v3$1), $cond64$1)]);
+    call {:sourceloc} {:sourceloc_num 42} _LOG_READ_$$IMGVF_kernel.IMGVF(p16$1, BV32_ADD(BV32_MUL(v20$1, v3$1), $3$1), $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL(v20$1, v3$1), $3$1)]);
     assume {:do_not_predicate} {:check_id "check_state_19"} {:captureState "check_state_19"} {:sourceloc} {:sourceloc_num 42} true;
-    call {:check_id "check_state_19"} {:sourceloc} {:sourceloc_num 42} _CHECK_READ_$$IMGVF_kernel.IMGVF(p16$2, BV32_ADD(BV32_MUL(v20$2, v3$2), $cond64$2), $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(v20$2, v3$2), $cond64$2)]);
+    call {:check_id "check_state_19"} {:sourceloc} {:sourceloc_num 42} _CHECK_READ_$$IMGVF_kernel.IMGVF(p16$2, BV32_ADD(BV32_MUL(v20$2, v3$2), $3$2), $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(v20$2, v3$2), $3$2)]);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$IMGVF_kernel.IMGVF"} true;
-    v33$1 := (if p16$1 then $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL(v20$1, v3$1), $cond64$1)] else v33$1);
-    v33$2 := (if p16$2 then $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(v20$2, v3$2), $cond64$2)] else v33$2);
+    v33$1 := (if p16$1 then $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL(v20$1, v3$1), $3$1)] else v33$1);
+    v33$2 := (if p16$2 then $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(v20$2, v3$2), $3$2)] else v33$2);
     v34$1 := (if p16$1 then FSUB32(v33$1, v28$1) else v34$1);
     v34$2 := (if p16$2 then FSUB32(v33$2, v28$2) else v34$2);
-    call {:sourceloc} {:sourceloc_num 43} _LOG_READ_$$IMGVF_kernel.IMGVF(p16$1, BV32_ADD(BV32_MUL(v20$1, v3$1), $cond73$1), $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL(v20$1, v3$1), $cond73$1)]);
+    call {:sourceloc} {:sourceloc_num 43} _LOG_READ_$$IMGVF_kernel.IMGVF(p16$1, BV32_ADD(BV32_MUL(v20$1, v3$1), $4$1), $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL(v20$1, v3$1), $4$1)]);
     assume {:do_not_predicate} {:check_id "check_state_20"} {:captureState "check_state_20"} {:sourceloc} {:sourceloc_num 43} true;
-    call {:check_id "check_state_20"} {:sourceloc} {:sourceloc_num 43} _CHECK_READ_$$IMGVF_kernel.IMGVF(p16$2, BV32_ADD(BV32_MUL(v20$2, v3$2), $cond73$2), $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(v20$2, v3$2), $cond73$2)]);
+    call {:check_id "check_state_20"} {:sourceloc} {:sourceloc_num 43} _CHECK_READ_$$IMGVF_kernel.IMGVF(p16$2, BV32_ADD(BV32_MUL(v20$2, v3$2), $4$2), $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(v20$2, v3$2), $4$2)]);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$IMGVF_kernel.IMGVF"} true;
-    v35$1 := (if p16$1 then $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL(v20$1, v3$1), $cond73$1)] else v35$1);
-    v35$2 := (if p16$2 then $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(v20$2, v3$2), $cond73$2)] else v35$2);
+    v35$1 := (if p16$1 then $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL(v20$1, v3$1), $4$1)] else v35$1);
+    v35$2 := (if p16$2 then $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(v20$2, v3$2), $4$2)] else v35$2);
     v36$1 := (if p16$1 then FSUB32(v35$1, v28$1) else v36$1);
     v36$2 := (if p16$2 then FSUB32(v35$2, v28$2) else v36$2);
-    call {:sourceloc} {:sourceloc_num 44} _LOG_READ_$$IMGVF_kernel.IMGVF(p16$1, BV32_ADD(BV32_MUL($cond$1, v3$1), $cond73$1), $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL($cond$1, v3$1), $cond73$1)]);
+    call {:sourceloc} {:sourceloc_num 44} _LOG_READ_$$IMGVF_kernel.IMGVF(p16$1, BV32_ADD(BV32_MUL($1$1, v3$1), $4$1), $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL($1$1, v3$1), $4$1)]);
     assume {:do_not_predicate} {:check_id "check_state_21"} {:captureState "check_state_21"} {:sourceloc} {:sourceloc_num 44} true;
-    call {:check_id "check_state_21"} {:sourceloc} {:sourceloc_num 44} _CHECK_READ_$$IMGVF_kernel.IMGVF(p16$2, BV32_ADD(BV32_MUL($cond$2, v3$2), $cond73$2), $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($cond$2, v3$2), $cond73$2)]);
+    call {:check_id "check_state_21"} {:sourceloc} {:sourceloc_num 44} _CHECK_READ_$$IMGVF_kernel.IMGVF(p16$2, BV32_ADD(BV32_MUL($1$2, v3$2), $4$2), $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($1$2, v3$2), $4$2)]);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$IMGVF_kernel.IMGVF"} true;
-    v37$1 := (if p16$1 then $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL($cond$1, v3$1), $cond73$1)] else v37$1);
-    v37$2 := (if p16$2 then $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($cond$2, v3$2), $cond73$2)] else v37$2);
+    v37$1 := (if p16$1 then $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL($1$1, v3$1), $4$1)] else v37$1);
+    v37$2 := (if p16$2 then $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($1$2, v3$2), $4$2)] else v37$2);
     v38$1 := (if p16$1 then FSUB32(v37$1, v28$1) else v38$1);
     v38$2 := (if p16$2 then FSUB32(v37$2, v28$2) else v38$2);
-    call {:sourceloc} {:sourceloc_num 45} _LOG_READ_$$IMGVF_kernel.IMGVF(p16$1, BV32_ADD(BV32_MUL($cond57$1, v3$1), $cond73$1), $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL($cond57$1, v3$1), $cond73$1)]);
+    call {:sourceloc} {:sourceloc_num 45} _LOG_READ_$$IMGVF_kernel.IMGVF(p16$1, BV32_ADD(BV32_MUL($2$1, v3$1), $4$1), $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL($2$1, v3$1), $4$1)]);
     assume {:do_not_predicate} {:check_id "check_state_22"} {:captureState "check_state_22"} {:sourceloc} {:sourceloc_num 45} true;
-    call {:check_id "check_state_22"} {:sourceloc} {:sourceloc_num 45} _CHECK_READ_$$IMGVF_kernel.IMGVF(p16$2, BV32_ADD(BV32_MUL($cond57$2, v3$2), $cond73$2), $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($cond57$2, v3$2), $cond73$2)]);
+    call {:check_id "check_state_22"} {:sourceloc} {:sourceloc_num 45} _CHECK_READ_$$IMGVF_kernel.IMGVF(p16$2, BV32_ADD(BV32_MUL($2$2, v3$2), $4$2), $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($2$2, v3$2), $4$2)]);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$IMGVF_kernel.IMGVF"} true;
-    v39$1 := (if p16$1 then $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL($cond57$1, v3$1), $cond73$1)] else v39$1);
-    v39$2 := (if p16$2 then $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($cond57$2, v3$2), $cond73$2)] else v39$2);
+    v39$1 := (if p16$1 then $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL($2$1, v3$1), $4$1)] else v39$1);
+    v39$2 := (if p16$2 then $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($2$2, v3$2), $4$2)] else v39$2);
     v40$1 := (if p16$1 then FSUB32(v39$1, v28$1) else v40$1);
     v40$2 := (if p16$2 then FSUB32(v39$2, v28$2) else v40$2);
-    call {:sourceloc} {:sourceloc_num 46} _LOG_READ_$$IMGVF_kernel.IMGVF(p16$1, BV32_ADD(BV32_MUL($cond$1, v3$1), $cond64$1), $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL($cond$1, v3$1), $cond64$1)]);
+    call {:sourceloc} {:sourceloc_num 46} _LOG_READ_$$IMGVF_kernel.IMGVF(p16$1, BV32_ADD(BV32_MUL($1$1, v3$1), $3$1), $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL($1$1, v3$1), $3$1)]);
     assume {:do_not_predicate} {:check_id "check_state_23"} {:captureState "check_state_23"} {:sourceloc} {:sourceloc_num 46} true;
-    call {:check_id "check_state_23"} {:sourceloc} {:sourceloc_num 46} _CHECK_READ_$$IMGVF_kernel.IMGVF(p16$2, BV32_ADD(BV32_MUL($cond$2, v3$2), $cond64$2), $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($cond$2, v3$2), $cond64$2)]);
+    call {:check_id "check_state_23"} {:sourceloc} {:sourceloc_num 46} _CHECK_READ_$$IMGVF_kernel.IMGVF(p16$2, BV32_ADD(BV32_MUL($1$2, v3$2), $3$2), $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($1$2, v3$2), $3$2)]);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$IMGVF_kernel.IMGVF"} true;
-    v41$1 := (if p16$1 then $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL($cond$1, v3$1), $cond64$1)] else v41$1);
-    v41$2 := (if p16$2 then $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($cond$2, v3$2), $cond64$2)] else v41$2);
+    v41$1 := (if p16$1 then $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL($1$1, v3$1), $3$1)] else v41$1);
+    v41$2 := (if p16$2 then $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($1$2, v3$2), $3$2)] else v41$2);
     v42$1 := (if p16$1 then FSUB32(v41$1, v28$1) else v42$1);
     v42$2 := (if p16$2 then FSUB32(v41$2, v28$2) else v42$2);
-    call {:sourceloc} {:sourceloc_num 47} _LOG_READ_$$IMGVF_kernel.IMGVF(p16$1, BV32_ADD(BV32_MUL($cond57$1, v3$1), $cond64$1), $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL($cond57$1, v3$1), $cond64$1)]);
+    call {:sourceloc} {:sourceloc_num 47} _LOG_READ_$$IMGVF_kernel.IMGVF(p16$1, BV32_ADD(BV32_MUL($2$1, v3$1), $3$1), $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL($2$1, v3$1), $3$1)]);
     assume {:do_not_predicate} {:check_id "check_state_24"} {:captureState "check_state_24"} {:sourceloc} {:sourceloc_num 47} true;
-    call {:check_id "check_state_24"} {:sourceloc} {:sourceloc_num 47} _CHECK_READ_$$IMGVF_kernel.IMGVF(p16$2, BV32_ADD(BV32_MUL($cond57$2, v3$2), $cond64$2), $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($cond57$2, v3$2), $cond64$2)]);
+    call {:check_id "check_state_24"} {:sourceloc} {:sourceloc_num 47} _CHECK_READ_$$IMGVF_kernel.IMGVF(p16$2, BV32_ADD(BV32_MUL($2$2, v3$2), $3$2), $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($2$2, v3$2), $3$2)]);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$IMGVF_kernel.IMGVF"} true;
-    v43$1 := (if p16$1 then $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL($cond57$1, v3$1), $cond64$1)] else v43$1);
-    v43$2 := (if p16$2 then $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($cond57$2, v3$2), $cond64$2)] else v43$2);
+    v43$1 := (if p16$1 then $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL($2$1, v3$1), $3$1)] else v43$1);
+    v43$2 := (if p16$2 then $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($2$2, v3$2), $3$2)] else v43$2);
     v44$1 := (if p16$1 then FSUB32(v43$1, v28$1) else v44$1);
     v44$2 := (if p16$2 then FSUB32(v43$2, v28$2) else v44$2);
     v45$1 := (if p16$1 then FADD32(FMUL32(1036831949bv32, FADD32(FMUL32(FADD32(FMUL32(__bugle_atan_float(FMUL32(FMUL32(v44$1, FADD32(FSUB32(2147483648bv32, $vx), $vy)), v15)), 1050868108bv32), 1056964608bv32), v44$1), FADD32(FMUL32(FADD32(FMUL32(__bugle_atan_float(FMUL32(FMUL32(v42$1, FSUB32(FSUB32(2147483648bv32, $vx), $vy)), v15)), 1050868108bv32), 1056964608bv32), v42$1), FADD32(FMUL32(FADD32(FMUL32(__bugle_atan_float(FMUL32(FMUL32(v40$1, FADD32($vx, $vy)), v15)), 1050868108bv32), 1056964608bv32), v40$1), FADD32(FMUL32(FADD32(FMUL32(__bugle_atan_float(FMUL32(FMUL32(v38$1, FSUB32($vx, $vy)), v15)), 1050868108bv32), 1056964608bv32), v38$1), FADD32(FMUL32(FADD32(FMUL32(__bugle_atan_float(FMUL32(FMUL32(v36$1, $vx), v15)), 1050868108bv32), 1056964608bv32), v36$1), FADD32(FMUL32(FADD32(FMUL32(__bugle_atan_float(FMUL32(FMUL32(v34$1, FSUB32(2147483648bv32, $vx)), v15)), 1050868108bv32), 1056964608bv32), v34$1), FADD32(FMUL32(FADD32(FMUL32(__bugle_atan_float(FMUL32(FMUL32(v30$1, FSUB32(2147483648bv32, $vy)), v15)), 1050868108bv32), 1056964608bv32), v30$1), FMUL32(FADD32(FMUL32(__bugle_atan_float(FMUL32(FMUL32(v32$1, $vy), v15)), 1050868108bv32), 1056964608bv32), v32$1))))))))), v28$1) else v45$1);
@@ -1014,8 +1014,8 @@ implementation {:source_name "IMGVF_kernel"} {:kernel} $IMGVF_kernel($vx: bv32, 
     havoc _HAVOC_bv32$1, _HAVOC_bv32$2;
     v46$1 := (if p16$1 then _HAVOC_bv32$1 else v46$1);
     v46$2 := (if p16$2 then _HAVOC_bv32$2 else v46$2);
-    $new_val.0$1, $old_val.0$1 := (if p16$1 then FSUB32(v45$1, FMUL32(FMUL32(1045220557bv32, v46$1), FSUB32(v45$1, v46$1))) else $new_val.0$1), (if p16$1 then v28$1 else $old_val.0$1);
-    $new_val.0$2, $old_val.0$2 := (if p16$2 then FSUB32(v45$2, FMUL32(FMUL32(1045220557bv32, v46$2), FSUB32(v45$2, v46$2))) else $new_val.0$2), (if p16$2 then v28$2 else $old_val.0$2);
+    $new_val.0$1, $old_val.0$1 := (if p16$1 then FADD32(FMUL32(FSUB32(2147483648bv32, FMUL32(1045220557bv32, v46$1)), FSUB32(v45$1, v46$1)), v45$1) else $new_val.0$1), (if p16$1 then v28$1 else $old_val.0$1);
+    $new_val.0$2, $old_val.0$2 := (if p16$2 then FADD32(FMUL32(FSUB32(2147483648bv32, FMUL32(1045220557bv32, v46$2)), FSUB32(v45$2, v46$2)), v45$2) else $new_val.0$2), (if p16$2 then v28$2 else $old_val.0$2);
     v47$1 := (if p12$1 then BV32_SGT($thread_block.1$1, 0bv32) else v47$1);
     v47$2 := (if p12$2 then BV32_SGT($thread_block.1$2, 0bv32) else v47$2);
     p26$1 := (if p12$1 && v47$1 then v47$1 else p26$1);
@@ -1061,17 +1061,17 @@ implementation {:source_name "IMGVF_kernel"} {:kernel} $IMGVF_kernel($vx: bv32, 
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$IMGVF_kernel.IMGVF"} true;
     $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL(v20$1, v3$1), $j.1$1)] := (if p32$1 then $new_val.0$1 else $$IMGVF_kernel.IMGVF[1bv1][BV32_ADD(BV32_MUL(v20$1, v3$1), $j.1$1)]);
     $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(v20$2, v3$2), $j.1$2)] := (if p32$2 then $new_val.0$2 else $$IMGVF_kernel.IMGVF[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(v20$2, v3$2), $j.1$2)]);
-    goto __partitioned_block_$for.cond.27_1;
+    goto __partitioned_block_$13_1;
 
-  __partitioned_block_$for.cond.27_1:
+  __partitioned_block_$13_1:
     call {:sourceloc_num 62} $bugle_barrier_duplicated_6(1bv1, 0bv1, p12$1, p12$2);
     $thread_block.1$1, $i.2$1, $j.0$1, $total_diff.0$1 := (if p12$1 then BV32_ADD($thread_block.1$1, 1bv32) else $thread_block.1$1), (if p12$1 then v20$1 else $i.2$1), (if p12$1 then $j.1$1 else $j.0$1), (if p12$1 then FADD32($total_diff.0$1, FABS32(FSUB32($new_val.0$1, $old_val.0$1))) else $total_diff.0$1);
     $thread_block.1$2, $i.2$2, $j.0$2, $total_diff.0$2 := (if p12$2 then BV32_ADD($thread_block.1$2, 1bv32) else $thread_block.1$2), (if p12$2 then v20$2 else $i.2$2), (if p12$2 then $j.1$2 else $j.0$2), (if p12$2 then FADD32($total_diff.0$2, FABS32(FSUB32($new_val.0$2, $old_val.0$2))) else $total_diff.0$2);
     p11$1 := (if p12$1 then true else p11$1);
     p11$2 := (if p12$2 then true else p11$2);
-    goto $for.cond.27.backedge, __partitioned_block_$for.cond.27.tail_0;
+    goto $13.backedge, __partitioned_block_$13.tail_0;
 
-  __partitioned_block_$for.cond.27.tail_0:
+  __partitioned_block_$13.tail_0:
     assume !p11$1 && !p11$2;
     call {:sourceloc} {:sourceloc_num 65} _LOG_WRITE_$$IMGVF_kernel.buffer(p10$1, v5$1, $total_diff.0$1, $$IMGVF_kernel.buffer[1bv1][v5$1]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$IMGVF_kernel.buffer(p10$2, v5$2);
@@ -1080,9 +1080,9 @@ implementation {:source_name "IMGVF_kernel"} {:kernel} $IMGVF_kernel($vx: bv32, 
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$IMGVF_kernel.buffer"} true;
     $$IMGVF_kernel.buffer[1bv1][v5$1] := (if p10$1 then $total_diff.0$1 else $$IMGVF_kernel.buffer[1bv1][v5$1]);
     $$IMGVF_kernel.buffer[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v5$2] := (if p10$2 then $total_diff.0$2 else $$IMGVF_kernel.buffer[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v5$2]);
-    goto __partitioned_block_$for.cond.27.tail_1;
+    goto __partitioned_block_$13.tail_1;
 
-  __partitioned_block_$for.cond.27.tail_1:
+  __partitioned_block_$13.tail_1:
     call {:sourceloc_num 66} $bugle_barrier_duplicated_2(1bv1, 0bv1, p10$1, p10$2);
     v52$1 := (if p10$1 then BV32_SGE(v5$1, 256bv32) else v52$1);
     v52$2 := (if p10$2 then BV32_SGE(v5$2, 256bv32) else v52$2);
@@ -1109,31 +1109,31 @@ implementation {:source_name "IMGVF_kernel"} {:kernel} $IMGVF_kernel($vx: bv32, 
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$IMGVF_kernel.buffer"} true;
     $$IMGVF_kernel.buffer[1bv1][v54$1] := (if p34$1 then FADD32(v55$1, v53$1) else $$IMGVF_kernel.buffer[1bv1][v54$1]);
     $$IMGVF_kernel.buffer[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v54$2] := (if p34$2 then FADD32(v55$2, v53$2) else $$IMGVF_kernel.buffer[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v54$2]);
-    goto __partitioned_block_$for.cond.27.tail_2;
+    goto __partitioned_block_$13.tail_2;
 
-  __partitioned_block_$for.cond.27.tail_2:
+  __partitioned_block_$13.tail_2:
     call {:sourceloc_num 72} $bugle_barrier_duplicated_3(1bv1, 0bv1, p10$1, p10$2);
     $th.0$1 := (if p10$1 then 128bv32 else $th.0$1);
     $th.0$2 := (if p10$2 then 128bv32 else $th.0$2);
     p35$1 := (if p10$1 then true else p35$1);
     p35$2 := (if p10$2 then true else p35$2);
-    _READ_HAS_OCCURRED_$$IMGVF_kernel.buffer$ghost$__partitioned_block_$for.cond.200_0 := _READ_HAS_OCCURRED_$$IMGVF_kernel.buffer;
-    _WRITE_HAS_OCCURRED_$$IMGVF_kernel.buffer$ghost$__partitioned_block_$for.cond.200_0 := _WRITE_HAS_OCCURRED_$$IMGVF_kernel.buffer;
+    _READ_HAS_OCCURRED_$$IMGVF_kernel.buffer$ghost$__partitioned_block_$44_0 := _READ_HAS_OCCURRED_$$IMGVF_kernel.buffer;
+    _WRITE_HAS_OCCURRED_$$IMGVF_kernel.buffer$ghost$__partitioned_block_$44_0 := _WRITE_HAS_OCCURRED_$$IMGVF_kernel.buffer;
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto __partitioned_block_$for.cond.200_0;
+    goto __partitioned_block_$44_0;
 
-  __partitioned_block_$for.cond.200_0:
+  __partitioned_block_$44_0:
     assume {:captureState "loop_head_state_2"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b195 ==> !p10$1 ==> _WRITE_HAS_OCCURRED_$$IMGVF_kernel.buffer$ghost$__partitioned_block_$for.cond.200_0 == _WRITE_HAS_OCCURRED_$$IMGVF_kernel.buffer;
-    assert {:tag "disabledMaintainsInstrumentation"} _b194 ==> !p10$1 ==> _READ_HAS_OCCURRED_$$IMGVF_kernel.buffer$ghost$__partitioned_block_$for.cond.200_0 == _READ_HAS_OCCURRED_$$IMGVF_kernel.buffer;
+    assert {:tag "disabledMaintainsInstrumentation"} _b195 ==> !p10$1 ==> _WRITE_HAS_OCCURRED_$$IMGVF_kernel.buffer$ghost$__partitioned_block_$44_0 == _WRITE_HAS_OCCURRED_$$IMGVF_kernel.buffer;
+    assert {:tag "disabledMaintainsInstrumentation"} _b194 ==> !p10$1 ==> _READ_HAS_OCCURRED_$$IMGVF_kernel.buffer$ghost$__partitioned_block_$44_0 == _READ_HAS_OCCURRED_$$IMGVF_kernel.buffer;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b193 ==> _WRITE_HAS_OCCURRED_$$IMGVF_kernel.buffer ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b192 ==> _READ_HAS_OCCURRED_$$IMGVF_kernel.buffer ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "nowrite"} _b191 ==> !_WRITE_HAS_OCCURRED_$$IMGVF_kernel.buffer;
     assert {:tag "noread"} _b190 ==> !_READ_HAS_OCCURRED_$$IMGVF_kernel.buffer;
-    assert {:tag "predicatedEquality"} _b189 ==> p35$1 && p35$2 ==> v57$1 == v57$2;
-    assert {:tag "predicatedEquality"} _b188 ==> p35$1 && p35$2 ==> v56$1 == v56$2;
-    assert {:tag "predicatedEquality"} _b187 ==> p35$1 && p35$2 ==> v59$1 == v59$2;
-    assert {:tag "predicatedEquality"} _b186 ==> p35$1 && p35$2 ==> v58$1 == v58$2;
+    assert {:tag "predicatedEquality"} _b189 ==> p35$1 && p35$2 ==> v59$1 == v59$2;
+    assert {:tag "predicatedEquality"} _b188 ==> p35$1 && p35$2 ==> v58$1 == v58$2;
+    assert {:tag "predicatedEquality"} _b187 ==> p35$1 && p35$2 ==> v56$1 == v56$2;
+    assert {:tag "predicatedEquality"} _b186 ==> p35$1 && p35$2 ==> v57$1 == v57$2;
     assert {:tag "predicatedEquality"} _b185 ==> p35$1 && p35$2 ==> $th.0$1 == $th.0$2;
     assert {:tag "loopPredicateEquality"} _b184 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 ==> p35$1 == p35$2;
     assert {:tag "loopPredicateEquality"} _b183 ==> p35$1 == p35$2;
@@ -1217,17 +1217,17 @@ implementation {:source_name "IMGVF_kernel"} {:kernel} $IMGVF_kernel($vx: bv32, 
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$IMGVF_kernel.buffer"} true;
     $$IMGVF_kernel.buffer[1bv1][v5$1] := (if p38$1 then FADD32(v59$1, v58$1) else $$IMGVF_kernel.buffer[1bv1][v5$1]);
     $$IMGVF_kernel.buffer[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v5$2] := (if p38$2 then FADD32(v59$2, v58$2) else $$IMGVF_kernel.buffer[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v5$2]);
-    goto __partitioned_block_$for.cond.200_1;
+    goto __partitioned_block_$44_1;
 
-  __partitioned_block_$for.cond.200_1:
+  __partitioned_block_$44_1:
     call {:sourceloc_num 80} $bugle_barrier_duplicated_5(1bv1, 0bv1, p36$1, p36$2);
     $th.0$1 := (if p36$1 then BV32_SDIV($th.0$1, 2bv32) else $th.0$1);
     $th.0$2 := (if p36$2 then BV32_SDIV($th.0$2, 2bv32) else $th.0$2);
     p35$1 := (if p36$1 then true else p35$1);
     p35$2 := (if p36$2 then true else p35$2);
-    goto $for.cond.200.backedge, __partitioned_block_$for.cond.200.tail_0;
+    goto $44.backedge, __partitioned_block_$44.tail_0;
 
-  __partitioned_block_$for.cond.200.tail_0:
+  __partitioned_block_$44.tail_0:
     assume !p35$1 && !p35$2;
     v60$1 := (if p10$1 then v5$1 == 0bv32 else v60$1);
     v60$2 := (if p10$2 then v5$2 == 0bv32 else v60$2);
@@ -1250,26 +1250,26 @@ implementation {:source_name "IMGVF_kernel"} {:kernel} $IMGVF_kernel($vx: bv32, 
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$IMGVF_kernel.cell_converged"} true;
     $$IMGVF_kernel.cell_converged[1bv1][0bv32] := (if p42$1 then 1bv32 else $$IMGVF_kernel.cell_converged[1bv1][0bv32]);
     $$IMGVF_kernel.cell_converged[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][0bv32] := (if p42$2 then 1bv32 else $$IMGVF_kernel.cell_converged[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][0bv32]);
-    goto __partitioned_block_$for.cond.200.tail_1;
+    goto __partitioned_block_$44.tail_1;
 
-  __partitioned_block_$for.cond.200.tail_1:
+  __partitioned_block_$44.tail_1:
     call {:sourceloc_num 89} $bugle_barrier_duplicated_4(1bv1, 0bv1, p10$1, p10$2);
     $i.1$1, $iterations.0$1 := (if p10$1 then $i.2$1 else $i.1$1), (if p10$1 then BV32_ADD($iterations.0$1, 1bv32) else $iterations.0$1);
     $i.1$2, $iterations.0$2 := (if p10$2 then $i.2$2 else $i.1$2), (if p10$2 then BV32_ADD($iterations.0$2, 1bv32) else $iterations.0$2);
     p7$1 := (if p10$1 then true else p7$1);
     p7$2 := (if p10$2 then true else p7$2);
-    goto $while.cond.backedge, $while.cond.tail;
+    goto $9.backedge, $9.tail;
 
-  $while.cond.tail:
+  $9.tail:
     assume !p7$1 && !p7$2;
     $thread_block.2$1 := 0bv32;
     $thread_block.2$2 := 0bv32;
     p43$1 := true;
     p43$2 := true;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.228;
+    goto $55;
 
-  $for.cond.228:
+  $55:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$IMGVF_kernel.buffer ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$IMGVF_kernel.buffer ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -1332,36 +1332,36 @@ implementation {:source_name "IMGVF_kernel"} {:kernel} $IMGVF_kernel($vx: bv32, 
     $thread_block.2$2 := (if p44$2 then BV32_ADD($thread_block.2$2, 1bv32) else $thread_block.2$2);
     p43$1 := (if p44$1 then true else p43$1);
     p43$2 := (if p44$2 then true else p43$2);
-    goto $for.cond.228.backedge, $for.cond.228.tail;
+    goto $55.backedge, $55.tail;
 
-  $for.cond.228.tail:
+  $55.tail:
     assume !p43$1 && !p43$2;
     return;
 
-  $for.cond.228.backedge:
+  $55.backedge:
     assume {:backedge} p43$1 || p43$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.228;
+    goto $55;
 
-  $while.cond.backedge:
+  $9.backedge:
     assume {:backedge} p7$1 || p7$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $while.cond;
+    goto $9;
 
-  $for.cond.200.backedge:
+  $44.backedge:
     assume {:backedge} p35$1 || p35$2;
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto __partitioned_block_$for.cond.200_0;
+    goto __partitioned_block_$44_0;
 
-  $for.cond.27.backedge:
+  $13.backedge:
     assume {:backedge} p11$1 || p11$2;
     assume {:captureState "loop_back_edge_state_3_0"} true;
-    goto __partitioned_block_$for.cond.27_0;
+    goto __partitioned_block_$13_0;
 
-  $for.cond.backedge:
+  $1.backedge:
     assume {:backedge} p0$1 || p0$2;
     assume {:captureState "loop_back_edge_state_4_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

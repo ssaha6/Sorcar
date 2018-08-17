@@ -104,12 +104,12 @@ implementation {:source_name "initialize_variables"} {:kernel} $initialize_varia
   var v1$2: bv32;
 
 
-  $entry:
+  $0:
     $j.0 := 0bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessBreak"} _b8 ==> _WRITE_HAS_OCCURRED_$$variables ==> group_id_x$1 == BV32_DIV(_WATCHED_OFFSET, group_size_x);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b7 ==> _WRITE_HAS_OCCURRED_$$variables ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, $nelr), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, $nelr), 1bv32), BV32_ADD(BV32_MUL(0bv32, $nelr), BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1)));
@@ -142,7 +142,7 @@ implementation {:source_name "initialize_variables"} {:kernel} $initialize_varia
     $$variables[BV32_ADD(BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2), BV32_MUL($j.0, $nelr))] := v1$2;
     $j.0 := BV32_ADD($j.0, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

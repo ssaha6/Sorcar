@@ -3,9 +3,7 @@ function {:existential true} my_inv (
  b0001: bool,
  b0002: bool,
  b0003: bool,
- b0004: bool,
- b0005: bool,
- b0006: bool
+ b0004: bool
  ) : bool;
 type _SIZE_T_TYPE = bv32;
 
@@ -206,8 +204,6 @@ implementation {:source_name "lud_internal"} {:kernel} $lud_internal($matrix_dim
 
   $1:
     assume {:captureState "loop_head_state_0"} true;
-    
-    
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$peri_col ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$peri_col ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$peri_col ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -219,7 +215,7 @@ implementation {:source_name "lud_internal"} {:kernel} $lud_internal($matrix_dim
     
     
     
-assert  my_inv (  (  BV32_SLE(0bv32, $i.0) ) ,  (  BV32_SLE($i.0, 0bv32) ) ,  (  BV32_SGE($i.0, 0bv32) ) ,  (  BV32_ULE($i.0, 0bv32) ) ,  (  BV32_UGE($i.0, 0bv32) ) ,  (  _READ_HAS_OCCURRED_$$peri_row ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 16bv32), local_id_x$1)) ) ,  (  _READ_HAS_OCCURRED_$$peri_col ==> local_id_y$1 == BV32_DIV(_WATCHED_OFFSET, 16bv32) )  ); 
+assert  my_inv (  (  BV32_SLE(0bv32, $i.0) ) ,  (  BV32_SLE($i.0, 0bv32) ) ,  (  BV32_SGE($i.0, 0bv32) ) ,  (  BV32_ULE($i.0, 0bv32) ) ,  (  BV32_UGE($i.0, 0bv32) )  ); 
 
 
     assert {:block_sourceloc} {:sourceloc_num 8} true;
@@ -247,20 +243,14 @@ assert  my_inv (  (  BV32_SLE(0bv32, $i.0) ) ,  (  BV32_SLE($i.0, 0bv32) ) ,  ( 
 
   $truebb:
     assume {:partition} v6;
-    call {:sourceloc} {:sourceloc_num 10} _LOG_READ_$$peri_col(true, BV32_ADD(BV32_MUL(v1$1, 16bv32), $i.0), $$peri_col[1bv1][BV32_ADD(BV32_MUL(v1$1, 16bv32), $i.0)]);
     assume {:do_not_predicate} {:check_id "check_state_6"} {:captureState "check_state_6"} {:sourceloc} {:sourceloc_num 10} true;
-    call {:check_id "check_state_6"} {:sourceloc} {:sourceloc_num 10} _CHECK_READ_$$peri_col(true, BV32_ADD(BV32_MUL(v1$2, 16bv32), $i.0), $$peri_col[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(v1$2, 16bv32), $i.0)]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$peri_col"} true;
     v7$1 := $$peri_col[1bv1][BV32_ADD(BV32_MUL(v1$1, 16bv32), $i.0)];
     v7$2 := $$peri_col[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(v1$2, 16bv32), $i.0)];
-    call {:sourceloc} {:sourceloc_num 11} _LOG_READ_$$peri_row(true, BV32_ADD(BV32_MUL($i.0, 16bv32), v0$1), $$peri_row[1bv1][BV32_ADD(BV32_MUL($i.0, 16bv32), v0$1)]);
     assume {:do_not_predicate} {:check_id "check_state_7"} {:captureState "check_state_7"} {:sourceloc} {:sourceloc_num 11} true;
-    call {:check_id "check_state_7"} {:sourceloc} {:sourceloc_num 11} _CHECK_READ_$$peri_row(true, BV32_ADD(BV32_MUL($i.0, 16bv32), v0$2), $$peri_row[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($i.0, 16bv32), v0$2)]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$peri_row"} true;
     v8$1 := $$peri_row[1bv1][BV32_ADD(BV32_MUL($i.0, 16bv32), v0$1)];
     v8$2 := $$peri_row[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($i.0, 16bv32), v0$2)];
-    $i.0, $sum.0$1 := BV32_ADD($i.0, 1bv32), FADD32($sum.0$1, FMUL32(v7$1, v8$1));
-    $sum.0$2 := FADD32($sum.0$2, FMUL32(v7$2, v8$2));
+    $i.0, $sum.0$1 := BV32_ADD($i.0, 1bv32), FADD32(FMUL32(v7$1, v8$1), $sum.0$1);
+    $sum.0$2 := FADD32(FMUL32(v7$2, v8$2), $sum.0$2);
     assume {:captureState "loop_back_edge_state_0_0"} true;
     goto $1;
 }
@@ -643,13 +633,3 @@ implementation {:inline 1} $bugle_barrier_duplicated_0($0: bv1, $1: bv1)
 
 
 function {:bvbuiltin "bvsgt"} BV32_SGT(bv32, bv32) : bool;
-
-function {:bvbuiltin "bvsub"} BV32_SUB(bv32, bv32) : bv32;
-
-function {:bvbuiltin "bvand"} BV32_AND(bv32, bv32) : bv32;
-
-
-
-function {:bvbuiltin "bvsdiv"} BV32_DIV(bv32, bv32) : bv32;
-
-

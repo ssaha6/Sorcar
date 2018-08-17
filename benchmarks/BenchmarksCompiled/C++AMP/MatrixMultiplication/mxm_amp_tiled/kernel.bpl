@@ -148,16 +148,16 @@ implementation {:source_name "mxm_amp_tiled"} {:kernel} $_Z13mxm_amp_tiledPKfS0_
   var v2: bool;
   var v3$1: bv32;
   var v3$2: bv32;
+  var v4$1: bv32;
+  var v4$2: bv32;
   var v5: bool;
   var v6$1: bv32;
   var v6$2: bv32;
   var v7$1: bv32;
   var v7$2: bv32;
-  var v4$1: bv32;
-  var v4$2: bv32;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2);
     v1$1 := BV32_ADD(BV32_MUL(group_id_y$1, group_size_y), local_id_y$1);
@@ -165,9 +165,9 @@ implementation {:source_name "mxm_amp_tiled"} {:kernel} $_Z13mxm_amp_tiledPKfS0_
     $temp_c.0$1, $i.0 := 0bv32, 0bv32;
     $temp_c.0$2 := 0bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b13 ==> _WRITE_HAS_OCCURRED_$$_ZZ13mxm_amp_tiledPKfS0_PfE6localB ==> _WATCHED_OFFSET == BV32_ADD(BV32_MUL(local_id_y$1, 16bv32), local_id_x$1);
     assert {:tag "nowrite"} _b12 ==> !_WRITE_HAS_OCCURRED_$$_ZZ13mxm_amp_tiledPKfS0_PfE6localB;
@@ -225,9 +225,9 @@ implementation {:source_name "mxm_amp_tiled"} {:kernel} $_Z13mxm_amp_tiledPKfS0_
     $temp_c.1$1, $k.0 := $temp_c.0$1, 0bv32;
     $temp_c.1$2 := $temp_c.0$2;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.14;
+    goto $3;
 
-  $for.cond.14:
+  $3:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ13mxm_amp_tiledPKfS0_PfE6localB ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ13mxm_amp_tiledPKfS0_PfE6localB ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -252,7 +252,7 @@ implementation {:source_name "mxm_amp_tiled"} {:kernel} $_Z13mxm_amp_tiledPKfS0_
     $temp_c.0$1, $i.0 := $temp_c.1$1, BV32_ADD($i.0, 16bv32);
     $temp_c.0$2 := $temp_c.1$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
   $truebb0:
     assume {:partition} v5;
@@ -265,7 +265,7 @@ implementation {:source_name "mxm_amp_tiled"} {:kernel} $_Z13mxm_amp_tiledPKfS0_
     $temp_c.1$1, $k.0 := FADD32($temp_c.1$1, FMUL32(v6$1, v7$1)), BV32_ADD($k.0, 1bv32);
     $temp_c.1$2 := FADD32($temp_c.1$2, FMUL32(v6$2, v7$2));
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.14;
+    goto $3;
 }
 
 

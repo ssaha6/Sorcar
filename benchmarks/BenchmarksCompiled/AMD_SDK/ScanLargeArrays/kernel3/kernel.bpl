@@ -134,50 +134,50 @@ implementation {:source_name "ScanLargeArrays"} {:kernel} $ScanLargeArrays($bloc
   var $offset.0: bv32;
   var $d.0: bv32;
   var $offset.1: bv32;
-  var $d30.0: bv32;
-  var v5: bool;
-  var v2$1: bv32;
-  var v2$2: bv32;
+  var $d1.0: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
-  var v22$1: bv32;
-  var v22$2: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
-  var v9$1: bv32;
-  var v9$2: bv32;
-  var v17$1: bv32;
-  var v17$2: bv32;
-  var v18$1: bv32;
-  var v18$2: bv32;
-  var v16$1: bv32;
-  var v16$2: bv32;
-  var v10$1: bv32;
-  var v10$2: bv32;
-  var v20$1: bv32;
-  var v20$2: bv32;
-  var v21$1: bv32;
-  var v21$2: bv32;
-  var v8$1: bv32;
-  var v8$2: bv32;
+  var v2$1: bv32;
+  var v2$2: bv32;
   var v3$1: bv32;
   var v3$2: bv32;
   var v4$1: bv32;
   var v4$2: bv32;
+  var v5: bool;
   var v6$1: bool;
   var v6$2: bool;
   var v7$1: bv32;
   var v7$2: bv32;
+  var v8$1: bv32;
+  var v8$2: bv32;
+  var v9$1: bv32;
+  var v9$2: bv32;
+  var v10$1: bv32;
+  var v10$2: bv32;
   var v11: bool;
-  var v19$1: bool;
-  var v19$2: bool;
-  var v14$1: bv32;
-  var v14$2: bv32;
+  var v12: bv32;
   var v13$1: bool;
   var v13$2: bool;
+  var v14$1: bv32;
+  var v14$2: bv32;
   var v15$1: bv32;
   var v15$2: bv32;
-  var v12: bv32;
+  var v16$1: bv32;
+  var v16$2: bv32;
+  var v17$1: bv32;
+  var v17$2: bv32;
+  var v18$1: bv32;
+  var v18$2: bv32;
+  var v19$1: bool;
+  var v19$2: bool;
+  var v20$1: bv32;
+  var v20$2: bv32;
+  var v21$1: bv32;
+  var v21$2: bv32;
+  var v22$1: bv32;
+  var v22$2: bv32;
   var v23$1: bv32;
   var v23$2: bv32;
   var p0$1: bool;
@@ -194,7 +194,7 @@ implementation {:source_name "ScanLargeArrays"} {:kernel} $ScanLargeArrays($bloc
   var p5$2: bool;
 
 
-  $entry:
+  $0:
     v0$1 := local_id_x$1;
     v0$2 := local_id_x$2;
     v1$1 := BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
@@ -219,9 +219,9 @@ implementation {:source_name "ScanLargeArrays"} {:kernel} $ScanLargeArrays($bloc
     $$block[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(2bv32, v0$2), 1bv32)] := v4$2;
     $offset.0, $d.0 := 1bv32, BV32_LSHR($block_size, 1bv32);
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "accessBreak"} _b47 ==> _WRITE_HAS_OCCURRED_$$block ==> local_id_x$1 == BV32_DIV(BV32_DIV(_WATCHED_OFFSET, $offset.0), 2bv32);
     assert {:tag "nowrite"} _b46 ==> !_WRITE_HAS_OCCURRED_$$block;
@@ -305,61 +305,61 @@ implementation {:source_name "ScanLargeArrays"} {:kernel} $ScanLargeArrays($bloc
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$block"} true;
     $$block[1bv1][BV32_SUB($block_size, 1bv32)] := 0bv32;
     $$block[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_SUB($block_size, 1bv32)] := 0bv32;
-    $offset.1, $d30.0 := $offset.0, 1bv32;
+    $offset.1, $d1.0 := $offset.0, 1bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.31;
+    goto $7;
 
-  $for.cond.31:
+  $7:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "nowrite"} _b87 ==> !_WRITE_HAS_OCCURRED_$$block;
     assert {:tag "noread"} _b86 ==> !_READ_HAS_OCCURRED_$$block;
-    assert {:tag "relationalPow2"} _b85 ==> ($offset.1 == 0bv32 && $d30.0 == 2bv32) || BV32_MUL($d30.0, $offset.1) == 1bv32;
-    assert {:tag "relationalPow2"} _b84 ==> BV32_MUL($d30.0, $offset.1) == 1bv32;
-    assert {:tag "relationalPow2"} _b83 ==> ($offset.1 == 0bv32 && $d30.0 == 4bv32) || BV32_MUL($d30.0, $offset.1) == 2bv32;
-    assert {:tag "relationalPow2"} _b82 ==> BV32_MUL($d30.0, $offset.1) == 2bv32;
-    assert {:tag "relationalPow2"} _b81 ==> ($offset.1 == 0bv32 && $d30.0 == 8bv32) || BV32_MUL($d30.0, $offset.1) == 4bv32;
-    assert {:tag "relationalPow2"} _b80 ==> BV32_MUL($d30.0, $offset.1) == 4bv32;
-    assert {:tag "relationalPow2"} _b79 ==> ($offset.1 == 0bv32 && $d30.0 == 16bv32) || BV32_MUL($d30.0, $offset.1) == 8bv32;
-    assert {:tag "relationalPow2"} _b78 ==> BV32_MUL($d30.0, $offset.1) == 8bv32;
-    assert {:tag "relationalPow2"} _b77 ==> ($offset.1 == 0bv32 && $d30.0 == 32bv32) || BV32_MUL($d30.0, $offset.1) == 16bv32;
-    assert {:tag "relationalPow2"} _b76 ==> BV32_MUL($d30.0, $offset.1) == 16bv32;
-    assert {:tag "relationalPow2"} _b75 ==> ($offset.1 == 0bv32 && $d30.0 == 64bv32) || BV32_MUL($d30.0, $offset.1) == 32bv32;
-    assert {:tag "relationalPow2"} _b74 ==> BV32_MUL($d30.0, $offset.1) == 32bv32;
-    assert {:tag "relationalPow2"} _b73 ==> ($offset.1 == 0bv32 && $d30.0 == 128bv32) || BV32_MUL($d30.0, $offset.1) == 64bv32;
-    assert {:tag "relationalPow2"} _b72 ==> BV32_MUL($d30.0, $offset.1) == 64bv32;
-    assert {:tag "relationalPow2"} _b71 ==> ($offset.1 == 0bv32 && $d30.0 == 256bv32) || BV32_MUL($d30.0, $offset.1) == 128bv32;
-    assert {:tag "relationalPow2"} _b70 ==> BV32_MUL($d30.0, $offset.1) == 128bv32;
-    assert {:tag "relationalPow2"} _b69 ==> ($offset.1 == 0bv32 && $d30.0 == 512bv32) || BV32_MUL($d30.0, $offset.1) == 256bv32;
-    assert {:tag "relationalPow2"} _b68 ==> BV32_MUL($d30.0, $offset.1) == 256bv32;
-    assert {:tag "relationalPow2"} _b67 ==> ($offset.1 == 0bv32 && $d30.0 == 1024bv32) || BV32_MUL($d30.0, $offset.1) == 512bv32;
-    assert {:tag "relationalPow2"} _b66 ==> BV32_MUL($d30.0, $offset.1) == 512bv32;
-    assert {:tag "relationalPow2"} _b65 ==> ($offset.1 == 0bv32 && $d30.0 == 2048bv32) || BV32_MUL($d30.0, $offset.1) == 1024bv32;
-    assert {:tag "relationalPow2"} _b64 ==> BV32_MUL($d30.0, $offset.1) == 1024bv32;
-    assert {:tag "relationalPow2"} _b63 ==> ($offset.1 == 0bv32 && $d30.0 == 4096bv32) || BV32_MUL($d30.0, $offset.1) == 2048bv32;
-    assert {:tag "relationalPow2"} _b62 ==> BV32_MUL($d30.0, $offset.1) == 2048bv32;
-    assert {:tag "relationalPow2"} _b61 ==> ($offset.1 == 0bv32 && $d30.0 == 8192bv32) || BV32_MUL($d30.0, $offset.1) == 4096bv32;
-    assert {:tag "relationalPow2"} _b60 ==> BV32_MUL($d30.0, $offset.1) == 4096bv32;
-    assert {:tag "relationalPow2"} _b59 ==> ($offset.1 == 0bv32 && $d30.0 == 16384bv32) || BV32_MUL($d30.0, $offset.1) == 8192bv32;
-    assert {:tag "relationalPow2"} _b58 ==> BV32_MUL($d30.0, $offset.1) == 8192bv32;
-    assert {:tag "relationalPow2"} _b57 ==> ($offset.1 == 0bv32 && $d30.0 == 32768bv32) || BV32_MUL($d30.0, $offset.1) == 16384bv32;
-    assert {:tag "relationalPow2"} _b56 ==> BV32_MUL($d30.0, $offset.1) == 16384bv32;
-    assert {:tag "relationalPow2"} _b55 ==> ($offset.1 == 0bv32 && $d30.0 == 65536bv32) || BV32_MUL($d30.0, $offset.1) == 32768bv32;
-    assert {:tag "relationalPow2"} _b54 ==> BV32_MUL($d30.0, $offset.1) == 32768bv32;
+    assert {:tag "relationalPow2"} _b85 ==> ($offset.1 == 0bv32 && $d1.0 == 2bv32) || BV32_MUL($d1.0, $offset.1) == 1bv32;
+    assert {:tag "relationalPow2"} _b84 ==> BV32_MUL($d1.0, $offset.1) == 1bv32;
+    assert {:tag "relationalPow2"} _b83 ==> ($offset.1 == 0bv32 && $d1.0 == 4bv32) || BV32_MUL($d1.0, $offset.1) == 2bv32;
+    assert {:tag "relationalPow2"} _b82 ==> BV32_MUL($d1.0, $offset.1) == 2bv32;
+    assert {:tag "relationalPow2"} _b81 ==> ($offset.1 == 0bv32 && $d1.0 == 8bv32) || BV32_MUL($d1.0, $offset.1) == 4bv32;
+    assert {:tag "relationalPow2"} _b80 ==> BV32_MUL($d1.0, $offset.1) == 4bv32;
+    assert {:tag "relationalPow2"} _b79 ==> ($offset.1 == 0bv32 && $d1.0 == 16bv32) || BV32_MUL($d1.0, $offset.1) == 8bv32;
+    assert {:tag "relationalPow2"} _b78 ==> BV32_MUL($d1.0, $offset.1) == 8bv32;
+    assert {:tag "relationalPow2"} _b77 ==> ($offset.1 == 0bv32 && $d1.0 == 32bv32) || BV32_MUL($d1.0, $offset.1) == 16bv32;
+    assert {:tag "relationalPow2"} _b76 ==> BV32_MUL($d1.0, $offset.1) == 16bv32;
+    assert {:tag "relationalPow2"} _b75 ==> ($offset.1 == 0bv32 && $d1.0 == 64bv32) || BV32_MUL($d1.0, $offset.1) == 32bv32;
+    assert {:tag "relationalPow2"} _b74 ==> BV32_MUL($d1.0, $offset.1) == 32bv32;
+    assert {:tag "relationalPow2"} _b73 ==> ($offset.1 == 0bv32 && $d1.0 == 128bv32) || BV32_MUL($d1.0, $offset.1) == 64bv32;
+    assert {:tag "relationalPow2"} _b72 ==> BV32_MUL($d1.0, $offset.1) == 64bv32;
+    assert {:tag "relationalPow2"} _b71 ==> ($offset.1 == 0bv32 && $d1.0 == 256bv32) || BV32_MUL($d1.0, $offset.1) == 128bv32;
+    assert {:tag "relationalPow2"} _b70 ==> BV32_MUL($d1.0, $offset.1) == 128bv32;
+    assert {:tag "relationalPow2"} _b69 ==> ($offset.1 == 0bv32 && $d1.0 == 512bv32) || BV32_MUL($d1.0, $offset.1) == 256bv32;
+    assert {:tag "relationalPow2"} _b68 ==> BV32_MUL($d1.0, $offset.1) == 256bv32;
+    assert {:tag "relationalPow2"} _b67 ==> ($offset.1 == 0bv32 && $d1.0 == 1024bv32) || BV32_MUL($d1.0, $offset.1) == 512bv32;
+    assert {:tag "relationalPow2"} _b66 ==> BV32_MUL($d1.0, $offset.1) == 512bv32;
+    assert {:tag "relationalPow2"} _b65 ==> ($offset.1 == 0bv32 && $d1.0 == 2048bv32) || BV32_MUL($d1.0, $offset.1) == 1024bv32;
+    assert {:tag "relationalPow2"} _b64 ==> BV32_MUL($d1.0, $offset.1) == 1024bv32;
+    assert {:tag "relationalPow2"} _b63 ==> ($offset.1 == 0bv32 && $d1.0 == 4096bv32) || BV32_MUL($d1.0, $offset.1) == 2048bv32;
+    assert {:tag "relationalPow2"} _b62 ==> BV32_MUL($d1.0, $offset.1) == 2048bv32;
+    assert {:tag "relationalPow2"} _b61 ==> ($offset.1 == 0bv32 && $d1.0 == 8192bv32) || BV32_MUL($d1.0, $offset.1) == 4096bv32;
+    assert {:tag "relationalPow2"} _b60 ==> BV32_MUL($d1.0, $offset.1) == 4096bv32;
+    assert {:tag "relationalPow2"} _b59 ==> ($offset.1 == 0bv32 && $d1.0 == 16384bv32) || BV32_MUL($d1.0, $offset.1) == 8192bv32;
+    assert {:tag "relationalPow2"} _b58 ==> BV32_MUL($d1.0, $offset.1) == 8192bv32;
+    assert {:tag "relationalPow2"} _b57 ==> ($offset.1 == 0bv32 && $d1.0 == 32768bv32) || BV32_MUL($d1.0, $offset.1) == 16384bv32;
+    assert {:tag "relationalPow2"} _b56 ==> BV32_MUL($d1.0, $offset.1) == 16384bv32;
+    assert {:tag "relationalPow2"} _b55 ==> ($offset.1 == 0bv32 && $d1.0 == 65536bv32) || BV32_MUL($d1.0, $offset.1) == 32768bv32;
+    assert {:tag "relationalPow2"} _b54 ==> BV32_MUL($d1.0, $offset.1) == 32768bv32;
     assert {:tag "pow2NotZero"} _b53 ==> v12 != 0bv32;
     assert {:tag "pow2"} _b52 ==> v12 == 0bv32 || BV32_AND(v12, BV32_SUB(v12, 1bv32)) == 0bv32;
-    assert {:tag "pow2NotZero"} _b51 ==> $d30.0 != 0bv32;
-    assert {:tag "pow2"} _b50 ==> $d30.0 == 0bv32 || BV32_AND($d30.0, BV32_SUB($d30.0, 1bv32)) == 0bv32;
+    assert {:tag "pow2NotZero"} _b51 ==> $d1.0 != 0bv32;
+    assert {:tag "pow2"} _b50 ==> $d1.0 == 0bv32 || BV32_AND($d1.0, BV32_SUB($d1.0, 1bv32)) == 0bv32;
     assert {:tag "pow2NotZero"} _b49 ==> $offset.1 != 0bv32;
     assert {:tag "pow2"} _b48 ==> $offset.1 == 0bv32 || BV32_AND($offset.1, BV32_SUB($offset.1, 1bv32)) == 0bv32;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$block ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$block ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$block ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
-    assert {:tag "loopBound"} {:thread 1} _b8 ==> BV32_UGE($d30.0, 1bv32);
-    assert {:tag "loopBound"} {:thread 1} _b7 ==> BV32_ULE($d30.0, 1bv32);
-    assert {:tag "loopBound"} {:thread 1} _b6 ==> BV32_SGE($d30.0, 1bv32);
-    assert {:tag "loopBound"} {:thread 1} _b5 ==> BV32_SLE($d30.0, 1bv32);
+    assert {:tag "loopBound"} {:thread 1} _b8 ==> BV32_UGE($d1.0, 1bv32);
+    assert {:tag "loopBound"} {:thread 1} _b7 ==> BV32_ULE($d1.0, 1bv32);
+    assert {:tag "loopBound"} {:thread 1} _b6 ==> BV32_SGE($d1.0, 1bv32);
+    assert {:tag "loopBound"} {:thread 1} _b5 ==> BV32_SLE($d1.0, 1bv32);
     assert {:block_sourceloc} {:sourceloc_num 21} true;
-    v11 := BV32_ULT($d30.0, $block_size);
+    v11 := BV32_ULT($d1.0, $block_size);
     p2$1 := false;
     p2$2 := false;
     p3$1 := false;
@@ -431,8 +431,8 @@ implementation {:source_name "ScanLargeArrays"} {:kernel} $ScanLargeArrays($bloc
 
   __partitioned_block_$truebb1_1:
     call {:sourceloc_num 23} $bugle_barrier_duplicated_3(1bv1, 0bv1);
-    v13$1 := BV32_SLT(v0$1, $d30.0);
-    v13$2 := BV32_SLT(v0$2, $d30.0);
+    v13$1 := BV32_SLT(v0$1, $d1.0);
+    v13$2 := BV32_SLT(v0$2, $d1.0);
     p3$1 := (if v13$1 then v13$1 else p3$1);
     p3$2 := (if v13$2 then v13$2 else p3$2);
     v14$1 := (if p3$1 then BV32_SUB(BV32_MUL(v12, BV32_ADD(BV32_MUL(2bv32, v0$1), 1bv32)), 1bv32) else v14$1);
@@ -471,9 +471,9 @@ implementation {:source_name "ScanLargeArrays"} {:kernel} $ScanLargeArrays($bloc
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$block"} true;
     $$block[1bv1][v15$1] := (if p3$1 then FADD32(v18$1, v16$1) else $$block[1bv1][v15$1]);
     $$block[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v15$2] := (if p3$2 then FADD32(v18$2, v16$2) else $$block[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v15$2]);
-    $offset.1, $d30.0 := v12, BV32_MUL($d30.0, 2bv32);
+    $offset.1, $d1.0 := v12, BV32_MUL($d1.0, 2bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.31;
+    goto $7;
 
   __partitioned_block_$truebb_0:
     assume {:partition} v5;
@@ -508,7 +508,7 @@ implementation {:source_name "ScanLargeArrays"} {:kernel} $ScanLargeArrays($bloc
     $$block[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v7$2] := (if p1$2 then FADD32(v9$2, v8$2) else $$block[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v7$2]);
     $offset.0, $d.0 := BV32_MUL($offset.0, 2bv32), BV32_ASHR($d.0, 1bv32);
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

@@ -130,77 +130,77 @@ implementation {:source_name "histogram64Kernel"} {:kernel} $_Z17histogram64Kern
   var $pos.0$2: bv32;
   var $sum.0$1: bv32;
   var $sum.0$2: bv32;
-  var $pos28.0$1: bv32;
-  var $pos28.0$2: bv32;
-  var $i31.0$1: bv32;
-  var $i31.0$2: bv32;
-  var v3$1: bv32;
-  var v3$2: bv32;
-  var v4$1: bv32;
-  var v4$2: bv32;
-  var v12$1: bv32;
-  var v12$2: bv32;
-  var v6$1: bv32;
-  var v6$2: bv32;
-  var v10$1: bv8;
-  var v10$2: bv8;
-  var v8$1: bv8;
-  var v8$2: bv8;
-  var v7$1: bv32;
-  var v7$2: bv32;
-  var v9$1: bv8;
-  var v9$2: bv8;
-  var v11$1: bv8;
-  var v11$2: bv8;
-  var v5$1: bv32;
-  var v5$2: bv32;
+  var $pos1.0$1: bv32;
+  var $pos1.0$2: bv32;
+  var $i2.0$1: bv32;
+  var $i2.0$2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
   var v1: bool;
   var v2$1: bool;
   var v2$2: bool;
-  var v16$1: bv8;
-  var v16$2: bv8;
-  var v20$1: bv8;
-  var v20$2: bv8;
-  var v19$1: bv8;
-  var v19$2: bv8;
-  var v17$1: bv32;
-  var v17$2: bv32;
-  var v25$1: bv8;
-  var v25$2: bv8;
+  var v3$1: bv32;
+  var v3$2: bv32;
+  var v4$1: bv32;
+  var v4$2: bv32;
+  var v5$1: bv32;
+  var v5$2: bv32;
+  var v6$1: bv32;
+  var v6$2: bv32;
+  var v7$1: bv32;
+  var v7$2: bv32;
+  var v8$1: bv8;
+  var v8$2: bv8;
+  var v9$1: bv8;
+  var v9$2: bv8;
+  var v10$1: bv8;
+  var v10$2: bv8;
+  var v11$1: bv8;
+  var v11$2: bv8;
+  var v12$1: bv32;
+  var v12$2: bv32;
   var v13$1: bv8;
   var v13$2: bv8;
+  var v14$1: bv8;
+  var v14$2: bv8;
+  var v15$1: bv8;
+  var v15$2: bv8;
+  var v16$1: bv8;
+  var v16$2: bv8;
+  var v17$1: bv32;
+  var v17$2: bv32;
+  var v18$1: bv8;
+  var v18$2: bv8;
+  var v19$1: bv8;
+  var v19$2: bv8;
+  var v20$1: bv8;
+  var v20$2: bv8;
+  var v21$1: bv8;
+  var v21$2: bv8;
+  var v22$1: bv32;
+  var v22$2: bv32;
   var v23$1: bv8;
   var v23$2: bv8;
   var v24$1: bv8;
   var v24$2: bv8;
-  var v15$1: bv8;
-  var v15$2: bv8;
-  var v22$1: bv32;
-  var v22$2: bv32;
-  var v18$1: bv8;
-  var v18$2: bv8;
-  var v21$1: bv8;
-  var v21$2: bv8;
-  var v30$1: bv8;
-  var v30$2: bv8;
+  var v25$1: bv8;
+  var v25$2: bv8;
   var v26$1: bv8;
   var v26$2: bv8;
-  var v14$1: bv8;
-  var v14$2: bv8;
+  var v27$1: bool;
+  var v27$2: bool;
+  var v28$1: bv32;
+  var v28$2: bv32;
+  var v29$1: bool;
+  var v29$2: bool;
+  var v30$1: bv8;
+  var v30$2: bv8;
   var v31$1: bv8;
   var v31$2: bv8;
   var v32$1: bv8;
   var v32$2: bv8;
   var v33$1: bv8;
   var v33$2: bv8;
-  var v27$1: bool;
-  var v27$2: bool;
-  var v29$1: bool;
-  var v29$2: bool;
-  var v28$1: bv32;
-  var v28$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -219,7 +219,7 @@ implementation {:source_name "histogram64Kernel"} {:kernel} $_Z17histogram64Kern
   var _HAVOC_bv32$2: bv32;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_OR(BV32_OR(BV32_SHL(BV32_AND(local_id_x$1, 4294967232bv32), 0bv32), BV32_SHL(BV32_AND(local_id_x$1, 15bv32), 2bv32)), BV32_LSHR(BV32_AND(local_id_x$1, 48bv32), 4bv32));
     v0$2 := BV32_OR(BV32_OR(BV32_SHL(BV32_AND(local_id_x$2, 4294967232bv32), 0bv32), BV32_SHL(BV32_AND(local_id_x$2, 15bv32), 2bv32)), BV32_LSHR(BV32_AND(local_id_x$2, 48bv32), 4bv32));
     $i.0 := 0bv32;
@@ -228,9 +228,9 @@ implementation {:source_name "histogram64Kernel"} {:kernel} $_Z17histogram64Kern
     p4$1 := false;
     p4$2 := false;
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_2"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b17 ==> _WRITE_HAS_OCCURRED_$$_ZZ17histogram64KernelPjP5uint4jE6s_Hist ==> BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 64bv32), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 64bv32), 4bv32), 1bv32), BV32_MUL(BV32_ADD(BV32_MUL(0bv32, 64bv32), local_id_x$1), 4bv32)) || BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 64bv32), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 64bv32), 4bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(0bv32, 64bv32), local_id_x$1), 4bv32), 1bv32)) || BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 64bv32), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 64bv32), 4bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(0bv32, 64bv32), local_id_x$1), 4bv32), 2bv32)) || BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 64bv32), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(1bv32, 64bv32), 4bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(0bv32, 64bv32), local_id_x$1), 4bv32), 3bv32));
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ17histogram64KernelPjP5uint4jE6s_Hist ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -255,9 +255,9 @@ implementation {:source_name "histogram64Kernel"} {:kernel} $_Z17histogram64Kern
     p0$1 := true;
     p0$2 := true;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.7;
+    goto $5;
 
-  $for.cond.7:
+  $5:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ17histogram64KernelPjP5uint4jE6s_Hist ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ17histogram64KernelPjP5uint4jE6s_Hist ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -531,13 +531,13 @@ implementation {:source_name "histogram64Kernel"} {:kernel} $_Z17histogram64Kern
     $pos.0$2 := (if p1$2 then BV32_ADD($pos.0$2, BV32_MUL(group_size_x, num_groups_x)) else $pos.0$2);
     p0$1 := (if p1$1 then true else p0$1);
     p0$2 := (if p1$2 then true else p0$2);
-    goto $for.cond.7.backedge, __partitioned_block_$for.cond.7.tail_0;
+    goto $5.backedge, __partitioned_block_$5.tail_0;
 
-  __partitioned_block_$for.cond.7.tail_0:
+  __partitioned_block_$5.tail_0:
     assume !p0$1 && !p0$2;
-    goto __partitioned_block_$for.cond.7.tail_1;
+    goto __partitioned_block_$5.tail_1;
 
-  __partitioned_block_$for.cond.7.tail_1:
+  __partitioned_block_$5.tail_1:
     call {:sourceloc_num 60} $bugle_barrier_duplicated_1(1bv1, 1bv1);
     v27$1 := BV32_ULT(local_id_x$1, 64bv32);
     v27$2 := BV32_ULT(local_id_x$2, 64bv32);
@@ -545,35 +545,35 @@ implementation {:source_name "histogram64Kernel"} {:kernel} $_Z17histogram64Kern
     p3$2 := (if v27$2 then v27$2 else p3$2);
     v28$1 := (if p3$1 then BV32_MUL(local_id_x$1, 64bv32) else v28$1);
     v28$2 := (if p3$2 then BV32_MUL(local_id_x$2, 64bv32) else v28$2);
-    $sum.0$1, $pos28.0$1, $i31.0$1 := (if p3$1 then 0bv32 else $sum.0$1), (if p3$1 then BV32_MUL(4bv32, BV32_AND(local_id_x$1, 15bv32)) else $pos28.0$1), (if p3$1 then 0bv32 else $i31.0$1);
-    $sum.0$2, $pos28.0$2, $i31.0$2 := (if p3$2 then 0bv32 else $sum.0$2), (if p3$2 then BV32_MUL(4bv32, BV32_AND(local_id_x$2, 15bv32)) else $pos28.0$2), (if p3$2 then 0bv32 else $i31.0$2);
+    $sum.0$1, $pos1.0$1, $i2.0$1 := (if p3$1 then 0bv32 else $sum.0$1), (if p3$1 then BV32_MUL(4bv32, BV32_AND(local_id_x$1, 15bv32)) else $pos1.0$1), (if p3$1 then 0bv32 else $i2.0$1);
+    $sum.0$2, $pos1.0$2, $i2.0$2 := (if p3$2 then 0bv32 else $sum.0$2), (if p3$2 then BV32_MUL(4bv32, BV32_AND(local_id_x$2, 15bv32)) else $pos1.0$2), (if p3$2 then 0bv32 else $i2.0$2);
     p4$1 := (if p3$1 then true else p4$1);
     p4$2 := (if p3$2 then true else p4$2);
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.32;
+    goto $10;
 
-  $for.cond.32:
+  $10:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ17histogram64KernelPjP5uint4jE6s_Hist ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ17histogram64KernelPjP5uint4jE6s_Hist ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$_ZZ17histogram64KernelPjP5uint4jE6s_Hist ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assume {:predicate "p4"} {:dominator_predicate "p3"} true;
     assert {:do_not_predicate} {:tag "accessOnlyIfEnabledInEnclosingScopes"} {:thread 1} _b16 ==> _READ_HAS_OCCURRED_$$_ZZ17histogram64KernelPjP5uint4jE6s_Hist ==> BV32_ULT(local_id_x$1, 64bv32);
-    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 1} _b15 ==> BV32_ULT(local_id_x$1, 64bv32) && BV32_ULT($i31.0$1, 16bv32) ==> p4$1;
-    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 2} _b15 ==> BV32_ULT(local_id_x$2, 64bv32) && BV32_ULT($i31.0$2, 16bv32) ==> p4$2;
+    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 1} _b15 ==> BV32_ULT(local_id_x$1, 64bv32) && BV32_ULT($i2.0$1, 16bv32) ==> p4$1;
+    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 2} _b15 ==> BV32_ULT(local_id_x$2, 64bv32) && BV32_ULT($i2.0$2, 16bv32) ==> p4$2;
     assert {:tag "conditionsImpliedByEnabledness"} {:thread 1} p4$1 ==> _b14 ==> p4$1 ==> BV32_ULT(local_id_x$1, 64bv32);
     assert {:tag "conditionsImpliedByEnabledness"} {:thread 2} p4$2 ==> _b14 ==> p4$2 ==> BV32_ULT(local_id_x$2, 64bv32);
-    assert {:tag "loopBound"} {:thread 1} p4$1 ==> _b13 ==> BV32_UGE($i31.0$1, 0bv32);
-    assert {:tag "loopBound"} {:thread 2} p4$2 ==> _b13 ==> BV32_UGE($i31.0$2, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} p4$1 ==> _b12 ==> BV32_ULE($i31.0$1, 0bv32);
-    assert {:tag "loopBound"} {:thread 2} p4$2 ==> _b12 ==> BV32_ULE($i31.0$2, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} p4$1 ==> _b11 ==> BV32_SGE($i31.0$1, 0bv32);
-    assert {:tag "loopBound"} {:thread 2} p4$2 ==> _b11 ==> BV32_SGE($i31.0$2, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} p4$1 ==> _b10 ==> BV32_SLE($i31.0$1, 0bv32);
-    assert {:tag "loopBound"} {:thread 2} p4$2 ==> _b10 ==> BV32_SLE($i31.0$2, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} p4$1 ==> _b13 ==> BV32_UGE($i2.0$1, 0bv32);
+    assert {:tag "loopBound"} {:thread 2} p4$2 ==> _b13 ==> BV32_UGE($i2.0$2, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} p4$1 ==> _b12 ==> BV32_ULE($i2.0$1, 0bv32);
+    assert {:tag "loopBound"} {:thread 2} p4$2 ==> _b12 ==> BV32_ULE($i2.0$2, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} p4$1 ==> _b11 ==> BV32_SGE($i2.0$1, 0bv32);
+    assert {:tag "loopBound"} {:thread 2} p4$2 ==> _b11 ==> BV32_SGE($i2.0$2, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} p4$1 ==> _b10 ==> BV32_SLE($i2.0$1, 0bv32);
+    assert {:tag "loopBound"} {:thread 2} p4$2 ==> _b10 ==> BV32_SLE($i2.0$2, 0bv32);
     assert {:block_sourceloc} {:sourceloc_num 62} p4$1 ==> true;
-    v29$1 := (if p4$1 then BV32_ULT($i31.0$1, 16bv32) else v29$1);
-    v29$2 := (if p4$2 then BV32_ULT($i31.0$2, 16bv32) else v29$2);
+    v29$1 := (if p4$1 then BV32_ULT($i2.0$1, 16bv32) else v29$1);
+    v29$2 := (if p4$2 then BV32_ULT($i2.0$2, 16bv32) else v29$2);
     p5$1 := false;
     p5$2 := false;
     p5$1 := (if p4$1 && v29$1 then v29$1 else p5$1);
@@ -581,24 +581,24 @@ implementation {:source_name "histogram64Kernel"} {:kernel} $_Z17histogram64Kern
     p4$1 := (if p4$1 && !v29$1 then v29$1 else p4$1);
     p4$2 := (if p4$2 && !v29$2 then v29$2 else p4$2);
     assume {:do_not_predicate} {:check_id "check_state_1"} {:captureState "check_state_1"} {:sourceloc} {:sourceloc_num 64} true;
-    v30$1 := (if p5$1 then $$_ZZ17histogram64KernelPjP5uint4jE6s_Hist[1bv1][BV32_ADD(v28$1, $pos28.0$1)] else v30$1);
-    v30$2 := (if p5$2 then $$_ZZ17histogram64KernelPjP5uint4jE6s_Hist[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v28$2, $pos28.0$2)] else v30$2);
+    v30$1 := (if p5$1 then $$_ZZ17histogram64KernelPjP5uint4jE6s_Hist[1bv1][BV32_ADD(v28$1, $pos1.0$1)] else v30$1);
+    v30$2 := (if p5$2 then $$_ZZ17histogram64KernelPjP5uint4jE6s_Hist[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v28$2, $pos1.0$2)] else v30$2);
     assume {:do_not_predicate} {:check_id "check_state_2"} {:captureState "check_state_2"} {:sourceloc} {:sourceloc_num 65} true;
-    v31$1 := (if p5$1 then $$_ZZ17histogram64KernelPjP5uint4jE6s_Hist[1bv1][BV32_ADD(v28$1, BV32_ADD($pos28.0$1, 1bv32))] else v31$1);
-    v31$2 := (if p5$2 then $$_ZZ17histogram64KernelPjP5uint4jE6s_Hist[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v28$2, BV32_ADD($pos28.0$2, 1bv32))] else v31$2);
+    v31$1 := (if p5$1 then $$_ZZ17histogram64KernelPjP5uint4jE6s_Hist[1bv1][BV32_ADD(v28$1, BV32_ADD($pos1.0$1, 1bv32))] else v31$1);
+    v31$2 := (if p5$2 then $$_ZZ17histogram64KernelPjP5uint4jE6s_Hist[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v28$2, BV32_ADD($pos1.0$2, 1bv32))] else v31$2);
     assume {:do_not_predicate} {:check_id "check_state_3"} {:captureState "check_state_3"} {:sourceloc} {:sourceloc_num 66} true;
-    v32$1 := (if p5$1 then $$_ZZ17histogram64KernelPjP5uint4jE6s_Hist[1bv1][BV32_ADD(v28$1, BV32_ADD($pos28.0$1, 2bv32))] else v32$1);
-    v32$2 := (if p5$2 then $$_ZZ17histogram64KernelPjP5uint4jE6s_Hist[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v28$2, BV32_ADD($pos28.0$2, 2bv32))] else v32$2);
+    v32$1 := (if p5$1 then $$_ZZ17histogram64KernelPjP5uint4jE6s_Hist[1bv1][BV32_ADD(v28$1, BV32_ADD($pos1.0$1, 2bv32))] else v32$1);
+    v32$2 := (if p5$2 then $$_ZZ17histogram64KernelPjP5uint4jE6s_Hist[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v28$2, BV32_ADD($pos1.0$2, 2bv32))] else v32$2);
     assume {:do_not_predicate} {:check_id "check_state_4"} {:captureState "check_state_4"} {:sourceloc} {:sourceloc_num 67} true;
-    v33$1 := (if p5$1 then $$_ZZ17histogram64KernelPjP5uint4jE6s_Hist[1bv1][BV32_ADD(v28$1, BV32_ADD($pos28.0$1, 3bv32))] else v33$1);
-    v33$2 := (if p5$2 then $$_ZZ17histogram64KernelPjP5uint4jE6s_Hist[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v28$2, BV32_ADD($pos28.0$2, 3bv32))] else v33$2);
-    $sum.0$1, $pos28.0$1, $i31.0$1 := (if p5$1 then BV32_ADD($sum.0$1, BV32_ADD(BV32_ADD(BV32_ADD(BV8_ZEXT32(v30$1), BV8_ZEXT32(v31$1)), BV8_ZEXT32(v32$1)), BV8_ZEXT32(v33$1))) else $sum.0$1), (if p5$1 then BV32_AND(BV32_ADD($pos28.0$1, 4bv32), 63bv32) else $pos28.0$1), (if p5$1 then BV32_ADD($i31.0$1, 1bv32) else $i31.0$1);
-    $sum.0$2, $pos28.0$2, $i31.0$2 := (if p5$2 then BV32_ADD($sum.0$2, BV32_ADD(BV32_ADD(BV32_ADD(BV8_ZEXT32(v30$2), BV8_ZEXT32(v31$2)), BV8_ZEXT32(v32$2)), BV8_ZEXT32(v33$2))) else $sum.0$2), (if p5$2 then BV32_AND(BV32_ADD($pos28.0$2, 4bv32), 63bv32) else $pos28.0$2), (if p5$2 then BV32_ADD($i31.0$2, 1bv32) else $i31.0$2);
+    v33$1 := (if p5$1 then $$_ZZ17histogram64KernelPjP5uint4jE6s_Hist[1bv1][BV32_ADD(v28$1, BV32_ADD($pos1.0$1, 3bv32))] else v33$1);
+    v33$2 := (if p5$2 then $$_ZZ17histogram64KernelPjP5uint4jE6s_Hist[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v28$2, BV32_ADD($pos1.0$2, 3bv32))] else v33$2);
+    $sum.0$1, $pos1.0$1, $i2.0$1 := (if p5$1 then BV32_ADD($sum.0$1, BV32_ADD(BV32_ADD(BV32_ADD(BV8_ZEXT32(v30$1), BV8_ZEXT32(v31$1)), BV8_ZEXT32(v32$1)), BV8_ZEXT32(v33$1))) else $sum.0$1), (if p5$1 then BV32_AND(BV32_ADD($pos1.0$1, 4bv32), 63bv32) else $pos1.0$1), (if p5$1 then BV32_ADD($i2.0$1, 1bv32) else $i2.0$1);
+    $sum.0$2, $pos1.0$2, $i2.0$2 := (if p5$2 then BV32_ADD($sum.0$2, BV32_ADD(BV32_ADD(BV32_ADD(BV8_ZEXT32(v30$2), BV8_ZEXT32(v31$2)), BV8_ZEXT32(v32$2)), BV8_ZEXT32(v33$2))) else $sum.0$2), (if p5$2 then BV32_AND(BV32_ADD($pos1.0$2, 4bv32), 63bv32) else $pos1.0$2), (if p5$2 then BV32_ADD($i2.0$2, 1bv32) else $i2.0$2);
     p4$1 := (if p5$1 then true else p4$1);
     p4$2 := (if p5$2 then true else p4$2);
-    goto $for.cond.32.backedge, $for.cond.32.tail;
+    goto $10.backedge, $10.tail;
 
-  $for.cond.32.tail:
+  $10.tail:
     assume !p4$1 && !p4$2;
     call {:sourceloc} {:sourceloc_num 70} _LOG_WRITE_$$d_PartialHistograms(p3$1, BV32_ADD(BV32_MUL(group_id_x$1, 64bv32), local_id_x$1), $sum.0$1, $$d_PartialHistograms[BV32_ADD(BV32_MUL(group_id_x$1, 64bv32), local_id_x$1)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$d_PartialHistograms(p3$2, BV32_ADD(BV32_MUL(group_id_x$2, 64bv32), local_id_x$2));
@@ -609,15 +609,15 @@ implementation {:source_name "histogram64Kernel"} {:kernel} $_Z17histogram64Kern
     $$d_PartialHistograms[BV32_ADD(BV32_MUL(group_id_x$2, 64bv32), local_id_x$2)] := (if p3$2 then $sum.0$2 else $$d_PartialHistograms[BV32_ADD(BV32_MUL(group_id_x$2, 64bv32), local_id_x$2)]);
     return;
 
-  $for.cond.32.backedge:
+  $10.backedge:
     assume {:backedge} p4$1 || p4$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.32;
+    goto $10;
 
-  $for.cond.7.backedge:
+  $5.backedge:
     assume {:backedge} p0$1 || p0$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.7;
+    goto $5;
 
   $truebb:
     assume {:partition} v1;
@@ -651,7 +651,7 @@ implementation {:source_name "histogram64Kernel"} {:kernel} $_Z17histogram64Kern
     $$_ZZ17histogram64KernelPjP5uint4jE6s_Hist[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(local_id_x$2, BV32_MUL($i.0, 64bv32)), 4bv32), 3bv32)] := 0bv8;
     $i.0 := BV32_ADD($i.0, 1bv32);
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

@@ -122,22 +122,22 @@ implementation {:source_name "transposeDiagonal"} {:kernel} $_Z17transposeDiagon
   var $blockIdx_y.0$2: bv32;
   var $r.0: bv32;
   var $i.0: bv32;
-  var $i57.0: bv32;
-  var v5$1: bv32;
-  var v5$2: bv32;
+  var $i1.0: bv32;
   var v0: bool;
-  var v2$1: bv32;
-  var v2$2: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
+  var v2$1: bv32;
+  var v2$2: bv32;
   var v3: bool;
   var v4: bool;
+  var v5$1: bv32;
+  var v5$2: bv32;
+  var v6: bool;
   var v7$1: bv32;
   var v7$2: bv32;
-  var v6: bool;
 
 
-  $entry:
+  $0:
     v0 := $width == $height;
     goto $truebb, $falsebb;
 
@@ -149,14 +149,14 @@ implementation {:source_name "transposeDiagonal"} {:kernel} $_Z17transposeDiagon
     v2$2 := BV32_UREM(v1$2, num_groups_y);
     $blockIdx_x.0$1, $blockIdx_y.0$1 := BV32_UREM(BV32_ADD(BV32_UDIV(v1$1, num_groups_y), v2$1), num_groups_x), v2$1;
     $blockIdx_x.0$2, $blockIdx_y.0$2 := BV32_UREM(BV32_ADD(BV32_UDIV(v1$2, num_groups_y), v2$2), num_groups_x), v2$2;
-    goto $if.end;
+    goto $3;
 
-  $if.end:
+  $3:
     $r.0 := 0bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $4;
 
-  $for.cond:
+  $4:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessBreak"} _b20 ==> _WRITE_HAS_OCCURRED_$$_ZZ17transposeDiagonalPfS_iiiE4tile ==> local_id_y$1 == BV32_DIV(_WATCHED_OFFSET, 17bv32);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b19 ==> _WRITE_HAS_OCCURRED_$$_ZZ17transposeDiagonalPfS_iiiE4tile ==> BV32_AND(BV32_SUB(BV32_MUL(16bv32, 17bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(16bv32, 17bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, local_id_y$1), 17bv32), local_id_x$1));
@@ -186,9 +186,9 @@ implementation {:source_name "transposeDiagonal"} {:kernel} $_Z17transposeDiagon
     assume {:partition} v3;
     $i.0 := 0bv32;
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond.48;
+    goto $6;
 
-  $for.cond.48:
+  $6:
     assume {:captureState "loop_head_state_2"} true;
     assert {:tag "accessBreak"} _b22 ==> _WRITE_HAS_OCCURRED_$$_ZZ17transposeDiagonalPfS_iiiE4tile ==> local_id_y$1 == BV32_DIV(_WATCHED_OFFSET, 17bv32);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b21 ==> _WRITE_HAS_OCCURRED_$$_ZZ17transposeDiagonalPfS_iiiE4tile ==> BV32_AND(BV32_SUB(BV32_MUL(16bv32, 17bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(16bv32, 17bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, local_id_y$1), 17bv32), local_id_x$1));
@@ -211,27 +211,27 @@ implementation {:source_name "transposeDiagonal"} {:kernel} $_Z17transposeDiagon
 
   __partitioned_block_$falsebb1_1:
     call {:sourceloc_num 19} $bugle_barrier_duplicated_0(1bv1, 1bv1);
-    $i57.0 := 0bv32;
+    $i1.0 := 0bv32;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.58;
+    goto $10;
 
-  $for.cond.58:
+  $10:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ17transposeDiagonalPfS_iiiE4tile ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ17transposeDiagonalPfS_iiiE4tile ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$_ZZ17transposeDiagonalPfS_iiiE4tile ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
-    assert {:tag "loopBound"} {:thread 1} _b16 ==> BV32_UGE($i57.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b15 ==> BV32_ULE($i57.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b14 ==> BV32_SGE($i57.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b13 ==> BV32_SLE($i57.0, 0bv32);
-    assert {:tag "guardNonNeg"} {:thread 1} _b12 ==> BV32_SLE(0bv32, $i57.0);
-    assert {:tag "loopCounterIsStrided"} {:thread 1} _b11 ==> BV32_AND(BV32_SUB(16bv32, 1bv32), $i57.0) == BV32_AND(BV32_SUB(16bv32, 1bv32), 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b16 ==> BV32_UGE($i1.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b15 ==> BV32_ULE($i1.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b14 ==> BV32_SGE($i1.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b13 ==> BV32_SLE($i1.0, 0bv32);
+    assert {:tag "guardNonNeg"} {:thread 1} _b12 ==> BV32_SLE(0bv32, $i1.0);
+    assert {:tag "loopCounterIsStrided"} {:thread 1} _b11 ==> BV32_AND(BV32_SUB(16bv32, 1bv32), $i1.0) == BV32_AND(BV32_SUB(16bv32, 1bv32), 0bv32);
     assert {:block_sourceloc} {:sourceloc_num 20} true;
     assert {:originated_from_invariant} {:sourceloc_num 21} {:thread 1} (if _WRITE_HAS_OCCURRED_$$odata ==> BV32_UREM(BV32_UREM(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), $height), 16bv32) == local_id_x$1 then 1bv1 else 0bv1) != 0bv1;
     assert {:originated_from_invariant} {:sourceloc_num 22} {:thread 1} (if _WRITE_HAS_OCCURRED_$$odata ==> BV32_UREM(BV32_UDIV(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), $height), 16bv32) == local_id_y$1 then 1bv1 else 0bv1) != 0bv1;
     assert {:originated_from_invariant} {:sourceloc_num 23} {:thread 1} (if _WRITE_HAS_OCCURRED_$$odata ==> BV32_UDIV(BV32_UDIV(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), $height), 16bv32) == $blockIdx_x.0$1 then 1bv1 else 0bv1) != 0bv1;
     assert {:originated_from_invariant} {:sourceloc_num 24} {:thread 1} (if _WRITE_HAS_OCCURRED_$$odata ==> BV32_UDIV(BV32_UREM(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), $height), 16bv32) == $blockIdx_y.0$1 then 1bv1 else 0bv1) != 0bv1;
-    v6 := BV32_SLT($i57.0, 16bv32);
+    v6 := BV32_SLT($i1.0, 16bv32);
     goto $truebb2, __partitioned_block_$falsebb2_0;
 
   __partitioned_block_$falsebb2_0:
@@ -242,23 +242,23 @@ implementation {:source_name "transposeDiagonal"} {:kernel} $_Z17transposeDiagon
     call {:sourceloc_num 30} $bugle_barrier_duplicated_1(1bv1, 1bv1);
     $r.0 := BV32_ADD($r.0, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $4;
 
   $truebb2:
     assume {:partition} v6;
     assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 26} true;
-    v7$1 := $$_ZZ17transposeDiagonalPfS_iiiE4tile[1bv1][BV32_ADD(BV32_MUL(local_id_x$1, 17bv32), BV32_ADD(local_id_y$1, $i57.0))];
-    v7$2 := $$_ZZ17transposeDiagonalPfS_iiiE4tile[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(local_id_x$2, 17bv32), BV32_ADD(local_id_y$2, $i57.0))];
-    call {:sourceloc} {:sourceloc_num 27} _LOG_WRITE_$$odata(true, BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL($blockIdx_y.0$1, 16bv32), local_id_x$1), BV32_MUL(BV32_ADD(BV32_MUL($blockIdx_x.0$1, 16bv32), local_id_y$1), $height)), BV32_MUL($i57.0, $height)), v7$1, $$odata[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL($blockIdx_y.0$1, 16bv32), local_id_x$1), BV32_MUL(BV32_ADD(BV32_MUL($blockIdx_x.0$1, 16bv32), local_id_y$1), $height)), BV32_MUL($i57.0, $height))]);
-    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$odata(true, BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL($blockIdx_y.0$2, 16bv32), local_id_x$2), BV32_MUL(BV32_ADD(BV32_MUL($blockIdx_x.0$2, 16bv32), local_id_y$2), $height)), BV32_MUL($i57.0, $height)));
+    v7$1 := $$_ZZ17transposeDiagonalPfS_iiiE4tile[1bv1][BV32_ADD(BV32_MUL(local_id_x$1, 17bv32), BV32_ADD(local_id_y$1, $i1.0))];
+    v7$2 := $$_ZZ17transposeDiagonalPfS_iiiE4tile[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(local_id_x$2, 17bv32), BV32_ADD(local_id_y$2, $i1.0))];
+    call {:sourceloc} {:sourceloc_num 27} _LOG_WRITE_$$odata(true, BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL($blockIdx_y.0$1, 16bv32), local_id_x$1), BV32_MUL(BV32_ADD(BV32_MUL($blockIdx_x.0$1, 16bv32), local_id_y$1), $height)), BV32_MUL($i1.0, $height)), v7$1, $$odata[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL($blockIdx_y.0$1, 16bv32), local_id_x$1), BV32_MUL(BV32_ADD(BV32_MUL($blockIdx_x.0$1, 16bv32), local_id_y$1), $height)), BV32_MUL($i1.0, $height))]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$odata(true, BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL($blockIdx_y.0$2, 16bv32), local_id_x$2), BV32_MUL(BV32_ADD(BV32_MUL($blockIdx_x.0$2, 16bv32), local_id_y$2), $height)), BV32_MUL($i1.0, $height)));
     assume {:do_not_predicate} {:check_id "check_state_1"} {:captureState "check_state_1"} {:sourceloc} {:sourceloc_num 27} true;
-    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 27} _CHECK_WRITE_$$odata(true, BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL($blockIdx_y.0$2, 16bv32), local_id_x$2), BV32_MUL(BV32_ADD(BV32_MUL($blockIdx_x.0$2, 16bv32), local_id_y$2), $height)), BV32_MUL($i57.0, $height)), v7$2);
+    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 27} _CHECK_WRITE_$$odata(true, BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL($blockIdx_y.0$2, 16bv32), local_id_x$2), BV32_MUL(BV32_ADD(BV32_MUL($blockIdx_x.0$2, 16bv32), local_id_y$2), $height)), BV32_MUL($i1.0, $height)), v7$2);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$odata"} true;
-    $$odata[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL($blockIdx_y.0$1, 16bv32), local_id_x$1), BV32_MUL(BV32_ADD(BV32_MUL($blockIdx_x.0$1, 16bv32), local_id_y$1), $height)), BV32_MUL($i57.0, $height))] := v7$1;
-    $$odata[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL($blockIdx_y.0$2, 16bv32), local_id_x$2), BV32_MUL(BV32_ADD(BV32_MUL($blockIdx_x.0$2, 16bv32), local_id_y$2), $height)), BV32_MUL($i57.0, $height))] := v7$2;
-    $i57.0 := BV32_ADD($i57.0, 16bv32);
+    $$odata[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL($blockIdx_y.0$1, 16bv32), local_id_x$1), BV32_MUL(BV32_ADD(BV32_MUL($blockIdx_x.0$1, 16bv32), local_id_y$1), $height)), BV32_MUL($i1.0, $height))] := v7$1;
+    $$odata[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL($blockIdx_y.0$2, 16bv32), local_id_x$2), BV32_MUL(BV32_ADD(BV32_MUL($blockIdx_x.0$2, 16bv32), local_id_y$2), $height)), BV32_MUL($i1.0, $height))] := v7$2;
+    $i1.0 := BV32_ADD($i1.0, 16bv32);
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.58;
+    goto $10;
 
   $truebb1:
     assume {:partition} v4;
@@ -272,13 +272,13 @@ implementation {:source_name "transposeDiagonal"} {:kernel} $_Z17transposeDiagon
     $$_ZZ17transposeDiagonalPfS_iiiE4tile[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(local_id_y$2, $i.0), 17bv32), local_id_x$2)] := v5$2;
     $i.0 := BV32_ADD($i.0, 16bv32);
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond.48;
+    goto $6;
 
   $truebb:
     assume {:partition} v0;
     $blockIdx_x.0$1, $blockIdx_y.0$1 := BV32_UREM(BV32_ADD(group_id_x$1, group_id_y$1), num_groups_x), group_id_x$1;
     $blockIdx_x.0$2, $blockIdx_y.0$2 := BV32_UREM(BV32_ADD(group_id_x$2, group_id_y$2), num_groups_x), group_id_x$2;
-    goto $if.end;
+    goto $3;
 }
 
 

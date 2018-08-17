@@ -155,8 +155,6 @@ implementation {:source_name "scan_inter2_kernel"} {:kernel} $scan_inter2_kernel
 {
   var $stride.0: bv32;
   var $d.0: bv32;
-  var v16$1: bv32;
-  var v16$2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
   var v1$1: bv32;
@@ -171,20 +169,22 @@ implementation {:source_name "scan_inter2_kernel"} {:kernel} $scan_inter2_kernel
   var v5$2: bv32;
   var v6$1: bv32;
   var v6$2: bv32;
-  var v10$1: bv32;
-  var v10$2: bv32;
   var v7$1: bv32;
   var v7$2: bv32;
   var v8$1: bv32;
   var v8$2: bv32;
   var v9$1: bv32;
   var v9$2: bv32;
+  var v10$1: bv32;
+  var v10$2: bv32;
   var v11$1: bv32;
   var v11$2: bv32;
   var v12: bool;
   var v13: bv32;
   var v14$1: bool;
   var v14$2: bool;
+  var v16$1: bv32;
+  var v16$2: bv32;
   var v15$1: bv32;
   var v15$2: bv32;
   var v17$1: bv32;
@@ -328,10 +328,7 @@ assert  my_inv (  (  BV32_SLE($d.0, 1bv32) ) ,  (  BV32_SGE($d.0, 1bv32) ) ,  ( 
 
   __partitioned_block_$falsebb_1:
     call {:sourceloc_num 18} $bugle_barrier_duplicated_0(1bv1, 0bv1);
-    call {:sourceloc} {:sourceloc_num 19} _LOG_READ_$$scan_inter2_kernel.s_data(true, v7$1, $$scan_inter2_kernel.s_data[1bv1][v7$1]);
     assume {:do_not_predicate} {:check_id "check_state_4"} {:captureState "check_state_4"} {:sourceloc} {:sourceloc_num 19} true;
-    call {:check_id "check_state_4"} {:sourceloc} {:sourceloc_num 19} _CHECK_READ_$$scan_inter2_kernel.s_data(true, v7$2, $$scan_inter2_kernel.s_data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v7$2]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$scan_inter2_kernel.s_data"} true;
     v24$1 := $$scan_inter2_kernel.s_data[1bv1][v7$1];
     v24$2 := $$scan_inter2_kernel.s_data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v7$2];
     call {:sourceloc} {:sourceloc_num 20} _LOG_WRITE_$$data(true, v1$1, v24$1, $$data[v1$1]);
@@ -341,10 +338,7 @@ assert  my_inv (  (  BV32_SLE($d.0, 1bv32) ) ,  (  BV32_SGE($d.0, 1bv32) ) ,  ( 
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$data"} true;
     $$data[v1$1] := v24$1;
     $$data[v1$2] := v24$2;
-    call {:sourceloc} {:sourceloc_num 21} _LOG_READ_$$scan_inter2_kernel.s_data(true, v9$1, $$scan_inter2_kernel.s_data[1bv1][v9$1]);
     assume {:do_not_predicate} {:check_id "check_state_6"} {:captureState "check_state_6"} {:sourceloc} {:sourceloc_num 21} true;
-    call {:check_id "check_state_6"} {:sourceloc} {:sourceloc_num 21} _CHECK_READ_$$scan_inter2_kernel.s_data(true, v9$2, $$scan_inter2_kernel.s_data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v9$2]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$scan_inter2_kernel.s_data"} true;
     v25$1 := $$scan_inter2_kernel.s_data[1bv1][v9$1];
     v25$2 := $$scan_inter2_kernel.s_data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v9$2];
     call {:sourceloc} {:sourceloc_num 22} _LOG_WRITE_$$data(true, v2$1, v25$1, $$data[v2$1]);

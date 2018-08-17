@@ -195,11 +195,11 @@ implementation {:source_name "dwtHaar1D"} {:kernel} $dwtHaar1D($tLevels: bv32, $
   var $data1.1$2: bv32;
   var $midOutPos.1$1: bv32;
   var $midOutPos.1$2: bv32;
+  var v0$1: bv32;
+  var v0$2: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
   var v2: bv32;
-  var v0$1: bv32;
-  var v0$2: bv32;
   var v3$1: bv32;
   var v3$2: bv32;
   var v4$1: bv32;

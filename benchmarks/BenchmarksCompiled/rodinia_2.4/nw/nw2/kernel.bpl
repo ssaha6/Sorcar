@@ -150,20 +150,23 @@ implementation {:source_name "nw_kernel2"} {:kernel} $nw_kernel2($cols: bv32, $p
   var $m.0: bv32;
   var $k.i.0$1: bv32;
   var $k.i.0$2: bv32;
-  var $retval.i.0$1: bv32;
-  var $retval.i.0$2: bv32;
-  var $m96.0: bv32;
-  var $k.i.166.0$1: bv32;
-  var $k.i.166.0$2: bv32;
-  var $retval.i.162.0$1: bv32;
-  var $retval.i.162.0$2: bv32;
-  var $ty135.0: bv32;
-  var v1$1: bv32;
-  var v1$2: bv32;
+  var $.01$1: bv32;
+  var $.01$2: bv32;
+  var $m1.0: bv32;
+  var $k.i5.0$1: bv32;
+  var $k.i5.0$2: bv32;
+  var $.0$1: bv32;
+  var $.0$2: bv32;
+  var $ty4.0: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
-  var v9$1: bv32;
-  var v9$2: bv32;
+  var v1$1: bv32;
+  var v1$2: bv32;
+  var v2: bv32;
+  var v3$1: bv32;
+  var v3$2: bv32;
+  var v4$1: bv32;
+  var v4$2: bv32;
   var v5$1: bv32;
   var v5$2: bv32;
   var v6$1: bv32;
@@ -172,39 +175,38 @@ implementation {:source_name "nw_kernel2"} {:kernel} $nw_kernel2($cols: bv32, $p
   var v7$2: bv32;
   var v8$1: bool;
   var v8$2: bool;
-  var v2: bv32;
-  var v4$1: bv32;
-  var v4$2: bv32;
-  var v3$1: bv32;
-  var v3$2: bv32;
+  var v9$1: bv32;
+  var v9$2: bv32;
+  var v10: bool;
+  var v11$1: bv32;
+  var v11$2: bv32;
+  var v12$1: bv32;
+  var v12$2: bv32;
+  var v13$1: bv32;
+  var v13$2: bv32;
   var v14: bool;
   var v15$1: bool;
   var v15$2: bool;
-  var v10: bool;
-  var v23$1: bv32;
-  var v23$2: bv32;
+  var v16$1: bv32;
+  var v16$2: bv32;
+  var v17$1: bv32;
+  var v17$2: bv32;
   var v18$1: bv32;
   var v18$2: bv32;
-  var v31$1: bv32;
-  var v31$2: bv32;
-  var v21$1: bv32;
-  var v21$2: bv32;
   var v19$1: bv32;
   var v19$2: bv32;
-  var v36$1: bv32;
-  var v36$2: bv32;
-  var v34$1: bv32;
-  var v34$2: bv32;
-  var v32$1: bv32;
-  var v32$2: bv32;
-  var v41$1: bv32;
-  var v41$2: bv32;
-  var v13$1: bv32;
-  var v13$2: bv32;
-  var v12$1: bv32;
-  var v12$2: bv32;
-  var v11$1: bv32;
-  var v11$2: bv32;
+  var v20$1: bv32;
+  var v20$2: bv32;
+  var v21$1: bv32;
+  var v21$2: bv32;
+  var v22$1: bv32;
+  var v22$2: bv32;
+  var v23$1: bv32;
+  var v23$2: bv32;
+  var v24$1: bv32;
+  var v24$2: bv32;
+  var v25$1: bool;
+  var v25$2: bool;
   var v26$1: bool;
   var v26$2: bool;
   var v27: bool;
@@ -214,29 +216,27 @@ implementation {:source_name "nw_kernel2"} {:kernel} $nw_kernel2($cols: bv32, $p
   var v29$2: bv32;
   var v30$1: bv32;
   var v30$2: bv32;
+  var v31$1: bv32;
+  var v31$2: bv32;
+  var v32$1: bv32;
+  var v32$2: bv32;
   var v33$1: bv32;
   var v33$2: bv32;
+  var v34$1: bv32;
+  var v34$2: bv32;
   var v35$1: bv32;
   var v35$2: bv32;
-  var v20$1: bv32;
-  var v20$2: bv32;
-  var v22$1: bv32;
-  var v22$2: bv32;
-  var v24$1: bv32;
-  var v24$2: bv32;
-  var v16$1: bv32;
-  var v16$2: bv32;
-  var v17$1: bv32;
-  var v17$2: bv32;
-  var v25$1: bool;
-  var v25$2: bool;
+  var v36$1: bv32;
+  var v36$2: bv32;
+  var v37$1: bv32;
+  var v37$2: bv32;
+  var v38$1: bool;
+  var v38$2: bool;
   var v39$1: bool;
   var v39$2: bool;
   var v40: bool;
-  var v38$1: bool;
-  var v38$2: bool;
-  var v37$1: bv32;
-  var v37$2: bv32;
+  var v41$1: bv32;
+  var v41$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -267,7 +267,7 @@ implementation {:source_name "nw_kernel2"} {:kernel} $nw_kernel2($cols: bv32, $p
   var p13$2: bool;
 
 
-  $entry:
+  $0:
     v0$1 := group_id_x$1;
     v0$2 := group_id_x$2;
     v1$1 := local_id_x$1;
@@ -306,9 +306,9 @@ implementation {:source_name "nw_kernel2"} {:kernel} $nw_kernel2($cols: bv32, $p
     $$input_itemsets_l[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_MUL(v1$2, 17bv32)] := (if p0$2 then v9$2 else $$input_itemsets_l[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_MUL(v1$2, 17bv32)]);
     $ty.0 := 0bv32;
     assume {:captureState "loop_entry_state_3_0"} true;
-    goto $for.cond;
+    goto $3;
 
-  $for.cond:
+  $3:
     assume {:captureState "loop_head_state_3"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b21 ==> _WRITE_HAS_OCCURRED_$$reference_l ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 16bv32), local_id_x$1));
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$reference_l ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -368,9 +368,9 @@ implementation {:source_name "nw_kernel2"} {:kernel} $nw_kernel2($cols: bv32, $p
     call {:sourceloc_num 24} $bugle_barrier_duplicated_2(1bv1, 0bv1);
     $m.0 := 0bv32;
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond.59;
+    goto $7;
 
-  $for.cond.59:
+  $7:
     assume {:captureState "loop_head_state_2"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b25 ==> _WRITE_HAS_OCCURRED_$$input_itemsets_l ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 17bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 17bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, 1bv32), 17bv32), BV32_ADD(local_id_x$1, 1bv32)));
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b24 ==> _READ_HAS_OCCURRED_$$input_itemsets_l ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 17bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 17bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 17bv32), BV32_ADD(local_id_x$1, 1bv32)));
@@ -405,11 +405,11 @@ implementation {:source_name "nw_kernel2"} {:kernel} $nw_kernel2($cols: bv32, $p
 
   $falsebb1:
     assume {:partition} !v14;
-    $m96.0 := 14bv32;
+    $m1.0 := 14bv32;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.97;
+    goto $18;
 
-  $for.cond.97:
+  $18:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "nowrite"} _b27 ==> !_WRITE_HAS_OCCURRED_$$input_itemsets_l;
     assert {:tag "noread"} _b26 ==> !_READ_HAS_OCCURRED_$$input_itemsets_l;
@@ -419,14 +419,14 @@ implementation {:source_name "nw_kernel2"} {:kernel} $nw_kernel2($cols: bv32, $p
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$input_itemsets_l ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$input_itemsets_l ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$input_itemsets_l ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
-    assert {:tag "loopBound"} {:thread 1} _b15 ==> BV32_UGE($m96.0, 14bv32);
-    assert {:tag "loopBound"} {:thread 1} _b14 ==> BV32_ULE($m96.0, 14bv32);
-    assert {:tag "loopBound"} {:thread 1} _b13 ==> BV32_SGE($m96.0, 14bv32);
-    assert {:tag "loopBound"} {:thread 1} _b12 ==> BV32_SLE($m96.0, 14bv32);
-    assert {:tag "guardNonNeg"} {:thread 1} _b11 ==> BV32_SLE(0bv32, $m96.0);
-    assert {:tag "loopCounterIsStrided"} {:thread 1} _b10 ==> BV32_AND(BV32_SUB(4294967295bv32, 1bv32), $m96.0) == BV32_AND(BV32_SUB(4294967295bv32, 1bv32), 14bv32);
+    assert {:tag "loopBound"} {:thread 1} _b15 ==> BV32_UGE($m1.0, 14bv32);
+    assert {:tag "loopBound"} {:thread 1} _b14 ==> BV32_ULE($m1.0, 14bv32);
+    assert {:tag "loopBound"} {:thread 1} _b13 ==> BV32_SGE($m1.0, 14bv32);
+    assert {:tag "loopBound"} {:thread 1} _b12 ==> BV32_SLE($m1.0, 14bv32);
+    assert {:tag "guardNonNeg"} {:thread 1} _b11 ==> BV32_SLE(0bv32, $m1.0);
+    assert {:tag "loopCounterIsStrided"} {:thread 1} _b10 ==> BV32_AND(BV32_SUB(4294967295bv32, 1bv32), $m1.0) == BV32_AND(BV32_SUB(4294967295bv32, 1bv32), 14bv32);
     assert {:block_sourceloc} {:sourceloc_num 43} true;
-    v27 := BV32_SGE($m96.0, 0bv32);
+    v27 := BV32_SGE($m1.0, 0bv32);
     p8$1 := false;
     p8$2 := false;
     p9$1 := false;
@@ -443,11 +443,11 @@ implementation {:source_name "nw_kernel2"} {:kernel} $nw_kernel2($cols: bv32, $p
 
   $falsebb5:
     assume {:partition} !v27;
-    $ty135.0 := 0bv32;
+    $ty4.0 := 0bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.136;
+    goto $29;
 
-  $for.cond.136:
+  $29:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b28 ==> _READ_HAS_OCCURRED_$$input_itemsets_l ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 17bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 17bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, 1bv32), 17bv32), BV32_ADD(local_id_x$1, 1bv32)));
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$reference_l ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -456,15 +456,15 @@ implementation {:source_name "nw_kernel2"} {:kernel} $nw_kernel2($cols: bv32, $p
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$input_itemsets_l ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$input_itemsets_l ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$input_itemsets_l ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
-    assert {:tag "loopBound"} {:thread 1} _b20 ==> BV32_UGE($ty135.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b19 ==> BV32_ULE($ty135.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b18 ==> BV32_SGE($ty135.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b17 ==> BV32_SLE($ty135.0, 0bv32);
-    assert {:tag "guardNonNeg"} {:thread 1} _b16 ==> BV32_SLE(0bv32, $ty135.0);
+    assert {:tag "loopBound"} {:thread 1} _b20 ==> BV32_UGE($ty4.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b19 ==> BV32_ULE($ty4.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b18 ==> BV32_SGE($ty4.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b17 ==> BV32_SLE($ty4.0, 0bv32);
+    assert {:tag "guardNonNeg"} {:thread 1} _b16 ==> BV32_SLE(0bv32, $ty4.0);
     assert {:block_sourceloc} {:sourceloc_num 61} true;
     assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 62} {:thread 1} (if _WRITE_HAS_OCCURRED_$$input_itemsets_d ==> BV32_UREM(BV32_SUB(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), v5$1), $cols) == 0bv32 then 1bv1 else 0bv1) != 0bv1;
     assert {:do_not_predicate} {:originated_from_invariant} {:sourceloc_num 63} {:thread 1} (if _WRITE_HAS_OCCURRED_$$input_itemsets_d ==> BV32_ULT(BV32_UDIV(BV32_SUB(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), v5$1), $cols), 16bv32) then 1bv1 else 0bv1) != 0bv1;
-    v40 := BV32_SLT($ty135.0, 16bv32);
+    v40 := BV32_SLT($ty4.0, 16bv32);
     goto $truebb9, $falsebb9;
 
   $falsebb9:
@@ -473,31 +473,31 @@ implementation {:source_name "nw_kernel2"} {:kernel} $nw_kernel2($cols: bv32, $p
 
   $truebb9:
     assume {:partition} v40;
-    call {:sourceloc} {:sourceloc_num 65} _LOG_READ_$$input_itemsets_l(true, BV32_ADD(BV32_ADD(v1$1, 1bv32), BV32_MUL(BV32_ADD($ty135.0, 1bv32), 17bv32)), $$input_itemsets_l[1bv1][BV32_ADD(BV32_ADD(v1$1, 1bv32), BV32_MUL(BV32_ADD($ty135.0, 1bv32), 17bv32))]);
+    call {:sourceloc} {:sourceloc_num 65} _LOG_READ_$$input_itemsets_l(true, BV32_ADD(BV32_ADD(v1$1, 1bv32), BV32_MUL(BV32_ADD($ty4.0, 1bv32), 17bv32)), $$input_itemsets_l[1bv1][BV32_ADD(BV32_ADD(v1$1, 1bv32), BV32_MUL(BV32_ADD($ty4.0, 1bv32), 17bv32))]);
     assume {:do_not_predicate} {:check_id "check_state_4"} {:captureState "check_state_4"} {:sourceloc} {:sourceloc_num 65} true;
-    call {:check_id "check_state_4"} {:sourceloc} {:sourceloc_num 65} _CHECK_READ_$$input_itemsets_l(true, BV32_ADD(BV32_ADD(v1$2, 1bv32), BV32_MUL(BV32_ADD($ty135.0, 1bv32), 17bv32)), $$input_itemsets_l[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_ADD(v1$2, 1bv32), BV32_MUL(BV32_ADD($ty135.0, 1bv32), 17bv32))]);
+    call {:check_id "check_state_4"} {:sourceloc} {:sourceloc_num 65} _CHECK_READ_$$input_itemsets_l(true, BV32_ADD(BV32_ADD(v1$2, 1bv32), BV32_MUL(BV32_ADD($ty4.0, 1bv32), 17bv32)), $$input_itemsets_l[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_ADD(v1$2, 1bv32), BV32_MUL(BV32_ADD($ty4.0, 1bv32), 17bv32))]);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$input_itemsets_l"} true;
-    v41$1 := $$input_itemsets_l[1bv1][BV32_ADD(BV32_ADD(v1$1, 1bv32), BV32_MUL(BV32_ADD($ty135.0, 1bv32), 17bv32))];
-    v41$2 := $$input_itemsets_l[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_ADD(v1$2, 1bv32), BV32_MUL(BV32_ADD($ty135.0, 1bv32), 17bv32))];
-    call {:sourceloc} {:sourceloc_num 66} _LOG_WRITE_$$input_itemsets_d(true, BV32_ADD(v5$1, BV32_MUL($ty135.0, $cols)), v41$1, $$input_itemsets_d[BV32_ADD(v5$1, BV32_MUL($ty135.0, $cols))]);
-    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$input_itemsets_d(true, BV32_ADD(v5$2, BV32_MUL($ty135.0, $cols)));
+    v41$1 := $$input_itemsets_l[1bv1][BV32_ADD(BV32_ADD(v1$1, 1bv32), BV32_MUL(BV32_ADD($ty4.0, 1bv32), 17bv32))];
+    v41$2 := $$input_itemsets_l[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_ADD(v1$2, 1bv32), BV32_MUL(BV32_ADD($ty4.0, 1bv32), 17bv32))];
+    call {:sourceloc} {:sourceloc_num 66} _LOG_WRITE_$$input_itemsets_d(true, BV32_ADD(v5$1, BV32_MUL($ty4.0, $cols)), v41$1, $$input_itemsets_d[BV32_ADD(v5$1, BV32_MUL($ty4.0, $cols))]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$input_itemsets_d(true, BV32_ADD(v5$2, BV32_MUL($ty4.0, $cols)));
     assume {:do_not_predicate} {:check_id "check_state_5"} {:captureState "check_state_5"} {:sourceloc} {:sourceloc_num 66} true;
-    call {:check_id "check_state_5"} {:sourceloc} {:sourceloc_num 66} _CHECK_WRITE_$$input_itemsets_d(true, BV32_ADD(v5$2, BV32_MUL($ty135.0, $cols)), v41$2);
+    call {:check_id "check_state_5"} {:sourceloc} {:sourceloc_num 66} _CHECK_WRITE_$$input_itemsets_d(true, BV32_ADD(v5$2, BV32_MUL($ty4.0, $cols)), v41$2);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$input_itemsets_d"} true;
-    $$input_itemsets_d[BV32_ADD(v5$1, BV32_MUL($ty135.0, $cols))] := v41$1;
-    $$input_itemsets_d[BV32_ADD(v5$2, BV32_MUL($ty135.0, $cols))] := v41$2;
-    $ty135.0 := BV32_ADD($ty135.0, 1bv32);
+    $$input_itemsets_d[BV32_ADD(v5$1, BV32_MUL($ty4.0, $cols))] := v41$1;
+    $$input_itemsets_d[BV32_ADD(v5$2, BV32_MUL($ty4.0, $cols))] := v41$2;
+    $ty4.0 := BV32_ADD($ty4.0, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.136;
+    goto $29;
 
   __partitioned_block_$truebb5_0:
     assume {:partition} v27;
-    v28$1 := BV32_SLE(v1$1, $m96.0);
-    v28$2 := BV32_SLE(v1$2, $m96.0);
+    v28$1 := BV32_SLE(v1$1, $m1.0);
+    v28$2 := BV32_SLE(v1$2, $m1.0);
     p9$1 := (if v28$1 then v28$1 else p9$1);
     p9$2 := (if v28$2 then v28$2 else p9$2);
-    v29$1 := (if p9$1 then BV32_SUB(BV32_ADD(v1$1, 16bv32), $m96.0) else v29$1);
-    v29$2 := (if p9$2 then BV32_SUB(BV32_ADD(v1$2, 16bv32), $m96.0) else v29$2);
+    v29$1 := (if p9$1 then BV32_SUB(BV32_ADD(v1$1, 16bv32), $m1.0) else v29$1);
+    v29$2 := (if p9$2 then BV32_SUB(BV32_ADD(v1$2, 16bv32), $m1.0) else v29$2);
     v30$1 := (if p9$1 then BV32_SUB(16bv32, v1$1) else v30$1);
     v30$2 := (if p9$2 then BV32_SUB(16bv32, v1$2) else v30$2);
     call {:sourceloc} {:sourceloc_num 46} _LOG_READ_$$input_itemsets_l(p9$1, BV32_ADD(BV32_SUB(v29$1, 1bv32), BV32_MUL(BV32_SUB(v30$1, 1bv32), 17bv32)), $$input_itemsets_l[1bv1][BV32_ADD(BV32_SUB(v29$1, 1bv32), BV32_MUL(BV32_SUB(v30$1, 1bv32), 17bv32))]);
@@ -533,34 +533,34 @@ implementation {:source_name "nw_kernel2"} {:kernel} $nw_kernel2($cols: bv32, $p
     p11$2 := (if p9$2 && v38$2 then v38$2 else p11$2);
     p10$1 := (if p9$1 && !v38$1 then !v38$1 else p10$1);
     p10$2 := (if p9$2 && !v38$2 then !v38$2 else p10$2);
-    $k.i.166.0$1 := (if p10$1 then v33$1 else $k.i.166.0$1);
-    $k.i.166.0$2 := (if p10$2 then v33$2 else $k.i.166.0$2);
-    $k.i.166.0$1 := (if p11$1 then v35$1 else $k.i.166.0$1);
-    $k.i.166.0$2 := (if p11$2 then v35$2 else $k.i.166.0$2);
-    v39$1 := (if p9$1 then BV32_SLE($k.i.166.0$1, v37$1) else v39$1);
-    v39$2 := (if p9$2 then BV32_SLE($k.i.166.0$2, v37$2) else v39$2);
+    $k.i5.0$1 := (if p10$1 then v33$1 else $k.i5.0$1);
+    $k.i5.0$2 := (if p10$2 then v33$2 else $k.i5.0$2);
+    $k.i5.0$1 := (if p11$1 then v35$1 else $k.i5.0$1);
+    $k.i5.0$2 := (if p11$2 then v35$2 else $k.i5.0$2);
+    v39$1 := (if p9$1 then BV32_SLE($k.i5.0$1, v37$1) else v39$1);
+    v39$2 := (if p9$2 then BV32_SLE($k.i5.0$2, v37$2) else v39$2);
     p13$1 := (if p9$1 && v39$1 then v39$1 else p13$1);
     p13$2 := (if p9$2 && v39$2 then v39$2 else p13$2);
     p12$1 := (if p9$1 && !v39$1 then !v39$1 else p12$1);
     p12$2 := (if p9$2 && !v39$2 then !v39$2 else p12$2);
-    $retval.i.162.0$1 := (if p12$1 then $k.i.166.0$1 else $retval.i.162.0$1);
-    $retval.i.162.0$2 := (if p12$2 then $k.i.166.0$2 else $retval.i.162.0$2);
-    $retval.i.162.0$1 := (if p13$1 then v37$1 else $retval.i.162.0$1);
-    $retval.i.162.0$2 := (if p13$2 then v37$2 else $retval.i.162.0$2);
-    call {:sourceloc} {:sourceloc_num 56} _LOG_WRITE_$$input_itemsets_l(p9$1, BV32_ADD(v29$1, BV32_MUL(v30$1, 17bv32)), $retval.i.162.0$1, $$input_itemsets_l[1bv1][BV32_ADD(v29$1, BV32_MUL(v30$1, 17bv32))]);
+    $.0$1 := (if p12$1 then $k.i5.0$1 else $.0$1);
+    $.0$2 := (if p12$2 then $k.i5.0$2 else $.0$2);
+    $.0$1 := (if p13$1 then v37$1 else $.0$1);
+    $.0$2 := (if p13$2 then v37$2 else $.0$2);
+    call {:sourceloc} {:sourceloc_num 56} _LOG_WRITE_$$input_itemsets_l(p9$1, BV32_ADD(v29$1, BV32_MUL(v30$1, 17bv32)), $.0$1, $$input_itemsets_l[1bv1][BV32_ADD(v29$1, BV32_MUL(v30$1, 17bv32))]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$input_itemsets_l(p9$2, BV32_ADD(v29$2, BV32_MUL(v30$2, 17bv32)));
     assume {:do_not_predicate} {:check_id "check_state_10"} {:captureState "check_state_10"} {:sourceloc} {:sourceloc_num 56} true;
-    call {:check_id "check_state_10"} {:sourceloc} {:sourceloc_num 56} _CHECK_WRITE_$$input_itemsets_l(p9$2, BV32_ADD(v29$2, BV32_MUL(v30$2, 17bv32)), $retval.i.162.0$2);
+    call {:check_id "check_state_10"} {:sourceloc} {:sourceloc_num 56} _CHECK_WRITE_$$input_itemsets_l(p9$2, BV32_ADD(v29$2, BV32_MUL(v30$2, 17bv32)), $.0$2);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$input_itemsets_l"} true;
-    $$input_itemsets_l[1bv1][BV32_ADD(v29$1, BV32_MUL(v30$1, 17bv32))] := (if p9$1 then $retval.i.162.0$1 else $$input_itemsets_l[1bv1][BV32_ADD(v29$1, BV32_MUL(v30$1, 17bv32))]);
-    $$input_itemsets_l[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v29$2, BV32_MUL(v30$2, 17bv32))] := (if p9$2 then $retval.i.162.0$2 else $$input_itemsets_l[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v29$2, BV32_MUL(v30$2, 17bv32))]);
+    $$input_itemsets_l[1bv1][BV32_ADD(v29$1, BV32_MUL(v30$1, 17bv32))] := (if p9$1 then $.0$1 else $$input_itemsets_l[1bv1][BV32_ADD(v29$1, BV32_MUL(v30$1, 17bv32))]);
+    $$input_itemsets_l[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v29$2, BV32_MUL(v30$2, 17bv32))] := (if p9$2 then $.0$2 else $$input_itemsets_l[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v29$2, BV32_MUL(v30$2, 17bv32))]);
     goto __partitioned_block_$truebb5_1;
 
   __partitioned_block_$truebb5_1:
     call {:sourceloc_num 58} $bugle_barrier_duplicated_3(1bv1, 0bv1);
-    $m96.0 := BV32_ADD($m96.0, 4294967295bv32);
+    $m1.0 := BV32_ADD($m1.0, 4294967295bv32);
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.97;
+    goto $18;
 
   __partitioned_block_$truebb1_0:
     assume {:partition} v14;
@@ -615,24 +615,24 @@ implementation {:source_name "nw_kernel2"} {:kernel} $nw_kernel2($cols: bv32, $p
     p7$2 := (if p3$2 && v26$2 then v26$2 else p7$2);
     p6$1 := (if p3$1 && !v26$1 then !v26$1 else p6$1);
     p6$2 := (if p3$2 && !v26$2 then !v26$2 else p6$2);
-    $retval.i.0$1 := (if p6$1 then $k.i.0$1 else $retval.i.0$1);
-    $retval.i.0$2 := (if p6$2 then $k.i.0$2 else $retval.i.0$2);
-    $retval.i.0$1 := (if p7$1 then v24$1 else $retval.i.0$1);
-    $retval.i.0$2 := (if p7$2 then v24$2 else $retval.i.0$2);
-    call {:sourceloc} {:sourceloc_num 38} _LOG_WRITE_$$input_itemsets_l(p3$1, BV32_ADD(v16$1, BV32_MUL(v17$1, 17bv32)), $retval.i.0$1, $$input_itemsets_l[1bv1][BV32_ADD(v16$1, BV32_MUL(v17$1, 17bv32))]);
+    $.01$1 := (if p6$1 then $k.i.0$1 else $.01$1);
+    $.01$2 := (if p6$2 then $k.i.0$2 else $.01$2);
+    $.01$1 := (if p7$1 then v24$1 else $.01$1);
+    $.01$2 := (if p7$2 then v24$2 else $.01$2);
+    call {:sourceloc} {:sourceloc_num 38} _LOG_WRITE_$$input_itemsets_l(p3$1, BV32_ADD(v16$1, BV32_MUL(v17$1, 17bv32)), $.01$1, $$input_itemsets_l[1bv1][BV32_ADD(v16$1, BV32_MUL(v17$1, 17bv32))]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$input_itemsets_l(p3$2, BV32_ADD(v16$2, BV32_MUL(v17$2, 17bv32)));
     assume {:do_not_predicate} {:check_id "check_state_15"} {:captureState "check_state_15"} {:sourceloc} {:sourceloc_num 38} true;
-    call {:check_id "check_state_15"} {:sourceloc} {:sourceloc_num 38} _CHECK_WRITE_$$input_itemsets_l(p3$2, BV32_ADD(v16$2, BV32_MUL(v17$2, 17bv32)), $retval.i.0$2);
+    call {:check_id "check_state_15"} {:sourceloc} {:sourceloc_num 38} _CHECK_WRITE_$$input_itemsets_l(p3$2, BV32_ADD(v16$2, BV32_MUL(v17$2, 17bv32)), $.01$2);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$input_itemsets_l"} true;
-    $$input_itemsets_l[1bv1][BV32_ADD(v16$1, BV32_MUL(v17$1, 17bv32))] := (if p3$1 then $retval.i.0$1 else $$input_itemsets_l[1bv1][BV32_ADD(v16$1, BV32_MUL(v17$1, 17bv32))]);
-    $$input_itemsets_l[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v16$2, BV32_MUL(v17$2, 17bv32))] := (if p3$2 then $retval.i.0$2 else $$input_itemsets_l[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v16$2, BV32_MUL(v17$2, 17bv32))]);
+    $$input_itemsets_l[1bv1][BV32_ADD(v16$1, BV32_MUL(v17$1, 17bv32))] := (if p3$1 then $.01$1 else $$input_itemsets_l[1bv1][BV32_ADD(v16$1, BV32_MUL(v17$1, 17bv32))]);
+    $$input_itemsets_l[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v16$2, BV32_MUL(v17$2, 17bv32))] := (if p3$2 then $.01$2 else $$input_itemsets_l[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v16$2, BV32_MUL(v17$2, 17bv32))]);
     goto __partitioned_block_$truebb1_1;
 
   __partitioned_block_$truebb1_1:
     call {:sourceloc_num 40} $bugle_barrier_duplicated_4(1bv1, 0bv1);
     $m.0 := BV32_ADD($m.0, 1bv32);
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond.59;
+    goto $7;
 
   $truebb0:
     assume {:partition} v10;
@@ -646,7 +646,7 @@ implementation {:source_name "nw_kernel2"} {:kernel} $nw_kernel2($cols: bv32, $p
     $$reference_l[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v1$2, BV32_MUL($ty.0, 16bv32))] := v11$2;
     $ty.0 := BV32_ADD($ty.0, 1bv32);
     assume {:captureState "loop_back_edge_state_3_0"} true;
-    goto $for.cond;
+    goto $3;
 }
 
 

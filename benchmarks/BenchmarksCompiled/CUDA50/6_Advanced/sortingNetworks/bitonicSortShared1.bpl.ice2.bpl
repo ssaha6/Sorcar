@@ -437,10 +437,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  (  BV32_SLE($stride2.0, 512bv3
 
   __partitioned_block_$falsebb2_1:
     call {:sourceloc_num 47} $bugle_barrier_duplicated_0(1bv1, 1bv1);
-    call {:sourceloc} {:sourceloc_num 48} _LOG_READ_$$_ZZ18bitonicSortShared1PjS_S_S_E5s_key(true, local_id_x$1, $$_ZZ18bitonicSortShared1PjS_S_S_E5s_key[1bv1][local_id_x$1]);
     assume {:do_not_predicate} {:check_id "check_state_4"} {:captureState "check_state_4"} {:sourceloc} {:sourceloc_num 48} true;
-    call {:check_id "check_state_4"} {:sourceloc} {:sourceloc_num 48} _CHECK_READ_$$_ZZ18bitonicSortShared1PjS_S_S_E5s_key(true, local_id_x$2, $$_ZZ18bitonicSortShared1PjS_S_S_E5s_key[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ18bitonicSortShared1PjS_S_S_E5s_key"} true;
     v31$1 := $$_ZZ18bitonicSortShared1PjS_S_S_E5s_key[1bv1][local_id_x$1];
     v31$2 := $$_ZZ18bitonicSortShared1PjS_S_S_E5s_key[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2];
     call {:sourceloc} {:sourceloc_num 49} _LOG_WRITE_$$d_DstKey(true, v2$1, v31$1, $$d_DstKey[v2$1]);
@@ -450,10 +447,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  (  BV32_SLE($stride2.0, 512bv3
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$d_DstKey"} true;
     $$d_DstKey[v2$1] := v31$1;
     $$d_DstKey[v2$2] := v31$2;
-    call {:sourceloc} {:sourceloc_num 50} _LOG_READ_$$_ZZ18bitonicSortShared1PjS_S_S_E5s_val(true, local_id_x$1, $$_ZZ18bitonicSortShared1PjS_S_S_E5s_val[1bv1][local_id_x$1]);
     assume {:do_not_predicate} {:check_id "check_state_6"} {:captureState "check_state_6"} {:sourceloc} {:sourceloc_num 50} true;
-    call {:check_id "check_state_6"} {:sourceloc} {:sourceloc_num 50} _CHECK_READ_$$_ZZ18bitonicSortShared1PjS_S_S_E5s_val(true, local_id_x$2, $$_ZZ18bitonicSortShared1PjS_S_S_E5s_val[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ18bitonicSortShared1PjS_S_S_E5s_val"} true;
     v32$1 := $$_ZZ18bitonicSortShared1PjS_S_S_E5s_val[1bv1][local_id_x$1];
     v32$2 := $$_ZZ18bitonicSortShared1PjS_S_S_E5s_val[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2];
     call {:sourceloc} {:sourceloc_num 51} _LOG_WRITE_$$d_DstVal(true, v3$1, v32$1, $$d_DstVal[v3$1]);
@@ -463,10 +457,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  (  BV32_SLE($stride2.0, 512bv3
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$d_DstVal"} true;
     $$d_DstVal[v3$1] := v32$1;
     $$d_DstVal[v3$2] := v32$2;
-    call {:sourceloc} {:sourceloc_num 52} _LOG_READ_$$_ZZ18bitonicSortShared1PjS_S_S_E5s_key(true, BV32_ADD(local_id_x$1, 512bv32), $$_ZZ18bitonicSortShared1PjS_S_S_E5s_key[1bv1][BV32_ADD(local_id_x$1, 512bv32)]);
     assume {:do_not_predicate} {:check_id "check_state_8"} {:captureState "check_state_8"} {:sourceloc} {:sourceloc_num 52} true;
-    call {:check_id "check_state_8"} {:sourceloc} {:sourceloc_num 52} _CHECK_READ_$$_ZZ18bitonicSortShared1PjS_S_S_E5s_key(true, BV32_ADD(local_id_x$2, 512bv32), $$_ZZ18bitonicSortShared1PjS_S_S_E5s_key[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(local_id_x$2, 512bv32)]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ18bitonicSortShared1PjS_S_S_E5s_key"} true;
     v33$1 := $$_ZZ18bitonicSortShared1PjS_S_S_E5s_key[1bv1][BV32_ADD(local_id_x$1, 512bv32)];
     v33$2 := $$_ZZ18bitonicSortShared1PjS_S_S_E5s_key[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(local_id_x$2, 512bv32)];
     call {:sourceloc} {:sourceloc_num 53} _LOG_WRITE_$$d_DstKey(true, BV32_ADD(v2$1, 512bv32), v33$1, $$d_DstKey[BV32_ADD(v2$1, 512bv32)]);
@@ -476,10 +467,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  (  BV32_SLE($stride2.0, 512bv3
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$d_DstKey"} true;
     $$d_DstKey[BV32_ADD(v2$1, 512bv32)] := v33$1;
     $$d_DstKey[BV32_ADD(v2$2, 512bv32)] := v33$2;
-    call {:sourceloc} {:sourceloc_num 54} _LOG_READ_$$_ZZ18bitonicSortShared1PjS_S_S_E5s_val(true, BV32_ADD(local_id_x$1, 512bv32), $$_ZZ18bitonicSortShared1PjS_S_S_E5s_val[1bv1][BV32_ADD(local_id_x$1, 512bv32)]);
     assume {:do_not_predicate} {:check_id "check_state_10"} {:captureState "check_state_10"} {:sourceloc} {:sourceloc_num 54} true;
-    call {:check_id "check_state_10"} {:sourceloc} {:sourceloc_num 54} _CHECK_READ_$$_ZZ18bitonicSortShared1PjS_S_S_E5s_val(true, BV32_ADD(local_id_x$2, 512bv32), $$_ZZ18bitonicSortShared1PjS_S_S_E5s_val[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(local_id_x$2, 512bv32)]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ18bitonicSortShared1PjS_S_S_E5s_val"} true;
     v34$1 := $$_ZZ18bitonicSortShared1PjS_S_S_E5s_val[1bv1][BV32_ADD(local_id_x$1, 512bv32)];
     v34$2 := $$_ZZ18bitonicSortShared1PjS_S_S_E5s_val[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(local_id_x$2, 512bv32)];
     call {:sourceloc} {:sourceloc_num 55} _LOG_WRITE_$$d_DstVal(true, BV32_ADD(v3$1, 512bv32), v34$1, $$d_DstVal[BV32_ADD(v3$1, 512bv32)]);

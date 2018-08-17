@@ -9,8 +9,7 @@ function {:existential true} my_inv (
  b0007: bool,
  b0008: bool,
  b0009: bool,
- b0010: bool,
- b0011: bool
+ b0010: bool
  ) : bool;
 type _SIZE_T_TYPE = bv32;
 
@@ -153,7 +152,7 @@ implementation {:source_name "writeLocalMemory"} {:kernel} $writeLocalMemory($si
     
     
     
-assert  my_inv (  (  BV32_SLE(0bv32, $j.0) ) ,  (  BV32_SLE($j.0, 0bv32) ) ,  (  BV32_SGE($j.0, 0bv32) ) ,  (  BV32_ULE($j.0, 0bv32) ) ,  (  BV32_UGE($j.0, 0bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true  ); 
+assert  my_inv (  (  BV32_SLE(0bv32, $j.0) ) ,  (  BV32_SLE($j.0, 0bv32) ) ,  (  BV32_SGE($j.0, 0bv32) ) ,  (  BV32_ULE($j.0, 0bv32) ) ,  (  BV32_UGE($j.0, 0bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true  ); 
 
 
     assert {:block_sourceloc} {:sourceloc_num 2} true;
@@ -173,7 +172,6 @@ assert  my_inv (  (  BV32_SLE(0bv32, $j.0) ) ,  (  BV32_SLE($j.0, 0bv32) ) ,  ( 
   $5:
     assume {:captureState "loop_head_state_0"} true;
     
-    
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$writeLocalMemory.lbuf ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$writeLocalMemory.lbuf ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$writeLocalMemory.lbuf ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -182,7 +180,7 @@ assert  my_inv (  (  BV32_SLE(0bv32, $j.0) ) ,  (  BV32_SLE($j.0, 0bv32) ) ,  ( 
     
     
     
-assert  my_inv (  true ,  true ,  true ,  true ,  true ,  (  BV32_SLE(0bv32, $j.1) ) ,  (  BV32_SLE($j.1, 0bv32) ) ,  (  BV32_SGE($j.1, 0bv32) ) ,  (  BV32_ULE($j.1, 0bv32) ) ,  (  BV32_UGE($j.1, 0bv32) ) ,  (  _WRITE_HAS_OCCURRED_$$output ==> _WATCHED_OFFSET == BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1) ) ,  (  _READ_HAS_OCCURRED_$$writeLocalMemory.lbuf ==> _WATCHED_OFFSET == local_id_x$1 )  ); 
+assert  my_inv (  true ,  true ,  true ,  true ,  true ,  (  BV32_SLE(0bv32, $j.1) ) ,  (  BV32_SLE($j.1, 0bv32) ) ,  (  BV32_SGE($j.1, 0bv32) ) ,  (  BV32_ULE($j.1, 0bv32) ) ,  (  BV32_UGE($j.1, 0bv32) ) ,  (  _WRITE_HAS_OCCURRED_$$output ==> _WATCHED_OFFSET == BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1) )  ); 
 
 
     assert {:block_sourceloc} {:sourceloc_num 23} true;
@@ -195,10 +193,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  (  BV32_SLE(0bv32, $j.
 
   $truebb0:
     assume {:partition} v3;
-    call {:sourceloc} {:sourceloc_num 25} _LOG_READ_$$writeLocalMemory.lbuf(true, v1$1, $$writeLocalMemory.lbuf[1bv1][v1$1]);
     assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 25} true;
-    call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 25} _CHECK_READ_$$writeLocalMemory.lbuf(true, v1$2, $$writeLocalMemory.lbuf[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v1$2]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$writeLocalMemory.lbuf"} true;
     v4$1 := $$writeLocalMemory.lbuf[1bv1][v1$1];
     v4$2 := $$writeLocalMemory.lbuf[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v1$2];
     call {:sourceloc} {:sourceloc_num 26} _LOG_WRITE_$$output(true, v0$1, v4$1, $$output[v0$1]);
@@ -634,7 +629,5 @@ implementation {:inline 1} $bugle_barrier_duplicated_0($0: bv1, $1: bv1)
 
 
 function {:bvbuiltin "bvsgt"} BV32_SGT(bv32, bv32) : bool;
-
-
 
 

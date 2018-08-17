@@ -226,9 +226,9 @@ var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 128} {:sourc
 
 var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 128} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$d_fv_gpu: bool;
 
-axiom {:array_info "$$d_par_gpu"} {:elem_width 32} {:source_name "d_par_gpu"} {:source_elem_width 32} {:source_dimensions "1"} true;
+axiom {:array_info "$$d_dim_gpu.val"} {:elem_width 8} {:source_name "d_dim_gpu.val"} {:source_elem_width 448} {:source_dimensions "1"} true;
 
-axiom {:array_info "$$d_dim_gpu"} {:elem_width 8} {:source_name "d_dim_gpu"} {:source_elem_width 448} {:source_dimensions "1"} true;
+axiom {:array_info "$$d_par_gpu.val"} {:elem_width 32} {:source_name "d_par_gpu.val"} {:source_elem_width 32} {:source_dimensions "1"} true;
 
 axiom {:array_info "$$d"} {:elem_width 32} {:source_name "d"} {:source_elem_width 96} {:source_dimensions "1"} true;
 
@@ -310,7 +310,7 @@ function {:bvbuiltin "bvsub"} BV32_SUB(bv32, bv32) : bv32;
 
 function {:bvbuiltin "sign_extend 32"} BV32_SEXT64(bv32) : bv64;
 
-procedure {:source_name "kernel_gpu_opencl"} {:kernel} $kernel_gpu_opencl($d_par_gpu.coerce: bv32, $d_dim_gpu.coerce0: bv32, $d_dim_gpu.coerce1: bv32, $d_dim_gpu.coerce2: bv32, $d_dim_gpu.coerce3: bv32, $d_dim_gpu.coerce4: bv64, $d_dim_gpu.coerce5: bv64, $d_dim_gpu.coerce6: bv64, $d_dim_gpu.coerce7: bv64, $d_dim_gpu.coerce8: bv64);
+procedure {:source_name "kernel_gpu_opencl"} {:kernel} $kernel_gpu_opencl($d_par_gpu: bv32, $d_dim_gpu: bv448);
   requires !_READ_HAS_OCCURRED_$$d_box_gpu && !_WRITE_HAS_OCCURRED_$$d_box_gpu && !_ATOMIC_HAS_OCCURRED_$$d_box_gpu;
   requires !_READ_HAS_OCCURRED_$$d_rv_gpu && !_WRITE_HAS_OCCURRED_$$d_rv_gpu && !_ATOMIC_HAS_OCCURRED_$$d_rv_gpu;
   requires !_READ_HAS_OCCURRED_$$d_qv_gpu && !_WRITE_HAS_OCCURRED_$$d_qv_gpu && !_ATOMIC_HAS_OCCURRED_$$d_qv_gpu;
@@ -353,7 +353,7 @@ procedure {:source_name "kernel_gpu_opencl"} {:kernel} $kernel_gpu_opencl($d_par
 
 
 
-implementation {:source_name "kernel_gpu_opencl"} {:kernel} $kernel_gpu_opencl($d_par_gpu.coerce: bv32, $d_dim_gpu.coerce0: bv32, $d_dim_gpu.coerce1: bv32, $d_dim_gpu.coerce2: bv32, $d_dim_gpu.coerce3: bv32, $d_dim_gpu.coerce4: bv64, $d_dim_gpu.coerce5: bv64, $d_dim_gpu.coerce6: bv64, $d_dim_gpu.coerce7: bv64, $d_dim_gpu.coerce8: bv64)
+implementation {:source_name "kernel_gpu_opencl"} {:kernel} $kernel_gpu_opencl($d_par_gpu: bv32, $d_dim_gpu: bv448)
 {
   var $wtx.0$1: bv32;
   var $wtx.0$2: bv32;
@@ -590,140 +590,140 @@ implementation {:source_name "kernel_gpu_opencl"} {:kernel} $kernel_gpu_opencl($
 
 
   $0:
-    $$d_par_gpu$0bv32$1 := $d_par_gpu.coerce;
-    $$d_par_gpu$0bv32$2 := $d_par_gpu.coerce;
-    $$d_dim_gpu$0bv32$1 := $d_dim_gpu.coerce0[8:0];
-    $$d_dim_gpu$0bv32$2 := $d_dim_gpu.coerce0[8:0];
-    $$d_dim_gpu$1bv32$1 := $d_dim_gpu.coerce0[16:8];
-    $$d_dim_gpu$1bv32$2 := $d_dim_gpu.coerce0[16:8];
-    $$d_dim_gpu$2bv32$1 := $d_dim_gpu.coerce0[24:16];
-    $$d_dim_gpu$2bv32$2 := $d_dim_gpu.coerce0[24:16];
-    $$d_dim_gpu$3bv32$1 := $d_dim_gpu.coerce0[32:24];
-    $$d_dim_gpu$3bv32$2 := $d_dim_gpu.coerce0[32:24];
-    $$d_dim_gpu$4bv32$1 := $d_dim_gpu.coerce1[8:0];
-    $$d_dim_gpu$4bv32$2 := $d_dim_gpu.coerce1[8:0];
-    $$d_dim_gpu$5bv32$1 := $d_dim_gpu.coerce1[16:8];
-    $$d_dim_gpu$5bv32$2 := $d_dim_gpu.coerce1[16:8];
-    $$d_dim_gpu$6bv32$1 := $d_dim_gpu.coerce1[24:16];
-    $$d_dim_gpu$6bv32$2 := $d_dim_gpu.coerce1[24:16];
-    $$d_dim_gpu$7bv32$1 := $d_dim_gpu.coerce1[32:24];
-    $$d_dim_gpu$7bv32$2 := $d_dim_gpu.coerce1[32:24];
-    $$d_dim_gpu$8bv32$1 := $d_dim_gpu.coerce2[8:0];
-    $$d_dim_gpu$8bv32$2 := $d_dim_gpu.coerce2[8:0];
-    $$d_dim_gpu$9bv32$1 := $d_dim_gpu.coerce2[16:8];
-    $$d_dim_gpu$9bv32$2 := $d_dim_gpu.coerce2[16:8];
-    $$d_dim_gpu$10bv32$1 := $d_dim_gpu.coerce2[24:16];
-    $$d_dim_gpu$10bv32$2 := $d_dim_gpu.coerce2[24:16];
-    $$d_dim_gpu$11bv32$1 := $d_dim_gpu.coerce2[32:24];
-    $$d_dim_gpu$11bv32$2 := $d_dim_gpu.coerce2[32:24];
-    $$d_dim_gpu$12bv32$1 := $d_dim_gpu.coerce3[8:0];
-    $$d_dim_gpu$12bv32$2 := $d_dim_gpu.coerce3[8:0];
-    $$d_dim_gpu$13bv32$1 := $d_dim_gpu.coerce3[16:8];
-    $$d_dim_gpu$13bv32$2 := $d_dim_gpu.coerce3[16:8];
-    $$d_dim_gpu$14bv32$1 := $d_dim_gpu.coerce3[24:16];
-    $$d_dim_gpu$14bv32$2 := $d_dim_gpu.coerce3[24:16];
-    $$d_dim_gpu$15bv32$1 := $d_dim_gpu.coerce3[32:24];
-    $$d_dim_gpu$15bv32$2 := $d_dim_gpu.coerce3[32:24];
-    $$d_dim_gpu$16bv32$1 := $d_dim_gpu.coerce4[8:0];
-    $$d_dim_gpu$16bv32$2 := $d_dim_gpu.coerce4[8:0];
-    $$d_dim_gpu$17bv32$1 := $d_dim_gpu.coerce4[16:8];
-    $$d_dim_gpu$17bv32$2 := $d_dim_gpu.coerce4[16:8];
-    $$d_dim_gpu$18bv32$1 := $d_dim_gpu.coerce4[24:16];
-    $$d_dim_gpu$18bv32$2 := $d_dim_gpu.coerce4[24:16];
-    $$d_dim_gpu$19bv32$1 := $d_dim_gpu.coerce4[32:24];
-    $$d_dim_gpu$19bv32$2 := $d_dim_gpu.coerce4[32:24];
-    $$d_dim_gpu$20bv32$1 := $d_dim_gpu.coerce4[40:32];
-    $$d_dim_gpu$20bv32$2 := $d_dim_gpu.coerce4[40:32];
-    $$d_dim_gpu$21bv32$1 := $d_dim_gpu.coerce4[48:40];
-    $$d_dim_gpu$21bv32$2 := $d_dim_gpu.coerce4[48:40];
-    $$d_dim_gpu$22bv32$1 := $d_dim_gpu.coerce4[56:48];
-    $$d_dim_gpu$22bv32$2 := $d_dim_gpu.coerce4[56:48];
-    $$d_dim_gpu$23bv32$1 := $d_dim_gpu.coerce4[64:56];
-    $$d_dim_gpu$23bv32$2 := $d_dim_gpu.coerce4[64:56];
-    $$d_dim_gpu$24bv32$1 := $d_dim_gpu.coerce5[8:0];
-    $$d_dim_gpu$24bv32$2 := $d_dim_gpu.coerce5[8:0];
-    $$d_dim_gpu$25bv32$1 := $d_dim_gpu.coerce5[16:8];
-    $$d_dim_gpu$25bv32$2 := $d_dim_gpu.coerce5[16:8];
-    $$d_dim_gpu$26bv32$1 := $d_dim_gpu.coerce5[24:16];
-    $$d_dim_gpu$26bv32$2 := $d_dim_gpu.coerce5[24:16];
-    $$d_dim_gpu$27bv32$1 := $d_dim_gpu.coerce5[32:24];
-    $$d_dim_gpu$27bv32$2 := $d_dim_gpu.coerce5[32:24];
-    $$d_dim_gpu$28bv32$1 := $d_dim_gpu.coerce5[40:32];
-    $$d_dim_gpu$28bv32$2 := $d_dim_gpu.coerce5[40:32];
-    $$d_dim_gpu$29bv32$1 := $d_dim_gpu.coerce5[48:40];
-    $$d_dim_gpu$29bv32$2 := $d_dim_gpu.coerce5[48:40];
-    $$d_dim_gpu$30bv32$1 := $d_dim_gpu.coerce5[56:48];
-    $$d_dim_gpu$30bv32$2 := $d_dim_gpu.coerce5[56:48];
-    $$d_dim_gpu$31bv32$1 := $d_dim_gpu.coerce5[64:56];
-    $$d_dim_gpu$31bv32$2 := $d_dim_gpu.coerce5[64:56];
-    $$d_dim_gpu$32bv32$1 := $d_dim_gpu.coerce6[8:0];
-    $$d_dim_gpu$32bv32$2 := $d_dim_gpu.coerce6[8:0];
-    $$d_dim_gpu$33bv32$1 := $d_dim_gpu.coerce6[16:8];
-    $$d_dim_gpu$33bv32$2 := $d_dim_gpu.coerce6[16:8];
-    $$d_dim_gpu$34bv32$1 := $d_dim_gpu.coerce6[24:16];
-    $$d_dim_gpu$34bv32$2 := $d_dim_gpu.coerce6[24:16];
-    $$d_dim_gpu$35bv32$1 := $d_dim_gpu.coerce6[32:24];
-    $$d_dim_gpu$35bv32$2 := $d_dim_gpu.coerce6[32:24];
-    $$d_dim_gpu$36bv32$1 := $d_dim_gpu.coerce6[40:32];
-    $$d_dim_gpu$36bv32$2 := $d_dim_gpu.coerce6[40:32];
-    $$d_dim_gpu$37bv32$1 := $d_dim_gpu.coerce6[48:40];
-    $$d_dim_gpu$37bv32$2 := $d_dim_gpu.coerce6[48:40];
-    $$d_dim_gpu$38bv32$1 := $d_dim_gpu.coerce6[56:48];
-    $$d_dim_gpu$38bv32$2 := $d_dim_gpu.coerce6[56:48];
-    $$d_dim_gpu$39bv32$1 := $d_dim_gpu.coerce6[64:56];
-    $$d_dim_gpu$39bv32$2 := $d_dim_gpu.coerce6[64:56];
-    $$d_dim_gpu$40bv32$1 := $d_dim_gpu.coerce7[8:0];
-    $$d_dim_gpu$40bv32$2 := $d_dim_gpu.coerce7[8:0];
-    $$d_dim_gpu$41bv32$1 := $d_dim_gpu.coerce7[16:8];
-    $$d_dim_gpu$41bv32$2 := $d_dim_gpu.coerce7[16:8];
-    $$d_dim_gpu$42bv32$1 := $d_dim_gpu.coerce7[24:16];
-    $$d_dim_gpu$42bv32$2 := $d_dim_gpu.coerce7[24:16];
-    $$d_dim_gpu$43bv32$1 := $d_dim_gpu.coerce7[32:24];
-    $$d_dim_gpu$43bv32$2 := $d_dim_gpu.coerce7[32:24];
-    $$d_dim_gpu$44bv32$1 := $d_dim_gpu.coerce7[40:32];
-    $$d_dim_gpu$44bv32$2 := $d_dim_gpu.coerce7[40:32];
-    $$d_dim_gpu$45bv32$1 := $d_dim_gpu.coerce7[48:40];
-    $$d_dim_gpu$45bv32$2 := $d_dim_gpu.coerce7[48:40];
-    $$d_dim_gpu$46bv32$1 := $d_dim_gpu.coerce7[56:48];
-    $$d_dim_gpu$46bv32$2 := $d_dim_gpu.coerce7[56:48];
-    $$d_dim_gpu$47bv32$1 := $d_dim_gpu.coerce7[64:56];
-    $$d_dim_gpu$47bv32$2 := $d_dim_gpu.coerce7[64:56];
-    $$d_dim_gpu$48bv32$1 := $d_dim_gpu.coerce8[8:0];
-    $$d_dim_gpu$48bv32$2 := $d_dim_gpu.coerce8[8:0];
-    $$d_dim_gpu$49bv32$1 := $d_dim_gpu.coerce8[16:8];
-    $$d_dim_gpu$49bv32$2 := $d_dim_gpu.coerce8[16:8];
-    $$d_dim_gpu$50bv32$1 := $d_dim_gpu.coerce8[24:16];
-    $$d_dim_gpu$50bv32$2 := $d_dim_gpu.coerce8[24:16];
-    $$d_dim_gpu$51bv32$1 := $d_dim_gpu.coerce8[32:24];
-    $$d_dim_gpu$51bv32$2 := $d_dim_gpu.coerce8[32:24];
-    $$d_dim_gpu$52bv32$1 := $d_dim_gpu.coerce8[40:32];
-    $$d_dim_gpu$52bv32$2 := $d_dim_gpu.coerce8[40:32];
-    $$d_dim_gpu$53bv32$1 := $d_dim_gpu.coerce8[48:40];
-    $$d_dim_gpu$53bv32$2 := $d_dim_gpu.coerce8[48:40];
-    $$d_dim_gpu$54bv32$1 := $d_dim_gpu.coerce8[56:48];
-    $$d_dim_gpu$54bv32$2 := $d_dim_gpu.coerce8[56:48];
-    $$d_dim_gpu$55bv32$1 := $d_dim_gpu.coerce8[64:56];
-    $$d_dim_gpu$55bv32$2 := $d_dim_gpu.coerce8[64:56];
+    $$d_dim_gpu.val$0bv32$1 := $d_dim_gpu[8:0];
+    $$d_dim_gpu.val$0bv32$2 := $d_dim_gpu[8:0];
+    $$d_dim_gpu.val$1bv32$1 := $d_dim_gpu[16:8];
+    $$d_dim_gpu.val$1bv32$2 := $d_dim_gpu[16:8];
+    $$d_dim_gpu.val$2bv32$1 := $d_dim_gpu[24:16];
+    $$d_dim_gpu.val$2bv32$2 := $d_dim_gpu[24:16];
+    $$d_dim_gpu.val$3bv32$1 := $d_dim_gpu[32:24];
+    $$d_dim_gpu.val$3bv32$2 := $d_dim_gpu[32:24];
+    $$d_dim_gpu.val$4bv32$1 := $d_dim_gpu[40:32];
+    $$d_dim_gpu.val$4bv32$2 := $d_dim_gpu[40:32];
+    $$d_dim_gpu.val$5bv32$1 := $d_dim_gpu[48:40];
+    $$d_dim_gpu.val$5bv32$2 := $d_dim_gpu[48:40];
+    $$d_dim_gpu.val$6bv32$1 := $d_dim_gpu[56:48];
+    $$d_dim_gpu.val$6bv32$2 := $d_dim_gpu[56:48];
+    $$d_dim_gpu.val$7bv32$1 := $d_dim_gpu[64:56];
+    $$d_dim_gpu.val$7bv32$2 := $d_dim_gpu[64:56];
+    $$d_dim_gpu.val$8bv32$1 := $d_dim_gpu[72:64];
+    $$d_dim_gpu.val$8bv32$2 := $d_dim_gpu[72:64];
+    $$d_dim_gpu.val$9bv32$1 := $d_dim_gpu[80:72];
+    $$d_dim_gpu.val$9bv32$2 := $d_dim_gpu[80:72];
+    $$d_dim_gpu.val$10bv32$1 := $d_dim_gpu[88:80];
+    $$d_dim_gpu.val$10bv32$2 := $d_dim_gpu[88:80];
+    $$d_dim_gpu.val$11bv32$1 := $d_dim_gpu[96:88];
+    $$d_dim_gpu.val$11bv32$2 := $d_dim_gpu[96:88];
+    $$d_dim_gpu.val$12bv32$1 := $d_dim_gpu[104:96];
+    $$d_dim_gpu.val$12bv32$2 := $d_dim_gpu[104:96];
+    $$d_dim_gpu.val$13bv32$1 := $d_dim_gpu[112:104];
+    $$d_dim_gpu.val$13bv32$2 := $d_dim_gpu[112:104];
+    $$d_dim_gpu.val$14bv32$1 := $d_dim_gpu[120:112];
+    $$d_dim_gpu.val$14bv32$2 := $d_dim_gpu[120:112];
+    $$d_dim_gpu.val$15bv32$1 := $d_dim_gpu[128:120];
+    $$d_dim_gpu.val$15bv32$2 := $d_dim_gpu[128:120];
+    $$d_dim_gpu.val$16bv32$1 := $d_dim_gpu[136:128];
+    $$d_dim_gpu.val$16bv32$2 := $d_dim_gpu[136:128];
+    $$d_dim_gpu.val$17bv32$1 := $d_dim_gpu[144:136];
+    $$d_dim_gpu.val$17bv32$2 := $d_dim_gpu[144:136];
+    $$d_dim_gpu.val$18bv32$1 := $d_dim_gpu[152:144];
+    $$d_dim_gpu.val$18bv32$2 := $d_dim_gpu[152:144];
+    $$d_dim_gpu.val$19bv32$1 := $d_dim_gpu[160:152];
+    $$d_dim_gpu.val$19bv32$2 := $d_dim_gpu[160:152];
+    $$d_dim_gpu.val$20bv32$1 := $d_dim_gpu[168:160];
+    $$d_dim_gpu.val$20bv32$2 := $d_dim_gpu[168:160];
+    $$d_dim_gpu.val$21bv32$1 := $d_dim_gpu[176:168];
+    $$d_dim_gpu.val$21bv32$2 := $d_dim_gpu[176:168];
+    $$d_dim_gpu.val$22bv32$1 := $d_dim_gpu[184:176];
+    $$d_dim_gpu.val$22bv32$2 := $d_dim_gpu[184:176];
+    $$d_dim_gpu.val$23bv32$1 := $d_dim_gpu[192:184];
+    $$d_dim_gpu.val$23bv32$2 := $d_dim_gpu[192:184];
+    $$d_dim_gpu.val$24bv32$1 := $d_dim_gpu[200:192];
+    $$d_dim_gpu.val$24bv32$2 := $d_dim_gpu[200:192];
+    $$d_dim_gpu.val$25bv32$1 := $d_dim_gpu[208:200];
+    $$d_dim_gpu.val$25bv32$2 := $d_dim_gpu[208:200];
+    $$d_dim_gpu.val$26bv32$1 := $d_dim_gpu[216:208];
+    $$d_dim_gpu.val$26bv32$2 := $d_dim_gpu[216:208];
+    $$d_dim_gpu.val$27bv32$1 := $d_dim_gpu[224:216];
+    $$d_dim_gpu.val$27bv32$2 := $d_dim_gpu[224:216];
+    $$d_dim_gpu.val$28bv32$1 := $d_dim_gpu[232:224];
+    $$d_dim_gpu.val$28bv32$2 := $d_dim_gpu[232:224];
+    $$d_dim_gpu.val$29bv32$1 := $d_dim_gpu[240:232];
+    $$d_dim_gpu.val$29bv32$2 := $d_dim_gpu[240:232];
+    $$d_dim_gpu.val$30bv32$1 := $d_dim_gpu[248:240];
+    $$d_dim_gpu.val$30bv32$2 := $d_dim_gpu[248:240];
+    $$d_dim_gpu.val$31bv32$1 := $d_dim_gpu[256:248];
+    $$d_dim_gpu.val$31bv32$2 := $d_dim_gpu[256:248];
+    $$d_dim_gpu.val$32bv32$1 := $d_dim_gpu[264:256];
+    $$d_dim_gpu.val$32bv32$2 := $d_dim_gpu[264:256];
+    $$d_dim_gpu.val$33bv32$1 := $d_dim_gpu[272:264];
+    $$d_dim_gpu.val$33bv32$2 := $d_dim_gpu[272:264];
+    $$d_dim_gpu.val$34bv32$1 := $d_dim_gpu[280:272];
+    $$d_dim_gpu.val$34bv32$2 := $d_dim_gpu[280:272];
+    $$d_dim_gpu.val$35bv32$1 := $d_dim_gpu[288:280];
+    $$d_dim_gpu.val$35bv32$2 := $d_dim_gpu[288:280];
+    $$d_dim_gpu.val$36bv32$1 := $d_dim_gpu[296:288];
+    $$d_dim_gpu.val$36bv32$2 := $d_dim_gpu[296:288];
+    $$d_dim_gpu.val$37bv32$1 := $d_dim_gpu[304:296];
+    $$d_dim_gpu.val$37bv32$2 := $d_dim_gpu[304:296];
+    $$d_dim_gpu.val$38bv32$1 := $d_dim_gpu[312:304];
+    $$d_dim_gpu.val$38bv32$2 := $d_dim_gpu[312:304];
+    $$d_dim_gpu.val$39bv32$1 := $d_dim_gpu[320:312];
+    $$d_dim_gpu.val$39bv32$2 := $d_dim_gpu[320:312];
+    $$d_dim_gpu.val$40bv32$1 := $d_dim_gpu[328:320];
+    $$d_dim_gpu.val$40bv32$2 := $d_dim_gpu[328:320];
+    $$d_dim_gpu.val$41bv32$1 := $d_dim_gpu[336:328];
+    $$d_dim_gpu.val$41bv32$2 := $d_dim_gpu[336:328];
+    $$d_dim_gpu.val$42bv32$1 := $d_dim_gpu[344:336];
+    $$d_dim_gpu.val$42bv32$2 := $d_dim_gpu[344:336];
+    $$d_dim_gpu.val$43bv32$1 := $d_dim_gpu[352:344];
+    $$d_dim_gpu.val$43bv32$2 := $d_dim_gpu[352:344];
+    $$d_dim_gpu.val$44bv32$1 := $d_dim_gpu[360:352];
+    $$d_dim_gpu.val$44bv32$2 := $d_dim_gpu[360:352];
+    $$d_dim_gpu.val$45bv32$1 := $d_dim_gpu[368:360];
+    $$d_dim_gpu.val$45bv32$2 := $d_dim_gpu[368:360];
+    $$d_dim_gpu.val$46bv32$1 := $d_dim_gpu[376:368];
+    $$d_dim_gpu.val$46bv32$2 := $d_dim_gpu[376:368];
+    $$d_dim_gpu.val$47bv32$1 := $d_dim_gpu[384:376];
+    $$d_dim_gpu.val$47bv32$2 := $d_dim_gpu[384:376];
+    $$d_dim_gpu.val$48bv32$1 := $d_dim_gpu[392:384];
+    $$d_dim_gpu.val$48bv32$2 := $d_dim_gpu[392:384];
+    $$d_dim_gpu.val$49bv32$1 := $d_dim_gpu[400:392];
+    $$d_dim_gpu.val$49bv32$2 := $d_dim_gpu[400:392];
+    $$d_dim_gpu.val$50bv32$1 := $d_dim_gpu[408:400];
+    $$d_dim_gpu.val$50bv32$2 := $d_dim_gpu[408:400];
+    $$d_dim_gpu.val$51bv32$1 := $d_dim_gpu[416:408];
+    $$d_dim_gpu.val$51bv32$2 := $d_dim_gpu[416:408];
+    $$d_dim_gpu.val$52bv32$1 := $d_dim_gpu[424:416];
+    $$d_dim_gpu.val$52bv32$2 := $d_dim_gpu[424:416];
+    $$d_dim_gpu.val$53bv32$1 := $d_dim_gpu[432:424];
+    $$d_dim_gpu.val$53bv32$2 := $d_dim_gpu[432:424];
+    $$d_dim_gpu.val$54bv32$1 := $d_dim_gpu[440:432];
+    $$d_dim_gpu.val$54bv32$2 := $d_dim_gpu[440:432];
+    $$d_dim_gpu.val$55bv32$1 := $d_dim_gpu[448:440];
+    $$d_dim_gpu.val$55bv32$2 := $d_dim_gpu[448:440];
+    $$d_par_gpu.val$0bv32$1 := $d_par_gpu;
+    $$d_par_gpu.val$0bv32$2 := $d_par_gpu;
     v0$1 := group_id_x$1;
     v0$2 := group_id_x$2;
     v1$1 := local_id_x$1;
     v1$2 := local_id_x$2;
-    v2$1 := $$d_dim_gpu$16bv32$1;
-    v2$2 := $$d_dim_gpu$16bv32$2;
-    v3$1 := $$d_dim_gpu$17bv32$1;
-    v3$2 := $$d_dim_gpu$17bv32$2;
-    v4$1 := $$d_dim_gpu$18bv32$1;
-    v4$2 := $$d_dim_gpu$18bv32$2;
-    v5$1 := $$d_dim_gpu$19bv32$1;
-    v5$2 := $$d_dim_gpu$19bv32$2;
-    v6$1 := $$d_dim_gpu$20bv32$1;
-    v6$2 := $$d_dim_gpu$20bv32$2;
-    v7$1 := $$d_dim_gpu$21bv32$1;
-    v7$2 := $$d_dim_gpu$21bv32$2;
-    v8$1 := $$d_dim_gpu$22bv32$1;
-    v8$2 := $$d_dim_gpu$22bv32$2;
-    v9$1 := $$d_dim_gpu$23bv32$1;
-    v9$2 := $$d_dim_gpu$23bv32$2;
+    v2$1 := $$d_dim_gpu.val$16bv32$1;
+    v2$2 := $$d_dim_gpu.val$16bv32$2;
+    v3$1 := $$d_dim_gpu.val$17bv32$1;
+    v3$2 := $$d_dim_gpu.val$17bv32$2;
+    v4$1 := $$d_dim_gpu.val$18bv32$1;
+    v4$2 := $$d_dim_gpu.val$18bv32$2;
+    v5$1 := $$d_dim_gpu.val$19bv32$1;
+    v5$2 := $$d_dim_gpu.val$19bv32$2;
+    v6$1 := $$d_dim_gpu.val$20bv32$1;
+    v6$2 := $$d_dim_gpu.val$20bv32$2;
+    v7$1 := $$d_dim_gpu.val$21bv32$1;
+    v7$2 := $$d_dim_gpu.val$21bv32$2;
+    v8$1 := $$d_dim_gpu.val$22bv32$1;
+    v8$2 := $$d_dim_gpu.val$22bv32$2;
+    v9$1 := $$d_dim_gpu.val$23bv32$1;
+    v9$2 := $$d_dim_gpu.val$23bv32$2;
     v10$1 := BV64_SLT(BV32_SEXT64(v0$1), v9$1 ++ v8$1 ++ v7$1 ++ v6$1 ++ v5$1 ++ v4$1 ++ v3$1 ++ v2$1);
     v10$2 := BV64_SLT(BV32_SEXT64(v0$2), v9$2 ++ v8$2 ++ v7$2 ++ v6$2 ++ v5$2 ++ v4$2 ++ v3$2 ++ v2$2);
     p0$1 := false;
@@ -736,10 +736,10 @@ implementation {:source_name "kernel_gpu_opencl"} {:kernel} $kernel_gpu_opencl($
     p13$2 := false;
     p0$1 := (if v10$1 then v10$1 else p0$1);
     p0$2 := (if v10$2 then v10$2 else p0$2);
-    v11$1 := (if p0$1 then $$d_par_gpu$0bv32$1 else v11$1);
-    v11$2 := (if p0$2 then $$d_par_gpu$0bv32$2 else v11$2);
-    v12$1 := (if p0$1 then $$d_par_gpu$0bv32$1 else v12$1);
-    v12$2 := (if p0$2 then $$d_par_gpu$0bv32$2 else v12$2);
+    v11$1 := (if p0$1 then $$d_par_gpu.val$0bv32$1 else v11$1);
+    v11$2 := (if p0$2 then $$d_par_gpu.val$0bv32$2 else v11$2);
+    v12$1 := (if p0$1 then $$d_par_gpu.val$0bv32$1 else v12$1);
+    v12$2 := (if p0$2 then $$d_par_gpu.val$0bv32$2 else v12$2);
     v13$1 := (if p0$1 then $$d_box_gpu[BV32_ADD(BV32_MUL(v0$1, 656bv32), 16bv32)] else v13$1);
     v13$2 := (if p0$2 then $$d_box_gpu[BV32_ADD(BV32_MUL(v0$2, 656bv32), 16bv32)] else v13$2);
     v14$1 := (if p0$1 then $$d_box_gpu[BV32_ADD(BV32_MUL(v0$1, 656bv32), 17bv32)] else v14$1);
@@ -800,7 +800,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     
     
     
-assert  my_inv (  ( p1$1 ==> BV32_AND(BV32_SUB(128bv32, 1bv32), $wtx.0$1) == BV32_AND(BV32_SUB(128bv32, 1bv32), v1$1) )  && ( p1$2 ==> BV32_AND(BV32_SUB(128bv32, 1bv32), $wtx.0$2) == BV32_AND(BV32_SUB(128bv32, 1bv32), v1$2) ) ,  ( p1$1 ==> BV32_SLE(0bv32, $wtx.0$1) )  && ( p1$2 ==> BV32_SLE(0bv32, $wtx.0$2) ) ,  ( p1$1 ==> BV32_SLE($wtx.0$1, v1$1) )  && ( p1$2 ==> BV32_SLE($wtx.0$2, v1$2) ) ,  ( p1$1 ==> BV32_SGE($wtx.0$1, v1$1) )  && ( p1$2 ==> BV32_SGE($wtx.0$2, v1$2) ) ,  ( p1$1 ==> BV32_ULE($wtx.0$1, v1$1) )  && ( p1$2 ==> BV32_ULE($wtx.0$2, v1$2) ) ,  ( p1$1 ==> BV32_UGE($wtx.0$1, v1$1) )  && ( p1$2 ==> BV32_UGE($wtx.0$2, v1$2) ) ,  ( p1$1 ==> p1$1 ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) )  && ( p1$2 ==> p1$2 ==> BV64_SLT(BV32_SEXT64(group_id_x$2), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) ) ,  (  BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) && BV32_SLT($wtx.0$1, 100bv32) ==> p1$1 )  && (  BV64_SLT(BV32_SEXT64(group_id_x$2), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) && BV32_SLT($wtx.0$2, 100bv32) ==> p1$2 ) ,  (  _WRITE_HAS_OCCURRED_$$kernel_gpu_opencl.rA_shared ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true  ); 
+assert  my_inv (  ( p1$1 ==> BV32_AND(BV32_SUB(128bv32, 1bv32), $wtx.0$1) == BV32_AND(BV32_SUB(128bv32, 1bv32), v1$1) )  && ( p1$2 ==> BV32_AND(BV32_SUB(128bv32, 1bv32), $wtx.0$2) == BV32_AND(BV32_SUB(128bv32, 1bv32), v1$2) ) ,  ( p1$1 ==> BV32_SLE(0bv32, $wtx.0$1) )  && ( p1$2 ==> BV32_SLE(0bv32, $wtx.0$2) ) ,  ( p1$1 ==> BV32_SLE($wtx.0$1, v1$1) )  && ( p1$2 ==> BV32_SLE($wtx.0$2, v1$2) ) ,  ( p1$1 ==> BV32_SGE($wtx.0$1, v1$1) )  && ( p1$2 ==> BV32_SGE($wtx.0$2, v1$2) ) ,  ( p1$1 ==> BV32_ULE($wtx.0$1, v1$1) )  && ( p1$2 ==> BV32_ULE($wtx.0$2, v1$2) ) ,  ( p1$1 ==> BV32_UGE($wtx.0$1, v1$1) )  && ( p1$2 ==> BV32_UGE($wtx.0$2, v1$2) ) ,  ( p1$1 ==> p1$1 ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) )  && ( p1$2 ==> p1$2 ==> BV64_SLT(BV32_SEXT64(group_id_x$2), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) ) ,  (  BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) && BV32_SLT($wtx.0$1, 100bv32) ==> p1$1 )  && (  BV64_SLT(BV32_SEXT64(group_id_x$2), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) && BV32_SLT($wtx.0$2, 100bv32) ==> p1$2 ) ,  (  _WRITE_HAS_OCCURRED_$$kernel_gpu_opencl.rA_shared ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true  ); 
 
 
     assert {:block_sourceloc} {:sourceloc_num 20} p1$1 ==> true;
@@ -1001,7 +1001,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     
     
     
-assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  ( p3$1 ==> BV32_SLE(0bv32, $k.0$1) )  && ( p3$2 ==> BV32_SLE(0bv32, $k.0$2) ) ,  ( p3$1 ==> BV32_SUB($k.0$1, 0bv32) == BV32_SUB($k.0$2, 0bv32) )  && ( p3$2 ==> BV32_SUB($k.0$2, 0bv32) == BV32_SUB($k.0$1, 0bv32) ) ,  ( p3$1 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 ==> BV32_SUB($k.0$1, 0bv32) == BV32_SUB($k.0$2, 0bv32) )  && ( p3$2 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 ==> BV32_SUB($k.0$2, 0bv32) == BV32_SUB($k.0$1, 0bv32) ) ,  ( p3$1 ==> BV32_SLE($k.0$1, 0bv32) )  && ( p3$2 ==> BV32_SLE($k.0$2, 0bv32) ) ,  ( p3$1 ==> BV32_SGE($k.0$1, 0bv32) )  && ( p3$2 ==> BV32_SGE($k.0$2, 0bv32) ) ,  ( p3$1 ==> BV32_ULE($k.0$1, 0bv32) )  && ( p3$2 ==> BV32_ULE($k.0$2, 0bv32) ) ,  ( p3$1 ==> BV32_UGE($k.0$1, 0bv32) )  && ( p3$2 ==> BV32_UGE($k.0$2, 0bv32) ) ,  ( p3$1 ==> p3$1 ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) )  && ( p3$2 ==> p3$2 ==> BV64_SLT(BV32_SEXT64(group_id_x$2), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) ) ,  (  BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) && BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) ==> p3$1 )  && (  BV64_SLT(BV32_SEXT64(group_id_x$2), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) && BV32_SLT($k.0$2, BV32_ADD(1bv32, v30$2 ++ v29$2 ++ v28$2 ++ v27$2)) ==> p3$2 ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.rA_shared ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.rB_shared ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.qB_shared ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) ) ,  (  _READ_HAS_OCCURRED_$$d_fv_gpu ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) ) ,  (  _WRITE_HAS_OCCURRED_$$d_fv_gpu ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) ) ,  (  _WRITE_HAS_OCCURRED_$$kernel_gpu_opencl.rB_shared ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) ) ,  (  _WRITE_HAS_OCCURRED_$$kernel_gpu_opencl.qB_shared ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true  ); 
+assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  ( p3$1 ==> BV32_SLE(0bv32, $k.0$1) )  && ( p3$2 ==> BV32_SLE(0bv32, $k.0$2) ) ,  ( p3$1 ==> BV32_SUB($k.0$1, 0bv32) == BV32_SUB($k.0$2, 0bv32) )  && ( p3$2 ==> BV32_SUB($k.0$2, 0bv32) == BV32_SUB($k.0$1, 0bv32) ) ,  ( p3$1 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 ==> BV32_SUB($k.0$1, 0bv32) == BV32_SUB($k.0$2, 0bv32) )  && ( p3$2 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 ==> BV32_SUB($k.0$2, 0bv32) == BV32_SUB($k.0$1, 0bv32) ) ,  ( p3$1 ==> BV32_SLE($k.0$1, 0bv32) )  && ( p3$2 ==> BV32_SLE($k.0$2, 0bv32) ) ,  ( p3$1 ==> BV32_SGE($k.0$1, 0bv32) )  && ( p3$2 ==> BV32_SGE($k.0$2, 0bv32) ) ,  ( p3$1 ==> BV32_ULE($k.0$1, 0bv32) )  && ( p3$2 ==> BV32_ULE($k.0$2, 0bv32) ) ,  ( p3$1 ==> BV32_UGE($k.0$1, 0bv32) )  && ( p3$2 ==> BV32_UGE($k.0$2, 0bv32) ) ,  ( p3$1 ==> p3$1 ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) )  && ( p3$2 ==> p3$2 ==> BV64_SLT(BV32_SEXT64(group_id_x$2), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) ) ,  (  BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) && BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) ==> p3$1 )  && (  BV64_SLT(BV32_SEXT64(group_id_x$2), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) && BV32_SLT($k.0$2, BV32_ADD(1bv32, v30$2 ++ v29$2 ++ v28$2 ++ v27$2)) ==> p3$2 ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.rA_shared ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.rB_shared ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.qB_shared ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) ) ,  (  _READ_HAS_OCCURRED_$$d_fv_gpu ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) ) ,  (  _WRITE_HAS_OCCURRED_$$d_fv_gpu ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) ) ,  (  _WRITE_HAS_OCCURRED_$$kernel_gpu_opencl.rB_shared ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) ) ,  (  _WRITE_HAS_OCCURRED_$$kernel_gpu_opencl.qB_shared ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true  ); 
 
 
     assert {:block_sourceloc} {:sourceloc_num 32} p3$1 ==> true;
@@ -1115,7 +1115,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     
     
     
-assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  ( p7$1 ==> BV32_AND(BV32_SUB(128bv32, 1bv32), $wtx.2$1) == BV32_AND(BV32_SUB(128bv32, 1bv32), v1$1) )  && ( p7$2 ==> BV32_AND(BV32_SUB(128bv32, 1bv32), $wtx.2$2) == BV32_AND(BV32_SUB(128bv32, 1bv32), v1$2) ) ,  ( p7$1 ==> BV32_SLE(0bv32, $wtx.2$1) )  && ( p7$2 ==> BV32_SLE(0bv32, $wtx.2$2) ) ,  ( p7$1 ==> BV32_SLE($wtx.2$1, v1$1) )  && ( p7$2 ==> BV32_SLE($wtx.2$2, v1$2) ) ,  ( p7$1 ==> BV32_SGE($wtx.2$1, v1$1) )  && ( p7$2 ==> BV32_SGE($wtx.2$2, v1$2) ) ,  ( p7$1 ==> BV32_ULE($wtx.2$1, v1$1) )  && ( p7$2 ==> BV32_ULE($wtx.2$2, v1$2) ) ,  ( p7$1 ==> BV32_UGE($wtx.2$1, v1$1) )  && ( p7$2 ==> BV32_UGE($wtx.2$2, v1$2) ) ,  ( p7$1 ==> p7$1 ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) && BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) )  && ( p7$2 ==> p7$2 ==> BV64_SLT(BV32_SEXT64(group_id_x$2), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) && BV32_SLT($k.0$2, BV32_ADD(1bv32, v30$2 ++ v29$2 ++ v28$2 ++ v27$2)) ) ,  (  BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) && BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) && BV32_SLT($wtx.2$1, 100bv32) ==> p7$1 )  && (  BV64_SLT(BV32_SEXT64(group_id_x$2), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) && BV32_SLT($k.0$2, BV32_ADD(1bv32, v30$2 ++ v29$2 ++ v28$2 ++ v27$2)) && BV32_SLT($wtx.2$2, 100bv32) ==> p7$2 ) ,  (  _WRITE_HAS_OCCURRED_$$kernel_gpu_opencl.rB_shared ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) ) ,  (  _WRITE_HAS_OCCURRED_$$kernel_gpu_opencl.rB_shared ==> BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) ) ,  (  _WRITE_HAS_OCCURRED_$$kernel_gpu_opencl.qB_shared ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) ) ,  (  _WRITE_HAS_OCCURRED_$$kernel_gpu_opencl.qB_shared ==> BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true  ); 
+assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  ( p7$1 ==> BV32_AND(BV32_SUB(128bv32, 1bv32), $wtx.2$1) == BV32_AND(BV32_SUB(128bv32, 1bv32), v1$1) )  && ( p7$2 ==> BV32_AND(BV32_SUB(128bv32, 1bv32), $wtx.2$2) == BV32_AND(BV32_SUB(128bv32, 1bv32), v1$2) ) ,  ( p7$1 ==> BV32_SLE(0bv32, $wtx.2$1) )  && ( p7$2 ==> BV32_SLE(0bv32, $wtx.2$2) ) ,  ( p7$1 ==> BV32_SLE($wtx.2$1, v1$1) )  && ( p7$2 ==> BV32_SLE($wtx.2$2, v1$2) ) ,  ( p7$1 ==> BV32_SGE($wtx.2$1, v1$1) )  && ( p7$2 ==> BV32_SGE($wtx.2$2, v1$2) ) ,  ( p7$1 ==> BV32_ULE($wtx.2$1, v1$1) )  && ( p7$2 ==> BV32_ULE($wtx.2$2, v1$2) ) ,  ( p7$1 ==> BV32_UGE($wtx.2$1, v1$1) )  && ( p7$2 ==> BV32_UGE($wtx.2$2, v1$2) ) ,  ( p7$1 ==> p7$1 ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) && BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) )  && ( p7$2 ==> p7$2 ==> BV64_SLT(BV32_SEXT64(group_id_x$2), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) && BV32_SLT($k.0$2, BV32_ADD(1bv32, v30$2 ++ v29$2 ++ v28$2 ++ v27$2)) ) ,  (  BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) && BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) && BV32_SLT($wtx.2$1, 100bv32) ==> p7$1 )  && (  BV64_SLT(BV32_SEXT64(group_id_x$2), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) && BV32_SLT($k.0$2, BV32_ADD(1bv32, v30$2 ++ v29$2 ++ v28$2 ++ v27$2)) && BV32_SLT($wtx.2$2, 100bv32) ==> p7$2 ) ,  (  _WRITE_HAS_OCCURRED_$$kernel_gpu_opencl.rB_shared ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) ) ,  (  _WRITE_HAS_OCCURRED_$$kernel_gpu_opencl.rB_shared ==> BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) ) ,  (  _WRITE_HAS_OCCURRED_$$kernel_gpu_opencl.qB_shared ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) ) ,  (  _WRITE_HAS_OCCURRED_$$kernel_gpu_opencl.qB_shared ==> BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true  ); 
 
 
     assert {:block_sourceloc} {:sourceloc_num 53} p7$1 ==> true;
@@ -1251,7 +1251,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     
     
     
-assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  ( p9$1 ==> BV32_AND(BV32_SUB(128bv32, 1bv32), $wtx.3$1) == BV32_AND(BV32_SUB(128bv32, 1bv32), v1$1) )  && ( p9$2 ==> BV32_AND(BV32_SUB(128bv32, 1bv32), $wtx.3$2) == BV32_AND(BV32_SUB(128bv32, 1bv32), v1$2) ) ,  ( p9$1 ==> BV32_SLE(0bv32, $wtx.3$1) )  && ( p9$2 ==> BV32_SLE(0bv32, $wtx.3$2) ) ,  ( p9$1 ==> BV32_SLE($wtx.3$1, v1$1) )  && ( p9$2 ==> BV32_SLE($wtx.3$2, v1$2) ) ,  ( p9$1 ==> BV32_SGE($wtx.3$1, v1$1) )  && ( p9$2 ==> BV32_SGE($wtx.3$2, v1$2) ) ,  ( p9$1 ==> BV32_ULE($wtx.3$1, v1$1) )  && ( p9$2 ==> BV32_ULE($wtx.3$2, v1$2) ) ,  ( p9$1 ==> BV32_UGE($wtx.3$1, v1$1) )  && ( p9$2 ==> BV32_UGE($wtx.3$2, v1$2) ) ,  ( p9$1 ==> p9$1 ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) && BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) )  && ( p9$2 ==> p9$2 ==> BV64_SLT(BV32_SEXT64(group_id_x$2), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) && BV32_SLT($k.0$2, BV32_ADD(1bv32, v30$2 ++ v29$2 ++ v28$2 ++ v27$2)) ) ,  (  BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) && BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) && BV32_SLT($wtx.3$1, 100bv32) ==> p9$1 )  && (  BV64_SLT(BV32_SEXT64(group_id_x$2), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) && BV32_SLT($k.0$2, BV32_ADD(1bv32, v30$2 ++ v29$2 ++ v28$2 ++ v27$2)) && BV32_SLT($wtx.3$2, 100bv32) ==> p9$2 ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.rA_shared ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.rA_shared ==> BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.rB_shared ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.rB_shared ==> BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.qB_shared ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.qB_shared ==> BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) ) ,  (  _READ_HAS_OCCURRED_$$d_fv_gpu ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) ) ,  (  _READ_HAS_OCCURRED_$$d_fv_gpu ==> BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) ) ,  (  _WRITE_HAS_OCCURRED_$$d_fv_gpu ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) ) ,  (  _WRITE_HAS_OCCURRED_$$d_fv_gpu ==> BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true  ); 
+assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  ( p9$1 ==> BV32_AND(BV32_SUB(128bv32, 1bv32), $wtx.3$1) == BV32_AND(BV32_SUB(128bv32, 1bv32), v1$1) )  && ( p9$2 ==> BV32_AND(BV32_SUB(128bv32, 1bv32), $wtx.3$2) == BV32_AND(BV32_SUB(128bv32, 1bv32), v1$2) ) ,  ( p9$1 ==> BV32_SLE(0bv32, $wtx.3$1) )  && ( p9$2 ==> BV32_SLE(0bv32, $wtx.3$2) ) ,  ( p9$1 ==> BV32_SLE($wtx.3$1, v1$1) )  && ( p9$2 ==> BV32_SLE($wtx.3$2, v1$2) ) ,  ( p9$1 ==> BV32_SGE($wtx.3$1, v1$1) )  && ( p9$2 ==> BV32_SGE($wtx.3$2, v1$2) ) ,  ( p9$1 ==> BV32_ULE($wtx.3$1, v1$1) )  && ( p9$2 ==> BV32_ULE($wtx.3$2, v1$2) ) ,  ( p9$1 ==> BV32_UGE($wtx.3$1, v1$1) )  && ( p9$2 ==> BV32_UGE($wtx.3$2, v1$2) ) ,  ( p9$1 ==> p9$1 ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) && BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) )  && ( p9$2 ==> p9$2 ==> BV64_SLT(BV32_SEXT64(group_id_x$2), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) && BV32_SLT($k.0$2, BV32_ADD(1bv32, v30$2 ++ v29$2 ++ v28$2 ++ v27$2)) ) ,  (  BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) && BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) && BV32_SLT($wtx.3$1, 100bv32) ==> p9$1 )  && (  BV64_SLT(BV32_SEXT64(group_id_x$2), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) && BV32_SLT($k.0$2, BV32_ADD(1bv32, v30$2 ++ v29$2 ++ v28$2 ++ v27$2)) && BV32_SLT($wtx.3$2, 100bv32) ==> p9$2 ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.rA_shared ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.rA_shared ==> BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.rB_shared ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.rB_shared ==> BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.qB_shared ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.qB_shared ==> BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) ) ,  (  _READ_HAS_OCCURRED_$$d_fv_gpu ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) ) ,  (  _READ_HAS_OCCURRED_$$d_fv_gpu ==> BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) ) ,  (  _WRITE_HAS_OCCURRED_$$d_fv_gpu ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) ) ,  (  _WRITE_HAS_OCCURRED_$$d_fv_gpu ==> BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true  ); 
 
 
     assert {:block_sourceloc} {:sourceloc_num 67} p9$1 ==> true;
@@ -1332,7 +1332,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     
     
     
-assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  ( p11$1 ==> BV32_SLE(0bv32, $j.0$1) )  && ( p11$2 ==> BV32_SLE(0bv32, $j.0$2) ) ,  ( p11$1 ==> BV32_SLE($j.0$1, 0bv32) )  && ( p11$2 ==> BV32_SLE($j.0$2, 0bv32) ) ,  ( p11$1 ==> BV32_SGE($j.0$1, 0bv32) )  && ( p11$2 ==> BV32_SGE($j.0$2, 0bv32) ) ,  ( p11$1 ==> BV32_ULE($j.0$1, 0bv32) )  && ( p11$2 ==> BV32_ULE($j.0$2, 0bv32) ) ,  ( p11$1 ==> BV32_UGE($j.0$1, 0bv32) )  && ( p11$2 ==> BV32_UGE($j.0$2, 0bv32) ) ,  ( p11$1 ==> p11$1 ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) && BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) && BV32_SLT($wtx.3$1, 100bv32) )  && ( p11$2 ==> p11$2 ==> BV64_SLT(BV32_SEXT64(group_id_x$2), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) && BV32_SLT($k.0$2, BV32_ADD(1bv32, v30$2 ++ v29$2 ++ v28$2 ++ v27$2)) && BV32_SLT($wtx.3$2, 100bv32) ) ,  (  BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) && BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) && BV32_SLT($wtx.3$1, 100bv32) && BV32_SLT($j.0$1, 100bv32) ==> p11$1 )  && (  BV64_SLT(BV32_SEXT64(group_id_x$2), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) && BV32_SLT($k.0$2, BV32_ADD(1bv32, v30$2 ++ v29$2 ++ v28$2 ++ v27$2)) && BV32_SLT($wtx.3$2, 100bv32) && BV32_SLT($j.0$2, 100bv32) ==> p11$2 ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.rA_shared ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.rA_shared ==> BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.rA_shared ==> BV32_SLT($wtx.3$1, 100bv32) ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.rB_shared ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.rB_shared ==> BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.rB_shared ==> BV32_SLT($wtx.3$1, 100bv32) ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.qB_shared ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.qB_shared ==> BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.qB_shared ==> BV32_SLT($wtx.3$1, 100bv32) ) ,  (  _READ_HAS_OCCURRED_$$d_fv_gpu ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) ) ,  (  _READ_HAS_OCCURRED_$$d_fv_gpu ==> BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) ) ,  (  _READ_HAS_OCCURRED_$$d_fv_gpu ==> BV32_SLT($wtx.3$1, 100bv32) ) ,  (  _WRITE_HAS_OCCURRED_$$d_fv_gpu ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu.coerce4[64:56] ++ $d_dim_gpu.coerce4[56:48] ++ $d_dim_gpu.coerce4[48:40] ++ $d_dim_gpu.coerce4[40:32] ++ $d_dim_gpu.coerce4[32:24] ++ $d_dim_gpu.coerce4[24:16] ++ $d_dim_gpu.coerce4[16:8] ++ $d_dim_gpu.coerce4[8:0]) ) ,  (  _WRITE_HAS_OCCURRED_$$d_fv_gpu ==> BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) ) ,  (  _WRITE_HAS_OCCURRED_$$d_fv_gpu ==> BV32_SLT($wtx.3$1, 100bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true  ); 
+assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  ( p11$1 ==> BV32_SLE(0bv32, $j.0$1) )  && ( p11$2 ==> BV32_SLE(0bv32, $j.0$2) ) ,  ( p11$1 ==> BV32_SLE($j.0$1, 0bv32) )  && ( p11$2 ==> BV32_SLE($j.0$2, 0bv32) ) ,  ( p11$1 ==> BV32_SGE($j.0$1, 0bv32) )  && ( p11$2 ==> BV32_SGE($j.0$2, 0bv32) ) ,  ( p11$1 ==> BV32_ULE($j.0$1, 0bv32) )  && ( p11$2 ==> BV32_ULE($j.0$2, 0bv32) ) ,  ( p11$1 ==> BV32_UGE($j.0$1, 0bv32) )  && ( p11$2 ==> BV32_UGE($j.0$2, 0bv32) ) ,  ( p11$1 ==> p11$1 ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) && BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) && BV32_SLT($wtx.3$1, 100bv32) )  && ( p11$2 ==> p11$2 ==> BV64_SLT(BV32_SEXT64(group_id_x$2), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) && BV32_SLT($k.0$2, BV32_ADD(1bv32, v30$2 ++ v29$2 ++ v28$2 ++ v27$2)) && BV32_SLT($wtx.3$2, 100bv32) ) ,  (  BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) && BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) && BV32_SLT($wtx.3$1, 100bv32) && BV32_SLT($j.0$1, 100bv32) ==> p11$1 )  && (  BV64_SLT(BV32_SEXT64(group_id_x$2), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) && BV32_SLT($k.0$2, BV32_ADD(1bv32, v30$2 ++ v29$2 ++ v28$2 ++ v27$2)) && BV32_SLT($wtx.3$2, 100bv32) && BV32_SLT($j.0$2, 100bv32) ==> p11$2 ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.rA_shared ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.rA_shared ==> BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.rA_shared ==> BV32_SLT($wtx.3$1, 100bv32) ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.rB_shared ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.rB_shared ==> BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.rB_shared ==> BV32_SLT($wtx.3$1, 100bv32) ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.qB_shared ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.qB_shared ==> BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) ) ,  (  _READ_HAS_OCCURRED_$$kernel_gpu_opencl.qB_shared ==> BV32_SLT($wtx.3$1, 100bv32) ) ,  (  _READ_HAS_OCCURRED_$$d_fv_gpu ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) ) ,  (  _READ_HAS_OCCURRED_$$d_fv_gpu ==> BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) ) ,  (  _READ_HAS_OCCURRED_$$d_fv_gpu ==> BV32_SLT($wtx.3$1, 100bv32) ) ,  (  _WRITE_HAS_OCCURRED_$$d_fv_gpu ==> BV64_SLT(BV32_SEXT64(group_id_x$1), $d_dim_gpu[192:184] ++ $d_dim_gpu[184:176] ++ $d_dim_gpu[176:168] ++ $d_dim_gpu[168:160] ++ $d_dim_gpu[160:152] ++ $d_dim_gpu[152:144] ++ $d_dim_gpu[144:136] ++ $d_dim_gpu[136:128]) ) ,  (  _WRITE_HAS_OCCURRED_$$d_fv_gpu ==> BV32_SLT($k.0$1, BV32_ADD(1bv32, v30$1 ++ v29$1 ++ v28$1 ++ v27$1)) ) ,  (  _WRITE_HAS_OCCURRED_$$d_fv_gpu ==> BV32_SLT($wtx.3$1, 100bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true  ); 
 
 
     assert {:block_sourceloc} {:sourceloc_num 69} p11$1 ==> true;
@@ -1458,13 +1458,13 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$d_fv_gpu"} true;
     v75$1 := (if p12$1 then $$d_fv_gpu[BV32_MUL(v74$1, 4bv32)] else v75$1);
     v75$2 := (if p12$2 then $$d_fv_gpu[BV32_MUL(v74$2, 4bv32)] else v75$2);
-    call {:sourceloc} {:sourceloc_num 93} _LOG_WRITE_$$d_fv_gpu(p12$1, BV32_MUL(v74$1, 4bv32), FADD32(v75$1, FMUL32(v73$1, v62$1)), $$d_fv_gpu[BV32_MUL(v74$1, 4bv32)]);
+    call {:sourceloc} {:sourceloc_num 93} _LOG_WRITE_$$d_fv_gpu(p12$1, BV32_MUL(v74$1, 4bv32), FADD32(FMUL32(v73$1, v62$1), v75$1), $$d_fv_gpu[BV32_MUL(v74$1, 4bv32)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$d_fv_gpu(p12$2, BV32_MUL(v74$2, 4bv32));
     assume {:do_not_predicate} {:check_id "check_state_16"} {:captureState "check_state_16"} {:sourceloc} {:sourceloc_num 93} true;
-    call {:check_id "check_state_16"} {:sourceloc} {:sourceloc_num 93} _CHECK_WRITE_$$d_fv_gpu(p12$2, BV32_MUL(v74$2, 4bv32), FADD32(v75$2, FMUL32(v73$2, v62$2)));
+    call {:check_id "check_state_16"} {:sourceloc} {:sourceloc_num 93} _CHECK_WRITE_$$d_fv_gpu(p12$2, BV32_MUL(v74$2, 4bv32), FADD32(FMUL32(v73$2, v62$2), v75$2));
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$d_fv_gpu"} true;
-    $$d_fv_gpu[BV32_MUL(v74$1, 4bv32)] := (if p12$1 then FADD32(v75$1, FMUL32(v73$1, v62$1)) else $$d_fv_gpu[BV32_MUL(v74$1, 4bv32)]);
-    $$d_fv_gpu[BV32_MUL(v74$2, 4bv32)] := (if p12$2 then FADD32(v75$2, FMUL32(v73$2, v62$2)) else $$d_fv_gpu[BV32_MUL(v74$2, 4bv32)]);
+    $$d_fv_gpu[BV32_MUL(v74$1, 4bv32)] := (if p12$1 then FADD32(FMUL32(v73$1, v62$1), v75$1) else $$d_fv_gpu[BV32_MUL(v74$1, 4bv32)]);
+    $$d_fv_gpu[BV32_MUL(v74$2, 4bv32)] := (if p12$2 then FADD32(FMUL32(v73$2, v62$2), v75$2) else $$d_fv_gpu[BV32_MUL(v74$2, 4bv32)]);
     call {:sourceloc} {:sourceloc_num 94} _LOG_READ_$$kernel_gpu_opencl.qB_shared(p12$1, $j.0$1, $$kernel_gpu_opencl.qB_shared[1bv1][$j.0$1]);
     assume {:do_not_predicate} {:check_id "check_state_17"} {:captureState "check_state_17"} {:sourceloc} {:sourceloc_num 94} true;
     call {:check_id "check_state_17"} {:sourceloc} {:sourceloc_num 94} _CHECK_READ_$$kernel_gpu_opencl.qB_shared(p12$2, $j.0$2, $$kernel_gpu_opencl.qB_shared[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][$j.0$2]);
@@ -1479,13 +1479,13 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$d_fv_gpu"} true;
     v78$1 := (if p12$1 then $$d_fv_gpu[BV32_ADD(BV32_MUL(v77$1, 4bv32), 1bv32)] else v78$1);
     v78$2 := (if p12$2 then $$d_fv_gpu[BV32_ADD(BV32_MUL(v77$2, 4bv32), 1bv32)] else v78$2);
-    call {:sourceloc} {:sourceloc_num 96} _LOG_WRITE_$$d_fv_gpu(p12$1, BV32_ADD(BV32_MUL(v77$1, 4bv32), 1bv32), FADD32(v78$1, FMUL32(v76$1, FMUL32(v63$1, v66$1))), $$d_fv_gpu[BV32_ADD(BV32_MUL(v77$1, 4bv32), 1bv32)]);
+    call {:sourceloc} {:sourceloc_num 96} _LOG_WRITE_$$d_fv_gpu(p12$1, BV32_ADD(BV32_MUL(v77$1, 4bv32), 1bv32), FADD32(FMUL32(v76$1, FMUL32(v63$1, v66$1)), v78$1), $$d_fv_gpu[BV32_ADD(BV32_MUL(v77$1, 4bv32), 1bv32)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$d_fv_gpu(p12$2, BV32_ADD(BV32_MUL(v77$2, 4bv32), 1bv32));
     assume {:do_not_predicate} {:check_id "check_state_19"} {:captureState "check_state_19"} {:sourceloc} {:sourceloc_num 96} true;
-    call {:check_id "check_state_19"} {:sourceloc} {:sourceloc_num 96} _CHECK_WRITE_$$d_fv_gpu(p12$2, BV32_ADD(BV32_MUL(v77$2, 4bv32), 1bv32), FADD32(v78$2, FMUL32(v76$2, FMUL32(v63$2, v66$2))));
+    call {:check_id "check_state_19"} {:sourceloc} {:sourceloc_num 96} _CHECK_WRITE_$$d_fv_gpu(p12$2, BV32_ADD(BV32_MUL(v77$2, 4bv32), 1bv32), FADD32(FMUL32(v76$2, FMUL32(v63$2, v66$2)), v78$2));
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$d_fv_gpu"} true;
-    $$d_fv_gpu[BV32_ADD(BV32_MUL(v77$1, 4bv32), 1bv32)] := (if p12$1 then FADD32(v78$1, FMUL32(v76$1, FMUL32(v63$1, v66$1))) else $$d_fv_gpu[BV32_ADD(BV32_MUL(v77$1, 4bv32), 1bv32)]);
-    $$d_fv_gpu[BV32_ADD(BV32_MUL(v77$2, 4bv32), 1bv32)] := (if p12$2 then FADD32(v78$2, FMUL32(v76$2, FMUL32(v63$2, v66$2))) else $$d_fv_gpu[BV32_ADD(BV32_MUL(v77$2, 4bv32), 1bv32)]);
+    $$d_fv_gpu[BV32_ADD(BV32_MUL(v77$1, 4bv32), 1bv32)] := (if p12$1 then FADD32(FMUL32(v76$1, FMUL32(v63$1, v66$1)), v78$1) else $$d_fv_gpu[BV32_ADD(BV32_MUL(v77$1, 4bv32), 1bv32)]);
+    $$d_fv_gpu[BV32_ADD(BV32_MUL(v77$2, 4bv32), 1bv32)] := (if p12$2 then FADD32(FMUL32(v76$2, FMUL32(v63$2, v66$2)), v78$2) else $$d_fv_gpu[BV32_ADD(BV32_MUL(v77$2, 4bv32), 1bv32)]);
     call {:sourceloc} {:sourceloc_num 97} _LOG_READ_$$kernel_gpu_opencl.qB_shared(p12$1, $j.0$1, $$kernel_gpu_opencl.qB_shared[1bv1][$j.0$1]);
     assume {:do_not_predicate} {:check_id "check_state_20"} {:captureState "check_state_20"} {:sourceloc} {:sourceloc_num 97} true;
     call {:check_id "check_state_20"} {:sourceloc} {:sourceloc_num 97} _CHECK_READ_$$kernel_gpu_opencl.qB_shared(p12$2, $j.0$2, $$kernel_gpu_opencl.qB_shared[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][$j.0$2]);
@@ -1500,13 +1500,13 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$d_fv_gpu"} true;
     v81$1 := (if p12$1 then $$d_fv_gpu[BV32_ADD(BV32_MUL(v80$1, 4bv32), 2bv32)] else v81$1);
     v81$2 := (if p12$2 then $$d_fv_gpu[BV32_ADD(BV32_MUL(v80$2, 4bv32), 2bv32)] else v81$2);
-    call {:sourceloc} {:sourceloc_num 99} _LOG_WRITE_$$d_fv_gpu(p12$1, BV32_ADD(BV32_MUL(v80$1, 4bv32), 2bv32), FADD32(v81$1, FMUL32(v79$1, FMUL32(v63$1, v69$1))), $$d_fv_gpu[BV32_ADD(BV32_MUL(v80$1, 4bv32), 2bv32)]);
+    call {:sourceloc} {:sourceloc_num 99} _LOG_WRITE_$$d_fv_gpu(p12$1, BV32_ADD(BV32_MUL(v80$1, 4bv32), 2bv32), FADD32(FMUL32(v79$1, FMUL32(v63$1, v69$1)), v81$1), $$d_fv_gpu[BV32_ADD(BV32_MUL(v80$1, 4bv32), 2bv32)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$d_fv_gpu(p12$2, BV32_ADD(BV32_MUL(v80$2, 4bv32), 2bv32));
     assume {:do_not_predicate} {:check_id "check_state_22"} {:captureState "check_state_22"} {:sourceloc} {:sourceloc_num 99} true;
-    call {:check_id "check_state_22"} {:sourceloc} {:sourceloc_num 99} _CHECK_WRITE_$$d_fv_gpu(p12$2, BV32_ADD(BV32_MUL(v80$2, 4bv32), 2bv32), FADD32(v81$2, FMUL32(v79$2, FMUL32(v63$2, v69$2))));
+    call {:check_id "check_state_22"} {:sourceloc} {:sourceloc_num 99} _CHECK_WRITE_$$d_fv_gpu(p12$2, BV32_ADD(BV32_MUL(v80$2, 4bv32), 2bv32), FADD32(FMUL32(v79$2, FMUL32(v63$2, v69$2)), v81$2));
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$d_fv_gpu"} true;
-    $$d_fv_gpu[BV32_ADD(BV32_MUL(v80$1, 4bv32), 2bv32)] := (if p12$1 then FADD32(v81$1, FMUL32(v79$1, FMUL32(v63$1, v69$1))) else $$d_fv_gpu[BV32_ADD(BV32_MUL(v80$1, 4bv32), 2bv32)]);
-    $$d_fv_gpu[BV32_ADD(BV32_MUL(v80$2, 4bv32), 2bv32)] := (if p12$2 then FADD32(v81$2, FMUL32(v79$2, FMUL32(v63$2, v69$2))) else $$d_fv_gpu[BV32_ADD(BV32_MUL(v80$2, 4bv32), 2bv32)]);
+    $$d_fv_gpu[BV32_ADD(BV32_MUL(v80$1, 4bv32), 2bv32)] := (if p12$1 then FADD32(FMUL32(v79$1, FMUL32(v63$1, v69$1)), v81$1) else $$d_fv_gpu[BV32_ADD(BV32_MUL(v80$1, 4bv32), 2bv32)]);
+    $$d_fv_gpu[BV32_ADD(BV32_MUL(v80$2, 4bv32), 2bv32)] := (if p12$2 then FADD32(FMUL32(v79$2, FMUL32(v63$2, v69$2)), v81$2) else $$d_fv_gpu[BV32_ADD(BV32_MUL(v80$2, 4bv32), 2bv32)]);
     call {:sourceloc} {:sourceloc_num 100} _LOG_READ_$$kernel_gpu_opencl.qB_shared(p12$1, $j.0$1, $$kernel_gpu_opencl.qB_shared[1bv1][$j.0$1]);
     assume {:do_not_predicate} {:check_id "check_state_23"} {:captureState "check_state_23"} {:sourceloc} {:sourceloc_num 100} true;
     call {:check_id "check_state_23"} {:sourceloc} {:sourceloc_num 100} _CHECK_READ_$$kernel_gpu_opencl.qB_shared(p12$2, $j.0$2, $$kernel_gpu_opencl.qB_shared[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][$j.0$2]);
@@ -1521,13 +1521,13 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$d_fv_gpu"} true;
     v84$1 := (if p12$1 then $$d_fv_gpu[BV32_ADD(BV32_MUL(v83$1, 4bv32), 3bv32)] else v84$1);
     v84$2 := (if p12$2 then $$d_fv_gpu[BV32_ADD(BV32_MUL(v83$2, 4bv32), 3bv32)] else v84$2);
-    call {:sourceloc} {:sourceloc_num 102} _LOG_WRITE_$$d_fv_gpu(p12$1, BV32_ADD(BV32_MUL(v83$1, 4bv32), 3bv32), FADD32(v84$1, FMUL32(v82$1, FMUL32(v63$1, v72$1))), $$d_fv_gpu[BV32_ADD(BV32_MUL(v83$1, 4bv32), 3bv32)]);
+    call {:sourceloc} {:sourceloc_num 102} _LOG_WRITE_$$d_fv_gpu(p12$1, BV32_ADD(BV32_MUL(v83$1, 4bv32), 3bv32), FADD32(FMUL32(v82$1, FMUL32(v63$1, v72$1)), v84$1), $$d_fv_gpu[BV32_ADD(BV32_MUL(v83$1, 4bv32), 3bv32)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$d_fv_gpu(p12$2, BV32_ADD(BV32_MUL(v83$2, 4bv32), 3bv32));
     assume {:do_not_predicate} {:check_id "check_state_25"} {:captureState "check_state_25"} {:sourceloc} {:sourceloc_num 102} true;
-    call {:check_id "check_state_25"} {:sourceloc} {:sourceloc_num 102} _CHECK_WRITE_$$d_fv_gpu(p12$2, BV32_ADD(BV32_MUL(v83$2, 4bv32), 3bv32), FADD32(v84$2, FMUL32(v82$2, FMUL32(v63$2, v72$2))));
+    call {:check_id "check_state_25"} {:sourceloc} {:sourceloc_num 102} _CHECK_WRITE_$$d_fv_gpu(p12$2, BV32_ADD(BV32_MUL(v83$2, 4bv32), 3bv32), FADD32(FMUL32(v82$2, FMUL32(v63$2, v72$2)), v84$2));
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$d_fv_gpu"} true;
-    $$d_fv_gpu[BV32_ADD(BV32_MUL(v83$1, 4bv32), 3bv32)] := (if p12$1 then FADD32(v84$1, FMUL32(v82$1, FMUL32(v63$1, v72$1))) else $$d_fv_gpu[BV32_ADD(BV32_MUL(v83$1, 4bv32), 3bv32)]);
-    $$d_fv_gpu[BV32_ADD(BV32_MUL(v83$2, 4bv32), 3bv32)] := (if p12$2 then FADD32(v84$2, FMUL32(v82$2, FMUL32(v63$2, v72$2))) else $$d_fv_gpu[BV32_ADD(BV32_MUL(v83$2, 4bv32), 3bv32)]);
+    $$d_fv_gpu[BV32_ADD(BV32_MUL(v83$1, 4bv32), 3bv32)] := (if p12$1 then FADD32(FMUL32(v82$1, FMUL32(v63$1, v72$1)), v84$1) else $$d_fv_gpu[BV32_ADD(BV32_MUL(v83$1, 4bv32), 3bv32)]);
+    $$d_fv_gpu[BV32_ADD(BV32_MUL(v83$2, 4bv32), 3bv32)] := (if p12$2 then FADD32(FMUL32(v82$2, FMUL32(v63$2, v72$2)), v84$2) else $$d_fv_gpu[BV32_ADD(BV32_MUL(v83$2, 4bv32), 3bv32)]);
     $j.0$1 := (if p12$1 then BV32_ADD($j.0$1, 1bv32) else $j.0$1);
     $j.0$2 := (if p12$2 then BV32_ADD($j.0$2, 1bv32) else $j.0$2);
     p11$1 := (if p12$1 then true else p11$1);
@@ -1650,233 +1650,233 @@ procedure {:inline 1} {:source_name "bugle_barrier"} {:barrier} $bugle_barrier_d
 
 
 
-var $$d_par_gpu$0bv32$1: bv32;
+var $$d_dim_gpu.val$0bv32$1: bv8;
 
-var $$d_par_gpu$0bv32$2: bv32;
+var $$d_dim_gpu.val$0bv32$2: bv8;
 
-var $$d_dim_gpu$0bv32$1: bv8;
+var $$d_dim_gpu.val$1bv32$1: bv8;
 
-var $$d_dim_gpu$0bv32$2: bv8;
+var $$d_dim_gpu.val$1bv32$2: bv8;
 
-var $$d_dim_gpu$1bv32$1: bv8;
+var $$d_dim_gpu.val$2bv32$1: bv8;
 
-var $$d_dim_gpu$1bv32$2: bv8;
+var $$d_dim_gpu.val$2bv32$2: bv8;
 
-var $$d_dim_gpu$2bv32$1: bv8;
+var $$d_dim_gpu.val$3bv32$1: bv8;
 
-var $$d_dim_gpu$2bv32$2: bv8;
+var $$d_dim_gpu.val$3bv32$2: bv8;
 
-var $$d_dim_gpu$3bv32$1: bv8;
+var $$d_dim_gpu.val$4bv32$1: bv8;
 
-var $$d_dim_gpu$3bv32$2: bv8;
+var $$d_dim_gpu.val$4bv32$2: bv8;
 
-var $$d_dim_gpu$4bv32$1: bv8;
+var $$d_dim_gpu.val$5bv32$1: bv8;
 
-var $$d_dim_gpu$4bv32$2: bv8;
+var $$d_dim_gpu.val$5bv32$2: bv8;
 
-var $$d_dim_gpu$5bv32$1: bv8;
+var $$d_dim_gpu.val$6bv32$1: bv8;
 
-var $$d_dim_gpu$5bv32$2: bv8;
+var $$d_dim_gpu.val$6bv32$2: bv8;
 
-var $$d_dim_gpu$6bv32$1: bv8;
+var $$d_dim_gpu.val$7bv32$1: bv8;
 
-var $$d_dim_gpu$6bv32$2: bv8;
+var $$d_dim_gpu.val$7bv32$2: bv8;
 
-var $$d_dim_gpu$7bv32$1: bv8;
+var $$d_dim_gpu.val$8bv32$1: bv8;
 
-var $$d_dim_gpu$7bv32$2: bv8;
+var $$d_dim_gpu.val$8bv32$2: bv8;
 
-var $$d_dim_gpu$8bv32$1: bv8;
+var $$d_dim_gpu.val$9bv32$1: bv8;
 
-var $$d_dim_gpu$8bv32$2: bv8;
+var $$d_dim_gpu.val$9bv32$2: bv8;
 
-var $$d_dim_gpu$9bv32$1: bv8;
+var $$d_dim_gpu.val$10bv32$1: bv8;
 
-var $$d_dim_gpu$9bv32$2: bv8;
+var $$d_dim_gpu.val$10bv32$2: bv8;
 
-var $$d_dim_gpu$10bv32$1: bv8;
+var $$d_dim_gpu.val$11bv32$1: bv8;
 
-var $$d_dim_gpu$10bv32$2: bv8;
+var $$d_dim_gpu.val$11bv32$2: bv8;
 
-var $$d_dim_gpu$11bv32$1: bv8;
+var $$d_dim_gpu.val$12bv32$1: bv8;
 
-var $$d_dim_gpu$11bv32$2: bv8;
+var $$d_dim_gpu.val$12bv32$2: bv8;
 
-var $$d_dim_gpu$12bv32$1: bv8;
+var $$d_dim_gpu.val$13bv32$1: bv8;
 
-var $$d_dim_gpu$12bv32$2: bv8;
+var $$d_dim_gpu.val$13bv32$2: bv8;
 
-var $$d_dim_gpu$13bv32$1: bv8;
+var $$d_dim_gpu.val$14bv32$1: bv8;
 
-var $$d_dim_gpu$13bv32$2: bv8;
+var $$d_dim_gpu.val$14bv32$2: bv8;
 
-var $$d_dim_gpu$14bv32$1: bv8;
+var $$d_dim_gpu.val$15bv32$1: bv8;
 
-var $$d_dim_gpu$14bv32$2: bv8;
+var $$d_dim_gpu.val$15bv32$2: bv8;
 
-var $$d_dim_gpu$15bv32$1: bv8;
+var $$d_dim_gpu.val$16bv32$1: bv8;
 
-var $$d_dim_gpu$15bv32$2: bv8;
+var $$d_dim_gpu.val$16bv32$2: bv8;
 
-var $$d_dim_gpu$16bv32$1: bv8;
+var $$d_dim_gpu.val$17bv32$1: bv8;
 
-var $$d_dim_gpu$16bv32$2: bv8;
+var $$d_dim_gpu.val$17bv32$2: bv8;
 
-var $$d_dim_gpu$17bv32$1: bv8;
+var $$d_dim_gpu.val$18bv32$1: bv8;
 
-var $$d_dim_gpu$17bv32$2: bv8;
+var $$d_dim_gpu.val$18bv32$2: bv8;
 
-var $$d_dim_gpu$18bv32$1: bv8;
+var $$d_dim_gpu.val$19bv32$1: bv8;
 
-var $$d_dim_gpu$18bv32$2: bv8;
+var $$d_dim_gpu.val$19bv32$2: bv8;
 
-var $$d_dim_gpu$19bv32$1: bv8;
+var $$d_dim_gpu.val$20bv32$1: bv8;
 
-var $$d_dim_gpu$19bv32$2: bv8;
+var $$d_dim_gpu.val$20bv32$2: bv8;
 
-var $$d_dim_gpu$20bv32$1: bv8;
+var $$d_dim_gpu.val$21bv32$1: bv8;
 
-var $$d_dim_gpu$20bv32$2: bv8;
+var $$d_dim_gpu.val$21bv32$2: bv8;
 
-var $$d_dim_gpu$21bv32$1: bv8;
+var $$d_dim_gpu.val$22bv32$1: bv8;
 
-var $$d_dim_gpu$21bv32$2: bv8;
+var $$d_dim_gpu.val$22bv32$2: bv8;
 
-var $$d_dim_gpu$22bv32$1: bv8;
+var $$d_dim_gpu.val$23bv32$1: bv8;
 
-var $$d_dim_gpu$22bv32$2: bv8;
+var $$d_dim_gpu.val$23bv32$2: bv8;
 
-var $$d_dim_gpu$23bv32$1: bv8;
+var $$d_dim_gpu.val$24bv32$1: bv8;
 
-var $$d_dim_gpu$23bv32$2: bv8;
+var $$d_dim_gpu.val$24bv32$2: bv8;
 
-var $$d_dim_gpu$24bv32$1: bv8;
+var $$d_dim_gpu.val$25bv32$1: bv8;
 
-var $$d_dim_gpu$24bv32$2: bv8;
+var $$d_dim_gpu.val$25bv32$2: bv8;
 
-var $$d_dim_gpu$25bv32$1: bv8;
+var $$d_dim_gpu.val$26bv32$1: bv8;
 
-var $$d_dim_gpu$25bv32$2: bv8;
+var $$d_dim_gpu.val$26bv32$2: bv8;
 
-var $$d_dim_gpu$26bv32$1: bv8;
+var $$d_dim_gpu.val$27bv32$1: bv8;
 
-var $$d_dim_gpu$26bv32$2: bv8;
+var $$d_dim_gpu.val$27bv32$2: bv8;
 
-var $$d_dim_gpu$27bv32$1: bv8;
+var $$d_dim_gpu.val$28bv32$1: bv8;
 
-var $$d_dim_gpu$27bv32$2: bv8;
+var $$d_dim_gpu.val$28bv32$2: bv8;
 
-var $$d_dim_gpu$28bv32$1: bv8;
+var $$d_dim_gpu.val$29bv32$1: bv8;
 
-var $$d_dim_gpu$28bv32$2: bv8;
+var $$d_dim_gpu.val$29bv32$2: bv8;
 
-var $$d_dim_gpu$29bv32$1: bv8;
+var $$d_dim_gpu.val$30bv32$1: bv8;
 
-var $$d_dim_gpu$29bv32$2: bv8;
+var $$d_dim_gpu.val$30bv32$2: bv8;
 
-var $$d_dim_gpu$30bv32$1: bv8;
+var $$d_dim_gpu.val$31bv32$1: bv8;
 
-var $$d_dim_gpu$30bv32$2: bv8;
+var $$d_dim_gpu.val$31bv32$2: bv8;
 
-var $$d_dim_gpu$31bv32$1: bv8;
+var $$d_dim_gpu.val$32bv32$1: bv8;
 
-var $$d_dim_gpu$31bv32$2: bv8;
+var $$d_dim_gpu.val$32bv32$2: bv8;
 
-var $$d_dim_gpu$32bv32$1: bv8;
+var $$d_dim_gpu.val$33bv32$1: bv8;
 
-var $$d_dim_gpu$32bv32$2: bv8;
+var $$d_dim_gpu.val$33bv32$2: bv8;
 
-var $$d_dim_gpu$33bv32$1: bv8;
+var $$d_dim_gpu.val$34bv32$1: bv8;
 
-var $$d_dim_gpu$33bv32$2: bv8;
+var $$d_dim_gpu.val$34bv32$2: bv8;
 
-var $$d_dim_gpu$34bv32$1: bv8;
+var $$d_dim_gpu.val$35bv32$1: bv8;
 
-var $$d_dim_gpu$34bv32$2: bv8;
+var $$d_dim_gpu.val$35bv32$2: bv8;
 
-var $$d_dim_gpu$35bv32$1: bv8;
+var $$d_dim_gpu.val$36bv32$1: bv8;
 
-var $$d_dim_gpu$35bv32$2: bv8;
+var $$d_dim_gpu.val$36bv32$2: bv8;
 
-var $$d_dim_gpu$36bv32$1: bv8;
+var $$d_dim_gpu.val$37bv32$1: bv8;
 
-var $$d_dim_gpu$36bv32$2: bv8;
+var $$d_dim_gpu.val$37bv32$2: bv8;
 
-var $$d_dim_gpu$37bv32$1: bv8;
+var $$d_dim_gpu.val$38bv32$1: bv8;
 
-var $$d_dim_gpu$37bv32$2: bv8;
+var $$d_dim_gpu.val$38bv32$2: bv8;
 
-var $$d_dim_gpu$38bv32$1: bv8;
+var $$d_dim_gpu.val$39bv32$1: bv8;
 
-var $$d_dim_gpu$38bv32$2: bv8;
+var $$d_dim_gpu.val$39bv32$2: bv8;
 
-var $$d_dim_gpu$39bv32$1: bv8;
+var $$d_dim_gpu.val$40bv32$1: bv8;
 
-var $$d_dim_gpu$39bv32$2: bv8;
+var $$d_dim_gpu.val$40bv32$2: bv8;
 
-var $$d_dim_gpu$40bv32$1: bv8;
+var $$d_dim_gpu.val$41bv32$1: bv8;
 
-var $$d_dim_gpu$40bv32$2: bv8;
+var $$d_dim_gpu.val$41bv32$2: bv8;
 
-var $$d_dim_gpu$41bv32$1: bv8;
+var $$d_dim_gpu.val$42bv32$1: bv8;
 
-var $$d_dim_gpu$41bv32$2: bv8;
+var $$d_dim_gpu.val$42bv32$2: bv8;
 
-var $$d_dim_gpu$42bv32$1: bv8;
+var $$d_dim_gpu.val$43bv32$1: bv8;
 
-var $$d_dim_gpu$42bv32$2: bv8;
+var $$d_dim_gpu.val$43bv32$2: bv8;
 
-var $$d_dim_gpu$43bv32$1: bv8;
+var $$d_dim_gpu.val$44bv32$1: bv8;
 
-var $$d_dim_gpu$43bv32$2: bv8;
+var $$d_dim_gpu.val$44bv32$2: bv8;
 
-var $$d_dim_gpu$44bv32$1: bv8;
+var $$d_dim_gpu.val$45bv32$1: bv8;
 
-var $$d_dim_gpu$44bv32$2: bv8;
+var $$d_dim_gpu.val$45bv32$2: bv8;
 
-var $$d_dim_gpu$45bv32$1: bv8;
+var $$d_dim_gpu.val$46bv32$1: bv8;
 
-var $$d_dim_gpu$45bv32$2: bv8;
+var $$d_dim_gpu.val$46bv32$2: bv8;
 
-var $$d_dim_gpu$46bv32$1: bv8;
+var $$d_dim_gpu.val$47bv32$1: bv8;
 
-var $$d_dim_gpu$46bv32$2: bv8;
+var $$d_dim_gpu.val$47bv32$2: bv8;
 
-var $$d_dim_gpu$47bv32$1: bv8;
+var $$d_dim_gpu.val$48bv32$1: bv8;
 
-var $$d_dim_gpu$47bv32$2: bv8;
+var $$d_dim_gpu.val$48bv32$2: bv8;
 
-var $$d_dim_gpu$48bv32$1: bv8;
+var $$d_dim_gpu.val$49bv32$1: bv8;
 
-var $$d_dim_gpu$48bv32$2: bv8;
+var $$d_dim_gpu.val$49bv32$2: bv8;
 
-var $$d_dim_gpu$49bv32$1: bv8;
+var $$d_dim_gpu.val$50bv32$1: bv8;
 
-var $$d_dim_gpu$49bv32$2: bv8;
+var $$d_dim_gpu.val$50bv32$2: bv8;
 
-var $$d_dim_gpu$50bv32$1: bv8;
+var $$d_dim_gpu.val$51bv32$1: bv8;
 
-var $$d_dim_gpu$50bv32$2: bv8;
+var $$d_dim_gpu.val$51bv32$2: bv8;
 
-var $$d_dim_gpu$51bv32$1: bv8;
+var $$d_dim_gpu.val$52bv32$1: bv8;
 
-var $$d_dim_gpu$51bv32$2: bv8;
+var $$d_dim_gpu.val$52bv32$2: bv8;
 
-var $$d_dim_gpu$52bv32$1: bv8;
+var $$d_dim_gpu.val$53bv32$1: bv8;
 
-var $$d_dim_gpu$52bv32$2: bv8;
+var $$d_dim_gpu.val$53bv32$2: bv8;
 
-var $$d_dim_gpu$53bv32$1: bv8;
+var $$d_dim_gpu.val$54bv32$1: bv8;
 
-var $$d_dim_gpu$53bv32$2: bv8;
+var $$d_dim_gpu.val$54bv32$2: bv8;
 
-var $$d_dim_gpu$54bv32$1: bv8;
+var $$d_dim_gpu.val$55bv32$1: bv8;
 
-var $$d_dim_gpu$54bv32$2: bv8;
+var $$d_dim_gpu.val$55bv32$2: bv8;
 
-var $$d_dim_gpu$55bv32$1: bv8;
+var $$d_par_gpu.val$0bv32$1: bv32;
 
-var $$d_dim_gpu$55bv32$2: bv8;
+var $$d_par_gpu.val$0bv32$2: bv32;
 
 var $$d$0bv32$1: bv32;
 

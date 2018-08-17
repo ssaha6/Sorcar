@@ -121,30 +121,30 @@ implementation {:source_name "shfl_vertical_shfl"} {:kernel} $_Z18shfl_vertical_
   var $partial_sum.1$2: bv32;
   var $sum.0$1: bv32;
   var $sum.0$2: bv32;
-  var v8$1: bv32;
-  var v8$2: bv32;
-  var v6$1: bv32;
-  var v6$2: bv32;
-  var v3$1: bv32;
-  var v3$2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
-  var v4$1: bv32;
-  var v4$2: bv32;
+  var v1: bool;
   var v2$1: bv32;
   var v2$2: bv32;
-  var v1: bool;
+  var v3$1: bv32;
+  var v3$2: bv32;
+  var v4$1: bv32;
+  var v4$2: bv32;
   var v5$1: bv32;
   var v5$2: bv32;
+  var v6$1: bv32;
+  var v6$2: bv32;
   var v7: bool;
   var v9$1: bool;
   var v9$2: bool;
+  var v8$1: bv32;
+  var v8$2: bv32;
   var v10$1: bool;
   var v10$2: bool;
-  var v12$1: bv32;
-  var v12$2: bv32;
   var v11$1: bv32;
   var v11$2: bv32;
+  var v12$1: bv32;
+  var v12$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -155,7 +155,7 @@ implementation {:source_name "shfl_vertical_shfl"} {:kernel} $_Z18shfl_vertical_
   var p3$2: bool;
 
 
-  __partitioned_block_$entry_0:
+  __partitioned_block_$0_0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2);
     call {:sourceloc} {:sourceloc_num 2} _LOG_WRITE_$$_ZZ18shfl_vertical_shflPjiiE4sums(true, BV32_ADD(BV32_MUL(local_id_x$1, 9bv32), local_id_y$1), 0bv32, $$_ZZ18shfl_vertical_shflPjiiE4sums[1bv1][BV32_ADD(BV32_MUL(local_id_x$1, 9bv32), local_id_y$1)]);
@@ -165,16 +165,16 @@ implementation {:source_name "shfl_vertical_shfl"} {:kernel} $_Z18shfl_vertical_
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$_ZZ18shfl_vertical_shflPjiiE4sums"} true;
     $$_ZZ18shfl_vertical_shflPjiiE4sums[1bv1][BV32_ADD(BV32_MUL(local_id_x$1, 9bv32), local_id_y$1)] := 0bv32;
     $$_ZZ18shfl_vertical_shflPjiiE4sums[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(local_id_x$2, 9bv32), local_id_y$2)] := 0bv32;
-    goto __partitioned_block_$entry_1;
+    goto __partitioned_block_$0_1;
 
-  __partitioned_block_$entry_1:
+  __partitioned_block_$0_1:
     call {:sourceloc_num 3} $bugle_barrier_duplicated_0(1bv1, 1bv1);
     $stepSum.0$1, $step.0 := 0bv32, 0bv32;
     $stepSum.0$2 := 0bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b22 ==> _WRITE_HAS_OCCURRED_$$_ZZ18shfl_vertical_shflPjiiE4sums ==> _WATCHED_OFFSET == BV32_ADD(BV32_MUL(BV32_ADD(BV32_UDIV(local_id_x$1, 8bv32), BV32_MUL(local_id_y$1, 4bv32)), 9bv32), BV32_UREM(local_id_x$1, 8bv32)) || _WATCHED_OFFSET == BV32_ADD(BV32_MUL(local_id_x$1, 9bv32), local_id_y$1);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b21 ==> _READ_HAS_OCCURRED_$$_ZZ18shfl_vertical_shflPjiiE4sums ==> _WATCHED_OFFSET == BV32_ADD(BV32_MUL(BV32_ADD(BV32_UDIV(local_id_x$1, 8bv32), BV32_MUL(local_id_y$1, 4bv32)), 9bv32), BV32_UREM(local_id_x$1, 8bv32));
@@ -247,9 +247,9 @@ implementation {:source_name "shfl_vertical_shfl"} {:kernel} $_Z18shfl_vertical_
     $partial_sum.0$1, $i.0 := v6$1, 1bv32;
     $partial_sum.0$2 := v6$2;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.33;
+    goto $3;
 
-  $for.cond.33:
+  $3:
     assume {:captureState "loop_head_state_1"} true;
     assume {:invGenSkippedLoop} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ18shfl_vertical_shflPjiiE4sums ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -310,7 +310,7 @@ implementation {:source_name "shfl_vertical_shfl"} {:kernel} $_Z18shfl_vertical_
     $stepSum.0$1, $step.0 := BV32_ADD($stepSum.0$1, v12$1), BV32_ADD($step.0, 1bv32);
     $stepSum.0$2 := BV32_ADD($stepSum.0$2, v12$2);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
   $truebb0:
     assume {:partition} v7;
@@ -329,7 +329,7 @@ implementation {:source_name "shfl_vertical_shfl"} {:kernel} $_Z18shfl_vertical_
     $partial_sum.0$1, $i.0 := $partial_sum.1$1, BV32_MUL($i.0, 2bv32);
     $partial_sum.0$2 := $partial_sum.1$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.33;
+    goto $3;
 }
 
 

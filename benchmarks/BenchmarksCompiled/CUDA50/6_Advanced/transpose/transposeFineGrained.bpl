@@ -114,26 +114,26 @@ implementation {:source_name "transposeFineGrained"} {:kernel} $_Z20transposeFin
 {
   var $r.0: bv32;
   var $i.0: bv32;
-  var $i17.0: bv32;
-  var v2: bool;
+  var $i1.0: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
   var v1: bool;
+  var v2: bool;
   var v3$1: bv32;
   var v3$2: bv32;
+  var v4: bool;
   var v5$1: bv32;
   var v5$2: bv32;
-  var v4: bool;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_ADD(BV32_MUL(group_id_x$1, 16bv32), local_id_x$1), BV32_MUL(BV32_ADD(BV32_MUL(group_id_y$1, 16bv32), local_id_y$1), $width));
     v0$2 := BV32_ADD(BV32_ADD(BV32_MUL(group_id_x$2, 16bv32), local_id_x$2), BV32_MUL(BV32_ADD(BV32_MUL(group_id_y$2, 16bv32), local_id_y$2), $width));
     $r.0 := 0bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessBreak"} _b24 ==> _WRITE_HAS_OCCURRED_$$_ZZ20transposeFineGrainedPfS_iiiE5block ==> local_id_y$1 == BV32_DIV(_WATCHED_OFFSET, 17bv32);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b23 ==> _WRITE_HAS_OCCURRED_$$_ZZ20transposeFineGrainedPfS_iiiE5block ==> BV32_AND(BV32_SUB(BV32_MUL(16bv32, 17bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(16bv32, 17bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, local_id_y$1), 17bv32), local_id_x$1));
@@ -163,9 +163,9 @@ implementation {:source_name "transposeFineGrained"} {:kernel} $_Z20transposeFin
     assume {:partition} v1;
     $i.0 := 0bv32;
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond.8;
+    goto $3;
 
-  $for.cond.8:
+  $3:
     assume {:captureState "loop_head_state_2"} true;
     assert {:tag "accessBreak"} _b26 ==> _WRITE_HAS_OCCURRED_$$_ZZ20transposeFineGrainedPfS_iiiE5block ==> local_id_y$1 == BV32_DIV(_WATCHED_OFFSET, 17bv32);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b25 ==> _WRITE_HAS_OCCURRED_$$_ZZ20transposeFineGrainedPfS_iiiE5block ==> BV32_AND(BV32_SUB(BV32_MUL(16bv32, 17bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(16bv32, 17bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, local_id_y$1), 17bv32), local_id_x$1));
@@ -188,11 +188,11 @@ implementation {:source_name "transposeFineGrained"} {:kernel} $_Z20transposeFin
 
   __partitioned_block_$falsebb0_1:
     call {:sourceloc_num 12} $bugle_barrier_duplicated_0(1bv1, 1bv1);
-    $i17.0 := 0bv32;
+    $i1.0 := 0bv32;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.18;
+    goto $7;
 
-  $for.cond.18:
+  $7:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "accessBreak"} _b30 ==> _WRITE_HAS_OCCURRED_$$odata ==> local_id_y$1 == BV32_SUB(BV32_SUB(BV32_DIV(_WATCHED_OFFSET, $width), BV32_DIV(BV32_MUL(group_id_x$1, 16bv32), $width)), BV32_MUL(group_id_y$1, 16bv32));
     assert {:tag "accessBreak"} _b29 ==> _WRITE_HAS_OCCURRED_$$odata ==> group_id_y$1 == BV32_SUB(BV32_SUB(BV32_DIV(BV32_DIV(_WATCHED_OFFSET, $width), 16bv32), BV32_DIV(group_id_x$1, $width)), BV32_DIV(local_id_y$1, 16bv32));
@@ -201,14 +201,14 @@ implementation {:source_name "transposeFineGrained"} {:kernel} $_Z20transposeFin
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ20transposeFineGrainedPfS_iiiE5block ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ20transposeFineGrainedPfS_iiiE5block ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$_ZZ20transposeFineGrainedPfS_iiiE5block ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
-    assert {:tag "loopBound"} {:thread 1} _b16 ==> BV32_UGE($i17.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b15 ==> BV32_ULE($i17.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b14 ==> BV32_SGE($i17.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b13 ==> BV32_SLE($i17.0, 0bv32);
-    assert {:tag "guardNonNeg"} {:thread 1} _b12 ==> BV32_SLE(0bv32, $i17.0);
-    assert {:tag "loopCounterIsStrided"} {:thread 1} _b11 ==> BV32_AND(BV32_SUB(16bv32, 1bv32), $i17.0) == BV32_AND(BV32_SUB(16bv32, 1bv32), 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b16 ==> BV32_UGE($i1.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b15 ==> BV32_ULE($i1.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b14 ==> BV32_SGE($i1.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b13 ==> BV32_SLE($i1.0, 0bv32);
+    assert {:tag "guardNonNeg"} {:thread 1} _b12 ==> BV32_SLE(0bv32, $i1.0);
+    assert {:tag "loopCounterIsStrided"} {:thread 1} _b11 ==> BV32_AND(BV32_SUB(16bv32, 1bv32), $i1.0) == BV32_AND(BV32_SUB(16bv32, 1bv32), 0bv32);
     assert {:block_sourceloc} {:sourceloc_num 13} true;
-    v4 := BV32_SLT($i17.0, 16bv32);
+    v4 := BV32_SLT($i1.0, 16bv32);
     goto $truebb1, __partitioned_block_$falsebb1_0;
 
   __partitioned_block_$falsebb1_0:
@@ -219,23 +219,23 @@ implementation {:source_name "transposeFineGrained"} {:kernel} $_Z20transposeFin
     call {:sourceloc_num 19} $bugle_barrier_duplicated_1(1bv1, 1bv1);
     $r.0 := BV32_ADD($r.0, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
   $truebb1:
     assume {:partition} v4;
     assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 15} true;
-    v5$1 := $$_ZZ20transposeFineGrainedPfS_iiiE5block[1bv1][BV32_ADD(BV32_MUL(local_id_x$1, 17bv32), BV32_ADD(local_id_y$1, $i17.0))];
-    v5$2 := $$_ZZ20transposeFineGrainedPfS_iiiE5block[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(local_id_x$2, 17bv32), BV32_ADD(local_id_y$2, $i17.0))];
-    call {:sourceloc} {:sourceloc_num 16} _LOG_WRITE_$$odata(true, BV32_ADD(v0$1, BV32_MUL($i17.0, $height)), v5$1, $$odata[BV32_ADD(v0$1, BV32_MUL($i17.0, $height))]);
-    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$odata(true, BV32_ADD(v0$2, BV32_MUL($i17.0, $height)));
+    v5$1 := $$_ZZ20transposeFineGrainedPfS_iiiE5block[1bv1][BV32_ADD(BV32_MUL(local_id_x$1, 17bv32), BV32_ADD(local_id_y$1, $i1.0))];
+    v5$2 := $$_ZZ20transposeFineGrainedPfS_iiiE5block[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(local_id_x$2, 17bv32), BV32_ADD(local_id_y$2, $i1.0))];
+    call {:sourceloc} {:sourceloc_num 16} _LOG_WRITE_$$odata(true, BV32_ADD(v0$1, BV32_MUL($i1.0, $height)), v5$1, $$odata[BV32_ADD(v0$1, BV32_MUL($i1.0, $height))]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$odata(true, BV32_ADD(v0$2, BV32_MUL($i1.0, $height)));
     assume {:do_not_predicate} {:check_id "check_state_1"} {:captureState "check_state_1"} {:sourceloc} {:sourceloc_num 16} true;
-    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 16} _CHECK_WRITE_$$odata(true, BV32_ADD(v0$2, BV32_MUL($i17.0, $height)), v5$2);
+    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 16} _CHECK_WRITE_$$odata(true, BV32_ADD(v0$2, BV32_MUL($i1.0, $height)), v5$2);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$odata"} true;
-    $$odata[BV32_ADD(v0$1, BV32_MUL($i17.0, $height))] := v5$1;
-    $$odata[BV32_ADD(v0$2, BV32_MUL($i17.0, $height))] := v5$2;
-    $i17.0 := BV32_ADD($i17.0, 16bv32);
+    $$odata[BV32_ADD(v0$1, BV32_MUL($i1.0, $height))] := v5$1;
+    $$odata[BV32_ADD(v0$2, BV32_MUL($i1.0, $height))] := v5$2;
+    $i1.0 := BV32_ADD($i1.0, 16bv32);
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.18;
+    goto $7;
 
   $truebb0:
     assume {:partition} v2;
@@ -249,7 +249,7 @@ implementation {:source_name "transposeFineGrained"} {:kernel} $_Z20transposeFin
     $$_ZZ20transposeFineGrainedPfS_iiiE5block[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(local_id_y$2, $i.0), 17bv32), local_id_x$2)] := v3$2;
     $i.0 := BV32_ADD($i.0, 16bv32);
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond.8;
+    goto $3;
 }
 
 

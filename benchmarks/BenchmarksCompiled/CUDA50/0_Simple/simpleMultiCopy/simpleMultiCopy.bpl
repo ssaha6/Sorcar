@@ -110,10 +110,10 @@ implementation {:source_name "incKernel"} {:kernel} $_Z9incKernelPiS_ii($N: bv32
   var p3$2: bool;
   var _HAVOC_bv32$1: bv32;
   var _HAVOC_bv32$2: bv32;
-  var _WRITE_HAS_OCCURRED_$$g_out$ghost$$for.cond: bool;
+  var _WRITE_HAS_OCCURRED_$$g_out$ghost$$2: bool;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2);
     v1$1 := BV32_SLT(v0$1, $N);
@@ -130,13 +130,13 @@ implementation {:source_name "incKernel"} {:kernel} $_Z9incKernelPiS_ii($N: bv32
     $i.0$2 := (if p0$2 then 0bv32 else $i.0$2);
     p1$1 := (if p0$1 then true else p1$1);
     p1$2 := (if p0$2 then true else p1$2);
-    _WRITE_HAS_OCCURRED_$$g_out$ghost$$for.cond := _WRITE_HAS_OCCURRED_$$g_out;
+    _WRITE_HAS_OCCURRED_$$g_out$ghost$$2 := _WRITE_HAS_OCCURRED_$$g_out;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $2;
 
-  $for.cond:
+  $2:
     assume {:captureState "loop_head_state_0"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b9 ==> !p0$1 ==> _WRITE_HAS_OCCURRED_$$g_out$ghost$$for.cond == _WRITE_HAS_OCCURRED_$$g_out;
+    assert {:tag "disabledMaintainsInstrumentation"} _b9 ==> !p0$1 ==> _WRITE_HAS_OCCURRED_$$g_out$ghost$$2 == _WRITE_HAS_OCCURRED_$$g_out;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b8 ==> _WRITE_HAS_OCCURRED_$$g_out ==> _WATCHED_OFFSET == BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
     assume {:predicate "p1"} {:dominator_predicate "p0"} true;
     assert {:do_not_predicate} {:tag "accessOnlyIfEnabledInEnclosingScopes"} {:thread 1} _b7 ==> _WRITE_HAS_OCCURRED_$$g_out ==> BV32_SLT(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), $N);
@@ -177,16 +177,16 @@ implementation {:source_name "incKernel"} {:kernel} $_Z9incKernelPiS_ii($N: bv32
     $i.0$2 := (if p2$2 then BV32_ADD($i.0$2, 1bv32) else $i.0$2);
     p1$1 := (if p2$1 then true else p1$1);
     p1$2 := (if p2$2 then true else p1$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $2.backedge, $2.tail;
 
-  $for.cond.tail:
+  $2.tail:
     assume !p1$1 && !p1$2;
     return;
 
-  $for.cond.backedge:
+  $2.backedge:
     assume {:backedge} p1$1 || p1$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $2;
 }
 
 

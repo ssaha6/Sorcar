@@ -106,19 +106,19 @@ implementation {:source_name "top_scan"} {:kernel} $top_scan($n: bv32)
   var v0$2: bool;
   var v1$1: bv32;
   var v1$2: bv32;
-  var v7$1: bv32;
-  var v7$2: bv32;
-  var v6$1: bv32;
-  var v6$2: bv32;
-  var v5$1: bv32;
-  var v5$2: bv32;
   var v2$1: bv32;
   var v2$2: bv32;
-  var v4: bool;
-  var v8$1: bool;
-  var v8$2: bool;
   var v3$1: bv32;
   var v3$2: bv32;
+  var v4: bool;
+  var v5$1: bv32;
+  var v5$2: bv32;
+  var v6$1: bv32;
+  var v6$2: bv32;
+  var v7$1: bv32;
+  var v7$2: bv32;
+  var v8$1: bool;
+  var v8$2: bool;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -129,7 +129,7 @@ implementation {:source_name "top_scan"} {:kernel} $top_scan($n: bv32)
   var p3$2: bool;
 
 
-  __partitioned_block_$entry_0:
+  __partitioned_block_$0_0:
     v0$1 := BV32_ULT(local_id_x$1, $n);
     v0$2 := BV32_ULT(local_id_x$2, $n);
     p0$1 := false;
@@ -168,15 +168,15 @@ implementation {:source_name "top_scan"} {:kernel} $top_scan($n: bv32)
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$lmem"} true;
     $$lmem[1bv1][v3$1] := $val.0$1;
     $$lmem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v3$2] := $val.0$2;
-    goto __partitioned_block_$entry_1;
+    goto __partitioned_block_$0_1;
 
-  __partitioned_block_$entry_1:
+  __partitioned_block_$0_1:
     call {:sourceloc_num 7} $bugle_barrier_duplicated_0(1bv1, 0bv1);
     $i.i.0 := 1bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.i;
+    goto $3;
 
-  $for.cond.i:
+  $3:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b9 ==> _WRITE_HAS_OCCURRED_$$lmem ==> _WATCHED_OFFSET == BV32_ADD(local_id_x$1, group_size_x);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b8 ==> _READ_HAS_OCCURRED_$$lmem ==> _WATCHED_OFFSET == BV32_ADD(local_id_x$1, group_size_x);
@@ -251,7 +251,7 @@ implementation {:source_name "top_scan"} {:kernel} $top_scan($n: bv32)
     call {:sourceloc_num 14} $bugle_barrier_duplicated_2(1bv1, 0bv1);
     $i.i.0 := BV32_MUL($i.i.0, 2bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.i;
+    goto $3;
 }
 
 

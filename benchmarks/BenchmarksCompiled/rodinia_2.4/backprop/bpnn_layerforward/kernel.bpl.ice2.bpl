@@ -186,8 +186,6 @@ implementation {:source_name "bpnn_layerforward_ocl"} {:kernel} $bpnn_layerforwa
   var v8$2: bv32;
   var v9$1: bv32;
   var v9$2: bv32;
-  var v15$1: bool;
-  var v15$2: bool;
   var v10: bool;
   var v11$1: bool;
   var v11$2: bool;
@@ -197,6 +195,8 @@ implementation {:source_name "bpnn_layerforward_ocl"} {:kernel} $bpnn_layerforwa
   var v13$2: bv32;
   var v14$1: bv32;
   var v14$2: bv32;
+  var v15$1: bool;
+  var v15$2: bool;
   var v16$1: bv32;
   var v16$2: bv32;
   var p0$1: bool;
@@ -346,10 +346,7 @@ assert  my_inv (  (  BV32_SLE(0bv32, $i.0) ) ,  (  BV32_SLE($i.0, 1bv32) ) ,  ( 
     v15$2 := v1$2 == 0bv32;
     p4$1 := (if v15$1 then v15$1 else p4$1);
     p4$2 := (if v15$2 then v15$2 else p4$2);
-    call {:sourceloc} {:sourceloc_num 29} _LOG_READ_$$weight_matrix(p4$1, BV32_ADD(BV32_MUL(v1$1, 16bv32), v2$1), $$weight_matrix[1bv1][BV32_ADD(BV32_MUL(v1$1, 16bv32), v2$1)]);
     assume {:do_not_predicate} {:check_id "check_state_7"} {:captureState "check_state_7"} {:sourceloc} {:sourceloc_num 29} true;
-    call {:check_id "check_state_7"} {:sourceloc} {:sourceloc_num 29} _CHECK_READ_$$weight_matrix(p4$2, BV32_ADD(BV32_MUL(v1$2, 16bv32), v2$2), $$weight_matrix[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(v1$2, 16bv32), v2$2)]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$weight_matrix"} true;
     v16$1 := (if p4$1 then $$weight_matrix[1bv1][BV32_ADD(BV32_MUL(v1$1, 16bv32), v2$1)] else v16$1);
     v16$2 := (if p4$2 then $$weight_matrix[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(v1$2, 16bv32), v2$2)] else v16$2);
     call {:sourceloc} {:sourceloc_num 30} _LOG_WRITE_$$hidden_partial_sum(p4$1, BV32_ADD(BV32_MUL(v0$1, $hid), v2$1), v16$1, $$hidden_partial_sum[BV32_ADD(BV32_MUL(v0$1, $hid), v2$1)]);

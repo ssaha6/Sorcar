@@ -18,53 +18,53 @@ const $arrayId$$pSobelOriginal: arrayId;
 
 axiom $arrayId$$pSobelOriginal == 1bv4;
 
-axiom {:array_info "$$agg.tmp"} {:elem_width 8} {:source_name "agg.tmp"} {:source_elem_width 96} {:source_dimensions "1"} true;
+axiom {:array_info "$$0"} {:elem_width 8} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
 
-const $arrayId$$agg.tmp: arrayId;
+const $arrayId$$0: arrayId;
 
-axiom $arrayId$$agg.tmp == 2bv4;
+axiom $arrayId$$0 == 2bv4;
 
-axiom {:array_info "$$agg.tmp48"} {:elem_width 8} {:source_name "agg.tmp48"} {:source_elem_width 96} {:source_dimensions "1"} true;
+axiom {:array_info "$$1"} {:elem_width 8} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
 
-const $arrayId$$agg.tmp48: arrayId;
+const $arrayId$$1: arrayId;
 
-axiom $arrayId$$agg.tmp48 == 3bv4;
+axiom $arrayId$$1 == 3bv4;
 
-axiom {:array_info "$$agg.tmp65"} {:elem_width 8} {:source_name "agg.tmp65"} {:source_elem_width 96} {:source_dimensions "1"} true;
+axiom {:array_info "$$2"} {:elem_width 8} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
 
-const $arrayId$$agg.tmp65: arrayId;
+const $arrayId$$2: arrayId;
 
-axiom $arrayId$$agg.tmp65 == 4bv4;
+axiom $arrayId$$2 == 4bv4;
 
-axiom {:array_info "$$agg.tmp82"} {:elem_width 8} {:source_name "agg.tmp82"} {:source_elem_width 96} {:source_dimensions "1"} true;
+axiom {:array_info "$$3"} {:elem_width 8} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
 
-const $arrayId$$agg.tmp82: arrayId;
+const $arrayId$$3: arrayId;
 
-axiom $arrayId$$agg.tmp82 == 5bv4;
+axiom $arrayId$$3 == 5bv4;
 
-axiom {:array_info "$$agg.tmp153"} {:elem_width 8} {:source_name "agg.tmp153"} {:source_elem_width 96} {:source_dimensions "1"} true;
+axiom {:array_info "$$4"} {:elem_width 8} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
 
-const $arrayId$$agg.tmp153: arrayId;
+const $arrayId$$4: arrayId;
 
-axiom $arrayId$$agg.tmp153 == 6bv4;
+axiom $arrayId$$4 == 6bv4;
 
-axiom {:array_info "$$agg.tmp171"} {:elem_width 8} {:source_name "agg.tmp171"} {:source_elem_width 96} {:source_dimensions "1"} true;
+axiom {:array_info "$$5"} {:elem_width 8} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
 
-const $arrayId$$agg.tmp171: arrayId;
+const $arrayId$$5: arrayId;
 
-axiom $arrayId$$agg.tmp171 == 7bv4;
+axiom $arrayId$$5 == 7bv4;
 
-axiom {:array_info "$$agg.tmp189"} {:elem_width 8} {:source_name "agg.tmp189"} {:source_elem_width 96} {:source_dimensions "1"} true;
+axiom {:array_info "$$6"} {:elem_width 8} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
 
-const $arrayId$$agg.tmp189: arrayId;
+const $arrayId$$6: arrayId;
 
-axiom $arrayId$$agg.tmp189 == 8bv4;
+axiom $arrayId$$6 == 8bv4;
 
-axiom {:array_info "$$agg.tmp207"} {:elem_width 8} {:source_name "agg.tmp207"} {:source_elem_width 96} {:source_dimensions "1"} true;
+axiom {:array_info "$$7"} {:elem_width 8} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
 
-const $arrayId$$agg.tmp207: arrayId;
+const $arrayId$$7: arrayId;
 
-axiom $arrayId$$agg.tmp207 == 9bv4;
+axiom $arrayId$$7 == 9bv4;
 
 axiom {:array_info "$$out"} {:elem_width 8} {:source_name "out"} {:source_elem_width 32} {:source_dimensions "1"} true;
 
@@ -244,330 +244,330 @@ implementation {:source_name "SobelShared"} {:kernel} $_Z11SobelSharedP6uchar4ts
   var $ib.1$2: bv16;
   var $ib.2$1: bv16;
   var $ib.2$2: bv16;
-  var $retval.i.0$1: bv8;
-  var $retval.i.0$2: bv8;
-  var $retval.i.447.0$1: bv8;
-  var $retval.i.447.0$2: bv8;
-  var $retval.i.508.0$1: bv8;
-  var $retval.i.508.0$2: bv8;
-  var $retval.i.569.0$1: bv8;
-  var $retval.i.569.0$2: bv8;
-  var v1$1: bv16;
-  var v1$2: bv16;
+  var $.01$1: bv8;
+  var $.01$2: bv8;
+  var $.03$1: bv8;
+  var $.03$2: bv8;
+  var $.02$1: bv8;
+  var $.02$2: bv8;
+  var $.0$1: bv8;
+  var $.0$2: bv8;
   var v0$1: bv16;
   var v0$2: bv16;
+  var v1$1: bv16;
+  var v1$2: bv16;
   var v2$1: bv32;
   var v2$2: bv32;
-  var v5$1: bv8;
-  var v5$2: bv8;
-  var v7$1: bv8;
-  var v7$2: bv8;
-  var v6$1: bv8;
-  var v6$2: bv8;
-  var v8$1: bv8;
-  var v8$2: bv8;
+  var v3$1: bool;
+  var v3$2: bool;
   var v4$1: bv8;
   var v4$2: bv8;
+  var v5$1: bv8;
+  var v5$2: bv8;
+  var v6$1: bv8;
+  var v6$2: bv8;
+  var v7$1: bv8;
+  var v7$2: bv8;
+  var v8$1: bv8;
+  var v8$2: bv8;
+  var v9$1: bv8;
+  var v9$2: bv8;
+  var v10$1: bv8;
+  var v10$2: bv8;
   var v11$1: bv8;
   var v11$2: bv8;
   var v12$1: bv8;
   var v12$2: bv8;
+  var v13$1: bv8;
+  var v13$2: bv8;
+  var v14$1: bv8;
+  var v14$2: bv8;
   var v15$1: bv8;
   var v15$2: bv8;
   var v16$1: bv8;
   var v16$2: bv8;
-  var v19$1: bv8;
-  var v19$2: bv8;
-  var v18$1: bv8;
-  var v18$2: bv8;
-  var v20$1: bv8;
-  var v20$2: bv8;
-  var v10$1: bv8;
-  var v10$2: bv8;
-  var v14$1: bv8;
-  var v14$2: bv8;
-  var v9$1: bv8;
-  var v9$2: bv8;
-  var v13$1: bv8;
-  var v13$2: bv8;
   var v17$1: bv8;
   var v17$2: bv8;
-  var v28$1: bv8;
-  var v28$2: bv8;
-  var v31$1: bv8;
-  var v31$2: bv8;
-  var v27$1: bv8;
-  var v27$2: bv8;
-  var v24$1: bv8;
-  var v24$2: bv8;
-  var v26$1: bv8;
-  var v26$2: bv8;
-  var v23$1: bv8;
-  var v23$2: bv8;
-  var v22$1: bv8;
-  var v22$2: bv8;
-  var v29$1: bv8;
-  var v29$2: bv8;
+  var v18$1: bv8;
+  var v18$2: bv8;
+  var v19$1: bv8;
+  var v19$2: bv8;
+  var v20$1: bv8;
+  var v20$2: bv8;
   var v21$1: bv8;
   var v21$2: bv8;
+  var v22$1: bv8;
+  var v22$2: bv8;
+  var v23$1: bv8;
+  var v23$2: bv8;
+  var v24$1: bv8;
+  var v24$2: bv8;
   var v25$1: bv8;
   var v25$2: bv8;
+  var v26$1: bv8;
+  var v26$2: bv8;
+  var v27$1: bv8;
+  var v27$2: bv8;
+  var v28$1: bv8;
+  var v28$2: bv8;
+  var v29$1: bv8;
+  var v29$2: bv8;
   var v30$1: bv8;
   var v30$2: bv8;
+  var v31$1: bv8;
+  var v31$2: bv8;
   var v32$1: bv8;
   var v32$2: bv8;
-  var v39$1: bv8;
-  var v39$2: bv8;
-  var v42$1: bv8;
-  var v42$2: bv8;
-  var v38$1: bv8;
-  var v38$2: bv8;
-  var v35$1: bv8;
-  var v35$2: bv8;
-  var v40$1: bv8;
-  var v40$2: bv8;
-  var v34$1: bv8;
-  var v34$2: bv8;
-  var v41$1: bv8;
-  var v41$2: bv8;
-  var v36$1: bv8;
-  var v36$2: bv8;
   var v33$1: bv8;
   var v33$2: bv8;
+  var v34$1: bv8;
+  var v34$2: bv8;
+  var v35$1: bv8;
+  var v35$2: bv8;
+  var v36$1: bv8;
+  var v36$2: bv8;
   var v37$1: bv8;
   var v37$2: bv8;
-  var v48$1: bv8;
-  var v48$2: bv8;
-  var v45$1: bv8;
-  var v45$2: bv8;
-  var v52$1: bv8;
-  var v52$2: bv8;
-  var v44$1: bv8;
-  var v44$2: bv8;
-  var v46$1: bv8;
-  var v46$2: bv8;
-  var v51$1: bv8;
-  var v51$2: bv8;
-  var v53$1: bv8;
-  var v53$2: bv8;
+  var v38$1: bv8;
+  var v38$2: bv8;
+  var v39$1: bv8;
+  var v39$2: bv8;
+  var v40$1: bv8;
+  var v40$2: bv8;
+  var v41$1: bv8;
+  var v41$2: bv8;
+  var v42$1: bv8;
+  var v42$2: bv8;
   var v43$1: bv8;
   var v43$2: bv8;
+  var v44$1: bv8;
+  var v44$2: bv8;
+  var v45$1: bv8;
+  var v45$2: bv8;
+  var v46$1: bv8;
+  var v46$2: bv8;
   var v47$1: bv8;
   var v47$2: bv8;
+  var v48$1: bv8;
+  var v48$2: bv8;
   var v49$1: bv8;
   var v49$2: bv8;
   var v50$1: bv8;
   var v50$2: bv8;
-  var v3$1: bool;
-  var v3$2: bool;
-  var v56$1: bool;
-  var v56$2: bool;
-  var v57$1: bv32;
-  var v57$2: bv32;
-  var v109$1: bv8;
-  var v109$2: bv8;
-  var v110$1: bv8;
-  var v110$2: bv8;
-  var v107$1: bv8;
-  var v107$2: bv8;
-  var v106$1: bv8;
-  var v106$2: bv8;
-  var v102$1: bv8;
-  var v102$2: bv8;
-  var v101$1: bv8;
-  var v101$2: bv8;
-  var v104$1: bv8;
-  var v104$2: bv8;
-  var v105$1: bv8;
-  var v105$2: bv8;
-  var v103$1: bv8;
-  var v103$2: bv8;
-  var v108$1: bv8;
-  var v108$2: bv8;
-  var v61$1: bv8;
-  var v61$2: bv8;
-  var v64$1: bv8;
-  var v64$2: bv8;
-  var v62$1: bv8;
-  var v62$2: bv8;
-  var v63$1: bv8;
-  var v63$2: bv8;
+  var v51$1: bv8;
+  var v51$2: bv8;
+  var v52$1: bv8;
+  var v52$2: bv8;
+  var v53$1: bv8;
+  var v53$2: bv8;
   var v54$1: bv8;
   var v54$2: bv8;
   var v55$1: bv8;
   var v55$2: bv8;
-  var v60$1: bv8;
-  var v60$2: bv8;
+  var v56$1: bool;
+  var v56$2: bool;
+  var v57$1: bv32;
+  var v57$2: bv32;
+  var v58$1: bool;
+  var v58$2: bool;
   var v59$1: bv8;
   var v59$2: bv8;
-  var v72$1: bv8;
-  var v72$2: bv8;
+  var v60$1: bv8;
+  var v60$2: bv8;
+  var v61$1: bv8;
+  var v61$2: bv8;
+  var v62$1: bv8;
+  var v62$2: bv8;
+  var v63$1: bv8;
+  var v63$2: bv8;
+  var v64$1: bv8;
+  var v64$2: bv8;
+  var v65$1: bv8;
+  var v65$2: bv8;
+  var v66$1: bv8;
+  var v66$2: bv8;
   var v67$1: bv8;
   var v67$2: bv8;
   var v68$1: bv8;
   var v68$2: bv8;
-  var v66$1: bv8;
-  var v66$2: bv8;
-  var v73$1: bv8;
-  var v73$2: bv8;
-  var v74$1: bv8;
-  var v74$2: bv8;
-  var v65$1: bv8;
-  var v65$2: bv8;
   var v69$1: bv8;
   var v69$2: bv8;
   var v70$1: bv8;
   var v70$2: bv8;
-  var v75$1: bv8;
-  var v75$2: bv8;
   var v71$1: bv8;
   var v71$2: bv8;
-  var v80$1: bv8;
-  var v80$2: bv8;
-  var v83$1: bv8;
-  var v83$2: bv8;
-  var v79$1: bv8;
-  var v79$2: bv8;
-  var v82$1: bv8;
-  var v82$2: bv8;
-  var v84$1: bv8;
-  var v84$2: bv8;
+  var v72$1: bv8;
+  var v72$2: bv8;
+  var v73$1: bv8;
+  var v73$2: bv8;
+  var v74$1: bv8;
+  var v74$2: bv8;
+  var v75$1: bv8;
+  var v75$2: bv8;
   var v76$1: bv8;
   var v76$2: bv8;
   var v77$1: bv8;
   var v77$2: bv8;
+  var v78$1: bv8;
+  var v78$2: bv8;
+  var v79$1: bv8;
+  var v79$2: bv8;
+  var v80$1: bv8;
+  var v80$2: bv8;
   var v81$1: bv8;
   var v81$2: bv8;
+  var v82$1: bv8;
+  var v82$2: bv8;
+  var v83$1: bv8;
+  var v83$2: bv8;
+  var v84$1: bv8;
+  var v84$2: bv8;
   var v85$1: bv8;
   var v85$2: bv8;
   var v86$1: bv8;
   var v86$2: bv8;
-  var v78$1: bv8;
-  var v78$2: bv8;
+  var v87$1: bv8;
+  var v87$2: bv8;
   var v88$1: bv8;
   var v88$2: bv8;
+  var v89$1: bv8;
+  var v89$2: bv8;
+  var v90$1: bv8;
+  var v90$2: bv8;
+  var v91$1: bv8;
+  var v91$2: bv8;
+  var v92$1: bv8;
+  var v92$2: bv8;
   var v93$1: bv8;
   var v93$2: bv8;
   var v94$1: bv8;
   var v94$2: bv8;
-  var v89$1: bv8;
-  var v89$2: bv8;
-  var v92$1: bv8;
-  var v92$2: bv8;
   var v95$1: bv8;
   var v95$2: bv8;
-  var v91$1: bv8;
-  var v91$2: bv8;
   var v96$1: bv8;
   var v96$2: bv8;
   var v97$1: bv8;
   var v97$2: bv8;
-  var v87$1: bv8;
-  var v87$2: bv8;
-  var v90$1: bv8;
-  var v90$2: bv8;
   var v98$1: bv8;
   var v98$2: bv8;
-  var v100$1: bv8;
-  var v100$2: bv8;
   var v99$1: bv8;
   var v99$2: bv8;
-  var v58$1: bool;
-  var v58$2: bool;
-  var v113$1: bool;
-  var v113$2: bool;
+  var v100$1: bv8;
+  var v100$2: bv8;
+  var v101$1: bv8;
+  var v101$2: bv8;
+  var v102$1: bv8;
+  var v102$2: bv8;
+  var v103$1: bv8;
+  var v103$2: bv8;
+  var v104$1: bv8;
+  var v104$2: bv8;
+  var v105$1: bv8;
+  var v105$2: bv8;
+  var v106$1: bv8;
+  var v106$2: bv8;
+  var v107$1: bv8;
+  var v107$2: bv8;
+  var v108$1: bv8;
+  var v108$2: bv8;
+  var v109$1: bv8;
+  var v109$2: bv8;
+  var v110$1: bv8;
+  var v110$2: bv8;
   var v111$1: bv16;
   var v111$2: bv16;
   var v112$1: bv32;
   var v112$2: bv32;
+  var v113$1: bool;
+  var v113$2: bool;
   var v114$1: bv8;
   var v114$2: bv8;
+  var v115$1: bv8;
+  var v115$2: bv8;
+  var v116$1: bv8;
+  var v116$2: bv8;
+  var v117$1: bv8;
+  var v117$2: bv8;
+  var v118$1: bv8;
+  var v118$2: bv8;
+  var v119$1: bv8;
+  var v119$2: bv8;
   var v120$1: bv8;
   var v120$2: bv8;
   var v121$1: bv8;
   var v121$2: bv8;
-  var v115$1: bv8;
-  var v115$2: bv8;
+  var v122$1: bv8;
+  var v122$2: bv8;
   var v123$1: bv32;
   var v123$2: bv32;
   var v124$1: bv32;
   var v124$2: bv32;
-  var v116$1: bv8;
-  var v116$2: bv8;
-  var v122$1: bv8;
-  var v122$2: bv8;
-  var v117$1: bv8;
-  var v117$2: bv8;
-  var v119$1: bv8;
-  var v119$2: bv8;
-  var v118$1: bv8;
-  var v118$2: bv8;
-  var v128$1: bv8;
-  var v128$2: bv8;
-  var v144$1: bv8;
-  var v144$2: bv8;
-  var v131$1: bv32;
-  var v131$2: bv32;
-  var v146$1: bv8;
-  var v146$2: bv8;
-  var v147$1: bv32;
-  var v147$2: bv32;
-  var v140$1: bv32;
-  var v140$2: bv32;
-  var v145$1: bv8;
-  var v145$2: bv8;
-  var v136$1: bv8;
-  var v136$2: bv8;
-  var v130$1: bv8;
-  var v130$2: bv8;
-  var v129$1: bv8;
-  var v129$2: bv8;
-  var v137$1: bv8;
-  var v137$2: bv8;
-  var v132$1: bv32;
-  var v132$2: bv32;
-  var v139$1: bv32;
-  var v139$2: bv32;
-  var v138$1: bv8;
-  var v138$2: bv8;
-  var v148$1: bv32;
-  var v148$2: bv32;
-  var v155$1: bv8;
-  var v155$2: bv8;
-  var v154$1: bv8;
-  var v154$2: bv8;
-  var v156$1: bv8;
-  var v156$2: bv8;
-  var v157$1: bv8;
-  var v157$2: bv8;
-  var v127$1: bool;
-  var v127$2: bool;
-  var v126$1: bool;
-  var v126$2: bool;
   var v125$1: bv16;
   var v125$2: bv16;
+  var v126$1: bool;
+  var v126$2: bool;
+  var v127$1: bool;
+  var v127$2: bool;
+  var v128$1: bv8;
+  var v128$2: bv8;
+  var v129$1: bv8;
+  var v129$2: bv8;
+  var v130$1: bv8;
+  var v130$2: bv8;
+  var v131$1: bv32;
+  var v131$2: bv32;
+  var v132$1: bv32;
+  var v132$2: bv32;
   var v133$1: bv16;
   var v133$2: bv16;
   var v134$1: bool;
   var v134$2: bool;
   var v135$1: bool;
   var v135$2: bool;
+  var v136$1: bv8;
+  var v136$2: bv8;
+  var v137$1: bv8;
+  var v137$2: bv8;
+  var v138$1: bv8;
+  var v138$2: bv8;
+  var v139$1: bv32;
+  var v139$2: bv32;
+  var v140$1: bv32;
+  var v140$2: bv32;
   var v141$1: bv16;
   var v141$2: bv16;
   var v142$1: bool;
   var v142$2: bool;
   var v143$1: bool;
   var v143$2: bool;
+  var v144$1: bv8;
+  var v144$2: bv8;
+  var v145$1: bv8;
+  var v145$2: bv8;
+  var v146$1: bv8;
+  var v146$2: bv8;
+  var v147$1: bv32;
+  var v147$2: bv32;
+  var v148$1: bv32;
+  var v148$2: bv32;
   var v149$1: bv16;
   var v149$2: bv16;
-  var v151$1: bool;
-  var v151$2: bool;
   var v150$1: bool;
   var v150$2: bool;
-  var v153$1: bool;
-  var v153$2: bool;
+  var v151$1: bool;
+  var v151$2: bool;
   var v152$1: bool;
   var v152$2: bool;
+  var v153$1: bool;
+  var v153$2: bool;
+  var v154$1: bv8;
+  var v154$2: bv8;
+  var v155$1: bv8;
+  var v155$2: bv8;
+  var v156$1: bv8;
+  var v156$2: bv8;
+  var v157$1: bv8;
+  var v157$2: bv8;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -628,10 +628,10 @@ implementation {:source_name "SobelShared"} {:kernel} $_Z11SobelSharedP6uchar4ts
   var p28$2: bool;
   var _HAVOC_bv8$1: bv8;
   var _HAVOC_bv8$2: bv8;
-  var _WRITE_HAS_OCCURRED_$$LocalBlock$ghost$$for.cond.107: bool;
+  var _WRITE_HAS_OCCURRED_$$LocalBlock$ghost$$6: bool;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_MUL(BV32_MUL(4bv32, group_id_x$1), BV16_SEXT32($BlockWidth))[16:0];
     v0$2 := BV32_MUL(BV32_MUL(4bv32, group_id_x$2), BV16_SEXT32($BlockWidth))[16:0];
     v1$1 := BV32_ADD(BV32_MUL(group_id_y$1, group_size_y), local_id_y$1)[16:0];
@@ -649,9 +649,9 @@ implementation {:source_name "SobelShared"} {:kernel} $_Z11SobelSharedP6uchar4ts
     p0$1 := true;
     p0$2 := true;
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_2"} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$LocalBlock ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$LocalBlock ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -690,64 +690,64 @@ implementation {:source_name "SobelShared"} {:kernel} $_Z11SobelSharedP6uchar4ts
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v4$1 := (if p1$1 then _HAVOC_bv8$1 else v4$1);
     v4$2 := (if p1$2 then _HAVOC_bv8$2 else v4$2);
-    $$agg.tmp$0bv32$1 := (if p1$1 then v4$1 else $$agg.tmp$0bv32$1);
-    $$agg.tmp$0bv32$2 := (if p1$2 then v4$2 else $$agg.tmp$0bv32$2);
+    $$0$0bv32$1 := (if p1$1 then v4$1 else $$0$0bv32$1);
+    $$0$0bv32$2 := (if p1$2 then v4$2 else $$0$0bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v5$1 := (if p1$1 then _HAVOC_bv8$1 else v5$1);
     v5$2 := (if p1$2 then _HAVOC_bv8$2 else v5$2);
-    $$agg.tmp$1bv32$1 := (if p1$1 then v5$1 else $$agg.tmp$1bv32$1);
-    $$agg.tmp$1bv32$2 := (if p1$2 then v5$2 else $$agg.tmp$1bv32$2);
+    $$0$1bv32$1 := (if p1$1 then v5$1 else $$0$1bv32$1);
+    $$0$1bv32$2 := (if p1$2 then v5$2 else $$0$1bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v6$1 := (if p1$1 then _HAVOC_bv8$1 else v6$1);
     v6$2 := (if p1$2 then _HAVOC_bv8$2 else v6$2);
-    $$agg.tmp$2bv32$1 := (if p1$1 then v6$1 else $$agg.tmp$2bv32$1);
-    $$agg.tmp$2bv32$2 := (if p1$2 then v6$2 else $$agg.tmp$2bv32$2);
+    $$0$2bv32$1 := (if p1$1 then v6$1 else $$0$2bv32$1);
+    $$0$2bv32$2 := (if p1$2 then v6$2 else $$0$2bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v7$1 := (if p1$1 then _HAVOC_bv8$1 else v7$1);
     v7$2 := (if p1$2 then _HAVOC_bv8$2 else v7$2);
-    $$agg.tmp$3bv32$1 := (if p1$1 then v7$1 else $$agg.tmp$3bv32$1);
-    $$agg.tmp$3bv32$2 := (if p1$2 then v7$2 else $$agg.tmp$3bv32$2);
+    $$0$3bv32$1 := (if p1$1 then v7$1 else $$0$3bv32$1);
+    $$0$3bv32$2 := (if p1$2 then v7$2 else $$0$3bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v8$1 := (if p1$1 then _HAVOC_bv8$1 else v8$1);
     v8$2 := (if p1$2 then _HAVOC_bv8$2 else v8$2);
-    $$agg.tmp$4bv32$1 := (if p1$1 then v8$1 else $$agg.tmp$4bv32$1);
-    $$agg.tmp$4bv32$2 := (if p1$2 then v8$2 else $$agg.tmp$4bv32$2);
+    $$0$4bv32$1 := (if p1$1 then v8$1 else $$0$4bv32$1);
+    $$0$4bv32$2 := (if p1$2 then v8$2 else $$0$4bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v9$1 := (if p1$1 then _HAVOC_bv8$1 else v9$1);
     v9$2 := (if p1$2 then _HAVOC_bv8$2 else v9$2);
-    $$agg.tmp$5bv32$1 := (if p1$1 then v9$1 else $$agg.tmp$5bv32$1);
-    $$agg.tmp$5bv32$2 := (if p1$2 then v9$2 else $$agg.tmp$5bv32$2);
+    $$0$5bv32$1 := (if p1$1 then v9$1 else $$0$5bv32$1);
+    $$0$5bv32$2 := (if p1$2 then v9$2 else $$0$5bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v10$1 := (if p1$1 then _HAVOC_bv8$1 else v10$1);
     v10$2 := (if p1$2 then _HAVOC_bv8$2 else v10$2);
-    $$agg.tmp$6bv32$1 := (if p1$1 then v10$1 else $$agg.tmp$6bv32$1);
-    $$agg.tmp$6bv32$2 := (if p1$2 then v10$2 else $$agg.tmp$6bv32$2);
+    $$0$6bv32$1 := (if p1$1 then v10$1 else $$0$6bv32$1);
+    $$0$6bv32$2 := (if p1$2 then v10$2 else $$0$6bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v11$1 := (if p1$1 then _HAVOC_bv8$1 else v11$1);
     v11$2 := (if p1$2 then _HAVOC_bv8$2 else v11$2);
-    $$agg.tmp$7bv32$1 := (if p1$1 then v11$1 else $$agg.tmp$7bv32$1);
-    $$agg.tmp$7bv32$2 := (if p1$2 then v11$2 else $$agg.tmp$7bv32$2);
+    $$0$7bv32$1 := (if p1$1 then v11$1 else $$0$7bv32$1);
+    $$0$7bv32$2 := (if p1$2 then v11$2 else $$0$7bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v12$1 := (if p1$1 then _HAVOC_bv8$1 else v12$1);
     v12$2 := (if p1$2 then _HAVOC_bv8$2 else v12$2);
-    $$agg.tmp$8bv32$1 := (if p1$1 then v12$1 else $$agg.tmp$8bv32$1);
-    $$agg.tmp$8bv32$2 := (if p1$2 then v12$2 else $$agg.tmp$8bv32$2);
+    $$0$8bv32$1 := (if p1$1 then v12$1 else $$0$8bv32$1);
+    $$0$8bv32$2 := (if p1$2 then v12$2 else $$0$8bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v13$1 := (if p1$1 then _HAVOC_bv8$1 else v13$1);
     v13$2 := (if p1$2 then _HAVOC_bv8$2 else v13$2);
-    $$agg.tmp$9bv32$1 := (if p1$1 then v13$1 else $$agg.tmp$9bv32$1);
-    $$agg.tmp$9bv32$2 := (if p1$2 then v13$2 else $$agg.tmp$9bv32$2);
+    $$0$9bv32$1 := (if p1$1 then v13$1 else $$0$9bv32$1);
+    $$0$9bv32$2 := (if p1$2 then v13$2 else $$0$9bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v14$1 := (if p1$1 then _HAVOC_bv8$1 else v14$1);
     v14$2 := (if p1$2 then _HAVOC_bv8$2 else v14$2);
-    $$agg.tmp$10bv32$1 := (if p1$1 then v14$1 else $$agg.tmp$10bv32$1);
-    $$agg.tmp$10bv32$2 := (if p1$2 then v14$2 else $$agg.tmp$10bv32$2);
+    $$0$10bv32$1 := (if p1$1 then v14$1 else $$0$10bv32$1);
+    $$0$10bv32$2 := (if p1$2 then v14$2 else $$0$10bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v15$1 := (if p1$1 then _HAVOC_bv8$1 else v15$1);
     v15$2 := (if p1$2 then _HAVOC_bv8$2 else v15$2);
-    $$agg.tmp$11bv32$1 := (if p1$1 then v15$1 else $$agg.tmp$11bv32$1);
-    $$agg.tmp$11bv32$2 := (if p1$2 then v15$2 else $$agg.tmp$11bv32$2);
-    call {:sourceloc_num 34} v16$1, v16$2 := $_Z5tex2DIhET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(MKPTR($arrayId$$agg.tmp, 0bv32), p1$1, SI32_TO_FP32(BV32_SUB(BV32_ADD(BV16_SEXT32(v0$1), BV32_MUL(4bv32, BV16_SEXT32($ib.0$1))), 1bv32)), SI32_TO_FP32(BV32_SUB(BV16_SEXT32(v1$1), 1bv32)), p1$2, SI32_TO_FP32(BV32_SUB(BV32_ADD(BV16_SEXT32(v0$2), BV32_MUL(4bv32, BV16_SEXT32($ib.0$2))), 1bv32)), SI32_TO_FP32(BV32_SUB(BV16_SEXT32(v1$2), 1bv32)));
+    $$0$11bv32$1 := (if p1$1 then v15$1 else $$0$11bv32$1);
+    $$0$11bv32$2 := (if p1$2 then v15$2 else $$0$11bv32$2);
+    call {:sourceloc_num 34} v16$1, v16$2 := $_Z5tex2DIhET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(MKPTR($arrayId$$0, 0bv32), p1$1, SI32_TO_FP32(BV32_SUB(BV32_ADD(BV16_SEXT32(v0$1), BV32_MUL(4bv32, BV16_SEXT32($ib.0$1))), 1bv32)), SI32_TO_FP32(BV32_SUB(BV16_SEXT32(v1$1), 1bv32)), p1$2, SI32_TO_FP32(BV32_SUB(BV32_ADD(BV16_SEXT32(v0$2), BV32_MUL(4bv32, BV16_SEXT32($ib.0$2))), 1bv32)), SI32_TO_FP32(BV32_SUB(BV16_SEXT32(v1$2), 1bv32)));
     assume {:captureState "call_return_state_0"} {:procedureName "$_Z5tex2DIhET_7textureIS0_Li2EL19cudaTextureReadMode0EEff"} true;
     call {:sourceloc} {:sourceloc_num 35} _LOG_WRITE_$$LocalBlock(p1$1, BV32_ADD(v2$1, BV32_MUL(4bv32, BV16_SEXT32($ib.0$1))), v16$1, $$LocalBlock[1bv1][BV32_ADD(v2$1, BV32_MUL(4bv32, BV16_SEXT32($ib.0$1)))]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$LocalBlock(p1$2, BV32_ADD(v2$2, BV32_MUL(4bv32, BV16_SEXT32($ib.0$2))));
@@ -759,64 +759,64 @@ implementation {:source_name "SobelShared"} {:kernel} $_Z11SobelSharedP6uchar4ts
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v17$1 := (if p1$1 then _HAVOC_bv8$1 else v17$1);
     v17$2 := (if p1$2 then _HAVOC_bv8$2 else v17$2);
-    $$agg.tmp48$0bv32$1 := (if p1$1 then v17$1 else $$agg.tmp48$0bv32$1);
-    $$agg.tmp48$0bv32$2 := (if p1$2 then v17$2 else $$agg.tmp48$0bv32$2);
+    $$1$0bv32$1 := (if p1$1 then v17$1 else $$1$0bv32$1);
+    $$1$0bv32$2 := (if p1$2 then v17$2 else $$1$0bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v18$1 := (if p1$1 then _HAVOC_bv8$1 else v18$1);
     v18$2 := (if p1$2 then _HAVOC_bv8$2 else v18$2);
-    $$agg.tmp48$1bv32$1 := (if p1$1 then v18$1 else $$agg.tmp48$1bv32$1);
-    $$agg.tmp48$1bv32$2 := (if p1$2 then v18$2 else $$agg.tmp48$1bv32$2);
+    $$1$1bv32$1 := (if p1$1 then v18$1 else $$1$1bv32$1);
+    $$1$1bv32$2 := (if p1$2 then v18$2 else $$1$1bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v19$1 := (if p1$1 then _HAVOC_bv8$1 else v19$1);
     v19$2 := (if p1$2 then _HAVOC_bv8$2 else v19$2);
-    $$agg.tmp48$2bv32$1 := (if p1$1 then v19$1 else $$agg.tmp48$2bv32$1);
-    $$agg.tmp48$2bv32$2 := (if p1$2 then v19$2 else $$agg.tmp48$2bv32$2);
+    $$1$2bv32$1 := (if p1$1 then v19$1 else $$1$2bv32$1);
+    $$1$2bv32$2 := (if p1$2 then v19$2 else $$1$2bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v20$1 := (if p1$1 then _HAVOC_bv8$1 else v20$1);
     v20$2 := (if p1$2 then _HAVOC_bv8$2 else v20$2);
-    $$agg.tmp48$3bv32$1 := (if p1$1 then v20$1 else $$agg.tmp48$3bv32$1);
-    $$agg.tmp48$3bv32$2 := (if p1$2 then v20$2 else $$agg.tmp48$3bv32$2);
+    $$1$3bv32$1 := (if p1$1 then v20$1 else $$1$3bv32$1);
+    $$1$3bv32$2 := (if p1$2 then v20$2 else $$1$3bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v21$1 := (if p1$1 then _HAVOC_bv8$1 else v21$1);
     v21$2 := (if p1$2 then _HAVOC_bv8$2 else v21$2);
-    $$agg.tmp48$4bv32$1 := (if p1$1 then v21$1 else $$agg.tmp48$4bv32$1);
-    $$agg.tmp48$4bv32$2 := (if p1$2 then v21$2 else $$agg.tmp48$4bv32$2);
+    $$1$4bv32$1 := (if p1$1 then v21$1 else $$1$4bv32$1);
+    $$1$4bv32$2 := (if p1$2 then v21$2 else $$1$4bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v22$1 := (if p1$1 then _HAVOC_bv8$1 else v22$1);
     v22$2 := (if p1$2 then _HAVOC_bv8$2 else v22$2);
-    $$agg.tmp48$5bv32$1 := (if p1$1 then v22$1 else $$agg.tmp48$5bv32$1);
-    $$agg.tmp48$5bv32$2 := (if p1$2 then v22$2 else $$agg.tmp48$5bv32$2);
+    $$1$5bv32$1 := (if p1$1 then v22$1 else $$1$5bv32$1);
+    $$1$5bv32$2 := (if p1$2 then v22$2 else $$1$5bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v23$1 := (if p1$1 then _HAVOC_bv8$1 else v23$1);
     v23$2 := (if p1$2 then _HAVOC_bv8$2 else v23$2);
-    $$agg.tmp48$6bv32$1 := (if p1$1 then v23$1 else $$agg.tmp48$6bv32$1);
-    $$agg.tmp48$6bv32$2 := (if p1$2 then v23$2 else $$agg.tmp48$6bv32$2);
+    $$1$6bv32$1 := (if p1$1 then v23$1 else $$1$6bv32$1);
+    $$1$6bv32$2 := (if p1$2 then v23$2 else $$1$6bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v24$1 := (if p1$1 then _HAVOC_bv8$1 else v24$1);
     v24$2 := (if p1$2 then _HAVOC_bv8$2 else v24$2);
-    $$agg.tmp48$7bv32$1 := (if p1$1 then v24$1 else $$agg.tmp48$7bv32$1);
-    $$agg.tmp48$7bv32$2 := (if p1$2 then v24$2 else $$agg.tmp48$7bv32$2);
+    $$1$7bv32$1 := (if p1$1 then v24$1 else $$1$7bv32$1);
+    $$1$7bv32$2 := (if p1$2 then v24$2 else $$1$7bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v25$1 := (if p1$1 then _HAVOC_bv8$1 else v25$1);
     v25$2 := (if p1$2 then _HAVOC_bv8$2 else v25$2);
-    $$agg.tmp48$8bv32$1 := (if p1$1 then v25$1 else $$agg.tmp48$8bv32$1);
-    $$agg.tmp48$8bv32$2 := (if p1$2 then v25$2 else $$agg.tmp48$8bv32$2);
+    $$1$8bv32$1 := (if p1$1 then v25$1 else $$1$8bv32$1);
+    $$1$8bv32$2 := (if p1$2 then v25$2 else $$1$8bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v26$1 := (if p1$1 then _HAVOC_bv8$1 else v26$1);
     v26$2 := (if p1$2 then _HAVOC_bv8$2 else v26$2);
-    $$agg.tmp48$9bv32$1 := (if p1$1 then v26$1 else $$agg.tmp48$9bv32$1);
-    $$agg.tmp48$9bv32$2 := (if p1$2 then v26$2 else $$agg.tmp48$9bv32$2);
+    $$1$9bv32$1 := (if p1$1 then v26$1 else $$1$9bv32$1);
+    $$1$9bv32$2 := (if p1$2 then v26$2 else $$1$9bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v27$1 := (if p1$1 then _HAVOC_bv8$1 else v27$1);
     v27$2 := (if p1$2 then _HAVOC_bv8$2 else v27$2);
-    $$agg.tmp48$10bv32$1 := (if p1$1 then v27$1 else $$agg.tmp48$10bv32$1);
-    $$agg.tmp48$10bv32$2 := (if p1$2 then v27$2 else $$agg.tmp48$10bv32$2);
+    $$1$10bv32$1 := (if p1$1 then v27$1 else $$1$10bv32$1);
+    $$1$10bv32$2 := (if p1$2 then v27$2 else $$1$10bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v28$1 := (if p1$1 then _HAVOC_bv8$1 else v28$1);
     v28$2 := (if p1$2 then _HAVOC_bv8$2 else v28$2);
-    $$agg.tmp48$11bv32$1 := (if p1$1 then v28$1 else $$agg.tmp48$11bv32$1);
-    $$agg.tmp48$11bv32$2 := (if p1$2 then v28$2 else $$agg.tmp48$11bv32$2);
-    call {:sourceloc_num 60} v29$1, v29$2 := $_Z5tex2DIhET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(MKPTR($arrayId$$agg.tmp48, 0bv32), p1$1, SI32_TO_FP32(BV32_ADD(BV32_SUB(BV32_ADD(BV16_SEXT32(v0$1), BV32_MUL(4bv32, BV16_SEXT32($ib.0$1))), 1bv32), 1bv32)), SI32_TO_FP32(BV32_SUB(BV16_SEXT32(v1$1), 1bv32)), p1$2, SI32_TO_FP32(BV32_ADD(BV32_SUB(BV32_ADD(BV16_SEXT32(v0$2), BV32_MUL(4bv32, BV16_SEXT32($ib.0$2))), 1bv32), 1bv32)), SI32_TO_FP32(BV32_SUB(BV16_SEXT32(v1$2), 1bv32)));
+    $$1$11bv32$1 := (if p1$1 then v28$1 else $$1$11bv32$1);
+    $$1$11bv32$2 := (if p1$2 then v28$2 else $$1$11bv32$2);
+    call {:sourceloc_num 60} v29$1, v29$2 := $_Z5tex2DIhET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(MKPTR($arrayId$$1, 0bv32), p1$1, SI32_TO_FP32(BV32_ADD(BV32_SUB(BV32_ADD(BV16_SEXT32(v0$1), BV32_MUL(4bv32, BV16_SEXT32($ib.0$1))), 1bv32), 1bv32)), SI32_TO_FP32(BV32_SUB(BV16_SEXT32(v1$1), 1bv32)), p1$2, SI32_TO_FP32(BV32_ADD(BV32_SUB(BV32_ADD(BV16_SEXT32(v0$2), BV32_MUL(4bv32, BV16_SEXT32($ib.0$2))), 1bv32), 1bv32)), SI32_TO_FP32(BV32_SUB(BV16_SEXT32(v1$2), 1bv32)));
     assume {:captureState "call_return_state_0"} {:procedureName "$_Z5tex2DIhET_7textureIS0_Li2EL19cudaTextureReadMode0EEff"} true;
     call {:sourceloc} {:sourceloc_num 61} _LOG_WRITE_$$LocalBlock(p1$1, BV32_ADD(BV32_ADD(v2$1, BV32_MUL(4bv32, BV16_SEXT32($ib.0$1))), 1bv32), v29$1, $$LocalBlock[1bv1][BV32_ADD(BV32_ADD(v2$1, BV32_MUL(4bv32, BV16_SEXT32($ib.0$1))), 1bv32)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$LocalBlock(p1$2, BV32_ADD(BV32_ADD(v2$2, BV32_MUL(4bv32, BV16_SEXT32($ib.0$2))), 1bv32));
@@ -828,64 +828,64 @@ implementation {:source_name "SobelShared"} {:kernel} $_Z11SobelSharedP6uchar4ts
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v30$1 := (if p1$1 then _HAVOC_bv8$1 else v30$1);
     v30$2 := (if p1$2 then _HAVOC_bv8$2 else v30$2);
-    $$agg.tmp65$0bv32$1 := (if p1$1 then v30$1 else $$agg.tmp65$0bv32$1);
-    $$agg.tmp65$0bv32$2 := (if p1$2 then v30$2 else $$agg.tmp65$0bv32$2);
+    $$2$0bv32$1 := (if p1$1 then v30$1 else $$2$0bv32$1);
+    $$2$0bv32$2 := (if p1$2 then v30$2 else $$2$0bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v31$1 := (if p1$1 then _HAVOC_bv8$1 else v31$1);
     v31$2 := (if p1$2 then _HAVOC_bv8$2 else v31$2);
-    $$agg.tmp65$1bv32$1 := (if p1$1 then v31$1 else $$agg.tmp65$1bv32$1);
-    $$agg.tmp65$1bv32$2 := (if p1$2 then v31$2 else $$agg.tmp65$1bv32$2);
+    $$2$1bv32$1 := (if p1$1 then v31$1 else $$2$1bv32$1);
+    $$2$1bv32$2 := (if p1$2 then v31$2 else $$2$1bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v32$1 := (if p1$1 then _HAVOC_bv8$1 else v32$1);
     v32$2 := (if p1$2 then _HAVOC_bv8$2 else v32$2);
-    $$agg.tmp65$2bv32$1 := (if p1$1 then v32$1 else $$agg.tmp65$2bv32$1);
-    $$agg.tmp65$2bv32$2 := (if p1$2 then v32$2 else $$agg.tmp65$2bv32$2);
+    $$2$2bv32$1 := (if p1$1 then v32$1 else $$2$2bv32$1);
+    $$2$2bv32$2 := (if p1$2 then v32$2 else $$2$2bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v33$1 := (if p1$1 then _HAVOC_bv8$1 else v33$1);
     v33$2 := (if p1$2 then _HAVOC_bv8$2 else v33$2);
-    $$agg.tmp65$3bv32$1 := (if p1$1 then v33$1 else $$agg.tmp65$3bv32$1);
-    $$agg.tmp65$3bv32$2 := (if p1$2 then v33$2 else $$agg.tmp65$3bv32$2);
+    $$2$3bv32$1 := (if p1$1 then v33$1 else $$2$3bv32$1);
+    $$2$3bv32$2 := (if p1$2 then v33$2 else $$2$3bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v34$1 := (if p1$1 then _HAVOC_bv8$1 else v34$1);
     v34$2 := (if p1$2 then _HAVOC_bv8$2 else v34$2);
-    $$agg.tmp65$4bv32$1 := (if p1$1 then v34$1 else $$agg.tmp65$4bv32$1);
-    $$agg.tmp65$4bv32$2 := (if p1$2 then v34$2 else $$agg.tmp65$4bv32$2);
+    $$2$4bv32$1 := (if p1$1 then v34$1 else $$2$4bv32$1);
+    $$2$4bv32$2 := (if p1$2 then v34$2 else $$2$4bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v35$1 := (if p1$1 then _HAVOC_bv8$1 else v35$1);
     v35$2 := (if p1$2 then _HAVOC_bv8$2 else v35$2);
-    $$agg.tmp65$5bv32$1 := (if p1$1 then v35$1 else $$agg.tmp65$5bv32$1);
-    $$agg.tmp65$5bv32$2 := (if p1$2 then v35$2 else $$agg.tmp65$5bv32$2);
+    $$2$5bv32$1 := (if p1$1 then v35$1 else $$2$5bv32$1);
+    $$2$5bv32$2 := (if p1$2 then v35$2 else $$2$5bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v36$1 := (if p1$1 then _HAVOC_bv8$1 else v36$1);
     v36$2 := (if p1$2 then _HAVOC_bv8$2 else v36$2);
-    $$agg.tmp65$6bv32$1 := (if p1$1 then v36$1 else $$agg.tmp65$6bv32$1);
-    $$agg.tmp65$6bv32$2 := (if p1$2 then v36$2 else $$agg.tmp65$6bv32$2);
+    $$2$6bv32$1 := (if p1$1 then v36$1 else $$2$6bv32$1);
+    $$2$6bv32$2 := (if p1$2 then v36$2 else $$2$6bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v37$1 := (if p1$1 then _HAVOC_bv8$1 else v37$1);
     v37$2 := (if p1$2 then _HAVOC_bv8$2 else v37$2);
-    $$agg.tmp65$7bv32$1 := (if p1$1 then v37$1 else $$agg.tmp65$7bv32$1);
-    $$agg.tmp65$7bv32$2 := (if p1$2 then v37$2 else $$agg.tmp65$7bv32$2);
+    $$2$7bv32$1 := (if p1$1 then v37$1 else $$2$7bv32$1);
+    $$2$7bv32$2 := (if p1$2 then v37$2 else $$2$7bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v38$1 := (if p1$1 then _HAVOC_bv8$1 else v38$1);
     v38$2 := (if p1$2 then _HAVOC_bv8$2 else v38$2);
-    $$agg.tmp65$8bv32$1 := (if p1$1 then v38$1 else $$agg.tmp65$8bv32$1);
-    $$agg.tmp65$8bv32$2 := (if p1$2 then v38$2 else $$agg.tmp65$8bv32$2);
+    $$2$8bv32$1 := (if p1$1 then v38$1 else $$2$8bv32$1);
+    $$2$8bv32$2 := (if p1$2 then v38$2 else $$2$8bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v39$1 := (if p1$1 then _HAVOC_bv8$1 else v39$1);
     v39$2 := (if p1$2 then _HAVOC_bv8$2 else v39$2);
-    $$agg.tmp65$9bv32$1 := (if p1$1 then v39$1 else $$agg.tmp65$9bv32$1);
-    $$agg.tmp65$9bv32$2 := (if p1$2 then v39$2 else $$agg.tmp65$9bv32$2);
+    $$2$9bv32$1 := (if p1$1 then v39$1 else $$2$9bv32$1);
+    $$2$9bv32$2 := (if p1$2 then v39$2 else $$2$9bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v40$1 := (if p1$1 then _HAVOC_bv8$1 else v40$1);
     v40$2 := (if p1$2 then _HAVOC_bv8$2 else v40$2);
-    $$agg.tmp65$10bv32$1 := (if p1$1 then v40$1 else $$agg.tmp65$10bv32$1);
-    $$agg.tmp65$10bv32$2 := (if p1$2 then v40$2 else $$agg.tmp65$10bv32$2);
+    $$2$10bv32$1 := (if p1$1 then v40$1 else $$2$10bv32$1);
+    $$2$10bv32$2 := (if p1$2 then v40$2 else $$2$10bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v41$1 := (if p1$1 then _HAVOC_bv8$1 else v41$1);
     v41$2 := (if p1$2 then _HAVOC_bv8$2 else v41$2);
-    $$agg.tmp65$11bv32$1 := (if p1$1 then v41$1 else $$agg.tmp65$11bv32$1);
-    $$agg.tmp65$11bv32$2 := (if p1$2 then v41$2 else $$agg.tmp65$11bv32$2);
-    call {:sourceloc_num 86} v42$1, v42$2 := $_Z5tex2DIhET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(MKPTR($arrayId$$agg.tmp65, 0bv32), p1$1, SI32_TO_FP32(BV32_ADD(BV32_SUB(BV32_ADD(BV16_SEXT32(v0$1), BV32_MUL(4bv32, BV16_SEXT32($ib.0$1))), 1bv32), 2bv32)), SI32_TO_FP32(BV32_SUB(BV16_SEXT32(v1$1), 1bv32)), p1$2, SI32_TO_FP32(BV32_ADD(BV32_SUB(BV32_ADD(BV16_SEXT32(v0$2), BV32_MUL(4bv32, BV16_SEXT32($ib.0$2))), 1bv32), 2bv32)), SI32_TO_FP32(BV32_SUB(BV16_SEXT32(v1$2), 1bv32)));
+    $$2$11bv32$1 := (if p1$1 then v41$1 else $$2$11bv32$1);
+    $$2$11bv32$2 := (if p1$2 then v41$2 else $$2$11bv32$2);
+    call {:sourceloc_num 86} v42$1, v42$2 := $_Z5tex2DIhET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(MKPTR($arrayId$$2, 0bv32), p1$1, SI32_TO_FP32(BV32_ADD(BV32_SUB(BV32_ADD(BV16_SEXT32(v0$1), BV32_MUL(4bv32, BV16_SEXT32($ib.0$1))), 1bv32), 2bv32)), SI32_TO_FP32(BV32_SUB(BV16_SEXT32(v1$1), 1bv32)), p1$2, SI32_TO_FP32(BV32_ADD(BV32_SUB(BV32_ADD(BV16_SEXT32(v0$2), BV32_MUL(4bv32, BV16_SEXT32($ib.0$2))), 1bv32), 2bv32)), SI32_TO_FP32(BV32_SUB(BV16_SEXT32(v1$2), 1bv32)));
     assume {:captureState "call_return_state_0"} {:procedureName "$_Z5tex2DIhET_7textureIS0_Li2EL19cudaTextureReadMode0EEff"} true;
     call {:sourceloc} {:sourceloc_num 87} _LOG_WRITE_$$LocalBlock(p1$1, BV32_ADD(BV32_ADD(v2$1, BV32_MUL(4bv32, BV16_SEXT32($ib.0$1))), 2bv32), v42$1, $$LocalBlock[1bv1][BV32_ADD(BV32_ADD(v2$1, BV32_MUL(4bv32, BV16_SEXT32($ib.0$1))), 2bv32)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$LocalBlock(p1$2, BV32_ADD(BV32_ADD(v2$2, BV32_MUL(4bv32, BV16_SEXT32($ib.0$2))), 2bv32));
@@ -897,64 +897,64 @@ implementation {:source_name "SobelShared"} {:kernel} $_Z11SobelSharedP6uchar4ts
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v43$1 := (if p1$1 then _HAVOC_bv8$1 else v43$1);
     v43$2 := (if p1$2 then _HAVOC_bv8$2 else v43$2);
-    $$agg.tmp82$0bv32$1 := (if p1$1 then v43$1 else $$agg.tmp82$0bv32$1);
-    $$agg.tmp82$0bv32$2 := (if p1$2 then v43$2 else $$agg.tmp82$0bv32$2);
+    $$3$0bv32$1 := (if p1$1 then v43$1 else $$3$0bv32$1);
+    $$3$0bv32$2 := (if p1$2 then v43$2 else $$3$0bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v44$1 := (if p1$1 then _HAVOC_bv8$1 else v44$1);
     v44$2 := (if p1$2 then _HAVOC_bv8$2 else v44$2);
-    $$agg.tmp82$1bv32$1 := (if p1$1 then v44$1 else $$agg.tmp82$1bv32$1);
-    $$agg.tmp82$1bv32$2 := (if p1$2 then v44$2 else $$agg.tmp82$1bv32$2);
+    $$3$1bv32$1 := (if p1$1 then v44$1 else $$3$1bv32$1);
+    $$3$1bv32$2 := (if p1$2 then v44$2 else $$3$1bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v45$1 := (if p1$1 then _HAVOC_bv8$1 else v45$1);
     v45$2 := (if p1$2 then _HAVOC_bv8$2 else v45$2);
-    $$agg.tmp82$2bv32$1 := (if p1$1 then v45$1 else $$agg.tmp82$2bv32$1);
-    $$agg.tmp82$2bv32$2 := (if p1$2 then v45$2 else $$agg.tmp82$2bv32$2);
+    $$3$2bv32$1 := (if p1$1 then v45$1 else $$3$2bv32$1);
+    $$3$2bv32$2 := (if p1$2 then v45$2 else $$3$2bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v46$1 := (if p1$1 then _HAVOC_bv8$1 else v46$1);
     v46$2 := (if p1$2 then _HAVOC_bv8$2 else v46$2);
-    $$agg.tmp82$3bv32$1 := (if p1$1 then v46$1 else $$agg.tmp82$3bv32$1);
-    $$agg.tmp82$3bv32$2 := (if p1$2 then v46$2 else $$agg.tmp82$3bv32$2);
+    $$3$3bv32$1 := (if p1$1 then v46$1 else $$3$3bv32$1);
+    $$3$3bv32$2 := (if p1$2 then v46$2 else $$3$3bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v47$1 := (if p1$1 then _HAVOC_bv8$1 else v47$1);
     v47$2 := (if p1$2 then _HAVOC_bv8$2 else v47$2);
-    $$agg.tmp82$4bv32$1 := (if p1$1 then v47$1 else $$agg.tmp82$4bv32$1);
-    $$agg.tmp82$4bv32$2 := (if p1$2 then v47$2 else $$agg.tmp82$4bv32$2);
+    $$3$4bv32$1 := (if p1$1 then v47$1 else $$3$4bv32$1);
+    $$3$4bv32$2 := (if p1$2 then v47$2 else $$3$4bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v48$1 := (if p1$1 then _HAVOC_bv8$1 else v48$1);
     v48$2 := (if p1$2 then _HAVOC_bv8$2 else v48$2);
-    $$agg.tmp82$5bv32$1 := (if p1$1 then v48$1 else $$agg.tmp82$5bv32$1);
-    $$agg.tmp82$5bv32$2 := (if p1$2 then v48$2 else $$agg.tmp82$5bv32$2);
+    $$3$5bv32$1 := (if p1$1 then v48$1 else $$3$5bv32$1);
+    $$3$5bv32$2 := (if p1$2 then v48$2 else $$3$5bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v49$1 := (if p1$1 then _HAVOC_bv8$1 else v49$1);
     v49$2 := (if p1$2 then _HAVOC_bv8$2 else v49$2);
-    $$agg.tmp82$6bv32$1 := (if p1$1 then v49$1 else $$agg.tmp82$6bv32$1);
-    $$agg.tmp82$6bv32$2 := (if p1$2 then v49$2 else $$agg.tmp82$6bv32$2);
+    $$3$6bv32$1 := (if p1$1 then v49$1 else $$3$6bv32$1);
+    $$3$6bv32$2 := (if p1$2 then v49$2 else $$3$6bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v50$1 := (if p1$1 then _HAVOC_bv8$1 else v50$1);
     v50$2 := (if p1$2 then _HAVOC_bv8$2 else v50$2);
-    $$agg.tmp82$7bv32$1 := (if p1$1 then v50$1 else $$agg.tmp82$7bv32$1);
-    $$agg.tmp82$7bv32$2 := (if p1$2 then v50$2 else $$agg.tmp82$7bv32$2);
+    $$3$7bv32$1 := (if p1$1 then v50$1 else $$3$7bv32$1);
+    $$3$7bv32$2 := (if p1$2 then v50$2 else $$3$7bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v51$1 := (if p1$1 then _HAVOC_bv8$1 else v51$1);
     v51$2 := (if p1$2 then _HAVOC_bv8$2 else v51$2);
-    $$agg.tmp82$8bv32$1 := (if p1$1 then v51$1 else $$agg.tmp82$8bv32$1);
-    $$agg.tmp82$8bv32$2 := (if p1$2 then v51$2 else $$agg.tmp82$8bv32$2);
+    $$3$8bv32$1 := (if p1$1 then v51$1 else $$3$8bv32$1);
+    $$3$8bv32$2 := (if p1$2 then v51$2 else $$3$8bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v52$1 := (if p1$1 then _HAVOC_bv8$1 else v52$1);
     v52$2 := (if p1$2 then _HAVOC_bv8$2 else v52$2);
-    $$agg.tmp82$9bv32$1 := (if p1$1 then v52$1 else $$agg.tmp82$9bv32$1);
-    $$agg.tmp82$9bv32$2 := (if p1$2 then v52$2 else $$agg.tmp82$9bv32$2);
+    $$3$9bv32$1 := (if p1$1 then v52$1 else $$3$9bv32$1);
+    $$3$9bv32$2 := (if p1$2 then v52$2 else $$3$9bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v53$1 := (if p1$1 then _HAVOC_bv8$1 else v53$1);
     v53$2 := (if p1$2 then _HAVOC_bv8$2 else v53$2);
-    $$agg.tmp82$10bv32$1 := (if p1$1 then v53$1 else $$agg.tmp82$10bv32$1);
-    $$agg.tmp82$10bv32$2 := (if p1$2 then v53$2 else $$agg.tmp82$10bv32$2);
+    $$3$10bv32$1 := (if p1$1 then v53$1 else $$3$10bv32$1);
+    $$3$10bv32$2 := (if p1$2 then v53$2 else $$3$10bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v54$1 := (if p1$1 then _HAVOC_bv8$1 else v54$1);
     v54$2 := (if p1$2 then _HAVOC_bv8$2 else v54$2);
-    $$agg.tmp82$11bv32$1 := (if p1$1 then v54$1 else $$agg.tmp82$11bv32$1);
-    $$agg.tmp82$11bv32$2 := (if p1$2 then v54$2 else $$agg.tmp82$11bv32$2);
-    call {:sourceloc_num 112} v55$1, v55$2 := $_Z5tex2DIhET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(MKPTR($arrayId$$agg.tmp82, 0bv32), p1$1, SI32_TO_FP32(BV32_ADD(BV32_SUB(BV32_ADD(BV16_SEXT32(v0$1), BV32_MUL(4bv32, BV16_SEXT32($ib.0$1))), 1bv32), 3bv32)), SI32_TO_FP32(BV32_SUB(BV16_SEXT32(v1$1), 1bv32)), p1$2, SI32_TO_FP32(BV32_ADD(BV32_SUB(BV32_ADD(BV16_SEXT32(v0$2), BV32_MUL(4bv32, BV16_SEXT32($ib.0$2))), 1bv32), 3bv32)), SI32_TO_FP32(BV32_SUB(BV16_SEXT32(v1$2), 1bv32)));
+    $$3$11bv32$1 := (if p1$1 then v54$1 else $$3$11bv32$1);
+    $$3$11bv32$2 := (if p1$2 then v54$2 else $$3$11bv32$2);
+    call {:sourceloc_num 112} v55$1, v55$2 := $_Z5tex2DIhET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(MKPTR($arrayId$$3, 0bv32), p1$1, SI32_TO_FP32(BV32_ADD(BV32_SUB(BV32_ADD(BV16_SEXT32(v0$1), BV32_MUL(4bv32, BV16_SEXT32($ib.0$1))), 1bv32), 3bv32)), SI32_TO_FP32(BV32_SUB(BV16_SEXT32(v1$1), 1bv32)), p1$2, SI32_TO_FP32(BV32_ADD(BV32_SUB(BV32_ADD(BV16_SEXT32(v0$2), BV32_MUL(4bv32, BV16_SEXT32($ib.0$2))), 1bv32), 3bv32)), SI32_TO_FP32(BV32_SUB(BV16_SEXT32(v1$2), 1bv32)));
     assume {:captureState "call_return_state_0"} {:procedureName "$_Z5tex2DIhET_7textureIS0_Li2EL19cudaTextureReadMode0EEff"} true;
     call {:sourceloc} {:sourceloc_num 113} _LOG_WRITE_$$LocalBlock(p1$1, BV32_ADD(BV32_ADD(v2$1, BV32_MUL(4bv32, BV16_SEXT32($ib.0$1))), 3bv32), v55$1, $$LocalBlock[1bv1][BV32_ADD(BV32_ADD(v2$1, BV32_MUL(4bv32, BV16_SEXT32($ib.0$1))), 3bv32)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$LocalBlock(p1$2, BV32_ADD(BV32_ADD(v2$2, BV32_MUL(4bv32, BV16_SEXT32($ib.0$2))), 3bv32));
@@ -967,9 +967,9 @@ implementation {:source_name "SobelShared"} {:kernel} $_Z11SobelSharedP6uchar4ts
     $ib.0$2 := (if p1$2 then BV32_ADD(BV16_SEXT32($ib.0$2), group_size_x)[16:0] else $ib.0$2);
     p0$1 := (if p1$1 then true else p0$1);
     p0$2 := (if p1$2 then true else p0$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $1.backedge, $1.tail;
 
-  $for.cond.tail:
+  $1.tail:
     assume !p0$1 && !p0$2;
     v56$1 := BV32_ULT(local_id_y$1, 2bv32);
     v56$2 := BV32_ULT(local_id_y$2, 2bv32);
@@ -981,13 +981,13 @@ implementation {:source_name "SobelShared"} {:kernel} $_Z11SobelSharedP6uchar4ts
     $ib.1$2 := (if p3$2 then local_id_x$2[16:0] else $ib.1$2);
     p4$1 := (if p3$1 then true else p4$1);
     p4$2 := (if p3$2 then true else p4$2);
-    _WRITE_HAS_OCCURRED_$$LocalBlock$ghost$$for.cond.107 := _WRITE_HAS_OCCURRED_$$LocalBlock;
+    _WRITE_HAS_OCCURRED_$$LocalBlock$ghost$$6 := _WRITE_HAS_OCCURRED_$$LocalBlock;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.107;
+    goto $6;
 
-  $for.cond.107:
+  $6:
     assume {:captureState "loop_head_state_1"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b20 ==> !p3$1 ==> _WRITE_HAS_OCCURRED_$$LocalBlock$ghost$$for.cond.107 == _WRITE_HAS_OCCURRED_$$LocalBlock;
+    assert {:tag "disabledMaintainsInstrumentation"} _b20 ==> !p3$1 ==> _WRITE_HAS_OCCURRED_$$LocalBlock$ghost$$6 == _WRITE_HAS_OCCURRED_$$LocalBlock;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$LocalBlock ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$LocalBlock ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$LocalBlock ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -1022,64 +1022,64 @@ implementation {:source_name "SobelShared"} {:kernel} $_Z11SobelSharedP6uchar4ts
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v59$1 := (if p5$1 then _HAVOC_bv8$1 else v59$1);
     v59$2 := (if p5$2 then _HAVOC_bv8$2 else v59$2);
-    $$agg.tmp153$0bv32$1 := (if p5$1 then v59$1 else $$agg.tmp153$0bv32$1);
-    $$agg.tmp153$0bv32$2 := (if p5$2 then v59$2 else $$agg.tmp153$0bv32$2);
+    $$4$0bv32$1 := (if p5$1 then v59$1 else $$4$0bv32$1);
+    $$4$0bv32$2 := (if p5$2 then v59$2 else $$4$0bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v60$1 := (if p5$1 then _HAVOC_bv8$1 else v60$1);
     v60$2 := (if p5$2 then _HAVOC_bv8$2 else v60$2);
-    $$agg.tmp153$1bv32$1 := (if p5$1 then v60$1 else $$agg.tmp153$1bv32$1);
-    $$agg.tmp153$1bv32$2 := (if p5$2 then v60$2 else $$agg.tmp153$1bv32$2);
+    $$4$1bv32$1 := (if p5$1 then v60$1 else $$4$1bv32$1);
+    $$4$1bv32$2 := (if p5$2 then v60$2 else $$4$1bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v61$1 := (if p5$1 then _HAVOC_bv8$1 else v61$1);
     v61$2 := (if p5$2 then _HAVOC_bv8$2 else v61$2);
-    $$agg.tmp153$2bv32$1 := (if p5$1 then v61$1 else $$agg.tmp153$2bv32$1);
-    $$agg.tmp153$2bv32$2 := (if p5$2 then v61$2 else $$agg.tmp153$2bv32$2);
+    $$4$2bv32$1 := (if p5$1 then v61$1 else $$4$2bv32$1);
+    $$4$2bv32$2 := (if p5$2 then v61$2 else $$4$2bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v62$1 := (if p5$1 then _HAVOC_bv8$1 else v62$1);
     v62$2 := (if p5$2 then _HAVOC_bv8$2 else v62$2);
-    $$agg.tmp153$3bv32$1 := (if p5$1 then v62$1 else $$agg.tmp153$3bv32$1);
-    $$agg.tmp153$3bv32$2 := (if p5$2 then v62$2 else $$agg.tmp153$3bv32$2);
+    $$4$3bv32$1 := (if p5$1 then v62$1 else $$4$3bv32$1);
+    $$4$3bv32$2 := (if p5$2 then v62$2 else $$4$3bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v63$1 := (if p5$1 then _HAVOC_bv8$1 else v63$1);
     v63$2 := (if p5$2 then _HAVOC_bv8$2 else v63$2);
-    $$agg.tmp153$4bv32$1 := (if p5$1 then v63$1 else $$agg.tmp153$4bv32$1);
-    $$agg.tmp153$4bv32$2 := (if p5$2 then v63$2 else $$agg.tmp153$4bv32$2);
+    $$4$4bv32$1 := (if p5$1 then v63$1 else $$4$4bv32$1);
+    $$4$4bv32$2 := (if p5$2 then v63$2 else $$4$4bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v64$1 := (if p5$1 then _HAVOC_bv8$1 else v64$1);
     v64$2 := (if p5$2 then _HAVOC_bv8$2 else v64$2);
-    $$agg.tmp153$5bv32$1 := (if p5$1 then v64$1 else $$agg.tmp153$5bv32$1);
-    $$agg.tmp153$5bv32$2 := (if p5$2 then v64$2 else $$agg.tmp153$5bv32$2);
+    $$4$5bv32$1 := (if p5$1 then v64$1 else $$4$5bv32$1);
+    $$4$5bv32$2 := (if p5$2 then v64$2 else $$4$5bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v65$1 := (if p5$1 then _HAVOC_bv8$1 else v65$1);
     v65$2 := (if p5$2 then _HAVOC_bv8$2 else v65$2);
-    $$agg.tmp153$6bv32$1 := (if p5$1 then v65$1 else $$agg.tmp153$6bv32$1);
-    $$agg.tmp153$6bv32$2 := (if p5$2 then v65$2 else $$agg.tmp153$6bv32$2);
+    $$4$6bv32$1 := (if p5$1 then v65$1 else $$4$6bv32$1);
+    $$4$6bv32$2 := (if p5$2 then v65$2 else $$4$6bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v66$1 := (if p5$1 then _HAVOC_bv8$1 else v66$1);
     v66$2 := (if p5$2 then _HAVOC_bv8$2 else v66$2);
-    $$agg.tmp153$7bv32$1 := (if p5$1 then v66$1 else $$agg.tmp153$7bv32$1);
-    $$agg.tmp153$7bv32$2 := (if p5$2 then v66$2 else $$agg.tmp153$7bv32$2);
+    $$4$7bv32$1 := (if p5$1 then v66$1 else $$4$7bv32$1);
+    $$4$7bv32$2 := (if p5$2 then v66$2 else $$4$7bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v67$1 := (if p5$1 then _HAVOC_bv8$1 else v67$1);
     v67$2 := (if p5$2 then _HAVOC_bv8$2 else v67$2);
-    $$agg.tmp153$8bv32$1 := (if p5$1 then v67$1 else $$agg.tmp153$8bv32$1);
-    $$agg.tmp153$8bv32$2 := (if p5$2 then v67$2 else $$agg.tmp153$8bv32$2);
+    $$4$8bv32$1 := (if p5$1 then v67$1 else $$4$8bv32$1);
+    $$4$8bv32$2 := (if p5$2 then v67$2 else $$4$8bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v68$1 := (if p5$1 then _HAVOC_bv8$1 else v68$1);
     v68$2 := (if p5$2 then _HAVOC_bv8$2 else v68$2);
-    $$agg.tmp153$9bv32$1 := (if p5$1 then v68$1 else $$agg.tmp153$9bv32$1);
-    $$agg.tmp153$9bv32$2 := (if p5$2 then v68$2 else $$agg.tmp153$9bv32$2);
+    $$4$9bv32$1 := (if p5$1 then v68$1 else $$4$9bv32$1);
+    $$4$9bv32$2 := (if p5$2 then v68$2 else $$4$9bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v69$1 := (if p5$1 then _HAVOC_bv8$1 else v69$1);
     v69$2 := (if p5$2 then _HAVOC_bv8$2 else v69$2);
-    $$agg.tmp153$10bv32$1 := (if p5$1 then v69$1 else $$agg.tmp153$10bv32$1);
-    $$agg.tmp153$10bv32$2 := (if p5$2 then v69$2 else $$agg.tmp153$10bv32$2);
+    $$4$10bv32$1 := (if p5$1 then v69$1 else $$4$10bv32$1);
+    $$4$10bv32$2 := (if p5$2 then v69$2 else $$4$10bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v70$1 := (if p5$1 then _HAVOC_bv8$1 else v70$1);
     v70$2 := (if p5$2 then _HAVOC_bv8$2 else v70$2);
-    $$agg.tmp153$11bv32$1 := (if p5$1 then v70$1 else $$agg.tmp153$11bv32$1);
-    $$agg.tmp153$11bv32$2 := (if p5$2 then v70$2 else $$agg.tmp153$11bv32$2);
-    call {:sourceloc_num 145} v71$1, v71$2 := $_Z5tex2DIhET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(MKPTR($arrayId$$agg.tmp153, 0bv32), p5$1, SI32_TO_FP32(BV32_SUB(BV32_ADD(BV16_SEXT32(v0$1), BV32_MUL(4bv32, BV16_SEXT32($ib.1$1))), 1bv32)), UI32_TO_FP32(BV32_SUB(BV32_ADD(BV16_SEXT32(v1$1), group_size_y), 1bv32)), p5$2, SI32_TO_FP32(BV32_SUB(BV32_ADD(BV16_SEXT32(v0$2), BV32_MUL(4bv32, BV16_SEXT32($ib.1$2))), 1bv32)), UI32_TO_FP32(BV32_SUB(BV32_ADD(BV16_SEXT32(v1$2), group_size_y), 1bv32)));
+    $$4$11bv32$1 := (if p5$1 then v70$1 else $$4$11bv32$1);
+    $$4$11bv32$2 := (if p5$2 then v70$2 else $$4$11bv32$2);
+    call {:sourceloc_num 145} v71$1, v71$2 := $_Z5tex2DIhET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(MKPTR($arrayId$$4, 0bv32), p5$1, SI32_TO_FP32(BV32_SUB(BV32_ADD(BV16_SEXT32(v0$1), BV32_MUL(4bv32, BV16_SEXT32($ib.1$1))), 1bv32)), UI32_TO_FP32(BV32_SUB(BV32_ADD(BV16_SEXT32(v1$1), group_size_y), 1bv32)), p5$2, SI32_TO_FP32(BV32_SUB(BV32_ADD(BV16_SEXT32(v0$2), BV32_MUL(4bv32, BV16_SEXT32($ib.1$2))), 1bv32)), UI32_TO_FP32(BV32_SUB(BV32_ADD(BV16_SEXT32(v1$2), group_size_y), 1bv32)));
     assume {:captureState "call_return_state_0"} {:procedureName "$_Z5tex2DIhET_7textureIS0_Li2EL19cudaTextureReadMode0EEff"} true;
     call {:sourceloc} {:sourceloc_num 146} _LOG_WRITE_$$LocalBlock(p5$1, BV32_ADD(v57$1, BV32_MUL(4bv32, BV16_SEXT32($ib.1$1))), v71$1, $$LocalBlock[1bv1][BV32_ADD(v57$1, BV32_MUL(4bv32, BV16_SEXT32($ib.1$1)))]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$LocalBlock(p5$2, BV32_ADD(v57$2, BV32_MUL(4bv32, BV16_SEXT32($ib.1$2))));
@@ -1091,64 +1091,64 @@ implementation {:source_name "SobelShared"} {:kernel} $_Z11SobelSharedP6uchar4ts
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v72$1 := (if p5$1 then _HAVOC_bv8$1 else v72$1);
     v72$2 := (if p5$2 then _HAVOC_bv8$2 else v72$2);
-    $$agg.tmp171$0bv32$1 := (if p5$1 then v72$1 else $$agg.tmp171$0bv32$1);
-    $$agg.tmp171$0bv32$2 := (if p5$2 then v72$2 else $$agg.tmp171$0bv32$2);
+    $$5$0bv32$1 := (if p5$1 then v72$1 else $$5$0bv32$1);
+    $$5$0bv32$2 := (if p5$2 then v72$2 else $$5$0bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v73$1 := (if p5$1 then _HAVOC_bv8$1 else v73$1);
     v73$2 := (if p5$2 then _HAVOC_bv8$2 else v73$2);
-    $$agg.tmp171$1bv32$1 := (if p5$1 then v73$1 else $$agg.tmp171$1bv32$1);
-    $$agg.tmp171$1bv32$2 := (if p5$2 then v73$2 else $$agg.tmp171$1bv32$2);
+    $$5$1bv32$1 := (if p5$1 then v73$1 else $$5$1bv32$1);
+    $$5$1bv32$2 := (if p5$2 then v73$2 else $$5$1bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v74$1 := (if p5$1 then _HAVOC_bv8$1 else v74$1);
     v74$2 := (if p5$2 then _HAVOC_bv8$2 else v74$2);
-    $$agg.tmp171$2bv32$1 := (if p5$1 then v74$1 else $$agg.tmp171$2bv32$1);
-    $$agg.tmp171$2bv32$2 := (if p5$2 then v74$2 else $$agg.tmp171$2bv32$2);
+    $$5$2bv32$1 := (if p5$1 then v74$1 else $$5$2bv32$1);
+    $$5$2bv32$2 := (if p5$2 then v74$2 else $$5$2bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v75$1 := (if p5$1 then _HAVOC_bv8$1 else v75$1);
     v75$2 := (if p5$2 then _HAVOC_bv8$2 else v75$2);
-    $$agg.tmp171$3bv32$1 := (if p5$1 then v75$1 else $$agg.tmp171$3bv32$1);
-    $$agg.tmp171$3bv32$2 := (if p5$2 then v75$2 else $$agg.tmp171$3bv32$2);
+    $$5$3bv32$1 := (if p5$1 then v75$1 else $$5$3bv32$1);
+    $$5$3bv32$2 := (if p5$2 then v75$2 else $$5$3bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v76$1 := (if p5$1 then _HAVOC_bv8$1 else v76$1);
     v76$2 := (if p5$2 then _HAVOC_bv8$2 else v76$2);
-    $$agg.tmp171$4bv32$1 := (if p5$1 then v76$1 else $$agg.tmp171$4bv32$1);
-    $$agg.tmp171$4bv32$2 := (if p5$2 then v76$2 else $$agg.tmp171$4bv32$2);
+    $$5$4bv32$1 := (if p5$1 then v76$1 else $$5$4bv32$1);
+    $$5$4bv32$2 := (if p5$2 then v76$2 else $$5$4bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v77$1 := (if p5$1 then _HAVOC_bv8$1 else v77$1);
     v77$2 := (if p5$2 then _HAVOC_bv8$2 else v77$2);
-    $$agg.tmp171$5bv32$1 := (if p5$1 then v77$1 else $$agg.tmp171$5bv32$1);
-    $$agg.tmp171$5bv32$2 := (if p5$2 then v77$2 else $$agg.tmp171$5bv32$2);
+    $$5$5bv32$1 := (if p5$1 then v77$1 else $$5$5bv32$1);
+    $$5$5bv32$2 := (if p5$2 then v77$2 else $$5$5bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v78$1 := (if p5$1 then _HAVOC_bv8$1 else v78$1);
     v78$2 := (if p5$2 then _HAVOC_bv8$2 else v78$2);
-    $$agg.tmp171$6bv32$1 := (if p5$1 then v78$1 else $$agg.tmp171$6bv32$1);
-    $$agg.tmp171$6bv32$2 := (if p5$2 then v78$2 else $$agg.tmp171$6bv32$2);
+    $$5$6bv32$1 := (if p5$1 then v78$1 else $$5$6bv32$1);
+    $$5$6bv32$2 := (if p5$2 then v78$2 else $$5$6bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v79$1 := (if p5$1 then _HAVOC_bv8$1 else v79$1);
     v79$2 := (if p5$2 then _HAVOC_bv8$2 else v79$2);
-    $$agg.tmp171$7bv32$1 := (if p5$1 then v79$1 else $$agg.tmp171$7bv32$1);
-    $$agg.tmp171$7bv32$2 := (if p5$2 then v79$2 else $$agg.tmp171$7bv32$2);
+    $$5$7bv32$1 := (if p5$1 then v79$1 else $$5$7bv32$1);
+    $$5$7bv32$2 := (if p5$2 then v79$2 else $$5$7bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v80$1 := (if p5$1 then _HAVOC_bv8$1 else v80$1);
     v80$2 := (if p5$2 then _HAVOC_bv8$2 else v80$2);
-    $$agg.tmp171$8bv32$1 := (if p5$1 then v80$1 else $$agg.tmp171$8bv32$1);
-    $$agg.tmp171$8bv32$2 := (if p5$2 then v80$2 else $$agg.tmp171$8bv32$2);
+    $$5$8bv32$1 := (if p5$1 then v80$1 else $$5$8bv32$1);
+    $$5$8bv32$2 := (if p5$2 then v80$2 else $$5$8bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v81$1 := (if p5$1 then _HAVOC_bv8$1 else v81$1);
     v81$2 := (if p5$2 then _HAVOC_bv8$2 else v81$2);
-    $$agg.tmp171$9bv32$1 := (if p5$1 then v81$1 else $$agg.tmp171$9bv32$1);
-    $$agg.tmp171$9bv32$2 := (if p5$2 then v81$2 else $$agg.tmp171$9bv32$2);
+    $$5$9bv32$1 := (if p5$1 then v81$1 else $$5$9bv32$1);
+    $$5$9bv32$2 := (if p5$2 then v81$2 else $$5$9bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v82$1 := (if p5$1 then _HAVOC_bv8$1 else v82$1);
     v82$2 := (if p5$2 then _HAVOC_bv8$2 else v82$2);
-    $$agg.tmp171$10bv32$1 := (if p5$1 then v82$1 else $$agg.tmp171$10bv32$1);
-    $$agg.tmp171$10bv32$2 := (if p5$2 then v82$2 else $$agg.tmp171$10bv32$2);
+    $$5$10bv32$1 := (if p5$1 then v82$1 else $$5$10bv32$1);
+    $$5$10bv32$2 := (if p5$2 then v82$2 else $$5$10bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v83$1 := (if p5$1 then _HAVOC_bv8$1 else v83$1);
     v83$2 := (if p5$2 then _HAVOC_bv8$2 else v83$2);
-    $$agg.tmp171$11bv32$1 := (if p5$1 then v83$1 else $$agg.tmp171$11bv32$1);
-    $$agg.tmp171$11bv32$2 := (if p5$2 then v83$2 else $$agg.tmp171$11bv32$2);
-    call {:sourceloc_num 171} v84$1, v84$2 := $_Z5tex2DIhET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(MKPTR($arrayId$$agg.tmp171, 0bv32), p5$1, SI32_TO_FP32(BV32_ADD(BV32_SUB(BV32_ADD(BV16_SEXT32(v0$1), BV32_MUL(4bv32, BV16_SEXT32($ib.1$1))), 1bv32), 1bv32)), UI32_TO_FP32(BV32_SUB(BV32_ADD(BV16_SEXT32(v1$1), group_size_y), 1bv32)), p5$2, SI32_TO_FP32(BV32_ADD(BV32_SUB(BV32_ADD(BV16_SEXT32(v0$2), BV32_MUL(4bv32, BV16_SEXT32($ib.1$2))), 1bv32), 1bv32)), UI32_TO_FP32(BV32_SUB(BV32_ADD(BV16_SEXT32(v1$2), group_size_y), 1bv32)));
+    $$5$11bv32$1 := (if p5$1 then v83$1 else $$5$11bv32$1);
+    $$5$11bv32$2 := (if p5$2 then v83$2 else $$5$11bv32$2);
+    call {:sourceloc_num 171} v84$1, v84$2 := $_Z5tex2DIhET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(MKPTR($arrayId$$5, 0bv32), p5$1, SI32_TO_FP32(BV32_ADD(BV32_SUB(BV32_ADD(BV16_SEXT32(v0$1), BV32_MUL(4bv32, BV16_SEXT32($ib.1$1))), 1bv32), 1bv32)), UI32_TO_FP32(BV32_SUB(BV32_ADD(BV16_SEXT32(v1$1), group_size_y), 1bv32)), p5$2, SI32_TO_FP32(BV32_ADD(BV32_SUB(BV32_ADD(BV16_SEXT32(v0$2), BV32_MUL(4bv32, BV16_SEXT32($ib.1$2))), 1bv32), 1bv32)), UI32_TO_FP32(BV32_SUB(BV32_ADD(BV16_SEXT32(v1$2), group_size_y), 1bv32)));
     assume {:captureState "call_return_state_0"} {:procedureName "$_Z5tex2DIhET_7textureIS0_Li2EL19cudaTextureReadMode0EEff"} true;
     call {:sourceloc} {:sourceloc_num 172} _LOG_WRITE_$$LocalBlock(p5$1, BV32_ADD(BV32_ADD(v57$1, BV32_MUL(4bv32, BV16_SEXT32($ib.1$1))), 1bv32), v84$1, $$LocalBlock[1bv1][BV32_ADD(BV32_ADD(v57$1, BV32_MUL(4bv32, BV16_SEXT32($ib.1$1))), 1bv32)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$LocalBlock(p5$2, BV32_ADD(BV32_ADD(v57$2, BV32_MUL(4bv32, BV16_SEXT32($ib.1$2))), 1bv32));
@@ -1160,64 +1160,64 @@ implementation {:source_name "SobelShared"} {:kernel} $_Z11SobelSharedP6uchar4ts
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v85$1 := (if p5$1 then _HAVOC_bv8$1 else v85$1);
     v85$2 := (if p5$2 then _HAVOC_bv8$2 else v85$2);
-    $$agg.tmp189$0bv32$1 := (if p5$1 then v85$1 else $$agg.tmp189$0bv32$1);
-    $$agg.tmp189$0bv32$2 := (if p5$2 then v85$2 else $$agg.tmp189$0bv32$2);
+    $$6$0bv32$1 := (if p5$1 then v85$1 else $$6$0bv32$1);
+    $$6$0bv32$2 := (if p5$2 then v85$2 else $$6$0bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v86$1 := (if p5$1 then _HAVOC_bv8$1 else v86$1);
     v86$2 := (if p5$2 then _HAVOC_bv8$2 else v86$2);
-    $$agg.tmp189$1bv32$1 := (if p5$1 then v86$1 else $$agg.tmp189$1bv32$1);
-    $$agg.tmp189$1bv32$2 := (if p5$2 then v86$2 else $$agg.tmp189$1bv32$2);
+    $$6$1bv32$1 := (if p5$1 then v86$1 else $$6$1bv32$1);
+    $$6$1bv32$2 := (if p5$2 then v86$2 else $$6$1bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v87$1 := (if p5$1 then _HAVOC_bv8$1 else v87$1);
     v87$2 := (if p5$2 then _HAVOC_bv8$2 else v87$2);
-    $$agg.tmp189$2bv32$1 := (if p5$1 then v87$1 else $$agg.tmp189$2bv32$1);
-    $$agg.tmp189$2bv32$2 := (if p5$2 then v87$2 else $$agg.tmp189$2bv32$2);
+    $$6$2bv32$1 := (if p5$1 then v87$1 else $$6$2bv32$1);
+    $$6$2bv32$2 := (if p5$2 then v87$2 else $$6$2bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v88$1 := (if p5$1 then _HAVOC_bv8$1 else v88$1);
     v88$2 := (if p5$2 then _HAVOC_bv8$2 else v88$2);
-    $$agg.tmp189$3bv32$1 := (if p5$1 then v88$1 else $$agg.tmp189$3bv32$1);
-    $$agg.tmp189$3bv32$2 := (if p5$2 then v88$2 else $$agg.tmp189$3bv32$2);
+    $$6$3bv32$1 := (if p5$1 then v88$1 else $$6$3bv32$1);
+    $$6$3bv32$2 := (if p5$2 then v88$2 else $$6$3bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v89$1 := (if p5$1 then _HAVOC_bv8$1 else v89$1);
     v89$2 := (if p5$2 then _HAVOC_bv8$2 else v89$2);
-    $$agg.tmp189$4bv32$1 := (if p5$1 then v89$1 else $$agg.tmp189$4bv32$1);
-    $$agg.tmp189$4bv32$2 := (if p5$2 then v89$2 else $$agg.tmp189$4bv32$2);
+    $$6$4bv32$1 := (if p5$1 then v89$1 else $$6$4bv32$1);
+    $$6$4bv32$2 := (if p5$2 then v89$2 else $$6$4bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v90$1 := (if p5$1 then _HAVOC_bv8$1 else v90$1);
     v90$2 := (if p5$2 then _HAVOC_bv8$2 else v90$2);
-    $$agg.tmp189$5bv32$1 := (if p5$1 then v90$1 else $$agg.tmp189$5bv32$1);
-    $$agg.tmp189$5bv32$2 := (if p5$2 then v90$2 else $$agg.tmp189$5bv32$2);
+    $$6$5bv32$1 := (if p5$1 then v90$1 else $$6$5bv32$1);
+    $$6$5bv32$2 := (if p5$2 then v90$2 else $$6$5bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v91$1 := (if p5$1 then _HAVOC_bv8$1 else v91$1);
     v91$2 := (if p5$2 then _HAVOC_bv8$2 else v91$2);
-    $$agg.tmp189$6bv32$1 := (if p5$1 then v91$1 else $$agg.tmp189$6bv32$1);
-    $$agg.tmp189$6bv32$2 := (if p5$2 then v91$2 else $$agg.tmp189$6bv32$2);
+    $$6$6bv32$1 := (if p5$1 then v91$1 else $$6$6bv32$1);
+    $$6$6bv32$2 := (if p5$2 then v91$2 else $$6$6bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v92$1 := (if p5$1 then _HAVOC_bv8$1 else v92$1);
     v92$2 := (if p5$2 then _HAVOC_bv8$2 else v92$2);
-    $$agg.tmp189$7bv32$1 := (if p5$1 then v92$1 else $$agg.tmp189$7bv32$1);
-    $$agg.tmp189$7bv32$2 := (if p5$2 then v92$2 else $$agg.tmp189$7bv32$2);
+    $$6$7bv32$1 := (if p5$1 then v92$1 else $$6$7bv32$1);
+    $$6$7bv32$2 := (if p5$2 then v92$2 else $$6$7bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v93$1 := (if p5$1 then _HAVOC_bv8$1 else v93$1);
     v93$2 := (if p5$2 then _HAVOC_bv8$2 else v93$2);
-    $$agg.tmp189$8bv32$1 := (if p5$1 then v93$1 else $$agg.tmp189$8bv32$1);
-    $$agg.tmp189$8bv32$2 := (if p5$2 then v93$2 else $$agg.tmp189$8bv32$2);
+    $$6$8bv32$1 := (if p5$1 then v93$1 else $$6$8bv32$1);
+    $$6$8bv32$2 := (if p5$2 then v93$2 else $$6$8bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v94$1 := (if p5$1 then _HAVOC_bv8$1 else v94$1);
     v94$2 := (if p5$2 then _HAVOC_bv8$2 else v94$2);
-    $$agg.tmp189$9bv32$1 := (if p5$1 then v94$1 else $$agg.tmp189$9bv32$1);
-    $$agg.tmp189$9bv32$2 := (if p5$2 then v94$2 else $$agg.tmp189$9bv32$2);
+    $$6$9bv32$1 := (if p5$1 then v94$1 else $$6$9bv32$1);
+    $$6$9bv32$2 := (if p5$2 then v94$2 else $$6$9bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v95$1 := (if p5$1 then _HAVOC_bv8$1 else v95$1);
     v95$2 := (if p5$2 then _HAVOC_bv8$2 else v95$2);
-    $$agg.tmp189$10bv32$1 := (if p5$1 then v95$1 else $$agg.tmp189$10bv32$1);
-    $$agg.tmp189$10bv32$2 := (if p5$2 then v95$2 else $$agg.tmp189$10bv32$2);
+    $$6$10bv32$1 := (if p5$1 then v95$1 else $$6$10bv32$1);
+    $$6$10bv32$2 := (if p5$2 then v95$2 else $$6$10bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v96$1 := (if p5$1 then _HAVOC_bv8$1 else v96$1);
     v96$2 := (if p5$2 then _HAVOC_bv8$2 else v96$2);
-    $$agg.tmp189$11bv32$1 := (if p5$1 then v96$1 else $$agg.tmp189$11bv32$1);
-    $$agg.tmp189$11bv32$2 := (if p5$2 then v96$2 else $$agg.tmp189$11bv32$2);
-    call {:sourceloc_num 197} v97$1, v97$2 := $_Z5tex2DIhET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(MKPTR($arrayId$$agg.tmp189, 0bv32), p5$1, SI32_TO_FP32(BV32_ADD(BV32_SUB(BV32_ADD(BV16_SEXT32(v0$1), BV32_MUL(4bv32, BV16_SEXT32($ib.1$1))), 1bv32), 2bv32)), UI32_TO_FP32(BV32_SUB(BV32_ADD(BV16_SEXT32(v1$1), group_size_y), 1bv32)), p5$2, SI32_TO_FP32(BV32_ADD(BV32_SUB(BV32_ADD(BV16_SEXT32(v0$2), BV32_MUL(4bv32, BV16_SEXT32($ib.1$2))), 1bv32), 2bv32)), UI32_TO_FP32(BV32_SUB(BV32_ADD(BV16_SEXT32(v1$2), group_size_y), 1bv32)));
+    $$6$11bv32$1 := (if p5$1 then v96$1 else $$6$11bv32$1);
+    $$6$11bv32$2 := (if p5$2 then v96$2 else $$6$11bv32$2);
+    call {:sourceloc_num 197} v97$1, v97$2 := $_Z5tex2DIhET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(MKPTR($arrayId$$6, 0bv32), p5$1, SI32_TO_FP32(BV32_ADD(BV32_SUB(BV32_ADD(BV16_SEXT32(v0$1), BV32_MUL(4bv32, BV16_SEXT32($ib.1$1))), 1bv32), 2bv32)), UI32_TO_FP32(BV32_SUB(BV32_ADD(BV16_SEXT32(v1$1), group_size_y), 1bv32)), p5$2, SI32_TO_FP32(BV32_ADD(BV32_SUB(BV32_ADD(BV16_SEXT32(v0$2), BV32_MUL(4bv32, BV16_SEXT32($ib.1$2))), 1bv32), 2bv32)), UI32_TO_FP32(BV32_SUB(BV32_ADD(BV16_SEXT32(v1$2), group_size_y), 1bv32)));
     assume {:captureState "call_return_state_0"} {:procedureName "$_Z5tex2DIhET_7textureIS0_Li2EL19cudaTextureReadMode0EEff"} true;
     call {:sourceloc} {:sourceloc_num 198} _LOG_WRITE_$$LocalBlock(p5$1, BV32_ADD(BV32_ADD(v57$1, BV32_MUL(4bv32, BV16_SEXT32($ib.1$1))), 2bv32), v97$1, $$LocalBlock[1bv1][BV32_ADD(BV32_ADD(v57$1, BV32_MUL(4bv32, BV16_SEXT32($ib.1$1))), 2bv32)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$LocalBlock(p5$2, BV32_ADD(BV32_ADD(v57$2, BV32_MUL(4bv32, BV16_SEXT32($ib.1$2))), 2bv32));
@@ -1229,64 +1229,64 @@ implementation {:source_name "SobelShared"} {:kernel} $_Z11SobelSharedP6uchar4ts
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v98$1 := (if p5$1 then _HAVOC_bv8$1 else v98$1);
     v98$2 := (if p5$2 then _HAVOC_bv8$2 else v98$2);
-    $$agg.tmp207$0bv32$1 := (if p5$1 then v98$1 else $$agg.tmp207$0bv32$1);
-    $$agg.tmp207$0bv32$2 := (if p5$2 then v98$2 else $$agg.tmp207$0bv32$2);
+    $$7$0bv32$1 := (if p5$1 then v98$1 else $$7$0bv32$1);
+    $$7$0bv32$2 := (if p5$2 then v98$2 else $$7$0bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v99$1 := (if p5$1 then _HAVOC_bv8$1 else v99$1);
     v99$2 := (if p5$2 then _HAVOC_bv8$2 else v99$2);
-    $$agg.tmp207$1bv32$1 := (if p5$1 then v99$1 else $$agg.tmp207$1bv32$1);
-    $$agg.tmp207$1bv32$2 := (if p5$2 then v99$2 else $$agg.tmp207$1bv32$2);
+    $$7$1bv32$1 := (if p5$1 then v99$1 else $$7$1bv32$1);
+    $$7$1bv32$2 := (if p5$2 then v99$2 else $$7$1bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v100$1 := (if p5$1 then _HAVOC_bv8$1 else v100$1);
     v100$2 := (if p5$2 then _HAVOC_bv8$2 else v100$2);
-    $$agg.tmp207$2bv32$1 := (if p5$1 then v100$1 else $$agg.tmp207$2bv32$1);
-    $$agg.tmp207$2bv32$2 := (if p5$2 then v100$2 else $$agg.tmp207$2bv32$2);
+    $$7$2bv32$1 := (if p5$1 then v100$1 else $$7$2bv32$1);
+    $$7$2bv32$2 := (if p5$2 then v100$2 else $$7$2bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v101$1 := (if p5$1 then _HAVOC_bv8$1 else v101$1);
     v101$2 := (if p5$2 then _HAVOC_bv8$2 else v101$2);
-    $$agg.tmp207$3bv32$1 := (if p5$1 then v101$1 else $$agg.tmp207$3bv32$1);
-    $$agg.tmp207$3bv32$2 := (if p5$2 then v101$2 else $$agg.tmp207$3bv32$2);
+    $$7$3bv32$1 := (if p5$1 then v101$1 else $$7$3bv32$1);
+    $$7$3bv32$2 := (if p5$2 then v101$2 else $$7$3bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v102$1 := (if p5$1 then _HAVOC_bv8$1 else v102$1);
     v102$2 := (if p5$2 then _HAVOC_bv8$2 else v102$2);
-    $$agg.tmp207$4bv32$1 := (if p5$1 then v102$1 else $$agg.tmp207$4bv32$1);
-    $$agg.tmp207$4bv32$2 := (if p5$2 then v102$2 else $$agg.tmp207$4bv32$2);
+    $$7$4bv32$1 := (if p5$1 then v102$1 else $$7$4bv32$1);
+    $$7$4bv32$2 := (if p5$2 then v102$2 else $$7$4bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v103$1 := (if p5$1 then _HAVOC_bv8$1 else v103$1);
     v103$2 := (if p5$2 then _HAVOC_bv8$2 else v103$2);
-    $$agg.tmp207$5bv32$1 := (if p5$1 then v103$1 else $$agg.tmp207$5bv32$1);
-    $$agg.tmp207$5bv32$2 := (if p5$2 then v103$2 else $$agg.tmp207$5bv32$2);
+    $$7$5bv32$1 := (if p5$1 then v103$1 else $$7$5bv32$1);
+    $$7$5bv32$2 := (if p5$2 then v103$2 else $$7$5bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v104$1 := (if p5$1 then _HAVOC_bv8$1 else v104$1);
     v104$2 := (if p5$2 then _HAVOC_bv8$2 else v104$2);
-    $$agg.tmp207$6bv32$1 := (if p5$1 then v104$1 else $$agg.tmp207$6bv32$1);
-    $$agg.tmp207$6bv32$2 := (if p5$2 then v104$2 else $$agg.tmp207$6bv32$2);
+    $$7$6bv32$1 := (if p5$1 then v104$1 else $$7$6bv32$1);
+    $$7$6bv32$2 := (if p5$2 then v104$2 else $$7$6bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v105$1 := (if p5$1 then _HAVOC_bv8$1 else v105$1);
     v105$2 := (if p5$2 then _HAVOC_bv8$2 else v105$2);
-    $$agg.tmp207$7bv32$1 := (if p5$1 then v105$1 else $$agg.tmp207$7bv32$1);
-    $$agg.tmp207$7bv32$2 := (if p5$2 then v105$2 else $$agg.tmp207$7bv32$2);
+    $$7$7bv32$1 := (if p5$1 then v105$1 else $$7$7bv32$1);
+    $$7$7bv32$2 := (if p5$2 then v105$2 else $$7$7bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v106$1 := (if p5$1 then _HAVOC_bv8$1 else v106$1);
     v106$2 := (if p5$2 then _HAVOC_bv8$2 else v106$2);
-    $$agg.tmp207$8bv32$1 := (if p5$1 then v106$1 else $$agg.tmp207$8bv32$1);
-    $$agg.tmp207$8bv32$2 := (if p5$2 then v106$2 else $$agg.tmp207$8bv32$2);
+    $$7$8bv32$1 := (if p5$1 then v106$1 else $$7$8bv32$1);
+    $$7$8bv32$2 := (if p5$2 then v106$2 else $$7$8bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v107$1 := (if p5$1 then _HAVOC_bv8$1 else v107$1);
     v107$2 := (if p5$2 then _HAVOC_bv8$2 else v107$2);
-    $$agg.tmp207$9bv32$1 := (if p5$1 then v107$1 else $$agg.tmp207$9bv32$1);
-    $$agg.tmp207$9bv32$2 := (if p5$2 then v107$2 else $$agg.tmp207$9bv32$2);
+    $$7$9bv32$1 := (if p5$1 then v107$1 else $$7$9bv32$1);
+    $$7$9bv32$2 := (if p5$2 then v107$2 else $$7$9bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v108$1 := (if p5$1 then _HAVOC_bv8$1 else v108$1);
     v108$2 := (if p5$2 then _HAVOC_bv8$2 else v108$2);
-    $$agg.tmp207$10bv32$1 := (if p5$1 then v108$1 else $$agg.tmp207$10bv32$1);
-    $$agg.tmp207$10bv32$2 := (if p5$2 then v108$2 else $$agg.tmp207$10bv32$2);
+    $$7$10bv32$1 := (if p5$1 then v108$1 else $$7$10bv32$1);
+    $$7$10bv32$2 := (if p5$2 then v108$2 else $$7$10bv32$2);
     havoc _HAVOC_bv8$1, _HAVOC_bv8$2;
     v109$1 := (if p5$1 then _HAVOC_bv8$1 else v109$1);
     v109$2 := (if p5$2 then _HAVOC_bv8$2 else v109$2);
-    $$agg.tmp207$11bv32$1 := (if p5$1 then v109$1 else $$agg.tmp207$11bv32$1);
-    $$agg.tmp207$11bv32$2 := (if p5$2 then v109$2 else $$agg.tmp207$11bv32$2);
-    call {:sourceloc_num 223} v110$1, v110$2 := $_Z5tex2DIhET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(MKPTR($arrayId$$agg.tmp207, 0bv32), p5$1, SI32_TO_FP32(BV32_ADD(BV32_SUB(BV32_ADD(BV16_SEXT32(v0$1), BV32_MUL(4bv32, BV16_SEXT32($ib.1$1))), 1bv32), 3bv32)), UI32_TO_FP32(BV32_SUB(BV32_ADD(BV16_SEXT32(v1$1), group_size_y), 1bv32)), p5$2, SI32_TO_FP32(BV32_ADD(BV32_SUB(BV32_ADD(BV16_SEXT32(v0$2), BV32_MUL(4bv32, BV16_SEXT32($ib.1$2))), 1bv32), 3bv32)), UI32_TO_FP32(BV32_SUB(BV32_ADD(BV16_SEXT32(v1$2), group_size_y), 1bv32)));
+    $$7$11bv32$1 := (if p5$1 then v109$1 else $$7$11bv32$1);
+    $$7$11bv32$2 := (if p5$2 then v109$2 else $$7$11bv32$2);
+    call {:sourceloc_num 223} v110$1, v110$2 := $_Z5tex2DIhET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(MKPTR($arrayId$$7, 0bv32), p5$1, SI32_TO_FP32(BV32_ADD(BV32_SUB(BV32_ADD(BV16_SEXT32(v0$1), BV32_MUL(4bv32, BV16_SEXT32($ib.1$1))), 1bv32), 3bv32)), UI32_TO_FP32(BV32_SUB(BV32_ADD(BV16_SEXT32(v1$1), group_size_y), 1bv32)), p5$2, SI32_TO_FP32(BV32_ADD(BV32_SUB(BV32_ADD(BV16_SEXT32(v0$2), BV32_MUL(4bv32, BV16_SEXT32($ib.1$2))), 1bv32), 3bv32)), UI32_TO_FP32(BV32_SUB(BV32_ADD(BV16_SEXT32(v1$2), group_size_y), 1bv32)));
     assume {:captureState "call_return_state_0"} {:procedureName "$_Z5tex2DIhET_7textureIS0_Li2EL19cudaTextureReadMode0EEff"} true;
     call {:sourceloc} {:sourceloc_num 224} _LOG_WRITE_$$LocalBlock(p5$1, BV32_ADD(BV32_ADD(v57$1, BV32_MUL(4bv32, BV16_SEXT32($ib.1$1))), 3bv32), v110$1, $$LocalBlock[1bv1][BV32_ADD(BV32_ADD(v57$1, BV32_MUL(4bv32, BV16_SEXT32($ib.1$1))), 3bv32)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$LocalBlock(p5$2, BV32_ADD(BV32_ADD(v57$2, BV32_MUL(4bv32, BV16_SEXT32($ib.1$2))), 3bv32));
@@ -1299,13 +1299,13 @@ implementation {:source_name "SobelShared"} {:kernel} $_Z11SobelSharedP6uchar4ts
     $ib.1$2 := (if p5$2 then BV32_ADD(BV16_SEXT32($ib.1$2), group_size_x)[16:0] else $ib.1$2);
     p4$1 := (if p5$1 then true else p4$1);
     p4$2 := (if p5$2 then true else p4$2);
-    goto $for.cond.107.backedge, __partitioned_block_$for.cond.107.tail_0;
+    goto $6.backedge, __partitioned_block_$6.tail_0;
 
-  __partitioned_block_$for.cond.107.tail_0:
+  __partitioned_block_$6.tail_0:
     assume !p4$1 && !p4$2;
-    goto __partitioned_block_$for.cond.107.tail_1;
+    goto __partitioned_block_$6.tail_1;
 
-  __partitioned_block_$for.cond.107.tail_1:
+  __partitioned_block_$6.tail_1:
     call {:sourceloc_num 228} $bugle_barrier_duplicated_0(1bv1, 1bv1);
     v111$1 := BV32_ASHR(BV16_SEXT32(v0$1), 2bv32)[16:0];
     v111$2 := BV32_ASHR(BV16_SEXT32(v0$2), 2bv32)[16:0];
@@ -1316,9 +1316,9 @@ implementation {:source_name "SobelShared"} {:kernel} $_Z11SobelSharedP6uchar4ts
     p7$1 := true;
     p7$2 := true;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.238;
+    goto $11;
 
-  $for.cond.238:
+  $11:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessUpperBoundBlock"} _b22 ==> _WRITE_HAS_OCCURRED_$$pSobelOriginal ==> BV32_SLT(_WATCHED_OFFSET, BV32_MUL(BV16_SEXT32(BV32_ADD(BV32_MUL(BV32_ADD(group_id_y$1, 1bv32), group_size_y), local_id_y$1)[16:0]), BV16_ZEXT32($SobelPitch)));
     assert {:tag "accessLowerBoundBlock"} _b21 ==> _WRITE_HAS_OCCURRED_$$pSobelOriginal ==> BV32_SLE(BV32_MUL(BV16_SEXT32(BV32_ADD(BV32_MUL(group_id_y$1, group_size_y), local_id_y$1)[16:0]), BV16_ZEXT32($SobelPitch)), _WATCHED_OFFSET);
@@ -1430,20 +1430,20 @@ implementation {:source_name "SobelShared"} {:kernel} $_Z11SobelSharedP6uchar4ts
     p9$2 := (if p8$2 && v126$2 then v126$2 else p9$2);
     p10$1 := (if p8$1 && !v126$1 then !v126$1 else p10$1);
     p10$2 := (if p8$2 && !v126$2 then !v126$2 else p10$2);
-    $retval.i.0$1 := (if p9$1 then 0bv8 else $retval.i.0$1);
-    $retval.i.0$2 := (if p9$2 then 0bv8 else $retval.i.0$2);
+    $.01$1 := (if p9$1 then 0bv8 else $.01$1);
+    $.01$2 := (if p9$2 then 0bv8 else $.01$2);
     v127$1 := (if p10$1 then BV32_SGT(BV16_SEXT32(v125$1), 255bv32) else v127$1);
     v127$2 := (if p10$2 then BV32_SGT(BV16_SEXT32(v125$2), 255bv32) else v127$2);
     p12$1 := (if p10$1 && v127$1 then v127$1 else p12$1);
     p12$2 := (if p10$2 && v127$2 then v127$2 else p12$2);
     p11$1 := (if p10$1 && !v127$1 then !v127$1 else p11$1);
     p11$2 := (if p10$2 && !v127$2 then !v127$2 else p11$2);
-    $retval.i.0$1 := (if p11$1 then v125$1[8:0] else $retval.i.0$1);
-    $retval.i.0$2 := (if p11$2 then v125$2[8:0] else $retval.i.0$2);
-    $retval.i.0$1 := (if p12$1 then 255bv8 else $retval.i.0$1);
-    $retval.i.0$2 := (if p12$2 then 255bv8 else $retval.i.0$2);
-    $$out$0bv32$1 := (if p8$1 then $retval.i.0$1 else $$out$0bv32$1);
-    $$out$0bv32$2 := (if p8$2 then $retval.i.0$2 else $$out$0bv32$2);
+    $.01$1 := (if p11$1 then v125$1[8:0] else $.01$1);
+    $.01$2 := (if p11$2 then v125$2[8:0] else $.01$2);
+    $.01$1 := (if p12$1 then 255bv8 else $.01$1);
+    $.01$2 := (if p12$2 then 255bv8 else $.01$2);
+    $$out$0bv32$1 := (if p8$1 then $.01$1 else $$out$0bv32$1);
+    $$out$0bv32$2 := (if p8$2 then $.01$2 else $$out$0bv32$2);
     assume {:do_not_predicate} {:check_id "check_state_9"} {:captureState "check_state_9"} {:sourceloc} {:sourceloc_num 252} true;
     v128$1 := (if p8$1 then $$LocalBlock[1bv1][BV32_ADD(BV32_ADD(BV32_ADD(v112$1, BV32_MUL(4bv32, BV16_SEXT32($ib.2$1))), BV32_MUL(0bv32, BV16_SEXT32($SharedPitch))), 3bv32)] else v128$1);
     v128$2 := (if p8$2 then $$LocalBlock[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_ADD(BV32_ADD(v112$2, BV32_MUL(4bv32, BV16_SEXT32($ib.2$2))), BV32_MUL(0bv32, BV16_SEXT32($SharedPitch))), 3bv32)] else v128$2);
@@ -1465,20 +1465,20 @@ implementation {:source_name "SobelShared"} {:kernel} $_Z11SobelSharedP6uchar4ts
     p13$2 := (if p8$2 && v134$2 then v134$2 else p13$2);
     p14$1 := (if p8$1 && !v134$1 then !v134$1 else p14$1);
     p14$2 := (if p8$2 && !v134$2 then !v134$2 else p14$2);
-    $retval.i.447.0$1 := (if p13$1 then 0bv8 else $retval.i.447.0$1);
-    $retval.i.447.0$2 := (if p13$2 then 0bv8 else $retval.i.447.0$2);
+    $.03$1 := (if p13$1 then 0bv8 else $.03$1);
+    $.03$2 := (if p13$2 then 0bv8 else $.03$2);
     v135$1 := (if p14$1 then BV32_SGT(BV16_SEXT32(v133$1), 255bv32) else v135$1);
     v135$2 := (if p14$2 then BV32_SGT(BV16_SEXT32(v133$2), 255bv32) else v135$2);
     p16$1 := (if p14$1 && v135$1 then v135$1 else p16$1);
     p16$2 := (if p14$2 && v135$2 then v135$2 else p16$2);
     p15$1 := (if p14$1 && !v135$1 then !v135$1 else p15$1);
     p15$2 := (if p14$2 && !v135$2 then !v135$2 else p15$2);
-    $retval.i.447.0$1 := (if p15$1 then v133$1[8:0] else $retval.i.447.0$1);
-    $retval.i.447.0$2 := (if p15$2 then v133$2[8:0] else $retval.i.447.0$2);
-    $retval.i.447.0$1 := (if p16$1 then 255bv8 else $retval.i.447.0$1);
-    $retval.i.447.0$2 := (if p16$2 then 255bv8 else $retval.i.447.0$2);
-    $$out$1bv32$1 := (if p8$1 then $retval.i.447.0$1 else $$out$1bv32$1);
-    $$out$1bv32$2 := (if p8$2 then $retval.i.447.0$2 else $$out$1bv32$2);
+    $.03$1 := (if p15$1 then v133$1[8:0] else $.03$1);
+    $.03$2 := (if p15$2 then v133$2[8:0] else $.03$2);
+    $.03$1 := (if p16$1 then 255bv8 else $.03$1);
+    $.03$2 := (if p16$2 then 255bv8 else $.03$2);
+    $$out$1bv32$1 := (if p8$1 then $.03$1 else $$out$1bv32$1);
+    $$out$1bv32$2 := (if p8$2 then $.03$2 else $$out$1bv32$2);
     assume {:do_not_predicate} {:check_id "check_state_12"} {:captureState "check_state_12"} {:sourceloc} {:sourceloc_num 263} true;
     v136$1 := (if p8$1 then $$LocalBlock[1bv1][BV32_ADD(BV32_ADD(BV32_ADD(v112$1, BV32_MUL(4bv32, BV16_SEXT32($ib.2$1))), BV32_MUL(0bv32, BV16_SEXT32($SharedPitch))), 4bv32)] else v136$1);
     v136$2 := (if p8$2 then $$LocalBlock[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_ADD(BV32_ADD(v112$2, BV32_MUL(4bv32, BV16_SEXT32($ib.2$2))), BV32_MUL(0bv32, BV16_SEXT32($SharedPitch))), 4bv32)] else v136$2);
@@ -1500,20 +1500,20 @@ implementation {:source_name "SobelShared"} {:kernel} $_Z11SobelSharedP6uchar4ts
     p17$2 := (if p8$2 && v142$2 then v142$2 else p17$2);
     p18$1 := (if p8$1 && !v142$1 then !v142$1 else p18$1);
     p18$2 := (if p8$2 && !v142$2 then !v142$2 else p18$2);
-    $retval.i.508.0$1 := (if p17$1 then 0bv8 else $retval.i.508.0$1);
-    $retval.i.508.0$2 := (if p17$2 then 0bv8 else $retval.i.508.0$2);
+    $.02$1 := (if p17$1 then 0bv8 else $.02$1);
+    $.02$2 := (if p17$2 then 0bv8 else $.02$2);
     v143$1 := (if p18$1 then BV32_SGT(BV16_SEXT32(v141$1), 255bv32) else v143$1);
     v143$2 := (if p18$2 then BV32_SGT(BV16_SEXT32(v141$2), 255bv32) else v143$2);
     p20$1 := (if p18$1 && v143$1 then v143$1 else p20$1);
     p20$2 := (if p18$2 && v143$2 then v143$2 else p20$2);
     p19$1 := (if p18$1 && !v143$1 then !v143$1 else p19$1);
     p19$2 := (if p18$2 && !v143$2 then !v143$2 else p19$2);
-    $retval.i.508.0$1 := (if p19$1 then v141$1[8:0] else $retval.i.508.0$1);
-    $retval.i.508.0$2 := (if p19$2 then v141$2[8:0] else $retval.i.508.0$2);
-    $retval.i.508.0$1 := (if p20$1 then 255bv8 else $retval.i.508.0$1);
-    $retval.i.508.0$2 := (if p20$2 then 255bv8 else $retval.i.508.0$2);
-    $$out$2bv32$1 := (if p8$1 then $retval.i.508.0$1 else $$out$2bv32$1);
-    $$out$2bv32$2 := (if p8$2 then $retval.i.508.0$2 else $$out$2bv32$2);
+    $.02$1 := (if p19$1 then v141$1[8:0] else $.02$1);
+    $.02$2 := (if p19$2 then v141$2[8:0] else $.02$2);
+    $.02$1 := (if p20$1 then 255bv8 else $.02$1);
+    $.02$2 := (if p20$2 then 255bv8 else $.02$2);
+    $$out$2bv32$1 := (if p8$1 then $.02$1 else $$out$2bv32$1);
+    $$out$2bv32$2 := (if p8$2 then $.02$2 else $$out$2bv32$2);
     assume {:do_not_predicate} {:check_id "check_state_15"} {:captureState "check_state_15"} {:sourceloc} {:sourceloc_num 274} true;
     v144$1 := (if p8$1 then $$LocalBlock[1bv1][BV32_ADD(BV32_ADD(BV32_ADD(v112$1, BV32_MUL(4bv32, BV16_SEXT32($ib.2$1))), BV32_MUL(0bv32, BV16_SEXT32($SharedPitch))), 5bv32)] else v144$1);
     v144$2 := (if p8$2 then $$LocalBlock[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_ADD(BV32_ADD(v112$2, BV32_MUL(4bv32, BV16_SEXT32($ib.2$2))), BV32_MUL(0bv32, BV16_SEXT32($SharedPitch))), 5bv32)] else v144$2);
@@ -1535,20 +1535,20 @@ implementation {:source_name "SobelShared"} {:kernel} $_Z11SobelSharedP6uchar4ts
     p21$2 := (if p8$2 && v150$2 then v150$2 else p21$2);
     p22$1 := (if p8$1 && !v150$1 then !v150$1 else p22$1);
     p22$2 := (if p8$2 && !v150$2 then !v150$2 else p22$2);
-    $retval.i.569.0$1 := (if p21$1 then 0bv8 else $retval.i.569.0$1);
-    $retval.i.569.0$2 := (if p21$2 then 0bv8 else $retval.i.569.0$2);
+    $.0$1 := (if p21$1 then 0bv8 else $.0$1);
+    $.0$2 := (if p21$2 then 0bv8 else $.0$2);
     v151$1 := (if p22$1 then BV32_SGT(BV16_SEXT32(v149$1), 255bv32) else v151$1);
     v151$2 := (if p22$2 then BV32_SGT(BV16_SEXT32(v149$2), 255bv32) else v151$2);
     p24$1 := (if p22$1 && v151$1 then v151$1 else p24$1);
     p24$2 := (if p22$2 && v151$2 then v151$2 else p24$2);
     p23$1 := (if p22$1 && !v151$1 then !v151$1 else p23$1);
     p23$2 := (if p22$2 && !v151$2 then !v151$2 else p23$2);
-    $retval.i.569.0$1 := (if p23$1 then v149$1[8:0] else $retval.i.569.0$1);
-    $retval.i.569.0$2 := (if p23$2 then v149$2[8:0] else $retval.i.569.0$2);
-    $retval.i.569.0$1 := (if p24$1 then 255bv8 else $retval.i.569.0$1);
-    $retval.i.569.0$2 := (if p24$2 then 255bv8 else $retval.i.569.0$2);
-    $$out$3bv32$1 := (if p8$1 then $retval.i.569.0$1 else $$out$3bv32$1);
-    $$out$3bv32$2 := (if p8$2 then $retval.i.569.0$2 else $$out$3bv32$2);
+    $.0$1 := (if p23$1 then v149$1[8:0] else $.0$1);
+    $.0$2 := (if p23$2 then v149$2[8:0] else $.0$2);
+    $.0$1 := (if p24$1 then 255bv8 else $.0$1);
+    $.0$2 := (if p24$2 then 255bv8 else $.0$2);
+    $$out$3bv32$1 := (if p8$1 then $.0$1 else $$out$3bv32$1);
+    $$out$3bv32$2 := (if p8$2 then $.0$2 else $$out$3bv32$2);
     v152$1 := (if p8$1 then BV32_SLT(BV32_ADD(BV16_SEXT32(v111$1), BV16_SEXT32($ib.2$1)), BV32_SDIV(BV16_SEXT32($w), 4bv32)) else v152$1);
     v152$2 := (if p8$2 then BV32_SLT(BV32_ADD(BV16_SEXT32(v111$2), BV16_SEXT32($ib.2$2)), BV32_SDIV(BV16_SEXT32($w), 4bv32)) else v152$2);
     p26$1 := (if p8$1 && v152$1 then v152$1 else p26$1);
@@ -1597,30 +1597,30 @@ implementation {:source_name "SobelShared"} {:kernel} $_Z11SobelSharedP6uchar4ts
     $ib.2$2 := (if p8$2 then BV32_ADD(BV16_SEXT32($ib.2$2), group_size_x)[16:0] else $ib.2$2);
     p7$1 := (if p8$1 then true else p7$1);
     p7$2 := (if p8$2 then true else p7$2);
-    goto $for.cond.238.backedge, __partitioned_block_$for.cond.238.tail_0;
+    goto $11.backedge, __partitioned_block_$11.tail_0;
 
-  __partitioned_block_$for.cond.238.tail_0:
+  __partitioned_block_$11.tail_0:
     assume !p7$1 && !p7$2;
-    goto __partitioned_block_$for.cond.238.tail_1;
+    goto __partitioned_block_$11.tail_1;
 
-  __partitioned_block_$for.cond.238.tail_1:
+  __partitioned_block_$11.tail_1:
     call {:sourceloc_num 298} $bugle_barrier_duplicated_1(1bv1, 1bv1);
     return;
 
-  $for.cond.238.backedge:
+  $11.backedge:
     assume {:backedge} p7$1 || p7$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.238;
+    goto $11;
 
-  $for.cond.107.backedge:
+  $6.backedge:
     assume {:backedge} p4$1 || p4$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.107;
+    goto $6;
 
-  $for.cond.backedge:
+  $1.backedge:
     assume {:backedge} p0$1 || p0$2;
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 
@@ -1667,389 +1667,389 @@ procedure {:inline 1} {:safe_barrier} {:source_name "bugle_barrier"} {:barrier} 
 
 
 
-var $$agg.tmp$0bv32$1: bv8;
+var $$0$0bv32$1: bv8;
 
-var $$agg.tmp$0bv32$2: bv8;
+var $$0$0bv32$2: bv8;
 
-var $$agg.tmp$1bv32$1: bv8;
+var $$0$1bv32$1: bv8;
 
-var $$agg.tmp$1bv32$2: bv8;
+var $$0$1bv32$2: bv8;
 
-var $$agg.tmp$2bv32$1: bv8;
+var $$0$2bv32$1: bv8;
 
-var $$agg.tmp$2bv32$2: bv8;
+var $$0$2bv32$2: bv8;
 
-var $$agg.tmp$3bv32$1: bv8;
+var $$0$3bv32$1: bv8;
 
-var $$agg.tmp$3bv32$2: bv8;
+var $$0$3bv32$2: bv8;
 
-var $$agg.tmp$4bv32$1: bv8;
+var $$0$4bv32$1: bv8;
 
-var $$agg.tmp$4bv32$2: bv8;
+var $$0$4bv32$2: bv8;
 
-var $$agg.tmp$5bv32$1: bv8;
+var $$0$5bv32$1: bv8;
 
-var $$agg.tmp$5bv32$2: bv8;
+var $$0$5bv32$2: bv8;
 
-var $$agg.tmp$6bv32$1: bv8;
+var $$0$6bv32$1: bv8;
 
-var $$agg.tmp$6bv32$2: bv8;
+var $$0$6bv32$2: bv8;
 
-var $$agg.tmp$7bv32$1: bv8;
+var $$0$7bv32$1: bv8;
 
-var $$agg.tmp$7bv32$2: bv8;
+var $$0$7bv32$2: bv8;
 
-var $$agg.tmp$8bv32$1: bv8;
+var $$0$8bv32$1: bv8;
 
-var $$agg.tmp$8bv32$2: bv8;
+var $$0$8bv32$2: bv8;
 
-var $$agg.tmp$9bv32$1: bv8;
+var $$0$9bv32$1: bv8;
 
-var $$agg.tmp$9bv32$2: bv8;
+var $$0$9bv32$2: bv8;
 
-var $$agg.tmp$10bv32$1: bv8;
+var $$0$10bv32$1: bv8;
 
-var $$agg.tmp$10bv32$2: bv8;
+var $$0$10bv32$2: bv8;
 
-var $$agg.tmp$11bv32$1: bv8;
+var $$0$11bv32$1: bv8;
 
-var $$agg.tmp$11bv32$2: bv8;
+var $$0$11bv32$2: bv8;
 
-var $$agg.tmp48$0bv32$1: bv8;
+var $$1$0bv32$1: bv8;
 
-var $$agg.tmp48$0bv32$2: bv8;
+var $$1$0bv32$2: bv8;
 
-var $$agg.tmp48$1bv32$1: bv8;
+var $$1$1bv32$1: bv8;
 
-var $$agg.tmp48$1bv32$2: bv8;
+var $$1$1bv32$2: bv8;
 
-var $$agg.tmp48$2bv32$1: bv8;
+var $$1$2bv32$1: bv8;
 
-var $$agg.tmp48$2bv32$2: bv8;
+var $$1$2bv32$2: bv8;
 
-var $$agg.tmp48$3bv32$1: bv8;
+var $$1$3bv32$1: bv8;
 
-var $$agg.tmp48$3bv32$2: bv8;
+var $$1$3bv32$2: bv8;
 
-var $$agg.tmp48$4bv32$1: bv8;
+var $$1$4bv32$1: bv8;
 
-var $$agg.tmp48$4bv32$2: bv8;
+var $$1$4bv32$2: bv8;
 
-var $$agg.tmp48$5bv32$1: bv8;
+var $$1$5bv32$1: bv8;
 
-var $$agg.tmp48$5bv32$2: bv8;
+var $$1$5bv32$2: bv8;
 
-var $$agg.tmp48$6bv32$1: bv8;
+var $$1$6bv32$1: bv8;
 
-var $$agg.tmp48$6bv32$2: bv8;
+var $$1$6bv32$2: bv8;
 
-var $$agg.tmp48$7bv32$1: bv8;
+var $$1$7bv32$1: bv8;
 
-var $$agg.tmp48$7bv32$2: bv8;
+var $$1$7bv32$2: bv8;
 
-var $$agg.tmp48$8bv32$1: bv8;
+var $$1$8bv32$1: bv8;
 
-var $$agg.tmp48$8bv32$2: bv8;
+var $$1$8bv32$2: bv8;
 
-var $$agg.tmp48$9bv32$1: bv8;
+var $$1$9bv32$1: bv8;
 
-var $$agg.tmp48$9bv32$2: bv8;
+var $$1$9bv32$2: bv8;
 
-var $$agg.tmp48$10bv32$1: bv8;
+var $$1$10bv32$1: bv8;
 
-var $$agg.tmp48$10bv32$2: bv8;
+var $$1$10bv32$2: bv8;
 
-var $$agg.tmp48$11bv32$1: bv8;
+var $$1$11bv32$1: bv8;
 
-var $$agg.tmp48$11bv32$2: bv8;
+var $$1$11bv32$2: bv8;
 
-var $$agg.tmp65$0bv32$1: bv8;
+var $$2$0bv32$1: bv8;
 
-var $$agg.tmp65$0bv32$2: bv8;
+var $$2$0bv32$2: bv8;
 
-var $$agg.tmp65$1bv32$1: bv8;
+var $$2$1bv32$1: bv8;
 
-var $$agg.tmp65$1bv32$2: bv8;
+var $$2$1bv32$2: bv8;
 
-var $$agg.tmp65$2bv32$1: bv8;
+var $$2$2bv32$1: bv8;
 
-var $$agg.tmp65$2bv32$2: bv8;
+var $$2$2bv32$2: bv8;
 
-var $$agg.tmp65$3bv32$1: bv8;
+var $$2$3bv32$1: bv8;
 
-var $$agg.tmp65$3bv32$2: bv8;
+var $$2$3bv32$2: bv8;
 
-var $$agg.tmp65$4bv32$1: bv8;
+var $$2$4bv32$1: bv8;
 
-var $$agg.tmp65$4bv32$2: bv8;
+var $$2$4bv32$2: bv8;
 
-var $$agg.tmp65$5bv32$1: bv8;
+var $$2$5bv32$1: bv8;
 
-var $$agg.tmp65$5bv32$2: bv8;
+var $$2$5bv32$2: bv8;
 
-var $$agg.tmp65$6bv32$1: bv8;
+var $$2$6bv32$1: bv8;
 
-var $$agg.tmp65$6bv32$2: bv8;
+var $$2$6bv32$2: bv8;
 
-var $$agg.tmp65$7bv32$1: bv8;
+var $$2$7bv32$1: bv8;
 
-var $$agg.tmp65$7bv32$2: bv8;
+var $$2$7bv32$2: bv8;
 
-var $$agg.tmp65$8bv32$1: bv8;
+var $$2$8bv32$1: bv8;
 
-var $$agg.tmp65$8bv32$2: bv8;
+var $$2$8bv32$2: bv8;
 
-var $$agg.tmp65$9bv32$1: bv8;
+var $$2$9bv32$1: bv8;
 
-var $$agg.tmp65$9bv32$2: bv8;
+var $$2$9bv32$2: bv8;
 
-var $$agg.tmp65$10bv32$1: bv8;
+var $$2$10bv32$1: bv8;
 
-var $$agg.tmp65$10bv32$2: bv8;
+var $$2$10bv32$2: bv8;
 
-var $$agg.tmp65$11bv32$1: bv8;
+var $$2$11bv32$1: bv8;
 
-var $$agg.tmp65$11bv32$2: bv8;
+var $$2$11bv32$2: bv8;
 
-var $$agg.tmp82$0bv32$1: bv8;
+var $$3$0bv32$1: bv8;
 
-var $$agg.tmp82$0bv32$2: bv8;
+var $$3$0bv32$2: bv8;
 
-var $$agg.tmp82$1bv32$1: bv8;
+var $$3$1bv32$1: bv8;
 
-var $$agg.tmp82$1bv32$2: bv8;
+var $$3$1bv32$2: bv8;
 
-var $$agg.tmp82$2bv32$1: bv8;
+var $$3$2bv32$1: bv8;
 
-var $$agg.tmp82$2bv32$2: bv8;
+var $$3$2bv32$2: bv8;
 
-var $$agg.tmp82$3bv32$1: bv8;
+var $$3$3bv32$1: bv8;
 
-var $$agg.tmp82$3bv32$2: bv8;
+var $$3$3bv32$2: bv8;
 
-var $$agg.tmp82$4bv32$1: bv8;
+var $$3$4bv32$1: bv8;
 
-var $$agg.tmp82$4bv32$2: bv8;
+var $$3$4bv32$2: bv8;
 
-var $$agg.tmp82$5bv32$1: bv8;
+var $$3$5bv32$1: bv8;
 
-var $$agg.tmp82$5bv32$2: bv8;
+var $$3$5bv32$2: bv8;
 
-var $$agg.tmp82$6bv32$1: bv8;
+var $$3$6bv32$1: bv8;
 
-var $$agg.tmp82$6bv32$2: bv8;
+var $$3$6bv32$2: bv8;
 
-var $$agg.tmp82$7bv32$1: bv8;
+var $$3$7bv32$1: bv8;
 
-var $$agg.tmp82$7bv32$2: bv8;
+var $$3$7bv32$2: bv8;
 
-var $$agg.tmp82$8bv32$1: bv8;
+var $$3$8bv32$1: bv8;
 
-var $$agg.tmp82$8bv32$2: bv8;
+var $$3$8bv32$2: bv8;
 
-var $$agg.tmp82$9bv32$1: bv8;
+var $$3$9bv32$1: bv8;
 
-var $$agg.tmp82$9bv32$2: bv8;
+var $$3$9bv32$2: bv8;
 
-var $$agg.tmp82$10bv32$1: bv8;
+var $$3$10bv32$1: bv8;
 
-var $$agg.tmp82$10bv32$2: bv8;
+var $$3$10bv32$2: bv8;
 
-var $$agg.tmp82$11bv32$1: bv8;
+var $$3$11bv32$1: bv8;
 
-var $$agg.tmp82$11bv32$2: bv8;
+var $$3$11bv32$2: bv8;
 
-var $$agg.tmp153$0bv32$1: bv8;
+var $$4$0bv32$1: bv8;
 
-var $$agg.tmp153$0bv32$2: bv8;
+var $$4$0bv32$2: bv8;
 
-var $$agg.tmp153$1bv32$1: bv8;
+var $$4$1bv32$1: bv8;
 
-var $$agg.tmp153$1bv32$2: bv8;
+var $$4$1bv32$2: bv8;
 
-var $$agg.tmp153$2bv32$1: bv8;
+var $$4$2bv32$1: bv8;
 
-var $$agg.tmp153$2bv32$2: bv8;
+var $$4$2bv32$2: bv8;
 
-var $$agg.tmp153$3bv32$1: bv8;
+var $$4$3bv32$1: bv8;
 
-var $$agg.tmp153$3bv32$2: bv8;
+var $$4$3bv32$2: bv8;
 
-var $$agg.tmp153$4bv32$1: bv8;
+var $$4$4bv32$1: bv8;
 
-var $$agg.tmp153$4bv32$2: bv8;
+var $$4$4bv32$2: bv8;
 
-var $$agg.tmp153$5bv32$1: bv8;
+var $$4$5bv32$1: bv8;
 
-var $$agg.tmp153$5bv32$2: bv8;
+var $$4$5bv32$2: bv8;
 
-var $$agg.tmp153$6bv32$1: bv8;
+var $$4$6bv32$1: bv8;
 
-var $$agg.tmp153$6bv32$2: bv8;
+var $$4$6bv32$2: bv8;
 
-var $$agg.tmp153$7bv32$1: bv8;
+var $$4$7bv32$1: bv8;
 
-var $$agg.tmp153$7bv32$2: bv8;
+var $$4$7bv32$2: bv8;
 
-var $$agg.tmp153$8bv32$1: bv8;
+var $$4$8bv32$1: bv8;
 
-var $$agg.tmp153$8bv32$2: bv8;
+var $$4$8bv32$2: bv8;
 
-var $$agg.tmp153$9bv32$1: bv8;
+var $$4$9bv32$1: bv8;
 
-var $$agg.tmp153$9bv32$2: bv8;
+var $$4$9bv32$2: bv8;
 
-var $$agg.tmp153$10bv32$1: bv8;
+var $$4$10bv32$1: bv8;
 
-var $$agg.tmp153$10bv32$2: bv8;
+var $$4$10bv32$2: bv8;
 
-var $$agg.tmp153$11bv32$1: bv8;
+var $$4$11bv32$1: bv8;
 
-var $$agg.tmp153$11bv32$2: bv8;
+var $$4$11bv32$2: bv8;
 
-var $$agg.tmp171$0bv32$1: bv8;
+var $$5$0bv32$1: bv8;
 
-var $$agg.tmp171$0bv32$2: bv8;
+var $$5$0bv32$2: bv8;
 
-var $$agg.tmp171$1bv32$1: bv8;
+var $$5$1bv32$1: bv8;
 
-var $$agg.tmp171$1bv32$2: bv8;
+var $$5$1bv32$2: bv8;
 
-var $$agg.tmp171$2bv32$1: bv8;
+var $$5$2bv32$1: bv8;
 
-var $$agg.tmp171$2bv32$2: bv8;
+var $$5$2bv32$2: bv8;
 
-var $$agg.tmp171$3bv32$1: bv8;
+var $$5$3bv32$1: bv8;
 
-var $$agg.tmp171$3bv32$2: bv8;
+var $$5$3bv32$2: bv8;
 
-var $$agg.tmp171$4bv32$1: bv8;
+var $$5$4bv32$1: bv8;
 
-var $$agg.tmp171$4bv32$2: bv8;
+var $$5$4bv32$2: bv8;
 
-var $$agg.tmp171$5bv32$1: bv8;
+var $$5$5bv32$1: bv8;
 
-var $$agg.tmp171$5bv32$2: bv8;
+var $$5$5bv32$2: bv8;
 
-var $$agg.tmp171$6bv32$1: bv8;
+var $$5$6bv32$1: bv8;
 
-var $$agg.tmp171$6bv32$2: bv8;
+var $$5$6bv32$2: bv8;
 
-var $$agg.tmp171$7bv32$1: bv8;
+var $$5$7bv32$1: bv8;
 
-var $$agg.tmp171$7bv32$2: bv8;
+var $$5$7bv32$2: bv8;
 
-var $$agg.tmp171$8bv32$1: bv8;
+var $$5$8bv32$1: bv8;
 
-var $$agg.tmp171$8bv32$2: bv8;
+var $$5$8bv32$2: bv8;
 
-var $$agg.tmp171$9bv32$1: bv8;
+var $$5$9bv32$1: bv8;
 
-var $$agg.tmp171$9bv32$2: bv8;
+var $$5$9bv32$2: bv8;
 
-var $$agg.tmp171$10bv32$1: bv8;
+var $$5$10bv32$1: bv8;
 
-var $$agg.tmp171$10bv32$2: bv8;
+var $$5$10bv32$2: bv8;
 
-var $$agg.tmp171$11bv32$1: bv8;
+var $$5$11bv32$1: bv8;
 
-var $$agg.tmp171$11bv32$2: bv8;
+var $$5$11bv32$2: bv8;
 
-var $$agg.tmp189$0bv32$1: bv8;
+var $$6$0bv32$1: bv8;
 
-var $$agg.tmp189$0bv32$2: bv8;
+var $$6$0bv32$2: bv8;
 
-var $$agg.tmp189$1bv32$1: bv8;
+var $$6$1bv32$1: bv8;
 
-var $$agg.tmp189$1bv32$2: bv8;
+var $$6$1bv32$2: bv8;
 
-var $$agg.tmp189$2bv32$1: bv8;
+var $$6$2bv32$1: bv8;
 
-var $$agg.tmp189$2bv32$2: bv8;
+var $$6$2bv32$2: bv8;
 
-var $$agg.tmp189$3bv32$1: bv8;
+var $$6$3bv32$1: bv8;
 
-var $$agg.tmp189$3bv32$2: bv8;
+var $$6$3bv32$2: bv8;
 
-var $$agg.tmp189$4bv32$1: bv8;
+var $$6$4bv32$1: bv8;
 
-var $$agg.tmp189$4bv32$2: bv8;
+var $$6$4bv32$2: bv8;
 
-var $$agg.tmp189$5bv32$1: bv8;
+var $$6$5bv32$1: bv8;
 
-var $$agg.tmp189$5bv32$2: bv8;
+var $$6$5bv32$2: bv8;
 
-var $$agg.tmp189$6bv32$1: bv8;
+var $$6$6bv32$1: bv8;
 
-var $$agg.tmp189$6bv32$2: bv8;
+var $$6$6bv32$2: bv8;
 
-var $$agg.tmp189$7bv32$1: bv8;
+var $$6$7bv32$1: bv8;
 
-var $$agg.tmp189$7bv32$2: bv8;
+var $$6$7bv32$2: bv8;
 
-var $$agg.tmp189$8bv32$1: bv8;
+var $$6$8bv32$1: bv8;
 
-var $$agg.tmp189$8bv32$2: bv8;
+var $$6$8bv32$2: bv8;
 
-var $$agg.tmp189$9bv32$1: bv8;
+var $$6$9bv32$1: bv8;
 
-var $$agg.tmp189$9bv32$2: bv8;
+var $$6$9bv32$2: bv8;
 
-var $$agg.tmp189$10bv32$1: bv8;
+var $$6$10bv32$1: bv8;
 
-var $$agg.tmp189$10bv32$2: bv8;
+var $$6$10bv32$2: bv8;
 
-var $$agg.tmp189$11bv32$1: bv8;
+var $$6$11bv32$1: bv8;
 
-var $$agg.tmp189$11bv32$2: bv8;
+var $$6$11bv32$2: bv8;
 
-var $$agg.tmp207$0bv32$1: bv8;
+var $$7$0bv32$1: bv8;
 
-var $$agg.tmp207$0bv32$2: bv8;
+var $$7$0bv32$2: bv8;
 
-var $$agg.tmp207$1bv32$1: bv8;
+var $$7$1bv32$1: bv8;
 
-var $$agg.tmp207$1bv32$2: bv8;
+var $$7$1bv32$2: bv8;
 
-var $$agg.tmp207$2bv32$1: bv8;
+var $$7$2bv32$1: bv8;
 
-var $$agg.tmp207$2bv32$2: bv8;
+var $$7$2bv32$2: bv8;
 
-var $$agg.tmp207$3bv32$1: bv8;
+var $$7$3bv32$1: bv8;
 
-var $$agg.tmp207$3bv32$2: bv8;
+var $$7$3bv32$2: bv8;
 
-var $$agg.tmp207$4bv32$1: bv8;
+var $$7$4bv32$1: bv8;
 
-var $$agg.tmp207$4bv32$2: bv8;
+var $$7$4bv32$2: bv8;
 
-var $$agg.tmp207$5bv32$1: bv8;
+var $$7$5bv32$1: bv8;
 
-var $$agg.tmp207$5bv32$2: bv8;
+var $$7$5bv32$2: bv8;
 
-var $$agg.tmp207$6bv32$1: bv8;
+var $$7$6bv32$1: bv8;
 
-var $$agg.tmp207$6bv32$2: bv8;
+var $$7$6bv32$2: bv8;
 
-var $$agg.tmp207$7bv32$1: bv8;
+var $$7$7bv32$1: bv8;
 
-var $$agg.tmp207$7bv32$2: bv8;
+var $$7$7bv32$2: bv8;
 
-var $$agg.tmp207$8bv32$1: bv8;
+var $$7$8bv32$1: bv8;
 
-var $$agg.tmp207$8bv32$2: bv8;
+var $$7$8bv32$2: bv8;
 
-var $$agg.tmp207$9bv32$1: bv8;
+var $$7$9bv32$1: bv8;
 
-var $$agg.tmp207$9bv32$2: bv8;
+var $$7$9bv32$2: bv8;
 
-var $$agg.tmp207$10bv32$1: bv8;
+var $$7$10bv32$1: bv8;
 
-var $$agg.tmp207$10bv32$2: bv8;
+var $$7$10bv32$2: bv8;
 
-var $$agg.tmp207$11bv32$1: bv8;
+var $$7$11bv32$1: bv8;
 
-var $$agg.tmp207$11bv32$2: bv8;
+var $$7$11bv32$2: bv8;
 
 var $$out$0bv32$1: bv8;
 

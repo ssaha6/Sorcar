@@ -158,62 +158,62 @@ procedure {:source_name "noise_uniform"} {:kernel} $noise_uniform($factor: bv32)
 implementation {:source_name "noise_uniform"} {:kernel} $noise_uniform($factor: bv32)
 {
   var $j.i.0: bv32;
-  var $idum.addr.i.0$1: bv32;
-  var $idum.addr.i.0$2: bv32;
-  var $idum.addr.i.1$1: bv32;
-  var $idum.addr.i.1$2: bv32;
-  var v7$1: bv32;
-  var v7$2: bv32;
-  var v5$1: bv32;
-  var v5$2: bv32;
+  var $.0$1: bv32;
+  var $.0$2: bv32;
+  var $.1$1: bv32;
+  var $.1$2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
-  var v6$1: bv32;
-  var v6$2: bv32;
   var v1$1: bv8;
   var v1$2: bv8;
-  var v4$1: bv8;
-  var v4$2: bv8;
   var v2$1: bv8;
   var v2$2: bv8;
   var v3$1: bv8;
   var v3$2: bv8;
+  var v4$1: bv8;
+  var v4$2: bv8;
+  var v5$1: bv32;
+  var v5$2: bv32;
+  var v6$1: bv32;
+  var v6$2: bv32;
+  var v7$1: bv32;
+  var v7$2: bv32;
   var v8$1: bv32;
   var v8$2: bv32;
   var v9: bool;
   var v10$1: bv32;
   var v10$2: bv32;
+  var v11$1: bv32;
+  var v11$2: bv32;
   var v12$1: bool;
   var v12$2: bool;
   var v13: bool;
-  var v11$1: bv32;
-  var v11$2: bv32;
   var v14$1: bv32;
   var v14$2: bv32;
-  var v19$1: bv32;
-  var v19$2: bv32;
-  var v17$1: bool;
-  var v17$2: bool;
-  var v18$1: bv32;
-  var v18$2: bv32;
   var v15$1: bv32;
   var v15$2: bv32;
   var v16$1: bv32;
   var v16$2: bv32;
+  var v17$1: bool;
+  var v17$2: bool;
+  var v18$1: bv32;
+  var v18$2: bv32;
+  var v19$1: bv32;
+  var v19$2: bv32;
   var v20$1: bv32;
   var v20$2: bv32;
-  var v24$1: bv32;
-  var v24$2: bv32;
   var v21$1: bv32;
   var v21$2: bv32;
   var v22$1: bv32;
   var v22$2: bv32;
   var v23$1: bv32;
   var v23$2: bv32;
-  var v26$1: bv8;
-  var v26$2: bv8;
+  var v24$1: bv32;
+  var v24$2: bv32;
   var v25$1: bv8;
   var v25$2: bv8;
+  var v26$1: bv8;
+  var v26$2: bv8;
   var v27$1: bv8;
   var v27$2: bv8;
   var v28$1: bv8;
@@ -228,7 +228,7 @@ implementation {:source_name "noise_uniform"} {:kernel} $noise_uniform($factor: 
   var p3$2: bool;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), BV32_MUL(BV32_ADD(BV32_MUL(group_id_y$1, group_size_y), local_id_y$1), BV32_MUL(group_size_x, num_groups_x)));
     v0$2 := BV32_ADD(BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2), BV32_MUL(BV32_ADD(BV32_MUL(group_id_y$2, group_size_y), local_id_y$2), BV32_MUL(group_size_x, num_groups_x)));
     v1$1 := $$inputImage[BV32_MUL(v0$1, 4bv32)];
@@ -247,26 +247,26 @@ implementation {:source_name "noise_uniform"} {:kernel} $noise_uniform($factor: 
     v7$2 := UI8_TO_FP32(v3$2);
     v8$1 := local_id_x$1;
     v8$2 := local_id_x$2;
-    $j.i.0, $idum.addr.i.0$1 := 4bv32, FP32_TO_SI32(FSUB32(2147483648bv32, FDIV32(FADD32(FADD32(FADD32(v5$1, v6$1), v7$1), v6$1), 1082130432bv32)));
-    $idum.addr.i.0$2 := FP32_TO_SI32(FSUB32(2147483648bv32, FDIV32(FADD32(FADD32(FADD32(v5$2, v6$2), v7$2), v6$2), 1082130432bv32)));
+    $j.i.0, $.0$1 := 4bv32, FP32_TO_SI32(FSUB32(2147483648bv32, FDIV32(FADD32(FADD32(FADD32(v5$1, v6$1), v7$1), v6$1), 1082130432bv32)));
+    $.0$2 := FP32_TO_SI32(FSUB32(2147483648bv32, FDIV32(FADD32(FADD32(FADD32(v5$2, v6$2), v7$2), v6$2), 1082130432bv32)));
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.i;
+    goto $1;
 
-  $for.cond.i:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessBreak"} _b11 ==> _WRITE_HAS_OCCURRED_$$noise_uniform.iv ==> local_id_x$1 == BV32_DIV(_WATCHED_OFFSET, 4bv32);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b10 ==> _WRITE_HAS_OCCURRED_$$noise_uniform.iv ==> BV32_AND(BV32_SUB(4294967295bv32, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(4294967295bv32, 1bv32), BV32_ADD(4bv32, BV32_MUL(4bv32, local_id_x$1)));
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$noise_uniform.iv ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$noise_uniform.iv ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$noise_uniform.iv ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
-    assert {:tag "loopBound"} {:thread 1} _b9 ==> BV32_UGE($idum.addr.i.0$1, FP32_TO_SI32(FSUB32(2147483648bv32, FDIV32(FADD32(FADD32(FADD32(v5$1, v6$1), v7$1), v6$1), 1082130432bv32))));
-    assert {:tag "loopBound"} {:thread 2} _b9 ==> BV32_UGE($idum.addr.i.0$2, FP32_TO_SI32(FSUB32(2147483648bv32, FDIV32(FADD32(FADD32(FADD32(v5$2, v6$2), v7$2), v6$2), 1082130432bv32))));
-    assert {:tag "loopBound"} {:thread 1} _b8 ==> BV32_ULE($idum.addr.i.0$1, FP32_TO_SI32(FSUB32(2147483648bv32, FDIV32(FADD32(FADD32(FADD32(v5$1, v6$1), v7$1), v6$1), 1082130432bv32))));
-    assert {:tag "loopBound"} {:thread 2} _b8 ==> BV32_ULE($idum.addr.i.0$2, FP32_TO_SI32(FSUB32(2147483648bv32, FDIV32(FADD32(FADD32(FADD32(v5$2, v6$2), v7$2), v6$2), 1082130432bv32))));
-    assert {:tag "loopBound"} {:thread 1} _b7 ==> BV32_SGE($idum.addr.i.0$1, FP32_TO_SI32(FSUB32(2147483648bv32, FDIV32(FADD32(FADD32(FADD32(v5$1, v6$1), v7$1), v6$1), 1082130432bv32))));
-    assert {:tag "loopBound"} {:thread 2} _b7 ==> BV32_SGE($idum.addr.i.0$2, FP32_TO_SI32(FSUB32(2147483648bv32, FDIV32(FADD32(FADD32(FADD32(v5$2, v6$2), v7$2), v6$2), 1082130432bv32))));
-    assert {:tag "loopBound"} {:thread 1} _b6 ==> BV32_SLE($idum.addr.i.0$1, FP32_TO_SI32(FSUB32(2147483648bv32, FDIV32(FADD32(FADD32(FADD32(v5$1, v6$1), v7$1), v6$1), 1082130432bv32))));
-    assert {:tag "loopBound"} {:thread 2} _b6 ==> BV32_SLE($idum.addr.i.0$2, FP32_TO_SI32(FSUB32(2147483648bv32, FDIV32(FADD32(FADD32(FADD32(v5$2, v6$2), v7$2), v6$2), 1082130432bv32))));
+    assert {:tag "loopBound"} {:thread 1} _b9 ==> BV32_UGE($.0$1, FP32_TO_SI32(FSUB32(2147483648bv32, FDIV32(FADD32(FADD32(FADD32(v5$1, v6$1), v7$1), v6$1), 1082130432bv32))));
+    assert {:tag "loopBound"} {:thread 2} _b9 ==> BV32_UGE($.0$2, FP32_TO_SI32(FSUB32(2147483648bv32, FDIV32(FADD32(FADD32(FADD32(v5$2, v6$2), v7$2), v6$2), 1082130432bv32))));
+    assert {:tag "loopBound"} {:thread 1} _b8 ==> BV32_ULE($.0$1, FP32_TO_SI32(FSUB32(2147483648bv32, FDIV32(FADD32(FADD32(FADD32(v5$1, v6$1), v7$1), v6$1), 1082130432bv32))));
+    assert {:tag "loopBound"} {:thread 2} _b8 ==> BV32_ULE($.0$2, FP32_TO_SI32(FSUB32(2147483648bv32, FDIV32(FADD32(FADD32(FADD32(v5$2, v6$2), v7$2), v6$2), 1082130432bv32))));
+    assert {:tag "loopBound"} {:thread 1} _b7 ==> BV32_SGE($.0$1, FP32_TO_SI32(FSUB32(2147483648bv32, FDIV32(FADD32(FADD32(FADD32(v5$1, v6$1), v7$1), v6$1), 1082130432bv32))));
+    assert {:tag "loopBound"} {:thread 2} _b7 ==> BV32_SGE($.0$2, FP32_TO_SI32(FSUB32(2147483648bv32, FDIV32(FADD32(FADD32(FADD32(v5$2, v6$2), v7$2), v6$2), 1082130432bv32))));
+    assert {:tag "loopBound"} {:thread 1} _b6 ==> BV32_SLE($.0$1, FP32_TO_SI32(FSUB32(2147483648bv32, FDIV32(FADD32(FADD32(FADD32(v5$1, v6$1), v7$1), v6$1), 1082130432bv32))));
+    assert {:tag "loopBound"} {:thread 2} _b6 ==> BV32_SLE($.0$2, FP32_TO_SI32(FSUB32(2147483648bv32, FDIV32(FADD32(FADD32(FADD32(v5$2, v6$2), v7$2), v6$2), 1082130432bv32))));
     assert {:tag "loopBound"} {:thread 1} _b5 ==> BV32_UGE($j.i.0, 4bv32);
     assert {:tag "loopBound"} {:thread 1} _b4 ==> BV32_ULE($j.i.0, 4bv32);
     assert {:tag "loopBound"} {:thread 1} _b3 ==> BV32_SGE($j.i.0, 4bv32);
@@ -293,10 +293,10 @@ implementation {:source_name "noise_uniform"} {:kernel} $noise_uniform($factor: 
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$noise_uniform.iv"} true;
     v14$1 := $$noise_uniform.iv[1bv1][BV32_MUL(4bv32, v8$1)];
     v14$2 := $$noise_uniform.iv[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_MUL(4bv32, v8$2)];
-    v15$1 := BV32_SDIV($idum.addr.i.0$1, 127773bv32);
-    v15$2 := BV32_SDIV($idum.addr.i.0$2, 127773bv32);
-    v16$1 := BV32_SUB(BV32_MUL(16807bv32, BV32_SUB($idum.addr.i.0$1, BV32_MUL(v15$1, 127773bv32))), BV32_MUL(2836bv32, v15$1));
-    v16$2 := BV32_SUB(BV32_MUL(16807bv32, BV32_SUB($idum.addr.i.0$2, BV32_MUL(v15$2, 127773bv32))), BV32_MUL(2836bv32, v15$2));
+    v15$1 := BV32_SDIV($.0$1, 127773bv32);
+    v15$2 := BV32_SDIV($.0$2, 127773bv32);
+    v16$1 := BV32_SUB(BV32_MUL(16807bv32, BV32_SUB($.0$1, BV32_MUL(v15$1, 127773bv32))), BV32_MUL(2836bv32, v15$1));
+    v16$2 := BV32_SUB(BV32_MUL(16807bv32, BV32_SUB($.0$2, BV32_MUL(v15$2, 127773bv32))), BV32_MUL(2836bv32, v15$2));
     v17$1 := BV32_SLT(v16$1, 0bv32);
     v17$2 := BV32_SLT(v16$2, 0bv32);
     v18$1 := BV32_SDIV(v14$1, 536870912bv32);
@@ -358,43 +358,43 @@ implementation {:source_name "noise_uniform"} {:kernel} $noise_uniform($factor: 
 
   $truebb:
     assume {:partition} v9;
-    v10$1 := BV32_SDIV($idum.addr.i.0$1, 127773bv32);
-    v10$2 := BV32_SDIV($idum.addr.i.0$2, 127773bv32);
-    v11$1 := BV32_SUB(BV32_MUL(16807bv32, BV32_SUB($idum.addr.i.0$1, BV32_MUL(v10$1, 127773bv32))), BV32_MUL(2836bv32, v10$1));
-    v11$2 := BV32_SUB(BV32_MUL(16807bv32, BV32_SUB($idum.addr.i.0$2, BV32_MUL(v10$2, 127773bv32))), BV32_MUL(2836bv32, v10$2));
+    v10$1 := BV32_SDIV($.0$1, 127773bv32);
+    v10$2 := BV32_SDIV($.0$2, 127773bv32);
+    v11$1 := BV32_SUB(BV32_MUL(16807bv32, BV32_SUB($.0$1, BV32_MUL(v10$1, 127773bv32))), BV32_MUL(2836bv32, v10$1));
+    v11$2 := BV32_SUB(BV32_MUL(16807bv32, BV32_SUB($.0$2, BV32_MUL(v10$2, 127773bv32))), BV32_MUL(2836bv32, v10$2));
     v12$1 := BV32_SLT(v11$1, 0bv32);
     v12$2 := BV32_SLT(v11$2, 0bv32);
     p1$1 := (if v12$1 then v12$1 else p1$1);
     p1$2 := (if v12$2 then v12$2 else p1$2);
     p0$1 := (if !v12$1 then !v12$1 else p0$1);
     p0$2 := (if !v12$2 then !v12$2 else p0$2);
-    $idum.addr.i.1$1 := (if p0$1 then v11$1 else $idum.addr.i.1$1);
-    $idum.addr.i.1$2 := (if p0$2 then v11$2 else $idum.addr.i.1$2);
-    $idum.addr.i.1$1 := (if p1$1 then BV32_ADD(v11$1, 2147483647bv32) else $idum.addr.i.1$1);
-    $idum.addr.i.1$2 := (if p1$2 then BV32_ADD(v11$2, 2147483647bv32) else $idum.addr.i.1$2);
+    $.1$1 := (if p0$1 then v11$1 else $.1$1);
+    $.1$2 := (if p0$2 then v11$2 else $.1$2);
+    $.1$1 := (if p1$1 then BV32_ADD(v11$1, 2147483647bv32) else $.1$1);
+    $.1$2 := (if p1$2 then BV32_ADD(v11$2, 2147483647bv32) else $.1$2);
     v13 := BV32_SLT($j.i.0, 4bv32);
     goto $truebb1, $falsebb1;
 
   $falsebb1:
     assume {:partition} !v13;
-    goto $if.end.9.i;
+    goto $6;
 
-  $if.end.9.i:
-    $j.i.0, $idum.addr.i.0$1 := BV32_ADD($j.i.0, 4294967295bv32), $idum.addr.i.1$1;
-    $idum.addr.i.0$2 := $idum.addr.i.1$2;
+  $6:
+    $j.i.0, $.0$1 := BV32_ADD($j.i.0, 4294967295bv32), $.1$1;
+    $.0$2 := $.1$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.i;
+    goto $1;
 
   $truebb1:
     assume {:partition} v13;
-    call {:sourceloc} {:sourceloc_num 10} _LOG_WRITE_$$noise_uniform.iv(true, BV32_ADD(BV32_MUL(4bv32, v8$1), $j.i.0), $idum.addr.i.1$1, $$noise_uniform.iv[1bv1][BV32_ADD(BV32_MUL(4bv32, v8$1), $j.i.0)]);
+    call {:sourceloc} {:sourceloc_num 10} _LOG_WRITE_$$noise_uniform.iv(true, BV32_ADD(BV32_MUL(4bv32, v8$1), $j.i.0), $.1$1, $$noise_uniform.iv[1bv1][BV32_ADD(BV32_MUL(4bv32, v8$1), $j.i.0)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$noise_uniform.iv(true, BV32_ADD(BV32_MUL(4bv32, v8$2), $j.i.0));
     assume {:do_not_predicate} {:check_id "check_state_6"} {:captureState "check_state_6"} {:sourceloc} {:sourceloc_num 10} true;
-    call {:check_id "check_state_6"} {:sourceloc} {:sourceloc_num 10} _CHECK_WRITE_$$noise_uniform.iv(true, BV32_ADD(BV32_MUL(4bv32, v8$2), $j.i.0), $idum.addr.i.1$2);
+    call {:check_id "check_state_6"} {:sourceloc} {:sourceloc_num 10} _CHECK_WRITE_$$noise_uniform.iv(true, BV32_ADD(BV32_MUL(4bv32, v8$2), $j.i.0), $.1$2);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$noise_uniform.iv"} true;
-    $$noise_uniform.iv[1bv1][BV32_ADD(BV32_MUL(4bv32, v8$1), $j.i.0)] := $idum.addr.i.1$1;
-    $$noise_uniform.iv[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(4bv32, v8$2), $j.i.0)] := $idum.addr.i.1$2;
-    goto $if.end.9.i;
+    $$noise_uniform.iv[1bv1][BV32_ADD(BV32_MUL(4bv32, v8$1), $j.i.0)] := $.1$1;
+    $$noise_uniform.iv[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(4bv32, v8$2), $j.i.0)] := $.1$2;
+    goto $6;
 }
 
 

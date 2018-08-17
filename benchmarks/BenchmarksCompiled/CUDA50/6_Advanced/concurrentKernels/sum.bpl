@@ -96,18 +96,18 @@ implementation {:source_name "sum"} {:kernel} $_Z3sumPji($N: bv32)
   var $my_sum.0$2: bv32;
   var $i.0$1: bv32;
   var $i.0$2: bv32;
-  var $i3.0: bv32;
-  var v3$1: bool;
-  var v3$2: bool;
+  var $i1.0: bv32;
   var v0$1: bool;
   var v0$2: bool;
-  var v2: bool;
-  var v5$1: bv32;
-  var v5$2: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
+  var v2: bool;
+  var v3$1: bool;
+  var v3$2: bool;
   var v4$1: bv32;
   var v4$2: bv32;
+  var v5$1: bv32;
+  var v5$2: bv32;
   var v6$1: bv32;
   var v6$2: bv32;
   var p0$1: bool;
@@ -122,7 +122,7 @@ implementation {:source_name "sum"} {:kernel} $_Z3sumPji($N: bv32)
   var p4$2: bool;
 
 
-  $entry:
+  $0:
     $my_sum.0$1, $i.0$1 := 0bv32, local_id_x$1;
     $my_sum.0$2, $i.0$2 := 0bv32, local_id_x$2;
     p0$1 := false;
@@ -130,9 +130,9 @@ implementation {:source_name "sum"} {:kernel} $_Z3sumPji($N: bv32)
     p0$1 := true;
     p0$2 := true;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b12 ==> _READ_HAS_OCCURRED_$$d_clocks ==> BV32_AND(BV32_SUB(group_size_x, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(group_size_x, 1bv32), local_id_x$1);
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ3sumPjiE8s_clocks ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -173,9 +173,9 @@ implementation {:source_name "sum"} {:kernel} $_Z3sumPji($N: bv32)
     $my_sum.0$2, $i.0$2 := (if p1$2 then BV32_ADD($my_sum.0$2, v1$2) else $my_sum.0$2), (if p1$2 then BV32_ADD($i.0$2, group_size_x) else $i.0$2);
     p0$1 := (if p1$1 then true else p0$1);
     p0$2 := (if p1$2 then true else p0$2);
-    goto $for.cond.backedge, __partitioned_block_$for.cond.tail_0;
+    goto $1.backedge, __partitioned_block_$1.tail_0;
 
-  __partitioned_block_$for.cond.tail_0:
+  __partitioned_block_$1.tail_0:
     assume !p0$1 && !p0$2;
     call {:sourceloc} {:sourceloc_num 6} _LOG_WRITE_$$_ZZ3sumPjiE8s_clocks(true, local_id_x$1, $my_sum.0$1, $$_ZZ3sumPjiE8s_clocks[1bv1][local_id_x$1]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$_ZZ3sumPjiE8s_clocks(true, local_id_x$2);
@@ -184,32 +184,32 @@ implementation {:source_name "sum"} {:kernel} $_Z3sumPji($N: bv32)
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$_ZZ3sumPjiE8s_clocks"} true;
     $$_ZZ3sumPjiE8s_clocks[1bv1][local_id_x$1] := $my_sum.0$1;
     $$_ZZ3sumPjiE8s_clocks[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2] := $my_sum.0$2;
-    goto __partitioned_block_$for.cond.tail_1;
+    goto __partitioned_block_$1.tail_1;
 
-  __partitioned_block_$for.cond.tail_1:
+  __partitioned_block_$1.tail_1:
     call {:sourceloc_num 7} $bugle_barrier_duplicated_0(1bv1, 1bv1);
-    $i3.0 := 16bv32;
+    $i1.0 := 16bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.4;
+    goto $5;
 
-  $for.cond.4:
+  $5:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b18 ==> _WRITE_HAS_OCCURRED_$$_ZZ3sumPjiE8s_clocks ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b17 ==> _READ_HAS_OCCURRED_$$_ZZ3sumPjiE8s_clocks ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "nowrite"} _b16 ==> !_WRITE_HAS_OCCURRED_$$_ZZ3sumPjiE8s_clocks;
     assert {:tag "noread"} _b15 ==> !_READ_HAS_OCCURRED_$$_ZZ3sumPjiE8s_clocks;
-    assert {:tag "pow2NotZero"} _b14 ==> $i3.0 != 0bv32;
-    assert {:tag "pow2"} _b13 ==> $i3.0 == 0bv32 || BV32_AND($i3.0, BV32_SUB($i3.0, 1bv32)) == 0bv32;
+    assert {:tag "pow2NotZero"} _b14 ==> $i1.0 != 0bv32;
+    assert {:tag "pow2"} _b13 ==> $i1.0 == 0bv32 || BV32_AND($i1.0, BV32_SUB($i1.0, 1bv32)) == 0bv32;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ3sumPjiE8s_clocks ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ3sumPjiE8s_clocks ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$_ZZ3sumPjiE8s_clocks ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
-    assert {:tag "loopBound"} {:thread 1} _b11 ==> BV32_UGE($i3.0, 16bv32);
-    assert {:tag "loopBound"} {:thread 1} _b10 ==> BV32_ULE($i3.0, 16bv32);
-    assert {:tag "loopBound"} {:thread 1} _b9 ==> BV32_SGE($i3.0, 16bv32);
-    assert {:tag "loopBound"} {:thread 1} _b8 ==> BV32_SLE($i3.0, 16bv32);
-    assert {:tag "guardNonNeg"} {:thread 1} _b7 ==> BV32_SLE(0bv32, $i3.0);
+    assert {:tag "loopBound"} {:thread 1} _b11 ==> BV32_UGE($i1.0, 16bv32);
+    assert {:tag "loopBound"} {:thread 1} _b10 ==> BV32_ULE($i1.0, 16bv32);
+    assert {:tag "loopBound"} {:thread 1} _b9 ==> BV32_SGE($i1.0, 16bv32);
+    assert {:tag "loopBound"} {:thread 1} _b8 ==> BV32_SLE($i1.0, 16bv32);
+    assert {:tag "guardNonNeg"} {:thread 1} _b7 ==> BV32_SLE(0bv32, $i1.0);
     assert {:block_sourceloc} {:sourceloc_num 8} true;
-    v2 := BV32_SGT($i3.0, 0bv32);
+    v2 := BV32_SGT($i1.0, 0bv32);
     p3$1 := false;
     p3$2 := false;
     p4$1 := false;
@@ -235,16 +235,16 @@ implementation {:source_name "sum"} {:kernel} $_Z3sumPji($N: bv32)
 
   __partitioned_block_$truebb0_0:
     assume {:partition} v2;
-    v3$1 := BV32_ULT(local_id_x$1, $i3.0);
-    v3$2 := BV32_ULT(local_id_x$2, $i3.0);
+    v3$1 := BV32_ULT(local_id_x$1, $i1.0);
+    v3$2 := BV32_ULT(local_id_x$2, $i1.0);
     p4$1 := (if v3$1 then v3$1 else p4$1);
     p4$2 := (if v3$2 then v3$2 else p4$2);
-    call {:sourceloc} {:sourceloc_num 11} _LOG_READ_$$_ZZ3sumPjiE8s_clocks(p4$1, BV32_ADD(local_id_x$1, $i3.0), $$_ZZ3sumPjiE8s_clocks[1bv1][BV32_ADD(local_id_x$1, $i3.0)]);
+    call {:sourceloc} {:sourceloc_num 11} _LOG_READ_$$_ZZ3sumPjiE8s_clocks(p4$1, BV32_ADD(local_id_x$1, $i1.0), $$_ZZ3sumPjiE8s_clocks[1bv1][BV32_ADD(local_id_x$1, $i1.0)]);
     assume {:do_not_predicate} {:check_id "check_state_3"} {:captureState "check_state_3"} {:sourceloc} {:sourceloc_num 11} true;
-    call {:check_id "check_state_3"} {:sourceloc} {:sourceloc_num 11} _CHECK_READ_$$_ZZ3sumPjiE8s_clocks(p4$2, BV32_ADD(local_id_x$2, $i3.0), $$_ZZ3sumPjiE8s_clocks[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(local_id_x$2, $i3.0)]);
+    call {:check_id "check_state_3"} {:sourceloc} {:sourceloc_num 11} _CHECK_READ_$$_ZZ3sumPjiE8s_clocks(p4$2, BV32_ADD(local_id_x$2, $i1.0), $$_ZZ3sumPjiE8s_clocks[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(local_id_x$2, $i1.0)]);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ3sumPjiE8s_clocks"} true;
-    v4$1 := (if p4$1 then $$_ZZ3sumPjiE8s_clocks[1bv1][BV32_ADD(local_id_x$1, $i3.0)] else v4$1);
-    v4$2 := (if p4$2 then $$_ZZ3sumPjiE8s_clocks[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(local_id_x$2, $i3.0)] else v4$2);
+    v4$1 := (if p4$1 then $$_ZZ3sumPjiE8s_clocks[1bv1][BV32_ADD(local_id_x$1, $i1.0)] else v4$1);
+    v4$2 := (if p4$2 then $$_ZZ3sumPjiE8s_clocks[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(local_id_x$2, $i1.0)] else v4$2);
     call {:sourceloc} {:sourceloc_num 12} _LOG_READ_$$_ZZ3sumPjiE8s_clocks(p4$1, local_id_x$1, $$_ZZ3sumPjiE8s_clocks[1bv1][local_id_x$1]);
     assume {:do_not_predicate} {:check_id "check_state_4"} {:captureState "check_state_4"} {:sourceloc} {:sourceloc_num 12} true;
     call {:check_id "check_state_4"} {:sourceloc} {:sourceloc_num 12} _CHECK_READ_$$_ZZ3sumPjiE8s_clocks(p4$2, local_id_x$2, $$_ZZ3sumPjiE8s_clocks[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2]);
@@ -262,14 +262,14 @@ implementation {:source_name "sum"} {:kernel} $_Z3sumPji($N: bv32)
 
   __partitioned_block_$truebb0_1:
     call {:sourceloc_num 15} $bugle_barrier_duplicated_1(1bv1, 1bv1);
-    $i3.0 := BV32_SDIV($i3.0, 2bv32);
+    $i1.0 := BV32_SDIV($i1.0, 2bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.4;
+    goto $5;
 
-  $for.cond.backedge:
+  $1.backedge:
     assume {:backedge} p0$1 || p0$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

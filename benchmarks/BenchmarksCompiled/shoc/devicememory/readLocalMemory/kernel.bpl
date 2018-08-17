@@ -135,55 +135,55 @@ implementation {:source_name "readLocalMemory"} {:kernel} $readLocalMemory($size
   var $sum.0$2: bv32;
   var $s.0$1: bv32;
   var $s.0$2: bv32;
-  var v2: bv32;
-  var v1$1: bv32;
-  var v1$2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
+  var v1$1: bv32;
+  var v1$2: bv32;
+  var v2: bv32;
+  var v3: bv32;
   var v4$1: bv32;
   var v4$2: bv32;
-  var v3: bv32;
   var v5$1: bool;
   var v5$2: bool;
   var v6$1: bool;
   var v6$2: bool;
-  var v19$1: bv32;
-  var v19$2: bv32;
-  var v18$1: bv32;
-  var v18$2: bv32;
-  var v24$1: bv32;
-  var v24$2: bv32;
-  var v17$1: bv32;
-  var v17$2: bv32;
-  var v20$1: bv32;
-  var v20$2: bv32;
-  var v23$1: bv32;
-  var v23$2: bv32;
-  var v16$1: bv32;
-  var v16$2: bv32;
-  var v25$1: bv32;
-  var v25$2: bv32;
-  var v21$1: bv32;
-  var v21$2: bv32;
-  var v22$1: bv32;
-  var v22$2: bv32;
-  var v9$1: bv32;
-  var v9$2: bv32;
   var v7$1: bv32;
   var v7$2: bv32;
-  var v14$1: bv32;
-  var v14$2: bv32;
-  var v15$1: bv32;
-  var v15$2: bv32;
+  var v8$1: bool;
+  var v8$2: bool;
+  var v9$1: bv32;
+  var v9$2: bv32;
+  var v10: bool;
   var v11$1: bv32;
   var v11$2: bv32;
   var v12$1: bv32;
   var v12$2: bv32;
   var v13$1: bv32;
   var v13$2: bv32;
-  var v10: bool;
-  var v8$1: bool;
-  var v8$2: bool;
+  var v14$1: bv32;
+  var v14$2: bv32;
+  var v15$1: bv32;
+  var v15$2: bv32;
+  var v16$1: bv32;
+  var v16$2: bv32;
+  var v17$1: bv32;
+  var v17$2: bv32;
+  var v18$1: bv32;
+  var v18$2: bv32;
+  var v19$1: bv32;
+  var v19$2: bv32;
+  var v20$1: bv32;
+  var v20$2: bv32;
+  var v21$1: bv32;
+  var v21$2: bv32;
+  var v22$1: bv32;
+  var v22$2: bv32;
+  var v23$1: bv32;
+  var v23$2: bv32;
+  var v24$1: bv32;
+  var v24$2: bv32;
+  var v25$1: bv32;
+  var v25$2: bv32;
   var v26$1: bv32;
   var v26$2: bv32;
   var p0$1: bool;
@@ -204,7 +204,7 @@ implementation {:source_name "readLocalMemory"} {:kernel} $readLocalMemory($size
   var _HAVOC_bv32$2: bv32;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2);
     v1$1 := local_id_x$1;
@@ -222,9 +222,9 @@ implementation {:source_name "readLocalMemory"} {:kernel} $readLocalMemory($size
     p0$1 := true;
     p0$2 := true;
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_2"} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$readLocalMemory.lbuf ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$readLocalMemory.lbuf ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -283,18 +283,18 @@ implementation {:source_name "readLocalMemory"} {:kernel} $readLocalMemory($size
     $j.0$2 := (if p3$2 then BV32_ADD($j.0$2, 1bv32) else $j.0$2);
     p0$1 := (if p3$1 then true else p0$1);
     p0$2 := (if p3$2 then true else p0$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $1.backedge, $1.tail;
 
-  $for.cond.tail:
+  $1.tail:
     assume !p0$1 && !p0$2;
     $j.1$1, $i.0$1 := $j.0$1, 0bv32;
     $j.1$2, $i.0$2 := $j.0$2, 0bv32;
     p5$1 := true;
     p5$2 := true;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.20;
+    goto $7;
 
-  $for.cond.20:
+  $7:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$readLocalMemory.lbuf ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$readLocalMemory.lbuf ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -335,20 +335,20 @@ implementation {:source_name "readLocalMemory"} {:kernel} $readLocalMemory($size
     $j.1$2, $i.0$2 := (if p6$2 then BV32_ADD($j.1$2, 1bv32) else $j.1$2), (if p6$2 then BV32_ADD($i.0$2, 1bv32) else $i.0$2);
     p5$1 := (if p6$1 then true else p5$1);
     p5$2 := (if p6$2 then true else p5$2);
-    goto $for.cond.20.backedge, __partitioned_block_$for.cond.20.tail_0;
+    goto $7.backedge, __partitioned_block_$7.tail_0;
 
-  __partitioned_block_$for.cond.20.tail_0:
+  __partitioned_block_$7.tail_0:
     assume !p5$1 && !p5$2;
-    goto __partitioned_block_$for.cond.20.tail_1;
+    goto __partitioned_block_$7.tail_1;
 
-  __partitioned_block_$for.cond.20.tail_1:
+  __partitioned_block_$7.tail_1:
     call {:sourceloc_num 19} $bugle_barrier_duplicated_0(1bv1, 0bv1);
     $j.2, $sum.0$1, $s.0$1 := 0bv32, 0bv32, v1$1;
     $sum.0$2, $s.0$2 := 0bv32, v1$2;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.38;
+    goto $11;
 
-  $for.cond.38:
+  $11:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$readLocalMemory.lbuf ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$readLocalMemory.lbuf ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -426,17 +426,17 @@ implementation {:source_name "readLocalMemory"} {:kernel} $readLocalMemory($size
     $j.2, $sum.0$1, $s.0$1 := BV32_ADD($j.2, 1bv32), FADD32($sum.0$1, FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(v11$1, v12$1), v13$1), v14$1), v15$1), v16$1), v17$1), v18$1), v19$1), v20$1), v21$1), v22$1), v23$1), v24$1), v25$1), v26$1)), BV32_AND(BV32_ADD($s.0$1, 16bv32), 4095bv32);
     $sum.0$2, $s.0$2 := FADD32($sum.0$2, FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(v11$2, v12$2), v13$2), v14$2), v15$2), v16$2), v17$2), v18$2), v19$2), v20$2), v21$2), v22$2), v23$2), v24$2), v25$2), v26$2)), BV32_AND(BV32_ADD($s.0$2, 16bv32), 4095bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.38;
+    goto $11;
 
-  $for.cond.20.backedge:
+  $7.backedge:
     assume {:backedge} p5$1 || p5$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.20;
+    goto $7;
 
-  $for.cond.backedge:
+  $1.backedge:
     assume {:backedge} p0$1 || p0$2;
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

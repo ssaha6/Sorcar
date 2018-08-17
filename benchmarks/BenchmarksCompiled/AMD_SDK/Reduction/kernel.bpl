@@ -112,57 +112,57 @@ procedure {:source_name "reduce"} {:kernel} $reduce();
 implementation {:source_name "reduce"} {:kernel} $reduce()
 {
   var $s.0: bv32;
-  var v2$1: bv32;
-  var v2$2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
-  var v13$1: bv32;
-  var v13$2: bv32;
-  var v10$1: bv32;
-  var v10$2: bv32;
-  var v14$1: bv32;
-  var v14$2: bv32;
-  var v6$1: bv32;
-  var v6$2: bv32;
-  var v9$1: bv32;
-  var v9$2: bv32;
-  var v8$1: bv32;
-  var v8$2: bv32;
-  var v5$1: bv32;
-  var v5$2: bv32;
-  var v7$1: bv32;
-  var v7$2: bv32;
-  var v25$1: bv32;
-  var v25$2: bv32;
-  var v24$1: bv32;
-  var v24$2: bv32;
-  var v19$1: bv32;
-  var v19$2: bv32;
-  var v16$1: bv32;
-  var v16$2: bv32;
-  var v22$1: bv32;
-  var v22$2: bv32;
-  var v20$1: bv32;
-  var v20$2: bv32;
-  var v23$1: bv32;
-  var v23$2: bv32;
-  var v18$1: bv32;
-  var v18$2: bv32;
-  var v15$1: bv32;
-  var v15$2: bv32;
-  var v17$1: bv32;
-  var v17$2: bv32;
-  var v4$1: bv32;
-  var v4$2: bv32;
-  var v3$1: bv32;
-  var v3$2: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
+  var v2$1: bv32;
+  var v2$2: bv32;
+  var v3$1: bv32;
+  var v3$2: bv32;
+  var v4$1: bv32;
+  var v4$2: bv32;
+  var v5$1: bv32;
+  var v5$2: bv32;
+  var v6$1: bv32;
+  var v6$2: bv32;
+  var v7$1: bv32;
+  var v7$2: bv32;
+  var v8$1: bv32;
+  var v8$2: bv32;
+  var v9$1: bv32;
+  var v9$2: bv32;
+  var v10$1: bv32;
+  var v10$2: bv32;
+  var v11: bool;
   var v12$1: bool;
   var v12$2: bool;
-  var v11: bool;
+  var v13$1: bv32;
+  var v13$2: bv32;
+  var v14$1: bv32;
+  var v14$2: bv32;
+  var v15$1: bv32;
+  var v15$2: bv32;
+  var v16$1: bv32;
+  var v16$2: bv32;
+  var v17$1: bv32;
+  var v17$2: bv32;
+  var v18$1: bv32;
+  var v18$2: bv32;
+  var v19$1: bv32;
+  var v19$2: bv32;
+  var v20$1: bv32;
+  var v20$2: bv32;
   var v21$1: bool;
   var v21$2: bool;
+  var v22$1: bv32;
+  var v22$2: bv32;
+  var v23$1: bv32;
+  var v23$2: bv32;
+  var v24$1: bv32;
+  var v24$2: bv32;
+  var v25$1: bv32;
+  var v25$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -173,7 +173,7 @@ implementation {:source_name "reduce"} {:kernel} $reduce()
   var p3$2: bool;
 
 
-  __partitioned_block_$entry_0:
+  __partitioned_block_$0_0:
     v0$1 := local_id_x$1;
     v0$2 := local_id_x$2;
     v1$1 := group_id_x$1;
@@ -216,15 +216,15 @@ implementation {:source_name "reduce"} {:kernel} $reduce()
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$sdata"} true;
     $$sdata[1bv1][BV32_ADD(BV32_MUL(v0$1, 4bv32), 3bv32)] := BV32_ADD(v6$1, v10$1);
     $$sdata[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(v0$2, 4bv32), 3bv32)] := BV32_ADD(v6$2, v10$2);
-    goto __partitioned_block_$entry_1;
+    goto __partitioned_block_$0_1;
 
-  __partitioned_block_$entry_1:
+  __partitioned_block_$0_1:
     call {:sourceloc_num 13} $bugle_barrier_duplicated_0(1bv1, 0bv1);
     $s.0 := BV32_LSHR(group_size_x, 1bv32);
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b9 ==> _WRITE_HAS_OCCURRED_$$sdata ==> _WATCHED_OFFSET == BV32_MUL(local_id_x$1, 4bv32) || _WATCHED_OFFSET == BV32_ADD(BV32_MUL(local_id_x$1, 4bv32), 1bv32) || _WATCHED_OFFSET == BV32_ADD(BV32_MUL(local_id_x$1, 4bv32), 2bv32) || _WATCHED_OFFSET == BV32_ADD(BV32_MUL(local_id_x$1, 4bv32), 3bv32);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b8 ==> _READ_HAS_OCCURRED_$$sdata ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_MUL(BV32_ADD(0bv32, local_id_x$1), 4bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, local_id_x$1), 4bv32), 1bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, local_id_x$1), 4bv32), 2bv32)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 4bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, local_id_x$1), 4bv32), 3bv32)) || _WATCHED_OFFSET == BV32_MUL(local_id_x$1, 4bv32) || _WATCHED_OFFSET == BV32_ADD(BV32_MUL(local_id_x$1, 4bv32), 1bv32) || _WATCHED_OFFSET == BV32_ADD(BV32_MUL(local_id_x$1, 4bv32), 2bv32) || _WATCHED_OFFSET == BV32_ADD(BV32_MUL(local_id_x$1, 4bv32), 3bv32);
@@ -399,7 +399,7 @@ implementation {:source_name "reduce"} {:kernel} $reduce()
     call {:sourceloc_num 30} $bugle_barrier_duplicated_1(1bv1, 0bv1);
     $s.0 := BV32_LSHR($s.0, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

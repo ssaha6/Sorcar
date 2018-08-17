@@ -107,7 +107,7 @@ implementation {:source_name "write_kernel"} {:kernel} $write_kernel($ni: bv32, 
   var v3: bool;
 
 
-  $entry:
+  $0:
     v0 := $nk == 0bv32;
     goto $truebb, $falsebb;
 
@@ -115,9 +115,9 @@ implementation {:source_name "write_kernel"} {:kernel} $write_kernel($ni: bv32, 
     assume {:partition} !v0;
     $n.0 := 0bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $3;
 
-  $for.cond:
+  $3:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b13 ==> _WRITE_HAS_OCCURRED_$$out ==> BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), 4bv32)) || BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), 4bv32), 1bv32)) || BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), 4bv32), 2bv32)) || BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), 4bv32), 3bv32));
     assert {:tag "loopBound"} {:thread 1} _b3 ==> BV32_UGE($n.0, 0bv32);
@@ -130,9 +130,9 @@ implementation {:source_name "write_kernel"} {:kernel} $write_kernel($ni: bv32, 
 
   $falsebb0:
     assume {:partition} !v1;
-    goto $for.end.17;
+    goto $14;
 
-  $for.end.17:
+  $14:
     return;
 
   $truebb0:
@@ -140,9 +140,9 @@ implementation {:source_name "write_kernel"} {:kernel} $write_kernel($ni: bv32, 
     $i.0, $idx.0$1 := 0bv32, BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
     $idx.0$2 := BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2);
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.5;
+    goto $5;
 
-  $for.cond.5:
+  $5:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b14 ==> _WRITE_HAS_OCCURRED_$$out ==> BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), 4bv32)) || BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), 4bv32), 1bv32)) || BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), 4bv32), 2bv32)) || BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), 4bv32), 3bv32));
     assert {:tag "loopBound"} {:thread 1} _b8 ==> BV32_UGE($i.0, 0bv32);
@@ -159,15 +159,15 @@ implementation {:source_name "write_kernel"} {:kernel} $write_kernel($ni: bv32, 
     assume {:partition} !v2;
     $n.0 := BV32_ADD($n.0, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $3;
 
   $truebb1:
     assume {:partition} v2;
     $i.1 := 0bv32;
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond.8;
+    goto $7;
 
-  $for.cond.8:
+  $7:
     assume {:captureState "loop_head_state_2"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b15 ==> _WRITE_HAS_OCCURRED_$$out ==> BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), 4bv32)) || BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), 4bv32), 1bv32)) || BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), 4bv32), 2bv32)) || BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(BV32_MUL(group_size_x, num_groups_x), 4bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), 4bv32), 3bv32));
     assert {:tag "loopBound"} {:thread 1} _b12 ==> BV32_UGE($i.1, 0bv32);
@@ -183,7 +183,7 @@ implementation {:source_name "write_kernel"} {:kernel} $write_kernel($ni: bv32, 
     $i.0, $idx.0$1 := BV32_ADD($i.1, 1bv32), BV32_ADD($idx.0$1, BV32_MUL(group_size_x, num_groups_x));
     $idx.0$2 := BV32_ADD($idx.0$2, BV32_MUL(group_size_x, num_groups_x));
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.5;
+    goto $5;
 
   $truebb2:
     assume {:partition} v3;
@@ -217,11 +217,11 @@ implementation {:source_name "write_kernel"} {:kernel} $write_kernel($ni: bv32, 
     $$out[BV32_ADD(BV32_MUL($idx.0$2, 4bv32), 3bv32)] := $val;
     $i.1 := BV32_ADD($i.1, 1bv32);
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond.8;
+    goto $7;
 
   $truebb:
     assume {:partition} v0;
-    goto $for.end.17;
+    goto $14;
 }
 
 

@@ -17,8 +17,7 @@ function {:existential true} my_inv (
  b0015: bool,
  b0016: bool,
  b0017: bool,
- b0018: bool,
- b0019: bool
+ b0018: bool
  ) : bool;
 type _SIZE_T_TYPE = bv32;
 
@@ -225,10 +224,10 @@ implementation {:source_name "sobolGPU_kernel"} {:kernel} $_Z15sobolGPU_kerneljj
   var $X.1$2: bv32;
   var $i.0$1: bv32;
   var $i.0$2: bv32;
-  var v1$1: bv32;
-  var v1$2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
+  var v1$1: bv32;
+  var v1$2: bv32;
   var v2$1: bool;
   var v2$2: bool;
   var v3$1: bv32;
@@ -340,7 +339,7 @@ implementation {:source_name "sobolGPU_kernel"} {:kernel} $_Z15sobolGPU_kerneljj
     
     
     
-assert  my_inv (  ( p2$1 ==> BV32_SLE($k.0$1, 0bv32) )  && ( p2$2 ==> BV32_SLE($k.0$2, 0bv32) ) ,  ( p2$1 ==> BV32_SGE($k.0$1, 0bv32) )  && ( p2$2 ==> BV32_SGE($k.0$2, 0bv32) ) ,  ( p2$1 ==> BV32_ULE($k.0$1, 0bv32) )  && ( p2$2 ==> BV32_ULE($k.0$2, 0bv32) ) ,  ( p2$1 ==> BV32_UGE($k.0$1, 0bv32) )  && ( p2$2 ==> BV32_UGE($k.0$2, 0bv32) ) ,  (  BV32_ULT($k.0$1, BV32_SUB(BV32_SUB(32bv32, v6$1), 1bv32)) ==> p2$1 )  && (  BV32_ULT($k.0$2, BV32_SUB(BV32_SUB(32bv32, v6$2), 1bv32)) ==> p2$2 ) ,  true ,  true ,  true ,  true ,  true ,  true ,  (  $g.0$1 == 0bv32 || BV32_AND($g.0$1, BV32_SUB($g.0$1, 1bv32)) == 0bv32 ) ,  (  $g.0$1 != 0bv32 ) ,  (  $g.0$2 == 0bv32 || BV32_AND($g.0$2, BV32_SUB($g.0$2, 1bv32)) == 0bv32 ) ,  (  $g.0$2 != 0bv32 ) ,  true ,  true ,  true ,  true ,  true  ); 
+assert  my_inv (  ( p2$1 ==> BV32_SLE($k.0$1, 0bv32) )  && ( p2$2 ==> BV32_SLE($k.0$2, 0bv32) ) ,  ( p2$1 ==> BV32_SGE($k.0$1, 0bv32) )  && ( p2$2 ==> BV32_SGE($k.0$2, 0bv32) ) ,  ( p2$1 ==> BV32_ULE($k.0$1, 0bv32) )  && ( p2$2 ==> BV32_ULE($k.0$2, 0bv32) ) ,  ( p2$1 ==> BV32_UGE($k.0$1, 0bv32) )  && ( p2$2 ==> BV32_UGE($k.0$2, 0bv32) ) ,  (  BV32_ULT($k.0$1, BV32_SUB(BV32_SUB(32bv32, v6$1), 1bv32)) ==> p2$1 )  && (  BV32_ULT($k.0$2, BV32_SUB(BV32_SUB(32bv32, v6$2), 1bv32)) ==> p2$2 ) ,  true ,  true ,  true ,  true ,  true ,  true ,  (  $g.0$1 == 0bv32 || BV32_AND($g.0$1, BV32_SUB($g.0$1, 1bv32)) == 0bv32 ) ,  (  $g.0$1 != 0bv32 ) ,  (  $g.0$2 == 0bv32 || BV32_AND($g.0$2, BV32_SUB($g.0$2, 1bv32)) == 0bv32 ) ,  (  $g.0$2 != 0bv32 ) ,  true ,  true ,  true ,  true  ); 
 
 
     assert {:block_sourceloc} {:sourceloc_num 8} p2$1 ==> true;
@@ -360,10 +359,7 @@ assert  my_inv (  ( p2$1 ==> BV32_SLE($k.0$1, 0bv32) )  && ( p2$2 ==> BV32_SLE($
     p3$2 := (if p2$2 && v7$2 then v7$2 else p3$2);
     p2$1 := (if p2$1 && !v7$1 then v7$1 else p2$1);
     p2$2 := (if p2$2 && !v7$2 then v7$2 else p2$2);
-    call {:sourceloc} {:sourceloc_num 10} _LOG_READ_$$_ZZ15sobolGPU_kerneljjPjPfE1v(p3$1, $k.0$1, $$_ZZ15sobolGPU_kerneljjPjPfE1v[1bv1][$k.0$1]);
     assume {:do_not_predicate} {:check_id "check_state_4"} {:captureState "check_state_4"} {:sourceloc} {:sourceloc_num 10} true;
-    call {:check_id "check_state_4"} {:sourceloc} {:sourceloc_num 10} _CHECK_READ_$$_ZZ15sobolGPU_kerneljjPjPfE1v(p3$2, $k.0$2, $$_ZZ15sobolGPU_kerneljjPjPfE1v[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][$k.0$2]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ15sobolGPU_kerneljjPjPfE1v"} true;
     v8$1 := (if p3$1 then $$_ZZ15sobolGPU_kerneljjPjPfE1v[1bv1][$k.0$1] else v8$1);
     v8$2 := (if p3$2 then $$_ZZ15sobolGPU_kerneljjPjPfE1v[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][$k.0$2] else v8$2);
     $g.0$1, $X.0$1, $k.0$1 := (if p3$1 then BV32_LSHR($g.0$1, 1bv32) else $g.0$1), (if p3$1 then BV32_XOR($X.0$1, BV32_AND(BV32_SUB(0bv32, BV32_AND($g.0$1, 1bv32)), v8$1)) else $X.0$1), (if p3$1 then BV32_ADD($k.0$1, 1bv32) else $k.0$1);
@@ -387,10 +383,7 @@ assert  my_inv (  ( p2$1 ==> BV32_SLE($k.0$1, 0bv32) )  && ( p2$2 ==> BV32_SLE($
     $$d_output[BV32_ADD(v1$2, v4$2)] := (if p5$2 then FMUL32(UI32_TO_FP32($X.0$2), 796917760bv32) else $$d_output[BV32_ADD(v1$2, v4$2)]);
     call v10$1, v10$2 := BV32_CTLZ(false, true, BV32_AND(v5, BV32_SUB(0bv32, v5)), true, BV32_AND(v5, BV32_SUB(0bv32, v5)));
     assume {:captureState "call_return_state_0"} {:procedureName "BV32_CTLZ"} true;
-    call {:sourceloc} {:sourceloc_num 16} _LOG_READ_$$_ZZ15sobolGPU_kerneljjPjPfE1v(true, BV32_SUB(BV32_SUB(32bv32, v10$1), 2bv32), $$_ZZ15sobolGPU_kerneljjPjPfE1v[1bv1][BV32_SUB(BV32_SUB(32bv32, v10$1), 2bv32)]);
     assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 16} true;
-    call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 16} _CHECK_READ_$$_ZZ15sobolGPU_kerneljjPjPfE1v(true, BV32_SUB(BV32_SUB(32bv32, v10$2), 2bv32), $$_ZZ15sobolGPU_kerneljjPjPfE1v[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_SUB(BV32_SUB(32bv32, v10$2), 2bv32)]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ15sobolGPU_kerneljjPjPfE1v"} true;
     v11$1 := $$_ZZ15sobolGPU_kerneljjPjPfE1v[1bv1][BV32_SUB(BV32_SUB(32bv32, v10$1), 2bv32)];
     v11$2 := $$_ZZ15sobolGPU_kerneljjPjPfE1v[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_SUB(BV32_SUB(32bv32, v10$2), 2bv32)];
     $X.1$1, $i.0$1 := $X.0$1, BV32_ADD(v4$1, v5);
@@ -402,7 +395,6 @@ assert  my_inv (  ( p2$1 ==> BV32_SLE($k.0$1, 0bv32) )  && ( p2$2 ==> BV32_SLE($
 
   $9:
     assume {:captureState "loop_head_state_0"} true;
-    
     
     
     
@@ -422,7 +414,7 @@ assert  my_inv (  ( p2$1 ==> BV32_SLE($k.0$1, 0bv32) )  && ( p2$2 ==> BV32_SLE($
     
     
     
-assert  my_inv (  true ,  true ,  true ,  true ,  true ,  ( p7$1 ==> BV32_AND(BV32_SUB(BV32_MUL(num_groups_x, group_size_x), 1bv32), $i.0$1) == BV32_AND(BV32_SUB(BV32_MUL(num_groups_x, group_size_x), 1bv32), BV32_ADD(v4$1, v5)) )  && ( p7$2 ==> BV32_AND(BV32_SUB(BV32_MUL(num_groups_x, group_size_x), 1bv32), $i.0$2) == BV32_AND(BV32_SUB(BV32_MUL(num_groups_x, group_size_x), 1bv32), BV32_ADD(v4$2, v5)) ) ,  ( p7$1 ==> BV32_SLE($i.0$1, BV32_ADD(v4$1, v5)) )  && ( p7$2 ==> BV32_SLE($i.0$2, BV32_ADD(v4$2, v5)) ) ,  ( p7$1 ==> BV32_SGE($i.0$1, BV32_ADD(v4$1, v5)) )  && ( p7$2 ==> BV32_SGE($i.0$2, BV32_ADD(v4$2, v5)) ) ,  ( p7$1 ==> BV32_ULE($i.0$1, BV32_ADD(v4$1, v5)) )  && ( p7$2 ==> BV32_ULE($i.0$2, BV32_ADD(v4$2, v5)) ) ,  ( p7$1 ==> BV32_UGE($i.0$1, BV32_ADD(v4$1, v5)) )  && ( p7$2 ==> BV32_UGE($i.0$2, BV32_ADD(v4$2, v5)) ) ,  (  BV32_ULT($i.0$1, $n_vectors) ==> p7$1 )  && (  BV32_ULT($i.0$2, $n_vectors) ==> p7$2 ) ,  true ,  true ,  true ,  true ,  (  _WRITE_HAS_OCCURRED_$$d_output ==> BV32_SLE(BV32_MUL($n_vectors, group_id_y$1), _WATCHED_OFFSET) ) ,  (  _WRITE_HAS_OCCURRED_$$d_output ==> BV32_SLT(_WATCHED_OFFSET, BV32_MUL($n_vectors, BV32_ADD(group_id_y$1, 1bv32))) ) ,  (  _WRITE_HAS_OCCURRED_$$d_output ==> BV32_AND(BV32_SUB(BV32_MUL(num_groups_x, group_size_x), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(num_groups_x, group_size_x), 1bv32), BV32_ADD(BV32_ADD(v4$1, v5), BV32_MUL($n_vectors, group_id_y$1))) ) ,  (  _WRITE_HAS_OCCURRED_$$d_output ==> group_id_y$1 == BV32_DIV(_WATCHED_OFFSET, $n_vectors) ) ,  (  _READ_HAS_OCCURRED_$$_ZZ15sobolGPU_kerneljjPjPfE1v ==> _WATCHED_OFFSET == BV32_SUB(BV32_SUB(32bv32, v14$1), 1bv32) )  ); 
+assert  my_inv (  true ,  true ,  true ,  true ,  true ,  ( p7$1 ==> BV32_AND(BV32_SUB(BV32_MUL(num_groups_x, group_size_x), 1bv32), $i.0$1) == BV32_AND(BV32_SUB(BV32_MUL(num_groups_x, group_size_x), 1bv32), BV32_ADD(v4$1, v5)) )  && ( p7$2 ==> BV32_AND(BV32_SUB(BV32_MUL(num_groups_x, group_size_x), 1bv32), $i.0$2) == BV32_AND(BV32_SUB(BV32_MUL(num_groups_x, group_size_x), 1bv32), BV32_ADD(v4$2, v5)) ) ,  ( p7$1 ==> BV32_SLE($i.0$1, BV32_ADD(v4$1, v5)) )  && ( p7$2 ==> BV32_SLE($i.0$2, BV32_ADD(v4$2, v5)) ) ,  ( p7$1 ==> BV32_SGE($i.0$1, BV32_ADD(v4$1, v5)) )  && ( p7$2 ==> BV32_SGE($i.0$2, BV32_ADD(v4$2, v5)) ) ,  ( p7$1 ==> BV32_ULE($i.0$1, BV32_ADD(v4$1, v5)) )  && ( p7$2 ==> BV32_ULE($i.0$2, BV32_ADD(v4$2, v5)) ) ,  ( p7$1 ==> BV32_UGE($i.0$1, BV32_ADD(v4$1, v5)) )  && ( p7$2 ==> BV32_UGE($i.0$2, BV32_ADD(v4$2, v5)) ) ,  (  BV32_ULT($i.0$1, $n_vectors) ==> p7$1 )  && (  BV32_ULT($i.0$2, $n_vectors) ==> p7$2 ) ,  true ,  true ,  true ,  true ,  (  _WRITE_HAS_OCCURRED_$$d_output ==> BV32_SLE(BV32_MUL($n_vectors, group_id_y$1), _WATCHED_OFFSET) ) ,  (  _WRITE_HAS_OCCURRED_$$d_output ==> BV32_SLT(_WATCHED_OFFSET, BV32_MUL($n_vectors, BV32_ADD(group_id_y$1, 1bv32))) ) ,  (  _WRITE_HAS_OCCURRED_$$d_output ==> BV32_AND(BV32_SUB(BV32_MUL(num_groups_x, group_size_x), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(num_groups_x, group_size_x), 1bv32), BV32_ADD(BV32_ADD(v4$1, v5), BV32_MUL($n_vectors, group_id_y$1))) ) ,  (  _WRITE_HAS_OCCURRED_$$d_output ==> group_id_y$1 == BV32_DIV(_WATCHED_OFFSET, $n_vectors) )  ); 
 
 
     assert {:block_sourceloc} {:sourceloc_num 17} p7$1 ==> true;
@@ -438,10 +430,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  ( p7$1 ==> BV32_AND(BV
     v13$2 := (if p8$2 then BV32_XOR(BV32_OR(BV32_SUB($i.0$2, v5), BV32_SUB(v5, 1bv32)), 4294967295bv32) else v13$2);
     call v14$1, v14$2 := BV32_CTLZ(false, p8$1, BV32_AND(v13$1, BV32_SUB(0bv32, v13$1)), p8$2, BV32_AND(v13$2, BV32_SUB(0bv32, v13$2)));
     assume {:captureState "call_return_state_0"} {:procedureName "BV32_CTLZ"} true;
-    call {:sourceloc} {:sourceloc_num 19} _LOG_READ_$$_ZZ15sobolGPU_kerneljjPjPfE1v(p8$1, BV32_SUB(BV32_SUB(32bv32, v14$1), 1bv32), $$_ZZ15sobolGPU_kerneljjPjPfE1v[1bv1][BV32_SUB(BV32_SUB(32bv32, v14$1), 1bv32)]);
     assume {:do_not_predicate} {:check_id "check_state_1"} {:captureState "check_state_1"} {:sourceloc} {:sourceloc_num 19} true;
-    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 19} _CHECK_READ_$$_ZZ15sobolGPU_kerneljjPjPfE1v(p8$2, BV32_SUB(BV32_SUB(32bv32, v14$2), 1bv32), $$_ZZ15sobolGPU_kerneljjPjPfE1v[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_SUB(BV32_SUB(32bv32, v14$2), 1bv32)]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ15sobolGPU_kerneljjPjPfE1v"} true;
     v15$1 := (if p8$1 then $$_ZZ15sobolGPU_kerneljjPjPfE1v[1bv1][BV32_SUB(BV32_SUB(32bv32, v14$1), 1bv32)] else v15$1);
     v15$2 := (if p8$2 then $$_ZZ15sobolGPU_kerneljjPjPfE1v[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_SUB(BV32_SUB(32bv32, v14$2), 1bv32)] else v15$2);
     v16$1 := (if p8$1 then BV32_XOR($X.1$1, BV32_XOR(v11$1, v15$1)) else v16$1);
@@ -870,7 +859,5 @@ function {:bvbuiltin "bvslt"} BV32_SLT(bv32, bv32) : bool;
 
 
 function {:bvbuiltin "bvsdiv"} BV32_DIV(bv32, bv32) : bv32;
-
-
 
 

@@ -296,10 +296,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
 
   $truebb2:
     assume {:partition} v9;
-    call {:sourceloc} {:sourceloc_num 19} _LOG_READ_$$sharedArray(true, BV32_ADD(BV32_ADD(BV32_MUL($j.0, 256bv32), BV32_MUL($i2.0, v2)), v0$1), $$sharedArray[1bv1][BV32_ADD(BV32_ADD(BV32_MUL($j.0, 256bv32), BV32_MUL($i2.0, v2)), v0$1)]);
     assume {:do_not_predicate} {:check_id "check_state_1"} {:captureState "check_state_1"} {:sourceloc} {:sourceloc_num 19} true;
-    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 19} _CHECK_READ_$$sharedArray(true, BV32_ADD(BV32_ADD(BV32_MUL($j.0, 256bv32), BV32_MUL($i2.0, v2)), v0$2), $$sharedArray[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_ADD(BV32_MUL($j.0, 256bv32), BV32_MUL($i2.0, v2)), v0$2)]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$sharedArray"} true;
     v10$1 := $$sharedArray[1bv1][BV32_ADD(BV32_ADD(BV32_MUL($j.0, 256bv32), BV32_MUL($i2.0, v2)), v0$1)];
     v10$2 := $$sharedArray[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_ADD(BV32_MUL($j.0, 256bv32), BV32_MUL($i2.0, v2)), v0$2)];
     $binCount.0$1, $j.0 := BV32_ADD($binCount.0$1, BV8_ZEXT32(v10$1)), BV32_ADD($j.0, 1bv32);

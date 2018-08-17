@@ -72,6 +72,8 @@ const {:num_groups_y} num_groups_y: bv32;
 
 const {:num_groups_z} num_groups_z: bv32;
 
+function FADD32(bv32, bv32) : bv32;
+
 function FDIV32(bv32, bv32) : bv32;
 
 function FMUL32(bv32, bv32) : bv32;
@@ -176,76 +178,76 @@ implementation {:source_name "lud_perimeter"} {:kernel} $lud_perimeter($matrix_d
   var $i.7$2: bv32;
   var $array_offset.5$1: bv32;
   var $array_offset.5$2: bv32;
-  var v2$1: bool;
-  var v2$2: bool;
-  var v1$1: bv32;
-  var v1$2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
+  var v1$1: bv32;
+  var v1$2: bv32;
+  var v2$1: bool;
+  var v2$2: bool;
   var v3$1: bool;
   var v3$2: bool;
-  var v22$1: bv32;
-  var v22$2: bv32;
-  var v15$1: bv32;
-  var v15$2: bv32;
-  var v18$1: bv32;
-  var v18$2: bv32;
-  var v16$1: bv32;
-  var v16$2: bv32;
-  var v23$1: bv32;
-  var v23$2: bv32;
-  var v25$1: bv32;
-  var v25$2: bv32;
-  var v26$1: bv32;
-  var v26$2: bv32;
-  var v31$1: bv32;
-  var v31$2: bv32;
-  var v28$1: bv32;
-  var v28$2: bv32;
-  var v34$1: bv32;
-  var v34$2: bv32;
-  var v6$1: bv32;
-  var v6$2: bv32;
   var v4$1: bv32;
   var v4$2: bv32;
-  var v9$1: bv32;
-  var v9$2: bv32;
-  var v11$1: bv32;
-  var v11$2: bv32;
   var v5$1: bool;
   var v5$2: bool;
+  var v6$1: bv32;
+  var v6$2: bv32;
   var v7$1: bv32;
   var v7$2: bv32;
   var v8$1: bool;
   var v8$2: bool;
-  var v12$1: bool;
-  var v12$2: bool;
+  var v9$1: bv32;
+  var v9$2: bv32;
   var v10$1: bool;
   var v10$2: bool;
+  var v11$1: bv32;
+  var v11$2: bv32;
+  var v12$1: bool;
+  var v12$2: bool;
   var v13$1: bool;
   var v13$2: bool;
-  var v17$1: bv32;
-  var v17$2: bv32;
   var v14$1: bool;
   var v14$2: bool;
-  var v21$1: bool;
-  var v21$2: bool;
-  var v27$1: bv32;
-  var v27$2: bv32;
-  var v24$1: bv32;
-  var v24$2: bv32;
-  var v20$1: bool;
-  var v20$2: bool;
+  var v15$1: bv32;
+  var v15$2: bv32;
+  var v16$1: bv32;
+  var v16$2: bv32;
+  var v17$1: bv32;
+  var v17$2: bv32;
+  var v18$1: bv32;
+  var v18$2: bv32;
   var v19$1: bv32;
   var v19$2: bv32;
+  var v20$1: bool;
+  var v20$2: bool;
+  var v21$1: bool;
+  var v21$2: bool;
+  var v22$1: bv32;
+  var v22$2: bv32;
+  var v23$1: bv32;
+  var v23$2: bv32;
+  var v24$1: bv32;
+  var v24$2: bv32;
+  var v25$1: bv32;
+  var v25$2: bv32;
+  var v26$1: bv32;
+  var v26$2: bv32;
+  var v27$1: bv32;
+  var v27$2: bv32;
+  var v28$1: bv32;
+  var v28$2: bv32;
   var v29$1: bool;
   var v29$2: bool;
   var v30$1: bool;
   var v30$2: bool;
+  var v31$1: bv32;
+  var v31$2: bv32;
   var v32$1: bv32;
   var v32$2: bv32;
   var v33$1: bool;
   var v33$2: bool;
+  var v34$1: bv32;
+  var v34$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -298,27 +300,27 @@ implementation {:source_name "lud_perimeter"} {:kernel} $lud_perimeter($matrix_d
   var p24$2: bool;
   var p25$1: bool;
   var p25$2: bool;
-  var _READ_HAS_OCCURRED_$$m$ghost$$for.cond: bool;
-  var _WRITE_HAS_OCCURRED_$$dia$ghost$$for.cond: bool;
-  var _READ_HAS_OCCURRED_$$m$ghost$$for.cond.26: bool;
-  var _WRITE_HAS_OCCURRED_$$peri_row$ghost$$for.cond.26: bool;
-  var _READ_HAS_OCCURRED_$$m$ghost$$for.cond.83: bool;
-  var _WRITE_HAS_OCCURRED_$$dia$ghost$$for.cond.83: bool;
-  var _READ_HAS_OCCURRED_$$m$ghost$$for.cond.152: bool;
-  var _WRITE_HAS_OCCURRED_$$peri_col$ghost$$for.cond.152: bool;
-  var _READ_HAS_OCCURRED_$$peri_row$ghost$$for.cond.242: bool;
-  var _WRITE_HAS_OCCURRED_$$peri_row$ghost$$for.cond.242: bool;
-  var _READ_HAS_OCCURRED_$$peri_row$ghost$$for.cond.246: bool;
-  var _WRITE_HAS_OCCURRED_$$peri_row$ghost$$for.cond.246: bool;
-  var _READ_HAS_OCCURRED_$$peri_col$ghost$$for.cond.269: bool;
-  var _WRITE_HAS_OCCURRED_$$peri_col$ghost$$for.cond.269: bool;
-  var _READ_HAS_OCCURRED_$$peri_col$ghost$$for.cond.289: bool;
-  var _WRITE_HAS_OCCURRED_$$peri_col$ghost$$for.cond.289: bool;
-  var _WRITE_HAS_OCCURRED_$$m$ghost$$for.cond.340: bool;
-  var _WRITE_HAS_OCCURRED_$$m$ghost$$for.cond.363: bool;
+  var _READ_HAS_OCCURRED_$$m$ghost$$2: bool;
+  var _WRITE_HAS_OCCURRED_$$dia$ghost$$2: bool;
+  var _READ_HAS_OCCURRED_$$m$ghost$$6: bool;
+  var _WRITE_HAS_OCCURRED_$$peri_row$ghost$$6: bool;
+  var _READ_HAS_OCCURRED_$$m$ghost$$11: bool;
+  var _WRITE_HAS_OCCURRED_$$dia$ghost$$11: bool;
+  var _READ_HAS_OCCURRED_$$m$ghost$$15: bool;
+  var _WRITE_HAS_OCCURRED_$$peri_col$ghost$$15: bool;
+  var _READ_HAS_OCCURRED_$$peri_row$ghost$$21: bool;
+  var _WRITE_HAS_OCCURRED_$$peri_row$ghost$$21: bool;
+  var _READ_HAS_OCCURRED_$$peri_row$ghost$$23: bool;
+  var _WRITE_HAS_OCCURRED_$$peri_row$ghost$$23: bool;
+  var _READ_HAS_OCCURRED_$$peri_col$ghost$$30: bool;
+  var _WRITE_HAS_OCCURRED_$$peri_col$ghost$$30: bool;
+  var _READ_HAS_OCCURRED_$$peri_col$ghost$$32: bool;
+  var _WRITE_HAS_OCCURRED_$$peri_col$ghost$$32: bool;
+  var _WRITE_HAS_OCCURRED_$$m$ghost$$40: bool;
+  var _WRITE_HAS_OCCURRED_$$m$ghost$$45: bool;
 
 
-  $entry:
+  $0:
     v0$1 := group_id_x$1;
     v0$2 := group_id_x$2;
     v1$1 := local_id_x$1;
@@ -361,16 +363,16 @@ implementation {:source_name "lud_perimeter"} {:kernel} $lud_perimeter($matrix_d
     $i.0$2, $array_offset.0$2 := (if p0$2 then 0bv32 else $i.0$2), (if p0$2 then BV32_ADD(BV32_MUL($offset, $matrix_dim), $offset) else $array_offset.0$2);
     p1$1 := (if p0$1 then true else p1$1);
     p1$2 := (if p0$2 then true else p1$2);
-    _READ_HAS_OCCURRED_$$m$ghost$$for.cond := _READ_HAS_OCCURRED_$$m;
-    _WRITE_HAS_OCCURRED_$$dia$ghost$$for.cond := _WRITE_HAS_OCCURRED_$$dia;
+    _READ_HAS_OCCURRED_$$m$ghost$$2 := _READ_HAS_OCCURRED_$$m;
+    _WRITE_HAS_OCCURRED_$$dia$ghost$$2 := _WRITE_HAS_OCCURRED_$$dia;
     assume {:captureState "loop_entry_state_9_0"} true;
-    goto $for.cond;
+    goto $2;
 
-  $for.cond:
+  $2:
     assume {:captureState "loop_head_state_9"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b109 ==> !p0$1 ==> _WRITE_HAS_OCCURRED_$$dia$ghost$$for.cond == _WRITE_HAS_OCCURRED_$$dia;
+    assert {:tag "disabledMaintainsInstrumentation"} _b109 ==> !p0$1 ==> _WRITE_HAS_OCCURRED_$$dia$ghost$$2 == _WRITE_HAS_OCCURRED_$$dia;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b108 ==> _WRITE_HAS_OCCURRED_$$dia ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 16bv32), local_id_x$1));
-    assert {:tag "disabledMaintainsInstrumentation"} _b107 ==> !p0$1 ==> _READ_HAS_OCCURRED_$$m$ghost$$for.cond == _READ_HAS_OCCURRED_$$m;
+    assert {:tag "disabledMaintainsInstrumentation"} _b107 ==> !p0$1 ==> _READ_HAS_OCCURRED_$$m$ghost$$2 == _READ_HAS_OCCURRED_$$m;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b106 ==> _READ_HAS_OCCURRED_$$m ==> BV32_AND(BV32_SUB($matrix_dim, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB($matrix_dim, 1bv32), BV32_ADD(BV32_ADD(BV32_MUL($offset, $matrix_dim), $offset), local_id_x$1));
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$peri_col ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$peri_col ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -430,24 +432,24 @@ implementation {:source_name "lud_perimeter"} {:kernel} $lud_perimeter($matrix_d
     $i.0$2, $array_offset.0$2 := (if p2$2 then BV32_ADD($i.0$2, 1bv32) else $i.0$2), (if p2$2 then BV32_ADD($array_offset.0$2, $matrix_dim) else $array_offset.0$2);
     p1$1 := (if p2$1 then true else p1$1);
     p1$2 := (if p2$2 then true else p1$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $2.backedge, $2.tail;
 
-  $for.cond.tail:
+  $2.tail:
     assume !p1$1 && !p1$2;
     $i.1$1, $array_offset.1$1 := (if p0$1 then 0bv32 else $i.1$1), (if p0$1 then BV32_ADD(BV32_MUL($offset, $matrix_dim), $offset) else $array_offset.1$1);
     $i.1$2, $array_offset.1$2 := (if p0$2 then 0bv32 else $i.1$2), (if p0$2 then BV32_ADD(BV32_MUL($offset, $matrix_dim), $offset) else $array_offset.1$2);
     p3$1 := (if p0$1 then true else p3$1);
     p3$2 := (if p0$2 then true else p3$2);
-    _READ_HAS_OCCURRED_$$m$ghost$$for.cond.26 := _READ_HAS_OCCURRED_$$m;
-    _WRITE_HAS_OCCURRED_$$peri_row$ghost$$for.cond.26 := _WRITE_HAS_OCCURRED_$$peri_row;
+    _READ_HAS_OCCURRED_$$m$ghost$$6 := _READ_HAS_OCCURRED_$$m;
+    _WRITE_HAS_OCCURRED_$$peri_row$ghost$$6 := _WRITE_HAS_OCCURRED_$$peri_row;
     assume {:captureState "loop_entry_state_8_0"} true;
-    goto $for.cond.26;
+    goto $6;
 
-  $for.cond.26:
+  $6:
     assume {:captureState "loop_head_state_8"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b114 ==> !p0$1 ==> _WRITE_HAS_OCCURRED_$$peri_row$ghost$$for.cond.26 == _WRITE_HAS_OCCURRED_$$peri_row;
+    assert {:tag "disabledMaintainsInstrumentation"} _b114 ==> !p0$1 ==> _WRITE_HAS_OCCURRED_$$peri_row$ghost$$6 == _WRITE_HAS_OCCURRED_$$peri_row;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b113 ==> _WRITE_HAS_OCCURRED_$$peri_row ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 16bv32), local_id_x$1));
-    assert {:tag "disabledMaintainsInstrumentation"} _b112 ==> !p0$1 ==> _READ_HAS_OCCURRED_$$m$ghost$$for.cond.26 == _READ_HAS_OCCURRED_$$m;
+    assert {:tag "disabledMaintainsInstrumentation"} _b112 ==> !p0$1 ==> _READ_HAS_OCCURRED_$$m$ghost$$6 == _READ_HAS_OCCURRED_$$m;
     assert {:tag "accessBreak"} _b111 ==> _READ_HAS_OCCURRED_$$m ==> group_id_x$1 == BV32_DIV(_WATCHED_OFFSET, 16bv32);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b110 ==> _READ_HAS_OCCURRED_$$m ==> BV32_AND(BV32_SUB($matrix_dim, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB($matrix_dim, 1bv32), BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL($offset, $matrix_dim), $offset), BV32_MUL(BV32_ADD(group_id_x$1, 1bv32), 16bv32)), local_id_x$1));
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$peri_col ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -508,9 +510,9 @@ implementation {:source_name "lud_perimeter"} {:kernel} $lud_perimeter($matrix_d
     $i.1$2, $array_offset.1$2 := (if p4$2 then BV32_ADD($i.1$2, 1bv32) else $i.1$2), (if p4$2 then BV32_ADD($array_offset.1$2, $matrix_dim) else $array_offset.1$2);
     p3$1 := (if p4$1 then true else p3$1);
     p3$2 := (if p4$2 then true else p3$2);
-    goto $for.cond.26.backedge, $for.cond.26.tail;
+    goto $6.backedge, $6.tail;
 
-  $for.cond.26.tail:
+  $6.tail:
     assume !p3$1 && !p3$2;
     v7$1 := (if p5$1 then BV32_SUB(v1$1, 16bv32) else v7$1);
     v7$2 := (if p5$2 then BV32_SUB(v1$2, 16bv32) else v7$2);
@@ -518,15 +520,15 @@ implementation {:source_name "lud_perimeter"} {:kernel} $lud_perimeter($matrix_d
     $i.2$2, $array_offset.2$2 := (if p5$2 then 8bv32 else $i.2$2), (if p5$2 then BV32_ADD(BV32_MUL(BV32_ADD($offset, 8bv32), $matrix_dim), $offset) else $array_offset.2$2);
     p6$1 := (if p5$1 then true else p6$1);
     p6$2 := (if p5$2 then true else p6$2);
-    _READ_HAS_OCCURRED_$$m$ghost$$for.cond.83 := _READ_HAS_OCCURRED_$$m;
-    _WRITE_HAS_OCCURRED_$$dia$ghost$$for.cond.83 := _WRITE_HAS_OCCURRED_$$dia;
+    _READ_HAS_OCCURRED_$$m$ghost$$11 := _READ_HAS_OCCURRED_$$m;
+    _WRITE_HAS_OCCURRED_$$dia$ghost$$11 := _WRITE_HAS_OCCURRED_$$dia;
     assume {:captureState "loop_entry_state_7_0"} true;
-    goto $for.cond.83;
+    goto $11;
 
-  $for.cond.83:
+  $11:
     assume {:captureState "loop_head_state_7"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b116 ==> !p5$1 ==> _WRITE_HAS_OCCURRED_$$dia$ghost$$for.cond.83 == _WRITE_HAS_OCCURRED_$$dia;
-    assert {:tag "disabledMaintainsInstrumentation"} _b115 ==> !p5$1 ==> _READ_HAS_OCCURRED_$$m$ghost$$for.cond.83 == _READ_HAS_OCCURRED_$$m;
+    assert {:tag "disabledMaintainsInstrumentation"} _b116 ==> !p5$1 ==> _WRITE_HAS_OCCURRED_$$dia$ghost$$11 == _WRITE_HAS_OCCURRED_$$dia;
+    assert {:tag "disabledMaintainsInstrumentation"} _b115 ==> !p5$1 ==> _READ_HAS_OCCURRED_$$m$ghost$$11 == _READ_HAS_OCCURRED_$$m;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$peri_col ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$peri_col ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$peri_col ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -586,23 +588,23 @@ implementation {:source_name "lud_perimeter"} {:kernel} $lud_perimeter($matrix_d
     $i.2$2, $array_offset.2$2 := (if p7$2 then BV32_ADD($i.2$2, 1bv32) else $i.2$2), (if p7$2 then BV32_ADD($array_offset.2$2, $matrix_dim) else $array_offset.2$2);
     p6$1 := (if p7$1 then true else p6$1);
     p6$2 := (if p7$2 then true else p6$2);
-    goto $for.cond.83.backedge, $for.cond.83.tail;
+    goto $11.backedge, $11.tail;
 
-  $for.cond.83.tail:
+  $11.tail:
     assume !p6$1 && !p6$2;
     $i.3$1, $array_offset.3$1 := (if p5$1 then 0bv32 else $i.3$1), (if p5$1 then BV32_ADD(BV32_MUL(BV32_ADD($offset, BV32_MUL(BV32_ADD(v0$1, 1bv32), 16bv32)), $matrix_dim), $offset) else $array_offset.3$1);
     $i.3$2, $array_offset.3$2 := (if p5$2 then 0bv32 else $i.3$2), (if p5$2 then BV32_ADD(BV32_MUL(BV32_ADD($offset, BV32_MUL(BV32_ADD(v0$2, 1bv32), 16bv32)), $matrix_dim), $offset) else $array_offset.3$2);
     p8$1 := (if p5$1 then true else p8$1);
     p8$2 := (if p5$2 then true else p8$2);
-    _READ_HAS_OCCURRED_$$m$ghost$$for.cond.152 := _READ_HAS_OCCURRED_$$m;
-    _WRITE_HAS_OCCURRED_$$peri_col$ghost$$for.cond.152 := _WRITE_HAS_OCCURRED_$$peri_col;
+    _READ_HAS_OCCURRED_$$m$ghost$$15 := _READ_HAS_OCCURRED_$$m;
+    _WRITE_HAS_OCCURRED_$$peri_col$ghost$$15 := _WRITE_HAS_OCCURRED_$$peri_col;
     assume {:captureState "loop_entry_state_6_0"} true;
-    goto $for.cond.152;
+    goto $15;
 
-  $for.cond.152:
+  $15:
     assume {:captureState "loop_head_state_6"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b118 ==> !p5$1 ==> _WRITE_HAS_OCCURRED_$$peri_col$ghost$$for.cond.152 == _WRITE_HAS_OCCURRED_$$peri_col;
-    assert {:tag "disabledMaintainsInstrumentation"} _b117 ==> !p5$1 ==> _READ_HAS_OCCURRED_$$m$ghost$$for.cond.152 == _READ_HAS_OCCURRED_$$m;
+    assert {:tag "disabledMaintainsInstrumentation"} _b118 ==> !p5$1 ==> _WRITE_HAS_OCCURRED_$$peri_col$ghost$$15 == _WRITE_HAS_OCCURRED_$$peri_col;
+    assert {:tag "disabledMaintainsInstrumentation"} _b117 ==> !p5$1 ==> _READ_HAS_OCCURRED_$$m$ghost$$15 == _READ_HAS_OCCURRED_$$m;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$peri_col ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$peri_col ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$peri_col ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -662,13 +664,13 @@ implementation {:source_name "lud_perimeter"} {:kernel} $lud_perimeter($matrix_d
     $i.3$2, $array_offset.3$2 := (if p9$2 then BV32_ADD($i.3$2, 1bv32) else $i.3$2), (if p9$2 then BV32_ADD($array_offset.3$2, $matrix_dim) else $array_offset.3$2);
     p8$1 := (if p9$1 then true else p8$1);
     p8$2 := (if p9$2 then true else p8$2);
-    goto $for.cond.152.backedge, __partitioned_block_$for.cond.152.tail_0;
+    goto $15.backedge, __partitioned_block_$15.tail_0;
 
-  __partitioned_block_$for.cond.152.tail_0:
+  __partitioned_block_$15.tail_0:
     assume !p8$1 && !p8$2;
-    goto __partitioned_block_$for.cond.152.tail_1;
+    goto __partitioned_block_$15.tail_1;
 
-  __partitioned_block_$for.cond.152.tail_1:
+  __partitioned_block_$15.tail_1:
     call {:sourceloc_num 43} $bugle_barrier_duplicated_0(1bv1, 0bv1);
     v12$1 := BV32_SLT(v1$1, 16bv32);
     v12$2 := BV32_SLT(v1$2, 16bv32);
@@ -680,15 +682,15 @@ implementation {:source_name "lud_perimeter"} {:kernel} $lud_perimeter($matrix_d
     $i.4$2 := (if p10$2 then 1bv32 else $i.4$2);
     p11$1 := (if p10$1 then true else p11$1);
     p11$2 := (if p10$2 then true else p11$2);
-    _READ_HAS_OCCURRED_$$peri_row$ghost$$for.cond.242 := _READ_HAS_OCCURRED_$$peri_row;
-    _WRITE_HAS_OCCURRED_$$peri_row$ghost$$for.cond.242 := _WRITE_HAS_OCCURRED_$$peri_row;
+    _READ_HAS_OCCURRED_$$peri_row$ghost$$21 := _READ_HAS_OCCURRED_$$peri_row;
+    _WRITE_HAS_OCCURRED_$$peri_row$ghost$$21 := _WRITE_HAS_OCCURRED_$$peri_row;
     assume {:captureState "loop_entry_state_4_0"} true;
-    goto $for.cond.242;
+    goto $21;
 
-  $for.cond.242:
+  $21:
     assume {:captureState "loop_head_state_4"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b122 ==> !p10$1 ==> _WRITE_HAS_OCCURRED_$$peri_row$ghost$$for.cond.242 == _WRITE_HAS_OCCURRED_$$peri_row;
-    assert {:tag "disabledMaintainsInstrumentation"} _b121 ==> !p10$1 ==> _READ_HAS_OCCURRED_$$peri_row$ghost$$for.cond.242 == _READ_HAS_OCCURRED_$$peri_row;
+    assert {:tag "disabledMaintainsInstrumentation"} _b122 ==> !p10$1 ==> _WRITE_HAS_OCCURRED_$$peri_row$ghost$$21 == _WRITE_HAS_OCCURRED_$$peri_row;
+    assert {:tag "disabledMaintainsInstrumentation"} _b121 ==> !p10$1 ==> _READ_HAS_OCCURRED_$$peri_row$ghost$$21 == _READ_HAS_OCCURRED_$$peri_row;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b120 ==> _WRITE_HAS_OCCURRED_$$peri_row ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 16bv32), local_id_x$1));
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b119 ==> _READ_HAS_OCCURRED_$$peri_row ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 16bv32), local_id_x$1)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 16bv32), local_id_x$1));
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$peri_col ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -733,15 +735,15 @@ implementation {:source_name "lud_perimeter"} {:kernel} $lud_perimeter($matrix_d
     $j.0$2 := (if p12$2 then 0bv32 else $j.0$2);
     p13$1 := (if p12$1 then true else p13$1);
     p13$2 := (if p12$2 then true else p13$2);
-    _READ_HAS_OCCURRED_$$peri_row$ghost$$for.cond.246 := _READ_HAS_OCCURRED_$$peri_row;
-    _WRITE_HAS_OCCURRED_$$peri_row$ghost$$for.cond.246 := _WRITE_HAS_OCCURRED_$$peri_row;
+    _READ_HAS_OCCURRED_$$peri_row$ghost$$23 := _READ_HAS_OCCURRED_$$peri_row;
+    _WRITE_HAS_OCCURRED_$$peri_row$ghost$$23 := _WRITE_HAS_OCCURRED_$$peri_row;
     assume {:captureState "loop_entry_state_5_0"} true;
-    goto $for.cond.246;
+    goto $23;
 
-  $for.cond.246:
+  $23:
     assume {:captureState "loop_head_state_5"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b126 ==> !p12$1 ==> _WRITE_HAS_OCCURRED_$$peri_row$ghost$$for.cond.246 == _WRITE_HAS_OCCURRED_$$peri_row;
-    assert {:tag "disabledMaintainsInstrumentation"} _b125 ==> !p12$1 ==> _READ_HAS_OCCURRED_$$peri_row$ghost$$for.cond.246 == _READ_HAS_OCCURRED_$$peri_row;
+    assert {:tag "disabledMaintainsInstrumentation"} _b126 ==> !p12$1 ==> _WRITE_HAS_OCCURRED_$$peri_row$ghost$$23 == _WRITE_HAS_OCCURRED_$$peri_row;
+    assert {:tag "disabledMaintainsInstrumentation"} _b125 ==> !p12$1 ==> _READ_HAS_OCCURRED_$$peri_row$ghost$$23 == _READ_HAS_OCCURRED_$$peri_row;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b124 ==> _WRITE_HAS_OCCURRED_$$peri_row ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 16bv32), local_id_x$1));
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b123 ==> _READ_HAS_OCCURRED_$$peri_row ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 16bv32), local_id_x$1)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 16bv32), local_id_x$1));
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$peri_col ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -802,28 +804,28 @@ implementation {:source_name "lud_perimeter"} {:kernel} $lud_perimeter($matrix_d
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$peri_row"} true;
     v18$1 := (if p14$1 then $$peri_row[1bv1][v17$1] else v18$1);
     v18$2 := (if p14$2 then $$peri_row[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v17$2] else v18$2);
-    call {:sourceloc} {:sourceloc_num 52} _LOG_WRITE_$$peri_row(p14$1, v17$1, FSUB32(v18$1, FMUL32(v15$1, v16$1)), $$peri_row[1bv1][v17$1]);
+    call {:sourceloc} {:sourceloc_num 52} _LOG_WRITE_$$peri_row(p14$1, v17$1, FADD32(FMUL32(FSUB32(2147483648bv32, v15$1), v16$1), v18$1), $$peri_row[1bv1][v17$1]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$peri_row(p14$2, v17$2);
     assume {:do_not_predicate} {:check_id "check_state_14"} {:captureState "check_state_14"} {:sourceloc} {:sourceloc_num 52} true;
-    call {:check_id "check_state_14"} {:sourceloc} {:sourceloc_num 52} _CHECK_WRITE_$$peri_row(p14$2, v17$2, FSUB32(v18$2, FMUL32(v15$2, v16$2)));
+    call {:check_id "check_state_14"} {:sourceloc} {:sourceloc_num 52} _CHECK_WRITE_$$peri_row(p14$2, v17$2, FADD32(FMUL32(FSUB32(2147483648bv32, v15$2), v16$2), v18$2));
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$peri_row"} true;
-    $$peri_row[1bv1][v17$1] := (if p14$1 then FSUB32(v18$1, FMUL32(v15$1, v16$1)) else $$peri_row[1bv1][v17$1]);
-    $$peri_row[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v17$2] := (if p14$2 then FSUB32(v18$2, FMUL32(v15$2, v16$2)) else $$peri_row[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v17$2]);
+    $$peri_row[1bv1][v17$1] := (if p14$1 then FADD32(FMUL32(FSUB32(2147483648bv32, v15$1), v16$1), v18$1) else $$peri_row[1bv1][v17$1]);
+    $$peri_row[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v17$2] := (if p14$2 then FADD32(FMUL32(FSUB32(2147483648bv32, v15$2), v16$2), v18$2) else $$peri_row[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v17$2]);
     $j.0$1 := (if p14$1 then BV32_ADD($j.0$1, 1bv32) else $j.0$1);
     $j.0$2 := (if p14$2 then BV32_ADD($j.0$2, 1bv32) else $j.0$2);
     p13$1 := (if p14$1 then true else p13$1);
     p13$2 := (if p14$2 then true else p13$2);
-    goto $for.cond.246.backedge, $for.cond.246.tail;
+    goto $23.backedge, $23.tail;
 
-  $for.cond.246.tail:
+  $23.tail:
     assume !p13$1 && !p13$2;
     $i.4$1 := (if p12$1 then BV32_ADD($i.4$1, 1bv32) else $i.4$1);
     $i.4$2 := (if p12$2 then BV32_ADD($i.4$2, 1bv32) else $i.4$2);
     p11$1 := (if p12$1 then true else p11$1);
     p11$2 := (if p12$2 then true else p11$2);
-    goto $for.cond.242.backedge, $for.cond.242.tail;
+    goto $21.backedge, $21.tail;
 
-  $for.cond.242.tail:
+  $21.tail:
     assume !p11$1 && !p11$2;
     v19$1 := (if p15$1 then BV32_SUB(v1$1, 16bv32) else v19$1);
     v19$2 := (if p15$2 then BV32_SUB(v1$2, 16bv32) else v19$2);
@@ -831,15 +833,15 @@ implementation {:source_name "lud_perimeter"} {:kernel} $lud_perimeter($matrix_d
     $i.5$2 := (if p15$2 then 0bv32 else $i.5$2);
     p16$1 := (if p15$1 then true else p16$1);
     p16$2 := (if p15$2 then true else p16$2);
-    _READ_HAS_OCCURRED_$$peri_col$ghost$$for.cond.269 := _READ_HAS_OCCURRED_$$peri_col;
-    _WRITE_HAS_OCCURRED_$$peri_col$ghost$$for.cond.269 := _WRITE_HAS_OCCURRED_$$peri_col;
+    _READ_HAS_OCCURRED_$$peri_col$ghost$$30 := _READ_HAS_OCCURRED_$$peri_col;
+    _WRITE_HAS_OCCURRED_$$peri_col$ghost$$30 := _WRITE_HAS_OCCURRED_$$peri_col;
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond.269;
+    goto $30;
 
-  $for.cond.269:
+  $30:
     assume {:captureState "loop_head_state_2"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b128 ==> !p15$1 ==> _WRITE_HAS_OCCURRED_$$peri_col$ghost$$for.cond.269 == _WRITE_HAS_OCCURRED_$$peri_col;
-    assert {:tag "disabledMaintainsInstrumentation"} _b127 ==> !p15$1 ==> _READ_HAS_OCCURRED_$$peri_col$ghost$$for.cond.269 == _READ_HAS_OCCURRED_$$peri_col;
+    assert {:tag "disabledMaintainsInstrumentation"} _b128 ==> !p15$1 ==> _WRITE_HAS_OCCURRED_$$peri_col$ghost$$30 == _WRITE_HAS_OCCURRED_$$peri_col;
+    assert {:tag "disabledMaintainsInstrumentation"} _b127 ==> !p15$1 ==> _READ_HAS_OCCURRED_$$peri_col$ghost$$30 == _READ_HAS_OCCURRED_$$peri_col;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$peri_col ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$peri_col ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$peri_col ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -884,15 +886,15 @@ implementation {:source_name "lud_perimeter"} {:kernel} $lud_perimeter($matrix_d
     $j.1$2 := (if p17$2 then 0bv32 else $j.1$2);
     p18$1 := (if p17$1 then true else p18$1);
     p18$2 := (if p17$2 then true else p18$2);
-    _READ_HAS_OCCURRED_$$peri_col$ghost$$for.cond.289 := _READ_HAS_OCCURRED_$$peri_col;
-    _WRITE_HAS_OCCURRED_$$peri_col$ghost$$for.cond.289 := _WRITE_HAS_OCCURRED_$$peri_col;
+    _READ_HAS_OCCURRED_$$peri_col$ghost$$32 := _READ_HAS_OCCURRED_$$peri_col;
+    _WRITE_HAS_OCCURRED_$$peri_col$ghost$$32 := _WRITE_HAS_OCCURRED_$$peri_col;
     assume {:captureState "loop_entry_state_3_0"} true;
-    goto $for.cond.289;
+    goto $32;
 
-  $for.cond.289:
+  $32:
     assume {:captureState "loop_head_state_3"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b130 ==> !p17$1 ==> _WRITE_HAS_OCCURRED_$$peri_col$ghost$$for.cond.289 == _WRITE_HAS_OCCURRED_$$peri_col;
-    assert {:tag "disabledMaintainsInstrumentation"} _b129 ==> !p17$1 ==> _READ_HAS_OCCURRED_$$peri_col$ghost$$for.cond.289 == _READ_HAS_OCCURRED_$$peri_col;
+    assert {:tag "disabledMaintainsInstrumentation"} _b130 ==> !p17$1 ==> _WRITE_HAS_OCCURRED_$$peri_col$ghost$$32 == _WRITE_HAS_OCCURRED_$$peri_col;
+    assert {:tag "disabledMaintainsInstrumentation"} _b129 ==> !p17$1 ==> _READ_HAS_OCCURRED_$$peri_col$ghost$$32 == _READ_HAS_OCCURRED_$$peri_col;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$peri_col ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$peri_col ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$peri_col ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -953,20 +955,20 @@ implementation {:source_name "lud_perimeter"} {:kernel} $lud_perimeter($matrix_d
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$peri_col"} true;
     v25$1 := (if p19$1 then $$peri_col[1bv1][v24$1] else v25$1);
     v25$2 := (if p19$2 then $$peri_col[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v24$2] else v25$2);
-    call {:sourceloc} {:sourceloc_num 69} _LOG_WRITE_$$peri_col(p19$1, v24$1, FSUB32(v25$1, FMUL32(v22$1, v23$1)), $$peri_col[1bv1][v24$1]);
+    call {:sourceloc} {:sourceloc_num 69} _LOG_WRITE_$$peri_col(p19$1, v24$1, FADD32(FMUL32(FSUB32(2147483648bv32, v22$1), v23$1), v25$1), $$peri_col[1bv1][v24$1]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$peri_col(p19$2, v24$2);
     assume {:do_not_predicate} {:check_id "check_state_10"} {:captureState "check_state_10"} {:sourceloc} {:sourceloc_num 69} true;
-    call {:check_id "check_state_10"} {:sourceloc} {:sourceloc_num 69} _CHECK_WRITE_$$peri_col(p19$2, v24$2, FSUB32(v25$2, FMUL32(v22$2, v23$2)));
+    call {:check_id "check_state_10"} {:sourceloc} {:sourceloc_num 69} _CHECK_WRITE_$$peri_col(p19$2, v24$2, FADD32(FMUL32(FSUB32(2147483648bv32, v22$2), v23$2), v25$2));
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$peri_col"} true;
-    $$peri_col[1bv1][v24$1] := (if p19$1 then FSUB32(v25$1, FMUL32(v22$1, v23$1)) else $$peri_col[1bv1][v24$1]);
-    $$peri_col[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v24$2] := (if p19$2 then FSUB32(v25$2, FMUL32(v22$2, v23$2)) else $$peri_col[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v24$2]);
+    $$peri_col[1bv1][v24$1] := (if p19$1 then FADD32(FMUL32(FSUB32(2147483648bv32, v22$1), v23$1), v25$1) else $$peri_col[1bv1][v24$1]);
+    $$peri_col[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v24$2] := (if p19$2 then FADD32(FMUL32(FSUB32(2147483648bv32, v22$2), v23$2), v25$2) else $$peri_col[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v24$2]);
     $j.1$1 := (if p19$1 then BV32_ADD($j.1$1, 1bv32) else $j.1$1);
     $j.1$2 := (if p19$2 then BV32_ADD($j.1$2, 1bv32) else $j.1$2);
     p18$1 := (if p19$1 then true else p18$1);
     p18$2 := (if p19$2 then true else p18$2);
-    goto $for.cond.289.backedge, $for.cond.289.tail;
+    goto $32.backedge, $32.tail;
 
-  $for.cond.289.tail:
+  $32.tail:
     assume !p18$1 && !p18$2;
     assume {:do_not_predicate} {:check_id "check_state_4"} {:captureState "check_state_4"} {:sourceloc} {:sourceloc_num 72} true;
     v26$1 := (if p17$1 then $$dia[1bv1][BV32_ADD(BV32_MUL($i.5$1, 16bv32), $i.5$1)] else v26$1);
@@ -990,13 +992,13 @@ implementation {:source_name "lud_perimeter"} {:kernel} $lud_perimeter($matrix_d
     $i.5$2 := (if p17$2 then BV32_ADD($i.5$2, 1bv32) else $i.5$2);
     p16$1 := (if p17$1 then true else p16$1);
     p16$2 := (if p17$2 then true else p16$2);
-    goto $for.cond.269.backedge, __partitioned_block_$for.cond.269.tail_0;
+    goto $30.backedge, __partitioned_block_$30.tail_0;
 
-  __partitioned_block_$for.cond.269.tail_0:
+  __partitioned_block_$30.tail_0:
     assume !p16$1 && !p16$2;
-    goto __partitioned_block_$for.cond.269.tail_1;
+    goto __partitioned_block_$30.tail_1;
 
-  __partitioned_block_$for.cond.269.tail_1:
+  __partitioned_block_$30.tail_1:
     call {:sourceloc_num 77} $bugle_barrier_duplicated_1(1bv1, 0bv1);
     v29$1 := BV32_SLT(v1$1, 16bv32);
     v29$2 := BV32_SLT(v1$2, 16bv32);
@@ -1008,13 +1010,13 @@ implementation {:source_name "lud_perimeter"} {:kernel} $lud_perimeter($matrix_d
     $i.6$2, $array_offset.4$2 := (if p20$2 then 1bv32 else $i.6$2), (if p20$2 then BV32_ADD(BV32_MUL(BV32_ADD($offset, 1bv32), $matrix_dim), $offset) else $array_offset.4$2);
     p21$1 := (if p20$1 then true else p21$1);
     p21$2 := (if p20$2 then true else p21$2);
-    _WRITE_HAS_OCCURRED_$$m$ghost$$for.cond.340 := _WRITE_HAS_OCCURRED_$$m;
+    _WRITE_HAS_OCCURRED_$$m$ghost$$40 := _WRITE_HAS_OCCURRED_$$m;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.340;
+    goto $40;
 
-  $for.cond.340:
+  $40:
     assume {:captureState "loop_head_state_1"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b133 ==> !p20$1 ==> _WRITE_HAS_OCCURRED_$$m$ghost$$for.cond.340 == _WRITE_HAS_OCCURRED_$$m;
+    assert {:tag "disabledMaintainsInstrumentation"} _b133 ==> !p20$1 ==> _WRITE_HAS_OCCURRED_$$m$ghost$$40 == _WRITE_HAS_OCCURRED_$$m;
     assert {:tag "accessBreak"} _b132 ==> _WRITE_HAS_OCCURRED_$$m ==> group_id_x$1 == BV32_DIV(_WATCHED_OFFSET, 16bv32);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b131 ==> _WRITE_HAS_OCCURRED_$$m ==> BV32_AND(BV32_SUB($matrix_dim, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB($matrix_dim, 1bv32), BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(BV32_ADD($offset, 1bv32), $matrix_dim), $offset), BV32_MUL(BV32_ADD(group_id_x$1, 1bv32), 16bv32)), local_id_x$1));
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$peri_col ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -1068,9 +1070,9 @@ implementation {:source_name "lud_perimeter"} {:kernel} $lud_perimeter($matrix_d
     $i.6$2, $array_offset.4$2 := (if p22$2 then BV32_ADD($i.6$2, 1bv32) else $i.6$2), (if p22$2 then BV32_ADD($array_offset.4$2, $matrix_dim) else $array_offset.4$2);
     p21$1 := (if p22$1 then true else p21$1);
     p21$2 := (if p22$2 then true else p21$2);
-    goto $for.cond.340.backedge, $for.cond.340.tail;
+    goto $40.backedge, $40.tail;
 
-  $for.cond.340.tail:
+  $40.tail:
     assume !p21$1 && !p21$2;
     v32$1 := (if p23$1 then BV32_SUB(v1$1, 16bv32) else v32$1);
     v32$2 := (if p23$2 then BV32_SUB(v1$2, 16bv32) else v32$2);
@@ -1078,13 +1080,13 @@ implementation {:source_name "lud_perimeter"} {:kernel} $lud_perimeter($matrix_d
     $i.7$2, $array_offset.5$2 := (if p23$2 then 0bv32 else $i.7$2), (if p23$2 then BV32_ADD(BV32_MUL(BV32_ADD($offset, BV32_MUL(BV32_ADD(v0$2, 1bv32), 16bv32)), $matrix_dim), $offset) else $array_offset.5$2);
     p24$1 := (if p23$1 then true else p24$1);
     p24$2 := (if p23$2 then true else p24$2);
-    _WRITE_HAS_OCCURRED_$$m$ghost$$for.cond.363 := _WRITE_HAS_OCCURRED_$$m;
+    _WRITE_HAS_OCCURRED_$$m$ghost$$45 := _WRITE_HAS_OCCURRED_$$m;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.363;
+    goto $45;
 
-  $for.cond.363:
+  $45:
     assume {:captureState "loop_head_state_0"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b134 ==> !p23$1 ==> _WRITE_HAS_OCCURRED_$$m$ghost$$for.cond.363 == _WRITE_HAS_OCCURRED_$$m;
+    assert {:tag "disabledMaintainsInstrumentation"} _b134 ==> !p23$1 ==> _WRITE_HAS_OCCURRED_$$m$ghost$$45 == _WRITE_HAS_OCCURRED_$$m;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$peri_col ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$peri_col ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$peri_col ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -1140,61 +1142,61 @@ implementation {:source_name "lud_perimeter"} {:kernel} $lud_perimeter($matrix_d
     $i.7$2, $array_offset.5$2 := (if p25$2 then BV32_ADD($i.7$2, 1bv32) else $i.7$2), (if p25$2 then BV32_ADD($array_offset.5$2, $matrix_dim) else $array_offset.5$2);
     p24$1 := (if p25$1 then true else p24$1);
     p24$2 := (if p25$2 then true else p24$2);
-    goto $for.cond.363.backedge, $for.cond.363.tail;
+    goto $45.backedge, $45.tail;
 
-  $for.cond.363.tail:
+  $45.tail:
     assume !p24$1 && !p24$2;
     return;
 
-  $for.cond.363.backedge:
+  $45.backedge:
     assume {:backedge} p24$1 || p24$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.363;
+    goto $45;
 
-  $for.cond.340.backedge:
+  $40.backedge:
     assume {:backedge} p21$1 || p21$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.340;
+    goto $40;
 
-  $for.cond.269.backedge:
+  $30.backedge:
     assume {:backedge} p16$1 || p16$2;
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond.269;
+    goto $30;
 
-  $for.cond.289.backedge:
+  $32.backedge:
     assume {:backedge} p18$1 || p18$2;
     assume {:captureState "loop_back_edge_state_3_0"} true;
-    goto $for.cond.289;
+    goto $32;
 
-  $for.cond.242.backedge:
+  $21.backedge:
     assume {:backedge} p11$1 || p11$2;
     assume {:captureState "loop_back_edge_state_4_0"} true;
-    goto $for.cond.242;
+    goto $21;
 
-  $for.cond.246.backedge:
+  $23.backedge:
     assume {:backedge} p13$1 || p13$2;
     assume {:captureState "loop_back_edge_state_5_0"} true;
-    goto $for.cond.246;
+    goto $23;
 
-  $for.cond.152.backedge:
+  $15.backedge:
     assume {:backedge} p8$1 || p8$2;
     assume {:captureState "loop_back_edge_state_6_0"} true;
-    goto $for.cond.152;
+    goto $15;
 
-  $for.cond.83.backedge:
+  $11.backedge:
     assume {:backedge} p6$1 || p6$2;
     assume {:captureState "loop_back_edge_state_7_0"} true;
-    goto $for.cond.83;
+    goto $11;
 
-  $for.cond.26.backedge:
+  $6.backedge:
     assume {:backedge} p3$1 || p3$2;
     assume {:captureState "loop_back_edge_state_8_0"} true;
-    goto $for.cond.26;
+    goto $6;
 
-  $for.cond.backedge:
+  $2.backedge:
     assume {:backedge} p1$1 || p1$2;
     assume {:captureState "loop_back_edge_state_9_0"} true;
-    goto $for.cond;
+    goto $2;
 }
 
 

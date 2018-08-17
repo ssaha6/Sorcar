@@ -148,45 +148,45 @@ implementation {:source_name "bitonicSortShared1"} {:kernel} $_Z18bitonicSortSha
 {
   var $size.0: bv32;
   var $stride.0: bv32;
-  var $stride41.0: bv32;
+  var $stride2.0: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
+  var v1$1: bv32;
+  var v1$2: bv32;
   var v2$1: bv32;
   var v2$2: bv32;
   var v3$1: bv32;
   var v3$2: bv32;
-  var v1$1: bv32;
-  var v1$2: bv32;
-  var v5$1: bv32;
-  var v5$2: bv32;
-  var v7$1: bv32;
-  var v7$2: bv32;
   var v4$1: bv32;
   var v4$2: bv32;
+  var v5$1: bv32;
+  var v5$2: bv32;
   var v6$1: bv32;
   var v6$2: bv32;
+  var v7$1: bv32;
+  var v7$2: bv32;
+  var v8: bool;
+  var v9: bool;
+  var v10$1: bv32;
+  var v10$2: bv32;
+  var v11$1: bv32;
+  var v11$2: bv32;
+  var v12$1: bv32;
+  var v12$2: bv32;
   var v13$1: bv32;
   var v13$2: bv32;
-  var v17$1: bv32;
-  var v17$2: bv32;
+  var v14$1: bv32;
+  var v14$2: bv32;
+  var v15$1: bool;
+  var v15$2: bool;
   var v16$1: bv32;
   var v16$2: bv32;
+  var v17$1: bv32;
+  var v17$2: bv32;
   var v18$1: bv32;
   var v18$2: bv32;
   var v19$1: bv32;
   var v19$2: bv32;
-  var v14$1: bv32;
-  var v14$2: bv32;
-  var v9: bool;
-  var v8: bool;
-  var v12$1: bv32;
-  var v12$2: bv32;
-  var v10$1: bv32;
-  var v10$2: bv32;
-  var v15$1: bool;
-  var v15$2: bool;
-  var v11$1: bv32;
-  var v11$2: bv32;
   var v20: bool;
   var v21$1: bv32;
   var v21$2: bv32;
@@ -194,28 +194,28 @@ implementation {:source_name "bitonicSortShared1"} {:kernel} $_Z18bitonicSortSha
   var v22$2: bv32;
   var v23$1: bv32;
   var v23$2: bv32;
-  var v26$1: bool;
-  var v26$2: bool;
-  var v34$1: bv32;
-  var v34$2: bv32;
-  var v33$1: bv32;
-  var v33$2: bv32;
-  var v32$1: bv32;
-  var v32$2: bv32;
-  var v28$1: bv32;
-  var v28$2: bv32;
-  var v25$1: bv32;
-  var v25$2: bv32;
-  var v29$1: bv32;
-  var v29$2: bv32;
-  var v27$1: bv32;
-  var v27$2: bv32;
   var v24$1: bv32;
   var v24$2: bv32;
+  var v25$1: bv32;
+  var v25$2: bv32;
+  var v26$1: bool;
+  var v26$2: bool;
+  var v27$1: bv32;
+  var v27$2: bv32;
+  var v28$1: bv32;
+  var v28$2: bv32;
+  var v29$1: bv32;
+  var v29$2: bv32;
   var v30$1: bv32;
   var v30$2: bv32;
   var v31$1: bv32;
   var v31$2: bv32;
+  var v32$1: bv32;
+  var v32$2: bv32;
+  var v33$1: bv32;
+  var v33$2: bv32;
+  var v34$1: bv32;
+  var v34$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -226,7 +226,7 @@ implementation {:source_name "bitonicSortShared1"} {:kernel} $_Z18bitonicSortSha
   var p3$2: bool;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, 1024bv32), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, 1024bv32), local_id_x$2);
     v1$1 := BV32_ADD(BV32_MUL(group_id_x$1, 1024bv32), local_id_x$1);
@@ -269,9 +269,9 @@ implementation {:source_name "bitonicSortShared1"} {:kernel} $_Z18bitonicSortSha
     $$_ZZ18bitonicSortShared1PjS_S_S_E5s_val[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(local_id_x$2, 512bv32)] := v7$2;
     $size.0 := 2bv32;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "nowrite"} _b51 ==> !_WRITE_HAS_OCCURRED_$$_ZZ18bitonicSortShared1PjS_S_S_E5s_val;
     assert {:tag "noread"} _b50 ==> !_READ_HAS_OCCURRED_$$_ZZ18bitonicSortShared1PjS_S_S_E5s_val;
@@ -329,30 +329,30 @@ implementation {:source_name "bitonicSortShared1"} {:kernel} $_Z18bitonicSortSha
 
   $falsebb:
     assume {:partition} !v8;
-    $stride41.0 := 512bv32;
+    $stride2.0 := 512bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.42;
+    goto $10;
 
-  $for.cond.42:
+  $10:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "nowrite"} _b57 ==> !_WRITE_HAS_OCCURRED_$$_ZZ18bitonicSortShared1PjS_S_S_E5s_val;
     assert {:tag "noread"} _b56 ==> !_READ_HAS_OCCURRED_$$_ZZ18bitonicSortShared1PjS_S_S_E5s_val;
     assert {:tag "nowrite"} _b55 ==> !_WRITE_HAS_OCCURRED_$$_ZZ18bitonicSortShared1PjS_S_S_E5s_key;
     assert {:tag "noread"} _b54 ==> !_READ_HAS_OCCURRED_$$_ZZ18bitonicSortShared1PjS_S_S_E5s_key;
-    assert {:tag "pow2NotZero"} _b53 ==> $stride41.0 != 0bv32;
-    assert {:tag "pow2"} _b52 ==> $stride41.0 == 0bv32 || BV32_AND($stride41.0, BV32_SUB($stride41.0, 1bv32)) == 0bv32;
+    assert {:tag "pow2NotZero"} _b53 ==> $stride2.0 != 0bv32;
+    assert {:tag "pow2"} _b52 ==> $stride2.0 == 0bv32 || BV32_AND($stride2.0, BV32_SUB($stride2.0, 1bv32)) == 0bv32;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ18bitonicSortShared1PjS_S_S_E5s_val ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ18bitonicSortShared1PjS_S_S_E5s_val ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$_ZZ18bitonicSortShared1PjS_S_S_E5s_val ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ18bitonicSortShared1PjS_S_S_E5s_key ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ18bitonicSortShared1PjS_S_S_E5s_key ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$_ZZ18bitonicSortShared1PjS_S_S_E5s_key ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
-    assert {:tag "loopBound"} {:thread 1} _b7 ==> BV32_UGE($stride41.0, 512bv32);
-    assert {:tag "loopBound"} {:thread 1} _b6 ==> BV32_ULE($stride41.0, 512bv32);
-    assert {:tag "loopBound"} {:thread 1} _b5 ==> BV32_SGE($stride41.0, 512bv32);
-    assert {:tag "loopBound"} {:thread 1} _b4 ==> BV32_SLE($stride41.0, 512bv32);
+    assert {:tag "loopBound"} {:thread 1} _b7 ==> BV32_UGE($stride2.0, 512bv32);
+    assert {:tag "loopBound"} {:thread 1} _b6 ==> BV32_ULE($stride2.0, 512bv32);
+    assert {:tag "loopBound"} {:thread 1} _b5 ==> BV32_SGE($stride2.0, 512bv32);
+    assert {:tag "loopBound"} {:thread 1} _b4 ==> BV32_SLE($stride2.0, 512bv32);
     assert {:block_sourceloc} {:sourceloc_num 30} true;
-    v20 := BV32_UGT($stride41.0, 0bv32);
+    v20 := BV32_UGT($stride2.0, 0bv32);
     p2$1 := false;
     p2$2 := false;
     p3$1 := false;
@@ -413,12 +413,12 @@ implementation {:source_name "bitonicSortShared1"} {:kernel} $_Z18bitonicSortSha
 
   __partitioned_block_$truebb2_1:
     call {:sourceloc_num 32} $bugle_barrier_duplicated_1(1bv1, 1bv1);
-    v21$1 := BV32_SUB(BV32_MUL(2bv32, local_id_x$1), BV32_AND(local_id_x$1, BV32_SUB($stride41.0, 1bv32)));
-    v21$2 := BV32_SUB(BV32_MUL(2bv32, local_id_x$2), BV32_AND(local_id_x$2, BV32_SUB($stride41.0, 1bv32)));
-    v22$1 := BV32_ADD(v21$1, $stride41.0);
-    v22$2 := BV32_ADD(v21$2, $stride41.0);
-    v23$1 := BV32_ADD(v21$1, $stride41.0);
-    v23$2 := BV32_ADD(v21$2, $stride41.0);
+    v21$1 := BV32_SUB(BV32_MUL(2bv32, local_id_x$1), BV32_AND(local_id_x$1, BV32_SUB($stride2.0, 1bv32)));
+    v21$2 := BV32_SUB(BV32_MUL(2bv32, local_id_x$2), BV32_AND(local_id_x$2, BV32_SUB($stride2.0, 1bv32)));
+    v22$1 := BV32_ADD(v21$1, $stride2.0);
+    v22$2 := BV32_ADD(v21$2, $stride2.0);
+    v23$1 := BV32_ADD(v21$1, $stride2.0);
+    v23$2 := BV32_ADD(v21$2, $stride2.0);
     call {:sourceloc} {:sourceloc_num 33} _LOG_READ_$$_ZZ18bitonicSortShared1PjS_S_S_E5s_key(true, v21$1, $$_ZZ18bitonicSortShared1PjS_S_S_E5s_key[1bv1][v21$1]);
     assume {:do_not_predicate} {:check_id "check_state_12"} {:captureState "check_state_12"} {:sourceloc} {:sourceloc_num 33} true;
     call {:check_id "check_state_12"} {:sourceloc} {:sourceloc_num 33} _CHECK_READ_$$_ZZ18bitonicSortShared1PjS_S_S_E5s_key(true, v21$2, $$_ZZ18bitonicSortShared1PjS_S_S_E5s_key[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v21$2]);
@@ -487,17 +487,17 @@ implementation {:source_name "bitonicSortShared1"} {:kernel} $_Z18bitonicSortSha
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$_ZZ18bitonicSortShared1PjS_S_S_E5s_val"} true;
     $$_ZZ18bitonicSortShared1PjS_S_S_E5s_val[1bv1][v23$1] := (if p3$1 then v29$1 else $$_ZZ18bitonicSortShared1PjS_S_S_E5s_val[1bv1][v23$1]);
     $$_ZZ18bitonicSortShared1PjS_S_S_E5s_val[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v23$2] := (if p3$2 then v29$2 else $$_ZZ18bitonicSortShared1PjS_S_S_E5s_val[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v23$2]);
-    $stride41.0 := BV32_LSHR($stride41.0, 1bv32);
+    $stride2.0 := BV32_LSHR($stride2.0, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.42;
+    goto $10;
 
   $truebb:
     assume {:partition} v8;
     $stride.0 := BV32_UDIV($size.0, 2bv32);
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond.23;
+    goto $3;
 
-  $for.cond.23:
+  $3:
     assume {:captureState "loop_head_state_2"} true;
     assert {:tag "nowrite"} _b63 ==> !_WRITE_HAS_OCCURRED_$$_ZZ18bitonicSortShared1PjS_S_S_E5s_val;
     assert {:tag "noread"} _b62 ==> !_READ_HAS_OCCURRED_$$_ZZ18bitonicSortShared1PjS_S_S_E5s_val;
@@ -527,7 +527,7 @@ implementation {:source_name "bitonicSortShared1"} {:kernel} $_Z18bitonicSortSha
     assume {:partition} !v9;
     $size.0 := BV32_SHL($size.0, 1bv32);
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond;
+    goto $1;
 
   __partitioned_block_$truebb0_0:
     assume {:partition} v9;
@@ -611,7 +611,7 @@ implementation {:source_name "bitonicSortShared1"} {:kernel} $_Z18bitonicSortSha
     $$_ZZ18bitonicSortShared1PjS_S_S_E5s_val[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v12$2] := (if p1$2 then v18$2 else $$_ZZ18bitonicSortShared1PjS_S_S_E5s_val[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v12$2]);
     $stride.0 := BV32_LSHR($stride.0, 1bv32);
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond.23;
+    goto $3;
 }
 
 

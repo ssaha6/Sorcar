@@ -31,8 +31,7 @@ function {:existential true} my_inv (
  b0029: bool,
  b0030: bool,
  b0031: bool,
- b0032: bool,
- b0033: bool
+ b0032: bool
  ) : bool;
 type _SIZE_T_TYPE = bv32;
 
@@ -285,7 +284,7 @@ implementation {:source_name "StencilKernel"} {:kernel} $StencilKernel($alignmen
     
     
     
-assert  my_inv (  (  BV32_SLE(0bv32, $i.0) ) ,  (  BV32_SLE($i.0, 0bv32) ) ,  (  BV32_SGE($i.0, 0bv32) ) ,  (  BV32_ULE($i.0, 0bv32) ) ,  (  BV32_UGE($i.0, 0bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  _WRITE_HAS_OCCURRED_$$sh ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, BV32_ADD(group_size_y, 2bv32)), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, BV32_ADD(group_size_y, 2bv32)), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, 1bv32), BV32_ADD(group_size_y, 2bv32)), BV32_ADD(local_id_y$1, 1bv32))) ) ,  true ,  true ,  true ,  true ,  true ,  true  ); 
+assert  my_inv (  (  BV32_SLE(0bv32, $i.0) ) ,  (  BV32_SLE($i.0, 0bv32) ) ,  (  BV32_SGE($i.0, 0bv32) ) ,  (  BV32_ULE($i.0, 0bv32) ) ,  (  BV32_UGE($i.0, 0bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  _WRITE_HAS_OCCURRED_$$sh ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, BV32_ADD(group_size_y, 2bv32)), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, BV32_ADD(group_size_y, 2bv32)), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, 1bv32), BV32_ADD(group_size_y, 2bv32)), BV32_ADD(local_id_y$1, 1bv32))) ) ,  true ,  true ,  true ,  true ,  true  ); 
 
 
     assert {:block_sourceloc} {:sourceloc_num 5} true;
@@ -321,7 +320,7 @@ assert  my_inv (  (  BV32_SLE(0bv32, $i.0) ) ,  (  BV32_SLE($i.0, 0bv32) ) ,  ( 
   $9:
     assume {:captureState "loop_head_state_2"} true;
     
-assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  !p0$1 ==> _WRITE_HAS_OCCURRED_$$sh$ghost$$9 == _WRITE_HAS_OCCURRED_$$sh ) ,  true ,  true ,  true ,  true ,  true  ); 
+assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  !p0$1 ==> _WRITE_HAS_OCCURRED_$$sh$ghost$$9 == _WRITE_HAS_OCCURRED_$$sh ) ,  true ,  true ,  true ,  true  ); 
 
 
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$sh ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -343,7 +342,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     
     
     
-assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  ( p1$1 ==> BV32_SLE(0bv32, $i1.0$1) )  && ( p1$2 ==> BV32_SLE(0bv32, $i1.0$2) ) ,  ( p1$1 ==> BV32_SLE($i1.0$1, 0bv32) )  && ( p1$2 ==> BV32_SLE($i1.0$2, 0bv32) ) ,  ( p1$1 ==> BV32_SGE($i1.0$1, 0bv32) )  && ( p1$2 ==> BV32_SGE($i1.0$2, 0bv32) ) ,  ( p1$1 ==> BV32_ULE($i1.0$1, 0bv32) )  && ( p1$2 ==> BV32_ULE($i1.0$2, 0bv32) ) ,  ( p1$1 ==> BV32_UGE($i1.0$1, 0bv32) )  && ( p1$2 ==> BV32_UGE($i1.0$2, 0bv32) ) ,  ( p1$1 ==> p1$1 ==> local_id_y$1 == 0bv32 )  && ( p1$2 ==> p1$2 ==> local_id_y$2 == 0bv32 ) ,  (  local_id_y$1 == 0bv32 && BV32_SLT($i1.0$1, 10bv32) ==> p1$1 )  && (  local_id_y$2 == 0bv32 && BV32_SLT($i1.0$2, 10bv32) ==> p1$2 ) ,  (  _WRITE_HAS_OCCURRED_$$sh ==> local_id_y$1 == 0bv32 ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true  ); 
+assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  ( p1$1 ==> BV32_SLE(0bv32, $i1.0$1) )  && ( p1$2 ==> BV32_SLE(0bv32, $i1.0$2) ) ,  ( p1$1 ==> BV32_SLE($i1.0$1, 0bv32) )  && ( p1$2 ==> BV32_SLE($i1.0$2, 0bv32) ) ,  ( p1$1 ==> BV32_SGE($i1.0$1, 0bv32) )  && ( p1$2 ==> BV32_SGE($i1.0$2, 0bv32) ) ,  ( p1$1 ==> BV32_ULE($i1.0$1, 0bv32) )  && ( p1$2 ==> BV32_ULE($i1.0$2, 0bv32) ) ,  ( p1$1 ==> BV32_UGE($i1.0$1, 0bv32) )  && ( p1$2 ==> BV32_UGE($i1.0$2, 0bv32) ) ,  ( p1$1 ==> p1$1 ==> local_id_y$1 == 0bv32 )  && ( p1$2 ==> p1$2 ==> local_id_y$2 == 0bv32 ) ,  (  local_id_y$1 == 0bv32 && BV32_SLT($i1.0$1, 10bv32) ==> p1$1 )  && (  local_id_y$2 == 0bv32 && BV32_SLT($i1.0$2, 10bv32) ==> p1$2 ) ,  (  _WRITE_HAS_OCCURRED_$$sh ==> local_id_y$1 == 0bv32 ) ,  true ,  true ,  true ,  true ,  true ,  true  ); 
 
 
     assert {:block_sourceloc} {:sourceloc_num 14} p1$1 ==> true;
@@ -390,7 +389,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     assume {:captureState "loop_head_state_1"} true;
     
     
-assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  _WRITE_HAS_OCCURRED_$$sh ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, BV32_ADD(group_size_y, 2bv32)), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, BV32_ADD(group_size_y, 2bv32)), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, 1bv32), BV32_ADD(group_size_y, 2bv32)), BV32_ADD(local_id_y$1, 2bv32))) ) ,  (  !p4$1 ==> _WRITE_HAS_OCCURRED_$$sh$ghost$$15 == _WRITE_HAS_OCCURRED_$$sh ) ,  true ,  true ,  true  ); 
+assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  _WRITE_HAS_OCCURRED_$$sh ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, BV32_ADD(group_size_y, 2bv32)), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, BV32_ADD(group_size_y, 2bv32)), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, 1bv32), BV32_ADD(group_size_y, 2bv32)), BV32_ADD(local_id_y$1, 2bv32))) ) ,  (  !p4$1 ==> _WRITE_HAS_OCCURRED_$$sh$ghost$$15 == _WRITE_HAS_OCCURRED_$$sh ) ,  true ,  true  ); 
 
 
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$sh ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -413,7 +412,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     
     
     
-assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  ( p5$1 ==> BV32_SLE(0bv32, $i4.0$1) )  && ( p5$2 ==> BV32_SLE(0bv32, $i4.0$2) ) ,  ( p5$1 ==> BV32_SLE($i4.0$1, 0bv32) )  && ( p5$2 ==> BV32_SLE($i4.0$2, 0bv32) ) ,  ( p5$1 ==> BV32_SGE($i4.0$1, 0bv32) )  && ( p5$2 ==> BV32_SGE($i4.0$2, 0bv32) ) ,  ( p5$1 ==> BV32_ULE($i4.0$1, 0bv32) )  && ( p5$2 ==> BV32_ULE($i4.0$2, 0bv32) ) ,  ( p5$1 ==> BV32_UGE($i4.0$1, 0bv32) )  && ( p5$2 ==> BV32_UGE($i4.0$2, 0bv32) ) ,  ( p5$1 ==> p5$1 ==> local_id_y$1 != 0bv32 && local_id_y$1 == BV32_SUB(group_size_y, 1bv32) )  && ( p5$2 ==> p5$2 ==> local_id_y$2 != 0bv32 && local_id_y$2 == BV32_SUB(group_size_y, 1bv32) ) ,  (  local_id_y$1 != 0bv32 && local_id_y$1 == BV32_SUB(group_size_y, 1bv32) && BV32_SLT($i4.0$1, 10bv32) ==> p5$1 )  && (  local_id_y$2 != 0bv32 && local_id_y$2 == BV32_SUB(group_size_y, 1bv32) && BV32_SLT($i4.0$2, 10bv32) ==> p5$2 ) ,  (  _WRITE_HAS_OCCURRED_$$sh ==> local_id_y$1 != 0bv32 ) ,  (  _WRITE_HAS_OCCURRED_$$sh ==> local_id_y$1 == BV32_SUB(group_size_y, 1bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true  ); 
+assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  ( p5$1 ==> BV32_SLE(0bv32, $i4.0$1) )  && ( p5$2 ==> BV32_SLE(0bv32, $i4.0$2) ) ,  ( p5$1 ==> BV32_SLE($i4.0$1, 0bv32) )  && ( p5$2 ==> BV32_SLE($i4.0$2, 0bv32) ) ,  ( p5$1 ==> BV32_SGE($i4.0$1, 0bv32) )  && ( p5$2 ==> BV32_SGE($i4.0$2, 0bv32) ) ,  ( p5$1 ==> BV32_ULE($i4.0$1, 0bv32) )  && ( p5$2 ==> BV32_ULE($i4.0$2, 0bv32) ) ,  ( p5$1 ==> BV32_UGE($i4.0$1, 0bv32) )  && ( p5$2 ==> BV32_UGE($i4.0$2, 0bv32) ) ,  ( p5$1 ==> p5$1 ==> local_id_y$1 != 0bv32 && local_id_y$1 == BV32_SUB(group_size_y, 1bv32) )  && ( p5$2 ==> p5$2 ==> local_id_y$2 != 0bv32 && local_id_y$2 == BV32_SUB(group_size_y, 1bv32) ) ,  (  local_id_y$1 != 0bv32 && local_id_y$1 == BV32_SUB(group_size_y, 1bv32) && BV32_SLT($i4.0$1, 10bv32) ==> p5$1 )  && (  local_id_y$2 != 0bv32 && local_id_y$2 == BV32_SUB(group_size_y, 1bv32) && BV32_SLT($i4.0$2, 10bv32) ==> p5$2 ) ,  (  _WRITE_HAS_OCCURRED_$$sh ==> local_id_y$1 != 0bv32 ) ,  (  _WRITE_HAS_OCCURRED_$$sh ==> local_id_y$1 == BV32_SUB(group_size_y, 1bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true  ); 
 
 
     assert {:block_sourceloc} {:sourceloc_num 23} p5$1 ==> true;
@@ -456,7 +455,6 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     assume {:captureState "loop_head_state_0"} true;
     
     
-    
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$sh ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$sh ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$sh ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -465,7 +463,7 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
     
     
     
-assert  my_inv (  true ,  true ,  true ,  true ,  true ,  (  BV32_SLE(0bv32, $i7.0) ) ,  (  BV32_SLE($i7.0, 0bv32) ) ,  (  BV32_SGE($i7.0, 0bv32) ) ,  (  BV32_ULE($i7.0, 0bv32) ) ,  (  BV32_UGE($i7.0, 0bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  _WRITE_HAS_OCCURRED_$$newData ==> BV32_SLE(BV32_ADD(BV32_ADD(BV32_MUL(group_id_y$1, group_size_y), local_id_y$1), 1bv32), _WATCHED_OFFSET) ) ,  (  _WRITE_HAS_OCCURRED_$$newData ==> BV32_SLT(_WATCHED_OFFSET, BV32_ADD(BV32_ADD(BV32_MUL(BV32_ADD(group_id_y$1, 1bv32), group_size_y), local_id_y$1), 1bv32)) ) ,  (  _READ_HAS_OCCURRED_$$sh ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, BV32_ADD(group_size_y, 2bv32)), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, BV32_ADD(group_size_y, 2bv32)), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(0bv32, local_id_x$1), 1bv32), BV32_ADD(group_size_y, 2bv32)), BV32_ADD(local_id_y$1, 1bv32))) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, BV32_ADD(group_size_y, 2bv32)), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, BV32_ADD(group_size_y, 2bv32)), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, 1bv32), BV32_ADD(group_size_y, 2bv32)), BV32_ADD(local_id_y$1, 1bv32))) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, BV32_ADD(group_size_y, 2bv32)), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, BV32_ADD(group_size_y, 2bv32)), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(0bv32, BV32_ADD(local_id_x$1, 1bv32)), 1bv32), BV32_ADD(group_size_y, 2bv32)), BV32_ADD(local_id_y$1, 1bv32))) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, BV32_ADD(group_size_y, 2bv32)), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, BV32_ADD(group_size_y, 2bv32)), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(0bv32, local_id_x$1), 1bv32), BV32_ADD(group_size_y, 2bv32)), BV32_ADD(local_id_y$1, 2bv32))) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, BV32_ADD(group_size_y, 2bv32)), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, BV32_ADD(group_size_y, 2bv32)), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, 1bv32), BV32_ADD(group_size_y, 2bv32)), BV32_ADD(local_id_y$1, 2bv32))) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, BV32_ADD(group_size_y, 2bv32)), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, BV32_ADD(group_size_y, 2bv32)), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(0bv32, BV32_ADD(local_id_x$1, 1bv32)), 1bv32), BV32_ADD(group_size_y, 2bv32)), BV32_ADD(local_id_y$1, 2bv32))) )  ); 
+assert  my_inv (  true ,  true ,  true ,  true ,  true ,  (  BV32_SLE(0bv32, $i7.0) ) ,  (  BV32_SLE($i7.0, 0bv32) ) ,  (  BV32_SGE($i7.0, 0bv32) ) ,  (  BV32_ULE($i7.0, 0bv32) ) ,  (  BV32_UGE($i7.0, 0bv32) ) ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,  (  _WRITE_HAS_OCCURRED_$$newData ==> BV32_SLE(BV32_ADD(BV32_ADD(BV32_MUL(group_id_y$1, group_size_y), local_id_y$1), 1bv32), _WATCHED_OFFSET) ) ,  (  _WRITE_HAS_OCCURRED_$$newData ==> BV32_SLT(_WATCHED_OFFSET, BV32_ADD(BV32_ADD(BV32_MUL(BV32_ADD(group_id_y$1, 1bv32), group_size_y), local_id_y$1), 1bv32)) )  ); 
 
 
     assert {:block_sourceloc} {:sourceloc_num 32} true;
@@ -480,58 +478,31 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  (  BV32_SLE(0bv32, $i7
 
   $truebb5:
     assume {:partition} v16;
-    call {:sourceloc} {:sourceloc_num 36} _LOG_READ_$$sh(true, BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(v0$1, $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$1, 1bv32)), $$sh[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(v0$1, $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$1, 1bv32))]);
     assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 36} true;
-    call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 36} _CHECK_READ_$$sh(true, BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(v0$2, $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$2, 1bv32)), $$sh[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(v0$2, $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$2, 1bv32))]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$sh"} true;
     v17$1 := $$sh[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(v0$1, $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$1, 1bv32))];
     v17$2 := $$sh[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(v0$2, $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$2, 1bv32))];
-    call {:sourceloc} {:sourceloc_num 37} _LOG_READ_$$sh(true, BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_SUB(v0$1, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$1, 1bv32)), $$sh[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_SUB(v0$1, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$1, 1bv32))]);
     assume {:do_not_predicate} {:check_id "check_state_1"} {:captureState "check_state_1"} {:sourceloc} {:sourceloc_num 37} true;
-    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 37} _CHECK_READ_$$sh(true, BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_SUB(v0$2, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$2, 1bv32)), $$sh[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_SUB(v0$2, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$2, 1bv32))]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$sh"} true;
     v18$1 := $$sh[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_SUB(v0$1, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$1, 1bv32))];
     v18$2 := $$sh[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_SUB(v0$2, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$2, 1bv32))];
-    call {:sourceloc} {:sourceloc_num 38} _LOG_READ_$$sh(true, BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_ADD(v0$1, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$1, 1bv32)), $$sh[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_ADD(v0$1, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$1, 1bv32))]);
     assume {:do_not_predicate} {:check_id "check_state_2"} {:captureState "check_state_2"} {:sourceloc} {:sourceloc_num 38} true;
-    call {:check_id "check_state_2"} {:sourceloc} {:sourceloc_num 38} _CHECK_READ_$$sh(true, BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_ADD(v0$2, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$2, 1bv32)), $$sh[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_ADD(v0$2, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$2, 1bv32))]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$sh"} true;
     v19$1 := $$sh[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_ADD(v0$1, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$1, 1bv32))];
     v19$2 := $$sh[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_ADD(v0$2, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$2, 1bv32))];
-    call {:sourceloc} {:sourceloc_num 39} _LOG_READ_$$sh(true, BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(v0$1, $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$1, 2bv32)), $$sh[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(v0$1, $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$1, 2bv32))]);
     assume {:do_not_predicate} {:check_id "check_state_3"} {:captureState "check_state_3"} {:sourceloc} {:sourceloc_num 39} true;
-    call {:check_id "check_state_3"} {:sourceloc} {:sourceloc_num 39} _CHECK_READ_$$sh(true, BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(v0$2, $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$2, 2bv32)), $$sh[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(v0$2, $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$2, 2bv32))]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$sh"} true;
     v20$1 := $$sh[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(v0$1, $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$1, 2bv32))];
     v20$2 := $$sh[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(v0$2, $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$2, 2bv32))];
-    call {:sourceloc} {:sourceloc_num 40} _LOG_READ_$$sh(true, BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(v0$1, $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(BV32_SUB(v1$1, 1bv32), 1bv32)), $$sh[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(v0$1, $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(BV32_SUB(v1$1, 1bv32), 1bv32))]);
     assume {:do_not_predicate} {:check_id "check_state_4"} {:captureState "check_state_4"} {:sourceloc} {:sourceloc_num 40} true;
-    call {:check_id "check_state_4"} {:sourceloc} {:sourceloc_num 40} _CHECK_READ_$$sh(true, BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(v0$2, $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(BV32_SUB(v1$2, 1bv32), 1bv32)), $$sh[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(v0$2, $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(BV32_SUB(v1$2, 1bv32), 1bv32))]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$sh"} true;
     v21$1 := $$sh[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(v0$1, $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(BV32_SUB(v1$1, 1bv32), 1bv32))];
     v21$2 := $$sh[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(v0$2, $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(BV32_SUB(v1$2, 1bv32), 1bv32))];
-    call {:sourceloc} {:sourceloc_num 41} _LOG_READ_$$sh(true, BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_SUB(v0$1, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$1, 2bv32)), $$sh[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_SUB(v0$1, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$1, 2bv32))]);
     assume {:do_not_predicate} {:check_id "check_state_5"} {:captureState "check_state_5"} {:sourceloc} {:sourceloc_num 41} true;
-    call {:check_id "check_state_5"} {:sourceloc} {:sourceloc_num 41} _CHECK_READ_$$sh(true, BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_SUB(v0$2, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$2, 2bv32)), $$sh[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_SUB(v0$2, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$2, 2bv32))]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$sh"} true;
     v22$1 := $$sh[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_SUB(v0$1, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$1, 2bv32))];
     v22$2 := $$sh[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_SUB(v0$2, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$2, 2bv32))];
-    call {:sourceloc} {:sourceloc_num 42} _LOG_READ_$$sh(true, BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_ADD(v0$1, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$1, 2bv32)), $$sh[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_ADD(v0$1, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$1, 2bv32))]);
     assume {:do_not_predicate} {:check_id "check_state_6"} {:captureState "check_state_6"} {:sourceloc} {:sourceloc_num 42} true;
-    call {:check_id "check_state_6"} {:sourceloc} {:sourceloc_num 42} _CHECK_READ_$$sh(true, BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_ADD(v0$2, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$2, 2bv32)), $$sh[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_ADD(v0$2, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$2, 2bv32))]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$sh"} true;
     v23$1 := $$sh[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_ADD(v0$1, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$1, 2bv32))];
     v23$2 := $$sh[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_ADD(v0$2, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(v1$2, 2bv32))];
-    call {:sourceloc} {:sourceloc_num 43} _LOG_READ_$$sh(true, BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_SUB(v0$1, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(BV32_SUB(v1$1, 1bv32), 1bv32)), $$sh[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_SUB(v0$1, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(BV32_SUB(v1$1, 1bv32), 1bv32))]);
     assume {:do_not_predicate} {:check_id "check_state_7"} {:captureState "check_state_7"} {:sourceloc} {:sourceloc_num 43} true;
-    call {:check_id "check_state_7"} {:sourceloc} {:sourceloc_num 43} _CHECK_READ_$$sh(true, BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_SUB(v0$2, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(BV32_SUB(v1$2, 1bv32), 1bv32)), $$sh[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_SUB(v0$2, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(BV32_SUB(v1$2, 1bv32), 1bv32))]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$sh"} true;
     v24$1 := $$sh[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_SUB(v0$1, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(BV32_SUB(v1$1, 1bv32), 1bv32))];
     v24$2 := $$sh[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_SUB(v0$2, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(BV32_SUB(v1$2, 1bv32), 1bv32))];
-    call {:sourceloc} {:sourceloc_num 44} _LOG_READ_$$sh(true, BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_ADD(v0$1, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(BV32_SUB(v1$1, 1bv32), 1bv32)), $$sh[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_ADD(v0$1, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(BV32_SUB(v1$1, 1bv32), 1bv32))]);
     assume {:do_not_predicate} {:check_id "check_state_8"} {:captureState "check_state_8"} {:sourceloc} {:sourceloc_num 44} true;
-    call {:check_id "check_state_8"} {:sourceloc} {:sourceloc_num 44} _CHECK_READ_$$sh(true, BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_ADD(v0$2, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(BV32_SUB(v1$2, 1bv32), 1bv32)), $$sh[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_ADD(v0$2, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(BV32_SUB(v1$2, 1bv32), 1bv32))]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$sh"} true;
     v25$1 := $$sh[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_ADD(v0$1, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(BV32_SUB(v1$1, 1bv32), 1bv32))];
     v25$2 := $$sh[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(BV32_ADD(v0$2, 1bv32), $i7.0), 1bv32), BV32_ADD(v2, 2bv32)), BV32_ADD(BV32_SUB(v1$2, 1bv32), 1bv32))];
     call {:sourceloc} {:sourceloc_num 45} _LOG_WRITE_$$newData(true, BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(v3$1, $i7.0), 1bv32), BV32_ADD(v7, 2bv32)), BV32_ADD(v4$1, 1bv32)), FADD32(FMUL32($wDiagonal, FADD32(FADD32(FADD32(v22$1, v23$1), v24$1), v25$1)), FADD32(FMUL32($wCenter, v17$1), FMUL32($wCardinal, FADD32(FADD32(FADD32(v18$1, v19$1), v20$1), v21$1)))), $$newData[BV32_ADD(BV32_MUL(BV32_ADD(BV32_ADD(v3$1, $i7.0), 1bv32), BV32_ADD(v7, 2bv32)), BV32_ADD(v4$1, 1bv32))]);
@@ -989,8 +960,6 @@ implementation {:inline 1} $bugle_barrier_duplicated_0($0: bv1, $1: bv1)
 function {:bvbuiltin "bvsgt"} BV32_SGT(bv32, bv32) : bool;
 
 function {:bvbuiltin "bvand"} BV32_AND(bv32, bv32) : bv32;
-
-
 
 
 

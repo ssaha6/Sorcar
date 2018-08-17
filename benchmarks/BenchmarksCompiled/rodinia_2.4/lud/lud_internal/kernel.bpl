@@ -128,30 +128,30 @@ implementation {:source_name "lud_internal"} {:kernel} $lud_internal($matrix_dim
   var $i.0: bv32;
   var $sum.0$1: bv32;
   var $sum.0$2: bv32;
-  var v4$1: bv32;
-  var v4$2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
-  var v6: bool;
   var v2$1: bv32;
   var v2$2: bv32;
   var v3$1: bv32;
   var v3$2: bv32;
-  var v7$1: bv32;
-  var v7$2: bv32;
-  var v10$1: bv32;
-  var v10$2: bv32;
+  var v4$1: bv32;
+  var v4$2: bv32;
   var v5$1: bv32;
   var v5$2: bv32;
+  var v6: bool;
+  var v7$1: bv32;
+  var v7$2: bv32;
   var v8$1: bv32;
   var v8$2: bv32;
   var v9$1: bv32;
   var v9$2: bv32;
+  var v10$1: bv32;
+  var v10$2: bv32;
 
 
-  __partitioned_block_$entry_0:
+  __partitioned_block_$0_0:
     v0$1 := local_id_x$1;
     v0$2 := local_id_x$2;
     v1$1 := local_id_y$1;
@@ -186,16 +186,16 @@ implementation {:source_name "lud_internal"} {:kernel} $lud_internal($matrix_dim
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$peri_col"} true;
     $$peri_col[1bv1][BV32_ADD(BV32_MUL(v1$1, 16bv32), v0$1)] := v5$1;
     $$peri_col[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(v1$2, 16bv32), v0$2)] := v5$2;
-    goto __partitioned_block_$entry_1;
+    goto __partitioned_block_$0_1;
 
-  __partitioned_block_$entry_1:
+  __partitioned_block_$0_1:
     call {:sourceloc_num 7} $bugle_barrier_duplicated_0(1bv1, 0bv1);
     $i.0, $sum.0$1 := 0bv32, 0bv32;
     $sum.0$2 := 0bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$peri_col ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$peri_col ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -239,10 +239,10 @@ implementation {:source_name "lud_internal"} {:kernel} $lud_internal($matrix_dim
     assume {:do_not_predicate} {:check_id "check_state_7"} {:captureState "check_state_7"} {:sourceloc} {:sourceloc_num 11} true;
     v8$1 := $$peri_row[1bv1][BV32_ADD(BV32_MUL($i.0, 16bv32), v0$1)];
     v8$2 := $$peri_row[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($i.0, 16bv32), v0$2)];
-    $i.0, $sum.0$1 := BV32_ADD($i.0, 1bv32), FADD32($sum.0$1, FMUL32(v7$1, v8$1));
-    $sum.0$2 := FADD32($sum.0$2, FMUL32(v7$2, v8$2));
+    $i.0, $sum.0$1 := BV32_ADD($i.0, 1bv32), FADD32(FMUL32(v7$1, v8$1), $sum.0$1);
+    $sum.0$2 := FADD32(FMUL32(v7$2, v8$2), $sum.0$2);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

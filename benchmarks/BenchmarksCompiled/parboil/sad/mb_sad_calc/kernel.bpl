@@ -153,77 +153,77 @@ implementation {:source_name "mb_sad_calc"} {:kernel} $mb_sad_calc($mb_width: bv
   var $sad4x4.1$2: bv16;
   var $x.0$1: bv32;
   var $x.0$2: bv32;
-  var $cond5.i$1: bv32;
-  var $cond5.i$2: bv32;
-  var $cond.i$1: bv32;
-  var $cond.i$2: bv32;
-  var $cond15.i$1: bv32;
-  var $cond15.i$2: bv32;
-  var $cond13.i$1: bv32;
-  var $cond13.i$2: bv32;
-  var v3$1: bv32;
-  var v3$2: bv32;
-  var v2$1: bv32;
-  var v2$2: bv32;
-  var v11$1: bv32;
-  var v11$2: bv32;
-  var v12$1: bv32;
-  var v12$2: bv32;
-  var v14$1: bv32;
-  var v14$2: bv32;
-  var v13$1: bv32;
-  var v13$2: bv32;
-  var v9$1: bool;
-  var v9$2: bool;
-  var v10$1: bool;
-  var v10$2: bool;
-  var v8$1: bv32;
-  var v8$2: bv32;
-  var v7$1: bv32;
-  var v7$2: bv32;
-  var v1$1: bv32;
-  var v1$2: bv32;
+  var $0$1: bv32;
+  var $0$2: bv32;
+  var $1$1: bv32;
+  var $1$2: bv32;
+  var $2$1: bv32;
+  var $2$2: bv32;
+  var $3$1: bv32;
+  var $3$2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
+  var v1$1: bv32;
+  var v1$2: bv32;
+  var v2$1: bv32;
+  var v2$2: bv32;
+  var v3$1: bv32;
+  var v3$2: bv32;
   var v4: bv32;
   var v5$1: bv32;
   var v5$2: bv32;
   var v6$1: bv32;
   var v6$2: bv32;
+  var v7$1: bv32;
+  var v7$2: bv32;
+  var v8$1: bv32;
+  var v8$2: bv32;
+  var v9$1: bool;
+  var v9$2: bool;
+  var v10$1: bool;
+  var v10$2: bool;
+  var v11$1: bv32;
+  var v11$2: bv32;
+  var v12$1: bv32;
+  var v12$2: bv32;
+  var v13$1: bv32;
+  var v13$2: bv32;
+  var v14$1: bv32;
+  var v14$2: bv32;
   var v15$1: bv32;
   var v15$2: bv32;
   var v16$1: bool;
   var v16$2: bool;
   var v17$1: bool;
   var v17$2: bool;
-  var v19$1: bool;
-  var v19$2: bool;
   var v18$1: bool;
   var v18$2: bool;
+  var v19$1: bool;
+  var v19$2: bool;
   var v20$1: bv32;
   var v20$2: bv32;
-  var v24$1: bool;
-  var v24$2: bool;
-  var v23$1: bool;
-  var v23$2: bool;
-  var v22$1: bool;
-  var v22$2: bool;
   var v21$1: bv32;
   var v21$2: bv32;
+  var v22$1: bool;
+  var v22$2: bool;
+  var v23$1: bool;
+  var v23$2: bool;
+  var v24$1: bool;
+  var v24$2: bool;
   var v25$1: bool;
   var v25$2: bool;
-  var v31$1: bv32;
-  var v31$2: bv32;
-  var v30$1: bv16;
-  var v30$2: bv16;
   var v26$1: bv32;
   var v26$2: bv32;
-  var v29$1: bv32;
-  var v29$2: bv32;
   var v27$1: bv32;
   var v27$2: bv32;
   var v28$1: bv32;
   var v28$2: bv32;
+  var v29$1: bv32;
+  var v29$2: bv32;
+  var v30$1: bv16;
+  var v30$2: bv16;
+  var v31$1: bv32;
+  var v31$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -268,10 +268,10 @@ implementation {:source_name "mb_sad_calc"} {:kernel} $mb_sad_calc($mb_width: bv
   var _HAVOC_bv32$2: bv32;
   var _HAVOC_bv16$1: bv16;
   var _HAVOC_bv16$2: bv16;
-  var _WRITE_HAS_OCCURRED_$$blk_sad$ghost$$for.cond: bool;
+  var _WRITE_HAS_OCCURRED_$$blk_sad$ghost$$5: bool;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_UREM(BV32_UDIV(local_id_x$1, 61bv32), 1bv32);
     v0$2 := BV32_UREM(BV32_UDIV(local_id_x$2, 61bv32), 1bv32);
     v1$1 := BV32_UDIV(BV32_UDIV(local_id_x$1, 61bv32), 1bv32);
@@ -335,13 +335,13 @@ implementation {:source_name "mb_sad_calc"} {:kernel} $mb_sad_calc($mb_width: bv
     $search_pos.0$2 := (if p1$2 then v13$2 else $search_pos.0$2);
     p4$1 := (if p1$1 then true else p4$1);
     p4$2 := (if p1$2 then true else p4$2);
-    _WRITE_HAS_OCCURRED_$$blk_sad$ghost$$for.cond := _WRITE_HAS_OCCURRED_$$blk_sad;
+    _WRITE_HAS_OCCURRED_$$blk_sad$ghost$$5 := _WRITE_HAS_OCCURRED_$$blk_sad;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $5;
 
-  $for.cond:
+  $5:
     assume {:captureState "loop_head_state_0"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b9 ==> !p1$1 ==> _WRITE_HAS_OCCURRED_$$blk_sad$ghost$$for.cond == _WRITE_HAS_OCCURRED_$$blk_sad;
+    assert {:tag "disabledMaintainsInstrumentation"} _b9 ==> !p1$1 ==> _WRITE_HAS_OCCURRED_$$blk_sad$ghost$$5 == _WRITE_HAS_OCCURRED_$$blk_sad;
     assume {:predicate "p4"} {:dominator_predicate "p1"} true;
     assert {:do_not_predicate} {:tag "accessOnlyIfEnabledInEnclosingScopes"} {:thread 1} _b8 ==> _WRITE_HAS_OCCURRED_$$blk_sad ==> BV32_SLT(BV32_ASHR(BV32_ADD(BV32_UDIV(BV32_UDIV(local_id_x$1, 61bv32), 1bv32), group_id_y$1), 2bv32), $mb_height);
     assert {:do_not_predicate} {:tag "accessOnlyIfEnabledInEnclosingScopes"} {:thread 1} _b7 ==> _WRITE_HAS_OCCURRED_$$blk_sad ==> BV32_SLT(BV32_ASHR(BV32_ADD(BV32_UREM(BV32_UDIV(local_id_x$1, 61bv32), 1bv32), group_id_x$1), 2bv32), $mb_width);
@@ -377,9 +377,9 @@ implementation {:source_name "mb_sad_calc"} {:kernel} $mb_sad_calc($mb_width: bv
     p6$1 := (if p5$1 then true else p6$1);
     p6$2 := (if p5$2 then true else p6$2);
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.85;
+    goto $7;
 
-  $for.cond.85:
+  $7:
     assume {:captureState "loop_head_state_1"} true;
     assume {:invGenSkippedLoop} true;
     assume {:predicate "p6"} {:dominator_predicate "p5"} true;
@@ -401,9 +401,9 @@ implementation {:source_name "mb_sad_calc"} {:kernel} $mb_sad_calc($mb_width: bv
     p8$1 := (if p7$1 then true else p8$1);
     p8$2 := (if p7$2 then true else p8$2);
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond.88;
+    goto $9;
 
-  $for.cond.88:
+  $9:
     assume {:captureState "loop_head_state_2"} true;
     assume {:invGenSkippedLoop} true;
     assume {:predicate "p8"} {:dominator_predicate "p7"} true;
@@ -446,40 +446,40 @@ implementation {:source_name "mb_sad_calc"} {:kernel} $mb_sad_calc($mb_width: bv
     p10$2 := (if p9$2 && v22$2 then v22$2 else p10$2);
     p11$1 := (if p9$1 && !v22$1 then !v22$1 else p11$1);
     p11$2 := (if p9$2 && !v22$2 then !v22$2 else p11$2);
-    $cond5.i$1 := (if p10$1 then 0bv32 else $cond5.i$1);
-    $cond5.i$2 := (if p10$2 then 0bv32 else $cond5.i$2);
+    $0$1 := (if p10$1 then 0bv32 else $0$1);
+    $0$2 := (if p10$2 then 0bv32 else $0$2);
     v23$1 := (if p11$1 then BV32_SGE(v20$1, 8192bv32) else v23$1);
     v23$2 := (if p11$2 then BV32_SGE(v20$2, 8192bv32) else v23$2);
     p13$1 := (if p11$1 && v23$1 then v23$1 else p13$1);
     p13$2 := (if p11$2 && v23$2 then v23$2 else p13$2);
     p12$1 := (if p11$1 && !v23$1 then !v23$1 else p12$1);
     p12$2 := (if p11$2 && !v23$2 then !v23$2 else p12$2);
-    $cond.i$1 := (if p12$1 then v20$1 else $cond.i$1);
-    $cond.i$2 := (if p12$2 then v20$2 else $cond.i$2);
-    $cond.i$1 := (if p13$1 then 8191bv32 else $cond.i$1);
-    $cond.i$2 := (if p13$2 then 8191bv32 else $cond.i$2);
-    $cond5.i$1 := (if p11$1 then $cond.i$1 else $cond5.i$1);
-    $cond5.i$2 := (if p11$2 then $cond.i$2 else $cond5.i$2);
+    $1$1 := (if p12$1 then v20$1 else $1$1);
+    $1$2 := (if p12$2 then v20$2 else $1$2);
+    $1$1 := (if p13$1 then 8191bv32 else $1$1);
+    $1$2 := (if p13$2 then 8191bv32 else $1$2);
+    $0$1 := (if p11$1 then $1$1 else $0$1);
+    $0$2 := (if p11$2 then $1$2 else $0$2);
     v24$1 := (if p9$1 then BV32_SLT(v21$1, 0bv32) else v24$1);
     v24$2 := (if p9$2 then BV32_SLT(v21$2, 0bv32) else v24$2);
     p14$1 := (if p9$1 && v24$1 then v24$1 else p14$1);
     p14$2 := (if p9$2 && v24$2 then v24$2 else p14$2);
     p15$1 := (if p9$1 && !v24$1 then !v24$1 else p15$1);
     p15$2 := (if p9$2 && !v24$2 then !v24$2 else p15$2);
-    $cond15.i$1 := (if p14$1 then 0bv32 else $cond15.i$1);
-    $cond15.i$2 := (if p14$2 then 0bv32 else $cond15.i$2);
+    $2$1 := (if p14$1 then 0bv32 else $2$1);
+    $2$2 := (if p14$2 then 0bv32 else $2$2);
     v25$1 := (if p15$1 then BV32_SGE(v21$1, 8192bv32) else v25$1);
     v25$2 := (if p15$2 then BV32_SGE(v21$2, 8192bv32) else v25$2);
     p17$1 := (if p15$1 && v25$1 then v25$1 else p17$1);
     p17$2 := (if p15$2 && v25$2 then v25$2 else p17$2);
     p16$1 := (if p15$1 && !v25$1 then !v25$1 else p16$1);
     p16$2 := (if p15$2 && !v25$2 then !v25$2 else p16$2);
-    $cond13.i$1 := (if p16$1 then v21$1 else $cond13.i$1);
-    $cond13.i$2 := (if p16$2 then v21$2 else $cond13.i$2);
-    $cond13.i$1 := (if p17$1 then 8191bv32 else $cond13.i$1);
-    $cond13.i$2 := (if p17$2 then 8191bv32 else $cond13.i$2);
-    $cond15.i$1 := (if p15$1 then $cond13.i$1 else $cond15.i$1);
-    $cond15.i$2 := (if p15$2 then $cond13.i$2 else $cond15.i$2);
+    $3$1 := (if p16$1 then v21$1 else $3$1);
+    $3$2 := (if p16$2 then v21$2 else $3$2);
+    $3$1 := (if p17$1 then 8191bv32 else $3$1);
+    $3$2 := (if p17$2 then 8191bv32 else $3$2);
+    $2$1 := (if p15$1 then $3$1 else $2$1);
+    $2$2 := (if p15$2 then $3$2 else $2$2);
     havoc _HAVOC_bv32$1, _HAVOC_bv32$2;
     v26$1 := (if p9$1 then _HAVOC_bv32$1 else v26$1);
     v26$2 := (if p9$2 then _HAVOC_bv32$2 else v26$2);
@@ -501,17 +501,17 @@ implementation {:source_name "mb_sad_calc"} {:kernel} $mb_sad_calc($mb_width: bv
     $sad4x4.1$2, $x.0$2 := (if p9$2 then BV32_ADD(BV16_ZEXT32($sad4x4.1$2), (if BV32_SGT(v31$2, 0bv32) then v31$2 else BV32_SUB(0bv32, v31$2)))[16:0] else $sad4x4.1$2), (if p9$2 then BV32_ADD($x.0$2, 1bv32) else $x.0$2);
     p8$1 := (if p9$1 then true else p8$1);
     p8$2 := (if p9$2 then true else p8$2);
-    goto $for.cond.88.backedge, $for.cond.88.tail;
+    goto $9.backedge, $9.tail;
 
-  $for.cond.88.tail:
+  $9.tail:
     assume !p8$1 && !p8$2;
     $sad4x4.0$1, $y.0$1 := (if p7$1 then $sad4x4.1$1 else $sad4x4.0$1), (if p7$1 then BV32_ADD($y.0$1, 1bv32) else $y.0$1);
     $sad4x4.0$2, $y.0$2 := (if p7$2 then $sad4x4.1$2 else $sad4x4.0$2), (if p7$2 then BV32_ADD($y.0$2, 1bv32) else $y.0$2);
     p6$1 := (if p7$1 then true else p6$1);
     p6$2 := (if p7$2 then true else p6$2);
-    goto $for.cond.85.backedge, $for.cond.85.tail;
+    goto $7.backedge, $7.tail;
 
-  $for.cond.85.tail:
+  $7.tail:
     assume !p6$1 && !p6$2;
     call {:sourceloc} {:sourceloc_num 36} _LOG_WRITE_$$blk_sad(p5$1, BV32_ADD(v15$1, $search_pos.0$1), $sad4x4.0$1, $$blk_sad[BV32_ADD(v15$1, $search_pos.0$1)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$blk_sad(p5$2, BV32_ADD(v15$2, $search_pos.0$2));
@@ -524,26 +524,26 @@ implementation {:source_name "mb_sad_calc"} {:kernel} $mb_sad_calc($mb_width: bv
     $search_pos.0$2 := (if p5$2 then BV32_ADD($search_pos.0$2, 1bv32) else $search_pos.0$2);
     p4$1 := (if p5$1 then true else p4$1);
     p4$2 := (if p5$2 then true else p4$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $5.backedge, $5.tail;
 
-  $for.cond.tail:
+  $5.tail:
     assume !p4$1 && !p4$2;
     return;
 
-  $for.cond.backedge:
+  $5.backedge:
     assume {:backedge} p4$1 || p4$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $5;
 
-  $for.cond.85.backedge:
+  $7.backedge:
     assume {:backedge} p6$1 || p6$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.85;
+    goto $7;
 
-  $for.cond.88.backedge:
+  $9.backedge:
     assume {:backedge} p8$1 || p8$2;
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond.88;
+    goto $9;
 }
 
 

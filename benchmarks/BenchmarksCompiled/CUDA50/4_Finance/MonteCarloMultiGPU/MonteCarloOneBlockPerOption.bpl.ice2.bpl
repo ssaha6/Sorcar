@@ -252,18 +252,18 @@ implementation {:source_name "MonteCarloOneBlockPerOption"} {:kernel} $_Z27Monte
   var $pos.i.0$2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
-  var v4$1: bv32;
-  var v4$2: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
   var v2$1: bv32;
   var v2$2: bv32;
   var v3$1: bv32;
   var v3$2: bv32;
-  var v5$1: bv32;
-  var v5$2: bv32;
+  var v4$1: bv32;
+  var v4$2: bv32;
   var v6$1: bool;
   var v6$2: bool;
+  var v5$1: bv32;
+  var v5$2: bv32;
   var v7$1: bool;
   var v7$2: bool;
   var v8$1: bv32;
@@ -1241,15 +1241,15 @@ assert  my_inv (  true ,  true ,  true ,  true ,  true ,  true ,  true ,  true ,
 
 
 
+procedure {:source_name "__expf"} $__expf(_P$1: bool, $0$1: bv32, _P$2: bool, $0$2: bv32) returns ($ret$1: bv32, $ret$2: bv32);
+
+
+
 procedure {:source_name "_Z20__bugle_random_floatv"} $_Z20__bugle_random_floatv(_P$1: bool, _P$2: bool) returns ($ret$1: bv32, $ret$2: bv32);
 
 
 
 procedure {:source_name "_Z19__bugle_random_uintv"} $_Z19__bugle_random_uintv(_P$1: bool, _P$2: bool) returns ($ret$1: bv32, $ret$2: bv32);
-
-
-
-procedure {:source_name "__expf"} $__expf(_P$1: bool, $0$1: bv32, _P$2: bool, $0$2: bv32) returns ($ret$1: bv32, $ret$2: bv32);
 
 
 

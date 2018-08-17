@@ -138,7 +138,7 @@ implementation {:source_name "quasirandomGeneratorKernel"} {:kernel} $_Z26quasir
   var p6$2: bool;
 
 
-  $entry:
+  $0:
     $pos.0$1 := BV32_ADD(BV32_MUL(group_size_x, group_id_x$1), local_id_x$1);
     $pos.0$2 := BV32_ADD(BV32_MUL(group_size_x, group_id_x$2), local_id_x$2);
     p0$1 := false;
@@ -146,9 +146,9 @@ implementation {:source_name "quasirandomGeneratorKernel"} {:kernel} $_Z26quasir
     p0$1 := true;
     p0$2 := true;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessBreak"} _b11 ==> _WRITE_HAS_OCCURRED_$$d_Output ==> local_id_y$1 == BV32_DIV(_WATCHED_OFFSET, $N);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b10 ==> _WRITE_HAS_OCCURRED_$$d_Output ==> BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(group_size_x, group_id_x$1), local_id_x$1), BV32_MUL(local_id_y$1, $N)));
@@ -186,9 +186,9 @@ implementation {:source_name "quasirandomGeneratorKernel"} {:kernel} $_Z26quasir
     p2$1 := (if p1$1 then true else p2$1);
     p2$2 := (if p1$2 then true else p2$2);
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.5;
+    goto $3;
 
-  $for.cond.5:
+  $3:
     assume {:captureState "loop_head_state_1"} true;
     assume {:invGenSkippedLoop} true;
     assume {:predicate "p2"} {:dominator_predicate "p1"} true;
@@ -223,9 +223,9 @@ implementation {:source_name "quasirandomGeneratorKernel"} {:kernel} $_Z26quasir
     $result.0$2, $data.0$2, $bit.0$2 := (if p3$2 then $result.1$2 else $result.0$2), (if p3$2 then BV32_LSHR($data.0$2, 1bv32) else $data.0$2), (if p3$2 then BV32_ADD($bit.0$2, 1bv32) else $bit.0$2);
     p2$1 := (if p3$1 then true else p2$1);
     p2$2 := (if p3$2 then true else p2$2);
-    goto $for.cond.5.backedge, $for.cond.5.tail;
+    goto $3.backedge, $3.tail;
 
-  $for.cond.5.tail:
+  $3.tail:
     assume !p2$1 && !p2$2;
     call {:sourceloc} {:sourceloc_num 11} _LOG_WRITE_$$d_Output(p1$1, BV32_ADD(BV32_MUL(local_id_y$1, $N), $pos.0$1), FMUL32(UI32_TO_FP32(BV32_ADD($result.0$1, 1bv32)), 805306368bv32), $$d_Output[BV32_ADD(BV32_MUL(local_id_y$1, $N), $pos.0$1)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$d_Output(p1$2, BV32_ADD(BV32_MUL(local_id_y$2, $N), $pos.0$2));
@@ -238,21 +238,21 @@ implementation {:source_name "quasirandomGeneratorKernel"} {:kernel} $_Z26quasir
     $pos.0$2 := (if p1$2 then BV32_ADD($pos.0$2, BV32_MUL(group_size_x, num_groups_x)) else $pos.0$2);
     p0$1 := (if p1$1 then true else p0$1);
     p0$2 := (if p1$2 then true else p0$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $1.backedge, $1.tail;
 
-  $for.cond.tail:
+  $1.tail:
     assume !p0$1 && !p0$2;
     return;
 
-  $for.cond.backedge:
+  $1.backedge:
     assume {:backedge} p0$1 || p0$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond.5.backedge:
+  $3.backedge:
     assume {:backedge} p2$1 || p2$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.5;
+    goto $3;
 }
 
 

@@ -122,41 +122,41 @@ implementation {:source_name "computeValue<float>"} {:kernel} $_Z12computeValueI
   var $pointsInside.1$1: bv32;
   var $pointsInside.1$2: bv32;
   var $s.i.0: bv32;
-  var v11$1: bool;
-  var v11$2: bool;
-  var v7$1: bv32;
-  var v7$2: bv32;
-  var v4$1: bv32;
-  var v4$2: bv32;
-  var v6$1: bv32;
-  var v6$2: bv32;
-  var v5$1: bv32;
-  var v5$2: bv32;
-  var v9$1: bv32;
-  var v9$2: bv32;
-  var v10$1: bv32;
-  var v10$2: bv32;
-  var v8$1: bv32;
-  var v8$2: bv32;
-  var v3$1: bv32;
-  var v3$2: bv32;
-  var v1$1: bv32;
-  var v1$2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
   var v2$1: bool;
   var v2$2: bool;
+  var v1$1: bv32;
+  var v1$2: bv32;
+  var v3$1: bv32;
+  var v3$2: bv32;
+  var v4$1: bv32;
+  var v4$2: bv32;
+  var v5$1: bv32;
+  var v5$2: bv32;
+  var v6$1: bv32;
+  var v6$2: bv32;
+  var v7$1: bv32;
+  var v7$2: bv32;
+  var v8$1: bv32;
+  var v8$2: bv32;
+  var v9$1: bv32;
+  var v9$2: bv32;
+  var v10$1: bv32;
+  var v10$2: bv32;
+  var v11$1: bool;
+  var v11$2: bool;
   var v12: bool;
   var v13$1: bool;
   var v13$2: bool;
-  var v17$1: bool;
-  var v17$2: bool;
   var v14$1: bv32;
   var v14$2: bv32;
   var v15$1: bv32;
   var v15$2: bv32;
   var v16$1: bv32;
   var v16$2: bv32;
+  var v17$1: bool;
+  var v17$2: bool;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -177,7 +177,7 @@ implementation {:source_name "computeValue<float>"} {:kernel} $_Z12computeValueI
   var p8$2: bool;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2);
     havoc v1$1, v1$2;
@@ -190,9 +190,9 @@ implementation {:source_name "computeValue<float>"} {:kernel} $_Z12computeValueI
     p0$1 := true;
     p0$2 := true;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_1"} true;
     assume {:invGenSkippedLoop} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$sdata ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -247,9 +247,9 @@ implementation {:source_name "computeValue<float>"} {:kernel} $_Z12computeValueI
     $pointsInside.0$2, $i.0$2 := (if p1$2 then $pointsInside.1$2 else $pointsInside.0$2), (if p1$2 then BV32_ADD($i.0$2, BV32_MUL(num_groups_x, group_size_x)) else $i.0$2);
     p0$1 := (if p1$1 then true else p0$1);
     p0$2 := (if p1$2 then true else p0$2);
-    goto $for.cond.backedge, __partitioned_block_$for.cond.tail_0;
+    goto $1.backedge, __partitioned_block_$1.tail_0;
 
-  __partitioned_block_$for.cond.tail_0:
+  __partitioned_block_$1.tail_0:
     assume !p0$1 && !p0$2;
     call {:sourceloc} {:sourceloc_num 19} _LOG_WRITE_$$sdata(true, local_id_x$1, $pointsInside.0$1, $$sdata[1bv1][local_id_x$1]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$sdata(true, local_id_x$2);
@@ -258,15 +258,15 @@ implementation {:source_name "computeValue<float>"} {:kernel} $_Z12computeValueI
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$sdata"} true;
     $$sdata[1bv1][local_id_x$1] := $pointsInside.0$1;
     $$sdata[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2] := $pointsInside.0$2;
-    goto __partitioned_block_$for.cond.tail_1;
+    goto __partitioned_block_$1.tail_1;
 
-  __partitioned_block_$for.cond.tail_1:
+  __partitioned_block_$1.tail_1:
     call {:sourceloc_num 20} $bugle_barrier_duplicated_0(1bv1, 1bv1);
     $s.i.0 := BV32_UDIV(group_size_x, 2bv32);
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.i;
+    goto $7;
 
-  $for.cond.i:
+  $7:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b9 ==> _WRITE_HAS_OCCURRED_$$sdata ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b8 ==> _READ_HAS_OCCURRED_$$sdata ==> _WATCHED_OFFSET == local_id_x$1;
@@ -345,12 +345,12 @@ implementation {:source_name "computeValue<float>"} {:kernel} $_Z12computeValueI
     call {:sourceloc_num 28} $bugle_barrier_duplicated_1(1bv1, 1bv1);
     $s.i.0 := BV32_LSHR($s.i.0, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.i;
+    goto $7;
 
-  $for.cond.backedge:
+  $1.backedge:
     assume {:backedge} p0$1 || p0$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

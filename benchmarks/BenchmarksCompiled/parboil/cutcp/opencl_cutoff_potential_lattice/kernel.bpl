@@ -209,8 +209,8 @@ implementation {:source_name "opencl_cutoff_potential_lattice"} {:kernel} $openc
   var $bincnt.1$2: bv32;
   var $energy.2$1: bv32;
   var $energy.2$2: bv32;
-  var $i128.0$1: bv32;
-  var $i128.0$2: bv32;
+  var $i1.0$1: bv32;
+  var $i1.0$2: bv32;
   var $energy.3$1: bv32;
   var $energy.3$2: bv32;
   var v0$1: bv32;
@@ -219,108 +219,108 @@ implementation {:source_name "opencl_cutoff_potential_lattice"} {:kernel} $openc
   var v1$2: bv32;
   var v2$1: bv32;
   var v2$2: bv32;
-  var v12$1: bv32;
-  var v12$2: bv32;
-  var v17$1: bv32;
-  var v17$2: bv32;
-  var v19$1: bv32;
-  var v19$2: bv32;
-  var v24$1: bv32;
-  var v24$2: bv32;
-  var v22$1: bv32;
-  var v22$2: bv32;
-  var v16$1: bv32;
-  var v16$2: bv32;
-  var v21$1: bv32;
-  var v21$2: bv32;
-  var v23$1: bv32;
-  var v23$2: bv32;
-  var v15$1: bv32;
-  var v15$2: bv32;
-  var v25$1: bv32;
-  var v25$2: bv32;
-  var v18$1: bv32;
-  var v18$2: bv32;
-  var v26$1: bv32;
-  var v26$2: bv32;
-  var v14$1: bv32;
-  var v14$2: bv32;
-  var v20$1: bv32;
-  var v20$2: bv32;
-  var v13$1: bv32;
-  var v13$2: bv32;
-  var v32$1: bv32;
-  var v32$2: bv32;
-  var v40$1: bv32;
-  var v40$2: bv32;
-  var v28$1: bv32;
-  var v28$2: bv32;
-  var v31$1: bv32;
-  var v31$2: bv32;
-  var v27$1: bv32;
-  var v27$2: bv32;
-  var v30$1: bv32;
-  var v30$2: bv32;
-  var v29$1: bv32;
-  var v29$2: bv32;
-  var v34$1: bv32;
-  var v34$2: bv32;
-  var v33$1: bv32;
-  var v33$2: bv32;
-  var v35$1: bv32;
-  var v35$2: bv32;
-  var v39$1: bv32;
-  var v39$2: bv32;
-  var v41$1: bv32;
-  var v41$2: bv32;
-  var v46$1: bv32;
-  var v46$2: bv32;
-  var v48$1: bv32;
-  var v48$2: bv32;
-  var v49$1: bv32;
-  var v49$2: bv32;
-  var v47$1: bv32;
-  var v47$2: bv32;
-  var v43$1: bv32;
-  var v43$2: bv32;
-  var v10$1: bv32;
-  var v10$2: bv32;
-  var v6$1: bv32;
-  var v6$2: bv32;
-  var v5$1: bv32;
-  var v5$2: bv32;
   var v3$1: bv32;
   var v3$2: bv32;
   var v4$1: bv32;
   var v4$2: bv32;
-  var v8$1: bv32;
-  var v8$2: bv32;
+  var v5$1: bv32;
+  var v5$2: bv32;
+  var v6$1: bv32;
+  var v6$2: bv32;
   var v7$1: bool;
   var v7$2: bool;
-  var v11$1: bool;
-  var v11$2: bool;
+  var v8$1: bv32;
+  var v8$2: bv32;
   var v9$1: bool;
   var v9$2: bool;
-  var v38$1: bv32;
-  var v38$2: bv32;
-  var v37$1: bv32;
-  var v37$2: bv32;
+  var v10$1: bv32;
+  var v10$2: bv32;
+  var v11$1: bool;
+  var v11$2: bool;
+  var v12$1: bv32;
+  var v12$2: bv32;
+  var v13$1: bv32;
+  var v13$2: bv32;
+  var v14$1: bv32;
+  var v14$2: bv32;
+  var v15$1: bv32;
+  var v15$2: bv32;
+  var v16$1: bv32;
+  var v16$2: bv32;
+  var v17$1: bv32;
+  var v17$2: bv32;
+  var v18$1: bv32;
+  var v18$2: bv32;
+  var v19$1: bv32;
+  var v19$2: bv32;
+  var v20$1: bv32;
+  var v20$2: bv32;
+  var v21$1: bv32;
+  var v21$2: bv32;
+  var v22$1: bv32;
+  var v22$2: bv32;
+  var v23$1: bv32;
+  var v23$2: bv32;
+  var v24$1: bv32;
+  var v24$2: bv32;
+  var v25$1: bv32;
+  var v25$2: bv32;
+  var v26$1: bv32;
+  var v26$2: bv32;
+  var v27$1: bv32;
+  var v27$2: bv32;
+  var v28$1: bv32;
+  var v28$2: bv32;
+  var v29$1: bv32;
+  var v29$2: bv32;
+  var v30$1: bv32;
+  var v30$2: bv32;
+  var v31$1: bv32;
+  var v31$2: bv32;
+  var v32$1: bv32;
+  var v32$2: bv32;
+  var v33$1: bv32;
+  var v33$2: bv32;
+  var v34$1: bv32;
+  var v34$2: bv32;
+  var v35$1: bv32;
+  var v35$2: bv32;
   var v36$1: bv32;
   var v36$2: bv32;
-  var v53$1: bv32;
-  var v53$2: bv32;
-  var v52$1: bool;
-  var v52$2: bool;
-  var v51$1: bv32;
-  var v51$2: bv32;
-  var v45$1: bool;
-  var v45$2: bool;
+  var v37$1: bv32;
+  var v37$2: bv32;
+  var v38$1: bv32;
+  var v38$2: bv32;
+  var v39$1: bv32;
+  var v39$2: bv32;
+  var v40$1: bv32;
+  var v40$2: bv32;
+  var v41$1: bv32;
+  var v41$2: bv32;
   var v42$1: bool;
   var v42$2: bool;
+  var v43$1: bv32;
+  var v43$2: bv32;
   var v44$1: bool;
   var v44$2: bool;
+  var v45$1: bool;
+  var v45$2: bool;
+  var v46$1: bv32;
+  var v46$2: bv32;
+  var v47$1: bv32;
+  var v47$2: bv32;
+  var v48$1: bv32;
+  var v48$2: bv32;
+  var v49$1: bv32;
+  var v49$2: bv32;
   var v50$1: bool;
   var v50$2: bool;
+  var v51$1: bv32;
+  var v51$2: bv32;
+  var v52$1: bool;
+  var v52$2: bool;
+  var v53$1: bv32;
+  var v53$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -359,13 +359,13 @@ implementation {:source_name "opencl_cutoff_potential_lattice"} {:kernel} $openc
   var p17$2: bool;
   var _HAVOC_bv32$1: bv32;
   var _HAVOC_bv32$2: bv32;
-  var _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.myBinIndex$ghost$$for.cond.74: bool;
-  var _WRITE_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache$ghost$$for.cond.74: bool;
-  var _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache$ghost$$for.cond.124: bool;
-  var _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache$ghost$$for.cond.129: bool;
+  var _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.myBinIndex$ghost$$3: bool;
+  var _WRITE_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache$ghost$$3: bool;
+  var _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache$ghost$$11: bool;
+  var _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache$ghost$$13: bool;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(local_id_z$1, 8bv32), local_id_y$1), 8bv32), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL(local_id_z$2, 8bv32), local_id_y$2), 8bv32), local_id_x$2);
     v1$1 := BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(BV32_MUL($zRegionIndex, num_groups_y), group_id_y$1), BV32_LSHR(num_groups_x, 2bv32)), BV32_LSHR(group_id_x$1, 2bv32)), 512bv32);
@@ -413,64 +413,64 @@ implementation {:source_name "opencl_cutoff_potential_lattice"} {:kernel} $openc
     p0$1 := true;
     p0$2 := true;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "nowrite"} _b105 ==> !_WRITE_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache;
     assert {:tag "noread"} _b104 ==> !_READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b103 ==> _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.myBinIndex ==> _WATCHED_OFFSET == 0bv32 || _WATCHED_OFFSET == 1bv32 || _WATCHED_OFFSET == 2bv32 || _WATCHED_OFFSET == 3bv32;
     assert {:tag "noread"} _b102 ==> !_READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.myBinIndex;
-    assert {:tag "predicatedEquality"} _b101 ==> p0$1 && p0$2 ==> v50$1 == v50$2;
-    assert {:tag "predicatedEquality"} _b100 ==> p0$1 && p0$2 ==> v44$1 == v44$2;
-    assert {:tag "predicatedEquality"} _b99 ==> p0$1 && p0$2 ==> v42$1 == v42$2;
-    assert {:tag "predicatedEquality"} _b98 ==> p0$1 && p0$2 ==> v45$1 == v45$2;
-    assert {:tag "predicatedEquality"} _b97 ==> p0$1 && p0$2 ==> v51$1 == v51$2;
-    assert {:tag "predicatedEquality"} _b96 ==> p0$1 && p0$2 ==> v52$1 == v52$2;
-    assert {:tag "predicatedEquality"} _b95 ==> p0$1 && p0$2 ==> v53$1 == v53$2;
-    assert {:tag "predicatedEquality"} _b94 ==> p0$1 && p0$2 ==> v36$1 == v36$2;
-    assert {:tag "predicatedEquality"} _b93 ==> p0$1 && p0$2 ==> v37$1 == v37$2;
-    assert {:tag "predicatedEquality"} _b92 ==> p0$1 && p0$2 ==> v38$1 == v38$2;
-    assert {:tag "predicatedEquality"} _b91 ==> p0$1 && p0$2 ==> v9$1 == v9$2;
-    assert {:tag "predicatedEquality"} _b90 ==> p0$1 && p0$2 ==> v11$1 == v11$2;
-    assert {:tag "predicatedEquality"} _b89 ==> p0$1 && p0$2 ==> v7$1 == v7$2;
-    assert {:tag "predicatedEquality"} _b88 ==> p0$1 && p0$2 ==> v8$1 == v8$2;
-    assert {:tag "predicatedEquality"} _b87 ==> p0$1 && p0$2 ==> v6$1 == v6$2;
-    assert {:tag "predicatedEquality"} _b86 ==> p0$1 && p0$2 ==> v10$1 == v10$2;
-    assert {:tag "predicatedEquality"} _b85 ==> p0$1 && p0$2 ==> v43$1 == v43$2;
-    assert {:tag "predicatedEquality"} _b84 ==> p0$1 && p0$2 ==> v47$1 == v47$2;
-    assert {:tag "predicatedEquality"} _b83 ==> p0$1 && p0$2 ==> v49$1 == v49$2;
-    assert {:tag "predicatedEquality"} _b82 ==> p0$1 && p0$2 ==> v48$1 == v48$2;
-    assert {:tag "predicatedEquality"} _b81 ==> p0$1 && p0$2 ==> v46$1 == v46$2;
-    assert {:tag "predicatedEquality"} _b80 ==> p0$1 && p0$2 ==> v41$1 == v41$2;
-    assert {:tag "predicatedEquality"} _b79 ==> p0$1 && p0$2 ==> v39$1 == v39$2;
-    assert {:tag "predicatedEquality"} _b78 ==> p0$1 && p0$2 ==> v35$1 == v35$2;
-    assert {:tag "predicatedEquality"} _b77 ==> p0$1 && p0$2 ==> v33$1 == v33$2;
-    assert {:tag "predicatedEquality"} _b76 ==> p0$1 && p0$2 ==> v34$1 == v34$2;
-    assert {:tag "predicatedEquality"} _b75 ==> p0$1 && p0$2 ==> v29$1 == v29$2;
-    assert {:tag "predicatedEquality"} _b74 ==> p0$1 && p0$2 ==> v30$1 == v30$2;
-    assert {:tag "predicatedEquality"} _b73 ==> p0$1 && p0$2 ==> v27$1 == v27$2;
-    assert {:tag "predicatedEquality"} _b72 ==> p0$1 && p0$2 ==> v31$1 == v31$2;
-    assert {:tag "predicatedEquality"} _b71 ==> p0$1 && p0$2 ==> v28$1 == v28$2;
-    assert {:tag "predicatedEquality"} _b70 ==> p0$1 && p0$2 ==> v40$1 == v40$2;
-    assert {:tag "predicatedEquality"} _b69 ==> p0$1 && p0$2 ==> v32$1 == v32$2;
-    assert {:tag "predicatedEquality"} _b68 ==> p0$1 && p0$2 ==> v13$1 == v13$2;
-    assert {:tag "predicatedEquality"} _b67 ==> p0$1 && p0$2 ==> v20$1 == v20$2;
-    assert {:tag "predicatedEquality"} _b66 ==> p0$1 && p0$2 ==> v14$1 == v14$2;
-    assert {:tag "predicatedEquality"} _b65 ==> p0$1 && p0$2 ==> v26$1 == v26$2;
-    assert {:tag "predicatedEquality"} _b64 ==> p0$1 && p0$2 ==> v18$1 == v18$2;
-    assert {:tag "predicatedEquality"} _b63 ==> p0$1 && p0$2 ==> v25$1 == v25$2;
-    assert {:tag "predicatedEquality"} _b62 ==> p0$1 && p0$2 ==> v15$1 == v15$2;
-    assert {:tag "predicatedEquality"} _b61 ==> p0$1 && p0$2 ==> v23$1 == v23$2;
-    assert {:tag "predicatedEquality"} _b60 ==> p0$1 && p0$2 ==> v21$1 == v21$2;
-    assert {:tag "predicatedEquality"} _b59 ==> p0$1 && p0$2 ==> v16$1 == v16$2;
-    assert {:tag "predicatedEquality"} _b58 ==> p0$1 && p0$2 ==> v22$1 == v22$2;
-    assert {:tag "predicatedEquality"} _b57 ==> p0$1 && p0$2 ==> v24$1 == v24$2;
-    assert {:tag "predicatedEquality"} _b56 ==> p0$1 && p0$2 ==> v19$1 == v19$2;
-    assert {:tag "predicatedEquality"} _b55 ==> p0$1 && p0$2 ==> v17$1 == v17$2;
-    assert {:tag "predicatedEquality"} _b54 ==> p0$1 && p0$2 ==> v12$1 == v12$2;
+    assert {:tag "predicatedEquality"} _b101 ==> p0$1 && p0$2 ==> v53$1 == v53$2;
+    assert {:tag "predicatedEquality"} _b100 ==> p0$1 && p0$2 ==> v52$1 == v52$2;
+    assert {:tag "predicatedEquality"} _b99 ==> p0$1 && p0$2 ==> v51$1 == v51$2;
+    assert {:tag "predicatedEquality"} _b98 ==> p0$1 && p0$2 ==> v50$1 == v50$2;
+    assert {:tag "predicatedEquality"} _b97 ==> p0$1 && p0$2 ==> v49$1 == v49$2;
+    assert {:tag "predicatedEquality"} _b96 ==> p0$1 && p0$2 ==> v48$1 == v48$2;
+    assert {:tag "predicatedEquality"} _b95 ==> p0$1 && p0$2 ==> v47$1 == v47$2;
+    assert {:tag "predicatedEquality"} _b94 ==> p0$1 && p0$2 ==> v46$1 == v46$2;
+    assert {:tag "predicatedEquality"} _b93 ==> p0$1 && p0$2 ==> v45$1 == v45$2;
+    assert {:tag "predicatedEquality"} _b92 ==> p0$1 && p0$2 ==> v44$1 == v44$2;
+    assert {:tag "predicatedEquality"} _b91 ==> p0$1 && p0$2 ==> v43$1 == v43$2;
+    assert {:tag "predicatedEquality"} _b90 ==> p0$1 && p0$2 ==> v42$1 == v42$2;
+    assert {:tag "predicatedEquality"} _b89 ==> p0$1 && p0$2 ==> v41$1 == v41$2;
+    assert {:tag "predicatedEquality"} _b88 ==> p0$1 && p0$2 ==> v40$1 == v40$2;
+    assert {:tag "predicatedEquality"} _b87 ==> p0$1 && p0$2 ==> v39$1 == v39$2;
+    assert {:tag "predicatedEquality"} _b86 ==> p0$1 && p0$2 ==> v38$1 == v38$2;
+    assert {:tag "predicatedEquality"} _b85 ==> p0$1 && p0$2 ==> v37$1 == v37$2;
+    assert {:tag "predicatedEquality"} _b84 ==> p0$1 && p0$2 ==> v36$1 == v36$2;
+    assert {:tag "predicatedEquality"} _b83 ==> p0$1 && p0$2 ==> v35$1 == v35$2;
+    assert {:tag "predicatedEquality"} _b82 ==> p0$1 && p0$2 ==> v34$1 == v34$2;
+    assert {:tag "predicatedEquality"} _b81 ==> p0$1 && p0$2 ==> v33$1 == v33$2;
+    assert {:tag "predicatedEquality"} _b80 ==> p0$1 && p0$2 ==> v32$1 == v32$2;
+    assert {:tag "predicatedEquality"} _b79 ==> p0$1 && p0$2 ==> v31$1 == v31$2;
+    assert {:tag "predicatedEquality"} _b78 ==> p0$1 && p0$2 ==> v30$1 == v30$2;
+    assert {:tag "predicatedEquality"} _b77 ==> p0$1 && p0$2 ==> v29$1 == v29$2;
+    assert {:tag "predicatedEquality"} _b76 ==> p0$1 && p0$2 ==> v28$1 == v28$2;
+    assert {:tag "predicatedEquality"} _b75 ==> p0$1 && p0$2 ==> v27$1 == v27$2;
+    assert {:tag "predicatedEquality"} _b74 ==> p0$1 && p0$2 ==> v26$1 == v26$2;
+    assert {:tag "predicatedEquality"} _b73 ==> p0$1 && p0$2 ==> v25$1 == v25$2;
+    assert {:tag "predicatedEquality"} _b72 ==> p0$1 && p0$2 ==> v24$1 == v24$2;
+    assert {:tag "predicatedEquality"} _b71 ==> p0$1 && p0$2 ==> v23$1 == v23$2;
+    assert {:tag "predicatedEquality"} _b70 ==> p0$1 && p0$2 ==> v22$1 == v22$2;
+    assert {:tag "predicatedEquality"} _b69 ==> p0$1 && p0$2 ==> v21$1 == v21$2;
+    assert {:tag "predicatedEquality"} _b68 ==> p0$1 && p0$2 ==> v20$1 == v20$2;
+    assert {:tag "predicatedEquality"} _b67 ==> p0$1 && p0$2 ==> v19$1 == v19$2;
+    assert {:tag "predicatedEquality"} _b66 ==> p0$1 && p0$2 ==> v18$1 == v18$2;
+    assert {:tag "predicatedEquality"} _b65 ==> p0$1 && p0$2 ==> v17$1 == v17$2;
+    assert {:tag "predicatedEquality"} _b64 ==> p0$1 && p0$2 ==> v16$1 == v16$2;
+    assert {:tag "predicatedEquality"} _b63 ==> p0$1 && p0$2 ==> v15$1 == v15$2;
+    assert {:tag "predicatedEquality"} _b62 ==> p0$1 && p0$2 ==> v14$1 == v14$2;
+    assert {:tag "predicatedEquality"} _b61 ==> p0$1 && p0$2 ==> v13$1 == v13$2;
+    assert {:tag "predicatedEquality"} _b60 ==> p0$1 && p0$2 ==> v12$1 == v12$2;
+    assert {:tag "predicatedEquality"} _b59 ==> p0$1 && p0$2 ==> v11$1 == v11$2;
+    assert {:tag "predicatedEquality"} _b58 ==> p0$1 && p0$2 ==> v10$1 == v10$2;
+    assert {:tag "predicatedEquality"} _b57 ==> p0$1 && p0$2 ==> v9$1 == v9$2;
+    assert {:tag "predicatedEquality"} _b56 ==> p0$1 && p0$2 ==> v8$1 == v8$2;
+    assert {:tag "predicatedEquality"} _b55 ==> p0$1 && p0$2 ==> v7$1 == v7$2;
+    assert {:tag "predicatedEquality"} _b54 ==> p0$1 && p0$2 ==> v6$1 == v6$2;
     assert {:tag "predicatedEquality"} _b53 ==> p0$1 && p0$2 ==> $energy.3$1 == $energy.3$2;
-    assert {:tag "predicatedEquality"} _b52 ==> p0$1 && p0$2 ==> $i128.0$1 == $i128.0$2;
+    assert {:tag "predicatedEquality"} _b52 ==> p0$1 && p0$2 ==> $i1.0$1 == $i1.0$2;
     assert {:tag "predicatedEquality"} _b51 ==> p0$1 && p0$2 ==> $energy.2$1 == $energy.2$2;
     assert {:tag "predicatedEquality"} _b50 ==> p0$1 && p0$2 ==> $bincnt.1$1 == $bincnt.1$2;
     assert {:tag "predicatedEquality"} _b49 ==> p0$1 && p0$2 ==> $energy.1$1 == $energy.1$2;
@@ -533,15 +533,15 @@ implementation {:source_name "opencl_cutoff_potential_lattice"} {:kernel} $openc
     $nbrid.1$2, $bincnt.0$2 := (if p1$2 then $nbrid.0$2 else $nbrid.1$2), (if p1$2 then 0bv32 else $bincnt.0$2);
     p2$1 := (if p1$1 then true else p2$1);
     p2$2 := (if p1$2 then true else p2$2);
-    _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.myBinIndex$ghost$$for.cond.74 := _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.myBinIndex;
-    _WRITE_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache$ghost$$for.cond.74 := _WRITE_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache;
+    _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.myBinIndex$ghost$$3 := _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.myBinIndex;
+    _WRITE_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache$ghost$$3 := _WRITE_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache;
     assume {:captureState "loop_entry_state_3_0"} true;
-    goto $for.cond.74;
+    goto $3;
 
-  $for.cond.74:
+  $3:
     assume {:captureState "loop_head_state_3"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b108 ==> !p1$1 ==> _WRITE_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache$ghost$$for.cond.74 == _WRITE_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache;
-    assert {:tag "disabledMaintainsInstrumentation"} _b107 ==> !p1$1 ==> _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.myBinIndex$ghost$$for.cond.74 == _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.myBinIndex;
+    assert {:tag "disabledMaintainsInstrumentation"} _b108 ==> !p1$1 ==> _WRITE_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache$ghost$$3 == _WRITE_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache;
+    assert {:tag "disabledMaintainsInstrumentation"} _b107 ==> !p1$1 ==> _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.myBinIndex$ghost$$3 == _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.myBinIndex;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b106 ==> _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.myBinIndex ==> _WATCHED_OFFSET == 0bv32 || _WATCHED_OFFSET == 1bv32 || _WATCHED_OFFSET == 2bv32 || _WATCHED_OFFSET == 3bv32;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -726,13 +726,13 @@ implementation {:source_name "opencl_cutoff_potential_lattice"} {:kernel} $openc
     $nbrid.1$2, $bincnt.0$2 := (if p5$2 then BV32_ADD($nbrid.1$2, 8bv32) else $nbrid.1$2), (if p5$2 then BV32_ADD($bincnt.0$2, 1bv32) else $bincnt.0$2);
     p2$1 := (if p5$1 then true else p2$1);
     p2$2 := (if p5$2 then true else p2$2);
-    goto $for.cond.74.backedge, __partitioned_block_$for.cond.74.tail_0;
+    goto $3.backedge, __partitioned_block_$3.tail_0;
 
-  __partitioned_block_$for.cond.74.tail_0:
+  __partitioned_block_$3.tail_0:
     assume !p2$1 && !p2$2;
-    goto __partitioned_block_$for.cond.74.tail_1;
+    goto __partitioned_block_$3.tail_1;
 
-  __partitioned_block_$for.cond.74.tail_1:
+  __partitioned_block_$3.tail_1:
     call {:sourceloc_num 46} $bugle_barrier_duplicated_0(1bv1, 1bv1, p1$1, p1$2);
     v41$1 := (if p1$1 then $$NbrListLen$1[0bv32] else v41$1);
     v41$2 := (if p1$2 then $$NbrListLen$2[0bv32] else v41$2);
@@ -752,13 +752,13 @@ implementation {:source_name "opencl_cutoff_potential_lattice"} {:kernel} $openc
     $energy.1$2, $bincnt.1$2 := (if p1$2 then $energy.0$2 else $energy.1$2), (if p1$2 then 0bv32 else $bincnt.1$2);
     p8$1 := (if p1$1 then true else p8$1);
     p8$2 := (if p1$2 then true else p8$2);
-    _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache$ghost$$for.cond.124 := _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache;
+    _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache$ghost$$11 := _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.124;
+    goto $11;
 
-  $for.cond.124:
+  $11:
     assume {:captureState "loop_head_state_1"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b109 ==> !p1$1 ==> _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache$ghost$$for.cond.124 == _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache;
+    assert {:tag "disabledMaintainsInstrumentation"} _b109 ==> !p1$1 ==> _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache$ghost$$11 == _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -794,17 +794,17 @@ implementation {:source_name "opencl_cutoff_potential_lattice"} {:kernel} $openc
     p9$2 := (if p8$2 && v44$2 then v44$2 else p9$2);
     p8$1 := (if p8$1 && !v44$1 then v44$1 else p8$1);
     p8$2 := (if p8$2 && !v44$2 then v44$2 else p8$2);
-    $energy.2$1, $i128.0$1 := (if p9$1 then $energy.1$1 else $energy.2$1), (if p9$1 then 0bv32 else $i128.0$1);
-    $energy.2$2, $i128.0$2 := (if p9$2 then $energy.1$2 else $energy.2$2), (if p9$2 then 0bv32 else $i128.0$2);
+    $energy.2$1, $i1.0$1 := (if p9$1 then $energy.1$1 else $energy.2$1), (if p9$1 then 0bv32 else $i1.0$1);
+    $energy.2$2, $i1.0$2 := (if p9$2 then $energy.1$2 else $energy.2$2), (if p9$2 then 0bv32 else $i1.0$2);
     p10$1 := (if p9$1 then true else p10$1);
     p10$2 := (if p9$2 then true else p10$2);
-    _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache$ghost$$for.cond.129 := _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache;
+    _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache$ghost$$13 := _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache;
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond.129;
+    goto $13;
 
-  $for.cond.129:
+  $13:
     assume {:captureState "loop_head_state_2"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b110 ==> !p9$1 ==> _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache$ghost$$for.cond.129 == _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache;
+    assert {:tag "disabledMaintainsInstrumentation"} _b110 ==> !p9$1 ==> _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache$ghost$$13 == _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -818,23 +818,23 @@ implementation {:source_name "opencl_cutoff_potential_lattice"} {:kernel} $openc
     assert p8$2 ==> p0$2;
     assert {:do_not_predicate} {:tag "accessOnlyIfEnabledInEnclosingScopes"} {:thread 1} _b34 ==> _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache ==> BV32_SLT($bincnt.1$1, $numbins.1$1);
     assert {:do_not_predicate} {:tag "accessOnlyIfEnabledInEnclosingScopes"} {:thread 1} _b33 ==> _READ_HAS_OCCURRED_$$opencl_cutoff_potential_lattice.AtomBinCache ==> BV32_SLT($totalbins.0$1, v6$1);
-    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 1} _b32 ==> BV32_SLT($totalbins.0$1, v6$1) && BV32_SLT($bincnt.1$1, $numbins.1$1) && BV32_SLT($i128.0$1, 8bv32) ==> p10$1;
-    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 2} _b32 ==> BV32_SLT($totalbins.0$2, v6$2) && BV32_SLT($bincnt.1$2, $numbins.1$2) && BV32_SLT($i128.0$2, 8bv32) ==> p10$2;
+    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 1} _b32 ==> BV32_SLT($totalbins.0$1, v6$1) && BV32_SLT($bincnt.1$1, $numbins.1$1) && BV32_SLT($i1.0$1, 8bv32) ==> p10$1;
+    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 2} _b32 ==> BV32_SLT($totalbins.0$2, v6$2) && BV32_SLT($bincnt.1$2, $numbins.1$2) && BV32_SLT($i1.0$2, 8bv32) ==> p10$2;
     assert {:tag "conditionsImpliedByEnabledness"} {:thread 1} p10$1 ==> _b31 ==> p10$1 ==> BV32_SLT($totalbins.0$1, v6$1) && BV32_SLT($bincnt.1$1, $numbins.1$1);
     assert {:tag "conditionsImpliedByEnabledness"} {:thread 2} p10$2 ==> _b31 ==> p10$2 ==> BV32_SLT($totalbins.0$2, v6$2) && BV32_SLT($bincnt.1$2, $numbins.1$2);
-    assert {:tag "loopBound"} {:thread 1} p10$1 ==> _b30 ==> BV32_UGE($i128.0$1, 0bv32);
-    assert {:tag "loopBound"} {:thread 2} p10$2 ==> _b30 ==> BV32_UGE($i128.0$2, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} p10$1 ==> _b29 ==> BV32_ULE($i128.0$1, 0bv32);
-    assert {:tag "loopBound"} {:thread 2} p10$2 ==> _b29 ==> BV32_ULE($i128.0$2, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} p10$1 ==> _b28 ==> BV32_SGE($i128.0$1, 0bv32);
-    assert {:tag "loopBound"} {:thread 2} p10$2 ==> _b28 ==> BV32_SGE($i128.0$2, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} p10$1 ==> _b27 ==> BV32_SLE($i128.0$1, 0bv32);
-    assert {:tag "loopBound"} {:thread 2} p10$2 ==> _b27 ==> BV32_SLE($i128.0$2, 0bv32);
-    assert {:tag "guardNonNeg"} {:thread 1} p10$1 ==> _b26 ==> BV32_SLE(0bv32, $i128.0$1);
-    assert {:tag "guardNonNeg"} {:thread 2} p10$2 ==> _b26 ==> BV32_SLE(0bv32, $i128.0$2);
+    assert {:tag "loopBound"} {:thread 1} p10$1 ==> _b30 ==> BV32_UGE($i1.0$1, 0bv32);
+    assert {:tag "loopBound"} {:thread 2} p10$2 ==> _b30 ==> BV32_UGE($i1.0$2, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} p10$1 ==> _b29 ==> BV32_ULE($i1.0$1, 0bv32);
+    assert {:tag "loopBound"} {:thread 2} p10$2 ==> _b29 ==> BV32_ULE($i1.0$2, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} p10$1 ==> _b28 ==> BV32_SGE($i1.0$1, 0bv32);
+    assert {:tag "loopBound"} {:thread 2} p10$2 ==> _b28 ==> BV32_SGE($i1.0$2, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} p10$1 ==> _b27 ==> BV32_SLE($i1.0$1, 0bv32);
+    assert {:tag "loopBound"} {:thread 2} p10$2 ==> _b27 ==> BV32_SLE($i1.0$2, 0bv32);
+    assert {:tag "guardNonNeg"} {:thread 1} p10$1 ==> _b26 ==> BV32_SLE(0bv32, $i1.0$1);
+    assert {:tag "guardNonNeg"} {:thread 2} p10$2 ==> _b26 ==> BV32_SLE(0bv32, $i1.0$2);
     assert {:block_sourceloc} {:sourceloc_num 53} p10$1 ==> true;
-    v45$1 := (if p10$1 then BV32_SLT($i128.0$1, 8bv32) else v45$1);
-    v45$2 := (if p10$2 then BV32_SLT($i128.0$2, 8bv32) else v45$2);
+    v45$1 := (if p10$1 then BV32_SLT($i1.0$1, 8bv32) else v45$1);
+    v45$2 := (if p10$2 then BV32_SLT($i1.0$2, 8bv32) else v45$2);
     p11$1 := false;
     p11$2 := false;
     p12$1 := false;
@@ -851,30 +851,30 @@ implementation {:source_name "opencl_cutoff_potential_lattice"} {:kernel} $openc
     p11$2 := (if p10$2 && v45$2 then v45$2 else p11$2);
     p10$1 := (if p10$1 && !v45$1 then v45$1 else p10$1);
     p10$2 := (if p10$2 && !v45$2 then v45$2 else p10$2);
-    call {:sourceloc} {:sourceloc_num 55} _LOG_READ_$$opencl_cutoff_potential_lattice.AtomBinCache(p11$1, BV32_ADD(BV32_MUL($bincnt.1$1, 32bv32), BV32_MUL($i128.0$1, 4bv32)), $$opencl_cutoff_potential_lattice.AtomBinCache[1bv1][BV32_ADD(BV32_MUL($bincnt.1$1, 32bv32), BV32_MUL($i128.0$1, 4bv32))]);
+    call {:sourceloc} {:sourceloc_num 55} _LOG_READ_$$opencl_cutoff_potential_lattice.AtomBinCache(p11$1, BV32_ADD(BV32_MUL($bincnt.1$1, 32bv32), BV32_MUL($i1.0$1, 4bv32)), $$opencl_cutoff_potential_lattice.AtomBinCache[1bv1][BV32_ADD(BV32_MUL($bincnt.1$1, 32bv32), BV32_MUL($i1.0$1, 4bv32))]);
     assume {:do_not_predicate} {:check_id "check_state_5"} {:captureState "check_state_5"} {:sourceloc} {:sourceloc_num 55} true;
-    call {:check_id "check_state_5"} {:sourceloc} {:sourceloc_num 55} _CHECK_READ_$$opencl_cutoff_potential_lattice.AtomBinCache(p11$2, BV32_ADD(BV32_MUL($bincnt.1$2, 32bv32), BV32_MUL($i128.0$2, 4bv32)), $$opencl_cutoff_potential_lattice.AtomBinCache[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($bincnt.1$2, 32bv32), BV32_MUL($i128.0$2, 4bv32))]);
+    call {:check_id "check_state_5"} {:sourceloc} {:sourceloc_num 55} _CHECK_READ_$$opencl_cutoff_potential_lattice.AtomBinCache(p11$2, BV32_ADD(BV32_MUL($bincnt.1$2, 32bv32), BV32_MUL($i1.0$2, 4bv32)), $$opencl_cutoff_potential_lattice.AtomBinCache[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($bincnt.1$2, 32bv32), BV32_MUL($i1.0$2, 4bv32))]);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$opencl_cutoff_potential_lattice.AtomBinCache"} true;
-    v46$1 := (if p11$1 then $$opencl_cutoff_potential_lattice.AtomBinCache[1bv1][BV32_ADD(BV32_MUL($bincnt.1$1, 32bv32), BV32_MUL($i128.0$1, 4bv32))] else v46$1);
-    v46$2 := (if p11$2 then $$opencl_cutoff_potential_lattice.AtomBinCache[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($bincnt.1$2, 32bv32), BV32_MUL($i128.0$2, 4bv32))] else v46$2);
-    call {:sourceloc} {:sourceloc_num 56} _LOG_READ_$$opencl_cutoff_potential_lattice.AtomBinCache(p11$1, BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$1, 32bv32), BV32_MUL($i128.0$1, 4bv32)), 1bv32), $$opencl_cutoff_potential_lattice.AtomBinCache[1bv1][BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$1, 32bv32), BV32_MUL($i128.0$1, 4bv32)), 1bv32)]);
+    v46$1 := (if p11$1 then $$opencl_cutoff_potential_lattice.AtomBinCache[1bv1][BV32_ADD(BV32_MUL($bincnt.1$1, 32bv32), BV32_MUL($i1.0$1, 4bv32))] else v46$1);
+    v46$2 := (if p11$2 then $$opencl_cutoff_potential_lattice.AtomBinCache[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($bincnt.1$2, 32bv32), BV32_MUL($i1.0$2, 4bv32))] else v46$2);
+    call {:sourceloc} {:sourceloc_num 56} _LOG_READ_$$opencl_cutoff_potential_lattice.AtomBinCache(p11$1, BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$1, 32bv32), BV32_MUL($i1.0$1, 4bv32)), 1bv32), $$opencl_cutoff_potential_lattice.AtomBinCache[1bv1][BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$1, 32bv32), BV32_MUL($i1.0$1, 4bv32)), 1bv32)]);
     assume {:do_not_predicate} {:check_id "check_state_6"} {:captureState "check_state_6"} {:sourceloc} {:sourceloc_num 56} true;
-    call {:check_id "check_state_6"} {:sourceloc} {:sourceloc_num 56} _CHECK_READ_$$opencl_cutoff_potential_lattice.AtomBinCache(p11$2, BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$2, 32bv32), BV32_MUL($i128.0$2, 4bv32)), 1bv32), $$opencl_cutoff_potential_lattice.AtomBinCache[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$2, 32bv32), BV32_MUL($i128.0$2, 4bv32)), 1bv32)]);
+    call {:check_id "check_state_6"} {:sourceloc} {:sourceloc_num 56} _CHECK_READ_$$opencl_cutoff_potential_lattice.AtomBinCache(p11$2, BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$2, 32bv32), BV32_MUL($i1.0$2, 4bv32)), 1bv32), $$opencl_cutoff_potential_lattice.AtomBinCache[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$2, 32bv32), BV32_MUL($i1.0$2, 4bv32)), 1bv32)]);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$opencl_cutoff_potential_lattice.AtomBinCache"} true;
-    v47$1 := (if p11$1 then $$opencl_cutoff_potential_lattice.AtomBinCache[1bv1][BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$1, 32bv32), BV32_MUL($i128.0$1, 4bv32)), 1bv32)] else v47$1);
-    v47$2 := (if p11$2 then $$opencl_cutoff_potential_lattice.AtomBinCache[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$2, 32bv32), BV32_MUL($i128.0$2, 4bv32)), 1bv32)] else v47$2);
-    call {:sourceloc} {:sourceloc_num 57} _LOG_READ_$$opencl_cutoff_potential_lattice.AtomBinCache(p11$1, BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$1, 32bv32), BV32_MUL($i128.0$1, 4bv32)), 2bv32), $$opencl_cutoff_potential_lattice.AtomBinCache[1bv1][BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$1, 32bv32), BV32_MUL($i128.0$1, 4bv32)), 2bv32)]);
+    v47$1 := (if p11$1 then $$opencl_cutoff_potential_lattice.AtomBinCache[1bv1][BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$1, 32bv32), BV32_MUL($i1.0$1, 4bv32)), 1bv32)] else v47$1);
+    v47$2 := (if p11$2 then $$opencl_cutoff_potential_lattice.AtomBinCache[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$2, 32bv32), BV32_MUL($i1.0$2, 4bv32)), 1bv32)] else v47$2);
+    call {:sourceloc} {:sourceloc_num 57} _LOG_READ_$$opencl_cutoff_potential_lattice.AtomBinCache(p11$1, BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$1, 32bv32), BV32_MUL($i1.0$1, 4bv32)), 2bv32), $$opencl_cutoff_potential_lattice.AtomBinCache[1bv1][BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$1, 32bv32), BV32_MUL($i1.0$1, 4bv32)), 2bv32)]);
     assume {:do_not_predicate} {:check_id "check_state_7"} {:captureState "check_state_7"} {:sourceloc} {:sourceloc_num 57} true;
-    call {:check_id "check_state_7"} {:sourceloc} {:sourceloc_num 57} _CHECK_READ_$$opencl_cutoff_potential_lattice.AtomBinCache(p11$2, BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$2, 32bv32), BV32_MUL($i128.0$2, 4bv32)), 2bv32), $$opencl_cutoff_potential_lattice.AtomBinCache[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$2, 32bv32), BV32_MUL($i128.0$2, 4bv32)), 2bv32)]);
+    call {:check_id "check_state_7"} {:sourceloc} {:sourceloc_num 57} _CHECK_READ_$$opencl_cutoff_potential_lattice.AtomBinCache(p11$2, BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$2, 32bv32), BV32_MUL($i1.0$2, 4bv32)), 2bv32), $$opencl_cutoff_potential_lattice.AtomBinCache[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$2, 32bv32), BV32_MUL($i1.0$2, 4bv32)), 2bv32)]);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$opencl_cutoff_potential_lattice.AtomBinCache"} true;
-    v48$1 := (if p11$1 then $$opencl_cutoff_potential_lattice.AtomBinCache[1bv1][BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$1, 32bv32), BV32_MUL($i128.0$1, 4bv32)), 2bv32)] else v48$1);
-    v48$2 := (if p11$2 then $$opencl_cutoff_potential_lattice.AtomBinCache[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$2, 32bv32), BV32_MUL($i128.0$2, 4bv32)), 2bv32)] else v48$2);
-    call {:sourceloc} {:sourceloc_num 58} _LOG_READ_$$opencl_cutoff_potential_lattice.AtomBinCache(p11$1, BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$1, 32bv32), BV32_MUL($i128.0$1, 4bv32)), 3bv32), $$opencl_cutoff_potential_lattice.AtomBinCache[1bv1][BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$1, 32bv32), BV32_MUL($i128.0$1, 4bv32)), 3bv32)]);
+    v48$1 := (if p11$1 then $$opencl_cutoff_potential_lattice.AtomBinCache[1bv1][BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$1, 32bv32), BV32_MUL($i1.0$1, 4bv32)), 2bv32)] else v48$1);
+    v48$2 := (if p11$2 then $$opencl_cutoff_potential_lattice.AtomBinCache[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$2, 32bv32), BV32_MUL($i1.0$2, 4bv32)), 2bv32)] else v48$2);
+    call {:sourceloc} {:sourceloc_num 58} _LOG_READ_$$opencl_cutoff_potential_lattice.AtomBinCache(p11$1, BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$1, 32bv32), BV32_MUL($i1.0$1, 4bv32)), 3bv32), $$opencl_cutoff_potential_lattice.AtomBinCache[1bv1][BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$1, 32bv32), BV32_MUL($i1.0$1, 4bv32)), 3bv32)]);
     assume {:do_not_predicate} {:check_id "check_state_8"} {:captureState "check_state_8"} {:sourceloc} {:sourceloc_num 58} true;
-    call {:check_id "check_state_8"} {:sourceloc} {:sourceloc_num 58} _CHECK_READ_$$opencl_cutoff_potential_lattice.AtomBinCache(p11$2, BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$2, 32bv32), BV32_MUL($i128.0$2, 4bv32)), 3bv32), $$opencl_cutoff_potential_lattice.AtomBinCache[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$2, 32bv32), BV32_MUL($i128.0$2, 4bv32)), 3bv32)]);
+    call {:check_id "check_state_8"} {:sourceloc} {:sourceloc_num 58} _CHECK_READ_$$opencl_cutoff_potential_lattice.AtomBinCache(p11$2, BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$2, 32bv32), BV32_MUL($i1.0$2, 4bv32)), 3bv32), $$opencl_cutoff_potential_lattice.AtomBinCache[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$2, 32bv32), BV32_MUL($i1.0$2, 4bv32)), 3bv32)]);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$opencl_cutoff_potential_lattice.AtomBinCache"} true;
-    v49$1 := (if p11$1 then $$opencl_cutoff_potential_lattice.AtomBinCache[1bv1][BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$1, 32bv32), BV32_MUL($i128.0$1, 4bv32)), 3bv32)] else v49$1);
-    v49$2 := (if p11$2 then $$opencl_cutoff_potential_lattice.AtomBinCache[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$2, 32bv32), BV32_MUL($i128.0$2, 4bv32)), 3bv32)] else v49$2);
+    v49$1 := (if p11$1 then $$opencl_cutoff_potential_lattice.AtomBinCache[1bv1][BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$1, 32bv32), BV32_MUL($i1.0$1, 4bv32)), 3bv32)] else v49$1);
+    v49$2 := (if p11$2 then $$opencl_cutoff_potential_lattice.AtomBinCache[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_ADD(BV32_MUL($bincnt.1$2, 32bv32), BV32_MUL($i1.0$2, 4bv32)), 3bv32)] else v49$2);
     v50$1 := (if p11$1 then FEQ32(0bv32, v49$1) else v50$1);
     v50$2 := (if p11$2 then FEQ32(0bv32, v49$2) else v50$2);
     p10$1 := (if p11$1 && v50$1 then !v50$1 else p10$1);
@@ -893,35 +893,35 @@ implementation {:source_name "opencl_cutoff_potential_lattice"} {:kernel} $openc
     $energy.3$2 := (if p13$2 then $energy.2$2 else $energy.3$2);
     v53$1 := (if p14$1 then FADD32(FMUL32(FSUB32(2147483648bv32, v51$1), $inv_cutoff2), 1065353216bv32) else v53$1);
     v53$2 := (if p14$2 then FADD32(FMUL32(FSUB32(2147483648bv32, v51$2), $inv_cutoff2), 1065353216bv32) else v53$2);
-    $energy.3$1 := (if p14$1 then FADD32($energy.2$1, FMUL32(FMUL32(FMUL32(v49$1, FDIV32(1065353216bv32, FSQRT32(v51$1))), v53$1), v53$1)) else $energy.3$1);
-    $energy.3$2 := (if p14$2 then FADD32($energy.2$2, FMUL32(FMUL32(FMUL32(v49$2, FDIV32(1065353216bv32, FSQRT32(v51$2))), v53$2), v53$2)) else $energy.3$2);
-    $energy.2$1, $i128.0$1 := (if p12$1 then $energy.3$1 else $energy.2$1), (if p12$1 then BV32_ADD($i128.0$1, 1bv32) else $i128.0$1);
-    $energy.2$2, $i128.0$2 := (if p12$2 then $energy.3$2 else $energy.2$2), (if p12$2 then BV32_ADD($i128.0$2, 1bv32) else $i128.0$2);
+    $energy.3$1 := (if p14$1 then FADD32(FMUL32(FMUL32(FMUL32(v49$1, FDIV32(1065353216bv32, FSQRT32(v51$1))), v53$1), v53$1), $energy.2$1) else $energy.3$1);
+    $energy.3$2 := (if p14$2 then FADD32(FMUL32(FMUL32(FMUL32(v49$2, FDIV32(1065353216bv32, FSQRT32(v51$2))), v53$2), v53$2), $energy.2$2) else $energy.3$2);
+    $energy.2$1, $i1.0$1 := (if p12$1 then $energy.3$1 else $energy.2$1), (if p12$1 then BV32_ADD($i1.0$1, 1bv32) else $i1.0$1);
+    $energy.2$2, $i1.0$2 := (if p12$2 then $energy.3$2 else $energy.2$2), (if p12$2 then BV32_ADD($i1.0$2, 1bv32) else $i1.0$2);
     p10$1 := (if p12$1 then true else p10$1);
     p10$2 := (if p12$2 then true else p10$2);
-    goto $for.cond.129.backedge, $for.cond.129.tail;
+    goto $13.backedge, $13.tail;
 
-  $for.cond.129.tail:
+  $13.tail:
     assume !p10$1 && !p10$2;
     $energy.1$1, $bincnt.1$1 := (if p9$1 then $energy.2$1 else $energy.1$1), (if p9$1 then BV32_ADD($bincnt.1$1, 1bv32) else $bincnt.1$1);
     $energy.1$2, $bincnt.1$2 := (if p9$2 then $energy.2$2 else $energy.1$2), (if p9$2 then BV32_ADD($bincnt.1$2, 1bv32) else $bincnt.1$2);
     p8$1 := (if p9$1 then true else p8$1);
     p8$2 := (if p9$2 then true else p8$2);
-    goto $for.cond.124.backedge, __partitioned_block_$for.cond.124.tail_0;
+    goto $11.backedge, __partitioned_block_$11.tail_0;
 
-  __partitioned_block_$for.cond.124.tail_0:
+  __partitioned_block_$11.tail_0:
     assume !p8$1 && !p8$2;
-    goto __partitioned_block_$for.cond.124.tail_1;
+    goto __partitioned_block_$11.tail_1;
 
-  __partitioned_block_$for.cond.124.tail_1:
+  __partitioned_block_$11.tail_1:
     call {:sourceloc_num 67} $bugle_barrier_duplicated_1(1bv1, 1bv1, p1$1, p1$2);
     $nbrid.0$1, $totalbins.0$1, $numbins.0$1, $energy.0$1 := (if p1$1 then $nbrid.1$1 else $nbrid.0$1), (if p1$1 then BV32_ADD($totalbins.0$1, $numbins.1$1) else $totalbins.0$1), (if p1$1 then $numbins.1$1 else $numbins.0$1), (if p1$1 then $energy.1$1 else $energy.0$1);
     $nbrid.0$2, $totalbins.0$2, $numbins.0$2, $energy.0$2 := (if p1$2 then $nbrid.1$2 else $nbrid.0$2), (if p1$2 then BV32_ADD($totalbins.0$2, $numbins.1$2) else $totalbins.0$2), (if p1$2 then $numbins.1$2 else $numbins.0$2), (if p1$2 then $energy.1$2 else $energy.0$2);
     p0$1 := (if p1$1 then true else p0$1);
     p0$2 := (if p1$2 then true else p0$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $1.backedge, $1.tail;
 
-  $for.cond.tail:
+  $1.tail:
     assume !p0$1 && !p0$2;
     call {:sourceloc} {:sourceloc_num 70} _LOG_WRITE_$$regionZeroAddr(true, BV32_ADD(BV32_ADD(v1$1, v2$1), v0$1), $energy.0$1, $$regionZeroAddr[BV32_ADD(BV32_ADD(v1$1, v2$1), v0$1)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$regionZeroAddr(true, BV32_ADD(BV32_ADD(v1$2, v2$2), v0$2));
@@ -932,25 +932,25 @@ implementation {:source_name "opencl_cutoff_potential_lattice"} {:kernel} $openc
     $$regionZeroAddr[BV32_ADD(BV32_ADD(v1$2, v2$2), v0$2)] := $energy.0$2;
     return;
 
-  $for.cond.backedge:
+  $1.backedge:
     assume {:backedge} p0$1 || p0$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond.124.backedge:
+  $11.backedge:
     assume {:backedge} p8$1 || p8$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.124;
+    goto $11;
 
-  $for.cond.129.backedge:
+  $13.backedge:
     assume {:backedge} p10$1 || p10$2;
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond.129;
+    goto $13;
 
-  $for.cond.74.backedge:
+  $3.backedge:
     assume {:backedge} p2$1 || p2$2;
     assume {:captureState "loop_back_edge_state_3_0"} true;
-    goto $for.cond.74;
+    goto $3;
 }
 
 

@@ -125,7 +125,7 @@ implementation {:source_name "write_kernel"} {:kernel} $write_kernel($np: bv32, 
   var v3$2: bv32;
 
 
-  $entry:
+  $0:
     v0 := $nk == 0bv32;
     goto $truebb, $falsebb;
 
@@ -134,9 +134,9 @@ implementation {:source_name "write_kernel"} {:kernel} $write_kernel($np: bv32, 
     $coord.0$1, $n.0 := 0bv32 ++ BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), 0bv32;
     $coord.0$2 := 0bv32 ++ BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2);
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $3;
 
-  $for.cond:
+  $3:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "loopBound"} {:thread 1} _b3 ==> BV32_UGE($n.0, 0bv32);
     assert {:tag "loopBound"} {:thread 1} _b2 ==> BV32_ULE($n.0, 0bv32);
@@ -152,9 +152,9 @@ implementation {:source_name "write_kernel"} {:kernel} $write_kernel($np: bv32, 
 
   $falsebb0:
     assume {:partition} !v1;
-    goto $for.end.52;
+    goto $10;
 
-  $for.end.52:
+  $10:
     return;
 
   $truebb0:
@@ -162,9 +162,9 @@ implementation {:source_name "write_kernel"} {:kernel} $write_kernel($np: bv32, 
     $i.0, $idx.0$1, $coord.1$1 := 0bv32, BV32_ADD(BV32_MUL(group_id_y$1, group_size_y), local_id_y$1), $coord.0$1;
     $idx.0$2, $coord.1$2 := BV32_ADD(BV32_MUL(group_id_y$2, group_size_y), local_id_y$2), $coord.0$2;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.26;
+    goto $5;
 
-  $for.cond.26:
+  $5:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "loopBound"} {:thread 1} _b8 ==> BV32_UGE($i.0, 0bv32);
     assert {:tag "loopBound"} {:thread 1} _b7 ==> BV32_ULE($i.0, 0bv32);
@@ -185,7 +185,7 @@ implementation {:source_name "write_kernel"} {:kernel} $write_kernel($np: bv32, 
     $coord.0$1, $n.0 := $coord.1$1, BV32_ADD($n.0, 1bv32);
     $coord.0$2 := $coord.1$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $3;
 
   $truebb1:
     assume {:partition} v2;
@@ -222,11 +222,11 @@ implementation {:source_name "write_kernel"} {:kernel} $write_kernel($np: bv32, 
     $i.0, $idx.0$1, $coord.1$1 := BV32_ADD($i.0, 1bv32), BV32_ADD($idx.0$1, BV32_MUL(group_size_y, num_groups_y)), $idx.0$1 ++ v3$1;
     $idx.0$2, $coord.1$2 := BV32_ADD($idx.0$2, BV32_MUL(group_size_y, num_groups_y)), $idx.0$2 ++ v3$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.26;
+    goto $5;
 
   $truebb:
     assume {:partition} v0;
-    goto $for.end.52;
+    goto $10;
 }
 
 

@@ -149,20 +149,20 @@ implementation {:source_name "matrixMulCUDA<32>"} {:kernel} $_Z13matrixMulCUDAIL
   var $Csub.1$2: bv32;
   var $k.0$1: bv32;
   var $k.0$2: bv32;
-  var v2$1: bv32;
-  var v2$2: bv32;
-  var v3$1: bv32;
-  var v3$2: bv32;
-  var v5$1: bv32;
-  var v5$2: bv32;
-  var v6$1: bv32;
-  var v6$2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
   var v1$1: bool;
   var v1$2: bool;
+  var v2$1: bv32;
+  var v2$2: bv32;
+  var v3$1: bv32;
+  var v3$2: bv32;
   var v4$1: bool;
   var v4$2: bool;
+  var v5$1: bv32;
+  var v5$2: bv32;
+  var v6$1: bv32;
+  var v6$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -175,11 +175,11 @@ implementation {:source_name "matrixMulCUDA<32>"} {:kernel} $_Z13matrixMulCUDAIL
   var p4$2: bool;
   var _HAVOC_bv32$1: bv32;
   var _HAVOC_bv32$2: bv32;
-  var _READ_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2As$ghost$$for.cond.17: bool;
-  var _READ_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2Bs$ghost$$for.cond.17: bool;
+  var _READ_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2As$ghost$$3: bool;
+  var _READ_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2Bs$ghost$$3: bool;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_MUL(BV32_MUL($wA, 32bv32), group_id_y$1);
     v0$2 := BV32_MUL(BV32_MUL($wA, 32bv32), group_id_y$2);
     $Csub.0$1, $a.0$1, $b.0$1 := 0bv32, v0$1, BV32_MUL(32bv32, group_id_x$1);
@@ -189,9 +189,9 @@ implementation {:source_name "matrixMulCUDA<32>"} {:kernel} $_Z13matrixMulCUDAIL
     p0$1 := true;
     p0$2 := true;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto __partitioned_block_$for.cond_0;
+    goto __partitioned_block_$1_0;
 
-  __partitioned_block_$for.cond_0:
+  __partitioned_block_$1_0:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b39 ==> _WRITE_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2Bs ==> _WATCHED_OFFSET == BV32_ADD(BV32_MUL(local_id_y$1, 32bv32), local_id_x$1);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b38 ==> _READ_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2Bs ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 32bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 32bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 32bv32), local_id_x$1));
@@ -201,12 +201,12 @@ implementation {:source_name "matrixMulCUDA<32>"} {:kernel} $_Z13matrixMulCUDAIL
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b34 ==> _WRITE_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2As ==> _WATCHED_OFFSET == BV32_ADD(BV32_MUL(local_id_y$1, 32bv32), local_id_x$1);
     assert {:tag "nowrite"} _b33 ==> !_WRITE_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2As;
     assert {:tag "noread"} _b32 ==> !_READ_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2As;
-    assert {:tag "predicatedEquality"} _b31 ==> p0$1 && p0$2 ==> v4$1 == v4$2;
-    assert {:tag "predicatedEquality"} _b30 ==> p0$1 && p0$2 ==> v1$1 == v1$2;
-    assert {:tag "predicatedEquality"} _b29 ==> p0$1 && p0$2 ==> v6$1 == v6$2;
-    assert {:tag "predicatedEquality"} _b28 ==> p0$1 && p0$2 ==> v5$1 == v5$2;
-    assert {:tag "predicatedEquality"} _b27 ==> p0$1 && p0$2 ==> v3$1 == v3$2;
-    assert {:tag "predicatedEquality"} _b26 ==> p0$1 && p0$2 ==> v2$1 == v2$2;
+    assert {:tag "predicatedEquality"} _b31 ==> p0$1 && p0$2 ==> v6$1 == v6$2;
+    assert {:tag "predicatedEquality"} _b30 ==> p0$1 && p0$2 ==> v5$1 == v5$2;
+    assert {:tag "predicatedEquality"} _b29 ==> p0$1 && p0$2 ==> v4$1 == v4$2;
+    assert {:tag "predicatedEquality"} _b28 ==> p0$1 && p0$2 ==> v3$1 == v3$2;
+    assert {:tag "predicatedEquality"} _b27 ==> p0$1 && p0$2 ==> v2$1 == v2$2;
+    assert {:tag "predicatedEquality"} _b26 ==> p0$1 && p0$2 ==> v1$1 == v1$2;
     assert {:tag "predicatedEquality"} _b25 ==> p0$1 && p0$2 ==> $k.0$1 == $k.0$2;
     assert {:tag "predicatedEquality"} _b24 ==> p0$1 && p0$2 ==> $Csub.1$1 == $Csub.1$2;
     assert {:tag "predicatedEquality"} _b23 ==> p0$1 && p0$2 ==> $b.0$1 == $b.0$2;
@@ -273,24 +273,24 @@ implementation {:source_name "matrixMulCUDA<32>"} {:kernel} $_Z13matrixMulCUDAIL
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2Bs"} true;
     $$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2Bs[1bv1][BV32_ADD(BV32_MUL(local_id_y$1, 32bv32), local_id_x$1)] := (if p1$1 then v3$1 else $$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2Bs[1bv1][BV32_ADD(BV32_MUL(local_id_y$1, 32bv32), local_id_x$1)]);
     $$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2Bs[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(local_id_y$2, 32bv32), local_id_x$2)] := (if p1$2 then v3$2 else $$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2Bs[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(local_id_y$2, 32bv32), local_id_x$2)]);
-    goto __partitioned_block_$for.cond_1;
+    goto __partitioned_block_$1_1;
 
-  __partitioned_block_$for.cond_1:
+  __partitioned_block_$1_1:
     call {:sourceloc_num 9} $bugle_barrier_duplicated_0(1bv1, 1bv1, p1$1, p1$2);
     $Csub.1$1, $k.0$1 := (if p1$1 then $Csub.0$1 else $Csub.1$1), (if p1$1 then 0bv32 else $k.0$1);
     $Csub.1$2, $k.0$2 := (if p1$2 then $Csub.0$2 else $Csub.1$2), (if p1$2 then 0bv32 else $k.0$2);
     p2$1 := (if p1$1 then true else p2$1);
     p2$2 := (if p1$2 then true else p2$2);
-    _READ_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2As$ghost$$for.cond.17 := _READ_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2As;
-    _READ_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2Bs$ghost$$for.cond.17 := _READ_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2Bs;
+    _READ_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2As$ghost$$3 := _READ_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2As;
+    _READ_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2Bs$ghost$$3 := _READ_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2Bs;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.17;
+    goto $3;
 
-  $for.cond.17:
+  $3:
     assume {:captureState "loop_head_state_1"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b43 ==> !p1$1 ==> _READ_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2Bs$ghost$$for.cond.17 == _READ_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2Bs;
+    assert {:tag "disabledMaintainsInstrumentation"} _b43 ==> !p1$1 ==> _READ_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2Bs$ghost$$3 == _READ_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2Bs;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b42 ==> _READ_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2Bs ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 32bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 32bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 32bv32), local_id_x$1));
-    assert {:tag "disabledMaintainsInstrumentation"} _b41 ==> !p1$1 ==> _READ_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2As$ghost$$for.cond.17 == _READ_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2As;
+    assert {:tag "disabledMaintainsInstrumentation"} _b41 ==> !p1$1 ==> _READ_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2As$ghost$$3 == _READ_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2As;
     assert {:tag "accessBreak"} _b40 ==> _READ_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2As ==> local_id_y$1 == BV32_DIV(_WATCHED_OFFSET, 32bv32);
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2Bs ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ13matrixMulCUDAILi32EEvPfS0_S0_iiE2Bs ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -342,21 +342,21 @@ implementation {:source_name "matrixMulCUDA<32>"} {:kernel} $_Z13matrixMulCUDAIL
     $Csub.1$2, $k.0$2 := (if p3$2 then FADD32($Csub.1$2, FMUL32(v5$2, v6$2)) else $Csub.1$2), (if p3$2 then BV32_ADD($k.0$2, 1bv32) else $k.0$2);
     p2$1 := (if p3$1 then true else p2$1);
     p2$2 := (if p3$2 then true else p2$2);
-    goto $for.cond.17.backedge, __partitioned_block_$for.cond.17.tail_0;
+    goto $3.backedge, __partitioned_block_$3.tail_0;
 
-  __partitioned_block_$for.cond.17.tail_0:
+  __partitioned_block_$3.tail_0:
     assume !p2$1 && !p2$2;
-    goto __partitioned_block_$for.cond.17.tail_1;
+    goto __partitioned_block_$3.tail_1;
 
-  __partitioned_block_$for.cond.17.tail_1:
+  __partitioned_block_$3.tail_1:
     call {:sourceloc_num 16} $bugle_barrier_duplicated_1(1bv1, 1bv1, p1$1, p1$2);
     $Csub.0$1, $a.0$1, $b.0$1 := (if p1$1 then $Csub.1$1 else $Csub.0$1), (if p1$1 then BV32_ADD($a.0$1, 32bv32) else $a.0$1), (if p1$1 then BV32_ADD($b.0$1, BV32_MUL(32bv32, $wB)) else $b.0$1);
     $Csub.0$2, $a.0$2, $b.0$2 := (if p1$2 then $Csub.1$2 else $Csub.0$2), (if p1$2 then BV32_ADD($a.0$2, 32bv32) else $a.0$2), (if p1$2 then BV32_ADD($b.0$2, BV32_MUL(32bv32, $wB)) else $b.0$2);
     p0$1 := (if p1$1 then true else p0$1);
     p0$2 := (if p1$2 then true else p0$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $1.backedge, $1.tail;
 
-  $for.cond.tail:
+  $1.tail:
     assume !p0$1 && !p0$2;
     call {:sourceloc} {:sourceloc_num 19} _LOG_WRITE_$$C(true, BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL($wB, 32bv32), group_id_y$1), BV32_MUL(32bv32, group_id_x$1)), BV32_MUL($wB, local_id_y$1)), local_id_x$1), $Csub.0$1, $$C[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL($wB, 32bv32), group_id_y$1), BV32_MUL(32bv32, group_id_x$1)), BV32_MUL($wB, local_id_y$1)), local_id_x$1)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$C(true, BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL($wB, 32bv32), group_id_y$2), BV32_MUL(32bv32, group_id_x$2)), BV32_MUL($wB, local_id_y$2)), local_id_x$2));
@@ -367,15 +367,15 @@ implementation {:source_name "matrixMulCUDA<32>"} {:kernel} $_Z13matrixMulCUDAIL
     $$C[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL($wB, 32bv32), group_id_y$2), BV32_MUL(32bv32, group_id_x$2)), BV32_MUL($wB, local_id_y$2)), local_id_x$2)] := $Csub.0$2;
     return;
 
-  $for.cond.backedge:
+  $1.backedge:
     assume {:backedge} p0$1 || p0$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto __partitioned_block_$for.cond_0;
+    goto __partitioned_block_$1_0;
 
-  $for.cond.17.backedge:
+  $3.backedge:
     assume {:backedge} p2$1 || p2$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.17;
+    goto $3;
 }
 
 

@@ -130,40 +130,46 @@ implementation {:source_name "box_filter_horizontal_local"} {:kernel} $box_filte
   var $sum.0$2: bv128;
   var $X.0$1: bv32;
   var $X.0$2: bv32;
-  var v5$1: bool;
-  var v5$2: bool;
-  var v4$1: bv32;
-  var v4$2: bv32;
-  var v1: bv32;
-  var v2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
+  var v1: bv32;
+  var v2: bv32;
+  var v3$1: bv32;
+  var v3$2: bv32;
+  var v4$1: bv32;
+  var v4$2: bv32;
+  var v5$1: bool;
+  var v5$2: bool;
   var v6$1: bv8;
   var v6$2: bv8;
   var v7$1: bv8;
   var v7$2: bv8;
-  var v3$1: bv32;
-  var v3$2: bv32;
-  var v14$1: bv8;
-  var v14$2: bv8;
   var v8$1: bv8;
   var v8$2: bv8;
-  var v15$1: bv8;
-  var v15$2: bv8;
-  var v17$1: bv8;
-  var v17$2: bv8;
-  var v12$1: bv8;
-  var v12$2: bv8;
-  var v16$1: bv8;
-  var v16$2: bv8;
-  var v13$1: bv8;
-  var v13$2: bv8;
-  var v10$1: bv8;
-  var v10$2: bv8;
   var v9$1: bv8;
   var v9$2: bv8;
+  var v10$1: bv8;
+  var v10$2: bv8;
   var v11$1: bv8;
   var v11$2: bv8;
+  var v12$1: bv8;
+  var v12$2: bv8;
+  var v13$1: bv8;
+  var v13$2: bv8;
+  var v14$1: bv8;
+  var v14$2: bv8;
+  var v15$1: bv8;
+  var v15$2: bv8;
+  var v16$1: bv8;
+  var v16$2: bv8;
+  var v17$1: bv8;
+  var v17$2: bv8;
+  var v18$1: bool;
+  var v18$2: bool;
+  var v19$1: bool;
+  var v19$2: bool;
+  var v20$1: bool;
+  var v20$2: bool;
   var v21$1: bv8;
   var v21$2: bv8;
   var v22$1: bv8;
@@ -172,12 +178,6 @@ implementation {:source_name "box_filter_horizontal_local"} {:kernel} $box_filte
   var v23$2: bv8;
   var v24$1: bv8;
   var v24$2: bv8;
-  var v18$1: bool;
-  var v18$2: bool;
-  var v19$1: bool;
-  var v19$2: bool;
-  var v20$1: bool;
-  var v20$2: bool;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -200,7 +200,7 @@ implementation {:source_name "box_filter_horizontal_local"} {:kernel} $box_filte
   var _HAVOC_bv8$2: bv8;
 
 
-  __partitioned_block_$entry_0:
+  __partitioned_block_$0_0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2);
     v1 := BV32_MUL(group_size_x, num_groups_x);
@@ -341,9 +341,9 @@ implementation {:source_name "box_filter_horizontal_local"} {:kernel} $box_filte
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$lds"} true;
     $$lds[1bv1][BV32_ADD(BV32_MUL(BV32_ADD(v3$1, v2), 4bv32), 3bv32)] := v17$1;
     $$lds[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(v3$2, v2), 4bv32), 3bv32)] := v17$2;
-    goto __partitioned_block_$entry_1;
+    goto __partitioned_block_$0_1;
 
-  __partitioned_block_$entry_1:
+  __partitioned_block_$0_1:
     call {:sourceloc_num 28} $bugle_barrier_duplicated_0(1bv1, 0bv1);
     v18$1 := BV32_SLT(v0$1, v2);
     v18$2 := BV32_SLT(v0$2, v2);
@@ -366,9 +366,9 @@ implementation {:source_name "box_filter_horizontal_local"} {:kernel} $box_filte
     p7$1 := (if p6$1 then true else p7$1);
     p7$2 := (if p6$2 then true else p7$2);
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $6;
 
-  $for.cond:
+  $6:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$lds ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$lds ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -415,9 +415,9 @@ implementation {:source_name "box_filter_horizontal_local"} {:kernel} $box_filte
     $sum.0$2, $X.0$2 := (if p8$2 then BV32_ADD($sum.0$2[128:96], BV8_ZEXT32(v24$2)) ++ BV32_ADD($sum.0$2[96:64], BV8_ZEXT32(v23$2)) ++ BV32_ADD($sum.0$2[64:32], BV8_ZEXT32(v22$2)) ++ BV32_ADD($sum.0$2[32:0], BV8_ZEXT32(v21$2)) else $sum.0$2), (if p8$2 then BV32_ADD($X.0$2, 1bv32) else $X.0$2);
     p7$1 := (if p8$1 then true else p7$1);
     p7$2 := (if p8$2 then true else p7$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $6.backedge, $6.tail;
 
-  $for.cond.tail:
+  $6.tail:
     assume !p7$1 && !p7$2;
     call {:sourceloc} {:sourceloc_num 40} _LOG_WRITE_$$outputImage(p6$1, BV32_MUL(BV32_ADD(v0$1, BV32_MUL(BV32_ADD(BV32_MUL(group_id_y$1, group_size_y), local_id_y$1), v1)), 4bv32), BV32_SDIV($sum.0$1[32:0], $filterWidth)[8:0], $$outputImage[BV32_MUL(BV32_ADD(v0$1, BV32_MUL(BV32_ADD(BV32_MUL(group_id_y$1, group_size_y), local_id_y$1), v1)), 4bv32)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$outputImage(p6$2, BV32_MUL(BV32_ADD(v0$2, BV32_MUL(BV32_ADD(BV32_MUL(group_id_y$2, group_size_y), local_id_y$2), v1)), 4bv32));
@@ -449,10 +449,10 @@ implementation {:source_name "box_filter_horizontal_local"} {:kernel} $box_filte
     $$outputImage[BV32_ADD(BV32_MUL(BV32_ADD(v0$2, BV32_MUL(BV32_ADD(BV32_MUL(group_id_y$2, group_size_y), local_id_y$2), v1)), 4bv32), 3bv32)] := (if p6$2 then BV32_SDIV($sum.0$2[128:96], $filterWidth)[8:0] else $$outputImage[BV32_ADD(BV32_MUL(BV32_ADD(v0$2, BV32_MUL(BV32_ADD(BV32_MUL(group_id_y$2, group_size_y), local_id_y$2), v1)), 4bv32), 3bv32)]);
     return;
 
-  $for.cond.backedge:
+  $6.backedge:
     assume {:backedge} p7$1 || p7$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $6;
 }
 
 

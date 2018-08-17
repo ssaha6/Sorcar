@@ -82,7 +82,7 @@ function FADD32(bv32, bv32) : bv32;
 
 function FDIV32(bv32, bv32) : bv32;
 
-function FLT32(bv32, bv32) : bool;
+function FMAX32(bv32, bv32) : bv32;
 
 function FMUL32(bv32, bv32) : bv32;
 
@@ -157,8 +157,6 @@ implementation {:source_name "gr_base"} {:kernel} $gr_base($TCONV: bv32, $PCONV:
   var v6$2: bv32;
   var v7$1: bv32;
   var v7$2: bv32;
-  var v14$1: bv32;
-  var v14$2: bv32;
   var v8$1: bv32;
   var v8$2: bv32;
   var v9$1: bv32;
@@ -173,6 +171,8 @@ implementation {:source_name "gr_base"} {:kernel} $gr_base($TCONV: bv32, $PCONV:
   var v13$2: bv32;
   var v29$1: bv32;
   var v29$2: bv32;
+  var v14$1: bv32;
+  var v14$2: bv32;
   var v15$1: bv32;
   var v15$2: bv32;
   var v16$1: bv32;
@@ -498,13 +498,13 @@ assert  my_inv (  (  BV32_SLE($k.0, 1bv32) ) ,  (  BV32_SGE($k.0, 1bv32) ) ,  ( 
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$C"} true;
     v47$1 := $$C[BV32_ADD(BV32_MUL(BV32_SUB($k.0, 1bv32), 13824bv32), BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1))];
     v47$2 := $$C[BV32_ADD(BV32_MUL(BV32_SUB($k.0, 1bv32), 13824bv32), BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2))];
-    call {:sourceloc} {:sourceloc_num 52} _LOG_WRITE_$$C(true, BV32_ADD(BV32_MUL(BV32_SUB($k.0, 1bv32), 13824bv32), BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1)), FMUL32((if FLT32(v47$1, 8388608bv32) then 8388608bv32 else v47$1), FMUL32(FMUL32(v1$1, $PCONV), FDIV32(1065353216bv32, FMUL32(FMUL32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(0bv32, v3$1), v5$1), v7$1), v9$1), v11$1), v13$1), v15$1), v17$1), v19$1), v21$1), v23$1), v25$1), v27$1), v29$1), v31$1), v33$1), v35$1), v37$1), v39$1), v41$1), v43$1), v45$1), FMUL32(v0$1, $TCONV)), 1285461554bv32)))), $$C[BV32_ADD(BV32_MUL(BV32_SUB($k.0, 1bv32), 13824bv32), BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1))]);
+    call {:sourceloc} {:sourceloc_num 52} _LOG_WRITE_$$C(true, BV32_ADD(BV32_MUL(BV32_SUB($k.0, 1bv32), 13824bv32), BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1)), FMUL32(FMAX32(v47$1, 8388608bv32), FMUL32(FMUL32(v1$1, $PCONV), FDIV32(1065353216bv32, FMUL32(FMUL32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(0bv32, v3$1), v5$1), v7$1), v9$1), v11$1), v13$1), v15$1), v17$1), v19$1), v21$1), v23$1), v25$1), v27$1), v29$1), v31$1), v33$1), v35$1), v37$1), v39$1), v41$1), v43$1), v45$1), FMUL32(v0$1, $TCONV)), 1285461554bv32)))), $$C[BV32_ADD(BV32_MUL(BV32_SUB($k.0, 1bv32), 13824bv32), BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1))]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$C(true, BV32_ADD(BV32_MUL(BV32_SUB($k.0, 1bv32), 13824bv32), BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2)));
     assume {:do_not_predicate} {:check_id "check_state_23"} {:captureState "check_state_23"} {:sourceloc} {:sourceloc_num 52} true;
-    call {:check_id "check_state_23"} {:sourceloc} {:sourceloc_num 52} _CHECK_WRITE_$$C(true, BV32_ADD(BV32_MUL(BV32_SUB($k.0, 1bv32), 13824bv32), BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2)), FMUL32((if FLT32(v47$2, 8388608bv32) then 8388608bv32 else v47$2), FMUL32(FMUL32(v1$2, $PCONV), FDIV32(1065353216bv32, FMUL32(FMUL32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(0bv32, v3$2), v5$2), v7$2), v9$2), v11$2), v13$2), v15$2), v17$2), v19$2), v21$2), v23$2), v25$2), v27$2), v29$2), v31$2), v33$2), v35$2), v37$2), v39$2), v41$2), v43$2), v45$2), FMUL32(v0$2, $TCONV)), 1285461554bv32)))));
+    call {:check_id "check_state_23"} {:sourceloc} {:sourceloc_num 52} _CHECK_WRITE_$$C(true, BV32_ADD(BV32_MUL(BV32_SUB($k.0, 1bv32), 13824bv32), BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2)), FMUL32(FMAX32(v47$2, 8388608bv32), FMUL32(FMUL32(v1$2, $PCONV), FDIV32(1065353216bv32, FMUL32(FMUL32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(0bv32, v3$2), v5$2), v7$2), v9$2), v11$2), v13$2), v15$2), v17$2), v19$2), v21$2), v23$2), v25$2), v27$2), v29$2), v31$2), v33$2), v35$2), v37$2), v39$2), v41$2), v43$2), v45$2), FMUL32(v0$2, $TCONV)), 1285461554bv32)))));
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$C"} true;
-    $$C[BV32_ADD(BV32_MUL(BV32_SUB($k.0, 1bv32), 13824bv32), BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1))] := FMUL32((if FLT32(v47$1, 8388608bv32) then 8388608bv32 else v47$1), FMUL32(FMUL32(v1$1, $PCONV), FDIV32(1065353216bv32, FMUL32(FMUL32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(0bv32, v3$1), v5$1), v7$1), v9$1), v11$1), v13$1), v15$1), v17$1), v19$1), v21$1), v23$1), v25$1), v27$1), v29$1), v31$1), v33$1), v35$1), v37$1), v39$1), v41$1), v43$1), v45$1), FMUL32(v0$1, $TCONV)), 1285461554bv32))));
-    $$C[BV32_ADD(BV32_MUL(BV32_SUB($k.0, 1bv32), 13824bv32), BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2))] := FMUL32((if FLT32(v47$2, 8388608bv32) then 8388608bv32 else v47$2), FMUL32(FMUL32(v1$2, $PCONV), FDIV32(1065353216bv32, FMUL32(FMUL32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(0bv32, v3$2), v5$2), v7$2), v9$2), v11$2), v13$2), v15$2), v17$2), v19$2), v21$2), v23$2), v25$2), v27$2), v29$2), v31$2), v33$2), v35$2), v37$2), v39$2), v41$2), v43$2), v45$2), FMUL32(v0$2, $TCONV)), 1285461554bv32))));
+    $$C[BV32_ADD(BV32_MUL(BV32_SUB($k.0, 1bv32), 13824bv32), BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1))] := FMUL32(FMAX32(v47$1, 8388608bv32), FMUL32(FMUL32(v1$1, $PCONV), FDIV32(1065353216bv32, FMUL32(FMUL32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(0bv32, v3$1), v5$1), v7$1), v9$1), v11$1), v13$1), v15$1), v17$1), v19$1), v21$1), v23$1), v25$1), v27$1), v29$1), v31$1), v33$1), v35$1), v37$1), v39$1), v41$1), v43$1), v45$1), FMUL32(v0$1, $TCONV)), 1285461554bv32))));
+    $$C[BV32_ADD(BV32_MUL(BV32_SUB($k.0, 1bv32), 13824bv32), BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2))] := FMUL32(FMAX32(v47$2, 8388608bv32), FMUL32(FMUL32(v1$2, $PCONV), FDIV32(1065353216bv32, FMUL32(FMUL32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(FADD32(0bv32, v3$2), v5$2), v7$2), v9$2), v11$2), v13$2), v15$2), v17$2), v19$2), v21$2), v23$2), v25$2), v27$2), v29$2), v31$2), v33$2), v35$2), v37$2), v39$2), v41$2), v43$2), v45$2), FMUL32(v0$2, $TCONV)), 1285461554bv32))));
     $k.0 := BV32_ADD($k.0, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
     goto $1;

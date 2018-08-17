@@ -102,15 +102,15 @@ implementation {:source_name "writeGlobalMemoryCoalesced"} {:kernel} $writeGloba
   var v1: bool;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2);
     $j.0, $s.0$1 := 0bv32, v0$1;
     $s.0$2 := v0$2;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "loopBound"} {:thread 1} _b4 ==> BV32_UGE($j.0, 0bv32);
     assert {:tag "loopBound"} {:thread 1} _b3 ==> BV32_ULE($j.0, 0bv32);
@@ -242,7 +242,7 @@ implementation {:source_name "writeGlobalMemoryCoalesced"} {:kernel} $writeGloba
     $j.0, $s.0$1 := BV32_ADD($j.0, 1bv32), BV32_AND(BV32_ADD($s.0$1, 163840bv32), BV32_SUB($size, 1bv32));
     $s.0$2 := BV32_AND(BV32_ADD($s.0$2, 163840bv32), BV32_SUB($size, 1bv32));
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

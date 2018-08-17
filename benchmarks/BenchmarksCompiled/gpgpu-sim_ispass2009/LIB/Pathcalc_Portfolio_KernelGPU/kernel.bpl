@@ -224,244 +224,244 @@ implementation {:source_name "Pathcalc_Portfolio_KernelGPU"} {:kernel} $_Z28Path
   var $m.i.0$2: bv32;
   var $m.i.1$1: bv32;
   var $m.i.1$2: bv32;
-  var $n.i.19.0$1: bv32;
-  var $n.i.19.0$2: bv32;
-  var $v.i.20.0$1: bv32;
-  var $v.i.20.0$2: bv32;
-  var $v.i.20.1$1: bv32;
-  var $v.i.20.1$2: bv32;
+  var $n.i1.0$1: bv32;
+  var $n.i1.0$2: bv32;
+  var $v.i2.0$1: bv32;
+  var $v.i2.0$2: bv32;
+  var $v.i2.1$1: bv32;
+  var $v.i2.1$2: bv32;
   var $m.i.2$1: bv32;
   var $m.i.2$2: bv32;
   var $b.i.1$1: bv32;
   var $b.i.1$2: bv32;
-  var $n.i.19.1$1: bv32;
-  var $n.i.19.1$2: bv32;
-  var $n.i.19.2$1: bv32;
-  var $n.i.19.2$2: bv32;
-  var $n.i.19.3$1: bv32;
-  var $n.i.19.3$2: bv32;
-  var $n.i.45.0$1: bv32;
-  var $n.i.45.0$2: bv32;
+  var $n.i1.1$1: bv32;
+  var $n.i1.1$2: bv32;
+  var $n.i1.2$1: bv32;
+  var $n.i1.2$2: bv32;
+  var $n.i1.3$1: bv32;
+  var $n.i1.3$2: bv32;
+  var $n.i4.0$1: bv32;
+  var $n.i4.0$2: bv32;
   var $v1.i.0$1: bv32;
   var $v1.i.0$2: bv32;
-  var $i.i.44.0$1: bv32;
-  var $i.i.44.0$2: bv32;
-  var v33$1: bv32;
-  var v33$2: bv32;
-  var v34$1: bv32;
-  var v34$2: bv32;
-  var v36$1: bv32;
-  var v36$2: bv32;
-  var v38$1: bv32;
-  var v38$2: bv32;
-  var v40$1: bv32;
-  var v40$2: bv32;
-  var v3$1: bv32;
-  var v3$2: bv32;
+  var $i.i3.0$1: bv32;
+  var $i.i3.0$2: bv32;
+  var v0$1: bool;
+  var v0$2: bool;
   var v1$1: bv32;
   var v1$2: bv32;
+  var v2$1: bool;
+  var v2$2: bool;
+  var v3$1: bv32;
+  var v3$2: bv32;
+  var v4$1: bool;
+  var v4$2: bool;
   var v5$1: bv32;
   var v5$2: bv32;
+  var v6$1: bv32;
+  var v6$2: bv32;
+  var v7$1: bool;
+  var v7$2: bool;
   var v8$1: bv32;
   var v8$2: bv32;
   var v9$1: bv32;
   var v9$2: bv32;
+  var v10$1: bv32;
+  var v10$2: bv32;
+  var v11$1: bool;
+  var v11$2: bool;
   var v12$1: bv32;
   var v12$2: bv32;
   var v13$1: bv32;
   var v13$2: bv32;
-  var v6$1: bv32;
-  var v6$2: bv32;
-  var v16$1: bv32;
-  var v16$2: bv32;
-  var v10$1: bv32;
-  var v10$2: bv32;
+  var v14$1: bv32;
+  var v14$2: bv32;
   var v15$1: bv32;
   var v15$2: bv32;
-  var v24$1: bv32;
-  var v24$2: bv32;
-  var v21$1: bv32;
-  var v21$2: bv32;
-  var v25$1: bv32;
-  var v25$2: bv32;
-  var v18$1: bv32;
-  var v18$2: bv32;
+  var v16$1: bv32;
+  var v16$2: bv32;
   var v17$1: bv32;
   var v17$2: bv32;
-  var v27$1: bv32;
-  var v27$2: bv32;
-  var v22$1: bv32;
-  var v22$2: bv32;
+  var v18$1: bv32;
+  var v18$2: bv32;
+  var v19$1: bv32;
+  var v19$2: bv32;
   var v20$1: bv32;
   var v20$2: bv32;
+  var v21$1: bv32;
+  var v21$2: bv32;
+  var v22$1: bv32;
+  var v22$2: bv32;
   var v23$1: bv32;
   var v23$2: bv32;
-  var v30$1: bv32;
-  var v30$2: bv32;
-  var v31$1: bv32;
-  var v31$2: bv32;
+  var v24$1: bv32;
+  var v24$2: bv32;
+  var v25$1: bv32;
+  var v25$2: bv32;
+  var v26$1: bool;
+  var v26$2: bool;
+  var v27$1: bv32;
+  var v27$2: bv32;
   var v28$1: bv32;
   var v28$2: bv32;
   var v29$1: bv32;
   var v29$2: bv32;
-  var v2$1: bool;
-  var v2$2: bool;
-  var v0$1: bool;
-  var v0$2: bool;
-  var v4$1: bool;
-  var v4$2: bool;
-  var v11$1: bool;
-  var v11$2: bool;
-  var v7$1: bool;
-  var v7$2: bool;
-  var v14$1: bv32;
-  var v14$2: bv32;
-  var v19$1: bv32;
-  var v19$2: bv32;
-  var v37$1: bool;
-  var v37$2: bool;
-  var v39$1: bv32;
-  var v39$2: bv32;
-  var v26$1: bool;
-  var v26$2: bool;
-  var v35$1: bool;
-  var v35$2: bool;
+  var v30$1: bv32;
+  var v30$2: bv32;
+  var v31$1: bv32;
+  var v31$2: bv32;
   var v32$1: bv32;
   var v32$2: bv32;
-  var v102$1: bv32;
-  var v102$2: bv32;
-  var v107$1: bv32;
-  var v107$2: bv32;
-  var v105$1: bv32;
-  var v105$2: bv32;
-  var v103$1: bv32;
-  var v103$2: bv32;
-  var v101$1: bv32;
-  var v101$2: bv32;
-  var v100$1: bv32;
-  var v100$2: bv32;
-  var v104$1: bv32;
-  var v104$2: bv32;
-  var v106$1: bv32;
-  var v106$2: bv32;
-  var v48$1: bv32;
-  var v48$2: bv32;
-  var v54$1: bv32;
-  var v54$2: bv32;
-  var v45$1: bv32;
-  var v45$2: bv32;
-  var v47$1: bv32;
-  var v47$2: bv32;
-  var v49$1: bv32;
-  var v49$2: bv32;
-  var v42$1: bv32;
-  var v42$2: bv32;
+  var v33$1: bv32;
+  var v33$2: bv32;
+  var v34$1: bv32;
+  var v34$2: bv32;
+  var v35$1: bool;
+  var v35$2: bool;
+  var v36$1: bv32;
+  var v36$2: bv32;
+  var v37$1: bool;
+  var v37$2: bool;
+  var v38$1: bv32;
+  var v38$2: bv32;
+  var v39$1: bv32;
+  var v39$2: bv32;
+  var v40$1: bv32;
+  var v40$2: bv32;
   var v41$1: bv32;
   var v41$2: bv32;
+  var v42$1: bv32;
+  var v42$2: bv32;
+  var v43$1: bv32;
+  var v43$2: bv32;
+  var v44$1: bool;
+  var v44$2: bool;
+  var v45$1: bv32;
+  var v45$2: bv32;
   var v46$1: bv32;
   var v46$2: bv32;
+  var v47$1: bv32;
+  var v47$2: bv32;
+  var v48$1: bv32;
+  var v48$2: bv32;
+  var v49$1: bv32;
+  var v49$2: bv32;
+  var v50$1: bool;
+  var v50$2: bool;
   var v51$1: bv32;
   var v51$2: bv32;
+  var v52$1: bv32;
+  var v52$2: bv32;
   var v53$1: bv32;
   var v53$2: bv32;
+  var v54$1: bv32;
+  var v54$2: bv32;
   var v55$1: bv32;
   var v55$2: bv32;
-  var v61$1: bv32;
-  var v61$2: bv32;
   var v56$1: bv32;
   var v56$2: bv32;
-  var v65$1: bv32;
-  var v65$2: bv32;
-  var v68$1: bv32;
-  var v68$2: bv32;
-  var v67$1: bv32;
-  var v67$2: bv32;
-  var v69$1: bv32;
-  var v69$2: bv32;
-  var v71$1: bv32;
-  var v71$2: bv32;
-  var v59$1: bv32;
-  var v59$2: bv32;
-  var v63$1: bv32;
-  var v63$2: bv32;
-  var v58$1: bv32;
-  var v58$2: bv32;
-  var v60$1: bv32;
-  var v60$2: bv32;
   var v57$1: bv32;
   var v57$2: bv32;
+  var v58$1: bv32;
+  var v58$2: bv32;
+  var v59$1: bv32;
+  var v59$2: bv32;
+  var v60$1: bv32;
+  var v60$2: bv32;
+  var v61$1: bv32;
+  var v61$2: bv32;
+  var v62$1: bool;
+  var v62$2: bool;
+  var v63$1: bv32;
+  var v63$2: bv32;
+  var v64$1: bv32;
+  var v64$2: bv32;
+  var v65$1: bv32;
+  var v65$2: bv32;
   var v66$1: bv32;
   var v66$2: bv32;
-  var v82$1: bv32;
-  var v82$2: bv32;
+  var v67$1: bv32;
+  var v67$2: bv32;
+  var v68$1: bv32;
+  var v68$2: bv32;
+  var v69$1: bv32;
+  var v69$2: bv32;
+  var v70$1: bv32;
+  var v70$2: bv32;
+  var v71$1: bv32;
+  var v71$2: bv32;
   var v72$1: bv32;
   var v72$2: bv32;
-  var v83$1: bv32;
-  var v83$2: bv32;
-  var v75$1: bv32;
-  var v75$2: bv32;
-  var v77$1: bv32;
-  var v77$2: bv32;
+  var v73$1: bool;
+  var v73$2: bool;
   var v74$1: bv32;
   var v74$2: bv32;
+  var v75$1: bv32;
+  var v75$2: bv32;
+  var v76$1: bv32;
+  var v76$2: bv32;
+  var v77$1: bv32;
+  var v77$2: bv32;
+  var v78$1: bool;
+  var v78$2: bool;
   var v79$1: bv32;
   var v79$2: bv32;
   var v80$1: bv32;
   var v80$2: bv32;
   var v81$1: bv32;
   var v81$2: bv32;
-  var v92$1: bv32;
-  var v92$2: bv32;
-  var v93$1: bv32;
-  var v93$2: bv32;
-  var v90$1: bv32;
-  var v90$2: bv32;
+  var v82$1: bv32;
+  var v82$2: bv32;
+  var v83$1: bv32;
+  var v83$2: bv32;
+  var v84$1: bool;
+  var v84$2: bool;
   var v85$1: bv32;
   var v85$2: bv32;
   var v86$1: bv32;
   var v86$2: bv32;
+  var v87$1: bool;
+  var v87$2: bool;
   var v88$1: bv32;
   var v88$2: bv32;
+  var v89$1: bool;
+  var v89$2: bool;
+  var v90$1: bv32;
+  var v90$2: bv32;
   var v91$1: bv32;
   var v91$2: bv32;
+  var v92$1: bv32;
+  var v92$2: bv32;
+  var v93$1: bv32;
+  var v93$2: bv32;
+  var v94$1: bv32;
+  var v94$2: bv32;
+  var v95$1: bv32;
+  var v95$2: bv32;
   var v96$1: bv32;
   var v96$2: bv32;
   var v97$1: bv32;
   var v97$2: bv32;
-  var v99$1: bv32;
-  var v99$2: bv32;
   var v98$1: bv32;
   var v98$2: bv32;
-  var v95$1: bv32;
-  var v95$2: bv32;
-  var v64$1: bv32;
-  var v64$2: bv32;
-  var v62$1: bool;
-  var v62$2: bool;
-  var v70$1: bv32;
-  var v70$2: bv32;
-  var v73$1: bool;
-  var v73$2: bool;
-  var v43$1: bv32;
-  var v43$2: bv32;
-  var v50$1: bool;
-  var v50$2: bool;
-  var v44$1: bool;
-  var v44$2: bool;
-  var v52$1: bv32;
-  var v52$2: bv32;
-  var v78$1: bool;
-  var v78$2: bool;
-  var v76$1: bv32;
-  var v76$2: bv32;
-  var v84$1: bool;
-  var v84$2: bool;
-  var v89$1: bool;
-  var v89$2: bool;
-  var v87$1: bool;
-  var v87$2: bool;
-  var v94$1: bv32;
-  var v94$2: bv32;
+  var v99$1: bv32;
+  var v99$2: bv32;
+  var v100$1: bv32;
+  var v100$2: bv32;
+  var v101$1: bv32;
+  var v101$2: bv32;
+  var v102$1: bv32;
+  var v102$2: bv32;
+  var v103$1: bv32;
+  var v103$2: bv32;
+  var v104$1: bv32;
+  var v104$2: bv32;
+  var v105$1: bv32;
+  var v105$2: bv32;
+  var v106$1: bv32;
+  var v106$2: bv32;
+  var v107$1: bv32;
+  var v107$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -530,7 +530,7 @@ implementation {:source_name "Pathcalc_Portfolio_KernelGPU"} {:kernel} $_Z28Path
   var p32$2: bool;
 
 
-  $entry:
+  $0:
     $path.0$1 := BV32_ADD(BV32_MUL(group_size_x, group_id_x$1), local_id_x$1);
     $path.0$2 := BV32_ADD(BV32_MUL(group_size_x, group_id_x$2), local_id_x$2);
     p0$1 := false;
@@ -538,9 +538,9 @@ implementation {:source_name "Pathcalc_Portfolio_KernelGPU"} {:kernel} $_Z28Path
     p0$1 := true;
     p0$2 := true;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b8 ==> _WRITE_HAS_OCCURRED_$$d_Lb ==> BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), BV32_ADD(BV32_MUL(group_size_x, group_id_x$1), local_id_x$1));
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b7 ==> _WRITE_HAS_OCCURRED_$$d_v ==> BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(group_size_x, num_groups_x), 1bv32), BV32_ADD(BV32_MUL(group_size_x, group_id_x$1), local_id_x$1));
@@ -596,9 +596,9 @@ implementation {:source_name "Pathcalc_Portfolio_KernelGPU"} {:kernel} $_Z28Path
     p2$1 := (if p1$1 then true else p2$1);
     p2$2 := (if p1$2 then true else p2$2);
     assume {:captureState "loop_entry_state_13_0"} true;
-    goto $for.cond.2;
+    goto $3;
 
-  $for.cond.2:
+  $3:
     assume {:captureState "loop_head_state_13"} true;
     assume {:invGenSkippedLoop} true;
     assume {:predicate "p2"} {:dominator_predicate "p1"} true;
@@ -623,18 +623,18 @@ implementation {:source_name "Pathcalc_Portfolio_KernelGPU"} {:kernel} $_Z28Path
     $i.0$2 := (if p3$2 then BV32_ADD($i.0$2, 1bv32) else $i.0$2);
     p2$1 := (if p3$1 then true else p2$1);
     p2$2 := (if p3$2 then true else p2$2);
-    goto $for.cond.2.backedge, $for.cond.2.tail;
+    goto $3.backedge, $3.tail;
 
-  $for.cond.2.tail:
+  $3.tail:
     assume !p2$1 && !p2$2;
     $i.i.0$1 := (if p1$1 then 0bv32 else $i.i.0$1);
     $i.i.0$2 := (if p1$2 then 0bv32 else $i.i.0$2);
     p4$1 := (if p1$1 then true else p4$1);
     p4$2 := (if p1$2 then true else p4$2);
     assume {:captureState "loop_entry_state_12_0"} true;
-    goto $for.cond.i;
+    goto $7;
 
-  $for.cond.i:
+  $7:
     assume {:captureState "loop_head_state_12"} true;
     assume {:invGenSkippedLoop} true;
     assume {:predicate "p4"} {:dominator_predicate "p1"} true;
@@ -659,18 +659,18 @@ implementation {:source_name "Pathcalc_Portfolio_KernelGPU"} {:kernel} $_Z28Path
     $i.i.0$2 := (if p5$2 then BV32_ADD($i.i.0$2, 1bv32) else $i.i.0$2);
     p4$1 := (if p5$1 then true else p4$1);
     p4$2 := (if p5$2 then true else p4$2);
-    goto $for.cond.i.backedge, $for.cond.i.tail;
+    goto $7.backedge, $7.tail;
 
-  $for.cond.i.tail:
+  $7.tail:
     assume !p4$1 && !p4$2;
     $n.i.0$1 := (if p1$1 then 0bv32 else $n.i.0$1);
     $n.i.0$2 := (if p1$2 then 0bv32 else $n.i.0$2);
     p6$1 := (if p1$1 then true else p6$1);
     p6$2 := (if p1$2 then true else p6$2);
     assume {:captureState "loop_entry_state_10_0"} true;
-    goto $for.cond.2.i;
+    goto $10;
 
-  $for.cond.2.i:
+  $10:
     assume {:captureState "loop_head_state_10"} true;
     assume {:invGenSkippedLoop} true;
     assume {:predicate "p6"} {:dominator_predicate "p1"} true;
@@ -698,9 +698,9 @@ implementation {:source_name "Pathcalc_Portfolio_KernelGPU"} {:kernel} $_Z28Path
     p8$1 := (if p7$1 then true else p8$1);
     p8$2 := (if p7$2 then true else p8$2);
     assume {:captureState "loop_entry_state_11_0"} true;
-    goto $for.cond.8.i;
+    goto $12;
 
-  $for.cond.8.i:
+  $12:
     assume {:captureState "loop_head_state_11"} true;
     assume {:invGenSkippedLoop} true;
     assume {:predicate "p8"} {:dominator_predicate "p7"} true;
@@ -751,26 +751,26 @@ implementation {:source_name "Pathcalc_Portfolio_KernelGPU"} {:kernel} $_Z28Path
     $i.i.1$2, $v.i.0$2 := (if p9$2 then BV32_ADD($i.i.1$2, 1bv32) else $i.i.1$2), (if p9$2 then v19$2 else $v.i.0$2);
     p8$1 := (if p9$1 then true else p8$1);
     p8$2 := (if p9$2 then true else p8$2);
-    goto $for.cond.8.i.backedge, $for.cond.8.i.tail;
+    goto $12.backedge, $12.tail;
 
-  $for.cond.8.i.tail:
+  $12.tail:
     assume !p8$1 && !p8$2;
     $n.i.0$1 := (if p7$1 then BV32_ADD($n.i.0$1, 1bv32) else $n.i.0$1);
     $n.i.0$2 := (if p7$2 then BV32_ADD($n.i.0$2, 1bv32) else $n.i.0$2);
     p6$1 := (if p7$1 then true else p6$1);
     p6$2 := (if p7$2 then true else p6$2);
-    goto $for.cond.2.i.backedge, $for.cond.2.i.tail;
+    goto $10.backedge, $10.tail;
 
-  $for.cond.2.i.tail:
+  $10.tail:
     assume !p6$1 && !p6$2;
     $s.i.0$1, $b.i.0$1, $m.i.0$1 := (if p1$1 then 0bv32 else $s.i.0$1), (if p1$1 then 1065353216bv32 else $b.i.0$1), (if p1$1 then 0bv32 else $m.i.0$1);
     $s.i.0$2, $b.i.0$2, $m.i.0$2 := (if p1$2 then 0bv32 else $s.i.0$2), (if p1$2 then 1065353216bv32 else $b.i.0$2), (if p1$2 then 0bv32 else $m.i.0$2);
     p10$1 := (if p1$1 then true else p10$1);
     p10$2 := (if p1$2 then true else p10$2);
     assume {:captureState "loop_entry_state_9_0"} true;
-    goto $for.cond.i.23;
+    goto $15;
 
-  $for.cond.i.23:
+  $15:
     assume {:captureState "loop_head_state_9"} true;
     assume {:invGenSkippedLoop} true;
     assume {:predicate "p10"} {:dominator_predicate "p1"} true;
@@ -809,18 +809,18 @@ implementation {:source_name "Pathcalc_Portfolio_KernelGPU"} {:kernel} $_Z28Path
     $s.i.0$2, $b.i.0$2, $m.i.0$2 := (if p11$2 then v32$2 else $s.i.0$2), (if p11$2 then v30$2 else $b.i.0$2), (if p11$2 then BV32_ADD($m.i.0$2, 1bv32) else $m.i.0$2);
     p10$1 := (if p11$1 then true else p10$1);
     p10$2 := (if p11$2 then true else p10$2);
-    goto $for.cond.i.23.backedge, $for.cond.i.23.tail;
+    goto $15.backedge, $15.tail;
 
-  $for.cond.i.23.tail:
+  $15.tail:
     assume !p10$1 && !p10$2;
     $m.i.1$1 := (if p1$1 then 0bv32 else $m.i.1$1);
     $m.i.1$2 := (if p1$2 then 0bv32 else $m.i.1$2);
     p12$1 := (if p1$1 then true else p12$1);
     p12$2 := (if p1$2 then true else p12$2);
     assume {:captureState "loop_entry_state_8_0"} true;
-    goto $for.cond.7.i;
+    goto $18;
 
-  $for.cond.7.i:
+  $18:
     assume {:captureState "loop_head_state_8"} true;
     assume {:invGenSkippedLoop} true;
     assume {:predicate "p12"} {:dominator_predicate "p1"} true;
@@ -847,18 +847,18 @@ implementation {:source_name "Pathcalc_Portfolio_KernelGPU"} {:kernel} $_Z28Path
     $m.i.1$2 := (if p13$2 then BV32_ADD($m.i.1$2, 1bv32) else $m.i.1$2);
     p12$1 := (if p13$1 then true else p12$1);
     p12$2 := (if p13$2 then true else p12$2);
-    goto $for.cond.7.i.backedge, $for.cond.7.i.tail;
+    goto $18.backedge, $18.tail;
 
-  $for.cond.7.i.tail:
+  $18.tail:
     assume !p12$1 && !p12$2;
-    $n.i.19.0$1, $v.i.20.0$1 := (if p1$1 then 0bv32 else $n.i.19.0$1), (if p1$1 then 0bv32 else $v.i.20.0$1);
-    $n.i.19.0$2, $v.i.20.0$2 := (if p1$2 then 0bv32 else $n.i.19.0$2), (if p1$2 then 0bv32 else $v.i.20.0$2);
+    $n.i1.0$1, $v.i2.0$1 := (if p1$1 then 0bv32 else $n.i1.0$1), (if p1$1 then 0bv32 else $v.i2.0$1);
+    $n.i1.0$2, $v.i2.0$2 := (if p1$2 then 0bv32 else $n.i1.0$2), (if p1$2 then 0bv32 else $v.i2.0$2);
     p14$1 := (if p1$1 then true else p14$1);
     p14$2 := (if p1$2 then true else p14$2);
     assume {:captureState "loop_entry_state_7_0"} true;
-    goto $for.cond.16.i;
+    goto $21;
 
-  $for.cond.16.i:
+  $21:
     assume {:captureState "loop_head_state_7"} true;
     assume {:invGenSkippedLoop} true;
     assume {:predicate "p14"} {:dominator_predicate "p1"} true;
@@ -867,8 +867,8 @@ implementation {:source_name "Pathcalc_Portfolio_KernelGPU"} {:kernel} $_Z28Path
     assert {:block_sourceloc} {:sourceloc_num 57} p14$1 ==> true;
     v36$1 := (if p14$1 then $$Nopt$1[0bv32] else v36$1);
     v36$2 := (if p14$2 then $$Nopt$2[0bv32] else v36$2);
-    v37$1 := (if p14$1 then BV32_SLT($n.i.19.0$1, v36$1) else v37$1);
-    v37$2 := (if p14$2 then BV32_SLT($n.i.19.0$2, v36$2) else v37$2);
+    v37$1 := (if p14$1 then BV32_SLT($n.i1.0$1, v36$1) else v37$1);
+    v37$2 := (if p14$2 then BV32_SLT($n.i1.0$2, v36$2) else v37$2);
     p15$1 := false;
     p15$2 := false;
     p16$1 := false;
@@ -879,14 +879,14 @@ implementation {:source_name "Pathcalc_Portfolio_KernelGPU"} {:kernel} $_Z28Path
     p15$2 := (if p14$2 && v37$2 then v37$2 else p15$2);
     p14$1 := (if p14$1 && !v37$1 then v37$1 else p14$1);
     p14$2 := (if p14$2 && !v37$2 then v37$2 else p14$2);
-    v38$1 := (if p15$1 then $$maturities$1[$n.i.19.0$1] else v38$1);
-    v38$2 := (if p15$2 then $$maturities$2[$n.i.19.0$2] else v38$2);
+    v38$1 := (if p15$1 then $$maturities$1[$n.i1.0$1] else v38$1);
+    v38$2 := (if p15$2 then $$maturities$2[$n.i1.0$2] else v38$2);
     v39$1 := (if p15$1 then BV32_SUB(v38$1, 1bv32) else v39$1);
     v39$2 := (if p15$2 then BV32_SUB(v38$2, 1bv32) else v39$2);
     v40$1 := (if p15$1 then $$B.i$1[v39$1] else v40$1);
     v40$2 := (if p15$2 then $$B.i$2[v39$2] else v40$2);
-    v41$1 := (if p15$1 then $$swaprates$1[$n.i.19.0$1] else v41$1);
-    v41$2 := (if p15$2 then $$swaprates$2[$n.i.19.0$2] else v41$2);
+    v41$1 := (if p15$1 then $$swaprates$1[$n.i1.0$1] else v41$1);
+    v41$2 := (if p15$2 then $$swaprates$2[$n.i1.0$2] else v41$2);
     v42$1 := (if p15$1 then $$S.i$1[v39$1] else v42$1);
     v42$2 := (if p15$2 then $$S.i$2[v39$2] else v42$2);
     v43$1 := (if p15$1 then FP64_CONV32(FSUB64(FP32_CONV64(FADD32(v40$1, FMUL32(v41$1, v42$1))), 4607182418800017408bv64)) else v43$1);
@@ -897,10 +897,10 @@ implementation {:source_name "Pathcalc_Portfolio_KernelGPU"} {:kernel} $_Z28Path
     p17$2 := (if p15$2 && v44$2 then v44$2 else p17$2);
     p16$1 := (if p15$1 && !v44$1 then !v44$1 else p16$1);
     p16$2 := (if p15$2 && !v44$2 then !v44$2 else p16$2);
-    $v.i.20.1$1 := (if p16$1 then $v.i.20.0$1 else $v.i.20.1$1);
-    $v.i.20.1$2 := (if p16$2 then $v.i.20.0$2 else $v.i.20.1$2);
-    v45$1 := (if p17$1 then $$swaprates$1[$n.i.19.0$1] else v45$1);
-    v45$2 := (if p17$2 then $$swaprates$2[$n.i.19.0$2] else v45$2);
+    $v.i2.1$1 := (if p16$1 then $v.i2.0$1 else $v.i2.1$1);
+    $v.i2.1$2 := (if p16$2 then $v.i2.0$2 else $v.i2.1$2);
+    v45$1 := (if p17$1 then $$swaprates$1[$n.i1.0$1] else v45$1);
+    v45$2 := (if p17$2 then $$swaprates$2[$n.i1.0$2] else v45$2);
     v46$1 := (if p17$1 then $$S_b.i$1[v39$1] else v46$1);
     v46$2 := (if p17$2 then $$S_b.i$2[v39$2] else v46$2);
     $$S_b.i$1[v39$1] := (if p17$1 then FADD32(v46$1, FMUL32(3267887104bv32, v45$1)) else $$S_b.i$1[v39$1]);
@@ -909,15 +909,15 @@ implementation {:source_name "Pathcalc_Portfolio_KernelGPU"} {:kernel} $_Z28Path
     v47$2 := (if p17$2 then $$B_b.i$2[v39$2] else v47$2);
     $$B_b.i$1[v39$1] := (if p17$1 then FADD32(v47$1, 3267887104bv32) else $$B_b.i$1[v39$1]);
     $$B_b.i$2[v39$2] := (if p17$2 then FADD32(v47$2, 3267887104bv32) else $$B_b.i$2[v39$2]);
-    $v.i.20.1$1 := (if p17$1 then FADD32($v.i.20.0$1, FMUL32(3267887104bv32, v43$1)) else $v.i.20.1$1);
-    $v.i.20.1$2 := (if p17$2 then FADD32($v.i.20.0$2, FMUL32(3267887104bv32, v43$2)) else $v.i.20.1$2);
-    $n.i.19.0$1, $v.i.20.0$1 := (if p15$1 then BV32_ADD($n.i.19.0$1, 1bv32) else $n.i.19.0$1), (if p15$1 then $v.i.20.1$1 else $v.i.20.0$1);
-    $n.i.19.0$2, $v.i.20.0$2 := (if p15$2 then BV32_ADD($n.i.19.0$2, 1bv32) else $n.i.19.0$2), (if p15$2 then $v.i.20.1$2 else $v.i.20.0$2);
+    $v.i2.1$1 := (if p17$1 then FADD32($v.i2.0$1, FMUL32(3267887104bv32, v43$1)) else $v.i2.1$1);
+    $v.i2.1$2 := (if p17$2 then FADD32($v.i2.0$2, FMUL32(3267887104bv32, v43$2)) else $v.i2.1$2);
+    $n.i1.0$1, $v.i2.0$1 := (if p15$1 then BV32_ADD($n.i1.0$1, 1bv32) else $n.i1.0$1), (if p15$1 then $v.i2.1$1 else $v.i2.0$1);
+    $n.i1.0$2, $v.i2.0$2 := (if p15$2 then BV32_ADD($n.i1.0$2, 1bv32) else $n.i1.0$2), (if p15$2 then $v.i2.1$2 else $v.i2.0$2);
     p14$1 := (if p15$1 then true else p14$1);
     p14$2 := (if p15$2 then true else p14$2);
-    goto $for.cond.16.i.backedge, $for.cond.16.i.tail;
+    goto $21.backedge, $21.tail;
 
-  $for.cond.16.i.tail:
+  $21.tail:
     assume !p14$1 && !p14$2;
     v48$1 := (if p1$1 then $$N$1[0bv32] else v48$1);
     v48$2 := (if p1$2 then $$N$2[0bv32] else v48$2);
@@ -928,9 +928,9 @@ implementation {:source_name "Pathcalc_Portfolio_KernelGPU"} {:kernel} $_Z28Path
     p18$1 := (if p1$1 then true else p18$1);
     p18$2 := (if p1$2 then true else p18$2);
     assume {:captureState "loop_entry_state_6_0"} true;
-    goto $for.cond.43.i;
+    goto $26;
 
-  $for.cond.43.i:
+  $26:
     assume {:captureState "loop_head_state_6"} true;
     assume {:invGenSkippedLoop} true;
     assume {:predicate "p18"} {:dominator_predicate "p1"} true;
@@ -1005,18 +1005,18 @@ implementation {:source_name "Pathcalc_Portfolio_KernelGPU"} {:kernel} $_Z28Path
     $m.i.2$2 := (if p19$2 then BV32_ADD($m.i.2$2, 4294967295bv32) else $m.i.2$2);
     p18$1 := (if p19$1 then true else p18$1);
     p18$2 := (if p19$2 then true else p18$2);
-    goto $for.cond.43.i.backedge, $for.cond.43.i.tail;
+    goto $26.backedge, $26.tail;
 
-  $for.cond.43.i.tail:
+  $26.tail:
     assume !p18$1 && !p18$2;
-    $b.i.1$1, $n.i.19.1$1 := (if p1$1 then 1065353216bv32 else $b.i.1$1), (if p1$1 then 0bv32 else $n.i.19.1$1);
-    $b.i.1$2, $n.i.19.1$2 := (if p1$2 then 1065353216bv32 else $b.i.1$2), (if p1$2 then 0bv32 else $n.i.19.1$2);
+    $b.i.1$1, $n.i1.1$1 := (if p1$1 then 1065353216bv32 else $b.i.1$1), (if p1$1 then 0bv32 else $n.i1.1$1);
+    $b.i.1$2, $n.i1.1$2 := (if p1$2 then 1065353216bv32 else $b.i.1$2), (if p1$2 then 0bv32 else $n.i1.1$2);
     p22$1 := (if p1$1 then true else p22$1);
     p22$2 := (if p1$2 then true else p22$2);
     assume {:captureState "loop_entry_state_5_0"} true;
-    goto $for.cond.82.i;
+    goto $31;
 
-  $for.cond.82.i:
+  $31:
     assume {:captureState "loop_head_state_5"} true;
     assume {:invGenSkippedLoop} true;
     assume {:predicate "p22"} {:dominator_predicate "p1"} true;
@@ -1025,8 +1025,8 @@ implementation {:source_name "Pathcalc_Portfolio_KernelGPU"} {:kernel} $_Z28Path
     assert {:block_sourceloc} {:sourceloc_num 100} p22$1 ==> true;
     v72$1 := (if p22$1 then $$Nmat$1[0bv32] else v72$1);
     v72$2 := (if p22$2 then $$Nmat$2[0bv32] else v72$2);
-    v73$1 := (if p22$1 then BV32_SLT($n.i.19.1$1, v72$1) else v73$1);
-    v73$2 := (if p22$2 then BV32_SLT($n.i.19.1$2, v72$2) else v73$2);
+    v73$1 := (if p22$1 then BV32_SLT($n.i1.1$1, v72$1) else v73$1);
+    v73$2 := (if p22$2 then BV32_SLT($n.i1.1$2, v72$2) else v73$2);
     p23$1 := false;
     p23$2 := false;
     p23$1 := (if p22$1 && v73$1 then v73$1 else p23$1);
@@ -1035,26 +1035,26 @@ implementation {:source_name "Pathcalc_Portfolio_KernelGPU"} {:kernel} $_Z28Path
     p22$2 := (if p22$2 && !v73$2 then v73$2 else p22$2);
     v74$1 := (if p23$1 then $$delta$1[0bv32] else v74$1);
     v74$2 := (if p23$2 then $$delta$2[0bv32] else v74$2);
-    v75$1 := (if p23$1 then $$L$1[$n.i.19.1$1] else v75$1);
-    v75$2 := (if p23$2 then $$L$2[$n.i.19.1$2] else v75$2);
-    $b.i.1$1, $n.i.19.1$1 := (if p23$1 then FP64_CONV32(FDIV64(FP32_CONV64($b.i.1$1), FADD64(4607182418800017408bv64, FP32_CONV64(FMUL32(v74$1, v75$1))))) else $b.i.1$1), (if p23$1 then BV32_ADD($n.i.19.1$1, 1bv32) else $n.i.19.1$1);
-    $b.i.1$2, $n.i.19.1$2 := (if p23$2 then FP64_CONV32(FDIV64(FP32_CONV64($b.i.1$2), FADD64(4607182418800017408bv64, FP32_CONV64(FMUL32(v74$2, v75$2))))) else $b.i.1$2), (if p23$2 then BV32_ADD($n.i.19.1$2, 1bv32) else $n.i.19.1$2);
+    v75$1 := (if p23$1 then $$L$1[$n.i1.1$1] else v75$1);
+    v75$2 := (if p23$2 then $$L$2[$n.i1.1$2] else v75$2);
+    $b.i.1$1, $n.i1.1$1 := (if p23$1 then FP64_CONV32(FDIV64(FP32_CONV64($b.i.1$1), FADD64(4607182418800017408bv64, FP32_CONV64(FMUL32(v74$1, v75$1))))) else $b.i.1$1), (if p23$1 then BV32_ADD($n.i1.1$1, 1bv32) else $n.i1.1$1);
+    $b.i.1$2, $n.i1.1$2 := (if p23$2 then FP64_CONV32(FDIV64(FP32_CONV64($b.i.1$2), FADD64(4607182418800017408bv64, FP32_CONV64(FMUL32(v74$2, v75$2))))) else $b.i.1$2), (if p23$2 then BV32_ADD($n.i1.1$2, 1bv32) else $n.i1.1$2);
     p22$1 := (if p23$1 then true else p22$1);
     p22$2 := (if p23$2 then true else p22$2);
-    goto $for.cond.82.i.backedge, $for.cond.82.i.tail;
+    goto $31.backedge, $31.tail;
 
-  $for.cond.82.i.tail:
+  $31.tail:
     assume !p22$1 && !p22$2;
-    v76$1 := (if p1$1 then FMUL32($b.i.1$1, $v.i.20.0$1) else v76$1);
-    v76$2 := (if p1$2 then FMUL32($b.i.1$2, $v.i.20.0$2) else v76$2);
-    $n.i.19.2$1 := (if p1$1 then 0bv32 else $n.i.19.2$1);
-    $n.i.19.2$2 := (if p1$2 then 0bv32 else $n.i.19.2$2);
+    v76$1 := (if p1$1 then FMUL32($b.i.1$1, $v.i2.0$1) else v76$1);
+    v76$2 := (if p1$2 then FMUL32($b.i.1$2, $v.i2.0$2) else v76$2);
+    $n.i1.2$1 := (if p1$1 then 0bv32 else $n.i1.2$1);
+    $n.i1.2$2 := (if p1$2 then 0bv32 else $n.i1.2$2);
     p24$1 := (if p1$1 then true else p24$1);
     p24$2 := (if p1$2 then true else p24$2);
     assume {:captureState "loop_entry_state_4_0"} true;
-    goto $for.cond.95.i;
+    goto $34;
 
-  $for.cond.95.i:
+  $34:
     assume {:captureState "loop_head_state_4"} true;
     assume {:invGenSkippedLoop} true;
     assume {:predicate "p24"} {:dominator_predicate "p1"} true;
@@ -1063,8 +1063,8 @@ implementation {:source_name "Pathcalc_Portfolio_KernelGPU"} {:kernel} $_Z28Path
     assert {:block_sourceloc} {:sourceloc_num 106} p24$1 ==> true;
     v77$1 := (if p24$1 then $$Nmat$1[0bv32] else v77$1);
     v77$2 := (if p24$2 then $$Nmat$2[0bv32] else v77$2);
-    v78$1 := (if p24$1 then BV32_SLT($n.i.19.2$1, v77$1) else v78$1);
-    v78$2 := (if p24$2 then BV32_SLT($n.i.19.2$2, v77$2) else v78$2);
+    v78$1 := (if p24$1 then BV32_SLT($n.i1.2$1, v77$1) else v78$1);
+    v78$2 := (if p24$2 then BV32_SLT($n.i1.2$2, v77$2) else v78$2);
     p25$1 := false;
     p25$2 := false;
     p25$1 := (if p24$1 && v78$1 then v78$1 else p25$1);
@@ -1075,28 +1075,28 @@ implementation {:source_name "Pathcalc_Portfolio_KernelGPU"} {:kernel} $_Z28Path
     v79$2 := (if p25$2 then $$delta$2[0bv32] else v79$2);
     v80$1 := (if p25$1 then $$delta$1[0bv32] else v80$1);
     v80$2 := (if p25$2 then $$delta$2[0bv32] else v80$2);
-    v81$1 := (if p25$1 then $$L$1[$n.i.19.2$1] else v81$1);
-    v81$2 := (if p25$2 then $$L$2[$n.i.19.2$2] else v81$2);
-    $$L$1[$n.i.19.2$1] := (if p25$1 then FP64_CONV32(FDIV64(FP32_CONV64(FMUL32(FSUB32(2147483648bv32, v76$1), v79$1)), FADD64(4607182418800017408bv64, FP32_CONV64(FMUL32(v80$1, v81$1))))) else $$L$1[$n.i.19.2$1]);
-    $$L$2[$n.i.19.2$2] := (if p25$2 then FP64_CONV32(FDIV64(FP32_CONV64(FMUL32(FSUB32(2147483648bv32, v76$2), v79$2)), FADD64(4607182418800017408bv64, FP32_CONV64(FMUL32(v80$2, v81$2))))) else $$L$2[$n.i.19.2$2]);
-    $n.i.19.2$1 := (if p25$1 then BV32_ADD($n.i.19.2$1, 1bv32) else $n.i.19.2$1);
-    $n.i.19.2$2 := (if p25$2 then BV32_ADD($n.i.19.2$2, 1bv32) else $n.i.19.2$2);
+    v81$1 := (if p25$1 then $$L$1[$n.i1.2$1] else v81$1);
+    v81$2 := (if p25$2 then $$L$2[$n.i1.2$2] else v81$2);
+    $$L$1[$n.i1.2$1] := (if p25$1 then FP64_CONV32(FDIV64(FP32_CONV64(FMUL32(FSUB32(2147483648bv32, v76$1), v79$1)), FADD64(4607182418800017408bv64, FP32_CONV64(FMUL32(v80$1, v81$1))))) else $$L$1[$n.i1.2$1]);
+    $$L$2[$n.i1.2$2] := (if p25$2 then FP64_CONV32(FDIV64(FP32_CONV64(FMUL32(FSUB32(2147483648bv32, v76$2), v79$2)), FADD64(4607182418800017408bv64, FP32_CONV64(FMUL32(v80$2, v81$2))))) else $$L$2[$n.i1.2$2]);
+    $n.i1.2$1 := (if p25$1 then BV32_ADD($n.i1.2$1, 1bv32) else $n.i1.2$1);
+    $n.i1.2$2 := (if p25$2 then BV32_ADD($n.i1.2$2, 1bv32) else $n.i1.2$2);
     p24$1 := (if p25$1 then true else p24$1);
     p24$2 := (if p25$2 then true else p24$2);
-    goto $for.cond.95.i.backedge, $for.cond.95.i.tail;
+    goto $34.backedge, $34.tail;
 
-  $for.cond.95.i.tail:
+  $34.tail:
     assume !p24$1 && !p24$2;
     v82$1 := (if p1$1 then $$Nmat$1[0bv32] else v82$1);
     v82$2 := (if p1$2 then $$Nmat$2[0bv32] else v82$2);
-    $n.i.19.3$1 := (if p1$1 then v82$1 else $n.i.19.3$1);
-    $n.i.19.3$2 := (if p1$2 then v82$2 else $n.i.19.3$2);
+    $n.i1.3$1 := (if p1$1 then v82$1 else $n.i1.3$1);
+    $n.i1.3$2 := (if p1$2 then v82$2 else $n.i1.3$2);
     p26$1 := (if p1$1 then true else p26$1);
     p26$2 := (if p1$2 then true else p26$2);
     assume {:captureState "loop_entry_state_3_0"} true;
-    goto $for.cond.111.i;
+    goto $37;
 
-  $for.cond.111.i:
+  $37:
     assume {:captureState "loop_head_state_3"} true;
     assume {:invGenSkippedLoop} true;
     assume {:predicate "p26"} {:dominator_predicate "p1"} true;
@@ -1105,25 +1105,25 @@ implementation {:source_name "Pathcalc_Portfolio_KernelGPU"} {:kernel} $_Z28Path
     assert {:block_sourceloc} {:sourceloc_num 115} p26$1 ==> true;
     v83$1 := (if p26$1 then $$N$1[0bv32] else v83$1);
     v83$2 := (if p26$2 then $$N$2[0bv32] else v83$2);
-    v84$1 := (if p26$1 then BV32_SLT($n.i.19.3$1, v83$1) else v84$1);
-    v84$2 := (if p26$2 then BV32_SLT($n.i.19.3$2, v83$2) else v84$2);
+    v84$1 := (if p26$1 then BV32_SLT($n.i1.3$1, v83$1) else v84$1);
+    v84$2 := (if p26$2 then BV32_SLT($n.i1.3$2, v83$2) else v84$2);
     p27$1 := false;
     p27$2 := false;
     p27$1 := (if p26$1 && v84$1 then v84$1 else p27$1);
     p27$2 := (if p26$2 && v84$2 then v84$2 else p27$2);
     p26$1 := (if p26$1 && !v84$1 then v84$1 else p26$1);
     p26$2 := (if p26$2 && !v84$2 then v84$2 else p26$2);
-    v85$1 := (if p27$1 then $$L$1[$n.i.19.3$1] else v85$1);
-    v85$2 := (if p27$2 then $$L$2[$n.i.19.3$2] else v85$2);
-    $$L$1[$n.i.19.3$1] := (if p27$1 then FMUL32($b.i.1$1, v85$1) else $$L$1[$n.i.19.3$1]);
-    $$L$2[$n.i.19.3$2] := (if p27$2 then FMUL32($b.i.1$2, v85$2) else $$L$2[$n.i.19.3$2]);
-    $n.i.19.3$1 := (if p27$1 then BV32_ADD($n.i.19.3$1, 1bv32) else $n.i.19.3$1);
-    $n.i.19.3$2 := (if p27$2 then BV32_ADD($n.i.19.3$2, 1bv32) else $n.i.19.3$2);
+    v85$1 := (if p27$1 then $$L$1[$n.i1.3$1] else v85$1);
+    v85$2 := (if p27$2 then $$L$2[$n.i1.3$2] else v85$2);
+    $$L$1[$n.i1.3$1] := (if p27$1 then FMUL32($b.i.1$1, v85$1) else $$L$1[$n.i1.3$1]);
+    $$L$2[$n.i1.3$2] := (if p27$2 then FMUL32($b.i.1$2, v85$2) else $$L$2[$n.i1.3$2]);
+    $n.i1.3$1 := (if p27$1 then BV32_ADD($n.i1.3$1, 1bv32) else $n.i1.3$1);
+    $n.i1.3$2 := (if p27$2 then BV32_ADD($n.i1.3$2, 1bv32) else $n.i1.3$2);
     p26$1 := (if p27$1 then true else p26$1);
     p26$2 := (if p27$2 then true else p26$2);
-    goto $for.cond.111.i.backedge, $for.cond.111.i.tail;
+    goto $37.backedge, $37.tail;
 
-  $for.cond.111.i.tail:
+  $37.tail:
     assume !p26$1 && !p26$2;
     call {:sourceloc} {:sourceloc_num 121} _LOG_WRITE_$$d_v(p1$1, $path.0$1, v76$1, $$d_v[$path.0$1]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$d_v(p1$2, $path.0$2);
@@ -1134,22 +1134,22 @@ implementation {:source_name "Pathcalc_Portfolio_KernelGPU"} {:kernel} $_Z28Path
     $$d_v[$path.0$2] := (if p1$2 then v76$2 else $$d_v[$path.0$2]);
     v86$1 := (if p1$1 then $$Nmat$1[0bv32] else v86$1);
     v86$2 := (if p1$2 then $$Nmat$2[0bv32] else v86$2);
-    $n.i.45.0$1 := (if p1$1 then BV32_SUB(v86$1, 1bv32) else $n.i.45.0$1);
-    $n.i.45.0$2 := (if p1$2 then BV32_SUB(v86$2, 1bv32) else $n.i.45.0$2);
+    $n.i4.0$1 := (if p1$1 then BV32_SUB(v86$1, 1bv32) else $n.i4.0$1);
+    $n.i4.0$2 := (if p1$2 then BV32_SUB(v86$2, 1bv32) else $n.i4.0$2);
     p28$1 := (if p1$1 then true else p28$1);
     p28$2 := (if p1$2 then true else p28$2);
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.i.48;
+    goto $39;
 
-  $for.cond.i.48:
+  $39:
     assume {:captureState "loop_head_state_1"} true;
     assume {:invGenSkippedLoop} true;
     assume {:predicate "p28"} {:dominator_predicate "p1"} true;
     assert p28$1 ==> p0$1;
     assert p28$2 ==> p0$2;
     assert {:block_sourceloc} {:sourceloc_num 123} p28$1 ==> true;
-    v87$1 := (if p28$1 then BV32_SGE($n.i.45.0$1, 0bv32) else v87$1);
-    v87$2 := (if p28$2 then BV32_SGE($n.i.45.0$2, 0bv32) else v87$2);
+    v87$1 := (if p28$1 then BV32_SGE($n.i4.0$1, 0bv32) else v87$1);
+    v87$2 := (if p28$2 then BV32_SGE($n.i4.0$2, 0bv32) else v87$2);
     p29$1 := false;
     p29$2 := false;
     p30$1 := false;
@@ -1160,14 +1160,14 @@ implementation {:source_name "Pathcalc_Portfolio_KernelGPU"} {:kernel} $_Z28Path
     p28$2 := (if p28$2 && !v87$2 then v87$2 else p28$2);
     v88$1 := (if p29$1 then $$N$1[0bv32] else v88$1);
     v88$2 := (if p29$2 then $$N$2[0bv32] else v88$2);
-    $v1.i.0$1, $i.i.44.0$1 := (if p29$1 then 0bv32 else $v1.i.0$1), (if p29$1 then BV32_SUB(v88$1, 1bv32) else $i.i.44.0$1);
-    $v1.i.0$2, $i.i.44.0$2 := (if p29$2 then 0bv32 else $v1.i.0$2), (if p29$2 then BV32_SUB(v88$2, 1bv32) else $i.i.44.0$2);
+    $v1.i.0$1, $i.i3.0$1 := (if p29$1 then 0bv32 else $v1.i.0$1), (if p29$1 then BV32_SUB(v88$1, 1bv32) else $i.i3.0$1);
+    $v1.i.0$2, $i.i3.0$2 := (if p29$2 then 0bv32 else $v1.i.0$2), (if p29$2 then BV32_SUB(v88$2, 1bv32) else $i.i3.0$2);
     p30$1 := (if p29$1 then true else p30$1);
     p30$2 := (if p29$2 then true else p30$2);
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond.2.i.51;
+    goto $41;
 
-  $for.cond.2.i.51:
+  $41:
     assume {:captureState "loop_head_state_2"} true;
     assume {:invGenSkippedLoop} true;
     assume {:predicate "p30"} {:dominator_predicate "p29"} true;
@@ -1176,22 +1176,22 @@ implementation {:source_name "Pathcalc_Portfolio_KernelGPU"} {:kernel} $_Z28Path
     assert p28$1 ==> p0$1;
     assert p28$2 ==> p0$2;
     assert {:block_sourceloc} {:sourceloc_num 126} p30$1 ==> true;
-    v89$1 := (if p30$1 then BV32_SGT($i.i.44.0$1, $n.i.45.0$1) else v89$1);
-    v89$2 := (if p30$2 then BV32_SGT($i.i.44.0$2, $n.i.45.0$2) else v89$2);
+    v89$1 := (if p30$1 then BV32_SGT($i.i3.0$1, $n.i4.0$1) else v89$1);
+    v89$2 := (if p30$2 then BV32_SGT($i.i3.0$2, $n.i4.0$2) else v89$2);
     p31$1 := false;
     p31$2 := false;
     p31$1 := (if p30$1 && v89$1 then v89$1 else p31$1);
     p31$2 := (if p30$2 && v89$2 then v89$2 else p31$2);
     p30$1 := (if p30$1 && !v89$1 then v89$1 else p30$1);
     p30$2 := (if p30$2 && !v89$2 then v89$2 else p30$2);
-    v90$1 := (if p31$1 then $$lambda$1[BV32_SUB(BV32_SUB($i.i.44.0$1, $n.i.45.0$1), 1bv32)] else v90$1);
-    v90$2 := (if p31$2 then $$lambda$2[BV32_SUB(BV32_SUB($i.i.44.0$2, $n.i.45.0$2), 1bv32)] else v90$2);
+    v90$1 := (if p31$1 then $$lambda$1[BV32_SUB(BV32_SUB($i.i3.0$1, $n.i4.0$1), 1bv32)] else v90$1);
+    v90$2 := (if p31$2 then $$lambda$2[BV32_SUB(BV32_SUB($i.i3.0$2, $n.i4.0$2), 1bv32)] else v90$2);
     v91$1 := (if p31$1 then $$N$1[0bv32] else v91$1);
     v91$2 := (if p31$2 then $$N$2[0bv32] else v91$2);
-    v92$1 := (if p31$1 then $$L2$1[BV32_ADD($i.i.44.0$1, BV32_MUL(BV32_ADD($n.i.45.0$1, 1bv32), v91$1))] else v92$1);
-    v92$2 := (if p31$2 then $$L2$2[BV32_ADD($i.i.44.0$2, BV32_MUL(BV32_ADD($n.i.45.0$2, 1bv32), v91$2))] else v92$2);
-    v93$1 := (if p31$1 then $$L$1[$i.i.44.0$1] else v93$1);
-    v93$2 := (if p31$2 then $$L$2[$i.i.44.0$2] else v93$2);
+    v92$1 := (if p31$1 then $$L2$1[BV32_ADD($i.i3.0$1, BV32_MUL(BV32_ADD($n.i4.0$1, 1bv32), v91$1))] else v92$1);
+    v92$2 := (if p31$2 then $$L2$2[BV32_ADD($i.i3.0$2, BV32_MUL(BV32_ADD($n.i4.0$2, 1bv32), v91$2))] else v92$2);
+    v93$1 := (if p31$1 then $$L$1[$i.i3.0$1] else v93$1);
+    v93$2 := (if p31$2 then $$L$2[$i.i3.0$2] else v93$2);
     v94$1 := (if p31$1 then FADD32($v1.i.0$1, FMUL32(FMUL32(v90$1, v92$1), v93$1)) else v94$1);
     v94$2 := (if p31$2 then FADD32($v1.i.0$2, FMUL32(FMUL32(v90$2, v92$2), v93$2)) else v94$2);
     v95$1 := (if p31$1 then $$delta$1[0bv32] else v95$1);
@@ -1200,41 +1200,41 @@ implementation {:source_name "Pathcalc_Portfolio_KernelGPU"} {:kernel} $_Z28Path
     v96$2 := (if p31$2 then $$delta$2[0bv32] else v96$2);
     v97$1 := (if p31$1 then $$N$1[0bv32] else v97$1);
     v97$2 := (if p31$2 then $$N$2[0bv32] else v97$2);
-    v98$1 := (if p31$1 then $$L2$1[BV32_ADD($i.i.44.0$1, BV32_MUL($n.i.45.0$1, v97$1))] else v98$1);
-    v98$2 := (if p31$2 then $$L2$2[BV32_ADD($i.i.44.0$2, BV32_MUL($n.i.45.0$2, v97$2))] else v98$2);
+    v98$1 := (if p31$1 then $$L2$1[BV32_ADD($i.i3.0$1, BV32_MUL($n.i4.0$1, v97$1))] else v98$1);
+    v98$2 := (if p31$2 then $$L2$2[BV32_ADD($i.i3.0$2, BV32_MUL($n.i4.0$2, v97$2))] else v98$2);
     call {:sourceloc_num 136} v99$1, v99$2 := $__fdividef(p31$1, v95$1, FP64_CONV32(FADD64(4607182418800017408bv64, FP32_CONV64(FMUL32(v96$1, v98$1)))), p31$2, v95$2, FP64_CONV32(FADD64(4607182418800017408bv64, FP32_CONV64(FMUL32(v96$2, v98$2)))));
     assume {:captureState "call_return_state_0"} {:procedureName "$__fdividef"} true;
-    v100$1 := (if p31$1 then $$L$1[$i.i.44.0$1] else v100$1);
-    v100$2 := (if p31$2 then $$L$2[$i.i.44.0$2] else v100$2);
+    v100$1 := (if p31$1 then $$L$1[$i.i3.0$1] else v100$1);
+    v100$2 := (if p31$2 then $$L$2[$i.i3.0$2] else v100$2);
     v101$1 := (if p31$1 then $$N$1[0bv32] else v101$1);
     v101$2 := (if p31$2 then $$N$2[0bv32] else v101$2);
-    v102$1 := (if p31$1 then $$L2$1[BV32_ADD($i.i.44.0$1, BV32_MUL(BV32_ADD($n.i.45.0$1, 1bv32), v101$1))] else v102$1);
-    v102$2 := (if p31$2 then $$L2$2[BV32_ADD($i.i.44.0$2, BV32_MUL(BV32_ADD($n.i.45.0$2, 1bv32), v101$2))] else v102$2);
+    v102$1 := (if p31$1 then $$L2$1[BV32_ADD($i.i3.0$1, BV32_MUL(BV32_ADD($n.i4.0$1, 1bv32), v101$1))] else v102$1);
+    v102$2 := (if p31$2 then $$L2$2[BV32_ADD($i.i3.0$2, BV32_MUL(BV32_ADD($n.i4.0$2, 1bv32), v101$2))] else v102$2);
     v103$1 := (if p31$1 then $$N$1[0bv32] else v103$1);
     v103$2 := (if p31$2 then $$N$2[0bv32] else v103$2);
-    v104$1 := (if p31$1 then $$L2$1[BV32_ADD($i.i.44.0$1, BV32_MUL($n.i.45.0$1, v103$1))] else v104$1);
-    v104$2 := (if p31$2 then $$L2$2[BV32_ADD($i.i.44.0$2, BV32_MUL($n.i.45.0$2, v103$2))] else v104$2);
+    v104$1 := (if p31$1 then $$L2$1[BV32_ADD($i.i3.0$1, BV32_MUL($n.i4.0$1, v103$1))] else v104$1);
+    v104$2 := (if p31$2 then $$L2$2[BV32_ADD($i.i3.0$2, BV32_MUL($n.i4.0$2, v103$2))] else v104$2);
     call {:sourceloc_num 142} v105$1, v105$2 := $__fdividef(p31$1, v102$1, v104$1, p31$2, v102$2, v104$2);
     assume {:captureState "call_return_state_0"} {:procedureName "$__fdividef"} true;
-    v106$1 := (if p31$1 then $$lambda$1[BV32_SUB(BV32_SUB($i.i.44.0$1, $n.i.45.0$1), 1bv32)] else v106$1);
-    v106$2 := (if p31$2 then $$lambda$2[BV32_SUB(BV32_SUB($i.i.44.0$2, $n.i.45.0$2), 1bv32)] else v106$2);
-    $$L$1[$i.i.44.0$1] := (if p31$1 then FADD32(FMUL32(v100$1, v105$1), FMUL32(FMUL32(FMUL32(v94$1, v106$1), v99$1), v99$1)) else $$L$1[$i.i.44.0$1]);
-    $$L$2[$i.i.44.0$2] := (if p31$2 then FADD32(FMUL32(v100$2, v105$2), FMUL32(FMUL32(FMUL32(v94$2, v106$2), v99$2), v99$2)) else $$L$2[$i.i.44.0$2]);
-    $v1.i.0$1, $i.i.44.0$1 := (if p31$1 then v94$1 else $v1.i.0$1), (if p31$1 then BV32_ADD($i.i.44.0$1, 4294967295bv32) else $i.i.44.0$1);
-    $v1.i.0$2, $i.i.44.0$2 := (if p31$2 then v94$2 else $v1.i.0$2), (if p31$2 then BV32_ADD($i.i.44.0$2, 4294967295bv32) else $i.i.44.0$2);
+    v106$1 := (if p31$1 then $$lambda$1[BV32_SUB(BV32_SUB($i.i3.0$1, $n.i4.0$1), 1bv32)] else v106$1);
+    v106$2 := (if p31$2 then $$lambda$2[BV32_SUB(BV32_SUB($i.i3.0$2, $n.i4.0$2), 1bv32)] else v106$2);
+    $$L$1[$i.i3.0$1] := (if p31$1 then FADD32(FMUL32(v100$1, v105$1), FMUL32(FMUL32(FMUL32(v94$1, v106$1), v99$1), v99$1)) else $$L$1[$i.i3.0$1]);
+    $$L$2[$i.i3.0$2] := (if p31$2 then FADD32(FMUL32(v100$2, v105$2), FMUL32(FMUL32(FMUL32(v94$2, v106$2), v99$2), v99$2)) else $$L$2[$i.i3.0$2]);
+    $v1.i.0$1, $i.i3.0$1 := (if p31$1 then v94$1 else $v1.i.0$1), (if p31$1 then BV32_ADD($i.i3.0$1, 4294967295bv32) else $i.i3.0$1);
+    $v1.i.0$2, $i.i3.0$2 := (if p31$2 then v94$2 else $v1.i.0$2), (if p31$2 then BV32_ADD($i.i3.0$2, 4294967295bv32) else $i.i3.0$2);
     p30$1 := (if p31$1 then true else p30$1);
     p30$2 := (if p31$2 then true else p30$2);
-    goto $for.cond.2.i.51.backedge, $for.cond.2.i.51.tail;
+    goto $41.backedge, $41.tail;
 
-  $for.cond.2.i.51.tail:
+  $41.tail:
     assume !p30$1 && !p30$2;
-    $n.i.45.0$1 := (if p29$1 then BV32_ADD($n.i.45.0$1, 4294967295bv32) else $n.i.45.0$1);
-    $n.i.45.0$2 := (if p29$2 then BV32_ADD($n.i.45.0$2, 4294967295bv32) else $n.i.45.0$2);
+    $n.i4.0$1 := (if p29$1 then BV32_ADD($n.i4.0$1, 4294967295bv32) else $n.i4.0$1);
+    $n.i4.0$2 := (if p29$2 then BV32_ADD($n.i4.0$2, 4294967295bv32) else $n.i4.0$2);
     p28$1 := (if p29$1 then true else p28$1);
     p28$2 := (if p29$2 then true else p28$2);
-    goto $for.cond.i.48.backedge, $for.cond.i.48.tail;
+    goto $39.backedge, $39.tail;
 
-  $for.cond.i.48.tail:
+  $39.tail:
     assume !p28$1 && !p28$2;
     v107$1 := (if p1$1 then $$L$1[79bv32] else v107$1);
     v107$2 := (if p1$2 then $$L$2[79bv32] else v107$2);
@@ -1249,81 +1249,81 @@ implementation {:source_name "Pathcalc_Portfolio_KernelGPU"} {:kernel} $_Z28Path
     $path.0$2 := (if p1$2 then BV32_ADD($path.0$2, BV32_MUL(group_size_x, num_groups_x)) else $path.0$2);
     p0$1 := (if p1$1 then true else p0$1);
     p0$2 := (if p1$2 then true else p0$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $1.backedge, $1.tail;
 
-  $for.cond.tail:
+  $1.tail:
     assume !p0$1 && !p0$2;
     return;
 
-  $for.cond.backedge:
+  $1.backedge:
     assume {:backedge} p0$1 || p0$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond.i.48.backedge:
+  $39.backedge:
     assume {:backedge} p28$1 || p28$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.i.48;
+    goto $39;
 
-  $for.cond.2.i.51.backedge:
+  $41.backedge:
     assume {:backedge} p30$1 || p30$2;
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond.2.i.51;
+    goto $41;
 
-  $for.cond.111.i.backedge:
+  $37.backedge:
     assume {:backedge} p26$1 || p26$2;
     assume {:captureState "loop_back_edge_state_3_0"} true;
-    goto $for.cond.111.i;
+    goto $37;
 
-  $for.cond.95.i.backedge:
+  $34.backedge:
     assume {:backedge} p24$1 || p24$2;
     assume {:captureState "loop_back_edge_state_4_0"} true;
-    goto $for.cond.95.i;
+    goto $34;
 
-  $for.cond.82.i.backedge:
+  $31.backedge:
     assume {:backedge} p22$1 || p22$2;
     assume {:captureState "loop_back_edge_state_5_0"} true;
-    goto $for.cond.82.i;
+    goto $31;
 
-  $for.cond.43.i.backedge:
+  $26.backedge:
     assume {:backedge} p18$1 || p18$2;
     assume {:captureState "loop_back_edge_state_6_0"} true;
-    goto $for.cond.43.i;
+    goto $26;
 
-  $for.cond.16.i.backedge:
+  $21.backedge:
     assume {:backedge} p14$1 || p14$2;
     assume {:captureState "loop_back_edge_state_7_0"} true;
-    goto $for.cond.16.i;
+    goto $21;
 
-  $for.cond.7.i.backedge:
+  $18.backedge:
     assume {:backedge} p12$1 || p12$2;
     assume {:captureState "loop_back_edge_state_8_0"} true;
-    goto $for.cond.7.i;
+    goto $18;
 
-  $for.cond.i.23.backedge:
+  $15.backedge:
     assume {:backedge} p10$1 || p10$2;
     assume {:captureState "loop_back_edge_state_9_0"} true;
-    goto $for.cond.i.23;
+    goto $15;
 
-  $for.cond.2.i.backedge:
+  $10.backedge:
     assume {:backedge} p6$1 || p6$2;
     assume {:captureState "loop_back_edge_state_10_0"} true;
-    goto $for.cond.2.i;
+    goto $10;
 
-  $for.cond.8.i.backedge:
+  $12.backedge:
     assume {:backedge} p8$1 || p8$2;
     assume {:captureState "loop_back_edge_state_11_0"} true;
-    goto $for.cond.8.i;
+    goto $12;
 
-  $for.cond.i.backedge:
+  $7.backedge:
     assume {:backedge} p4$1 || p4$2;
     assume {:captureState "loop_back_edge_state_12_0"} true;
-    goto $for.cond.i;
+    goto $7;
 
-  $for.cond.2.backedge:
+  $3.backedge:
     assume {:backedge} p2$1 || p2$2;
     assume {:captureState "loop_back_edge_state_13_0"} true;
-    goto $for.cond.2;
+    goto $3;
 }
 
 

@@ -6,8 +6,7 @@ function {:existential true} my_inv (
  b0004: bool,
  b0005: bool,
  b0006: bool,
- b0007: bool,
- b0008: bool
+ b0007: bool
  ) : bool;
 type _SIZE_T_TYPE = bv32;
 
@@ -112,8 +111,6 @@ procedure {:source_name "kernel2"} {:kernel} $kernel2($ny: bv32, $tmax: bv32, $n
   requires {:sourceloc_num 1} {:thread 1} (if $tmax == 256bv32 then 1bv1 else 0bv1) != 0bv1;
   requires {:sourceloc_num 2} {:thread 1} (if $nx == 1024bv32 then 1bv1 else 0bv1) != 0bv1;
   requires {:sourceloc_num 3} {:thread 1} (if BV32_AND(BV32_AND(BV32_AND(BV32_AND(BV32_AND(BV32_AND(BV1_ZEXT32((if BV32_SGE($ny, 1bv32) then 1bv1 else 0bv1)), BV1_ZEXT32((if BV32_SLE($ny, 2147483647bv32) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV32_SLE($tmax, 2147483647bv32) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV32_SLE($nx, 2147483647bv32) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV32_SGE($nx, 2147483649bv32) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV64_SGE(BV32_SEXT64($tmax), BV64_ADD($c0, 1bv64)) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV64_SGE($c0, 0bv64) then 1bv1 else 0bv1))) != 0bv32 then 1bv1 else 0bv1) != 0bv1;
-  requires {:procedure_wide_invariant} {:do_not_predicate} {:sourceloc_num 4} {:thread 1} (if _WRITE_HAS_OCCURRED_$$ey ==> BV32_AND(BV32_AND(BV32_AND(BV32_AND(BV32_AND(BV1_ZEXT32((if BV64_SGE(BV64_ADD(BV64_MUL(32bv64, BV32_ZEXT64(group_id_x$1)), BV32_ZEXT64(local_id_x$1)), 0bv64) then 1bv1 else 0bv1)), BV1_ZEXT32((if BV64_SLE(BV64_ADD(BV64_MUL(32bv64, BV32_ZEXT64(group_id_x$1)), BV32_ZEXT64(local_id_x$1)), 1048575bv64) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV32_UREM(BV32_UDIV(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $ny), (if BV32_SGE($nx, 2bv32) then $nx else 1bv32)) == 0bv32 then 1bv1 else 0bv1))), BV1_ZEXT32((if BV32_UGE($ny, BV32_ADD(BV32_UREM(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $ny), 1bv32)) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV32_UGE(BV32_UREM(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $ny), 0bv32) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV64_SREM(BV64_SUB(BV64_ADD(BV64_MUL(32bv64, BV32_ZEXT64(group_id_x$1)), BV32_ZEXT64(local_id_x$1)), BV32_ZEXT64(BV32_UREM(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $ny))), 1048576bv64) == 0bv64 then 1bv1 else 0bv1))) != 0bv32 then 1bv1 else 0bv1) != 0bv1;
-  requires {:procedure_wide_invariant} {:do_not_predicate} {:sourceloc_num 5} {:thread 1} (if _READ_HAS_OCCURRED_$$_fict_ ==> BV32_AND(BV1_ZEXT32((if BV32_ZEXT64(local_id_x$1) == 0bv64 then 1bv1 else 0bv1)), BV1_ZEXT32((if $c0 == BV32_ZEXT64(BV32_UREM(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $tmax)) then 1bv1 else 0bv1))) != 0bv32 then 1bv1 else 0bv1) != 0bv1;
   requires !_READ_HAS_OCCURRED_$$_fict_ && !_WRITE_HAS_OCCURRED_$$_fict_ && !_ATOMIC_HAS_OCCURRED_$$_fict_;
   requires !_READ_HAS_OCCURRED_$$ey && !_WRITE_HAS_OCCURRED_$$ey && !_ATOMIC_HAS_OCCURRED_$$ey;
   requires !_READ_HAS_OCCURRED_$$kernel2.shared__fict_ && !_WRITE_HAS_OCCURRED_$$kernel2.shared__fict_ && !_ATOMIC_HAS_OCCURRED_$$kernel2.shared__fict_;
@@ -227,7 +224,6 @@ implementation {:source_name "kernel2"} {:kernel} $kernel2($ny: bv32, $tmax: bv3
   $3:
     assume {:captureState "loop_head_state_0"} true;
     
-    
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$kernel2.shared__fict_ ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$kernel2.shared__fict_ ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$kernel2.shared__fict_ ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -245,7 +241,7 @@ implementation {:source_name "kernel2"} {:kernel} $kernel2($ny: bv32, $tmax: bv3
     
     
     
-assert  my_inv (  ( p2$1 ==> BV64_AND(BV64_SUB(1048576bv64, 1bv64), $c1.0$1) == BV64_AND(BV64_SUB(1048576bv64, 1bv64), BV64_MUL(32bv64, v0$1)) )  && ( p2$2 ==> BV64_AND(BV64_SUB(1048576bv64, 1bv64), $c1.0$2) == BV64_AND(BV64_SUB(1048576bv64, 1bv64), BV64_MUL(32bv64, v0$2)) ) ,  ( p2$1 ==> BV64_SLE(0bv64, $c1.0$1) )  && ( p2$2 ==> BV64_SLE(0bv64, $c1.0$2) ) ,  ( p2$1 ==> BV64_SLE($c1.0$1, BV64_MUL(32bv64, v0$1)) )  && ( p2$2 ==> BV64_SLE($c1.0$2, BV64_MUL(32bv64, v0$2)) ) ,  ( p2$1 ==> BV64_SGE($c1.0$1, BV64_MUL(32bv64, v0$1)) )  && ( p2$2 ==> BV64_SGE($c1.0$2, BV64_MUL(32bv64, v0$2)) ) ,  ( p2$1 ==> BV64_ULE($c1.0$1, BV64_MUL(32bv64, v0$1)) )  && ( p2$2 ==> BV64_ULE($c1.0$2, BV64_MUL(32bv64, v0$2)) ) ,  ( p2$1 ==> BV64_UGE($c1.0$1, BV64_MUL(32bv64, v0$1)) )  && ( p2$2 ==> BV64_UGE($c1.0$2, BV64_MUL(32bv64, v0$2)) ) ,  (  BV64_SLT($c1.0$1, BV32_SEXT64($ny)) ==> p2$1 )  && (  BV64_SLT($c1.0$2, BV32_SEXT64($ny)) ==> p2$2 ) ,  (  _WRITE_HAS_OCCURRED_$$ey ==> BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), 0bv64[32:0]) ) ,  (  _READ_HAS_OCCURRED_$$kernel2.shared__fict_ ==> _WATCHED_OFFSET == 0bv32 )  ); 
+assert  my_inv (  ( p2$1 ==> BV64_AND(BV64_SUB(1048576bv64, 1bv64), $c1.0$1) == BV64_AND(BV64_SUB(1048576bv64, 1bv64), BV64_MUL(32bv64, v0$1)) )  && ( p2$2 ==> BV64_AND(BV64_SUB(1048576bv64, 1bv64), $c1.0$2) == BV64_AND(BV64_SUB(1048576bv64, 1bv64), BV64_MUL(32bv64, v0$2)) ) ,  ( p2$1 ==> BV64_SLE(0bv64, $c1.0$1) )  && ( p2$2 ==> BV64_SLE(0bv64, $c1.0$2) ) ,  ( p2$1 ==> BV64_SLE($c1.0$1, BV64_MUL(32bv64, v0$1)) )  && ( p2$2 ==> BV64_SLE($c1.0$2, BV64_MUL(32bv64, v0$2)) ) ,  ( p2$1 ==> BV64_SGE($c1.0$1, BV64_MUL(32bv64, v0$1)) )  && ( p2$2 ==> BV64_SGE($c1.0$2, BV64_MUL(32bv64, v0$2)) ) ,  ( p2$1 ==> BV64_ULE($c1.0$1, BV64_MUL(32bv64, v0$1)) )  && ( p2$2 ==> BV64_ULE($c1.0$2, BV64_MUL(32bv64, v0$2)) ) ,  ( p2$1 ==> BV64_UGE($c1.0$1, BV64_MUL(32bv64, v0$1)) )  && ( p2$2 ==> BV64_UGE($c1.0$2, BV64_MUL(32bv64, v0$2)) ) ,  (  BV64_SLT($c1.0$1, BV32_SEXT64($ny)) ==> p2$1 )  && (  BV64_SLT($c1.0$2, BV32_SEXT64($ny)) ==> p2$2 ) ,  (  _WRITE_HAS_OCCURRED_$$ey ==> BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), 0bv64[32:0]) )  ); 
 
 
     assert {:procedure_wide_invariant} {:do_not_predicate} {:sourceloc_num 5} {:thread 1} (if _READ_HAS_OCCURRED_$$_fict_ ==> BV32_AND(BV1_ZEXT32((if BV32_ZEXT64(local_id_x$1) == 0bv64 then 1bv1 else 0bv1)), BV1_ZEXT32((if $c0 == BV32_ZEXT64(BV32_UREM(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $tmax)) then 1bv1 else 0bv1))) != 0bv32 then 1bv1 else 0bv1) != 0bv1;
@@ -269,10 +265,7 @@ assert  my_inv (  ( p2$1 ==> BV64_AND(BV64_SUB(1048576bv64, 1bv64), $c1.0$1) == 
     v5$2 := (if p3$2 then BV64_SGE(BV32_SEXT64($ny), BV64_ADD(BV64_ADD(v1$2, $c1.0$2), 1bv64)) else v5$2);
     p5$1 := (if p3$1 && v5$1 then v5$1 else p5$1);
     p5$2 := (if p3$2 && v5$2 then v5$2 else p5$2);
-    call {:sourceloc} {:sourceloc_num 15} _LOG_READ_$$kernel2.shared__fict_(p5$1, 0bv32, $$kernel2.shared__fict_[1bv1][0bv32]);
     assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 15} true;
-    call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 15} _CHECK_READ_$$kernel2.shared__fict_(p5$2, 0bv32, $$kernel2.shared__fict_[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][0bv32]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$kernel2.shared__fict_"} true;
     v6$1 := (if p5$1 then $$kernel2.shared__fict_[1bv1][0bv32] else v6$1);
     v6$2 := (if p5$2 then $$kernel2.shared__fict_[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][0bv32] else v6$2);
     call {:sourceloc} {:sourceloc_num 16} _LOG_WRITE_$$ey(p5$1, BV64_ADD(BV32_SEXT64(BV32_MUL(0bv32, $ny)), BV64_ADD(v1$1, $c1.0$1))[32:0], v6$1, $$ey[BV64_ADD(BV32_SEXT64(BV32_MUL(0bv32, $ny)), BV64_ADD(v1$1, $c1.0$1))[32:0]]);
@@ -680,7 +673,5 @@ function {:bvbuiltin "bvsgt"} BV32_SGT(bv32, bv32) : bool;
 function {:bvbuiltin "bvslt"} BV32_SLT(bv32, bv32) : bool;
 
 function {:bvbuiltin "bvsub"} BV32_SUB(bv32, bv32) : bv32;
-
-
 
 

@@ -30,7 +30,15 @@ var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source
 
 var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$g_odata: bool;
 
+const $arrayId$$g_odata: arrayId;
+
+axiom $arrayId$$g_odata == 1bv3;
+
 axiom {:array_info "$$0"} {:elem_width 8} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
+
+const $arrayId$$0: arrayId;
+
+axiom $arrayId$$0 == 2bv3;
 
 axiom {:array_info "$$tex"} {:global} {:elem_width 8} {:source_name "tex"} {:source_elem_width 96} {:source_dimensions "1"} true;
 
@@ -39,6 +47,33 @@ var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 96} {:source_
 var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 96} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$tex: bool;
 
 var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 96} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$tex: bool;
+
+const $arrayId$$tex: arrayId;
+
+axiom $arrayId$$tex == 3bv3;
+
+type ptr = bv32;
+
+type arrayId = bv3;
+
+function {:inline true} MKPTR(base: arrayId, offset: bv32) : ptr
+{
+  base ++ offset[29:0]
+}
+
+function {:inline true} base#MKPTR(p: ptr) : arrayId
+{
+  p[32:29]
+}
+
+function {:inline true} offset#MKPTR(p: ptr) : bv32
+{
+  0bv3 ++ p[29:0]
+}
+
+const $arrayId$$null$: arrayId;
+
+axiom $arrayId$$null$ == 0bv3;
 
 const _WATCHED_OFFSET: bv32;
 
@@ -186,9 +221,9 @@ implementation {:source_name "transformKernel"} {:kernel} $_Z15transformKernelPf
   var v5$2: bv32;
   var v4$1: bv32;
   var v4$2: bv32;
-  var v9: bool;
   var v7: bool;
   var v8: bool;
+  var v9: bool;
   var v10: bool;
   var v11: bool;
   var v12: bool;
@@ -201,8 +236,6 @@ implementation {:source_name "transformKernel"} {:kernel} $_Z15transformKernelPf
   var v16$2: bv8;
   var v17$1: bv8;
   var v17$2: bv8;
-  var v22$1: bv8;
-  var v22$2: bv8;
   var v18$1: bv8;
   var v18$2: bv8;
   var v19$1: bv8;
@@ -211,38 +244,16 @@ implementation {:source_name "transformKernel"} {:kernel} $_Z15transformKernelPf
   var v20$2: bv8;
   var v21$1: bv8;
   var v21$2: bv8;
-  var v31$1: bv8;
-  var v31$2: bv8;
+  var v22$1: bv8;
+  var v22$2: bv8;
   var v23$1: bv8;
   var v23$2: bv8;
   var v24$1: bv8;
   var v24$2: bv8;
   var v25$1: bv8;
   var v25$2: bv8;
-  var v26$1: bv8;
-  var v26$2: bv8;
-  var v27$1: bv8;
-  var v27$2: bv8;
-  var v28$1: bv8;
-  var v28$2: bv8;
-  var v29$1: bv8;
-  var v29$2: bv8;
-  var v30$1: bv8;
-  var v30$2: bv8;
-  var v32$1: bv8;
-  var v32$2: bv8;
-  var v33$1: bv8;
-  var v33$2: bv8;
-  var v34$1: bv8;
-  var v34$2: bv8;
-  var v35$1: bv8;
-  var v35$2: bv8;
-  var v36$1: bv8;
-  var v36$2: bv8;
-  var v37$1: bv8;
-  var v37$2: bv8;
-  var v38$1: bv32;
-  var v38$2: bv32;
+  var v26$1: bv32;
+  var v26$2: bv32;
 
 
   $0:
@@ -383,39 +394,15 @@ assert  my_inv (  (  BV32_SLE($face.0, 0bv32) ) ,  (  BV32_SGE($face.0, 0bv32) )
     havoc v25$1, v25$2;
     $$0$11bv32$1 := v25$1;
     $$0$11bv32$2 := v25$2;
-    v26$1 := $$0$0bv32$1;
-    v26$2 := $$0$0bv32$2;
-    v27$1 := $$0$1bv32$1;
-    v27$2 := $$0$1bv32$2;
-    v28$1 := $$0$2bv32$1;
-    v28$2 := $$0$2bv32$2;
-    v29$1 := $$0$3bv32$1;
-    v29$2 := $$0$3bv32$2;
-    v30$1 := $$0$4bv32$1;
-    v30$2 := $$0$4bv32$2;
-    v31$1 := $$0$5bv32$1;
-    v31$2 := $$0$5bv32$2;
-    v32$1 := $$0$6bv32$1;
-    v32$2 := $$0$6bv32$2;
-    v33$1 := $$0$7bv32$1;
-    v33$2 := $$0$7bv32$2;
-    v34$1 := $$0$8bv32$1;
-    v34$2 := $$0$8bv32$2;
-    v35$1 := $$0$9bv32$1;
-    v35$2 := $$0$9bv32$2;
-    v36$1 := $$0$10bv32$1;
-    v36$2 := $$0$10bv32$2;
-    v37$1 := $$0$11bv32$1;
-    v37$2 := $$0$11bv32$2;
-    call {:sourceloc_num 52} v38$1, v38$2 := $_Z10texCubemapIfET_7textureIS0_Li12EL19cudaTextureReadMode0EEfff(v29$1 ++ v28$1 ++ v27$1 ++ v26$1, v33$1 ++ v32$1 ++ v31$1 ++ v30$1, v37$1 ++ v36$1 ++ v35$1 ++ v34$1, $cx.6$1, $cy.6$1, $cz.6$1, v29$2 ++ v28$2 ++ v27$2 ++ v26$2, v33$2 ++ v32$2 ++ v31$2 ++ v30$2, v37$2 ++ v36$2 ++ v35$2 ++ v34$2, $cx.6$2, $cy.6$2, $cz.6$2);
+    call {:sourceloc_num 40} v26$1, v26$2 := $_Z10texCubemapIfET_7textureIS0_Li12EL19cudaTextureReadMode0EEfff(MKPTR($arrayId$$0, 0bv32), $cx.6$1, $cy.6$1, $cz.6$1, $cx.6$2, $cy.6$2, $cz.6$2);
     assume {:captureState "call_return_state_0"} {:procedureName "$_Z10texCubemapIfET_7textureIS0_Li12EL19cudaTextureReadMode0EEfff"} true;
-    call {:sourceloc} {:sourceloc_num 53} _LOG_WRITE_$$g_odata(true, BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL($face.0, $width), $width), BV32_MUL(v1$1, $width)), v0$1), FSUB32(2147483648bv32, v38$1), $$g_odata[BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL($face.0, $width), $width), BV32_MUL(v1$1, $width)), v0$1)]);
+    call {:sourceloc} {:sourceloc_num 41} _LOG_WRITE_$$g_odata(true, BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL($face.0, $width), $width), BV32_MUL(v1$1, $width)), v0$1), FSUB32(2147483648bv32, v26$1), $$g_odata[BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL($face.0, $width), $width), BV32_MUL(v1$1, $width)), v0$1)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$g_odata(true, BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL($face.0, $width), $width), BV32_MUL(v1$2, $width)), v0$2));
-    assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 53} true;
-    call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 53} _CHECK_WRITE_$$g_odata(true, BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL($face.0, $width), $width), BV32_MUL(v1$2, $width)), v0$2), FSUB32(2147483648bv32, v38$2));
+    assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 41} true;
+    call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 41} _CHECK_WRITE_$$g_odata(true, BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL($face.0, $width), $width), BV32_MUL(v1$2, $width)), v0$2), FSUB32(2147483648bv32, v26$2));
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$g_odata"} true;
-    $$g_odata[BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL($face.0, $width), $width), BV32_MUL(v1$1, $width)), v0$1)] := FSUB32(2147483648bv32, v38$1);
-    $$g_odata[BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL($face.0, $width), $width), BV32_MUL(v1$2, $width)), v0$2)] := FSUB32(2147483648bv32, v38$2);
+    $$g_odata[BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL($face.0, $width), $width), BV32_MUL(v1$1, $width)), v0$1)] := FSUB32(2147483648bv32, v26$1);
+    $$g_odata[BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL($face.0, $width), $width), BV32_MUL(v1$2, $width)), v0$2)] := FSUB32(2147483648bv32, v26$2);
     $cx.0$1, $cy.0$1, $cz.0$1, $face.0 := $cx.6$1, $cy.6$1, $cz.6$1, BV32_ADD($face.0, 1bv32);
     $cx.0$2, $cy.0$2, $cz.0$2 := $cx.6$2, $cy.6$2, $cz.6$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
@@ -460,7 +447,7 @@ assert  my_inv (  (  BV32_SLE($face.0, 0bv32) ) ,  (  BV32_SGE($face.0, 0bv32) )
 
 
 
-procedure {:source_name "_Z10texCubemapIfET_7textureIS0_Li12EL19cudaTextureReadMode0EEfff"} $_Z10texCubemapIfET_7textureIS0_Li12EL19cudaTextureReadMode0EEfff($0$1: bv32, $1$1: bv32, $2$1: bv32, $3$1: bv32, $4$1: bv32, $5$1: bv32, $0$2: bv32, $1$2: bv32, $2$2: bv32, $3$2: bv32, $4$2: bv32, $5$2: bv32) returns ($ret$1: bv32, $ret$2: bv32);
+procedure {:source_name "_Z10texCubemapIfET_7textureIS0_Li12EL19cudaTextureReadMode0EEfff"} $_Z10texCubemapIfET_7textureIS0_Li12EL19cudaTextureReadMode0EEfff($0: ptr, $1$1: bv32, $2$1: bv32, $3$1: bv32, $1$2: bv32, $2$2: bv32, $3$2: bv32) returns ($ret$1: bv32, $ret$2: bv32);
 
 
 

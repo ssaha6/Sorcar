@@ -150,101 +150,101 @@ implementation {:source_name "reduceSinglePass<128, true>"} {:kernel} $_Z16reduc
   var $i.i.0$2: bv32;
   var $mySum.i.0$1: bv32;
   var $mySum.i.0$2: bv32;
-  var $mySum.addr.i.i.0$1: bv32;
-  var $mySum.addr.i.i.0$2: bv32;
+  var $.01$1: bv32;
+  var $.01$2: bv32;
   var $i.0$1: bv32;
   var $i.0$2: bv32;
   var $mySum.0$1: bv32;
   var $mySum.0$2: bv32;
-  var $mySum.addr.i.0$1: bv32;
-  var $mySum.addr.i.0$2: bv32;
-  var v11$1: bv32;
-  var v11$2: bv32;
+  var $.0$1: bv32;
+  var $.0$2: bv32;
+  var v22$1: bv32;
+  var v22$2: bv32;
   var v0$1: bool;
   var v0$2: bool;
-  var v9$1: bv32;
-  var v9$2: bv32;
-  var v4$1: bv32;
-  var v4$2: bv32;
-  var v2$1: bv32;
-  var v2$2: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
-  var v7$1: bv32;
-  var v7$2: bv32;
-  var v5$1: bv32;
-  var v5$2: bv32;
+  var v2$1: bv32;
+  var v2$2: bv32;
   var v3$1: bool;
   var v3$2: bool;
-  var v8$1: bv32;
-  var v8$2: bv32;
+  var v4$1: bv32;
+  var v4$2: bv32;
+  var v5$1: bv32;
+  var v5$2: bv32;
   var v6$1: bool;
   var v6$2: bool;
+  var v7$1: bv32;
+  var v7$2: bv32;
+  var v8$1: bv32;
+  var v8$2: bv32;
+  var v9$1: bv32;
+  var v9$2: bv32;
   var v10$1: bv32;
   var v10$2: bv32;
+  var v11$1: bv32;
+  var v11$2: bv32;
   var v12$1: bv32;
   var v12$2: bv32;
-  var v14$1: bv32;
-  var v14$2: bv32;
-  var v23$1: bv8;
-  var v23$2: bv8;
-  var v26$1: bv32;
-  var v26$2: bv32;
-  var v28$1: bv32;
-  var v28$2: bv32;
-  var v39$1: bv32;
-  var v39$2: bv32;
-  var v35$1: bv32;
-  var v35$2: bv32;
-  var v33$1: bv32;
-  var v33$2: bv32;
-  var v37$1: bv32;
-  var v37$2: bv32;
-  var v31$1: bv32;
-  var v31$2: bv32;
-  var v43$1: bv32;
-  var v43$2: bv32;
-  var v41$1: bv32;
-  var v41$2: bv32;
-  var v19$1: bv32;
-  var v19$2: bv32;
-  var v15$1: bv32;
-  var v15$2: bv32;
   var v13$1: bv32;
   var v13$2: bv32;
-  var v17$1: bv32;
-  var v17$2: bv32;
+  var v14$1: bv32;
+  var v14$2: bv32;
+  var v15$1: bv32;
+  var v15$2: bv32;
   var v16$1: bv32;
   var v16$2: bv32;
+  var v17$1: bv32;
+  var v17$2: bv32;
   var v18$1: bool;
   var v18$2: bool;
+  var v19$1: bv32;
+  var v19$2: bv32;
   var v20: bool;
   var v21$1: bool;
   var v21$2: bool;
+  var v23$1: bv8;
+  var v23$2: bv8;
   var v24$1: bool;
   var v24$2: bool;
-  var v22$1: bv32;
-  var v22$2: bv32;
   var v25$1: bool;
   var v25$2: bool;
+  var v26$1: bv32;
+  var v26$2: bv32;
   var v27$1: bool;
   var v27$2: bool;
+  var v28$1: bv32;
+  var v28$2: bv32;
   var v29$1: bv32;
   var v29$2: bv32;
-  var v32$1: bv32;
-  var v32$2: bv32;
   var v30$1: bool;
   var v30$2: bool;
+  var v31$1: bv32;
+  var v31$2: bv32;
+  var v32$1: bv32;
+  var v32$2: bv32;
+  var v33$1: bv32;
+  var v33$2: bv32;
   var v34$1: bv32;
   var v34$2: bv32;
+  var v35$1: bv32;
+  var v35$2: bv32;
   var v36$1: bv32;
   var v36$2: bv32;
+  var v37$1: bv32;
+  var v37$2: bv32;
   var v38$1: bv32;
   var v38$2: bv32;
+  var v39$1: bv32;
+  var v39$2: bv32;
   var v40$1: bv32;
   var v40$2: bv32;
+  var v41$1: bv32;
+  var v41$2: bv32;
   var v42$1: bool;
   var v42$2: bool;
+  var v43$1: bv32;
+  var v43$2: bv32;
   var _abstracted_call_arg_0$1: bv32;
   var _abstracted_call_arg_0$2: bv32;
   var p0$1: bool;
@@ -291,10 +291,10 @@ implementation {:source_name "reduceSinglePass<128, true>"} {:kernel} $_Z16reduc
   var p20$2: bool;
   var _HAVOC_bv32$1: bv32;
   var _HAVOC_bv32$2: bv32;
-  var _READ_HAS_OCCURRED_$$g_odata$ghost$$while.cond: bool;
+  var _READ_HAS_OCCURRED_$$g_odata$ghost$$12: bool;
 
 
-  $entry:
+  $0:
     $i.i.0$1, $mySum.i.0$1 := BV32_ADD(BV32_MUL(group_id_x$1, 256bv32), local_id_x$1), 0bv32;
     $i.i.0$2, $mySum.i.0$2 := BV32_ADD(BV32_MUL(group_id_x$2, 256bv32), local_id_x$2), 0bv32;
     p0$1 := false;
@@ -304,9 +304,9 @@ implementation {:source_name "reduceSinglePass<128, true>"} {:kernel} $_Z16reduc
     p0$1 := true;
     p0$2 := true;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $while.cond.i;
+    goto $1;
 
-  $while.cond.i:
+  $1:
     assume {:captureState "loop_head_state_1"} true;
     assume {:invGenSkippedLoop} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$smem ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -359,9 +359,9 @@ implementation {:source_name "reduceSinglePass<128, true>"} {:kernel} $_Z16reduc
     $i.i.0$2, $mySum.i.0$2 := (if p1$2 then BV32_ADD($i.i.0$2, BV32_MUL(256bv32, num_groups_x)) else $i.i.0$2), (if p1$2 then FADD32(FADD32($mySum.i.0$2, v1$2), v2$2) else $mySum.i.0$2);
     p0$1 := (if p1$1 then true else p0$1);
     p0$2 := (if p1$2 then true else p0$2);
-    goto $while.cond.i.backedge, __partitioned_block_$while.cond.i.tail_0;
+    goto $1.backedge, __partitioned_block_$1.tail_0;
 
-  __partitioned_block_$while.cond.i.tail_0:
+  __partitioned_block_$1.tail_0:
     assume !p0$1 && !p0$2;
     call {:sourceloc} {:sourceloc_num 6} _LOG_WRITE_$$sdata(true, local_id_x$1, $mySum.i.0$1, $$sdata[1bv1][local_id_x$1]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$sdata(true, local_id_x$2);
@@ -370,9 +370,9 @@ implementation {:source_name "reduceSinglePass<128, true>"} {:kernel} $_Z16reduc
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$sdata"} true;
     $$sdata[1bv1][local_id_x$1] := $mySum.i.0$1;
     $$sdata[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2] := $mySum.i.0$2;
-    goto __partitioned_block_$while.cond.i.tail_1;
+    goto __partitioned_block_$1.tail_1;
 
-  __partitioned_block_$while.cond.i.tail_1:
+  __partitioned_block_$1.tail_1:
     call {:sourceloc_num 7} $bugle_barrier_duplicated_0(1bv1, 1bv1);
     v3$1 := BV32_ULT(local_id_x$1, 64bv32);
     v3$2 := BV32_ULT(local_id_x$2, 64bv32);
@@ -395,13 +395,13 @@ implementation {:source_name "reduceSinglePass<128, true>"} {:kernel} $_Z16reduc
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$sdata"} true;
     $$sdata[1bv1][local_id_x$1] := (if p3$1 then v5$1 else $$sdata[1bv1][local_id_x$1]);
     $$sdata[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2] := (if p3$2 then v5$2 else $$sdata[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2]);
-    $mySum.addr.i.i.0$1 := (if p3$1 then v5$1 else $mySum.addr.i.i.0$1);
-    $mySum.addr.i.i.0$2 := (if p3$2 then v5$2 else $mySum.addr.i.i.0$2);
-    $mySum.addr.i.i.0$1 := (if p4$1 then $mySum.i.0$1 else $mySum.addr.i.i.0$1);
-    $mySum.addr.i.i.0$2 := (if p4$2 then $mySum.i.0$2 else $mySum.addr.i.i.0$2);
-    goto __partitioned_block_$while.cond.i.tail_2;
+    $.01$1 := (if p3$1 then v5$1 else $.01$1);
+    $.01$2 := (if p3$2 then v5$2 else $.01$2);
+    $.01$1 := (if p4$1 then $mySum.i.0$1 else $.01$1);
+    $.01$2 := (if p4$2 then $mySum.i.0$2 else $.01$2);
+    goto __partitioned_block_$1.tail_2;
 
-  __partitioned_block_$while.cond.i.tail_2:
+  __partitioned_block_$1.tail_2:
     call {:sourceloc_num 12} $bugle_barrier_duplicated_1(1bv1, 1bv1);
     v6$1 := BV32_ULT(local_id_x$1, 32bv32);
     v6$2 := BV32_ULT(local_id_x$2, 32bv32);
@@ -413,8 +413,8 @@ implementation {:source_name "reduceSinglePass<128, true>"} {:kernel} $_Z16reduc
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$sdata"} true;
     v7$1 := (if p5$1 then $$sdata[1bv1][BV32_ADD(local_id_x$1, 32bv32)] else v7$1);
     v7$2 := (if p5$2 then $$sdata[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(local_id_x$2, 32bv32)] else v7$2);
-    v8$1 := (if p5$1 then FADD32($mySum.addr.i.i.0$1, v7$1) else v8$1);
-    v8$2 := (if p5$2 then FADD32($mySum.addr.i.i.0$2, v7$2) else v8$2);
+    v8$1 := (if p5$1 then FADD32($.01$1, v7$1) else v8$1);
+    v8$2 := (if p5$2 then FADD32($.01$2, v7$2) else v8$2);
     call {:sourceloc} {:sourceloc_num 15} _LOG_WRITE_$$sdata(p5$1, local_id_x$1, v8$1, $$sdata[1bv1][local_id_x$1]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$sdata(p5$2, local_id_x$2);
     assume {:do_not_predicate} {:check_id "check_state_26"} {:captureState "check_state_26"} {:sourceloc} {:sourceloc_num 15} true;
@@ -517,9 +517,9 @@ implementation {:source_name "reduceSinglePass<128, true>"} {:kernel} $_Z16reduc
 
   $falsebb3:
     assume {:partition} !v20;
-    goto $if.end.12;
+    goto $21;
 
-  $if.end.12:
+  $21:
     return;
 
   __partitioned_block_$truebb3_0:
@@ -562,13 +562,13 @@ implementation {:source_name "reduceSinglePass<128, true>"} {:kernel} $_Z16reduc
     $i.0$2, $mySum.0$2 := (if p11$2 then local_id_x$2 else $i.0$2), (if p11$2 then 0bv32 else $mySum.0$2);
     p12$1 := (if p11$1 then true else p12$1);
     p12$2 := (if p11$2 then true else p12$2);
-    _READ_HAS_OCCURRED_$$g_odata$ghost$$while.cond := _READ_HAS_OCCURRED_$$g_odata;
+    _READ_HAS_OCCURRED_$$g_odata$ghost$$12 := _READ_HAS_OCCURRED_$$g_odata;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $while.cond;
+    goto $12;
 
-  $while.cond:
+  $12:
     assume {:captureState "loop_head_state_0"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b10 ==> !p11$1 ==> _READ_HAS_OCCURRED_$$g_odata$ghost$$while.cond == _READ_HAS_OCCURRED_$$g_odata;
+    assert {:tag "disabledMaintainsInstrumentation"} _b10 ==> !p11$1 ==> _READ_HAS_OCCURRED_$$g_odata$ghost$$12 == _READ_HAS_OCCURRED_$$g_odata;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b9 ==> _READ_HAS_OCCURRED_$$g_odata ==> BV32_AND(BV32_SUB(128bv32, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(128bv32, 1bv32), local_id_x$1);
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$smem ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$smem ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -627,9 +627,9 @@ implementation {:source_name "reduceSinglePass<128, true>"} {:kernel} $_Z16reduc
     $i.0$2, $mySum.0$2 := (if p13$2 then BV32_ADD($i.0$2, 128bv32) else $i.0$2), (if p13$2 then FADD32($mySum.0$2, v26$2) else $mySum.0$2);
     p12$1 := (if p13$1 then true else p12$1);
     p12$2 := (if p13$2 then true else p12$2);
-    goto $while.cond.backedge, __partitioned_block_$while.cond.tail_0;
+    goto $12.backedge, __partitioned_block_$12.tail_0;
 
-  __partitioned_block_$while.cond.tail_0:
+  __partitioned_block_$12.tail_0:
     assume !p12$1 && !p12$2;
     call {:sourceloc} {:sourceloc_num 44} _LOG_WRITE_$$smem(p11$1, local_id_x$1, $mySum.0$1, $$smem[1bv1][local_id_x$1]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$smem(p11$2, local_id_x$2);
@@ -638,9 +638,9 @@ implementation {:source_name "reduceSinglePass<128, true>"} {:kernel} $_Z16reduc
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$smem"} true;
     $$smem[1bv1][local_id_x$1] := (if p11$1 then $mySum.0$1 else $$smem[1bv1][local_id_x$1]);
     $$smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2] := (if p11$2 then $mySum.0$2 else $$smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2]);
-    goto __partitioned_block_$while.cond.tail_1;
+    goto __partitioned_block_$12.tail_1;
 
-  __partitioned_block_$while.cond.tail_1:
+  __partitioned_block_$12.tail_1:
     call {:sourceloc_num 45} $bugle_barrier_duplicated_3(1bv1, 1bv1, p11$1, p11$2);
     v27$1 := (if p11$1 then BV32_ULT(local_id_x$1, 64bv32) else v27$1);
     v27$2 := (if p11$2 then BV32_ULT(local_id_x$2, 64bv32) else v27$2);
@@ -663,13 +663,13 @@ implementation {:source_name "reduceSinglePass<128, true>"} {:kernel} $_Z16reduc
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$smem"} true;
     $$smem[1bv1][local_id_x$1] := (if p14$1 then v29$1 else $$smem[1bv1][local_id_x$1]);
     $$smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2] := (if p14$2 then v29$2 else $$smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2]);
-    $mySum.addr.i.0$1 := (if p14$1 then v29$1 else $mySum.addr.i.0$1);
-    $mySum.addr.i.0$2 := (if p14$2 then v29$2 else $mySum.addr.i.0$2);
-    $mySum.addr.i.0$1 := (if p15$1 then $mySum.0$1 else $mySum.addr.i.0$1);
-    $mySum.addr.i.0$2 := (if p15$2 then $mySum.0$2 else $mySum.addr.i.0$2);
-    goto __partitioned_block_$while.cond.tail_2;
+    $.0$1 := (if p14$1 then v29$1 else $.0$1);
+    $.0$2 := (if p14$2 then v29$2 else $.0$2);
+    $.0$1 := (if p15$1 then $mySum.0$1 else $.0$1);
+    $.0$2 := (if p15$2 then $mySum.0$2 else $.0$2);
+    goto __partitioned_block_$12.tail_2;
 
-  __partitioned_block_$while.cond.tail_2:
+  __partitioned_block_$12.tail_2:
     call {:sourceloc_num 50} $bugle_barrier_duplicated_4(1bv1, 1bv1, p11$1, p11$2);
     v30$1 := (if p11$1 then BV32_ULT(local_id_x$1, 32bv32) else v30$1);
     v30$2 := (if p11$2 then BV32_ULT(local_id_x$2, 32bv32) else v30$2);
@@ -681,8 +681,8 @@ implementation {:source_name "reduceSinglePass<128, true>"} {:kernel} $_Z16reduc
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$smem"} true;
     v31$1 := (if p16$1 then $$smem[1bv1][BV32_ADD(local_id_x$1, 32bv32)] else v31$1);
     v31$2 := (if p16$2 then $$smem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(local_id_x$2, 32bv32)] else v31$2);
-    v32$1 := (if p16$1 then FADD32($mySum.addr.i.0$1, v31$1) else v32$1);
-    v32$2 := (if p16$2 then FADD32($mySum.addr.i.0$2, v31$2) else v32$2);
+    v32$1 := (if p16$1 then FADD32($.0$1, v31$1) else v32$1);
+    v32$2 := (if p16$2 then FADD32($.0$2, v31$2) else v32$2);
     call {:sourceloc} {:sourceloc_num 53} _LOG_WRITE_$$smem(p16$1, local_id_x$1, v32$1, $$smem[1bv1][local_id_x$1]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$smem(p16$2, local_id_x$2);
     assume {:do_not_predicate} {:check_id "check_state_7"} {:captureState "check_state_7"} {:sourceloc} {:sourceloc_num 53} true;
@@ -788,17 +788,17 @@ implementation {:source_name "reduceSinglePass<128, true>"} {:kernel} $_Z16reduc
     assume {:do_not_predicate} {:check_id "check_state_5"} {:captureState "check_state_5"} {:sourceloc} {:sourceloc_num 68} true;
     call {:check_id "check_state_5"} {:sourceloc} {:sourceloc_num 68} _CHECK_WRITE_$$retirementCount(p18$2, 0bv32, 0bv32);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$retirementCount"} true;
-    goto $if.end.12;
+    goto $21;
 
-  $while.cond.backedge:
+  $12.backedge:
     assume {:backedge} p12$1 || p12$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $while.cond;
+    goto $12;
 
-  $while.cond.i.backedge:
+  $1.backedge:
     assume {:backedge} p0$1 || p0$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $while.cond.i;
+    goto $1;
 }
 
 

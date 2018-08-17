@@ -159,7 +159,6 @@ implementation {:source_name "nbody_sim"} {:kernel} $nbody_sim($numBodies: bv32,
   var $j.0: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
-  var v12: bool;
   var v1$1: bv32;
   var v1$2: bv32;
   var v2: bv32;
@@ -180,6 +179,7 @@ implementation {:source_name "nbody_sim"} {:kernel} $nbody_sim($numBodies: bv32,
   var v10$2: bv32;
   var v11$1: bv32;
   var v11$2: bv32;
+  var v12: bool;
   var v13$1: bv32;
   var v13$2: bv32;
   var v14$1: bv32;
@@ -419,8 +419,8 @@ assert  my_inv (  true ,  true ,  true ,  true ,  (  BV32_SLE($j.0, 0bv32) ) ,  
     v24$2 := $$localPos[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($j.0, 4bv32), 3bv32)];
     v25$1 := FMUL32(v24$1, FMUL32(FMUL32(v20$1, v20$1), v20$1));
     v25$2 := FMUL32(v24$2, FMUL32(FMUL32(v20$2, v20$2), v20$2));
-    $acc.1$1, $j.0 := FADD32($acc.1$1[128:96], FMUL32(v25$1, FSUB32(v16$1, v6$1))) ++ FADD32($acc.1$1[96:64], FMUL32(v25$1, v19$1)) ++ FADD32($acc.1$1[64:32], FMUL32(v25$1, v18$1)) ++ FADD32($acc.1$1[32:0], FMUL32(v25$1, v17$1)), BV32_ADD($j.0, 1bv32);
-    $acc.1$2 := FADD32($acc.1$2[128:96], FMUL32(v25$2, FSUB32(v16$2, v6$2))) ++ FADD32($acc.1$2[96:64], FMUL32(v25$2, v19$2)) ++ FADD32($acc.1$2[64:32], FMUL32(v25$2, v18$2)) ++ FADD32($acc.1$2[32:0], FMUL32(v25$2, v17$2));
+    $acc.1$1, $j.0 := FADD32(FMUL32(v25$1, FSUB32(v16$1, v6$1)), $acc.1$1[128:96]) ++ FADD32(FMUL32(v25$1, v19$1), $acc.1$1[96:64]) ++ FADD32(FMUL32(v25$1, v18$1), $acc.1$1[64:32]) ++ FADD32(FMUL32(v25$1, v17$1), $acc.1$1[32:0]), BV32_ADD($j.0, 1bv32);
+    $acc.1$2 := FADD32(FMUL32(v25$2, FSUB32(v16$2, v6$2)), $acc.1$2[128:96]) ++ FADD32(FMUL32(v25$2, v19$2), $acc.1$2[96:64]) ++ FADD32(FMUL32(v25$2, v18$2), $acc.1$2[64:32]) ++ FADD32(FMUL32(v25$2, v17$2), $acc.1$2[32:0]);
     assume {:captureState "loop_back_edge_state_1_0"} true;
     goto $3;
 }

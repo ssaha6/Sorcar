@@ -214,10 +214,10 @@ implementation {:source_name "noise_uniform"} {:kernel} $noise_uniform($factor: 
   var v18$2: bv32;
   var v19$1: bv32;
   var v19$2: bv32;
-  var v21$1: bv32;
-  var v21$2: bv32;
   var v20$1: bv32;
   var v20$2: bv32;
+  var v21$1: bv32;
+  var v21$2: bv32;
   var v22$1: bv32;
   var v22$2: bv32;
   var v23$1: bv32;

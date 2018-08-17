@@ -157,35 +157,35 @@ implementation {:source_name "bpnn_layerforward_ocl"} {:kernel} $bpnn_layerforwa
   var v0$2: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
+  var v2$1: bv32;
+  var v2$2: bv32;
+  var v3$1: bv32;
+  var v3$2: bv32;
   var v4$1: bv32;
   var v4$2: bv32;
   var v5$1: bool;
   var v5$2: bool;
-  var v3$1: bv32;
-  var v3$2: bv32;
-  var v2$1: bv32;
-  var v2$2: bv32;
-  var v7$1: bv32;
-  var v7$2: bv32;
-  var v13$1: bv32;
-  var v13$2: bv32;
   var v6$1: bv32;
   var v6$2: bv32;
+  var v7$1: bv32;
+  var v7$2: bv32;
   var v8$1: bv32;
   var v8$2: bv32;
   var v9$1: bv32;
   var v9$2: bv32;
-  var v12$1: bv32;
-  var v12$2: bv32;
-  var v14$1: bv32;
-  var v14$2: bv32;
-  var v16$1: bv32;
-  var v16$2: bv32;
-  var v15$1: bool;
-  var v15$2: bool;
+  var v10: bool;
   var v11$1: bool;
   var v11$2: bool;
-  var v10: bool;
+  var v12$1: bv32;
+  var v12$2: bv32;
+  var v13$1: bv32;
+  var v13$2: bv32;
+  var v14$1: bv32;
+  var v14$2: bv32;
+  var v15$1: bool;
+  var v15$2: bool;
+  var v16$1: bv32;
+  var v16$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -202,7 +202,7 @@ implementation {:source_name "bpnn_layerforward_ocl"} {:kernel} $bpnn_layerforwa
   var _HAVOC_bv32$2: bv32;
 
 
-  __partitioned_block_$entry_0:
+  __partitioned_block_$0_0:
     v0$1 := group_id_y$1;
     v0$2 := group_id_y$2;
     v1$1 := local_id_x$1;
@@ -231,9 +231,9 @@ implementation {:source_name "bpnn_layerforward_ocl"} {:kernel} $bpnn_layerforwa
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$input_node"} true;
     $$input_node[1bv1][v2$1] := (if p0$1 then v6$1 else $$input_node[1bv1][v2$1]);
     $$input_node[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v2$2] := (if p0$2 then v6$2 else $$input_node[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v2$2]);
-    goto __partitioned_block_$entry_1;
+    goto __partitioned_block_$0_1;
 
-  __partitioned_block_$entry_1:
+  __partitioned_block_$0_1:
     call {:sourceloc_num 7} $bugle_barrier_duplicated_0(1bv1, 0bv1);
     call {:sourceloc} {:sourceloc_num 8} _LOG_READ_$$input_hidden_cuda(true, v3$1, $$input_hidden_cuda[v3$1]);
     assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 8} true;
@@ -248,9 +248,9 @@ implementation {:source_name "bpnn_layerforward_ocl"} {:kernel} $bpnn_layerforwa
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$weight_matrix"} true;
     $$weight_matrix[1bv1][BV32_ADD(BV32_MUL(v2$1, 16bv32), v1$1)] := v7$1;
     $$weight_matrix[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(v2$2, 16bv32), v1$2)] := v7$2;
-    goto __partitioned_block_$entry_2;
+    goto __partitioned_block_$0_2;
 
-  __partitioned_block_$entry_2:
+  __partitioned_block_$0_2:
     call {:sourceloc_num 10} $bugle_barrier_duplicated_1(1bv1, 0bv1);
     call {:sourceloc} {:sourceloc_num 11} _LOG_READ_$$weight_matrix(true, BV32_ADD(BV32_MUL(v2$1, 16bv32), v1$1), $$weight_matrix[1bv1][BV32_ADD(BV32_MUL(v2$1, 16bv32), v1$1)]);
     assume {:do_not_predicate} {:check_id "check_state_2"} {:captureState "check_state_2"} {:sourceloc} {:sourceloc_num 11} true;
@@ -268,15 +268,15 @@ implementation {:source_name "bpnn_layerforward_ocl"} {:kernel} $bpnn_layerforwa
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$weight_matrix"} true;
     $$weight_matrix[1bv1][BV32_ADD(BV32_MUL(v2$1, 16bv32), v1$1)] := FMUL32(v8$1, v9$1);
     $$weight_matrix[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(v2$2, 16bv32), v1$2)] := FMUL32(v8$2, v9$2);
-    goto __partitioned_block_$entry_3;
+    goto __partitioned_block_$0_3;
 
-  __partitioned_block_$entry_3:
+  __partitioned_block_$0_3:
     call {:sourceloc_num 14} $bugle_barrier_duplicated_2(1bv1, 0bv1);
     $i.0 := 1bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $3;
 
-  $for.cond:
+  $3:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b10 ==> _WRITE_HAS_OCCURRED_$$weight_matrix ==> _WATCHED_OFFSET == BV32_ADD(BV32_MUL(local_id_y$1, 16bv32), local_id_x$1);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b9 ==> _READ_HAS_OCCURRED_$$weight_matrix ==> _WATCHED_OFFSET == BV32_ADD(BV32_MUL(local_id_y$1, 16bv32), local_id_x$1) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, local_id_y$1), 16bv32), local_id_x$1));
@@ -373,7 +373,7 @@ implementation {:source_name "bpnn_layerforward_ocl"} {:kernel} $bpnn_layerforwa
     call {:sourceloc_num 22} $bugle_barrier_duplicated_4(1bv1, 0bv1);
     $i.0 := BV32_MUL($i.0, 2bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $3;
 }
 
 

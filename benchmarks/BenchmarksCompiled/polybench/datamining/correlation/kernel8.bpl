@@ -124,18 +124,18 @@ implementation {:source_name "kernel8"} {:kernel} $kernel8($m: bv32, $n: bv32)
 {
   var $c0.0$1: bv64;
   var $c0.0$2: bv64;
-  var $cond$1: bv32;
-  var $cond$2: bv32;
-  var v2$1: bool;
-  var v2$2: bool;
+  var $0$1: bv32;
+  var $0$2: bv32;
   var v0$1: bv64;
   var v0$2: bv64;
   var v1$1: bv64;
   var v1$2: bv64;
-  var v4$1: bool;
-  var v4$2: bool;
+  var v2$1: bool;
+  var v2$2: bool;
   var v3$1: bool;
   var v3$2: bool;
+  var v4$1: bool;
+  var v4$2: bool;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -152,7 +152,7 @@ implementation {:source_name "kernel8"} {:kernel} $kernel8($m: bv32, $n: bv32)
   var p6$2: bool;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ZEXT64(group_id_x$1);
     v0$2 := BV32_ZEXT64(group_id_x$2);
     v1$1 := BV32_ZEXT64(local_id_x$1);
@@ -164,9 +164,9 @@ implementation {:source_name "kernel8"} {:kernel} $kernel8($m: bv32, $n: bv32)
     p0$1 := true;
     p0$2 := true;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 1} _b6 ==> BV64_SLT($c0.0$1, BV32_SEXT64(BV32_SUB($m, 1bv32))) ==> p0$1;
     assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 2} _b6 ==> BV64_SLT($c0.0$2, BV32_SEXT64(BV32_SUB($m, 1bv32))) ==> p0$2;
@@ -212,31 +212,31 @@ implementation {:source_name "kernel8"} {:kernel} $kernel8($m: bv32, $n: bv32)
     p5$2 := (if p3$2 && v4$2 then v4$2 else p5$2);
     p4$1 := (if p3$1 && !v4$1 then !v4$1 else p4$1);
     p4$2 := (if p3$2 && !v4$2 then !v4$2 else p4$2);
-    $cond$1 := (if p4$1 then 1bv32 else $cond$1);
-    $cond$2 := (if p4$2 then 1bv32 else $cond$2);
-    $cond$1 := (if p5$1 then $m else $cond$1);
-    $cond$2 := (if p5$2 then $m else $cond$2);
-    call {:sourceloc} {:sourceloc_num 11} _LOG_WRITE_$$corr(p3$1, BV64_ADD(BV64_MUL(BV64_ADD(v1$1, $c0.0$1), BV32_SEXT64($cond$1)), BV64_ADD(v1$1, $c0.0$1))[32:0], 4607182418800017408bv64, $$corr[BV64_ADD(BV64_MUL(BV64_ADD(v1$1, $c0.0$1), BV32_SEXT64($cond$1)), BV64_ADD(v1$1, $c0.0$1))[32:0]]);
-    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$corr(p3$2, BV64_ADD(BV64_MUL(BV64_ADD(v1$2, $c0.0$2), BV32_SEXT64($cond$2)), BV64_ADD(v1$2, $c0.0$2))[32:0]);
+    $0$1 := (if p4$1 then 1bv32 else $0$1);
+    $0$2 := (if p4$2 then 1bv32 else $0$2);
+    $0$1 := (if p5$1 then $m else $0$1);
+    $0$2 := (if p5$2 then $m else $0$2);
+    call {:sourceloc} {:sourceloc_num 11} _LOG_WRITE_$$corr(p3$1, BV64_ADD(BV64_MUL(BV64_ADD(v1$1, $c0.0$1), BV32_SEXT64($0$1)), BV64_ADD(v1$1, $c0.0$1))[32:0], 4607182418800017408bv64, $$corr[BV64_ADD(BV64_MUL(BV64_ADD(v1$1, $c0.0$1), BV32_SEXT64($0$1)), BV64_ADD(v1$1, $c0.0$1))[32:0]]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$corr(p3$2, BV64_ADD(BV64_MUL(BV64_ADD(v1$2, $c0.0$2), BV32_SEXT64($0$2)), BV64_ADD(v1$2, $c0.0$2))[32:0]);
     assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 11} true;
-    call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 11} _CHECK_WRITE_$$corr(p3$2, BV64_ADD(BV64_MUL(BV64_ADD(v1$2, $c0.0$2), BV32_SEXT64($cond$2)), BV64_ADD(v1$2, $c0.0$2))[32:0], 4607182418800017408bv64);
+    call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 11} _CHECK_WRITE_$$corr(p3$2, BV64_ADD(BV64_MUL(BV64_ADD(v1$2, $c0.0$2), BV32_SEXT64($0$2)), BV64_ADD(v1$2, $c0.0$2))[32:0], 4607182418800017408bv64);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$corr"} true;
-    $$corr[BV64_ADD(BV64_MUL(BV64_ADD(v1$1, $c0.0$1), BV32_SEXT64($cond$1)), BV64_ADD(v1$1, $c0.0$1))[32:0]] := (if p3$1 then 4607182418800017408bv64 else $$corr[BV64_ADD(BV64_MUL(BV64_ADD(v1$1, $c0.0$1), BV32_SEXT64($cond$1)), BV64_ADD(v1$1, $c0.0$1))[32:0]]);
-    $$corr[BV64_ADD(BV64_MUL(BV64_ADD(v1$2, $c0.0$2), BV32_SEXT64($cond$2)), BV64_ADD(v1$2, $c0.0$2))[32:0]] := (if p3$2 then 4607182418800017408bv64 else $$corr[BV64_ADD(BV64_MUL(BV64_ADD(v1$2, $c0.0$2), BV32_SEXT64($cond$2)), BV64_ADD(v1$2, $c0.0$2))[32:0]]);
+    $$corr[BV64_ADD(BV64_MUL(BV64_ADD(v1$1, $c0.0$1), BV32_SEXT64($0$1)), BV64_ADD(v1$1, $c0.0$1))[32:0]] := (if p3$1 then 4607182418800017408bv64 else $$corr[BV64_ADD(BV64_MUL(BV64_ADD(v1$1, $c0.0$1), BV32_SEXT64($0$1)), BV64_ADD(v1$1, $c0.0$1))[32:0]]);
+    $$corr[BV64_ADD(BV64_MUL(BV64_ADD(v1$2, $c0.0$2), BV32_SEXT64($0$2)), BV64_ADD(v1$2, $c0.0$2))[32:0]] := (if p3$2 then 4607182418800017408bv64 else $$corr[BV64_ADD(BV64_MUL(BV64_ADD(v1$2, $c0.0$2), BV32_SEXT64($0$2)), BV64_ADD(v1$2, $c0.0$2))[32:0]]);
     $c0.0$1 := (if p1$1 then BV64_ADD($c0.0$1, 1048576bv64) else $c0.0$1);
     $c0.0$2 := (if p1$2 then BV64_ADD($c0.0$2, 1048576bv64) else $c0.0$2);
     p0$1 := (if p1$1 then true else p0$1);
     p0$2 := (if p1$2 then true else p0$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $1.backedge, $1.tail;
 
-  $for.cond.tail:
+  $1.tail:
     assume !p0$1 && !p0$2;
     return;
 
-  $for.cond.backedge:
+  $1.backedge:
     assume {:backedge} p0$1 || p0$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

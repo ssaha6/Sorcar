@@ -114,28 +114,28 @@ implementation {:source_name "copySharedMem"} {:kernel} $_Z13copySharedMemPfS_ii
 {
   var $r.0: bv32;
   var $i.0: bv32;
-  var $i16.0: bv32;
-  var v7$1: bv32;
-  var v7$2: bv32;
-  var v11$1: bv32;
-  var v11$2: bv32;
-  var v5$1: bool;
-  var v5$2: bool;
-  var v4: bool;
-  var v6$1: bool;
-  var v6$2: bool;
+  var $i1.0: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
-  var v2$1: bv32;
-  var v2$2: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
+  var v2$1: bv32;
+  var v2$2: bv32;
   var v3: bool;
-  var v10$1: bool;
-  var v10$2: bool;
+  var v4: bool;
+  var v5$1: bool;
+  var v5$2: bool;
+  var v6$1: bool;
+  var v6$2: bool;
+  var v7$1: bv32;
+  var v7$2: bv32;
+  var v8: bool;
   var v9$1: bool;
   var v9$2: bool;
-  var v8: bool;
+  var v10$1: bool;
+  var v10$2: bool;
+  var v11$1: bv32;
+  var v11$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -156,7 +156,7 @@ implementation {:source_name "copySharedMem"} {:kernel} $_Z13copySharedMemPfS_ii
   var _HAVOC_bv32$2: bv32;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, 16bv32), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, 16bv32), local_id_x$2);
     v1$1 := BV32_ADD(BV32_MUL(group_id_y$1, 16bv32), local_id_y$1);
@@ -165,9 +165,9 @@ implementation {:source_name "copySharedMem"} {:kernel} $_Z13copySharedMemPfS_ii
     v2$2 := BV32_ADD(v0$2, BV32_MUL($width, v1$2));
     $r.0 := 0bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b22 ==> _WRITE_HAS_OCCURRED_$$_ZZ13copySharedMemPfS_iiiE4tile ==> _WATCHED_OFFSET == BV32_ADD(BV32_MUL(local_id_y$1, 16bv32), local_id_x$1);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b21 ==> _READ_HAS_OCCURRED_$$_ZZ13copySharedMemPfS_iiiE4tile ==> _WATCHED_OFFSET == BV32_ADD(BV32_MUL(local_id_y$1, 16bv32), local_id_x$1);
@@ -195,9 +195,9 @@ implementation {:source_name "copySharedMem"} {:kernel} $_Z13copySharedMemPfS_ii
     assume {:partition} v3;
     $i.0 := 0bv32;
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond.8;
+    goto $3;
 
-  $for.cond.8:
+  $3:
     assume {:captureState "loop_head_state_2"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b23 ==> _WRITE_HAS_OCCURRED_$$_ZZ13copySharedMemPfS_iiiE4tile ==> _WATCHED_OFFSET == BV32_ADD(BV32_MUL(local_id_y$1, 16bv32), local_id_x$1);
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ13copySharedMemPfS_iiiE4tile ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -227,25 +227,25 @@ implementation {:source_name "copySharedMem"} {:kernel} $_Z13copySharedMemPfS_ii
 
   __partitioned_block_$falsebb0_1:
     call {:sourceloc_num 15} $bugle_barrier_duplicated_0(1bv1, 1bv1);
-    $i16.0 := 0bv32;
+    $i1.0 := 0bv32;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.17;
+    goto $10;
 
-  $for.cond.17:
+  $10:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b25 ==> _READ_HAS_OCCURRED_$$_ZZ13copySharedMemPfS_iiiE4tile ==> _WATCHED_OFFSET == BV32_ADD(BV32_MUL(local_id_y$1, 16bv32), local_id_x$1);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b24 ==> _WRITE_HAS_OCCURRED_$$odata ==> _WATCHED_OFFSET == BV32_ADD(BV32_ADD(BV32_MUL(group_id_x$1, 16bv32), local_id_x$1), BV32_MUL($width, BV32_ADD(BV32_MUL(group_id_y$1, 16bv32), local_id_y$1)));
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ13copySharedMemPfS_iiiE4tile ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ13copySharedMemPfS_iiiE4tile ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$_ZZ13copySharedMemPfS_iiiE4tile ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
-    assert {:tag "loopBound"} {:thread 1} _b16 ==> BV32_UGE($i16.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b15 ==> BV32_ULE($i16.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b14 ==> BV32_SGE($i16.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b13 ==> BV32_SLE($i16.0, 0bv32);
-    assert {:tag "guardNonNeg"} {:thread 1} _b12 ==> BV32_SLE(0bv32, $i16.0);
-    assert {:tag "loopCounterIsStrided"} {:thread 1} _b11 ==> BV32_AND(BV32_SUB(16bv32, 1bv32), $i16.0) == BV32_AND(BV32_SUB(16bv32, 1bv32), 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b16 ==> BV32_UGE($i1.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b15 ==> BV32_ULE($i1.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b14 ==> BV32_SGE($i1.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b13 ==> BV32_SLE($i1.0, 0bv32);
+    assert {:tag "guardNonNeg"} {:thread 1} _b12 ==> BV32_SLE(0bv32, $i1.0);
+    assert {:tag "loopCounterIsStrided"} {:thread 1} _b11 ==> BV32_AND(BV32_SUB(16bv32, 1bv32), $i1.0) == BV32_AND(BV32_SUB(16bv32, 1bv32), 0bv32);
     assert {:block_sourceloc} {:sourceloc_num 16} true;
-    v8 := BV32_SLT($i16.0, 16bv32);
+    v8 := BV32_SLT($i1.0, 16bv32);
     p4$1 := false;
     p4$2 := false;
     p5$1 := false;
@@ -260,7 +260,7 @@ implementation {:source_name "copySharedMem"} {:kernel} $_Z13copySharedMemPfS_ii
     assume {:partition} !v8;
     $r.0 := BV32_ADD($r.0, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
   $truebb3:
     assume {:partition} v8;
@@ -285,9 +285,9 @@ implementation {:source_name "copySharedMem"} {:kernel} $_Z13copySharedMemPfS_ii
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$odata"} true;
     $$odata[v2$1] := (if p7$1 then v11$1 else $$odata[v2$1]);
     $$odata[v2$2] := (if p7$2 then v11$2 else $$odata[v2$2]);
-    $i16.0 := BV32_ADD($i16.0, 16bv32);
+    $i1.0 := BV32_ADD($i1.0, 16bv32);
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.17;
+    goto $10;
 
   $truebb0:
     assume {:partition} v4;
@@ -311,7 +311,7 @@ implementation {:source_name "copySharedMem"} {:kernel} $_Z13copySharedMemPfS_ii
     $$_ZZ13copySharedMemPfS_iiiE4tile[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(local_id_y$2, 16bv32), local_id_x$2)] := (if p3$2 then v7$2 else $$_ZZ13copySharedMemPfS_iiiE4tile[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(local_id_y$2, 16bv32), local_id_x$2)]);
     $i.0 := BV32_ADD($i.0, 16bv32);
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond.8;
+    goto $3;
 }
 
 

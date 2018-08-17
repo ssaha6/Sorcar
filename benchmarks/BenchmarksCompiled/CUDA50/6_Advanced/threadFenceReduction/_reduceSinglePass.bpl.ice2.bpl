@@ -171,6 +171,8 @@ implementation {:source_name "reduceSinglePass<128, true>"} {:kernel} $_Z16reduc
   var $mySum.0$2: bv32;
   var $.0$1: bv32;
   var $.0$2: bv32;
+  var v22$1: bv32;
+  var v22$2: bv32;
   var v0$1: bool;
   var v0$2: bool;
   var v1$1: bv32;
@@ -214,12 +216,8 @@ implementation {:source_name "reduceSinglePass<128, true>"} {:kernel} $_Z16reduc
   var v20: bool;
   var v21$1: bool;
   var v21$2: bool;
-  var v22$1: bv32;
-  var v22$2: bv32;
   var v23$1: bv8;
   var v23$2: bv8;
-  var v30$1: bool;
-  var v30$2: bool;
   var v24$1: bool;
   var v24$2: bool;
   var v25$1: bool;
@@ -232,6 +230,8 @@ implementation {:source_name "reduceSinglePass<128, true>"} {:kernel} $_Z16reduc
   var v28$2: bv32;
   var v29$1: bv32;
   var v29$2: bv32;
+  var v30$1: bool;
+  var v30$2: bool;
   var v31$1: bv32;
   var v31$2: bv32;
   var v32$1: bv32;

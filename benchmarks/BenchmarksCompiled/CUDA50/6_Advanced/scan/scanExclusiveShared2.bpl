@@ -127,25 +127,25 @@ implementation {:source_name "scanExclusiveShared2"} {:kernel} $_Z20scanExclusiv
   var $idata.0$1: bv32;
   var $idata.0$2: bv32;
   var $offset.i.i.0: bv32;
+  var v0$1: bv32;
+  var v0$2: bv32;
+  var v1$1: bool;
+  var v1$2: bool;
   var v2$1: bv32;
   var v2$2: bv32;
   var v3$1: bv32;
   var v3$2: bv32;
-  var v7$1: bv32;
-  var v7$2: bv32;
-  var v9$1: bv32;
-  var v9$2: bv32;
-  var v8$1: bv32;
-  var v8$2: bv32;
-  var v1$1: bool;
-  var v1$2: bool;
   var v4$1: bv32;
   var v4$2: bv32;
   var v5$1: bv32;
   var v5$2: bv32;
-  var v0$1: bv32;
-  var v0$2: bv32;
   var v6: bool;
+  var v7$1: bv32;
+  var v7$2: bv32;
+  var v8$1: bv32;
+  var v8$2: bv32;
+  var v9$1: bv32;
+  var v9$2: bv32;
   var v10$1: bool;
   var v10$2: bool;
   var p0$1: bool;
@@ -160,7 +160,7 @@ implementation {:source_name "scanExclusiveShared2"} {:kernel} $_Z20scanExclusiv
   var _HAVOC_bv32$2: bv32;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2);
     v1$1 := BV32_ULT(v0$1, $N);
@@ -203,9 +203,9 @@ implementation {:source_name "scanExclusiveShared2"} {:kernel} $_Z20scanExclusiv
     $$_ZZ20scanExclusiveShared2PjS_S_jjE6s_Data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v5$2] := $idata.0$2;
     $offset.i.i.0 := 1bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.i.i;
+    goto $3;
 
-  $for.cond.i.i:
+  $3:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b7 ==> _WRITE_HAS_OCCURRED_$$_ZZ20scanExclusiveShared2PjS_S_jjE6s_Data ==> _WATCHED_OFFSET == BV32_ADD(BV32_SUB(BV32_MUL(2bv32, local_id_x$1), BV32_AND(local_id_x$1, BV32_SUB($arrayLength, 1bv32))), $arrayLength);
     assert {:tag "nowrite"} _b6 ==> !_WRITE_HAS_OCCURRED_$$_ZZ20scanExclusiveShared2PjS_S_jjE6s_Data;
@@ -273,7 +273,7 @@ implementation {:source_name "scanExclusiveShared2"} {:kernel} $_Z20scanExclusiv
     $$_ZZ20scanExclusiveShared2PjS_S_jjE6s_Data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v5$2] := BV32_ADD(v7$2, v8$2);
     $offset.i.i.0 := BV32_SHL($offset.i.i.0, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.i.i;
+    goto $3;
 }
 
 

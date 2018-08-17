@@ -127,17 +127,17 @@ implementation {:source_name "binarySearch_mulkeys"} {:kernel} $binarySearch_mul
   var v0$2: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
-  var v7$1: bv32;
-  var v7$2: bv32;
+  var v2: bool;
   var v3$1: bv32;
   var v3$2: bv32;
   var v4$1: bv32;
   var v4$2: bv32;
-  var v6$1: bv32;
-  var v6$2: bv32;
-  var v2: bool;
   var v5$1: bool;
   var v5$2: bool;
+  var v6$1: bv32;
+  var v6$2: bv32;
+  var v7$1: bv32;
+  var v7$2: bv32;
   var v8$1: bool;
   var v8$2: bool;
   var p0$1: bool;
@@ -150,7 +150,7 @@ implementation {:source_name "binarySearch_mulkeys"} {:kernel} $binarySearch_mul
   var p3$2: bool;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), 256bv32);
     v0$2 := BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2), 256bv32);
     v1$1 := BV32_ADD(v0$1, 255bv32);
@@ -160,9 +160,9 @@ implementation {:source_name "binarySearch_mulkeys"} {:kernel} $binarySearch_mul
     assume BV1_ZEXT32((if BV32_SLT(v1$1, v0$2) ==> BV32_ULT($$input[v1$1], $$input[v0$2]) then 1bv1 else 0bv1)) != 0bv32 && BV1_ZEXT32((if BV32_SLT(v1$2, v0$1) ==> BV32_ULT($$input[v1$2], $$input[v0$1]) then 1bv1 else 0bv1)) != 0bv32;
     $i.0 := 0bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "loopBound"} {:thread 1} _b3 ==> BV32_UGE($i.0, 0bv32);
     assert {:tag "loopBound"} {:thread 1} _b2 ==> BV32_ULE($i.0, 0bv32);
@@ -212,7 +212,7 @@ implementation {:source_name "binarySearch_mulkeys"} {:kernel} $binarySearch_mul
     $$output[$i.0] := (if p3$2 then v0$2 else $$output[$i.0]);
     $i.0 := BV32_ADD($i.0, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

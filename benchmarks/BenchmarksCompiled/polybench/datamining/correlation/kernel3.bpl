@@ -124,18 +124,18 @@ implementation {:source_name "kernel3"} {:kernel} $kernel3($float_n: bv64, $m: b
 {
   var $c0.0$1: bv64;
   var $c0.0$2: bv64;
-  var v3$1: bool;
-  var v3$2: bool;
-  var v5$1: bv64;
-  var v5$2: bv64;
-  var v2$1: bool;
-  var v2$2: bool;
   var v0$1: bv64;
   var v0$2: bv64;
   var v1$1: bv64;
   var v1$2: bv64;
+  var v2$1: bool;
+  var v2$2: bool;
+  var v3$1: bool;
+  var v3$2: bool;
   var v4$1: bv32;
   var v4$2: bv32;
+  var v5$1: bv64;
+  var v5$2: bv64;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -148,7 +148,7 @@ implementation {:source_name "kernel3"} {:kernel} $kernel3($float_n: bv64, $m: b
   var p4$2: bool;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ZEXT64(group_id_x$1);
     v0$2 := BV32_ZEXT64(group_id_x$2);
     v1$1 := BV32_ZEXT64(local_id_x$1);
@@ -160,9 +160,9 @@ implementation {:source_name "kernel3"} {:kernel} $kernel3($float_n: bv64, $m: b
     p0$1 := true;
     p0$2 := true;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b8 ==> _WRITE_HAS_OCCURRED_$$stddev ==> BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), 0bv64[32:0]);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b7 ==> _READ_HAS_OCCURRED_$$stddev ==> BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(1bv64[32:0], 1bv32), 0bv64[32:0]);
@@ -220,16 +220,16 @@ implementation {:source_name "kernel3"} {:kernel} $kernel3($float_n: bv64, $m: b
     $c0.0$2 := (if p1$2 then BV64_ADD($c0.0$2, 1048576bv64) else $c0.0$2);
     p0$1 := (if p1$1 then true else p0$1);
     p0$2 := (if p1$2 then true else p0$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $1.backedge, $1.tail;
 
-  $for.cond.tail:
+  $1.tail:
     assume !p0$1 && !p0$2;
     return;
 
-  $for.cond.backedge:
+  $1.backedge:
     assume {:backedge} p0$1 || p0$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

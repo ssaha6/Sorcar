@@ -116,27 +116,27 @@ implementation {:source_name "histogram256Kernel"} {:kernel} $_Z18histogram256Ke
   var $bin.0$2: bv32;
   var $sum.0$1: bv32;
   var $sum.0$2: bv32;
-  var $i27.0$1: bv32;
-  var $i27.0$2: bv32;
+  var $i1.0$1: bv32;
+  var $i1.0$2: bv32;
+  var v3$1: bv32;
+  var v3$2: bv32;
   var v0: bool;
   var v1$1: bool;
   var v1$2: bool;
-  var v4$1: bv32;
-  var v4$2: bv32;
-  var v3$1: bv32;
-  var v3$2: bv32;
-  var v5$1: bv32;
-  var v5$2: bv32;
-  var v9$1: bv32;
-  var v9$2: bv32;
   var v2$1: bv32;
   var v2$2: bv32;
+  var v4$1: bv32;
+  var v4$2: bv32;
+  var v5$1: bv32;
+  var v5$2: bv32;
   var v6$1: bv32;
   var v6$2: bv32;
   var v7$1: bool;
   var v7$2: bool;
   var v8$1: bool;
   var v8$2: bool;
+  var v9$1: bv32;
+  var v9$2: bv32;
   var _abstracted_call_arg_0$1: bv32;
   var _abstracted_call_arg_0$2: bv32;
   var _abstracted_call_arg_1$1: bv32;
@@ -161,16 +161,16 @@ implementation {:source_name "histogram256Kernel"} {:kernel} $_Z18histogram256Ke
   var _HAVOC_bv32$2: bv32;
 
 
-  $entry:
+  $0:
     $i.0 := 0bv32;
     p0$1 := false;
     p0$2 := false;
     p3$1 := false;
     p3$2 := false;
     assume {:captureState "loop_entry_state_3_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_3"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b23 ==> _WRITE_HAS_OCCURRED_$$_ZZ18histogram256KernelPjS_jE6s_Hist ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 192bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 192bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 192bv32), local_id_x$1));
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ18histogram256KernelPjS_jE6s_Hist ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -196,9 +196,9 @@ implementation {:source_name "histogram256Kernel"} {:kernel} $_Z18histogram256Ke
     p0$1 := true;
     p0$2 := true;
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond.7;
+    goto $5;
 
-  $for.cond.7:
+  $5:
     assume {:captureState "loop_head_state_2"} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ18histogram256KernelPjS_jE6s_Hist ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ18histogram256KernelPjS_jE6s_Hist ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -277,22 +277,22 @@ implementation {:source_name "histogram256Kernel"} {:kernel} $_Z18histogram256Ke
     $pos.0$2 := (if p1$2 then BV32_ADD($pos.0$2, BV32_MUL(group_size_x, num_groups_x)) else $pos.0$2);
     p0$1 := (if p1$1 then true else p0$1);
     p0$2 := (if p1$2 then true else p0$2);
-    goto $for.cond.7.backedge, __partitioned_block_$for.cond.7.tail_0;
+    goto $5.backedge, __partitioned_block_$5.tail_0;
 
-  __partitioned_block_$for.cond.7.tail_0:
+  __partitioned_block_$5.tail_0:
     assume !p0$1 && !p0$2;
-    goto __partitioned_block_$for.cond.7.tail_1;
+    goto __partitioned_block_$5.tail_1;
 
-  __partitioned_block_$for.cond.7.tail_1:
+  __partitioned_block_$5.tail_1:
     call {:sourceloc_num 17} $bugle_barrier_duplicated_1(1bv1, 1bv1);
     $bin.0$1 := local_id_x$1;
     $bin.0$2 := local_id_x$2;
     p3$1 := true;
     p3$2 := true;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.15;
+    goto $9;
 
-  $for.cond.15:
+  $9:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessBreak"} _b27 ==> _WRITE_HAS_OCCURRED_$$d_PartialHistograms ==> group_id_x$1 == BV32_DIV(_WATCHED_OFFSET, 256bv32);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b26 ==> _WRITE_HAS_OCCURRED_$$d_PartialHistograms ==> BV32_AND(BV32_SUB(192bv32, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(192bv32, 1bv32), BV32_ADD(local_id_x$1, BV32_MUL(group_id_x$1, 256bv32)));
@@ -327,14 +327,14 @@ implementation {:source_name "histogram256Kernel"} {:kernel} $_Z18histogram256Ke
     p4$2 := (if p3$2 && v7$2 then v7$2 else p4$2);
     p3$1 := (if p3$1 && !v7$1 then v7$1 else p3$1);
     p3$2 := (if p3$2 && !v7$2 then v7$2 else p3$2);
-    $sum.0$1, $i27.0$1 := (if p4$1 then 0bv32 else $sum.0$1), (if p4$1 then 0bv32 else $i27.0$1);
-    $sum.0$2, $i27.0$2 := (if p4$2 then 0bv32 else $sum.0$2), (if p4$2 then 0bv32 else $i27.0$2);
+    $sum.0$1, $i1.0$1 := (if p4$1 then 0bv32 else $sum.0$1), (if p4$1 then 0bv32 else $i1.0$1);
+    $sum.0$2, $i1.0$2 := (if p4$2 then 0bv32 else $sum.0$2), (if p4$2 then 0bv32 else $i1.0$2);
     p5$1 := (if p4$1 then true else p5$1);
     p5$2 := (if p4$2 then true else p5$2);
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.28;
+    goto $11;
 
-  $for.cond.28:
+  $11:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ18histogram256KernelPjS_jE6s_Hist ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ18histogram256KernelPjS_jE6s_Hist ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -343,21 +343,21 @@ implementation {:source_name "histogram256Kernel"} {:kernel} $_Z18histogram256Ke
     assert p5$1 ==> p3$1;
     assert p5$2 ==> p3$2;
     assert {:do_not_predicate} {:tag "accessOnlyIfEnabledInEnclosingScopes"} {:thread 1} _b22 ==> _READ_HAS_OCCURRED_$$_ZZ18histogram256KernelPjS_jE6s_Hist ==> BV32_ULT($bin.0$1, 256bv32);
-    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 1} _b21 ==> BV32_ULT($bin.0$1, 256bv32) && BV32_ULT($i27.0$1, 6bv32) ==> p5$1;
-    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 2} _b21 ==> BV32_ULT($bin.0$2, 256bv32) && BV32_ULT($i27.0$2, 6bv32) ==> p5$2;
+    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 1} _b21 ==> BV32_ULT($bin.0$1, 256bv32) && BV32_ULT($i1.0$1, 6bv32) ==> p5$1;
+    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 2} _b21 ==> BV32_ULT($bin.0$2, 256bv32) && BV32_ULT($i1.0$2, 6bv32) ==> p5$2;
     assert {:tag "conditionsImpliedByEnabledness"} {:thread 1} p5$1 ==> _b20 ==> p5$1 ==> BV32_ULT($bin.0$1, 256bv32);
     assert {:tag "conditionsImpliedByEnabledness"} {:thread 2} p5$2 ==> _b20 ==> p5$2 ==> BV32_ULT($bin.0$2, 256bv32);
-    assert {:tag "loopBound"} {:thread 1} p5$1 ==> _b19 ==> BV32_UGE($i27.0$1, 0bv32);
-    assert {:tag "loopBound"} {:thread 2} p5$2 ==> _b19 ==> BV32_UGE($i27.0$2, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} p5$1 ==> _b18 ==> BV32_ULE($i27.0$1, 0bv32);
-    assert {:tag "loopBound"} {:thread 2} p5$2 ==> _b18 ==> BV32_ULE($i27.0$2, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} p5$1 ==> _b17 ==> BV32_SGE($i27.0$1, 0bv32);
-    assert {:tag "loopBound"} {:thread 2} p5$2 ==> _b17 ==> BV32_SGE($i27.0$2, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} p5$1 ==> _b16 ==> BV32_SLE($i27.0$1, 0bv32);
-    assert {:tag "loopBound"} {:thread 2} p5$2 ==> _b16 ==> BV32_SLE($i27.0$2, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} p5$1 ==> _b19 ==> BV32_UGE($i1.0$1, 0bv32);
+    assert {:tag "loopBound"} {:thread 2} p5$2 ==> _b19 ==> BV32_UGE($i1.0$2, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} p5$1 ==> _b18 ==> BV32_ULE($i1.0$1, 0bv32);
+    assert {:tag "loopBound"} {:thread 2} p5$2 ==> _b18 ==> BV32_ULE($i1.0$2, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} p5$1 ==> _b17 ==> BV32_SGE($i1.0$1, 0bv32);
+    assert {:tag "loopBound"} {:thread 2} p5$2 ==> _b17 ==> BV32_SGE($i1.0$2, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} p5$1 ==> _b16 ==> BV32_SLE($i1.0$1, 0bv32);
+    assert {:tag "loopBound"} {:thread 2} p5$2 ==> _b16 ==> BV32_SLE($i1.0$2, 0bv32);
     assert {:block_sourceloc} {:sourceloc_num 22} p5$1 ==> true;
-    v8$1 := (if p5$1 then BV32_ULT($i27.0$1, 6bv32) else v8$1);
-    v8$2 := (if p5$2 then BV32_ULT($i27.0$2, 6bv32) else v8$2);
+    v8$1 := (if p5$1 then BV32_ULT($i1.0$1, 6bv32) else v8$1);
+    v8$2 := (if p5$2 then BV32_ULT($i1.0$2, 6bv32) else v8$2);
     p6$1 := false;
     p6$2 := false;
     p6$1 := (if p5$1 && v8$1 then v8$1 else p6$1);
@@ -374,13 +374,13 @@ implementation {:source_name "histogram256Kernel"} {:kernel} $_Z18histogram256Ke
     havoc _HAVOC_bv32$1, _HAVOC_bv32$2;
     v9$1 := (if p6$1 then _HAVOC_bv32$1 else v9$1);
     v9$2 := (if p6$2 then _HAVOC_bv32$2 else v9$2);
-    $sum.0$1, $i27.0$1 := (if p6$1 then BV32_ADD($sum.0$1, v9$1) else $sum.0$1), (if p6$1 then BV32_ADD($i27.0$1, 1bv32) else $i27.0$1);
-    $sum.0$2, $i27.0$2 := (if p6$2 then BV32_ADD($sum.0$2, v9$2) else $sum.0$2), (if p6$2 then BV32_ADD($i27.0$2, 1bv32) else $i27.0$2);
+    $sum.0$1, $i1.0$1 := (if p6$1 then BV32_ADD($sum.0$1, v9$1) else $sum.0$1), (if p6$1 then BV32_ADD($i1.0$1, 1bv32) else $i1.0$1);
+    $sum.0$2, $i1.0$2 := (if p6$2 then BV32_ADD($sum.0$2, v9$2) else $sum.0$2), (if p6$2 then BV32_ADD($i1.0$2, 1bv32) else $i1.0$2);
     p5$1 := (if p6$1 then true else p5$1);
     p5$2 := (if p6$2 then true else p5$2);
-    goto $for.cond.28.backedge, $for.cond.28.tail;
+    goto $11.backedge, $11.tail;
 
-  $for.cond.28.tail:
+  $11.tail:
     assume !p5$1 && !p5$2;
     call {:sourceloc} {:sourceloc_num 27} _LOG_WRITE_$$d_PartialHistograms(p4$1, BV32_ADD(BV32_MUL(group_id_x$1, 256bv32), $bin.0$1), $sum.0$1, $$d_PartialHistograms[BV32_ADD(BV32_MUL(group_id_x$1, 256bv32), $bin.0$1)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$d_PartialHistograms(p4$2, BV32_ADD(BV32_MUL(group_id_x$2, 256bv32), $bin.0$2));
@@ -393,26 +393,26 @@ implementation {:source_name "histogram256Kernel"} {:kernel} $_Z18histogram256Ke
     $bin.0$2 := (if p4$2 then BV32_ADD($bin.0$2, 192bv32) else $bin.0$2);
     p3$1 := (if p4$1 then true else p3$1);
     p3$2 := (if p4$2 then true else p3$2);
-    goto $for.cond.15.backedge, $for.cond.15.tail;
+    goto $9.backedge, $9.tail;
 
-  $for.cond.15.tail:
+  $9.tail:
     assume !p3$1 && !p3$2;
     return;
 
-  $for.cond.15.backedge:
+  $9.backedge:
     assume {:backedge} p3$1 || p3$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.15;
+    goto $9;
 
-  $for.cond.28.backedge:
+  $11.backedge:
     assume {:backedge} p5$1 || p5$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.28;
+    goto $11;
 
-  $for.cond.7.backedge:
+  $5.backedge:
     assume {:backedge} p0$1 || p0$2;
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond.7;
+    goto $5;
 
   $truebb:
     assume {:partition} v0;
@@ -424,7 +424,7 @@ implementation {:source_name "histogram256Kernel"} {:kernel} $_Z18histogram256Ke
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$_ZZ18histogram256KernelPjS_jE6s_Hist"} true;
     $i.0 := BV32_ADD($i.0, 1bv32);
     assume {:captureState "loop_back_edge_state_3_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

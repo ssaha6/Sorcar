@@ -2,8 +2,7 @@ function {:existential true} my_inv (
  b0000: bool,
  b0001: bool,
  b0002: bool,
- b0003: bool,
- b0004: bool
+ b0003: bool
  ) : bool;
 type _SIZE_T_TYPE = bv32;
 
@@ -211,7 +210,6 @@ implementation {:source_name "DCT"} {:kernel} $DCT($width: bv32, $blockWidth: bv
 
   $8:
     assume {:captureState "loop_head_state_0"} true;
-    
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$inter ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$inter ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$inter ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -219,7 +217,7 @@ implementation {:source_name "DCT"} {:kernel} $DCT($width: bv32, $blockWidth: bv
     
     
     
-assert  my_inv (  (  BV32_SLE($k1.0, 0bv32) ) ,  (  BV32_SGE($k1.0, 0bv32) ) ,  (  BV32_ULE($k1.0, 0bv32) ) ,  (  BV32_UGE($k1.0, 0bv32) ) ,  (  _READ_HAS_OCCURRED_$$inter ==> local_id_x$1 == BV32_DIV(_WATCHED_OFFSET, $blockWidth) )  ); 
+assert  my_inv (  (  BV32_SLE($k1.0, 0bv32) ) ,  (  BV32_SGE($k1.0, 0bv32) ) ,  (  BV32_ULE($k1.0, 0bv32) ) ,  (  BV32_UGE($k1.0, 0bv32) )  ); 
 
 
     assert {:block_sourceloc} {:sourceloc_num 14} true;
@@ -251,15 +249,12 @@ assert  my_inv (  (  BV32_SLE($k1.0, 0bv32) ) ,  (  BV32_SGE($k1.0, 0bv32) ) ,  
     goto $12;
 
   $12:
-    call {:sourceloc} {:sourceloc_num 19} _LOG_READ_$$inter(true, v8$1, $$inter[1bv1][v8$1]);
     assume {:do_not_predicate} {:check_id "check_state_2"} {:captureState "check_state_2"} {:sourceloc} {:sourceloc_num 19} true;
-    call {:check_id "check_state_2"} {:sourceloc} {:sourceloc_num 19} _CHECK_READ_$$inter(true, v8$2, $$inter[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v8$2]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$inter"} true;
     v10$1 := $$inter[1bv1][v8$1];
     v10$2 := $$inter[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v8$2];
     havoc v11$1, v11$2;
-    $acc.1$1, $k1.0 := FADD32($acc.1$1, FMUL32(v10$1, v11$1)), BV32_ADD($k1.0, 1bv32);
-    $acc.1$2 := FADD32($acc.1$2, FMUL32(v10$2, v11$2));
+    $acc.1$1, $k1.0 := FADD32(FMUL32(v10$1, v11$1), $acc.1$1), BV32_ADD($k1.0, 1bv32);
+    $acc.1$2 := FADD32(FMUL32(v10$2, v11$2), $acc.1$2);
     assume {:captureState "loop_back_edge_state_0_0"} true;
     goto $8;
 
@@ -283,8 +278,8 @@ assert  my_inv (  (  BV32_SLE($k1.0, 0bv32) ) ,  (  BV32_SGE($k1.0, 0bv32) ) ,  
   $5:
     havoc v5$1, v5$2;
     havoc v6$1, v6$2;
-    $acc.0$1, $k.0 := FADD32($acc.0$1, FMUL32(v5$1, v6$1)), BV32_ADD($k.0, 1bv32);
-    $acc.0$2 := FADD32($acc.0$2, FMUL32(v5$2, v6$2));
+    $acc.0$1, $k.0 := FADD32(FMUL32(v5$1, v6$1), $acc.0$1), BV32_ADD($k.0, 1bv32);
+    $acc.0$2 := FADD32(FMUL32(v5$2, v6$2), $acc.0$2);
     assume {:captureState "loop_back_edge_state_1_0"} true;
     goto $1;
 
@@ -747,7 +742,3 @@ implementation {:inline 1} $bugle_barrier_duplicated_0($0: bv1, $1: bv1)
 function {:bvbuiltin "bvsgt"} BV32_SGT(bv32, bv32) : bool;
 
 function {:bvbuiltin "bvslt"} BV32_SLT(bv32, bv32) : bool;
-
-function {:bvbuiltin "bvsdiv"} BV32_DIV(bv32, bv32) : bv32;
-
-

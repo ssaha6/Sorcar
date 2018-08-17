@@ -202,8 +202,8 @@ implementation {:source_name "bisectKernelLarge_OneIntervals"} {:kernel} $_Z30bi
   var $count.i.1$2: bv32;
   var $k.i.0$1: bv32;
   var $k.i.0$2: bv32;
-  var $cond.i$1: bv32;
-  var $cond.i$2: bv32;
+  var $0$1: bv32;
+  var $0$2: bv32;
   var $left.4$1: bv32;
   var $left.4$2: bv32;
   var $right.4$1: bv32;
@@ -214,66 +214,50 @@ implementation {:source_name "bisectKernelLarge_OneIntervals"} {:kernel} $_Z30bi
   var $left.2$2: bv32;
   var $right.2$1: bv32;
   var $right.2$2: bv32;
-  var $cond$1: bv32;
-  var $cond$2: bv32;
-  var $cond28$1: bv32;
-  var $cond28$2: bv32;
-  var $mid.i.49.0$1: bv32;
-  var $mid.i.49.0$2: bv32;
+  var $1$1: bv32;
+  var $1$2: bv32;
+  var $2$1: bv32;
+  var $2$2: bv32;
+  var $mid.i1.0$1: bv32;
+  var $mid.i1.0$2: bv32;
   var $left.3$1: bv32;
   var $left.3$2: bv32;
   var $right.3$1: bv32;
   var $right.3$2: bv32;
   var $converged.1$1: bv32;
   var $converged.1$2: bv32;
-  var v5$1: bool;
-  var v5$2: bool;
   var v0$1: bv32;
   var v0$2: bv32;
   var v1$1: bool;
   var v1$2: bool;
+  var v41$1: bv32;
+  var v41$2: bv32;
+  var v40$1: bv32;
+  var v40$2: bv32;
+  var v39$1: bv32;
+  var v39$2: bv32;
   var v2$1: bv32;
   var v2$2: bv32;
   var v3$1: bv32;
   var v3$2: bv32;
   var v4$1: bv32;
   var v4$2: bv32;
+  var v5$1: bool;
+  var v5$2: bool;
+  var v6$1: bool;
+  var v6$2: bool;
+  var v7$1: bool;
+  var v7$2: bool;
   var v8$1: bv32;
   var v8$2: bv32;
   var v9$1: bv32;
   var v9$2: bv32;
-  var v39$1: bv32;
-  var v39$2: bv32;
-  var v40$1: bv32;
-  var v40$2: bv32;
-  var v41$1: bv32;
-  var v41$2: bv32;
-  var v6$1: bool;
-  var v6$2: bool;
   var v10$1: bool;
   var v10$2: bool;
-  var v7$1: bool;
-  var v7$2: bool;
   var v11$1: bool;
   var v11$2: bool;
-  var v19$1: bv32;
-  var v19$2: bv32;
-  var v20$1: bv32;
-  var v20$2: bv32;
-  var v18$1: bv32;
-  var v18$2: bv32;
-  var v26$1: bv32;
-  var v26$2: bv32;
-  var v28$1: bv32;
-  var v28$2: bv32;
-  var v33$1: bv32;
-  var v33$2: bv32;
-  var v34$1: bv32;
-  var v34$2: bv32;
-  var v29$1: bv32;
-  var v29$2: bv32;
-  var v25$1: bv32;
-  var v25$2: bv32;
+  var v12$1: bool;
+  var v12$2: bool;
   var v13$1: bv32;
   var v13$2: bv32;
   var v14$1: bv32;
@@ -282,34 +266,50 @@ implementation {:source_name "bisectKernelLarge_OneIntervals"} {:kernel} $_Z30bi
   var v15$2: bool;
   var v16$1: bool;
   var v16$2: bool;
-  var v12$1: bool;
-  var v12$2: bool;
-  var v27$1: bool;
-  var v27$2: bool;
+  var v17$1: bool;
+  var v17$2: bool;
+  var v18$1: bv32;
+  var v18$2: bv32;
+  var v19$1: bv32;
+  var v19$2: bv32;
+  var v20$1: bv32;
+  var v20$2: bv32;
+  var v21$1: bv32;
+  var v21$2: bv32;
   var v22$1: bool;
   var v22$2: bool;
   var v23$1: bool;
   var v23$2: bool;
   var v24$1: bool;
   var v24$2: bool;
-  var v35$1: bool;
-  var v35$2: bool;
+  var v25$1: bv32;
+  var v25$2: bv32;
+  var v26$1: bv32;
+  var v26$2: bv32;
+  var v27$1: bool;
+  var v27$2: bool;
+  var v28$1: bv32;
+  var v28$2: bv32;
+  var v29$1: bv32;
+  var v29$2: bv32;
   var v30$1: bv32;
   var v30$2: bv32;
-  var v32$1: bool;
-  var v32$2: bool;
   var v31$1: bool;
   var v31$2: bool;
-  var v21$1: bv32;
-  var v21$2: bv32;
-  var v17$1: bool;
-  var v17$2: bool;
+  var v32$1: bool;
+  var v32$2: bool;
+  var v33$1: bv32;
+  var v33$2: bv32;
+  var v34$1: bv32;
+  var v34$2: bv32;
+  var v35$1: bool;
+  var v35$2: bool;
+  var v36$1: bv32;
+  var v36$2: bv32;
   var v37$1: bool;
   var v37$2: bool;
   var v38$1: bool;
   var v38$2: bool;
-  var v36$1: bv32;
-  var v36$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -390,15 +390,15 @@ implementation {:source_name "bisectKernelLarge_OneIntervals"} {:kernel} $_Z30bi
   var p38$2: bool;
   var _HAVOC_bv32$1: bv32;
   var _HAVOC_bv32$2: bv32;
-  var _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch$ghost$__partitioned_block_$for.cond.i_0: bool;
-  var _WRITE_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch$ghost$__partitioned_block_$for.cond.i_0: bool;
-  var _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch$ghost$__partitioned_block_$for.cond.i_0: bool;
-  var _WRITE_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch$ghost$__partitioned_block_$for.cond.i_0: bool;
-  var _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch$ghost$$for.cond.9.i: bool;
-  var _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch$ghost$$for.cond.9.i: bool;
+  var _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch$ghost$__partitioned_block_$11_0: bool;
+  var _WRITE_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch$ghost$__partitioned_block_$11_0: bool;
+  var _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch$ghost$__partitioned_block_$11_0: bool;
+  var _WRITE_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch$ghost$__partitioned_block_$11_0: bool;
+  var _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch$ghost$$16: bool;
+  var _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch$ghost$$16: bool;
 
 
-  __partitioned_block_$entry_0:
+  __partitioned_block_$0_0:
     v0$1 := BV32_ADD(BV32_MUL(group_size_x, group_id_x$1), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_size_x, group_id_x$2), local_id_x$2);
     v1$1 := BV32_ULT(v0$1, $num_intervals);
@@ -451,18 +451,18 @@ implementation {:source_name "bisectKernelLarge_OneIntervals"} {:kernel} $_Z30bi
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE21converged_all_threads"} true;
     $$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE21converged_all_threads[1bv1][0bv32] := (if p2$1 then 0bv32 else $$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE21converged_all_threads[1bv1][0bv32]);
     $$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE21converged_all_threads[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][0bv32] := (if p2$2 then 0bv32 else $$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE21converged_all_threads[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][0bv32]);
-    goto __partitioned_block_$entry_1;
+    goto __partitioned_block_$0_1;
 
-  __partitioned_block_$entry_1:
+  __partitioned_block_$0_1:
     call {:sourceloc_num 9} $bugle_barrier_duplicated_0(1bv1, 1bv1);
     $left.1$1, $right.1$1, $converged.0$1, $mid.0$1 := $left.0$1, $right.0$1, 0bv32, 0bv32;
     $left.1$2, $right.1$2, $converged.0$2, $mid.0$2 := $left.0$2, $right.0$2, 0bv32, 0bv32;
     p4$1 := true;
     p4$2 := true;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $while.body;
+    goto $5;
 
-  $while.body:
+  $5:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b88 ==> _WRITE_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "nowrite"} _b87 ==> !_WRITE_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch;
@@ -474,42 +474,42 @@ implementation {:source_name "bisectKernelLarge_OneIntervals"} {:kernel} $_Z30bi
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b81 ==> _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE21converged_all_threads ==> _WATCHED_OFFSET == 0bv32;
     assert {:tag "nowrite"} _b80 ==> !_WRITE_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE21converged_all_threads;
     assert {:tag "noread"} _b79 ==> !_READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE21converged_all_threads;
-    assert {:tag "predicatedEquality"} _b78 ==> p4$1 && p4$2 ==> v36$1 == v36$2;
-    assert {:tag "predicatedEquality"} _b77 ==> p4$1 && p4$2 ==> v37$1 == v37$2;
-    assert {:tag "predicatedEquality"} _b76 ==> p4$1 && p4$2 ==> v17$1 == v17$2;
-    assert {:tag "predicatedEquality"} _b75 ==> p4$1 && p4$2 ==> v21$1 == v21$2;
+    assert {:tag "predicatedEquality"} _b78 ==> p4$1 && p4$2 ==> v37$1 == v37$2;
+    assert {:tag "predicatedEquality"} _b77 ==> p4$1 && p4$2 ==> v36$1 == v36$2;
+    assert {:tag "predicatedEquality"} _b76 ==> p4$1 && p4$2 ==> v35$1 == v35$2;
+    assert {:tag "predicatedEquality"} _b75 ==> p4$1 && p4$2 ==> v32$1 == v32$2;
     assert {:tag "predicatedEquality"} _b74 ==> p4$1 && p4$2 ==> v31$1 == v31$2;
-    assert {:tag "predicatedEquality"} _b73 ==> p4$1 && p4$2 ==> v32$1 == v32$2;
-    assert {:tag "predicatedEquality"} _b72 ==> p4$1 && p4$2 ==> v30$1 == v30$2;
-    assert {:tag "predicatedEquality"} _b71 ==> p4$1 && p4$2 ==> v35$1 == v35$2;
-    assert {:tag "predicatedEquality"} _b70 ==> p4$1 && p4$2 ==> v24$1 == v24$2;
-    assert {:tag "predicatedEquality"} _b69 ==> p4$1 && p4$2 ==> v23$1 == v23$2;
-    assert {:tag "predicatedEquality"} _b68 ==> p4$1 && p4$2 ==> v22$1 == v22$2;
-    assert {:tag "predicatedEquality"} _b67 ==> p4$1 && p4$2 ==> v27$1 == v27$2;
-    assert {:tag "predicatedEquality"} _b66 ==> p4$1 && p4$2 ==> v12$1 == v12$2;
-    assert {:tag "predicatedEquality"} _b65 ==> p4$1 && p4$2 ==> v16$1 == v16$2;
-    assert {:tag "predicatedEquality"} _b64 ==> p4$1 && p4$2 ==> v15$1 == v15$2;
-    assert {:tag "predicatedEquality"} _b63 ==> p4$1 && p4$2 ==> v14$1 == v14$2;
-    assert {:tag "predicatedEquality"} _b62 ==> p4$1 && p4$2 ==> v13$1 == v13$2;
-    assert {:tag "predicatedEquality"} _b61 ==> p4$1 && p4$2 ==> v18$1 == v18$2;
-    assert {:tag "predicatedEquality"} _b60 ==> p4$1 && p4$2 ==> v20$1 == v20$2;
-    assert {:tag "predicatedEquality"} _b59 ==> p4$1 && p4$2 ==> v19$1 == v19$2;
+    assert {:tag "predicatedEquality"} _b73 ==> p4$1 && p4$2 ==> v30$1 == v30$2;
+    assert {:tag "predicatedEquality"} _b72 ==> p4$1 && p4$2 ==> v27$1 == v27$2;
+    assert {:tag "predicatedEquality"} _b71 ==> p4$1 && p4$2 ==> v24$1 == v24$2;
+    assert {:tag "predicatedEquality"} _b70 ==> p4$1 && p4$2 ==> v23$1 == v23$2;
+    assert {:tag "predicatedEquality"} _b69 ==> p4$1 && p4$2 ==> v22$1 == v22$2;
+    assert {:tag "predicatedEquality"} _b68 ==> p4$1 && p4$2 ==> v21$1 == v21$2;
+    assert {:tag "predicatedEquality"} _b67 ==> p4$1 && p4$2 ==> v20$1 == v20$2;
+    assert {:tag "predicatedEquality"} _b66 ==> p4$1 && p4$2 ==> v19$1 == v19$2;
+    assert {:tag "predicatedEquality"} _b65 ==> p4$1 && p4$2 ==> v18$1 == v18$2;
+    assert {:tag "predicatedEquality"} _b64 ==> p4$1 && p4$2 ==> v17$1 == v17$2;
+    assert {:tag "predicatedEquality"} _b63 ==> p4$1 && p4$2 ==> v16$1 == v16$2;
+    assert {:tag "predicatedEquality"} _b62 ==> p4$1 && p4$2 ==> v15$1 == v15$2;
+    assert {:tag "predicatedEquality"} _b61 ==> p4$1 && p4$2 ==> v14$1 == v14$2;
+    assert {:tag "predicatedEquality"} _b60 ==> p4$1 && p4$2 ==> v13$1 == v13$2;
+    assert {:tag "predicatedEquality"} _b59 ==> p4$1 && p4$2 ==> v12$1 == v12$2;
     assert {:tag "predicatedEquality"} _b58 ==> p4$1 && p4$2 ==> v11$1 == v11$2;
-    assert {:tag "predicatedEquality"} _b57 ==> p4$1 && p4$2 ==> v7$1 == v7$2;
-    assert {:tag "predicatedEquality"} _b56 ==> p4$1 && p4$2 ==> v10$1 == v10$2;
+    assert {:tag "predicatedEquality"} _b57 ==> p4$1 && p4$2 ==> v10$1 == v10$2;
+    assert {:tag "predicatedEquality"} _b56 ==> p4$1 && p4$2 ==> v7$1 == v7$2;
     assert {:tag "predicatedEquality"} _b55 ==> p4$1 && p4$2 ==> v6$1 == v6$2;
     assert {:tag "predicatedEquality"} _b54 ==> p4$1 && p4$2 ==> $converged.1$1 == $converged.1$2;
     assert {:tag "predicatedEquality"} _b53 ==> p4$1 && p4$2 ==> $right.3$1 == $right.3$2;
     assert {:tag "predicatedEquality"} _b52 ==> p4$1 && p4$2 ==> $left.3$1 == $left.3$2;
-    assert {:tag "predicatedEquality"} _b51 ==> p4$1 && p4$2 ==> $mid.i.49.0$1 == $mid.i.49.0$2;
-    assert {:tag "predicatedEquality"} _b50 ==> p4$1 && p4$2 ==> $cond28$1 == $cond28$2;
-    assert {:tag "predicatedEquality"} _b49 ==> p4$1 && p4$2 ==> $cond$1 == $cond$2;
+    assert {:tag "predicatedEquality"} _b51 ==> p4$1 && p4$2 ==> $mid.i1.0$1 == $mid.i1.0$2;
+    assert {:tag "predicatedEquality"} _b50 ==> p4$1 && p4$2 ==> $2$1 == $2$2;
+    assert {:tag "predicatedEquality"} _b49 ==> p4$1 && p4$2 ==> $1$1 == $1$2;
     assert {:tag "predicatedEquality"} _b48 ==> p4$1 && p4$2 ==> $right.2$1 == $right.2$2;
     assert {:tag "predicatedEquality"} _b47 ==> p4$1 && p4$2 ==> $left.2$1 == $left.2$2;
     assert {:tag "predicatedEquality"} _b46 ==> p4$1 && p4$2 ==> $converged.2$1 == $converged.2$2;
     assert {:tag "predicatedEquality"} _b45 ==> p4$1 && p4$2 ==> $right.4$1 == $right.4$2;
     assert {:tag "predicatedEquality"} _b44 ==> p4$1 && p4$2 ==> $left.4$1 == $left.4$2;
-    assert {:tag "predicatedEquality"} _b43 ==> p4$1 && p4$2 ==> $cond.i$1 == $cond.i$2;
+    assert {:tag "predicatedEquality"} _b43 ==> p4$1 && p4$2 ==> $0$1 == $0$2;
     assert {:tag "predicatedEquality"} _b42 ==> p4$1 && p4$2 ==> $k.i.0$1 == $k.i.0$2;
     assert {:tag "predicatedEquality"} _b41 ==> p4$1 && p4$2 ==> $count.i.1$1 == $count.i.1$2;
     assert {:tag "predicatedEquality"} _b40 ==> p4$1 && p4$2 ==> $delta.i.1$1 == $delta.i.1$2;
@@ -602,37 +602,37 @@ implementation {:source_name "bisectKernelLarge_OneIntervals"} {:kernel} $_Z30bi
     $delta.i.0$2, $count.i.0$2, $rem.i.0$2, $i.i.0$2 := (if p4$2 then 1065353216bv32 else $delta.i.0$2), (if p4$2 then 0bv32 else $count.i.0$2), (if p4$2 then $n else $rem.i.0$2), (if p4$2 then 0bv32 else $i.i.0$2);
     p11$1 := (if p4$1 then true else p11$1);
     p11$2 := (if p4$2 then true else p11$2);
-    _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch$ghost$__partitioned_block_$for.cond.i_0 := _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch;
-    _WRITE_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch$ghost$__partitioned_block_$for.cond.i_0 := _WRITE_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch;
-    _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch$ghost$__partitioned_block_$for.cond.i_0 := _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch;
-    _WRITE_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch$ghost$__partitioned_block_$for.cond.i_0 := _WRITE_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch;
+    _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch$ghost$__partitioned_block_$11_0 := _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch;
+    _WRITE_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch$ghost$__partitioned_block_$11_0 := _WRITE_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch;
+    _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch$ghost$__partitioned_block_$11_0 := _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch;
+    _WRITE_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch$ghost$__partitioned_block_$11_0 := _WRITE_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto __partitioned_block_$for.cond.i_0;
+    goto __partitioned_block_$11_0;
 
-  __partitioned_block_$for.cond.i_0:
+  __partitioned_block_$11_0:
     assume {:captureState "loop_head_state_1"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b121 ==> !p4$1 ==> _WRITE_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch$ghost$__partitioned_block_$for.cond.i_0 == _WRITE_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch;
-    assert {:tag "disabledMaintainsInstrumentation"} _b120 ==> !p4$1 ==> _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch$ghost$__partitioned_block_$for.cond.i_0 == _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch;
+    assert {:tag "disabledMaintainsInstrumentation"} _b121 ==> !p4$1 ==> _WRITE_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch$ghost$__partitioned_block_$11_0 == _WRITE_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch;
+    assert {:tag "disabledMaintainsInstrumentation"} _b120 ==> !p4$1 ==> _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch$ghost$__partitioned_block_$11_0 == _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b119 ==> _WRITE_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "nowrite"} _b118 ==> !_WRITE_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch;
     assert {:tag "noread"} _b117 ==> !_READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch;
-    assert {:tag "disabledMaintainsInstrumentation"} _b116 ==> !p4$1 ==> _WRITE_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch$ghost$__partitioned_block_$for.cond.i_0 == _WRITE_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch;
-    assert {:tag "disabledMaintainsInstrumentation"} _b115 ==> !p4$1 ==> _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch$ghost$__partitioned_block_$for.cond.i_0 == _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch;
+    assert {:tag "disabledMaintainsInstrumentation"} _b116 ==> !p4$1 ==> _WRITE_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch$ghost$__partitioned_block_$11_0 == _WRITE_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch;
+    assert {:tag "disabledMaintainsInstrumentation"} _b115 ==> !p4$1 ==> _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch$ghost$__partitioned_block_$11_0 == _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b114 ==> _WRITE_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "nowrite"} _b113 ==> !_WRITE_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch;
     assert {:tag "noread"} _b112 ==> !_READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch;
-    assert {:tag "predicatedEquality"} _b111 ==> p11$1 && p11$2 ==> v17$1 == v17$2;
-    assert {:tag "predicatedEquality"} _b110 ==> p11$1 && p11$2 ==> v21$1 == v21$2;
-    assert {:tag "predicatedEquality"} _b109 ==> p11$1 && p11$2 ==> v12$1 == v12$2;
-    assert {:tag "predicatedEquality"} _b108 ==> p11$1 && p11$2 ==> v16$1 == v16$2;
-    assert {:tag "predicatedEquality"} _b107 ==> p11$1 && p11$2 ==> v15$1 == v15$2;
-    assert {:tag "predicatedEquality"} _b106 ==> p11$1 && p11$2 ==> v14$1 == v14$2;
-    assert {:tag "predicatedEquality"} _b105 ==> p11$1 && p11$2 ==> v13$1 == v13$2;
-    assert {:tag "predicatedEquality"} _b104 ==> p11$1 && p11$2 ==> v18$1 == v18$2;
-    assert {:tag "predicatedEquality"} _b103 ==> p11$1 && p11$2 ==> v20$1 == v20$2;
-    assert {:tag "predicatedEquality"} _b102 ==> p11$1 && p11$2 ==> v19$1 == v19$2;
+    assert {:tag "predicatedEquality"} _b111 ==> p11$1 && p11$2 ==> v21$1 == v21$2;
+    assert {:tag "predicatedEquality"} _b110 ==> p11$1 && p11$2 ==> v20$1 == v20$2;
+    assert {:tag "predicatedEquality"} _b109 ==> p11$1 && p11$2 ==> v19$1 == v19$2;
+    assert {:tag "predicatedEquality"} _b108 ==> p11$1 && p11$2 ==> v18$1 == v18$2;
+    assert {:tag "predicatedEquality"} _b107 ==> p11$1 && p11$2 ==> v17$1 == v17$2;
+    assert {:tag "predicatedEquality"} _b106 ==> p11$1 && p11$2 ==> v16$1 == v16$2;
+    assert {:tag "predicatedEquality"} _b105 ==> p11$1 && p11$2 ==> v15$1 == v15$2;
+    assert {:tag "predicatedEquality"} _b104 ==> p11$1 && p11$2 ==> v14$1 == v14$2;
+    assert {:tag "predicatedEquality"} _b103 ==> p11$1 && p11$2 ==> v13$1 == v13$2;
+    assert {:tag "predicatedEquality"} _b102 ==> p11$1 && p11$2 ==> v12$1 == v12$2;
     assert {:tag "predicatedEquality"} _b101 ==> p11$1 && p11$2 ==> v11$1 == v11$2;
-    assert {:tag "predicatedEquality"} _b100 ==> p11$1 && p11$2 ==> $cond.i$1 == $cond.i$2;
+    assert {:tag "predicatedEquality"} _b100 ==> p11$1 && p11$2 ==> $0$1 == $0$2;
     assert {:tag "predicatedEquality"} _b99 ==> p11$1 && p11$2 ==> $k.i.0$1 == $k.i.0$2;
     assert {:tag "predicatedEquality"} _b98 ==> p11$1 && p11$2 ==> $count.i.1$1 == $count.i.1$2;
     assert {:tag "predicatedEquality"} _b97 ==> p11$1 && p11$2 ==> $delta.i.1$1 == $delta.i.1$2;
@@ -735,9 +735,9 @@ implementation {:source_name "bisectKernelLarge_OneIntervals"} {:kernel} $_Z30bi
     p12$2 := (if p11$2 && v11$2 then v11$2 else p12$2);
     p11$1 := (if p11$1 && !v11$1 then v11$1 else p11$1);
     p11$2 := (if p11$2 && !v11$2 then v11$2 else p11$2);
-    goto __partitioned_block_$for.cond.i_1;
+    goto __partitioned_block_$11_1;
 
-  __partitioned_block_$for.cond.i_1:
+  __partitioned_block_$11_1:
     call {:sourceloc_num 22} $bugle_barrier_duplicated_5(1bv1, 1bv1, p12$1, p12$2);
     v12$1 := (if p12$1 then BV32_ULT(BV32_ADD($i.i.0$1, local_id_x$1), $n) else v12$1);
     v12$2 := (if p12$2 then BV32_ULT(BV32_ADD($i.i.0$2, local_id_x$2), $n) else v12$2);
@@ -763,9 +763,9 @@ implementation {:source_name "bisectKernelLarge_OneIntervals"} {:kernel} $_Z30bi
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch"} true;
     $$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch[1bv1][local_id_x$1] := (if p14$1 then v14$1 else $$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch[1bv1][local_id_x$1]);
     $$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2] := (if p14$2 then v14$2 else $$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2]);
-    goto __partitioned_block_$for.cond.i_2;
+    goto __partitioned_block_$11_2;
 
-  __partitioned_block_$for.cond.i_2:
+  __partitioned_block_$11_2:
     call {:sourceloc_num 29} $bugle_barrier_duplicated_6(1bv1, 1bv1, p12$1, p12$2);
     v15$1 := (if p12$1 then BV32_ULT(v0$1, $num_intervals) else v15$1);
     v15$2 := (if p12$2 then BV32_ULT(v0$2, $num_intervals) else v15$2);
@@ -779,15 +779,15 @@ implementation {:source_name "bisectKernelLarge_OneIntervals"} {:kernel} $_Z30bi
     $delta.i.1$2, $count.i.1$2, $k.i.0$2 := (if p16$2 then $delta.i.0$2 else $delta.i.1$2), (if p16$2 then $count.i.0$2 else $count.i.1$2), (if p16$2 then 0bv32 else $k.i.0$2);
     p17$1 := (if p16$1 then true else p17$1);
     p17$2 := (if p16$2 then true else p17$2);
-    _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch$ghost$$for.cond.9.i := _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch;
-    _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch$ghost$$for.cond.9.i := _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch;
+    _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch$ghost$$16 := _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch;
+    _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch$ghost$$16 := _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch;
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond.9.i;
+    goto $16;
 
-  $for.cond.9.i:
+  $16:
     assume {:captureState "loop_head_state_2"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b123 ==> !p16$1 ==> _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch$ghost$$for.cond.9.i == _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch;
-    assert {:tag "disabledMaintainsInstrumentation"} _b122 ==> !p16$1 ==> _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch$ghost$$for.cond.9.i == _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch;
+    assert {:tag "disabledMaintainsInstrumentation"} _b123 ==> !p16$1 ==> _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch$ghost$$16 == _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch;
+    assert {:tag "disabledMaintainsInstrumentation"} _b122 ==> !p16$1 ==> _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch$ghost$$16 == _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -806,8 +806,8 @@ implementation {:source_name "bisectKernelLarge_OneIntervals"} {:kernel} $_Z30bi
     assert {:do_not_predicate} {:tag "accessOnlyIfEnabledInEnclosingScopes"} {:thread 1} _b24 ==> _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE15s_right_scratch ==> BV32_ULT($i.i.0$1, $n);
     assert {:do_not_predicate} {:tag "accessOnlyIfEnabledInEnclosingScopes"} {:thread 1} _b23 ==> _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch ==> BV32_ULT(BV32_ADD(BV32_MUL(group_size_x, group_id_x$1), local_id_x$1), $num_intervals);
     assert {:do_not_predicate} {:tag "accessOnlyIfEnabledInEnclosingScopes"} {:thread 1} _b22 ==> _READ_HAS_OCCURRED_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE14s_left_scratch ==> BV32_ULT($i.i.0$1, $n);
-    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 1} _b21 ==> BV32_ULT($i.i.0$1, $n) && BV32_ULT(BV32_ADD(BV32_MUL(group_size_x, group_id_x$1), local_id_x$1), $num_intervals) && BV32_ULT($k.i.0$1, $cond.i$1) ==> p17$1;
-    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 2} _b21 ==> BV32_ULT($i.i.0$2, $n) && BV32_ULT(BV32_ADD(BV32_MUL(group_size_x, group_id_x$2), local_id_x$2), $num_intervals) && BV32_ULT($k.i.0$2, $cond.i$2) ==> p17$2;
+    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 1} _b21 ==> BV32_ULT($i.i.0$1, $n) && BV32_ULT(BV32_ADD(BV32_MUL(group_size_x, group_id_x$1), local_id_x$1), $num_intervals) && BV32_ULT($k.i.0$1, $0$1) ==> p17$1;
+    assert {:do_not_predicate} {:tag "conditionsImplyingEnabledness"} {:thread 2} _b21 ==> BV32_ULT($i.i.0$2, $n) && BV32_ULT(BV32_ADD(BV32_MUL(group_size_x, group_id_x$2), local_id_x$2), $num_intervals) && BV32_ULT($k.i.0$2, $0$2) ==> p17$2;
     assert {:tag "conditionsImpliedByEnabledness"} {:thread 1} p17$1 ==> _b20 ==> p17$1 ==> BV32_ULT($i.i.0$1, $n) && BV32_ULT(BV32_ADD(BV32_MUL(group_size_x, group_id_x$1), local_id_x$1), $num_intervals);
     assert {:tag "conditionsImpliedByEnabledness"} {:thread 2} p17$2 ==> _b20 ==> p17$2 ==> BV32_ULT($i.i.0$2, $n) && BV32_ULT(BV32_ADD(BV32_MUL(group_size_x, group_id_x$2), local_id_x$2), $num_intervals);
     assert {:tag "loopBound"} {:thread 1} p17$1 ==> _b19 ==> BV32_UGE($k.i.0$1, 0bv32);
@@ -831,12 +831,12 @@ implementation {:source_name "bisectKernelLarge_OneIntervals"} {:kernel} $_Z30bi
     p19$2 := (if p17$2 && v16$2 then v16$2 else p19$2);
     p18$1 := (if p17$1 && !v16$1 then !v16$1 else p18$1);
     p18$2 := (if p17$2 && !v16$2 then !v16$2 else p18$2);
-    $cond.i$1 := (if p18$1 then group_size_x else $cond.i$1);
-    $cond.i$2 := (if p18$2 then group_size_x else $cond.i$2);
-    $cond.i$1 := (if p19$1 then $rem.i.0$1 else $cond.i$1);
-    $cond.i$2 := (if p19$2 then $rem.i.0$2 else $cond.i$2);
-    v17$1 := (if p17$1 then BV32_ULT($k.i.0$1, $cond.i$1) else v17$1);
-    v17$2 := (if p17$2 then BV32_ULT($k.i.0$2, $cond.i$2) else v17$2);
+    $0$1 := (if p18$1 then group_size_x else $0$1);
+    $0$2 := (if p18$2 then group_size_x else $0$2);
+    $0$1 := (if p19$1 then $rem.i.0$1 else $0$1);
+    $0$2 := (if p19$2 then $rem.i.0$2 else $0$2);
+    v17$1 := (if p17$1 then BV32_ULT($k.i.0$1, $0$1) else v17$1);
+    v17$2 := (if p17$2 then BV32_ULT($k.i.0$2, $0$2) else v17$2);
     p20$1 := (if p17$1 && v17$1 then v17$1 else p20$1);
     p20$2 := (if p17$2 && v17$2 then v17$2 else p20$2);
     p17$1 := (if p17$1 && !v17$1 then v17$1 else p17$1);
@@ -865,9 +865,9 @@ implementation {:source_name "bisectKernelLarge_OneIntervals"} {:kernel} $_Z30bi
     $delta.i.1$2, $count.i.1$2, $k.i.0$2 := (if p20$2 then v21$2 else $delta.i.1$2), (if p20$2 then BV32_ADD($count.i.1$2, (if FLT32(v21$2, 0bv32) then 1bv32 else 0bv32)) else $count.i.1$2), (if p20$2 then BV32_ADD($k.i.0$2, 1bv32) else $k.i.0$2);
     p17$1 := (if p20$1 then true else p17$1);
     p17$2 := (if p20$2 then true else p17$2);
-    goto $for.cond.9.i.backedge, $for.cond.9.i.tail;
+    goto $16.backedge, $16.tail;
 
-  $for.cond.9.i.tail:
+  $16.tail:
     assume !p17$1 && !p17$2;
     $delta.i.2$1, $count.i.2$1 := (if p16$1 then $delta.i.1$1 else $delta.i.2$1), (if p16$1 then $count.i.1$1 else $count.i.2$1);
     $delta.i.2$2, $count.i.2$2 := (if p16$2 then $delta.i.1$2 else $delta.i.2$2), (if p16$2 then $count.i.1$2 else $count.i.2$2);
@@ -875,13 +875,13 @@ implementation {:source_name "bisectKernelLarge_OneIntervals"} {:kernel} $_Z30bi
     $delta.i.0$2, $count.i.0$2, $rem.i.0$2, $i.i.0$2 := (if p12$2 then $delta.i.2$2 else $delta.i.0$2), (if p12$2 then $count.i.2$2 else $count.i.0$2), (if p12$2 then BV32_SUB($rem.i.0$2, group_size_x) else $rem.i.0$2), (if p12$2 then BV32_ADD($i.i.0$2, group_size_x) else $i.i.0$2);
     p11$1 := (if p12$1 then true else p11$1);
     p11$2 := (if p12$2 then true else p11$2);
-    goto $for.cond.i.backedge, __partitioned_block_$for.cond.i.tail_0;
+    goto $11.backedge, __partitioned_block_$11.tail_0;
 
-  __partitioned_block_$for.cond.i.tail_0:
+  __partitioned_block_$11.tail_0:
     assume !p11$1 && !p11$2;
-    goto __partitioned_block_$for.cond.i.tail_1;
+    goto __partitioned_block_$11.tail_1;
 
-  __partitioned_block_$for.cond.i.tail_1:
+  __partitioned_block_$11.tail_1:
     call {:sourceloc_num 42} $bugle_barrier_duplicated_1(1bv1, 1bv1, p4$1, p4$2);
     v22$1 := (if p4$1 then BV32_ULT(v0$1, $num_intervals) else v22$1);
     v22$2 := (if p4$2 then BV32_ULT(v0$2, $num_intervals) else v22$2);
@@ -921,26 +921,26 @@ implementation {:source_name "bisectKernelLarge_OneIntervals"} {:kernel} $_Z30bi
     p27$2 := (if p24$2 && !v27$2 then !v27$2 else p27$2);
     call {:sourceloc_num 53} v29$1, v29$2 := $abs(p27$1, $right.2$1, p27$2, $right.2$2);
     assume {:captureState "call_return_state_0"} {:procedureName "$abs"} true;
-    $cond$1 := (if p27$1 then v29$1 else $cond$1);
-    $cond$2 := (if p27$2 then v29$2 else $cond$2);
+    $1$1 := (if p27$1 then v29$1 else $1$1);
+    $1$2 := (if p27$2 then v29$2 else $1$2);
     call {:sourceloc_num 51} v28$1, v28$2 := $abs(p28$1, $left.2$1, p28$2, $left.2$2);
     assume {:captureState "call_return_state_0"} {:procedureName "$abs"} true;
-    $cond$1 := (if p28$1 then v28$1 else $cond$1);
-    $cond$2 := (if p28$2 then v28$2 else $cond$2);
-    v30$1 := (if p24$1 then FMUL32($cond$1, $precision) else v30$1);
-    v30$2 := (if p24$2 then FMUL32($cond$2, $precision) else v30$2);
+    $1$1 := (if p28$1 then v28$1 else $1$1);
+    $1$2 := (if p28$2 then v28$2 else $1$2);
+    v30$1 := (if p24$1 then FMUL32($1$1, $precision) else v30$1);
+    v30$2 := (if p24$2 then FMUL32($1$2, $precision) else v30$2);
     v31$1 := (if p24$1 then FLT32($precision, v30$1) else v31$1);
     v31$2 := (if p24$2 then FLT32($precision, v30$2) else v31$2);
     p30$1 := (if p24$1 && v31$1 then v31$1 else p30$1);
     p30$2 := (if p24$2 && v31$2 then v31$2 else p30$2);
     p29$1 := (if p24$1 && !v31$1 then !v31$1 else p29$1);
     p29$2 := (if p24$2 && !v31$2 then !v31$2 else p29$2);
-    $cond28$1 := (if p29$1 then v30$1 else $cond28$1);
-    $cond28$2 := (if p29$2 then v30$2 else $cond28$2);
-    $cond28$1 := (if p30$1 then $precision else $cond28$1);
-    $cond28$2 := (if p30$2 then $precision else $cond28$2);
-    v32$1 := (if p24$1 then FLT32(FSUB32($right.2$1, $left.2$1), $cond28$1) else v32$1);
-    v32$2 := (if p24$2 then FLT32(FSUB32($right.2$2, $left.2$2), $cond28$2) else v32$2);
+    $2$1 := (if p29$1 then v30$1 else $2$1);
+    $2$2 := (if p29$2 then v30$2 else $2$2);
+    $2$1 := (if p30$1 then $precision else $2$1);
+    $2$2 := (if p30$2 then $precision else $2$2);
+    v32$1 := (if p24$1 then FLT32(FSUB32($right.2$1, $left.2$1), $2$1) else v32$1);
+    v32$2 := (if p24$2 then FLT32(FSUB32($right.2$2, $left.2$2), $2$2) else v32$2);
     p32$1 := (if p24$1 && v32$1 then v32$1 else p32$1);
     p32$2 := (if p24$2 && v32$2 then v32$2 else p32$2);
     p31$1 := (if p24$1 && !v32$1 then !v32$1 else p31$1);
@@ -964,17 +964,17 @@ implementation {:source_name "bisectKernelLarge_OneIntervals"} {:kernel} $_Z30bi
     p34$2 := (if p32$2 && v35$2 then v35$2 else p34$2);
     p33$1 := (if p32$1 && !v35$1 then !v35$1 else p33$1);
     p33$2 := (if p32$2 && !v35$2 then !v35$2 else p33$2);
-    $mid.i.49.0$1 := (if p33$1 then FMUL32(FADD32($left.2$1, $right.2$1), 1056964608bv32) else $mid.i.49.0$1);
-    $mid.i.49.0$2 := (if p33$2 then FMUL32(FADD32($left.2$2, $right.2$2), 1056964608bv32) else $mid.i.49.0$2);
-    $mid.i.49.0$1 := (if p34$1 then FADD32($left.2$1, FMUL32(FSUB32($right.2$1, $left.2$1), 1056964608bv32)) else $mid.i.49.0$1);
-    $mid.i.49.0$2 := (if p34$2 then FADD32($left.2$2, FMUL32(FSUB32($right.2$2, $left.2$2), 1056964608bv32)) else $mid.i.49.0$2);
-    $left.3$1, $right.3$1, $converged.1$1 := (if p32$1 then $mid.i.49.0$1 else $left.3$1), (if p32$1 then $mid.i.49.0$1 else $right.3$1), (if p32$1 then 1bv32 else $converged.1$1);
-    $left.3$2, $right.3$2, $converged.1$2 := (if p32$2 then $mid.i.49.0$2 else $left.3$2), (if p32$2 then $mid.i.49.0$2 else $right.3$2), (if p32$2 then 1bv32 else $converged.1$2);
+    $mid.i1.0$1 := (if p33$1 then FMUL32(FADD32($left.2$1, $right.2$1), 1056964608bv32) else $mid.i1.0$1);
+    $mid.i1.0$2 := (if p33$2 then FMUL32(FADD32($left.2$2, $right.2$2), 1056964608bv32) else $mid.i1.0$2);
+    $mid.i1.0$1 := (if p34$1 then FADD32($left.2$1, FMUL32(FSUB32($right.2$1, $left.2$1), 1056964608bv32)) else $mid.i1.0$1);
+    $mid.i1.0$2 := (if p34$2 then FADD32($left.2$2, FMUL32(FSUB32($right.2$2, $left.2$2), 1056964608bv32)) else $mid.i1.0$2);
+    $left.3$1, $right.3$1, $converged.1$1 := (if p32$1 then $mid.i1.0$1 else $left.3$1), (if p32$1 then $mid.i1.0$1 else $right.3$1), (if p32$1 then 1bv32 else $converged.1$1);
+    $left.3$2, $right.3$2, $converged.1$2 := (if p32$2 then $mid.i1.0$2 else $left.3$2), (if p32$2 then $mid.i1.0$2 else $right.3$2), (if p32$2 then 1bv32 else $converged.1$2);
     $left.4$1, $right.4$1, $converged.2$1 := (if p24$1 then $left.3$1 else $left.4$1), (if p24$1 then $right.3$1 else $right.4$1), (if p24$1 then $converged.1$1 else $converged.2$1);
     $left.4$2, $right.4$2, $converged.2$2 := (if p24$2 then $left.3$2 else $left.4$2), (if p24$2 then $right.3$2 else $right.4$2), (if p24$2 then $converged.1$2 else $converged.2$2);
-    goto __partitioned_block_$for.cond.i.tail_2;
+    goto __partitioned_block_$11.tail_2;
 
-  __partitioned_block_$for.cond.i.tail_2:
+  __partitioned_block_$11.tail_2:
     call {:sourceloc_num 68} $bugle_barrier_duplicated_2(1bv1, 1bv1, p4$1, p4$2);
     call {:sourceloc} {:sourceloc_num 69} _LOG_READ_$$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE21converged_all_threads(p4$1, 0bv32, $$_ZZ30bisectKernelLarge_OneIntervalsPfS_jjS_S_PjfE21converged_all_threads[1bv1][0bv32]);
     assume {:do_not_predicate} {:check_id "check_state_1"} {:captureState "check_state_1"} {:sourceloc} {:sourceloc_num 69} true;
@@ -988,21 +988,21 @@ implementation {:source_name "bisectKernelLarge_OneIntervals"} {:kernel} $_Z30bi
     p4$2 := (if p4$2 && v37$2 then !v37$2 else p4$2);
     p35$1 := (if p4$1 && !v37$1 then !v37$1 else p35$1);
     p35$2 := (if p4$2 && !v37$2 then !v37$2 else p35$2);
-    goto __partitioned_block_$for.cond.i.tail_3;
+    goto __partitioned_block_$11.tail_3;
 
-  __partitioned_block_$for.cond.i.tail_3:
+  __partitioned_block_$11.tail_3:
     call {:sourceloc_num 72} $bugle_barrier_duplicated_3(1bv1, 1bv1, p35$1, p35$2);
     $left.1$1, $right.1$1, $converged.0$1, $mid.0$1 := (if p35$1 then $left.4$1 else $left.1$1), (if p35$1 then $right.4$1 else $right.1$1), (if p35$1 then $converged.2$1 else $converged.0$1), (if p35$1 then $mid.1$1 else $mid.0$1);
     $left.1$2, $right.1$2, $converged.0$2, $mid.0$2 := (if p35$2 then $left.4$2 else $left.1$2), (if p35$2 then $right.4$2 else $right.1$2), (if p35$2 then $converged.2$2 else $converged.0$2), (if p35$2 then $mid.1$2 else $mid.0$2);
     p4$1 := (if p35$1 then true else p4$1);
     p4$2 := (if p35$2 then true else p4$2);
-    goto $while.body.backedge, __partitioned_block_$while.body.tail_0;
+    goto $5.backedge, __partitioned_block_$5.tail_0;
 
-  __partitioned_block_$while.body.tail_0:
+  __partitioned_block_$5.tail_0:
     assume !p4$1 && !p4$2;
-    goto __partitioned_block_$while.body.tail_1;
+    goto __partitioned_block_$5.tail_1;
 
-  __partitioned_block_$while.body.tail_1:
+  __partitioned_block_$5.tail_1:
     call {:sourceloc_num 74} $bugle_barrier_duplicated_4(1bv1, 1bv1);
     v38$1 := BV32_ULT(v0$1, $num_intervals);
     v38$2 := BV32_ULT(v0$2, $num_intervals);
@@ -1017,20 +1017,20 @@ implementation {:source_name "bisectKernelLarge_OneIntervals"} {:kernel} $_Z30bi
     $$g_left[v0$2] := (if p37$2 then $left.4$2 else $$g_left[v0$2]);
     return;
 
-  $while.body.backedge:
+  $5.backedge:
     assume {:backedge} p4$1 || p4$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $while.body;
+    goto $5;
 
-  $for.cond.i.backedge:
+  $11.backedge:
     assume {:backedge} p11$1 || p11$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto __partitioned_block_$for.cond.i_0;
+    goto __partitioned_block_$11_0;
 
-  $for.cond.9.i.backedge:
+  $16.backedge:
     assume {:backedge} p17$1 || p17$2;
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond.9.i;
+    goto $16;
 }
 
 

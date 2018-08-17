@@ -6,9 +6,7 @@ function {:existential true} my_inv (
  b0004: bool,
  b0005: bool,
  b0006: bool,
- b0007: bool,
- b0008: bool,
- b0009: bool
+ b0007: bool
  ) : bool;
 type _SIZE_T_TYPE = bv32;
 
@@ -296,8 +294,6 @@ implementation {:source_name "transitive_closure_stage2_kernel"} {:kernel} $_Z32
     
     
     
-    
-    
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ32transitive_closure_stage2_kernelPjiE17curr_block_buffer ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ32transitive_closure_stage2_kernelPjiE17curr_block_buffer ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$_ZZ32transitive_closure_stage2_kernelPjiE17curr_block_buffer ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -308,7 +304,7 @@ implementation {:source_name "transitive_closure_stage2_kernel"} {:kernel} $_Z32
     
     
     
-assert  my_inv (  (  BV32_SLE($k.0, 0bv32) ) ,  (  BV32_SGE($k.0, 0bv32) ) ,  (  BV32_ULE($k.0, 0bv32) ) ,  (  BV32_UGE($k.0, 0bv32) ) ,  (  !_READ_HAS_OCCURRED_$$_ZZ32transitive_closure_stage2_kernelPjiE20primary_block_buffer ) ,  (  _READ_HAS_OCCURRED_$$_ZZ32transitive_closure_stage2_kernelPjiE20primary_block_buffer ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 8bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 8bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 8bv32), local_id_x$1)) ) ,  (  !_READ_HAS_OCCURRED_$$_ZZ32transitive_closure_stage2_kernelPjiE17curr_block_buffer ) ,  (  !_WRITE_HAS_OCCURRED_$$_ZZ32transitive_closure_stage2_kernelPjiE17curr_block_buffer ) ,  (  _READ_HAS_OCCURRED_$$_ZZ32transitive_closure_stage2_kernelPjiE17curr_block_buffer ==> _WATCHED_OFFSET == BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 8bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 8bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 8bv32), local_id_x$1)) ) ,  (  _WRITE_HAS_OCCURRED_$$_ZZ32transitive_closure_stage2_kernelPjiE17curr_block_buffer ==> _WATCHED_OFFSET == BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1) || _WATCHED_OFFSET == BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1) )  ); 
+assert  my_inv (  (  BV32_SLE($k.0, 0bv32) ) ,  (  BV32_SGE($k.0, 0bv32) ) ,  (  BV32_ULE($k.0, 0bv32) ) ,  (  BV32_UGE($k.0, 0bv32) ) ,  (  !_READ_HAS_OCCURRED_$$_ZZ32transitive_closure_stage2_kernelPjiE17curr_block_buffer ) ,  (  !_WRITE_HAS_OCCURRED_$$_ZZ32transitive_closure_stage2_kernelPjiE17curr_block_buffer ) ,  (  _READ_HAS_OCCURRED_$$_ZZ32transitive_closure_stage2_kernelPjiE17curr_block_buffer ==> _WATCHED_OFFSET == BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 8bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 8bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 8bv32), local_id_x$1)) ) ,  (  _WRITE_HAS_OCCURRED_$$_ZZ32transitive_closure_stage2_kernelPjiE17curr_block_buffer ==> _WATCHED_OFFSET == BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1) || _WATCHED_OFFSET == BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1) )  ); 
 
 
     assert {:block_sourceloc} {:sourceloc_num 14} true;
@@ -374,10 +370,7 @@ assert  my_inv (  (  BV32_SLE($k.0, 0bv32) ) ,  (  BV32_SGE($k.0, 0bv32) ) ,  ( 
     p8$2 := (if p7$2 && v10$2 then v10$2 else p8$2);
     p13$1 := (if p7$1 && !v10$1 then !v10$1 else p13$1);
     p13$2 := (if p7$2 && !v10$2 then !v10$2 else p13$2);
-    call {:sourceloc} {:sourceloc_num 19} _LOG_READ_$$_ZZ32transitive_closure_stage2_kernelPjiE20primary_block_buffer(p8$1, BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), $k.0), $$_ZZ32transitive_closure_stage2_kernelPjiE20primary_block_buffer[1bv1][BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), $k.0)]);
     assume {:do_not_predicate} {:check_id "check_state_10"} {:captureState "check_state_10"} {:sourceloc} {:sourceloc_num 19} true;
-    call {:check_id "check_state_10"} {:sourceloc} {:sourceloc_num 19} _CHECK_READ_$$_ZZ32transitive_closure_stage2_kernelPjiE20primary_block_buffer(p8$2, BV32_ADD(BV32_MUL(local_id_y$2, 8bv32), $k.0), $$_ZZ32transitive_closure_stage2_kernelPjiE20primary_block_buffer[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(local_id_y$2, 8bv32), $k.0)]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ32transitive_closure_stage2_kernelPjiE20primary_block_buffer"} true;
     v11$1 := (if p8$1 then $$_ZZ32transitive_closure_stage2_kernelPjiE20primary_block_buffer[1bv1][BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), $k.0)] else v11$1);
     v11$2 := (if p8$2 then $$_ZZ32transitive_closure_stage2_kernelPjiE20primary_block_buffer[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(local_id_y$2, 8bv32), $k.0)] else v11$2);
     v12$1 := (if p8$1 then v11$1 != 0bv32 else v12$1);
@@ -411,10 +404,7 @@ assert  my_inv (  (  BV32_SLE($k.0, 0bv32) ) ,  (  BV32_SGE($k.0, 0bv32) ) ,  ( 
     v16$2 := (if p13$2 then v15$2 != 0bv32 else v16$2);
     p15$1 := (if p13$1 && v16$1 then v16$1 else p15$1);
     p15$2 := (if p13$2 && v16$2 then v16$2 else p15$2);
-    call {:sourceloc} {:sourceloc_num 28} _LOG_READ_$$_ZZ32transitive_closure_stage2_kernelPjiE20primary_block_buffer(p15$1, BV32_ADD(BV32_MUL($k.0, 8bv32), local_id_x$1), $$_ZZ32transitive_closure_stage2_kernelPjiE20primary_block_buffer[1bv1][BV32_ADD(BV32_MUL($k.0, 8bv32), local_id_x$1)]);
     assume {:do_not_predicate} {:check_id "check_state_8"} {:captureState "check_state_8"} {:sourceloc} {:sourceloc_num 28} true;
-    call {:check_id "check_state_8"} {:sourceloc} {:sourceloc_num 28} _CHECK_READ_$$_ZZ32transitive_closure_stage2_kernelPjiE20primary_block_buffer(p15$2, BV32_ADD(BV32_MUL($k.0, 8bv32), local_id_x$2), $$_ZZ32transitive_closure_stage2_kernelPjiE20primary_block_buffer[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($k.0, 8bv32), local_id_x$2)]);
-    assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$_ZZ32transitive_closure_stage2_kernelPjiE20primary_block_buffer"} true;
     v17$1 := (if p15$1 then $$_ZZ32transitive_closure_stage2_kernelPjiE20primary_block_buffer[1bv1][BV32_ADD(BV32_MUL($k.0, 8bv32), local_id_x$1)] else v17$1);
     v17$2 := (if p15$2 then $$_ZZ32transitive_closure_stage2_kernelPjiE20primary_block_buffer[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($k.0, 8bv32), local_id_x$2)] else v17$2);
     v18$1 := (if p15$1 then v17$1 != 0bv32 else v18$1);
@@ -889,15 +879,11 @@ function {:bvbuiltin "bvslt"} BV32_SLT(bv32, bv32) : bool;
 
 
 
+
+
 function {:bvbuiltin "bvsub"} BV32_SUB(bv32, bv32) : bv32;
 
 function {:bvbuiltin "bvand"} BV32_AND(bv32, bv32) : bv32;
-
-
-
-
-
-
 
 
 

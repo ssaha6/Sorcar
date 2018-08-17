@@ -93,25 +93,25 @@ procedure {:source_name "transitive_closure_stage1_kernel"} {:kernel} $_Z32trans
 implementation {:source_name "transitive_closure_stage1_kernel"} {:kernel} $_Z32transitive_closure_stage1_kernelPji($passnum: bv32)
 {
   var $k.0: bv32;
-  var v5$1: bool;
-  var v5$2: bool;
   var v0$1: bv32;
   var v0$2: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
-  var v3: bool;
-  var v6$1: bv32;
-  var v6$2: bv32;
-  var v4$1: bv32;
-  var v4$2: bv32;
   var v2$1: bv32;
   var v2$2: bv32;
+  var v3: bool;
+  var v4$1: bv32;
+  var v4$2: bv32;
+  var v5$1: bool;
+  var v5$2: bool;
+  var v6$1: bv32;
+  var v6$2: bv32;
+  var v7$1: bool;
+  var v7$2: bool;
   var v8$1: bv32;
   var v8$2: bv32;
   var v9$1: bool;
   var v9$2: bool;
-  var v7$1: bool;
-  var v7$2: bool;
   var v10$1: bv32;
   var v10$2: bv32;
   var p0$1: bool;
@@ -128,7 +128,7 @@ implementation {:source_name "transitive_closure_stage1_kernel"} {:kernel} $_Z32
   var p5$2: bool;
 
 
-  __partitioned_block_$entry_0:
+  __partitioned_block_$0_0:
     v0$1 := BV32_ADD(BV32_MUL($passnum, 8bv32), local_id_y$1);
     v0$2 := BV32_ADD(BV32_MUL($passnum, 8bv32), local_id_y$2);
     v1$1 := BV32_ADD(BV32_MUL($passnum, 8bv32), local_id_x$1);
@@ -146,15 +146,15 @@ implementation {:source_name "transitive_closure_stage1_kernel"} {:kernel} $_Z32
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$_ZZ32transitive_closure_stage1_kernelPjiE20primary_block_buffer"} true;
     $$_ZZ32transitive_closure_stage1_kernelPjiE20primary_block_buffer[1bv1][BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1)] := v2$1;
     $$_ZZ32transitive_closure_stage1_kernelPjiE20primary_block_buffer[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(local_id_y$2, 8bv32), local_id_x$2)] := v2$2;
-    goto __partitioned_block_$entry_1;
+    goto __partitioned_block_$0_1;
 
-  __partitioned_block_$entry_1:
+  __partitioned_block_$0_1:
     call {:sourceloc_num 3} $bugle_barrier_duplicated_0(1bv1, 1bv1);
     $k.0 := 0bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b7 ==> _WRITE_HAS_OCCURRED_$$_ZZ32transitive_closure_stage1_kernelPjiE20primary_block_buffer ==> _WATCHED_OFFSET == BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b6 ==> _READ_HAS_OCCURRED_$$_ZZ32transitive_closure_stage1_kernelPjiE20primary_block_buffer ==> _WATCHED_OFFSET == BV32_ADD(BV32_MUL(local_id_y$1, 8bv32), local_id_x$1) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 8bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 8bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 8bv32), local_id_x$1));
@@ -245,7 +245,7 @@ implementation {:source_name "transitive_closure_stage1_kernel"} {:kernel} $_Z32
     call {:sourceloc_num 15} $bugle_barrier_duplicated_1(1bv1, 1bv1);
     $k.0 := BV32_ADD($k.0, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

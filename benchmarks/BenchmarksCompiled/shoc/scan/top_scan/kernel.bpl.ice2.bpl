@@ -127,10 +127,10 @@ implementation {:source_name "top_scan"} {:kernel} $top_scan($n: bv32)
   var v5$2: bv32;
   var v6$1: bv32;
   var v6$2: bv32;
-  var v8$1: bool;
-  var v8$2: bool;
   var v7$1: bv32;
   var v7$2: bv32;
+  var v8$1: bool;
+  var v8$2: bool;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;

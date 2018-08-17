@@ -122,35 +122,35 @@ procedure {:source_name "reduce"} {:kernel} $reduce($n: bv32);
 
 implementation {:source_name "reduce"} {:kernel} $reduce($n: bv32)
 {
-  var $cond$1: bv32;
-  var $cond$2: bv32;
+  var $0$1: bv32;
+  var $0$2: bv32;
   var $i.0$1: bv32;
   var $i.0$2: bv32;
   var $sum.0$1: bv32;
   var $sum.0$2: bv32;
   var $s.0: bv32;
+  var v0: bv32;
+  var v1$1: bv32;
+  var v1$2: bv32;
+  var v2$1: bool;
+  var v2$2: bool;
+  var v3$1: bv32;
+  var v3$2: bv32;
+  var v4$1: bool;
+  var v4$2: bool;
+  var v5$1: bv32;
+  var v5$2: bv32;
+  var v6: bool;
+  var v7$1: bool;
+  var v7$2: bool;
   var v8$1: bv32;
   var v8$2: bv32;
   var v9$1: bv32;
   var v9$2: bv32;
-  var v5$1: bv32;
-  var v5$2: bv32;
-  var v11$1: bv32;
-  var v11$2: bv32;
-  var v3$1: bv32;
-  var v3$2: bv32;
-  var v1$1: bv32;
-  var v1$2: bv32;
-  var v0: bv32;
-  var v4$1: bool;
-  var v4$2: bool;
-  var v2$1: bool;
-  var v2$2: bool;
-  var v7$1: bool;
-  var v7$2: bool;
-  var v6: bool;
   var v10$1: bool;
   var v10$2: bool;
+  var v11$1: bv32;
+  var v11$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -173,7 +173,7 @@ implementation {:source_name "reduce"} {:kernel} $reduce($n: bv32)
   var _HAVOC_bv32$2: bv32;
 
 
-  $entry:
+  $0:
     v0 := BV32_MUL(BV32_UDIV(BV32_SDIV($n, 4bv32), num_groups_x), 4bv32);
     v1$1 := BV32_MUL(group_id_x$1, v0);
     v1$2 := BV32_MUL(group_id_x$2, v0);
@@ -189,10 +189,10 @@ implementation {:source_name "reduce"} {:kernel} $reduce($n: bv32)
     p0$2 := (if v2$2 then v2$2 else p0$2);
     p1$1 := (if !v2$1 then !v2$1 else p1$1);
     p1$2 := (if !v2$2 then !v2$2 else p1$2);
-    $cond$1 := (if p0$1 then $n else $cond$1);
-    $cond$2 := (if p0$2 then $n else $cond$2);
-    $cond$1 := (if p1$1 then BV32_ADD(v1$1, v0) else $cond$1);
-    $cond$2 := (if p1$2 then BV32_ADD(v1$2, v0) else $cond$2);
+    $0$1 := (if p0$1 then $n else $0$1);
+    $0$2 := (if p0$2 then $n else $0$2);
+    $0$1 := (if p1$1 then BV32_ADD(v1$1, v0) else $0$1);
+    $0$2 := (if p1$2 then BV32_ADD(v1$2, v0) else $0$2);
     v3$1 := local_id_x$1;
     v3$2 := local_id_x$2;
     $i.0$1, $sum.0$1 := BV32_ADD(v1$1, v3$1), 0bv32;
@@ -200,17 +200,17 @@ implementation {:source_name "reduce"} {:kernel} $reduce($n: bv32)
     p2$1 := true;
     p2$2 := true;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $while.cond;
+    goto $4;
 
-  $while.cond:
+  $4:
     assume {:captureState "loop_head_state_1"} true;
     assume {:invGenSkippedLoop} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$lmem ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$lmem ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$lmem ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:block_sourceloc} {:sourceloc_num 5} p2$1 ==> true;
-    v4$1 := (if p2$1 then BV32_SLT($i.0$1, $cond$1) else v4$1);
-    v4$2 := (if p2$2 then BV32_SLT($i.0$2, $cond$2) else v4$2);
+    v4$1 := (if p2$1 then BV32_SLT($i.0$1, $0$1) else v4$1);
+    v4$2 := (if p2$2 then BV32_SLT($i.0$2, $0$2) else v4$2);
     p3$1 := false;
     p3$2 := false;
     p4$1 := false;
@@ -226,9 +226,9 @@ implementation {:source_name "reduce"} {:kernel} $reduce($n: bv32)
     $i.0$2, $sum.0$2 := (if p3$2 then BV32_ADD($i.0$2, group_size_x) else $i.0$2), (if p3$2 then FADD32($sum.0$2, v5$2) else $sum.0$2);
     p2$1 := (if p3$1 then true else p2$1);
     p2$2 := (if p3$2 then true else p2$2);
-    goto $while.cond.backedge, __partitioned_block_$while.cond.tail_0;
+    goto $4.backedge, __partitioned_block_$4.tail_0;
 
-  __partitioned_block_$while.cond.tail_0:
+  __partitioned_block_$4.tail_0:
     assume !p2$1 && !p2$2;
     call {:sourceloc} {:sourceloc_num 9} _LOG_WRITE_$$lmem(true, v3$1, $sum.0$1, $$lmem[1bv1][v3$1]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$lmem(true, v3$2);
@@ -237,15 +237,15 @@ implementation {:source_name "reduce"} {:kernel} $reduce($n: bv32)
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$lmem"} true;
     $$lmem[1bv1][v3$1] := $sum.0$1;
     $$lmem[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v3$2] := $sum.0$2;
-    goto __partitioned_block_$while.cond.tail_1;
+    goto __partitioned_block_$4.tail_1;
 
-  __partitioned_block_$while.cond.tail_1:
+  __partitioned_block_$4.tail_1:
     call {:sourceloc_num 10} $bugle_barrier_duplicated_0(1bv1, 0bv1);
     $s.0 := BV32_UDIV(group_size_x, 2bv32);
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $7;
 
-  $for.cond:
+  $7:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b9 ==> _WRITE_HAS_OCCURRED_$$lmem ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b8 ==> _READ_HAS_OCCURRED_$$lmem ==> _WATCHED_OFFSET == local_id_x$1;
@@ -324,12 +324,12 @@ implementation {:source_name "reduce"} {:kernel} $reduce($n: bv32)
     call {:sourceloc_num 18} $bugle_barrier_duplicated_1(1bv1, 0bv1);
     $s.0 := BV32_LSHR($s.0, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $7;
 
-  $while.cond.backedge:
+  $4.backedge:
     assume {:backedge} p2$1 || p2$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $while.cond;
+    goto $4;
 }
 
 

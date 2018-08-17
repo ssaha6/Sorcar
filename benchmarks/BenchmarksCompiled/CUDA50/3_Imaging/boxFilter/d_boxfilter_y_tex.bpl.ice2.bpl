@@ -29,11 +29,27 @@ var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source
 
 var {:race_checking} {:global} {:elem_width 32} {:source_elem_width 32} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$od: bool;
 
+const $arrayId$$od: arrayId;
+
+axiom $arrayId$$od == 1bv3;
+
 axiom {:array_info "$$0"} {:elem_width 8} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
+
+const $arrayId$$0: arrayId;
+
+axiom $arrayId$$0 == 2bv3;
 
 axiom {:array_info "$$1"} {:elem_width 8} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
 
+const $arrayId$$1: arrayId;
+
+axiom $arrayId$$1 == 3bv3;
+
 axiom {:array_info "$$2"} {:elem_width 8} {:source_name ""} {:source_elem_width 96} {:source_dimensions "1"} true;
+
+const $arrayId$$2: arrayId;
+
+axiom $arrayId$$2 == 4bv3;
 
 axiom {:array_info "$$tex"} {:global} {:elem_width 8} {:source_name "tex"} {:source_elem_width 96} {:source_dimensions "1"} true;
 
@@ -42,6 +58,33 @@ var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 96} {:source_
 var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 96} {:source_dimensions "*"} _WRITE_HAS_OCCURRED_$$tex: bool;
 
 var {:race_checking} {:global} {:elem_width 8} {:source_elem_width 96} {:source_dimensions "*"} _ATOMIC_HAS_OCCURRED_$$tex: bool;
+
+const $arrayId$$tex: arrayId;
+
+axiom $arrayId$$tex == 5bv3;
+
+type ptr = bv32;
+
+type arrayId = bv3;
+
+function {:inline true} MKPTR(base: arrayId, offset: bv32) : ptr
+{
+  base ++ offset[29:0]
+}
+
+function {:inline true} base#MKPTR(p: ptr) : arrayId
+{
+  p[32:29]
+}
+
+function {:inline true} offset#MKPTR(p: ptr) : bv32
+{
+  0bv3 ++ p[29:0]
+}
+
+const $arrayId$$null$: arrayId;
+
+axiom $arrayId$$null$ == 0bv3;
 
 const _WATCHED_OFFSET: bv32;
 
@@ -149,8 +192,6 @@ implementation {:source_name "d_boxfilter_y_tex"} {:kernel} $_Z17d_boxfilter_y_t
   var v5$2: bv8;
   var v6$1: bv8;
   var v6$2: bv8;
-  var v11$1: bv8;
-  var v11$2: bv8;
   var v7$1: bv8;
   var v7$2: bv8;
   var v8$1: bv8;
@@ -159,16 +200,17 @@ implementation {:source_name "d_boxfilter_y_tex"} {:kernel} $_Z17d_boxfilter_y_t
   var v9$2: bv8;
   var v10$1: bv8;
   var v10$2: bv8;
+  var v11$1: bv8;
+  var v11$2: bv8;
   var v12$1: bv8;
   var v12$2: bv8;
   var v13$1: bv8;
   var v13$2: bv8;
   var v14$1: bv8;
   var v14$2: bv8;
-  var v15$1: bv8;
-  var v15$2: bv8;
-  var v16$1: bv8;
-  var v16$2: bv8;
+  var v15$1: bv32;
+  var v15$2: bv32;
+  var v16: bool;
   var v17$1: bv8;
   var v17$2: bv8;
   var v18$1: bv8;
@@ -189,19 +231,18 @@ implementation {:source_name "d_boxfilter_y_tex"} {:kernel} $_Z17d_boxfilter_y_t
   var v25$2: bv8;
   var v26$1: bv8;
   var v26$2: bv8;
-  var v27$1: bv32;
-  var v27$2: bv32;
-  var v28: bool;
-  var v29$1: bv8;
-  var v29$2: bv8;
+  var v27$1: bv8;
+  var v27$2: bv8;
+  var v28$1: bv8;
+  var v28$2: bv8;
+  var v29$1: bv32;
+  var v29$2: bv32;
   var v30$1: bv8;
   var v30$2: bv8;
   var v31$1: bv8;
   var v31$2: bv8;
   var v32$1: bv8;
   var v32$2: bv8;
-  var v37$1: bv8;
-  var v37$2: bv8;
   var v33$1: bv8;
   var v33$2: bv8;
   var v34$1: bv8;
@@ -210,6 +251,8 @@ implementation {:source_name "d_boxfilter_y_tex"} {:kernel} $_Z17d_boxfilter_y_t
   var v35$2: bv8;
   var v36$1: bv8;
   var v36$2: bv8;
+  var v37$1: bv8;
+  var v37$2: bv8;
   var v38$1: bv8;
   var v38$2: bv8;
   var v39$1: bv8;
@@ -218,82 +261,10 @@ implementation {:source_name "d_boxfilter_y_tex"} {:kernel} $_Z17d_boxfilter_y_t
   var v40$2: bv8;
   var v41$1: bv8;
   var v41$2: bv8;
-  var v42$1: bv8;
-  var v42$2: bv8;
-  var v43$1: bv8;
-  var v43$2: bv8;
-  var v44$1: bv8;
-  var v44$2: bv8;
-  var v64$1: bv8;
-  var v64$2: bv8;
-  var v65$1: bv8;
-  var v65$2: bv8;
-  var v45$1: bv8;
-  var v45$2: bv8;
-  var v46$1: bv8;
-  var v46$2: bv8;
-  var v47$1: bv8;
-  var v47$2: bv8;
-  var v48$1: bv8;
-  var v48$2: bv8;
-  var v49$1: bv8;
-  var v49$2: bv8;
-  var v50$1: bv8;
-  var v50$2: bv8;
-  var v51$1: bv8;
-  var v51$2: bv8;
-  var v52$1: bv8;
-  var v52$2: bv8;
-  var v53$1: bv32;
-  var v53$2: bv32;
-  var v63$1: bv8;
-  var v63$2: bv8;
-  var v54$1: bv8;
-  var v54$2: bv8;
-  var v55$1: bv8;
-  var v55$2: bv8;
-  var v56$1: bv8;
-  var v56$2: bv8;
-  var v57$1: bv8;
-  var v57$2: bv8;
-  var v58$1: bv8;
-  var v58$2: bv8;
-  var v59$1: bv8;
-  var v59$2: bv8;
-  var v60$1: bv8;
-  var v60$2: bv8;
-  var v61$1: bv8;
-  var v61$2: bv8;
-  var v62$1: bv8;
-  var v62$2: bv8;
-  var v66$1: bv8;
-  var v66$2: bv8;
-  var v67$1: bv8;
-  var v67$2: bv8;
-  var v68$1: bv8;
-  var v68$2: bv8;
-  var v69$1: bv8;
-  var v69$2: bv8;
-  var v70$1: bv8;
-  var v70$2: bv8;
-  var v71$1: bv8;
-  var v71$2: bv8;
-  var v72$1: bv8;
-  var v72$2: bv8;
-  var v73$1: bv8;
-  var v73$2: bv8;
-  var v74$1: bv8;
-  var v74$2: bv8;
-  var v75$1: bv8;
-  var v75$2: bv8;
-  var v76$1: bv8;
-  var v76$2: bv8;
-  var v77$1: bv8;
-  var v77$2: bv8;
-  var v78$1: bv32;
-  var v78$2: bv32;
-  var v79$1: bv32;
-  var v79$2: bv32;
+  var v42$1: bv32;
+  var v42$2: bv32;
+  var v43$1: bv32;
+  var v43$2: bv32;
 
 
   $0:
@@ -314,10 +285,10 @@ implementation {:source_name "d_boxfilter_y_tex"} {:kernel} $_Z17d_boxfilter_y_t
 
   $falsebb:
     assume {:partition} !v2;
-    call {:sourceloc} {:sourceloc_num 44} _LOG_WRITE_$$od(true, v1$1, FMUL32($t.0$1, v0), $$od[v1$1]);
+    call {:sourceloc} {:sourceloc_num 32} _LOG_WRITE_$$od(true, v1$1, FMUL32($t.0$1, v0), $$od[v1$1]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$od(true, v1$2);
-    assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 44} true;
-    call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 44} _CHECK_WRITE_$$od(true, v1$2, FMUL32($t.0$2, v0));
+    assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 32} true;
+    call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 32} _CHECK_WRITE_$$od(true, v1$2, FMUL32($t.0$2, v0));
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$od"} true;
     $$od[v1$1] := FMUL32($t.0$1, v0);
     $$od[v1$2] := FMUL32($t.0$2, v0);
@@ -340,151 +311,103 @@ implementation {:source_name "d_boxfilter_y_tex"} {:kernel} $_Z17d_boxfilter_y_t
 assert  my_inv (  (  BV32_SLE(0bv32, $y1.0) ) ,  (  BV32_SLE($y1.0, 1bv32) ) ,  (  BV32_SGE($y1.0, 1bv32) ) ,  (  BV32_ULE($y1.0, 1bv32) ) ,  (  BV32_UGE($y1.0, 1bv32) ) ,  (  _WRITE_HAS_OCCURRED_$$od ==> BV32_SLE(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), _WATCHED_OFFSET) ) ,  (  _WRITE_HAS_OCCURRED_$$od ==> BV32_SLT(_WATCHED_OFFSET, BV32_ADD(BV32_MUL(BV32_ADD(group_id_x$1, 1bv32), group_size_x), local_id_x$1)) ) ,  (  _WRITE_HAS_OCCURRED_$$od ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, $w), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, $w), 1bv32), BV32_ADD(BV32_MUL(0bv32, $w), BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1))) ) ,  (  _WRITE_HAS_OCCURRED_$$od ==> group_id_x$1 == BV32_DIV(_WATCHED_OFFSET, group_size_x) )  ); 
 
 
-    assert {:block_sourceloc} {:sourceloc_num 45} true;
-    v28 := BV32_SLT($y1.0, $h);
+    assert {:block_sourceloc} {:sourceloc_num 33} true;
+    v16 := BV32_SLT($y1.0, $h);
     goto $truebb0, $falsebb0;
 
   $falsebb0:
-    assume {:partition} !v28;
+    assume {:partition} !v16;
     return;
 
   $truebb0:
-    assume {:partition} v28;
-    havoc v29$1, v29$2;
-    $$1$0bv32$1 := v29$1;
-    $$1$0bv32$2 := v29$2;
+    assume {:partition} v16;
+    havoc v17$1, v17$2;
+    $$1$0bv32$1 := v17$1;
+    $$1$0bv32$2 := v17$2;
+    havoc v18$1, v18$2;
+    $$1$1bv32$1 := v18$1;
+    $$1$1bv32$2 := v18$2;
+    havoc v19$1, v19$2;
+    $$1$2bv32$1 := v19$1;
+    $$1$2bv32$2 := v19$2;
+    havoc v20$1, v20$2;
+    $$1$3bv32$1 := v20$1;
+    $$1$3bv32$2 := v20$2;
+    havoc v21$1, v21$2;
+    $$1$4bv32$1 := v21$1;
+    $$1$4bv32$2 := v21$2;
+    havoc v22$1, v22$2;
+    $$1$5bv32$1 := v22$1;
+    $$1$5bv32$2 := v22$2;
+    havoc v23$1, v23$2;
+    $$1$6bv32$1 := v23$1;
+    $$1$6bv32$2 := v23$2;
+    havoc v24$1, v24$2;
+    $$1$7bv32$1 := v24$1;
+    $$1$7bv32$2 := v24$2;
+    havoc v25$1, v25$2;
+    $$1$8bv32$1 := v25$1;
+    $$1$8bv32$2 := v25$2;
+    havoc v26$1, v26$2;
+    $$1$9bv32$1 := v26$1;
+    $$1$9bv32$2 := v26$2;
+    havoc v27$1, v27$2;
+    $$1$10bv32$1 := v27$1;
+    $$1$10bv32$2 := v27$2;
+    havoc v28$1, v28$2;
+    $$1$11bv32$1 := v28$1;
+    $$1$11bv32$2 := v28$2;
+    call {:sourceloc_num 59} v29$1, v29$2 := $_Z5tex2DIfET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(MKPTR($arrayId$$1, 0bv32), SI32_TO_FP32(BV32_ADD($y1.0, $r)), UI32_TO_FP32(v1$1), UI32_TO_FP32(v1$2));
+    assume {:captureState "call_return_state_0"} {:procedureName "$_Z5tex2DIfET_7textureIS0_Li2EL19cudaTextureReadMode0EEff"} true;
     havoc v30$1, v30$2;
-    $$1$1bv32$1 := v30$1;
-    $$1$1bv32$2 := v30$2;
+    $$2$0bv32$1 := v30$1;
+    $$2$0bv32$2 := v30$2;
     havoc v31$1, v31$2;
-    $$1$2bv32$1 := v31$1;
-    $$1$2bv32$2 := v31$2;
+    $$2$1bv32$1 := v31$1;
+    $$2$1bv32$2 := v31$2;
     havoc v32$1, v32$2;
-    $$1$3bv32$1 := v32$1;
-    $$1$3bv32$2 := v32$2;
+    $$2$2bv32$1 := v32$1;
+    $$2$2bv32$2 := v32$2;
     havoc v33$1, v33$2;
-    $$1$4bv32$1 := v33$1;
-    $$1$4bv32$2 := v33$2;
+    $$2$3bv32$1 := v33$1;
+    $$2$3bv32$2 := v33$2;
     havoc v34$1, v34$2;
-    $$1$5bv32$1 := v34$1;
-    $$1$5bv32$2 := v34$2;
+    $$2$4bv32$1 := v34$1;
+    $$2$4bv32$2 := v34$2;
     havoc v35$1, v35$2;
-    $$1$6bv32$1 := v35$1;
-    $$1$6bv32$2 := v35$2;
+    $$2$5bv32$1 := v35$1;
+    $$2$5bv32$2 := v35$2;
     havoc v36$1, v36$2;
-    $$1$7bv32$1 := v36$1;
-    $$1$7bv32$2 := v36$2;
+    $$2$6bv32$1 := v36$1;
+    $$2$6bv32$2 := v36$2;
     havoc v37$1, v37$2;
-    $$1$8bv32$1 := v37$1;
-    $$1$8bv32$2 := v37$2;
+    $$2$7bv32$1 := v37$1;
+    $$2$7bv32$2 := v37$2;
     havoc v38$1, v38$2;
-    $$1$9bv32$1 := v38$1;
-    $$1$9bv32$2 := v38$2;
+    $$2$8bv32$1 := v38$1;
+    $$2$8bv32$2 := v38$2;
     havoc v39$1, v39$2;
-    $$1$10bv32$1 := v39$1;
-    $$1$10bv32$2 := v39$2;
+    $$2$9bv32$1 := v39$1;
+    $$2$9bv32$2 := v39$2;
     havoc v40$1, v40$2;
-    $$1$11bv32$1 := v40$1;
-    $$1$11bv32$2 := v40$2;
-    v41$1 := $$1$0bv32$1;
-    v41$2 := $$1$0bv32$2;
-    v42$1 := $$1$1bv32$1;
-    v42$2 := $$1$1bv32$2;
-    v43$1 := $$1$2bv32$1;
-    v43$2 := $$1$2bv32$2;
-    v44$1 := $$1$3bv32$1;
-    v44$2 := $$1$3bv32$2;
-    v45$1 := $$1$4bv32$1;
-    v45$2 := $$1$4bv32$2;
-    v46$1 := $$1$5bv32$1;
-    v46$2 := $$1$5bv32$2;
-    v47$1 := $$1$6bv32$1;
-    v47$2 := $$1$6bv32$2;
-    v48$1 := $$1$7bv32$1;
-    v48$2 := $$1$7bv32$2;
-    v49$1 := $$1$8bv32$1;
-    v49$2 := $$1$8bv32$2;
-    v50$1 := $$1$9bv32$1;
-    v50$2 := $$1$9bv32$2;
-    v51$1 := $$1$10bv32$1;
-    v51$2 := $$1$10bv32$2;
-    v52$1 := $$1$11bv32$1;
-    v52$2 := $$1$11bv32$2;
-    call {:sourceloc_num 83} v53$1, v53$2 := $_Z5tex2DIfET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(SI32_TO_FP32(BV32_ADD($y1.0, $r)), v44$1 ++ v43$1 ++ v42$1 ++ v41$1, v48$1 ++ v47$1 ++ v46$1 ++ v45$1, v52$1 ++ v51$1 ++ v50$1 ++ v49$1, UI32_TO_FP32(v1$1), v44$2 ++ v43$2 ++ v42$2 ++ v41$2, v48$2 ++ v47$2 ++ v46$2 ++ v45$2, v52$2 ++ v51$2 ++ v50$2 ++ v49$2, UI32_TO_FP32(v1$2));
+    $$2$10bv32$1 := v40$1;
+    $$2$10bv32$2 := v40$2;
+    havoc v41$1, v41$2;
+    $$2$11bv32$1 := v41$1;
+    $$2$11bv32$2 := v41$2;
+    call {:sourceloc_num 84} v42$1, v42$2 := $_Z5tex2DIfET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(MKPTR($arrayId$$2, 0bv32), SI32_TO_FP32(BV32_SUB(BV32_SUB($y1.0, $r), 1bv32)), UI32_TO_FP32(v1$1), UI32_TO_FP32(v1$2));
     assume {:captureState "call_return_state_0"} {:procedureName "$_Z5tex2DIfET_7textureIS0_Li2EL19cudaTextureReadMode0EEff"} true;
-    havoc v54$1, v54$2;
-    $$2$0bv32$1 := v54$1;
-    $$2$0bv32$2 := v54$2;
-    havoc v55$1, v55$2;
-    $$2$1bv32$1 := v55$1;
-    $$2$1bv32$2 := v55$2;
-    havoc v56$1, v56$2;
-    $$2$2bv32$1 := v56$1;
-    $$2$2bv32$2 := v56$2;
-    havoc v57$1, v57$2;
-    $$2$3bv32$1 := v57$1;
-    $$2$3bv32$2 := v57$2;
-    havoc v58$1, v58$2;
-    $$2$4bv32$1 := v58$1;
-    $$2$4bv32$2 := v58$2;
-    havoc v59$1, v59$2;
-    $$2$5bv32$1 := v59$1;
-    $$2$5bv32$2 := v59$2;
-    havoc v60$1, v60$2;
-    $$2$6bv32$1 := v60$1;
-    $$2$6bv32$2 := v60$2;
-    havoc v61$1, v61$2;
-    $$2$7bv32$1 := v61$1;
-    $$2$7bv32$2 := v61$2;
-    havoc v62$1, v62$2;
-    $$2$8bv32$1 := v62$1;
-    $$2$8bv32$2 := v62$2;
-    havoc v63$1, v63$2;
-    $$2$9bv32$1 := v63$1;
-    $$2$9bv32$2 := v63$2;
-    havoc v64$1, v64$2;
-    $$2$10bv32$1 := v64$1;
-    $$2$10bv32$2 := v64$2;
-    havoc v65$1, v65$2;
-    $$2$11bv32$1 := v65$1;
-    $$2$11bv32$2 := v65$2;
-    v66$1 := $$2$0bv32$1;
-    v66$2 := $$2$0bv32$2;
-    v67$1 := $$2$1bv32$1;
-    v67$2 := $$2$1bv32$2;
-    v68$1 := $$2$2bv32$1;
-    v68$2 := $$2$2bv32$2;
-    v69$1 := $$2$3bv32$1;
-    v69$2 := $$2$3bv32$2;
-    v70$1 := $$2$4bv32$1;
-    v70$2 := $$2$4bv32$2;
-    v71$1 := $$2$5bv32$1;
-    v71$2 := $$2$5bv32$2;
-    v72$1 := $$2$6bv32$1;
-    v72$2 := $$2$6bv32$2;
-    v73$1 := $$2$7bv32$1;
-    v73$2 := $$2$7bv32$2;
-    v74$1 := $$2$8bv32$1;
-    v74$2 := $$2$8bv32$2;
-    v75$1 := $$2$9bv32$1;
-    v75$2 := $$2$9bv32$2;
-    v76$1 := $$2$10bv32$1;
-    v76$2 := $$2$10bv32$2;
-    v77$1 := $$2$11bv32$1;
-    v77$2 := $$2$11bv32$2;
-    call {:sourceloc_num 120} v78$1, v78$2 := $_Z5tex2DIfET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(SI32_TO_FP32(BV32_SUB(BV32_SUB($y1.0, $r), 1bv32)), v69$1 ++ v68$1 ++ v67$1 ++ v66$1, v73$1 ++ v72$1 ++ v71$1 ++ v70$1, v77$1 ++ v76$1 ++ v75$1 ++ v74$1, UI32_TO_FP32(v1$1), v69$2 ++ v68$2 ++ v67$2 ++ v66$2, v73$2 ++ v72$2 ++ v71$2 ++ v70$2, v77$2 ++ v76$2 ++ v75$2 ++ v74$2, UI32_TO_FP32(v1$2));
-    assume {:captureState "call_return_state_0"} {:procedureName "$_Z5tex2DIfET_7textureIS0_Li2EL19cudaTextureReadMode0EEff"} true;
-    v79$1 := FSUB32(FADD32($t.1$1, v53$1), v78$1);
-    v79$2 := FSUB32(FADD32($t.1$2, v53$2), v78$2);
-    call {:sourceloc} {:sourceloc_num 121} _LOG_WRITE_$$od(true, BV32_ADD(BV32_MUL($y1.0, $w), v1$1), FMUL32(v79$1, v0), $$od[BV32_ADD(BV32_MUL($y1.0, $w), v1$1)]);
+    v43$1 := FSUB32(FADD32($t.1$1, v29$1), v42$1);
+    v43$2 := FSUB32(FADD32($t.1$2, v29$2), v42$2);
+    call {:sourceloc} {:sourceloc_num 85} _LOG_WRITE_$$od(true, BV32_ADD(BV32_MUL($y1.0, $w), v1$1), FMUL32(v43$1, v0), $$od[BV32_ADD(BV32_MUL($y1.0, $w), v1$1)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$od(true, BV32_ADD(BV32_MUL($y1.0, $w), v1$2));
-    assume {:do_not_predicate} {:check_id "check_state_1"} {:captureState "check_state_1"} {:sourceloc} {:sourceloc_num 121} true;
-    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 121} _CHECK_WRITE_$$od(true, BV32_ADD(BV32_MUL($y1.0, $w), v1$2), FMUL32(v79$2, v0));
+    assume {:do_not_predicate} {:check_id "check_state_1"} {:captureState "check_state_1"} {:sourceloc} {:sourceloc_num 85} true;
+    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 85} _CHECK_WRITE_$$od(true, BV32_ADD(BV32_MUL($y1.0, $w), v1$2), FMUL32(v43$2, v0));
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$od"} true;
-    $$od[BV32_ADD(BV32_MUL($y1.0, $w), v1$1)] := FMUL32(v79$1, v0);
-    $$od[BV32_ADD(BV32_MUL($y1.0, $w), v1$2)] := FMUL32(v79$2, v0);
-    $t.1$1, $y1.0 := v79$1, BV32_ADD($y1.0, 1bv32);
-    $t.1$2 := v79$2;
+    $$od[BV32_ADD(BV32_MUL($y1.0, $w), v1$1)] := FMUL32(v43$1, v0);
+    $$od[BV32_ADD(BV32_MUL($y1.0, $w), v1$2)] := FMUL32(v43$2, v0);
+    $t.1$1, $y1.0 := v43$1, BV32_ADD($y1.0, 1bv32);
+    $t.1$2 := v43$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
     goto $5;
 
@@ -526,41 +449,17 @@ assert  my_inv (  (  BV32_SLE(0bv32, $y1.0) ) ,  (  BV32_SLE($y1.0, 1bv32) ) ,  
     havoc v14$1, v14$2;
     $$0$11bv32$1 := v14$1;
     $$0$11bv32$2 := v14$2;
-    v15$1 := $$0$0bv32$1;
-    v15$2 := $$0$0bv32$2;
-    v16$1 := $$0$1bv32$1;
-    v16$2 := $$0$1bv32$2;
-    v17$1 := $$0$2bv32$1;
-    v17$2 := $$0$2bv32$2;
-    v18$1 := $$0$3bv32$1;
-    v18$2 := $$0$3bv32$2;
-    v19$1 := $$0$4bv32$1;
-    v19$2 := $$0$4bv32$2;
-    v20$1 := $$0$5bv32$1;
-    v20$2 := $$0$5bv32$2;
-    v21$1 := $$0$6bv32$1;
-    v21$2 := $$0$6bv32$2;
-    v22$1 := $$0$7bv32$1;
-    v22$2 := $$0$7bv32$2;
-    v23$1 := $$0$8bv32$1;
-    v23$2 := $$0$8bv32$2;
-    v24$1 := $$0$9bv32$1;
-    v24$2 := $$0$9bv32$2;
-    v25$1 := $$0$10bv32$1;
-    v25$2 := $$0$10bv32$2;
-    v26$1 := $$0$11bv32$1;
-    v26$2 := $$0$11bv32$2;
-    call {:sourceloc_num 41} v27$1, v27$2 := $_Z5tex2DIfET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(SI32_TO_FP32($y.0), v18$1 ++ v17$1 ++ v16$1 ++ v15$1, v22$1 ++ v21$1 ++ v20$1 ++ v19$1, v26$1 ++ v25$1 ++ v24$1 ++ v23$1, UI32_TO_FP32(v1$1), v18$2 ++ v17$2 ++ v16$2 ++ v15$2, v22$2 ++ v21$2 ++ v20$2 ++ v19$2, v26$2 ++ v25$2 ++ v24$2 ++ v23$2, UI32_TO_FP32(v1$2));
+    call {:sourceloc_num 29} v15$1, v15$2 := $_Z5tex2DIfET_7textureIS0_Li2EL19cudaTextureReadMode0EEff(MKPTR($arrayId$$0, 0bv32), SI32_TO_FP32($y.0), UI32_TO_FP32(v1$1), UI32_TO_FP32(v1$2));
     assume {:captureState "call_return_state_0"} {:procedureName "$_Z5tex2DIfET_7textureIS0_Li2EL19cudaTextureReadMode0EEff"} true;
-    $t.0$1, $y.0 := FADD32($t.0$1, v27$1), BV32_ADD($y.0, 1bv32);
-    $t.0$2 := FADD32($t.0$2, v27$2);
+    $t.0$1, $y.0 := FADD32($t.0$1, v15$1), BV32_ADD($y.0, 1bv32);
+    $t.0$2 := FADD32($t.0$2, v15$2);
     assume {:captureState "loop_back_edge_state_1_0"} true;
     goto $1;
 }
 
 
 
-procedure {:source_name "_Z5tex2DIfET_7textureIS0_Li2EL19cudaTextureReadMode0EEff"} $_Z5tex2DIfET_7textureIS0_Li2EL19cudaTextureReadMode0EEff($4: bv32, $0$1: bv32, $1$1: bv32, $2$1: bv32, $3$1: bv32, $0$2: bv32, $1$2: bv32, $2$2: bv32, $3$2: bv32) returns ($ret$1: bv32, $ret$2: bv32);
+procedure {:source_name "_Z5tex2DIfET_7textureIS0_Li2EL19cudaTextureReadMode0EEff"} $_Z5tex2DIfET_7textureIS0_Li2EL19cudaTextureReadMode0EEff($0: ptr, $2: bv32, $1$1: bv32, $1$2: bv32) returns ($ret$1: bv32, $ret$2: bv32);
 
 
 

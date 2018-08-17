@@ -161,49 +161,61 @@ implementation {:source_name "reduce_kernel"} {:kernel} $reduce_kernel($d_Ne: bv
   var v1$2: bv32;
   var v2$1: bv32;
   var v2$2: bv32;
+  var v3: bv32;
   var v4$1: bool;
   var v4$2: bool;
-  var v3: bv32;
   var v5$1: bv32;
   var v5$2: bv32;
   var v6$1: bv32;
   var v6$2: bv32;
-  var v11$1: bv32;
-  var v11$2: bv32;
-  var v13$1: bv32;
-  var v13$2: bv32;
-  var v10$1: bv32;
-  var v10$2: bv32;
-  var v12$1: bv32;
-  var v12$2: bv32;
   var v7: bool;
   var v8: bool;
   var v9$1: bool;
   var v9$2: bool;
+  var v10$1: bv32;
+  var v10$2: bv32;
+  var v11$1: bv32;
+  var v11$2: bv32;
+  var v12$1: bv32;
+  var v12$2: bv32;
+  var v13$1: bv32;
+  var v13$2: bv32;
   var v14$1: bool;
   var v14$2: bool;
-  var v17$1: bool;
-  var v17$2: bool;
-  var v19$1: bool;
-  var v19$2: bool;
-  var v18$1: bool;
-  var v18$2: bool;
-  var v20$1: bv32;
-  var v20$2: bv32;
-  var v25$1: bv32;
-  var v25$2: bv32;
   var v15$1: bv32;
   var v15$2: bv32;
   var v16$1: bv32;
   var v16$2: bv32;
+  var v17$1: bool;
+  var v17$2: bool;
+  var v18$1: bool;
+  var v18$2: bool;
+  var v19$1: bool;
+  var v19$2: bool;
+  var v20$1: bv32;
+  var v20$2: bv32;
   var v21$1: bv32;
   var v21$2: bv32;
   var v22$1: bv32;
   var v22$2: bv32;
   var v23$1: bv32;
   var v23$2: bv32;
+  var v24$1: bool;
+  var v24$2: bool;
+  var v25$1: bv32;
+  var v25$2: bv32;
   var v26$1: bv32;
   var v26$2: bv32;
+  var v27$1: bool;
+  var v27$2: bool;
+  var v28$1: bool;
+  var v28$2: bool;
+  var v29$1: bool;
+  var v29$2: bool;
+  var v30$1: bool;
+  var v30$2: bool;
+  var v31$1: bool;
+  var v31$2: bool;
   var v32$1: bv32;
   var v32$2: bv32;
   var v33$1: bv32;
@@ -212,30 +224,18 @@ implementation {:source_name "reduce_kernel"} {:kernel} $reduce_kernel($d_Ne: bv
   var v34$2: bv32;
   var v35$1: bv32;
   var v35$2: bv32;
-  var v40$1: bv32;
-  var v40$2: bv32;
-  var v41$1: bv32;
-  var v41$2: bv32;
+  var v36$1: bool;
+  var v36$2: bool;
+  var v37$1: bool;
+  var v37$2: bool;
   var v38$1: bv32;
   var v38$2: bv32;
   var v39$1: bv32;
   var v39$2: bv32;
-  var v24$1: bool;
-  var v24$2: bool;
-  var v27$1: bool;
-  var v27$2: bool;
-  var v37$1: bool;
-  var v37$2: bool;
-  var v28$1: bool;
-  var v28$2: bool;
-  var v30$1: bool;
-  var v30$2: bool;
-  var v29$1: bool;
-  var v29$2: bool;
-  var v36$1: bool;
-  var v36$2: bool;
-  var v31$1: bool;
-  var v31$2: bool;
+  var v40$1: bv32;
+  var v40$2: bv32;
+  var v41$1: bv32;
+  var v41$2: bv32;
   var v42$1: bv32;
   var v42$2: bv32;
   var v43$1: bv32;
@@ -296,23 +296,23 @@ implementation {:source_name "reduce_kernel"} {:kernel} $reduce_kernel($d_Ne: bv
   var p26$2: bool;
   var p27$1: bool;
   var p27$2: bool;
-  var _READ_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$__partitioned_block_$for.cond.54_0: bool;
-  var _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$__partitioned_block_$for.cond.54_0: bool;
-  var _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$__partitioned_block_$for.cond.54_0: bool;
-  var _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$__partitioned_block_$for.cond.54_0: bool;
-  var _READ_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$__partitioned_block_$for.cond.103_0: bool;
-  var _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$__partitioned_block_$for.cond.103_0: bool;
-  var _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$__partitioned_block_$for.cond.103_0: bool;
-  var _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$__partitioned_block_$for.cond.103_0: bool;
-  var _READ_HAS_OCCURRED_$$d_sums$ghost$$for.cond.136: bool;
-  var _READ_HAS_OCCURRED_$$d_sums2$ghost$$for.cond.136: bool;
-  var _READ_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$$for.cond.136: bool;
-  var _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$$for.cond.136: bool;
-  var _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$$for.cond.136: bool;
-  var _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$$for.cond.136: bool;
+  var _READ_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$__partitioned_block_$14_0: bool;
+  var _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$__partitioned_block_$14_0: bool;
+  var _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$__partitioned_block_$14_0: bool;
+  var _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$__partitioned_block_$14_0: bool;
+  var _READ_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$__partitioned_block_$29_0: bool;
+  var _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$__partitioned_block_$29_0: bool;
+  var _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$__partitioned_block_$29_0: bool;
+  var _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$__partitioned_block_$29_0: bool;
+  var _READ_HAS_OCCURRED_$$d_sums$ghost$$37: bool;
+  var _READ_HAS_OCCURRED_$$d_sums2$ghost$$37: bool;
+  var _READ_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$$37: bool;
+  var _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$$37: bool;
+  var _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$$37: bool;
+  var _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$$37: bool;
 
 
-  __partitioned_block_$entry_0:
+  __partitioned_block_$0_0:
     v0$1 := group_id_x$1;
     v0$2 := group_id_x$2;
     v1$1 := local_id_x$1;
@@ -366,9 +366,9 @@ implementation {:source_name "reduce_kernel"} {:kernel} $reduce_kernel($d_Ne: bv
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$reduce_kernel.d_psum2"} true;
     $$reduce_kernel.d_psum2[1bv1][v1$1] := (if p0$1 then v6$1 else $$reduce_kernel.d_psum2[1bv1][v1$1]);
     $$reduce_kernel.d_psum2[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v1$2] := (if p0$2 then v6$2 else $$reduce_kernel.d_psum2[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v1$2]);
-    goto __partitioned_block_$entry_1;
+    goto __partitioned_block_$0_1;
 
-  __partitioned_block_$entry_1:
+  __partitioned_block_$0_1:
     call {:sourceloc_num 11} $bugle_barrier_duplicated_0(1bv1, 1bv1);
     v7 := v3 == 512bv32;
     goto $truebb0, $falsebb0;
@@ -385,23 +385,23 @@ implementation {:source_name "reduce_kernel"} {:kernel} $reduce_kernel($d_Ne: bv
     $i.1$2 := (if p6$2 then 2bv32 else $i.1$2);
     p7$1 := (if p6$1 then true else p7$1);
     p7$2 := (if p6$2 then true else p7$2);
-    _READ_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$__partitioned_block_$for.cond.54_0 := _READ_HAS_OCCURRED_$$reduce_kernel.d_psum;
-    _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$__partitioned_block_$for.cond.54_0 := _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum;
-    _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$__partitioned_block_$for.cond.54_0 := _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2;
-    _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$__partitioned_block_$for.cond.54_0 := _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2;
+    _READ_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$__partitioned_block_$14_0 := _READ_HAS_OCCURRED_$$reduce_kernel.d_psum;
+    _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$__partitioned_block_$14_0 := _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum;
+    _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$__partitioned_block_$14_0 := _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2;
+    _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$__partitioned_block_$14_0 := _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2;
     assume {:captureState "loop_entry_state_3_0"} true;
-    goto __partitioned_block_$for.cond.54_0;
+    goto __partitioned_block_$14_0;
 
-  __partitioned_block_$for.cond.54_0:
+  __partitioned_block_$14_0:
     assume {:captureState "loop_head_state_3"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b88 ==> !p6$1 ==> _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$__partitioned_block_$for.cond.54_0 == _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2;
-    assert {:tag "disabledMaintainsInstrumentation"} _b87 ==> !p6$1 ==> _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$__partitioned_block_$for.cond.54_0 == _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2;
+    assert {:tag "disabledMaintainsInstrumentation"} _b88 ==> !p6$1 ==> _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$__partitioned_block_$14_0 == _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2;
+    assert {:tag "disabledMaintainsInstrumentation"} _b87 ==> !p6$1 ==> _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$__partitioned_block_$14_0 == _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b86 ==> _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2 ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b85 ==> _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2 ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "nowrite"} _b84 ==> !_WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2;
     assert {:tag "noread"} _b83 ==> !_READ_HAS_OCCURRED_$$reduce_kernel.d_psum2;
-    assert {:tag "disabledMaintainsInstrumentation"} _b82 ==> !p6$1 ==> _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$__partitioned_block_$for.cond.54_0 == _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum;
-    assert {:tag "disabledMaintainsInstrumentation"} _b81 ==> !p6$1 ==> _READ_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$__partitioned_block_$for.cond.54_0 == _READ_HAS_OCCURRED_$$reduce_kernel.d_psum;
+    assert {:tag "disabledMaintainsInstrumentation"} _b82 ==> !p6$1 ==> _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$__partitioned_block_$14_0 == _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum;
+    assert {:tag "disabledMaintainsInstrumentation"} _b81 ==> !p6$1 ==> _READ_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$__partitioned_block_$14_0 == _READ_HAS_OCCURRED_$$reduce_kernel.d_psum;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b80 ==> _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b79 ==> _READ_HAS_OCCURRED_$$reduce_kernel.d_psum ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "nowrite"} _b78 ==> !_WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum;
@@ -410,8 +410,8 @@ implementation {:source_name "reduce_kernel"} {:kernel} $reduce_kernel($d_Ne: bv
     assert {:tag "predicatedEquality"} _b75 ==> p7$1 && p7$2 ==> v22$1 == v22$2;
     assert {:tag "predicatedEquality"} _b74 ==> p7$1 && p7$2 ==> v21$1 == v21$2;
     assert {:tag "predicatedEquality"} _b73 ==> p7$1 && p7$2 ==> v20$1 == v20$2;
-    assert {:tag "predicatedEquality"} _b72 ==> p7$1 && p7$2 ==> v18$1 == v18$2;
-    assert {:tag "predicatedEquality"} _b71 ==> p7$1 && p7$2 ==> v19$1 == v19$2;
+    assert {:tag "predicatedEquality"} _b72 ==> p7$1 && p7$2 ==> v19$1 == v19$2;
+    assert {:tag "predicatedEquality"} _b71 ==> p7$1 && p7$2 ==> v18$1 == v18$2;
     assert {:tag "predicatedEquality"} _b70 ==> p7$1 && p7$2 ==> $i.1$1 == $i.1$2;
     assert {:tag "loopPredicateEquality"} _b69 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 ==> p7$1 == p7$2;
     assert {:tag "loopPredicateEquality"} _b68 ==> p7$1 == p7$2;
@@ -511,17 +511,17 @@ implementation {:source_name "reduce_kernel"} {:kernel} $reduce_kernel($d_Ne: bv
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$reduce_kernel.d_psum2"} true;
     $$reduce_kernel.d_psum2[1bv1][v1$1] := (if p10$1 then FADD32(v22$1, v23$1) else $$reduce_kernel.d_psum2[1bv1][v1$1]);
     $$reduce_kernel.d_psum2[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v1$2] := (if p10$2 then FADD32(v22$2, v23$2) else $$reduce_kernel.d_psum2[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v1$2]);
-    goto __partitioned_block_$for.cond.54_1;
+    goto __partitioned_block_$14_1;
 
-  __partitioned_block_$for.cond.54_1:
+  __partitioned_block_$14_1:
     call {:sourceloc_num 44} $bugle_barrier_duplicated_2(1bv1, 0bv1, p8$1, p8$2);
     $i.1$1 := (if p8$1 then BV32_MUL(2bv32, $i.1$1) else $i.1$1);
     $i.1$2 := (if p8$2 then BV32_MUL(2bv32, $i.1$2) else $i.1$2);
     p7$1 := (if p8$1 then true else p7$1);
     p7$2 := (if p8$2 then true else p7$2);
-    goto $for.cond.54.backedge, $for.cond.54.tail;
+    goto $14.backedge, $14.tail;
 
-  $for.cond.54.tail:
+  $14.tail:
     assume !p7$1 && !p7$2;
     v24$1 := (if p6$1 then v1$1 == 511bv32 else v24$1);
     v24$2 := (if p6$2 then v1$2 == 511bv32 else v24$2);
@@ -558,9 +558,9 @@ implementation {:source_name "reduce_kernel"} {:kernel} $reduce_kernel($d_Ne: bv
     p14$1 := (if p13$1 then true else p14$1);
     p14$2 := (if p13$2 then true else p14$2);
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond.92;
+    goto $23;
 
-  $for.cond.92:
+  $23:
     assume {:captureState "loop_head_state_2"} true;
     assume {:invGenSkippedLoop} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$reduce_kernel.d_psum2 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -597,42 +597,42 @@ implementation {:source_name "reduce_kernel"} {:kernel} $reduce_kernel($d_Ne: bv
     $df.0$2, $i.2$2 := (if p15$2 then $df.1$2 else $df.0$2), (if p15$2 then BV32_MUL(2bv32, $i.2$2) else $i.2$2);
     p14$1 := (if p15$1 then true else p14$1);
     p14$2 := (if p15$2 then true else p14$2);
-    goto $for.cond.92.backedge, $for.cond.92.tail;
+    goto $23.backedge, $23.tail;
 
-  $for.cond.92.tail:
+  $23.tail:
     assume !p14$1 && !p14$2;
     $i.3$1 := (if p13$1 then 2bv32 else $i.3$1);
     $i.3$2 := (if p13$2 then 2bv32 else $i.3$2);
     p18$1 := (if p13$1 then true else p18$1);
     p18$2 := (if p13$2 then true else p18$2);
-    _READ_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$__partitioned_block_$for.cond.103_0 := _READ_HAS_OCCURRED_$$reduce_kernel.d_psum;
-    _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$__partitioned_block_$for.cond.103_0 := _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum;
-    _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$__partitioned_block_$for.cond.103_0 := _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2;
-    _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$__partitioned_block_$for.cond.103_0 := _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2;
+    _READ_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$__partitioned_block_$29_0 := _READ_HAS_OCCURRED_$$reduce_kernel.d_psum;
+    _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$__partitioned_block_$29_0 := _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum;
+    _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$__partitioned_block_$29_0 := _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2;
+    _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$__partitioned_block_$29_0 := _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto __partitioned_block_$for.cond.103_0;
+    goto __partitioned_block_$29_0;
 
-  __partitioned_block_$for.cond.103_0:
+  __partitioned_block_$29_0:
     assume {:captureState "loop_head_state_1"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b114 ==> !p13$1 ==> _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$__partitioned_block_$for.cond.103_0 == _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2;
-    assert {:tag "disabledMaintainsInstrumentation"} _b113 ==> !p13$1 ==> _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$__partitioned_block_$for.cond.103_0 == _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2;
+    assert {:tag "disabledMaintainsInstrumentation"} _b114 ==> !p13$1 ==> _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$__partitioned_block_$29_0 == _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2;
+    assert {:tag "disabledMaintainsInstrumentation"} _b113 ==> !p13$1 ==> _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$__partitioned_block_$29_0 == _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b112 ==> _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2 ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b111 ==> _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2 ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "nowrite"} _b110 ==> !_WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2;
     assert {:tag "noread"} _b109 ==> !_READ_HAS_OCCURRED_$$reduce_kernel.d_psum2;
-    assert {:tag "disabledMaintainsInstrumentation"} _b108 ==> !p13$1 ==> _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$__partitioned_block_$for.cond.103_0 == _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum;
-    assert {:tag "disabledMaintainsInstrumentation"} _b107 ==> !p13$1 ==> _READ_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$__partitioned_block_$for.cond.103_0 == _READ_HAS_OCCURRED_$$reduce_kernel.d_psum;
+    assert {:tag "disabledMaintainsInstrumentation"} _b108 ==> !p13$1 ==> _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$__partitioned_block_$29_0 == _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum;
+    assert {:tag "disabledMaintainsInstrumentation"} _b107 ==> !p13$1 ==> _READ_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$__partitioned_block_$29_0 == _READ_HAS_OCCURRED_$$reduce_kernel.d_psum;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b106 ==> _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b105 ==> _READ_HAS_OCCURRED_$$reduce_kernel.d_psum ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "nowrite"} _b104 ==> !_WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum;
     assert {:tag "noread"} _b103 ==> !_READ_HAS_OCCURRED_$$reduce_kernel.d_psum;
-    assert {:tag "predicatedEquality"} _b102 ==> p18$1 && p18$2 ==> v31$1 == v31$2;
-    assert {:tag "predicatedEquality"} _b101 ==> p18$1 && p18$2 ==> v29$1 == v29$2;
-    assert {:tag "predicatedEquality"} _b100 ==> p18$1 && p18$2 ==> v30$1 == v30$2;
-    assert {:tag "predicatedEquality"} _b99 ==> p18$1 && p18$2 ==> v35$1 == v35$2;
-    assert {:tag "predicatedEquality"} _b98 ==> p18$1 && p18$2 ==> v34$1 == v34$2;
-    assert {:tag "predicatedEquality"} _b97 ==> p18$1 && p18$2 ==> v33$1 == v33$2;
-    assert {:tag "predicatedEquality"} _b96 ==> p18$1 && p18$2 ==> v32$1 == v32$2;
+    assert {:tag "predicatedEquality"} _b102 ==> p18$1 && p18$2 ==> v35$1 == v35$2;
+    assert {:tag "predicatedEquality"} _b101 ==> p18$1 && p18$2 ==> v34$1 == v34$2;
+    assert {:tag "predicatedEquality"} _b100 ==> p18$1 && p18$2 ==> v33$1 == v33$2;
+    assert {:tag "predicatedEquality"} _b99 ==> p18$1 && p18$2 ==> v32$1 == v32$2;
+    assert {:tag "predicatedEquality"} _b98 ==> p18$1 && p18$2 ==> v31$1 == v31$2;
+    assert {:tag "predicatedEquality"} _b97 ==> p18$1 && p18$2 ==> v30$1 == v30$2;
+    assert {:tag "predicatedEquality"} _b96 ==> p18$1 && p18$2 ==> v29$1 == v29$2;
     assert {:tag "predicatedEquality"} _b95 ==> p18$1 && p18$2 ==> $i.3$1 == $i.3$2;
     assert {:tag "loopPredicateEquality"} _b94 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 ==> p18$1 == p18$2;
     assert {:tag "loopPredicateEquality"} _b93 ==> p18$1 == p18$2;
@@ -740,17 +740,17 @@ implementation {:source_name "reduce_kernel"} {:kernel} $reduce_kernel($d_Ne: bv
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$reduce_kernel.d_psum2"} true;
     $$reduce_kernel.d_psum2[1bv1][v1$1] := (if p23$1 then FADD32(v34$1, v35$1) else $$reduce_kernel.d_psum2[1bv1][v1$1]);
     $$reduce_kernel.d_psum2[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v1$2] := (if p23$2 then FADD32(v34$2, v35$2) else $$reduce_kernel.d_psum2[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v1$2]);
-    goto __partitioned_block_$for.cond.103_1;
+    goto __partitioned_block_$29_1;
 
-  __partitioned_block_$for.cond.103_1:
+  __partitioned_block_$29_1:
     call {:sourceloc_num 71} $bugle_barrier_duplicated_1(1bv1, 0bv1, p19$1, p19$2);
     $i.3$1 := (if p19$1 then BV32_MUL(2bv32, $i.3$1) else $i.3$1);
     $i.3$2 := (if p19$2 then BV32_MUL(2bv32, $i.3$2) else $i.3$2);
     p18$1 := (if p19$1 then true else p18$1);
     p18$2 := (if p19$2 then true else p18$2);
-    goto $for.cond.103.backedge, $for.cond.103.tail;
+    goto $29.backedge, $29.tail;
 
-  $for.cond.103.tail:
+  $29.tail:
     assume !p18$1 && !p18$2;
     v36$1 := (if p13$1 then v1$1 == BV32_SUB($df.0$1, 1bv32) else v36$1);
     v36$2 := (if p13$2 then v1$2 == BV32_SUB($df.0$2, 1bv32) else v36$2);
@@ -760,27 +760,27 @@ implementation {:source_name "reduce_kernel"} {:kernel} $reduce_kernel($d_Ne: bv
     $i.4$2 := (if p24$2 then BV32_ADD(BV32_MUL(v0$2, 512bv32), $df.0$2) else $i.4$2);
     p25$1 := (if p24$1 then true else p25$1);
     p25$2 := (if p24$2 then true else p25$2);
-    _READ_HAS_OCCURRED_$$d_sums$ghost$$for.cond.136 := _READ_HAS_OCCURRED_$$d_sums;
-    _READ_HAS_OCCURRED_$$d_sums2$ghost$$for.cond.136 := _READ_HAS_OCCURRED_$$d_sums2;
-    _READ_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$$for.cond.136 := _READ_HAS_OCCURRED_$$reduce_kernel.d_psum;
-    _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$$for.cond.136 := _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum;
-    _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$$for.cond.136 := _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2;
-    _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$$for.cond.136 := _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2;
+    _READ_HAS_OCCURRED_$$d_sums$ghost$$37 := _READ_HAS_OCCURRED_$$d_sums;
+    _READ_HAS_OCCURRED_$$d_sums2$ghost$$37 := _READ_HAS_OCCURRED_$$d_sums2;
+    _READ_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$$37 := _READ_HAS_OCCURRED_$$reduce_kernel.d_psum;
+    _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$$37 := _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum;
+    _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$$37 := _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2;
+    _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$$37 := _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.136;
+    goto $37;
 
-  $for.cond.136:
+  $37:
     assume {:captureState "loop_head_state_0"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b124 ==> !p24$1 ==> _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$$for.cond.136 == _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2;
-    assert {:tag "disabledMaintainsInstrumentation"} _b123 ==> !p24$1 ==> _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$$for.cond.136 == _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2;
+    assert {:tag "disabledMaintainsInstrumentation"} _b124 ==> !p24$1 ==> _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$$37 == _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2;
+    assert {:tag "disabledMaintainsInstrumentation"} _b123 ==> !p24$1 ==> _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2$ghost$$37 == _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b122 ==> _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2 ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b121 ==> _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2 ==> _WATCHED_OFFSET == local_id_x$1;
-    assert {:tag "disabledMaintainsInstrumentation"} _b120 ==> !p24$1 ==> _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$$for.cond.136 == _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum;
-    assert {:tag "disabledMaintainsInstrumentation"} _b119 ==> !p24$1 ==> _READ_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$$for.cond.136 == _READ_HAS_OCCURRED_$$reduce_kernel.d_psum;
+    assert {:tag "disabledMaintainsInstrumentation"} _b120 ==> !p24$1 ==> _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$$37 == _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum;
+    assert {:tag "disabledMaintainsInstrumentation"} _b119 ==> !p24$1 ==> _READ_HAS_OCCURRED_$$reduce_kernel.d_psum$ghost$$37 == _READ_HAS_OCCURRED_$$reduce_kernel.d_psum;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b118 ==> _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b117 ==> _READ_HAS_OCCURRED_$$reduce_kernel.d_psum ==> _WATCHED_OFFSET == local_id_x$1;
-    assert {:tag "disabledMaintainsInstrumentation"} _b116 ==> !p24$1 ==> _READ_HAS_OCCURRED_$$d_sums2$ghost$$for.cond.136 == _READ_HAS_OCCURRED_$$d_sums2;
-    assert {:tag "disabledMaintainsInstrumentation"} _b115 ==> !p24$1 ==> _READ_HAS_OCCURRED_$$d_sums$ghost$$for.cond.136 == _READ_HAS_OCCURRED_$$d_sums;
+    assert {:tag "disabledMaintainsInstrumentation"} _b116 ==> !p24$1 ==> _READ_HAS_OCCURRED_$$d_sums2$ghost$$37 == _READ_HAS_OCCURRED_$$d_sums2;
+    assert {:tag "disabledMaintainsInstrumentation"} _b115 ==> !p24$1 ==> _READ_HAS_OCCURRED_$$d_sums$ghost$$37 == _READ_HAS_OCCURRED_$$d_sums;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$reduce_kernel.d_psum2 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -871,9 +871,9 @@ implementation {:source_name "reduce_kernel"} {:kernel} $reduce_kernel($d_Ne: bv
     $i.4$2 := (if p26$2 then BV32_ADD($i.4$2, 1bv32) else $i.4$2);
     p25$1 := (if p26$1 then true else p25$1);
     p25$2 := (if p26$2 then true else p25$2);
-    goto $for.cond.136.backedge, $for.cond.136.tail;
+    goto $37.backedge, $37.tail;
 
-  $for.cond.136.tail:
+  $37.tail:
     assume !p25$1 && !p25$2;
     call {:sourceloc} {:sourceloc_num 85} _LOG_READ_$$reduce_kernel.d_psum(p24$1, v1$1, $$reduce_kernel.d_psum[1bv1][v1$1]);
     assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 85} true;
@@ -901,38 +901,38 @@ implementation {:source_name "reduce_kernel"} {:kernel} $reduce_kernel($d_Ne: bv
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$d_sums2"} true;
     $$d_sums2[BV32_MUL(BV32_MUL(v0$1, $d_mul), 512bv32)] := (if p24$1 then v43$1 else $$d_sums2[BV32_MUL(BV32_MUL(v0$1, $d_mul), 512bv32)]);
     $$d_sums2[BV32_MUL(BV32_MUL(v0$2, $d_mul), 512bv32)] := (if p24$2 then v43$2 else $$d_sums2[BV32_MUL(BV32_MUL(v0$2, $d_mul), 512bv32)]);
-    goto $if.end.162;
+    goto $43;
 
-  $if.end.162:
+  $43:
     return;
 
-  $for.cond.136.backedge:
+  $37.backedge:
     assume {:backedge} p25$1 || p25$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.136;
+    goto $37;
 
-  $for.cond.103.backedge:
+  $29.backedge:
     assume {:backedge} p18$1 || p18$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto __partitioned_block_$for.cond.103_0;
+    goto __partitioned_block_$29_0;
 
-  $for.cond.92.backedge:
+  $23.backedge:
     assume {:backedge} p14$1 || p14$2;
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond.92;
+    goto $23;
 
-  $for.cond.54.backedge:
+  $14.backedge:
     assume {:backedge} p7$1 || p7$2;
     assume {:captureState "loop_back_edge_state_3_0"} true;
-    goto __partitioned_block_$for.cond.54_0;
+    goto __partitioned_block_$14_0;
 
   $truebb0:
     assume {:partition} v7;
     $i.0 := 2bv32;
     assume {:captureState "loop_entry_state_4_0"} true;
-    goto $for.cond;
+    goto $4;
 
-  $for.cond:
+  $4:
     assume {:captureState "loop_head_state_4"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b134 ==> _WRITE_HAS_OCCURRED_$$reduce_kernel.d_psum2 ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b133 ==> _READ_HAS_OCCURRED_$$reduce_kernel.d_psum2 ==> _WATCHED_OFFSET == local_id_x$1;
@@ -999,7 +999,7 @@ implementation {:source_name "reduce_kernel"} {:kernel} $reduce_kernel($d_Ne: bv
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$d_sums2"} true;
     $$d_sums2[BV32_MUL(BV32_MUL(v0$1, $d_mul), 512bv32)] := (if p4$1 then v16$1 else $$d_sums2[BV32_MUL(BV32_MUL(v0$1, $d_mul), 512bv32)]);
     $$d_sums2[BV32_MUL(BV32_MUL(v0$2, $d_mul), 512bv32)] := (if p4$2 then v16$2 else $$d_sums2[BV32_MUL(BV32_MUL(v0$2, $d_mul), 512bv32)]);
-    goto $if.end.162;
+    goto $43;
 
   __partitioned_block_$truebb1_0:
     assume {:partition} v8;
@@ -1051,7 +1051,7 @@ implementation {:source_name "reduce_kernel"} {:kernel} $reduce_kernel($d_Ne: bv
     call {:sourceloc_num 23} $bugle_barrier_duplicated_3(1bv1, 0bv1);
     $i.0 := BV32_MUL(2bv32, $i.0);
     assume {:captureState "loop_back_edge_state_4_0"} true;
-    goto $for.cond;
+    goto $4;
 }
 
 

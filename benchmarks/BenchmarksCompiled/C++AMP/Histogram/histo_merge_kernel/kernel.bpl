@@ -112,15 +112,15 @@ implementation {:source_name "histo_merge_kernel"} {:kernel} $_Z18histo_merge_ke
   var $stride.0: bv32;
   var v0$1: bool;
   var v0$2: bool;
-  var v2: bool;
   var v1$1: bv32;
   var v1$2: bv32;
-  var v5$1: bv32;
-  var v5$2: bv32;
-  var v4$1: bv32;
-  var v4$2: bv32;
+  var v2: bool;
   var v3$1: bool;
   var v3$2: bool;
+  var v4$1: bv32;
+  var v4$2: bv32;
+  var v5$1: bv32;
+  var v5$2: bv32;
   var v6$1: bool;
   var v6$2: bool;
   var v7$1: bv32;
@@ -143,7 +143,7 @@ implementation {:source_name "histo_merge_kernel"} {:kernel} $_Z18histo_merge_ke
   var _HAVOC_bv32$2: bv32;
 
 
-  $entry:
+  $0:
     $sum.0$1, $i.0$1 := 0bv32, local_id_x$1;
     $sum.0$2, $i.0$2 := 0bv32, local_id_x$2;
     p0$1 := false;
@@ -151,9 +151,9 @@ implementation {:source_name "histo_merge_kernel"} {:kernel} $_Z18histo_merge_ke
     p0$1 := true;
     p0$2 := true;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_1"} true;
     assume {:invGenSkippedLoop} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ18histo_merge_kernelPjS_E6s_data ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -177,9 +177,9 @@ implementation {:source_name "histo_merge_kernel"} {:kernel} $_Z18histo_merge_ke
     $sum.0$2, $i.0$2 := (if p1$2 then BV32_ADD($sum.0$2, v1$2) else $sum.0$2), (if p1$2 then BV32_ADD($i.0$2, 256bv32) else $i.0$2);
     p0$1 := (if p1$1 then true else p0$1);
     p0$2 := (if p1$2 then true else p0$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $1.backedge, $1.tail;
 
-  $for.cond.tail:
+  $1.tail:
     assume !p0$1 && !p0$2;
     call {:sourceloc} {:sourceloc_num 6} _LOG_WRITE_$$_ZZ18histo_merge_kernelPjS_E6s_data(true, local_id_x$1, $sum.0$1, $$_ZZ18histo_merge_kernelPjS_E6s_data[1bv1][local_id_x$1]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$_ZZ18histo_merge_kernelPjS_E6s_data(true, local_id_x$2);
@@ -190,9 +190,9 @@ implementation {:source_name "histo_merge_kernel"} {:kernel} $_Z18histo_merge_ke
     $$_ZZ18histo_merge_kernelPjS_E6s_data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2] := $sum.0$2;
     $stride.0 := 128bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.4;
+    goto $5;
 
-  $for.cond.4:
+  $5:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b10 ==> _WRITE_HAS_OCCURRED_$$_ZZ18histo_merge_kernelPjS_E6s_data ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b9 ==> _READ_HAS_OCCURRED_$$_ZZ18histo_merge_kernelPjS_E6s_data ==> _WATCHED_OFFSET == local_id_x$1;
@@ -272,12 +272,12 @@ implementation {:source_name "histo_merge_kernel"} {:kernel} $_Z18histo_merge_ke
     $$_ZZ18histo_merge_kernelPjS_E6s_data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2] := (if p4$2 then BV32_ADD(v5$2, v4$2) else $$_ZZ18histo_merge_kernelPjS_E6s_data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2]);
     $stride.0 := BV32_ASHR($stride.0, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.4;
+    goto $5;
 
-  $for.cond.backedge:
+  $1.backedge:
     assume {:backedge} p0$1 || p0$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

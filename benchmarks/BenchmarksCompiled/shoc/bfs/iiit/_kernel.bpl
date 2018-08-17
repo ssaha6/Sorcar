@@ -141,32 +141,32 @@ implementation {:source_name "BFS_kernel_warp"} {:kernel} $BFS_kernel_warp($W_SZ
   var $v.0$2: bv32;
   var $i.0$1: bv32;
   var $i.0$2: bv32;
-  var v4$1: bool;
-  var v4$2: bool;
-  var v3$1: bv32;
-  var v3$2: bv32;
+  var v0$1: bv32;
+  var v0$2: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
   var v2$1: bool;
   var v2$2: bool;
-  var v0$1: bv32;
-  var v0$2: bv32;
+  var v3$1: bv32;
+  var v3$2: bv32;
+  var v4$1: bool;
+  var v4$2: bool;
   var v5$1: bool;
   var v5$2: bool;
-  var v7$1: bool;
-  var v7$2: bool;
-  var v11$1: bool;
-  var v11$2: bool;
   var v6$1: bv32;
   var v6$2: bv32;
-  var v10$1: bv32;
-  var v10$2: bv32;
+  var v7$1: bool;
+  var v7$2: bool;
   var v8$1: bv32;
   var v8$2: bv32;
-  var v12$1: bv32;
-  var v12$2: bv32;
   var v9$1: bv32;
   var v9$2: bv32;
+  var v10$1: bv32;
+  var v10$2: bv32;
+  var v11$1: bool;
+  var v11$2: bool;
+  var v12$1: bv32;
+  var v12$2: bv32;
   var v13$1: bv32;
   var v13$2: bv32;
   var v14$1: bool;
@@ -197,12 +197,12 @@ implementation {:source_name "BFS_kernel_warp"} {:kernel} $BFS_kernel_warp($W_SZ
   var p11$2: bool;
   var p12$1: bool;
   var p12$2: bool;
-  var _READ_HAS_OCCURRED_$$levels$ghost$$for.cond.19: bool;
-  var _WRITE_HAS_OCCURRED_$$levels$ghost$$for.cond.19: bool;
-  var _WRITE_HAS_OCCURRED_$$flag$ghost$$for.cond.19: bool;
+  var _READ_HAS_OCCURRED_$$levels$ghost$$8: bool;
+  var _WRITE_HAS_OCCURRED_$$levels$ghost$$8: bool;
+  var _WRITE_HAS_OCCURRED_$$flag$ghost$$8: bool;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2);
     v1$1 := BV32_MUL(BV32_SDIV(v0$1, $W_SZ), $CHUNK_SZ);
@@ -244,9 +244,9 @@ implementation {:source_name "BFS_kernel_warp"} {:kernel} $BFS_kernel_warp($W_SZ
     p4$1 := true;
     p4$2 := true;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $5;
 
-  $for.cond:
+  $5:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b45 ==> _WRITE_HAS_OCCURRED_$$flag ==> _WATCHED_OFFSET == 0bv32;
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b44 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_WRITE_HAS_OCCURRED_$$flag;
@@ -259,13 +259,13 @@ implementation {:source_name "BFS_kernel_warp"} {:kernel} $BFS_kernel_warp($W_SZ
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b37 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_READ_HAS_OCCURRED_$$levels;
     assert {:tag "predicatedEquality"} _b36 ==> p4$1 && p4$2 ==> v14$1 == v14$2;
     assert {:tag "predicatedEquality"} _b35 ==> p4$1 && p4$2 ==> v13$1 == v13$2;
-    assert {:tag "predicatedEquality"} _b34 ==> p4$1 && p4$2 ==> v9$1 == v9$2;
-    assert {:tag "predicatedEquality"} _b33 ==> p4$1 && p4$2 ==> v12$1 == v12$2;
-    assert {:tag "predicatedEquality"} _b32 ==> p4$1 && p4$2 ==> v8$1 == v8$2;
-    assert {:tag "predicatedEquality"} _b31 ==> p4$1 && p4$2 ==> v10$1 == v10$2;
-    assert {:tag "predicatedEquality"} _b30 ==> p4$1 && p4$2 ==> v6$1 == v6$2;
-    assert {:tag "predicatedEquality"} _b29 ==> p4$1 && p4$2 ==> v11$1 == v11$2;
-    assert {:tag "predicatedEquality"} _b28 ==> p4$1 && p4$2 ==> v7$1 == v7$2;
+    assert {:tag "predicatedEquality"} _b34 ==> p4$1 && p4$2 ==> v12$1 == v12$2;
+    assert {:tag "predicatedEquality"} _b33 ==> p4$1 && p4$2 ==> v11$1 == v11$2;
+    assert {:tag "predicatedEquality"} _b32 ==> p4$1 && p4$2 ==> v10$1 == v10$2;
+    assert {:tag "predicatedEquality"} _b31 ==> p4$1 && p4$2 ==> v9$1 == v9$2;
+    assert {:tag "predicatedEquality"} _b30 ==> p4$1 && p4$2 ==> v8$1 == v8$2;
+    assert {:tag "predicatedEquality"} _b29 ==> p4$1 && p4$2 ==> v7$1 == v7$2;
+    assert {:tag "predicatedEquality"} _b28 ==> p4$1 && p4$2 ==> v6$1 == v6$2;
     assert {:tag "predicatedEquality"} _b27 ==> p4$1 && p4$2 ==> v5$1 == v5$2;
     assert {:tag "predicatedEquality"} _b26 ==> p4$1 && p4$2 ==> $i.0$1 == $i.0$2;
     assert {:tag "predicatedEquality"} _b25 ==> p4$1 && p4$2 ==> $v.0$1 == $v.0$2;
@@ -326,15 +326,15 @@ implementation {:source_name "BFS_kernel_warp"} {:kernel} $BFS_kernel_warp($W_SZ
     $i.0$2 := (if p7$2 then BV32_SREM(v0$2, $W_SZ) else $i.0$2);
     p8$1 := (if p7$1 then true else p8$1);
     p8$2 := (if p7$2 then true else p8$2);
-    _READ_HAS_OCCURRED_$$levels$ghost$$for.cond.19 := _READ_HAS_OCCURRED_$$levels;
-    _WRITE_HAS_OCCURRED_$$levels$ghost$$for.cond.19 := _WRITE_HAS_OCCURRED_$$levels;
-    _WRITE_HAS_OCCURRED_$$flag$ghost$$for.cond.19 := _WRITE_HAS_OCCURRED_$$flag;
+    _READ_HAS_OCCURRED_$$levels$ghost$$8 := _READ_HAS_OCCURRED_$$levels;
+    _WRITE_HAS_OCCURRED_$$levels$ghost$$8 := _WRITE_HAS_OCCURRED_$$levels;
+    _WRITE_HAS_OCCURRED_$$flag$ghost$$8 := _WRITE_HAS_OCCURRED_$$flag;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.19;
+    goto $8;
 
-  $for.cond.19:
+  $8:
     assume {:captureState "loop_head_state_1"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b64 ==> !p7$1 ==> _WRITE_HAS_OCCURRED_$$flag$ghost$$for.cond.19 == _WRITE_HAS_OCCURRED_$$flag;
+    assert {:tag "disabledMaintainsInstrumentation"} _b64 ==> !p7$1 ==> _WRITE_HAS_OCCURRED_$$flag$ghost$$8 == _WRITE_HAS_OCCURRED_$$flag;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b63 ==> _WRITE_HAS_OCCURRED_$$flag ==> _WATCHED_OFFSET == 0bv32;
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b62 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_WRITE_HAS_OCCURRED_$$flag;
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b61 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_READ_HAS_OCCURRED_$$flag;
@@ -342,8 +342,8 @@ implementation {:source_name "BFS_kernel_warp"} {:kernel} $BFS_kernel_warp($W_SZ
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b59 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_READ_HAS_OCCURRED_$$edgeArrayAux;
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b58 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_WRITE_HAS_OCCURRED_$$edgeArray;
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b57 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_READ_HAS_OCCURRED_$$edgeArray;
-    assert {:tag "disabledMaintainsInstrumentation"} _b56 ==> !p7$1 ==> _WRITE_HAS_OCCURRED_$$levels$ghost$$for.cond.19 == _WRITE_HAS_OCCURRED_$$levels;
-    assert {:tag "disabledMaintainsInstrumentation"} _b55 ==> !p7$1 ==> _READ_HAS_OCCURRED_$$levels$ghost$$for.cond.19 == _READ_HAS_OCCURRED_$$levels;
+    assert {:tag "disabledMaintainsInstrumentation"} _b56 ==> !p7$1 ==> _WRITE_HAS_OCCURRED_$$levels$ghost$$8 == _WRITE_HAS_OCCURRED_$$levels;
+    assert {:tag "disabledMaintainsInstrumentation"} _b55 ==> !p7$1 ==> _READ_HAS_OCCURRED_$$levels$ghost$$8 == _READ_HAS_OCCURRED_$$levels;
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b54 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_WRITE_HAS_OCCURRED_$$levels;
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b53 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_READ_HAS_OCCURRED_$$levels;
     assert {:tag "predicatedEquality"} _b52 ==> p8$1 && p8$2 ==> v14$1 == v14$2;
@@ -429,29 +429,29 @@ implementation {:source_name "BFS_kernel_warp"} {:kernel} $BFS_kernel_warp($W_SZ
     $i.0$2 := (if p9$2 then BV32_ADD($i.0$2, $W_SZ) else $i.0$2);
     p8$1 := (if p9$1 then true else p8$1);
     p8$2 := (if p9$2 then true else p8$2);
-    goto $for.cond.19.backedge, $for.cond.19.tail;
+    goto $8.backedge, $8.tail;
 
-  $for.cond.19.tail:
+  $8.tail:
     assume !p8$1 && !p8$2;
     $v.0$1 := (if p5$1 then BV32_ADD($v.0$1, 1bv32) else $v.0$1);
     $v.0$2 := (if p5$2 then BV32_ADD($v.0$2, 1bv32) else $v.0$2);
     p4$1 := (if p5$1 then true else p4$1);
     p4$2 := (if p5$2 then true else p4$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $5.backedge, $5.tail;
 
-  $for.cond.tail:
+  $5.tail:
     assume !p4$1 && !p4$2;
     return;
 
-  $for.cond.backedge:
+  $5.backedge:
     assume {:backedge} p4$1 || p4$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $5;
 
-  $for.cond.19.backedge:
+  $8.backedge:
     assume {:backedge} p8$1 || p8$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.19;
+    goto $8;
 }
 
 

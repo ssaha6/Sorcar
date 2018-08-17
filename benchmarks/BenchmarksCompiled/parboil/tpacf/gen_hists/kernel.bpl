@@ -173,8 +173,8 @@ implementation {:source_name "gen_hists"} {:kernel} $gen_hists($NUM_SETS: bv32, 
   var $k.0$2: bv32;
   var $0$1: bv1;
   var $0$2: bv1;
-  var $cond$1: bv32;
-  var $cond$2: bv32;
+  var $1$1: bv32;
+  var $1$2: bv32;
   var $min.0$1: bv32;
   var $min.0$2: bv32;
   var $max.0$1: bv32;
@@ -185,92 +185,92 @@ implementation {:source_name "gen_hists"} {:kernel} $gen_hists($NUM_SETS: bv32, 
   var $max.1$2: bv32;
   var $offset.0: bv32;
   var $bin_base.0: bv32;
-  var v11$1: bv32;
-  var v11$2: bv32;
-  var v12$1: bv32;
-  var v12$2: bv32;
-  var v10$1: bv32;
-  var v10$2: bv32;
-  var v41$1: bv32;
-  var v41$2: bv32;
-  var v42$1: bv32;
-  var v42$2: bv32;
-  var v45$1: bv32;
-  var v45$2: bv32;
   var v34$1: bv32;
   var v34$2: bv32;
-  var v2$1: bv32;
-  var v2$2: bv32;
-  var v3$1: bv32;
-  var v3$2: bv32;
+  var v12$1: bv32;
+  var v12$2: bv32;
+  var v14$1: bool;
+  var v14$2: bool;
+  var v15$1: bv32;
+  var v15$2: bv32;
   var v7$1: bv32;
   var v7$2: bv32;
-  var v8$1: bv32;
-  var v8$2: bv32;
+  var v10$1: bv32;
+  var v10$2: bv32;
   var v9$1: bv32;
   var v9$2: bv32;
+  var v8$1: bv32;
+  var v8$2: bv32;
+  var v35$1: bv32;
+  var v35$2: bv32;
+  var v19$1: bool;
+  var v19$2: bool;
+  var v11$1: bv32;
+  var v11$2: bv32;
+  var v13: bool;
+  var v20$1: bv32;
+  var v20$2: bv32;
+  var v21$1: bv32;
+  var v21$2: bv32;
+  var v22$1: bv32;
+  var v22$2: bv32;
+  var v23$1: bv32;
+  var v23$2: bv32;
+  var v24$1: bool;
+  var v24$2: bool;
+  var v0: bv32;
+  var v1: bv32;
+  var v5: bool;
+  var v25$1: bv32;
+  var v25$2: bv32;
+  var v26$1: bv32;
+  var v26$2: bv32;
+  var v27$1: bool;
+  var v27$2: bool;
+  var v28$1: bv32;
+  var v28$2: bv32;
+  var v29$1: bool;
+  var v29$2: bool;
+  var v30$1: bv32;
+  var v30$2: bv32;
+  var v31$1: bool;
+  var v31$2: bool;
+  var v6$1: bool;
+  var v6$2: bool;
   var v16$1: bv32;
   var v16$2: bv32;
   var v17$1: bv32;
   var v17$2: bv32;
-  var v15$1: bv32;
-  var v15$2: bv32;
-  var v20$1: bv32;
-  var v20$2: bv32;
-  var v28$1: bv32;
-  var v28$2: bv32;
-  var v22$1: bv32;
-  var v22$2: bv32;
-  var v30$1: bv32;
-  var v30$2: bv32;
-  var v21$1: bv32;
-  var v21$2: bv32;
-  var v26$1: bv32;
-  var v26$2: bv32;
-  var v14$1: bool;
-  var v14$2: bool;
   var v18$1: bool;
   var v18$2: bool;
-  var v19$1: bool;
-  var v19$2: bool;
-  var v13: bool;
-  var v29$1: bool;
-  var v29$2: bool;
-  var v31$1: bool;
-  var v31$2: bool;
-  var v33$1: bool;
-  var v33$2: bool;
-  var v32$1: bool;
-  var v32$2: bool;
-  var v35$1: bv32;
-  var v35$2: bv32;
-  var v36$1: bv32;
-  var v36$2: bv32;
-  var v24$1: bool;
-  var v24$2: bool;
-  var v23$1: bv32;
-  var v23$2: bv32;
-  var v25$1: bv32;
-  var v25$2: bv32;
-  var v27$1: bool;
-  var v27$2: bool;
+  var v40$1: bool;
+  var v40$2: bool;
+  var v41$1: bv32;
+  var v41$2: bv32;
+  var v42$1: bv32;
+  var v42$2: bv32;
   var v43$1: bv32;
   var v43$2: bv32;
   var v44$1: bool;
   var v44$2: bool;
+  var v2$1: bv32;
+  var v2$2: bv32;
+  var v3$1: bv32;
+  var v3$2: bv32;
+  var v4$1: bool;
+  var v4$2: bool;
+  var v36$1: bv32;
+  var v36$2: bv32;
   var v37: bool;
   var v38: bool;
   var v39$1: bool;
   var v39$2: bool;
-  var v40$1: bool;
-  var v40$2: bool;
-  var v5: bool;
-  var v6$1: bool;
-  var v6$2: bool;
-  var v0: bv32;
-  var v1: bv32;
-  var v4$1: bool;
-  var v4$2: bool;
+  var v32$1: bool;
+  var v32$2: bool;
+  var v33$1: bool;
+  var v33$2: bool;
+  var v45$1: bv32;
+  var v45$2: bv32;
   var _abstracted_call_arg_0$1: bv32;
   var _abstracted_call_arg_0$2: bv32;
   var _abstracted_call_arg_1$1: bv32;
@@ -359,7 +359,7 @@ implementation {:source_name "gen_hists"} {:kernel} $gen_hists($NUM_SETS: bv32, 
   var _HAVOC_bv32$2: bv32;
 
 
-  $entry:
+  $0:
     v0 := BV32_MUL($NUM_ELEMENTS, BV32_ADD($NUM_SETS, 1bv32));
     v1 := BV32_MUL($NUM_ELEMENTS, BV32_ADD($NUM_SETS, 1bv32));
     v2$1 := group_id_x$1;
@@ -370,9 +370,9 @@ implementation {:source_name "gen_hists"} {:kernel} $gen_hists($NUM_SETS: bv32, 
     v4$2 := BV32_ULT(v2$2, BV32_ADD($NUM_SETS, 1bv32));
     $w.0 := 0bv32;
     assume {:captureState "loop_entry_state_5_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_5"} true;
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b32 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_WRITE_HAS_OCCURRED_$$gen_hists.warp_hists;
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b31 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_READ_HAS_OCCURRED_$$gen_hists.warp_hists;
@@ -427,9 +427,9 @@ implementation {:source_name "gen_hists"} {:kernel} $gen_hists($NUM_SETS: bv32, 
     $j.0, $random_x_s.0$1, $random_y_s.0$1, $random_z_s.0$1 := 0bv32, v10$1, v11$1, v12$1;
     $random_x_s.0$2, $random_y_s.0$2, $random_z_s.0$2 := v10$2, v11$2, v12$2;
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond.36;
+    goto $10;
 
-  $for.cond.36:
+  $10:
     assume {:captureState "loop_head_state_2"} true;
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b38 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_WRITE_HAS_OCCURRED_$$gen_hists.warp_hists;
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b37 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_READ_HAS_OCCURRED_$$gen_hists.warp_hists;
@@ -463,9 +463,9 @@ implementation {:source_name "gen_hists"} {:kernel} $gen_hists($NUM_SETS: bv32, 
     v36$2 := BV32_UDIV(v3$2, 64bv32);
     $offset.0 := 64bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.102;
+    goto $37;
 
-  $for.cond.102:
+  $37:
     assume {:captureState "loop_head_state_0"} true;
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b48 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_WRITE_HAS_OCCURRED_$$gen_hists.warp_hists;
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b47 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_READ_HAS_OCCURRED_$$gen_hists.warp_hists;
@@ -531,9 +531,9 @@ implementation {:source_name "gen_hists"} {:kernel} $gen_hists($NUM_SETS: bv32, 
     assume {:partition} v37;
     $bin_base.0 := 0bv32;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.106;
+    goto $39;
 
-  $for.cond.106:
+  $39:
     assume {:captureState "loop_head_state_1"} true;
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b56 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_WRITE_HAS_OCCURRED_$$gen_hists.warp_hists;
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b55 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_READ_HAS_OCCURRED_$$gen_hists.warp_hists;
@@ -567,7 +567,7 @@ implementation {:source_name "gen_hists"} {:kernel} $gen_hists($NUM_SETS: bv32, 
     assume {:partition} !v38;
     $offset.0 := BV32_LSHR($offset.0, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.102;
+    goto $37;
 
   __partitioned_block_$truebb15_0:
     assume {:partition} v38;
@@ -625,7 +625,7 @@ implementation {:source_name "gen_hists"} {:kernel} $gen_hists($NUM_SETS: bv32, 
     call _POST_WARP_SYNC_$$gen_hists.warp_hists_WRITE(p31$1, p31$2);
     $bin_base.0 := BV32_ADD($bin_base.0, 4bv32);
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.106;
+    goto $39;
 
   $truebb2:
     assume {:partition} v13;
@@ -650,9 +650,9 @@ implementation {:source_name "gen_hists"} {:kernel} $gen_hists($NUM_SETS: bv32, 
     p6$1 := true;
     p6$2 := true;
     assume {:captureState "loop_entry_state_3_0"} true;
-    goto $for.cond.49;
+    goto $14;
 
-  $for.cond.49:
+  $14:
     assume {:captureState "loop_head_state_3"} true;
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b88 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_WRITE_HAS_OCCURRED_$$gen_hists.warp_hists;
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b87 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_READ_HAS_OCCURRED_$$gen_hists.warp_hists;
@@ -660,28 +660,28 @@ implementation {:source_name "gen_hists"} {:kernel} $gen_hists($NUM_SETS: bv32, 
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b85 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_READ_HAS_OCCURRED_$$all_x_data;
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b84 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_WRITE_HAS_OCCURRED_$$histograms;
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b83 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_READ_HAS_OCCURRED_$$histograms;
-    assert {:tag "predicatedEquality"} _b82 ==> p6$1 && p6$2 ==> v27$1 == v27$2;
-    assert {:tag "predicatedEquality"} _b81 ==> p6$1 && p6$2 ==> v25$1 == v25$2;
-    assert {:tag "predicatedEquality"} _b80 ==> p6$1 && p6$2 ==> v23$1 == v23$2;
-    assert {:tag "predicatedEquality"} _b79 ==> p6$1 && p6$2 ==> v24$1 == v24$2;
-    assert {:tag "predicatedEquality"} _b78 ==> p6$1 && p6$2 ==> v32$1 == v32$2;
-    assert {:tag "predicatedEquality"} _b77 ==> p6$1 && p6$2 ==> v33$1 == v33$2;
-    assert {:tag "predicatedEquality"} _b76 ==> p6$1 && p6$2 ==> v31$1 == v31$2;
-    assert {:tag "predicatedEquality"} _b75 ==> p6$1 && p6$2 ==> v29$1 == v29$2;
-    assert {:tag "predicatedEquality"} _b74 ==> p6$1 && p6$2 ==> v19$1 == v19$2;
-    assert {:tag "predicatedEquality"} _b73 ==> p6$1 && p6$2 ==> v18$1 == v18$2;
-    assert {:tag "predicatedEquality"} _b72 ==> p6$1 && p6$2 ==> v26$1 == v26$2;
-    assert {:tag "predicatedEquality"} _b71 ==> p6$1 && p6$2 ==> v21$1 == v21$2;
-    assert {:tag "predicatedEquality"} _b70 ==> p6$1 && p6$2 ==> v30$1 == v30$2;
-    assert {:tag "predicatedEquality"} _b69 ==> p6$1 && p6$2 ==> v22$1 == v22$2;
-    assert {:tag "predicatedEquality"} _b68 ==> p6$1 && p6$2 ==> v28$1 == v28$2;
-    assert {:tag "predicatedEquality"} _b67 ==> p6$1 && p6$2 ==> v20$1 == v20$2;
+    assert {:tag "predicatedEquality"} _b82 ==> p6$1 && p6$2 ==> v33$1 == v33$2;
+    assert {:tag "predicatedEquality"} _b81 ==> p6$1 && p6$2 ==> v32$1 == v32$2;
+    assert {:tag "predicatedEquality"} _b80 ==> p6$1 && p6$2 ==> v18$1 == v18$2;
+    assert {:tag "predicatedEquality"} _b79 ==> p6$1 && p6$2 ==> v31$1 == v31$2;
+    assert {:tag "predicatedEquality"} _b78 ==> p6$1 && p6$2 ==> v30$1 == v30$2;
+    assert {:tag "predicatedEquality"} _b77 ==> p6$1 && p6$2 ==> v29$1 == v29$2;
+    assert {:tag "predicatedEquality"} _b76 ==> p6$1 && p6$2 ==> v28$1 == v28$2;
+    assert {:tag "predicatedEquality"} _b75 ==> p6$1 && p6$2 ==> v27$1 == v27$2;
+    assert {:tag "predicatedEquality"} _b74 ==> p6$1 && p6$2 ==> v26$1 == v26$2;
+    assert {:tag "predicatedEquality"} _b73 ==> p6$1 && p6$2 ==> v25$1 == v25$2;
+    assert {:tag "predicatedEquality"} _b72 ==> p6$1 && p6$2 ==> v24$1 == v24$2;
+    assert {:tag "predicatedEquality"} _b71 ==> p6$1 && p6$2 ==> v23$1 == v23$2;
+    assert {:tag "predicatedEquality"} _b70 ==> p6$1 && p6$2 ==> v22$1 == v22$2;
+    assert {:tag "predicatedEquality"} _b69 ==> p6$1 && p6$2 ==> v21$1 == v21$2;
+    assert {:tag "predicatedEquality"} _b68 ==> p6$1 && p6$2 ==> v20$1 == v20$2;
+    assert {:tag "predicatedEquality"} _b67 ==> p6$1 && p6$2 ==> v19$1 == v19$2;
     assert {:tag "predicatedEquality"} _b66 ==> p6$1 && p6$2 ==> v34$1 == v34$2;
     assert {:tag "predicatedEquality"} _b65 ==> p6$1 && p6$2 ==> $max.1$1 == $max.1$2;
     assert {:tag "predicatedEquality"} _b64 ==> p6$1 && p6$2 ==> $min.1$1 == $min.1$2;
     assert {:tag "predicatedEquality"} _b63 ==> p6$1 && p6$2 ==> $max.0$1 == $max.0$2;
     assert {:tag "predicatedEquality"} _b62 ==> p6$1 && p6$2 ==> $min.0$1 == $min.0$2;
-    assert {:tag "predicatedEquality"} _b61 ==> p6$1 && p6$2 ==> $cond$1 == $cond$2;
+    assert {:tag "predicatedEquality"} _b61 ==> p6$1 && p6$2 ==> $1$1 == $1$2;
     assert {:tag "predicatedEquality"} _b60 ==> p6$1 && p6$2 ==> $0$1 == $0$2;
     assert {:tag "predicatedEquality"} _b59 ==> p6$1 && p6$2 ==> $k.0$1 == $k.0$2;
     assert {:tag "loopPredicateEquality"} _b58 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 ==> p6$1 == p6$2;
@@ -732,12 +732,12 @@ implementation {:source_name "gen_hists"} {:kernel} $gen_hists($NUM_SETS: bv32, 
     p10$2 := (if p8$2 && v4$2 then v4$2 else p10$2);
     p9$1 := (if p8$1 && !v4$1 then !v4$1 else p9$1);
     p9$2 := (if p8$2 && !v4$2 then !v4$2 else p9$2);
-    $cond$1 := (if p9$1 then 1bv32 else $cond$1);
-    $cond$2 := (if p9$2 then 1bv32 else $cond$2);
-    $cond$1 := (if p10$1 then BV1_ZEXT32((if BV32_ULT($k.0$1, BV32_ADD($j.0, 256bv32)) then 1bv1 else 0bv1)) else $cond$1);
-    $cond$2 := (if p10$2 then BV1_ZEXT32((if BV32_ULT($k.0$2, BV32_ADD($j.0, 256bv32)) then 1bv1 else 0bv1)) else $cond$2);
-    $0$1 := (if p8$1 then (if $cond$1 != 0bv32 then 1bv1 else 0bv1) else $0$1);
-    $0$2 := (if p8$2 then (if $cond$2 != 0bv32 then 1bv1 else 0bv1) else $0$2);
+    $1$1 := (if p9$1 then 1bv32 else $1$1);
+    $1$2 := (if p9$2 then 1bv32 else $1$2);
+    $1$1 := (if p10$1 then BV1_ZEXT32((if BV32_ULT($k.0$1, BV32_ADD($j.0, 256bv32)) then 1bv1 else 0bv1)) else $1$1);
+    $1$2 := (if p10$2 then BV1_ZEXT32((if BV32_ULT($k.0$2, BV32_ADD($j.0, 256bv32)) then 1bv1 else 0bv1)) else $1$2);
+    $0$1 := (if p8$1 then (if $1$1 != 0bv32 then 1bv1 else 0bv1) else $0$1);
+    $0$2 := (if p8$2 then (if $1$2 != 0bv32 then 1bv1 else 0bv1) else $0$2);
     v19$1 := (if p6$1 then $0$1 == 1bv1 else v19$1);
     v19$2 := (if p6$2 then $0$2 == 1bv1 else v19$2);
     p11$1 := (if p6$1 && v19$1 then v19$1 else p11$1);
@@ -757,9 +757,9 @@ implementation {:source_name "gen_hists"} {:kernel} $gen_hists($NUM_SETS: bv32, 
     p12$1 := (if p11$1 then true else p12$1);
     p12$2 := (if p11$2 then true else p12$2);
     assume {:captureState "loop_entry_state_4_0"} true;
-    goto $while.cond;
+    goto $21;
 
-  $while.cond:
+  $21:
     assume {:captureState "loop_head_state_4"} true;
     assume {:invGenSkippedLoop} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$gen_hists.warp_hists ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -821,9 +821,9 @@ implementation {:source_name "gen_hists"} {:kernel} $gen_hists($NUM_SETS: bv32, 
     $min.0$2, $max.0$2 := (if p13$2 then $min.1$2 else $min.0$2), (if p13$2 then $max.1$2 else $max.0$2);
     p12$1 := (if p13$1 then true else p12$1);
     p12$2 := (if p13$2 then true else p12$2);
-    goto $while.cond.backedge, $while.cond.tail;
+    goto $21.backedge, $21.tail;
 
-  $while.cond.tail:
+  $21.tail:
     assume !p12$1 && !p12$2;
     v28$1 := (if p11$1 then $$dev_binb$1[$min.0$1] else v28$1);
     v28$2 := (if p11$2 then $$dev_binb$2[$min.0$2] else v28$2);
@@ -870,24 +870,24 @@ implementation {:source_name "gen_hists"} {:kernel} $gen_hists($NUM_SETS: bv32, 
     $k.0$2 := (if p11$2 then BV32_ADD($k.0$2, 1bv32) else $k.0$2);
     p6$1 := (if p11$1 then true else p6$1);
     p6$2 := (if p11$2 then true else p6$2);
-    goto $for.cond.49.backedge, $for.cond.49.tail;
+    goto $14.backedge, $14.tail;
 
-  $for.cond.49.tail:
+  $14.tail:
     assume !p6$1 && !p6$2;
     $j.0, $random_x_s.0$1, $random_y_s.0$1, $random_z_s.0$1 := BV32_ADD($j.0, 256bv32), $random_x_s.1$1, $random_y_s.1$1, $random_z_s.1$1;
     $random_x_s.0$2, $random_y_s.0$2, $random_z_s.0$2 := $random_x_s.1$2, $random_y_s.1$2, $random_z_s.1$2;
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond.36;
+    goto $10;
 
-  $for.cond.49.backedge:
+  $14.backedge:
     assume {:backedge} p6$1 || p6$2;
     assume {:captureState "loop_back_edge_state_3_0"} true;
-    goto $for.cond.49;
+    goto $14;
 
-  $while.cond.backedge:
+  $21.backedge:
     assume {:backedge} p12$1 || p12$2;
     assume {:captureState "loop_back_edge_state_4_0"} true;
-    goto $while.cond;
+    goto $21;
 
   $truebb:
     assume {:partition} v5;
@@ -907,7 +907,7 @@ implementation {:source_name "gen_hists"} {:kernel} $gen_hists($NUM_SETS: bv32, 
     call _POST_WARP_SYNC_$$gen_hists.warp_hists_WRITE(p1$1, p1$2);
     $w.0 := BV32_ADD($w.0, 256bv32);
     assume {:captureState "loop_back_edge_state_5_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

@@ -154,96 +154,96 @@ implementation {:source_name "histo_prescan_kernel"} {:kernel} $histo_prescan_ke
   var $addr2.0$2: bv32;
   var $stddev.0$1: bv32;
   var $stddev.0$2: bv32;
-  var $stride31.0: bv32;
-  var v3: bv32;
-  var v10$1: bv32;
-  var v10$2: bv32;
-  var v9$1: bv32;
-  var v9$2: bv32;
-  var v6$1: bv32;
-  var v6$2: bv32;
+  var $stride1.0: bv32;
+  var v45$1: bv32;
+  var v45$2: bv32;
+  var v44$1: bv32;
+  var v44$2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
+  var v1: bv32;
   var v2$1: bv32;
   var v2$2: bv32;
-  var v1: bv32;
+  var v3: bv32;
   var v4$1: bv32;
   var v4$2: bv32;
   var v5$1: bool;
   var v5$2: bool;
+  var v6$1: bv32;
+  var v6$2: bv32;
   var v7$1: bv32;
   var v7$2: bv32;
   var v8$1: bool;
   var v8$2: bool;
+  var v9$1: bv32;
+  var v9$2: bv32;
+  var v10$1: bv32;
+  var v10$2: bv32;
   var v11: bool;
   var v12$1: bool;
   var v12$2: bool;
-  var v39$1: bv32;
-  var v39$2: bv32;
-  var v35$1: bv32;
-  var v35$2: bv32;
-  var v41$1: bv32;
-  var v41$2: bv32;
-  var v34$1: bv32;
-  var v34$2: bv32;
-  var v42$1: bv32;
-  var v42$2: bv32;
-  var v38$1: bv32;
-  var v38$2: bv32;
-  var v36$1: bv32;
-  var v36$2: bv32;
-  var v14$1: bv32;
-  var v14$2: bv32;
-  var v18$1: bv32;
-  var v18$2: bv32;
-  var v23$1: bv32;
-  var v23$2: bv32;
-  var v16$1: bv32;
-  var v16$2: bv32;
-  var v19$1: bv32;
-  var v19$2: bv32;
   var v13$1: bv32;
   var v13$2: bv32;
-  var v20$1: bv32;
-  var v20$2: bv32;
+  var v14$1: bv32;
+  var v14$2: bv32;
   var v15$1: bv32;
   var v15$2: bv32;
+  var v16$1: bv32;
+  var v16$2: bv32;
+  var v17$1: bool;
+  var v17$2: bool;
+  var v18$1: bv32;
+  var v18$2: bv32;
+  var v19$1: bv32;
+  var v19$2: bv32;
+  var v20$1: bv32;
+  var v20$2: bv32;
   var v21$1: bv32;
   var v21$2: bv32;
-  var v25$1: bv32;
-  var v25$2: bv32;
+  var v22$1: bool;
+  var v22$2: bool;
+  var v23$1: bv32;
+  var v23$2: bv32;
   var v24$1: bv32;
   var v24$2: bv32;
-  var v29$1: bv32;
-  var v29$2: bv32;
-  var v33$1: bv32;
-  var v33$2: bv32;
+  var v25$1: bv32;
+  var v25$2: bv32;
   var v26$1: bv32;
   var v26$2: bv32;
+  var v27$1: bool;
+  var v27$2: bool;
   var v28$1: bv32;
   var v28$2: bv32;
+  var v29$1: bv32;
+  var v29$2: bv32;
   var v30$1: bv32;
   var v30$2: bv32;
   var v31$1: bv32;
   var v31$2: bv32;
-  var v22$1: bool;
-  var v22$2: bool;
-  var v17$1: bool;
-  var v17$2: bool;
   var v32$1: bool;
   var v32$2: bool;
-  var v27$1: bool;
-  var v27$2: bool;
-  var v43$1: bv32;
-  var v43$2: bv32;
-  var v40$1: bv32;
-  var v40$2: bv32;
+  var v33$1: bv32;
+  var v33$2: bv32;
+  var v34$1: bv32;
+  var v34$2: bv32;
+  var v35$1: bv32;
+  var v35$2: bv32;
+  var v36$1: bv32;
+  var v36$2: bv32;
   var v37$1: bool;
   var v37$2: bool;
-  var v44$1: bv32;
-  var v44$2: bv32;
-  var v45$1: bv32;
-  var v45$2: bv32;
+  var v38$1: bv32;
+  var v38$2: bv32;
+  var v39$1: bv32;
+  var v39$2: bv32;
+  var v40$1: bv32;
+  var v40$2: bv32;
+  var v41$1: bv32;
+  var v41$2: bv32;
+  var v42$1: bv32;
+  var v42$2: bv32;
+  var v43$1: bv32;
+  var v43$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -282,7 +282,7 @@ implementation {:source_name "histo_prescan_kernel"} {:kernel} $histo_prescan_ke
   var _HAVOC_bv32$2: bv32;
 
 
-  $entry:
+  $0:
     v0$1 := local_id_x$1;
     v0$2 := local_id_x$2;
     v1 := group_size_x;
@@ -300,9 +300,9 @@ implementation {:source_name "histo_prescan_kernel"} {:kernel} $histo_prescan_ke
     p0$1 := true;
     p0$2 := true;
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $while.cond;
+    goto $1;
 
-  $while.cond:
+  $1:
     assume {:captureState "loop_head_state_2"} true;
     assume {:invGenSkippedLoop} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$histo_prescan_kernel.StdDev ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -329,9 +329,9 @@ implementation {:source_name "histo_prescan_kernel"} {:kernel} $histo_prescan_ke
     $addr.0$2, $avg.0$2, $count.0$2 := (if p1$2 then BV32_ADD($addr.0$2, v1) else $addr.0$2), (if p1$2 then FADD32($avg.0$2, UI32_TO_FP32(v6$2)) else $avg.0$2), (if p1$2 then BV32_ADD($count.0$2, 1bv32) else $count.0$2);
     p0$1 := (if p1$1 then true else p0$1);
     p0$2 := (if p1$2 then true else p0$2);
-    goto $while.cond.backedge, $while.cond.tail;
+    goto $1.backedge, $1.tail;
 
-  $while.cond.tail:
+  $1.tail:
     assume !p0$1 && !p0$2;
     v7$1 := FDIV32($avg.0$1, UI32_TO_FP32($count.0$1));
     v7$2 := FDIV32($avg.0$2, UI32_TO_FP32($count.0$2));
@@ -349,9 +349,9 @@ implementation {:source_name "histo_prescan_kernel"} {:kernel} $histo_prescan_ke
     p3$1 := true;
     p3$2 := true;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $while.cond.14;
+    goto $4;
 
-  $while.cond.14:
+  $4:
     assume {:captureState "loop_head_state_1"} true;
     assume {:invGenSkippedLoop} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$histo_prescan_kernel.StdDev ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -375,13 +375,13 @@ implementation {:source_name "histo_prescan_kernel"} {:kernel} $histo_prescan_ke
     havoc _HAVOC_bv32$1, _HAVOC_bv32$2;
     v10$1 := (if p4$1 then _HAVOC_bv32$1 else v10$1);
     v10$2 := (if p4$2 then _HAVOC_bv32$2 else v10$2);
-    $addr2.0$1, $stddev.0$1 := (if p4$1 then BV32_ADD($addr2.0$1, v1) else $addr2.0$1), (if p4$1 then FADD32($stddev.0$1, FMUL32(FSUB32(UI32_TO_FP32(v9$1), v7$1), FSUB32(UI32_TO_FP32(v10$1), v7$1))) else $stddev.0$1);
-    $addr2.0$2, $stddev.0$2 := (if p4$2 then BV32_ADD($addr2.0$2, v1) else $addr2.0$2), (if p4$2 then FADD32($stddev.0$2, FMUL32(FSUB32(UI32_TO_FP32(v9$2), v7$2), FSUB32(UI32_TO_FP32(v10$2), v7$2))) else $stddev.0$2);
+    $addr2.0$1, $stddev.0$1 := (if p4$1 then BV32_ADD($addr2.0$1, v1) else $addr2.0$1), (if p4$1 then FADD32(FMUL32(FSUB32(UI32_TO_FP32(v9$1), v7$1), FSUB32(UI32_TO_FP32(v10$1), v7$1)), $stddev.0$1) else $stddev.0$1);
+    $addr2.0$2, $stddev.0$2 := (if p4$2 then BV32_ADD($addr2.0$2, v1) else $addr2.0$2), (if p4$2 then FADD32(FMUL32(FSUB32(UI32_TO_FP32(v9$2), v7$2), FSUB32(UI32_TO_FP32(v10$2), v7$2)), $stddev.0$2) else $stddev.0$2);
     p3$1 := (if p4$1 then true else p3$1);
     p3$2 := (if p4$2 then true else p3$2);
-    goto $while.cond.14.backedge, $while.cond.14.tail;
+    goto $4.backedge, $4.tail;
 
-  $while.cond.14.tail:
+  $4.tail:
     assume !p3$1 && !p3$2;
     call _PRE_WARP_SYNC_$$histo_prescan_kernel.StdDev_WRITE(true, true);
     call {:sourceloc} {:sourceloc_num 11} _LOG_WRITE_$$histo_prescan_kernel.StdDev(true, v0$1, FSQRT32(FDIV32($stddev.0$1, UI32_TO_FP32($count.0$1))), $$histo_prescan_kernel.StdDev[1bv1][v0$1]);
@@ -392,11 +392,11 @@ implementation {:source_name "histo_prescan_kernel"} {:kernel} $histo_prescan_ke
     call _POST_WARP_SYNC_$$histo_prescan_kernel.StdDev_WRITE(true, true);
     $$histo_prescan_kernel.StdDev[1bv1][v0$1] := FSQRT32(FDIV32($stddev.0$1, UI32_TO_FP32($count.0$1)));
     $$histo_prescan_kernel.StdDev[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v0$2] := FSQRT32(FDIV32($stddev.0$2, UI32_TO_FP32($count.0$2)));
-    $stride31.0 := 256bv32;
+    $stride1.0 := 256bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $7;
 
-  $for.cond:
+  $7:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b22 ==> _WRITE_HAS_OCCURRED_$$histo_prescan_kernel.StdDev ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b21 ==> _READ_HAS_OCCURRED_$$histo_prescan_kernel.StdDev ==> _WATCHED_OFFSET == local_id_x$1;
@@ -414,24 +414,24 @@ implementation {:source_name "histo_prescan_kernel"} {:kernel} $histo_prescan_ke
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b9 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_READ_HAS_OCCURRED_$$minmax;
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b8 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_WRITE_HAS_OCCURRED_$$input;
     assert {:do_not_predicate} {:tag "sameWarpNoAccess"} _b7 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 && BV32_DIV(BV32_ADD(local_id_x$1, BV32_ADD(BV32_MUL(local_id_y$1, group_size_x), BV32_MUL(local_id_z$1, BV32_MUL(group_size_x, group_size_y)))), 32bv32) == BV32_DIV(BV32_ADD(local_id_x$2, BV32_ADD(BV32_MUL(local_id_y$2, group_size_x), BV32_MUL(local_id_z$2, BV32_MUL(group_size_x, group_size_y)))), 32bv32) ==> !_READ_HAS_OCCURRED_$$input;
-    assert {:tag "pow2NotZero"} _b6 ==> $stride31.0 != 0bv32;
-    assert {:tag "pow2"} _b5 ==> $stride31.0 == 0bv32 || BV32_AND($stride31.0, BV32_SUB($stride31.0, 1bv32)) == 0bv32;
+    assert {:tag "pow2NotZero"} _b6 ==> $stride1.0 != 0bv32;
+    assert {:tag "pow2"} _b5 ==> $stride1.0 == 0bv32 || BV32_AND($stride1.0, BV32_SUB($stride1.0, 1bv32)) == 0bv32;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$histo_prescan_kernel.StdDev ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$histo_prescan_kernel.StdDev ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$histo_prescan_kernel.StdDev ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$histo_prescan_kernel.Avg ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$histo_prescan_kernel.Avg ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$histo_prescan_kernel.Avg ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
-    assert {:tag "loopBound"} {:thread 1} _b4 ==> BV32_UGE($stride31.0, 256bv32);
-    assert {:tag "loopBound"} {:thread 1} _b3 ==> BV32_ULE($stride31.0, 256bv32);
-    assert {:tag "loopBound"} {:thread 1} _b2 ==> BV32_SGE($stride31.0, 256bv32);
-    assert {:tag "loopBound"} {:thread 1} _b1 ==> BV32_SLE($stride31.0, 256bv32);
-    assert {:tag "guardNonNeg"} {:thread 1} _b0 ==> BV32_SLE(0bv32, $stride31.0);
+    assert {:tag "loopBound"} {:thread 1} _b4 ==> BV32_UGE($stride1.0, 256bv32);
+    assert {:tag "loopBound"} {:thread 1} _b3 ==> BV32_ULE($stride1.0, 256bv32);
+    assert {:tag "loopBound"} {:thread 1} _b2 ==> BV32_SGE($stride1.0, 256bv32);
+    assert {:tag "loopBound"} {:thread 1} _b1 ==> BV32_SLE($stride1.0, 256bv32);
+    assert {:tag "guardNonNeg"} {:thread 1} _b0 ==> BV32_SLE(0bv32, $stride1.0);
     assert {:block_sourceloc} {:sourceloc_num 12} true;
-    assert {:originated_from_invariant} {:sourceloc_num 13} {:thread 1} (if BV32_SGE($stride31.0, 16bv32) then 1bv1 else 0bv1) != 0bv1;
-    assert {:originated_from_invariant} {:sourceloc_num 14} {:thread 1} (if BV32_AND(BV1_ZEXT32((if $stride31.0 == 16bv32 then 1bv1 else 0bv1)), BV1_ZEXT32((if _READ_HAS_OCCURRED_$$histo_prescan_kernel.StdDev then 1bv1 else 0bv1))) != 0bv32 ==> BV32_OR(BV1_ZEXT32((if BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32) == v0$1 then 1bv1 else 0bv1)), BV1_ZEXT32((if BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32) == BV32_ADD(v0$1, 32bv32) then 1bv1 else 0bv1))) != 0bv32 then 1bv1 else 0bv1) != 0bv1;
-    assert {:originated_from_invariant} {:sourceloc_num 15} {:thread 1} (if BV32_AND(BV1_ZEXT32((if $stride31.0 == 16bv32 then 1bv1 else 0bv1)), BV1_ZEXT32((if _READ_HAS_OCCURRED_$$histo_prescan_kernel.Avg then 1bv1 else 0bv1))) != 0bv32 ==> BV32_OR(BV1_ZEXT32((if BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32) == v0$1 then 1bv1 else 0bv1)), BV1_ZEXT32((if BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32) == BV32_ADD(v0$1, 32bv32) then 1bv1 else 0bv1))) != 0bv32 then 1bv1 else 0bv1) != 0bv1;
-    v11 := BV32_SGE($stride31.0, 32bv32);
+    assert {:originated_from_invariant} {:sourceloc_num 13} {:thread 1} (if BV32_SGE($stride1.0, 16bv32) then 1bv1 else 0bv1) != 0bv1;
+    assert {:originated_from_invariant} {:sourceloc_num 14} {:thread 1} (if BV32_AND(BV1_ZEXT32((if $stride1.0 == 16bv32 then 1bv1 else 0bv1)), BV1_ZEXT32((if _READ_HAS_OCCURRED_$$histo_prescan_kernel.StdDev then 1bv1 else 0bv1))) != 0bv32 ==> BV32_OR(BV1_ZEXT32((if BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32) == v0$1 then 1bv1 else 0bv1)), BV1_ZEXT32((if BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32) == BV32_ADD(v0$1, 32bv32) then 1bv1 else 0bv1))) != 0bv32 then 1bv1 else 0bv1) != 0bv1;
+    assert {:originated_from_invariant} {:sourceloc_num 15} {:thread 1} (if BV32_AND(BV1_ZEXT32((if $stride1.0 == 16bv32 then 1bv1 else 0bv1)), BV1_ZEXT32((if _READ_HAS_OCCURRED_$$histo_prescan_kernel.Avg then 1bv1 else 0bv1))) != 0bv32 ==> BV32_OR(BV1_ZEXT32((if BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32) == v0$1 then 1bv1 else 0bv1)), BV1_ZEXT32((if BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32) == BV32_ADD(v0$1, 32bv32) then 1bv1 else 0bv1))) != 0bv32 then 1bv1 else 0bv1) != 0bv1;
+    v11 := BV32_SGE($stride1.0, 32bv32);
     p5$1 := false;
     p5$2 := false;
     p6$1 := false;
@@ -742,18 +742,18 @@ implementation {:source_name "histo_prescan_kernel"} {:kernel} $histo_prescan_ke
 
   __partitioned_block_$truebb1_1:
     call {:sourceloc_num 17} $bugle_barrier_duplicated_0(1bv1, 0bv1);
-    v12$1 := BV32_SLT(v0$1, $stride31.0);
-    v12$2 := BV32_SLT(v0$2, $stride31.0);
+    v12$1 := BV32_SLT(v0$1, $stride1.0);
+    v12$2 := BV32_SLT(v0$2, $stride1.0);
     p6$1 := (if v12$1 then v12$1 else p6$1);
     p6$2 := (if v12$2 then v12$2 else p6$2);
     call _PRE_WARP_SYNC_$$histo_prescan_kernel.Avg_READ(p6$1, p6$2);
-    call {:sourceloc} {:sourceloc_num 19} _LOG_READ_$$histo_prescan_kernel.Avg(p6$1, BV32_ADD(v0$1, $stride31.0), $$histo_prescan_kernel.Avg[1bv1][BV32_ADD(v0$1, $stride31.0)]);
+    call {:sourceloc} {:sourceloc_num 19} _LOG_READ_$$histo_prescan_kernel.Avg(p6$1, BV32_ADD(v0$1, $stride1.0), $$histo_prescan_kernel.Avg[1bv1][BV32_ADD(v0$1, $stride1.0)]);
     assume {:do_not_predicate} {:check_id "check_state_32"} {:captureState "check_state_32"} {:sourceloc} {:sourceloc_num 19} true;
-    call {:check_id "check_state_32"} {:sourceloc} {:sourceloc_num 19} _CHECK_READ_$$histo_prescan_kernel.Avg(p6$2, BV32_ADD(v0$2, $stride31.0), $$histo_prescan_kernel.Avg[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v0$2, $stride31.0)]);
+    call {:check_id "check_state_32"} {:sourceloc} {:sourceloc_num 19} _CHECK_READ_$$histo_prescan_kernel.Avg(p6$2, BV32_ADD(v0$2, $stride1.0), $$histo_prescan_kernel.Avg[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v0$2, $stride1.0)]);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$histo_prescan_kernel.Avg"} true;
     call _POST_WARP_SYNC_$$histo_prescan_kernel.Avg_READ(p6$1, p6$2);
-    v13$1 := (if p6$1 then $$histo_prescan_kernel.Avg[1bv1][BV32_ADD(v0$1, $stride31.0)] else v13$1);
-    v13$2 := (if p6$2 then $$histo_prescan_kernel.Avg[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v0$2, $stride31.0)] else v13$2);
+    v13$1 := (if p6$1 then $$histo_prescan_kernel.Avg[1bv1][BV32_ADD(v0$1, $stride1.0)] else v13$1);
+    v13$2 := (if p6$2 then $$histo_prescan_kernel.Avg[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v0$2, $stride1.0)] else v13$2);
     call _PRE_WARP_SYNC_$$histo_prescan_kernel.Avg_READ(p6$1, p6$2);
     call {:sourceloc} {:sourceloc_num 20} _LOG_READ_$$histo_prescan_kernel.Avg(p6$1, v0$1, $$histo_prescan_kernel.Avg[1bv1][v0$1]);
     assume {:do_not_predicate} {:check_id "check_state_33"} {:captureState "check_state_33"} {:sourceloc} {:sourceloc_num 20} true;
@@ -772,13 +772,13 @@ implementation {:source_name "histo_prescan_kernel"} {:kernel} $histo_prescan_ke
     $$histo_prescan_kernel.Avg[1bv1][v0$1] := (if p6$1 then FADD32(v14$1, v13$1) else $$histo_prescan_kernel.Avg[1bv1][v0$1]);
     $$histo_prescan_kernel.Avg[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v0$2] := (if p6$2 then FADD32(v14$2, v13$2) else $$histo_prescan_kernel.Avg[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v0$2]);
     call _PRE_WARP_SYNC_$$histo_prescan_kernel.StdDev_READ(p6$1, p6$2);
-    call {:sourceloc} {:sourceloc_num 22} _LOG_READ_$$histo_prescan_kernel.StdDev(p6$1, BV32_ADD(v0$1, $stride31.0), $$histo_prescan_kernel.StdDev[1bv1][BV32_ADD(v0$1, $stride31.0)]);
+    call {:sourceloc} {:sourceloc_num 22} _LOG_READ_$$histo_prescan_kernel.StdDev(p6$1, BV32_ADD(v0$1, $stride1.0), $$histo_prescan_kernel.StdDev[1bv1][BV32_ADD(v0$1, $stride1.0)]);
     assume {:do_not_predicate} {:check_id "check_state_35"} {:captureState "check_state_35"} {:sourceloc} {:sourceloc_num 22} true;
-    call {:check_id "check_state_35"} {:sourceloc} {:sourceloc_num 22} _CHECK_READ_$$histo_prescan_kernel.StdDev(p6$2, BV32_ADD(v0$2, $stride31.0), $$histo_prescan_kernel.StdDev[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v0$2, $stride31.0)]);
+    call {:check_id "check_state_35"} {:sourceloc} {:sourceloc_num 22} _CHECK_READ_$$histo_prescan_kernel.StdDev(p6$2, BV32_ADD(v0$2, $stride1.0), $$histo_prescan_kernel.StdDev[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v0$2, $stride1.0)]);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$histo_prescan_kernel.StdDev"} true;
     call _POST_WARP_SYNC_$$histo_prescan_kernel.StdDev_READ(p6$1, p6$2);
-    v15$1 := (if p6$1 then $$histo_prescan_kernel.StdDev[1bv1][BV32_ADD(v0$1, $stride31.0)] else v15$1);
-    v15$2 := (if p6$2 then $$histo_prescan_kernel.StdDev[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v0$2, $stride31.0)] else v15$2);
+    v15$1 := (if p6$1 then $$histo_prescan_kernel.StdDev[1bv1][BV32_ADD(v0$1, $stride1.0)] else v15$1);
+    v15$2 := (if p6$2 then $$histo_prescan_kernel.StdDev[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(v0$2, $stride1.0)] else v15$2);
     call _PRE_WARP_SYNC_$$histo_prescan_kernel.StdDev_READ(p6$1, p6$2);
     call {:sourceloc} {:sourceloc_num 23} _LOG_READ_$$histo_prescan_kernel.StdDev(p6$1, v0$1, $$histo_prescan_kernel.StdDev[1bv1][v0$1]);
     assume {:do_not_predicate} {:check_id "check_state_36"} {:captureState "check_state_36"} {:sourceloc} {:sourceloc_num 23} true;
@@ -796,19 +796,19 @@ implementation {:source_name "histo_prescan_kernel"} {:kernel} $histo_prescan_ke
     call _POST_WARP_SYNC_$$histo_prescan_kernel.StdDev_WRITE(p6$1, p6$2);
     $$histo_prescan_kernel.StdDev[1bv1][v0$1] := (if p6$1 then FADD32(v16$1, v15$1) else $$histo_prescan_kernel.StdDev[1bv1][v0$1]);
     $$histo_prescan_kernel.StdDev[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v0$2] := (if p6$2 then FADD32(v16$2, v15$2) else $$histo_prescan_kernel.StdDev[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v0$2]);
-    $stride31.0 := BV32_ASHR($stride31.0, 1bv32);
+    $stride1.0 := BV32_ASHR($stride1.0, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $7;
 
-  $while.cond.14.backedge:
+  $4.backedge:
     assume {:backedge} p3$1 || p3$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $while.cond.14;
+    goto $4;
 
-  $while.cond.backedge:
+  $1.backedge:
     assume {:backedge} p0$1 || p0$2;
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $while.cond;
+    goto $1;
 }
 
 

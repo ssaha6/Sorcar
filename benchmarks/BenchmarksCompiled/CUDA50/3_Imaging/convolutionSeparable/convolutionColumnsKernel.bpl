@@ -137,41 +137,41 @@ procedure {:source_name "convolutionColumnsKernel"} {:kernel} $_Z24convolutionCo
 implementation {:source_name "convolutionColumnsKernel"} {:kernel} $_Z24convolutionColumnsKernelPfS_iii($imageW: bv32, $imageH: bv32, $pitch: bv32)
 {
   var $i.0: bv32;
-  var $i16.0: bv32;
-  var $cond$1: bv32;
-  var $cond$2: bv32;
-  var $i33.0: bv32;
-  var $cond46$1: bv32;
-  var $cond46$2: bv32;
-  var $i54.0: bv32;
+  var $i1.0: bv32;
+  var $0$1: bv32;
+  var $0$2: bv32;
+  var $i2.0: bv32;
+  var $1$1: bv32;
+  var $1$2: bv32;
+  var $i3.0: bv32;
   var $sum.0$1: bv32;
   var $sum.0$2: bv32;
   var $j.0: bv32;
-  var v3$1: bv32;
-  var v3$2: bv32;
-  var v2$1: bv32;
-  var v2$2: bv32;
-  var v4: bool;
-  var v1$1: bv32;
-  var v1$2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
-  var v14$1: bv32;
-  var v14$2: bv32;
-  var v8$1: bv32;
-  var v8$2: bv32;
+  var v1$1: bv32;
+  var v1$2: bv32;
+  var v2$1: bv32;
+  var v2$2: bv32;
+  var v3$1: bv32;
+  var v3$2: bv32;
+  var v4: bool;
   var v5$1: bv32;
   var v5$2: bv32;
-  var v11$1: bv32;
-  var v11$2: bv32;
   var v6: bool;
   var v7$1: bool;
   var v7$2: bool;
+  var v8$1: bv32;
+  var v8$2: bv32;
   var v9: bool;
   var v10$1: bool;
   var v10$2: bool;
+  var v11$1: bv32;
+  var v11$2: bv32;
   var v12: bool;
   var v13: bool;
+  var v14$1: bv32;
+  var v14$2: bv32;
   var v15$1: bv32;
   var v15$2: bv32;
   var p0$1: bool;
@@ -186,7 +186,7 @@ implementation {:source_name "convolutionColumnsKernel"} {:kernel} $_Z24convolut
   var _HAVOC_bv32$2: bv32;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, 16bv32), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, 16bv32), local_id_x$2);
     v1$1 := BV32_ADD(BV32_MUL(BV32_SUB(BV32_MUL(group_id_y$1, 8bv32), 1bv32), 8bv32), local_id_y$1);
@@ -197,9 +197,9 @@ implementation {:source_name "convolutionColumnsKernel"} {:kernel} $_Z24convolut
     v3$2 := BV32_ADD(BV32_MUL(v1$2, $pitch), v0$2);
     $i.0 := 1bv32;
     assume {:captureState "loop_entry_state_4_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_4"} true;
     assert {:tag "accessBreak"} _b26 ==> _WRITE_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> local_id_x$1 == BV32_DIV(_WATCHED_OFFSET, 81bv32);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b25 ==> _WRITE_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 8bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 8bv32), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(0bv32, 8bv32), local_id_y$1), BV32_MUL(local_id_x$1, 81bv32)));
@@ -217,24 +217,24 @@ implementation {:source_name "convolutionColumnsKernel"} {:kernel} $_Z24convolut
 
   $falsebb:
     assume {:partition} !v4;
-    $i16.0 := 0bv32;
+    $i1.0 := 0bv32;
     assume {:captureState "loop_entry_state_3_0"} true;
-    goto $for.cond.17;
+    goto $5;
 
-  $for.cond.17:
+  $5:
     assume {:captureState "loop_head_state_3"} true;
     assert {:tag "accessBreak"} _b28 ==> _WRITE_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> local_id_x$1 == BV32_DIV(_WATCHED_OFFSET, 81bv32);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b27 ==> _WRITE_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 8bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 8bv32), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(0bv32, 8bv32), local_id_y$1), BV32_MUL(local_id_x$1, 81bv32)));
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
-    assert {:tag "loopBound"} {:thread 1} _b9 ==> BV32_UGE($i16.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b8 ==> BV32_ULE($i16.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b7 ==> BV32_SGE($i16.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b6 ==> BV32_SLE($i16.0, 0bv32);
-    assert {:tag "guardNonNeg"} {:thread 1} _b5 ==> BV32_SLE(0bv32, $i16.0);
+    assert {:tag "loopBound"} {:thread 1} _b9 ==> BV32_UGE($i1.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b8 ==> BV32_ULE($i1.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b7 ==> BV32_SGE($i1.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b6 ==> BV32_SLE($i1.0, 0bv32);
+    assert {:tag "guardNonNeg"} {:thread 1} _b5 ==> BV32_SLE(0bv32, $i1.0);
     assert {:block_sourceloc} {:sourceloc_num 8} true;
-    v6 := BV32_SLT($i16.0, 1bv32);
+    v6 := BV32_SLT($i1.0, 1bv32);
     p0$1 := false;
     p0$2 := false;
     p1$1 := false;
@@ -243,24 +243,24 @@ implementation {:source_name "convolutionColumnsKernel"} {:kernel} $_Z24convolut
 
   $falsebb0:
     assume {:partition} !v6;
-    $i33.0 := 9bv32;
+    $i2.0 := 9bv32;
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond.34;
+    goto $12;
 
-  $for.cond.34:
+  $12:
     assume {:captureState "loop_head_state_2"} true;
     assert {:tag "accessBreak"} _b30 ==> _WRITE_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> local_id_x$1 == BV32_DIV(_WATCHED_OFFSET, 81bv32);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b29 ==> _WRITE_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 8bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 8bv32), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(0bv32, 8bv32), local_id_y$1), BV32_MUL(local_id_x$1, 81bv32)));
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
-    assert {:tag "loopBound"} {:thread 1} _b14 ==> BV32_UGE($i33.0, 9bv32);
-    assert {:tag "loopBound"} {:thread 1} _b13 ==> BV32_ULE($i33.0, 9bv32);
-    assert {:tag "loopBound"} {:thread 1} _b12 ==> BV32_SGE($i33.0, 9bv32);
-    assert {:tag "loopBound"} {:thread 1} _b11 ==> BV32_SLE($i33.0, 9bv32);
-    assert {:tag "guardNonNeg"} {:thread 1} _b10 ==> BV32_SLE(0bv32, $i33.0);
+    assert {:tag "loopBound"} {:thread 1} _b14 ==> BV32_UGE($i2.0, 9bv32);
+    assert {:tag "loopBound"} {:thread 1} _b13 ==> BV32_ULE($i2.0, 9bv32);
+    assert {:tag "loopBound"} {:thread 1} _b12 ==> BV32_SGE($i2.0, 9bv32);
+    assert {:tag "loopBound"} {:thread 1} _b11 ==> BV32_SLE($i2.0, 9bv32);
+    assert {:tag "guardNonNeg"} {:thread 1} _b10 ==> BV32_SLE(0bv32, $i2.0);
     assert {:block_sourceloc} {:sourceloc_num 17} true;
-    v9 := BV32_SLT($i33.0, 10bv32);
+    v9 := BV32_SLT($i2.0, 10bv32);
     p2$1 := false;
     p2$2 := false;
     p3$1 := false;
@@ -273,25 +273,25 @@ implementation {:source_name "convolutionColumnsKernel"} {:kernel} $_Z24convolut
 
   __partitioned_block_$falsebb2_1:
     call {:sourceloc_num 26} $bugle_barrier_duplicated_0(1bv1, 1bv1);
-    $i54.0 := 1bv32;
+    $i3.0 := 1bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.55;
+    goto $19;
 
-  $for.cond.55:
+  $19:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
-    assert {:tag "loopBound"} {:thread 1} _b19 ==> BV32_UGE($i54.0, 1bv32);
-    assert {:tag "loopBound"} {:thread 1} _b18 ==> BV32_ULE($i54.0, 1bv32);
-    assert {:tag "loopBound"} {:thread 1} _b17 ==> BV32_SGE($i54.0, 1bv32);
-    assert {:tag "loopBound"} {:thread 1} _b16 ==> BV32_SLE($i54.0, 1bv32);
-    assert {:tag "guardNonNeg"} {:thread 1} _b15 ==> BV32_SLE(0bv32, $i54.0);
+    assert {:tag "loopBound"} {:thread 1} _b19 ==> BV32_UGE($i3.0, 1bv32);
+    assert {:tag "loopBound"} {:thread 1} _b18 ==> BV32_ULE($i3.0, 1bv32);
+    assert {:tag "loopBound"} {:thread 1} _b17 ==> BV32_SGE($i3.0, 1bv32);
+    assert {:tag "loopBound"} {:thread 1} _b16 ==> BV32_SLE($i3.0, 1bv32);
+    assert {:tag "guardNonNeg"} {:thread 1} _b15 ==> BV32_SLE(0bv32, $i3.0);
     assert {:block_sourceloc} {:sourceloc_num 27} true;
     assert {:originated_from_invariant} {:sourceloc_num 28} {:thread 1} (if _WRITE_HAS_OCCURRED_$$d_Dst ==> BV32_UREM(BV32_SUB(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), BV32_ADD(BV32_MUL(v1$1, $pitch), v0$1)), BV32_MUL(8bv32, $pitch)) == 0bv32 then 1bv1 else 0bv1) != 0bv1;
     assert {:originated_from_invariant} {:sourceloc_num 29} {:thread 1} (if _WRITE_HAS_OCCURRED_$$d_Dst ==> BV32_UGE(BV32_UDIV(BV32_SUB(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), BV32_ADD(BV32_MUL(v1$1, $pitch), v0$1)), BV32_MUL(8bv32, $pitch)), 1bv32) then 1bv1 else 0bv1) != 0bv1;
     assert {:originated_from_invariant} {:sourceloc_num 30} {:thread 1} (if _WRITE_HAS_OCCURRED_$$d_Dst ==> BV32_ULT(BV32_UDIV(BV32_SUB(BV32_UDIV(BV32_MUL(4bv32, _WATCHED_OFFSET), 4bv32), BV32_ADD(BV32_MUL(v1$1, $pitch), v0$1)), BV32_MUL(8bv32, $pitch)), 9bv32) then 1bv1 else 0bv1) != 0bv1;
-    v12 := BV32_SLT($i54.0, 9bv32);
+    v12 := BV32_SLT($i3.0, 9bv32);
     goto $truebb4, $falsebb4;
 
   $falsebb4:
@@ -303,9 +303,9 @@ implementation {:source_name "convolutionColumnsKernel"} {:kernel} $_Z24convolut
     $sum.0$1, $j.0 := 0bv32, 4294967288bv32;
     $sum.0$2 := 0bv32;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.85;
+    goto $21;
 
-  $for.cond.85:
+  $21:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -321,80 +321,80 @@ implementation {:source_name "convolutionColumnsKernel"} {:kernel} $_Z24convolut
 
   $falsebb5:
     assume {:partition} !v13;
-    call {:sourceloc} {:sourceloc_num 38} _LOG_WRITE_$$d_Dst(true, BV32_ADD(v3$1, BV32_MUL(BV32_MUL($i54.0, 8bv32), $pitch)), $sum.0$1, $$d_Dst[BV32_ADD(v3$1, BV32_MUL(BV32_MUL($i54.0, 8bv32), $pitch))]);
-    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$d_Dst(true, BV32_ADD(v3$2, BV32_MUL(BV32_MUL($i54.0, 8bv32), $pitch)));
+    call {:sourceloc} {:sourceloc_num 38} _LOG_WRITE_$$d_Dst(true, BV32_ADD(v3$1, BV32_MUL(BV32_MUL($i3.0, 8bv32), $pitch)), $sum.0$1, $$d_Dst[BV32_ADD(v3$1, BV32_MUL(BV32_MUL($i3.0, 8bv32), $pitch))]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$d_Dst(true, BV32_ADD(v3$2, BV32_MUL(BV32_MUL($i3.0, 8bv32), $pitch)));
     assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 38} true;
-    call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 38} _CHECK_WRITE_$$d_Dst(true, BV32_ADD(v3$2, BV32_MUL(BV32_MUL($i54.0, 8bv32), $pitch)), $sum.0$2);
+    call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 38} _CHECK_WRITE_$$d_Dst(true, BV32_ADD(v3$2, BV32_MUL(BV32_MUL($i3.0, 8bv32), $pitch)), $sum.0$2);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$d_Dst"} true;
-    $$d_Dst[BV32_ADD(v3$1, BV32_MUL(BV32_MUL($i54.0, 8bv32), $pitch))] := $sum.0$1;
-    $$d_Dst[BV32_ADD(v3$2, BV32_MUL(BV32_MUL($i54.0, 8bv32), $pitch))] := $sum.0$2;
-    $i54.0 := BV32_ADD($i54.0, 1bv32);
+    $$d_Dst[BV32_ADD(v3$1, BV32_MUL(BV32_MUL($i3.0, 8bv32), $pitch))] := $sum.0$1;
+    $$d_Dst[BV32_ADD(v3$2, BV32_MUL(BV32_MUL($i3.0, 8bv32), $pitch))] := $sum.0$2;
+    $i3.0 := BV32_ADD($i3.0, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.55;
+    goto $19;
 
   $truebb5:
     assume {:partition} v13;
     v14$1 := $$c_Kernel$1[BV32_SUB(8bv32, $j.0)];
     v14$2 := $$c_Kernel$2[BV32_SUB(8bv32, $j.0)];
     assume {:do_not_predicate} {:check_id "check_state_1"} {:captureState "check_state_1"} {:sourceloc} {:sourceloc_num 35} true;
-    v15$1 := $$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data[1bv1][BV32_ADD(BV32_MUL(local_id_x$1, 81bv32), BV32_ADD(BV32_ADD(local_id_y$1, BV32_MUL($i54.0, 8bv32)), $j.0))];
-    v15$2 := $$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(local_id_x$2, 81bv32), BV32_ADD(BV32_ADD(local_id_y$2, BV32_MUL($i54.0, 8bv32)), $j.0))];
+    v15$1 := $$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data[1bv1][BV32_ADD(BV32_MUL(local_id_x$1, 81bv32), BV32_ADD(BV32_ADD(local_id_y$1, BV32_MUL($i3.0, 8bv32)), $j.0))];
+    v15$2 := $$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(local_id_x$2, 81bv32), BV32_ADD(BV32_ADD(local_id_y$2, BV32_MUL($i3.0, 8bv32)), $j.0))];
     $sum.0$1, $j.0 := FADD32($sum.0$1, FMUL32(v14$1, v15$1)), BV32_ADD($j.0, 1bv32);
     $sum.0$2 := FADD32($sum.0$2, FMUL32(v14$2, v15$2));
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.85;
+    goto $21;
 
   $truebb2:
     assume {:partition} v9;
-    v10$1 := BV32_SGT(BV32_SUB($imageH, v1$1), BV32_MUL($i33.0, 8bv32));
-    v10$2 := BV32_SGT(BV32_SUB($imageH, v1$2), BV32_MUL($i33.0, 8bv32));
+    v10$1 := BV32_SGT(BV32_SUB($imageH, v1$1), BV32_MUL($i2.0, 8bv32));
+    v10$2 := BV32_SGT(BV32_SUB($imageH, v1$2), BV32_MUL($i2.0, 8bv32));
     p3$1 := (if v10$1 then v10$1 else p3$1);
     p3$2 := (if v10$2 then v10$2 else p3$2);
     p2$1 := (if !v10$1 then !v10$1 else p2$1);
     p2$2 := (if !v10$2 then !v10$2 else p2$2);
-    $cond46$1 := (if p2$1 then 0bv32 else $cond46$1);
-    $cond46$2 := (if p2$2 then 0bv32 else $cond46$2);
+    $1$1 := (if p2$1 then 0bv32 else $1$1);
+    $1$2 := (if p2$2 then 0bv32 else $1$2);
     havoc _HAVOC_bv32$1, _HAVOC_bv32$2;
     v11$1 := (if p3$1 then _HAVOC_bv32$1 else v11$1);
     v11$2 := (if p3$2 then _HAVOC_bv32$2 else v11$2);
-    $cond46$1 := (if p3$1 then v11$1 else $cond46$1);
-    $cond46$2 := (if p3$2 then v11$2 else $cond46$2);
-    call {:sourceloc} {:sourceloc_num 23} _LOG_WRITE_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data(true, BV32_ADD(BV32_MUL(local_id_x$1, 81bv32), BV32_ADD(local_id_y$1, BV32_MUL($i33.0, 8bv32))), $cond46$1, $$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data[1bv1][BV32_ADD(BV32_MUL(local_id_x$1, 81bv32), BV32_ADD(local_id_y$1, BV32_MUL($i33.0, 8bv32)))]);
-    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data(true, BV32_ADD(BV32_MUL(local_id_x$2, 81bv32), BV32_ADD(local_id_y$2, BV32_MUL($i33.0, 8bv32))));
+    $1$1 := (if p3$1 then v11$1 else $1$1);
+    $1$2 := (if p3$2 then v11$2 else $1$2);
+    call {:sourceloc} {:sourceloc_num 23} _LOG_WRITE_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data(true, BV32_ADD(BV32_MUL(local_id_x$1, 81bv32), BV32_ADD(local_id_y$1, BV32_MUL($i2.0, 8bv32))), $1$1, $$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data[1bv1][BV32_ADD(BV32_MUL(local_id_x$1, 81bv32), BV32_ADD(local_id_y$1, BV32_MUL($i2.0, 8bv32)))]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data(true, BV32_ADD(BV32_MUL(local_id_x$2, 81bv32), BV32_ADD(local_id_y$2, BV32_MUL($i2.0, 8bv32))));
     assume {:do_not_predicate} {:check_id "check_state_2"} {:captureState "check_state_2"} {:sourceloc} {:sourceloc_num 23} true;
-    call {:check_id "check_state_2"} {:sourceloc} {:sourceloc_num 23} _CHECK_WRITE_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data(true, BV32_ADD(BV32_MUL(local_id_x$2, 81bv32), BV32_ADD(local_id_y$2, BV32_MUL($i33.0, 8bv32))), $cond46$2);
+    call {:check_id "check_state_2"} {:sourceloc} {:sourceloc_num 23} _CHECK_WRITE_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data(true, BV32_ADD(BV32_MUL(local_id_x$2, 81bv32), BV32_ADD(local_id_y$2, BV32_MUL($i2.0, 8bv32))), $1$2);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data"} true;
-    $$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data[1bv1][BV32_ADD(BV32_MUL(local_id_x$1, 81bv32), BV32_ADD(local_id_y$1, BV32_MUL($i33.0, 8bv32)))] := $cond46$1;
-    $$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(local_id_x$2, 81bv32), BV32_ADD(local_id_y$2, BV32_MUL($i33.0, 8bv32)))] := $cond46$2;
-    $i33.0 := BV32_ADD($i33.0, 1bv32);
+    $$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data[1bv1][BV32_ADD(BV32_MUL(local_id_x$1, 81bv32), BV32_ADD(local_id_y$1, BV32_MUL($i2.0, 8bv32)))] := $1$1;
+    $$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(local_id_x$2, 81bv32), BV32_ADD(local_id_y$2, BV32_MUL($i2.0, 8bv32)))] := $1$2;
+    $i2.0 := BV32_ADD($i2.0, 1bv32);
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond.34;
+    goto $12;
 
   $truebb0:
     assume {:partition} v6;
-    v7$1 := BV32_SGE(v1$1, BV32_MUL(BV32_SUB(0bv32, $i16.0), 8bv32));
-    v7$2 := BV32_SGE(v1$2, BV32_MUL(BV32_SUB(0bv32, $i16.0), 8bv32));
+    v7$1 := BV32_SGE(v1$1, BV32_MUL(BV32_SUB(0bv32, $i1.0), 8bv32));
+    v7$2 := BV32_SGE(v1$2, BV32_MUL(BV32_SUB(0bv32, $i1.0), 8bv32));
     p1$1 := (if v7$1 then v7$1 else p1$1);
     p1$2 := (if v7$2 then v7$2 else p1$2);
     p0$1 := (if !v7$1 then !v7$1 else p0$1);
     p0$2 := (if !v7$2 then !v7$2 else p0$2);
-    $cond$1 := (if p0$1 then 0bv32 else $cond$1);
-    $cond$2 := (if p0$2 then 0bv32 else $cond$2);
+    $0$1 := (if p0$1 then 0bv32 else $0$1);
+    $0$2 := (if p0$2 then 0bv32 else $0$2);
     havoc _HAVOC_bv32$1, _HAVOC_bv32$2;
     v8$1 := (if p1$1 then _HAVOC_bv32$1 else v8$1);
     v8$2 := (if p1$2 then _HAVOC_bv32$2 else v8$2);
-    $cond$1 := (if p1$1 then v8$1 else $cond$1);
-    $cond$2 := (if p1$2 then v8$2 else $cond$2);
-    call {:sourceloc} {:sourceloc_num 14} _LOG_WRITE_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data(true, BV32_ADD(BV32_MUL(local_id_x$1, 81bv32), BV32_ADD(local_id_y$1, BV32_MUL($i16.0, 8bv32))), $cond$1, $$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data[1bv1][BV32_ADD(BV32_MUL(local_id_x$1, 81bv32), BV32_ADD(local_id_y$1, BV32_MUL($i16.0, 8bv32)))]);
-    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data(true, BV32_ADD(BV32_MUL(local_id_x$2, 81bv32), BV32_ADD(local_id_y$2, BV32_MUL($i16.0, 8bv32))));
+    $0$1 := (if p1$1 then v8$1 else $0$1);
+    $0$2 := (if p1$2 then v8$2 else $0$2);
+    call {:sourceloc} {:sourceloc_num 14} _LOG_WRITE_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data(true, BV32_ADD(BV32_MUL(local_id_x$1, 81bv32), BV32_ADD(local_id_y$1, BV32_MUL($i1.0, 8bv32))), $0$1, $$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data[1bv1][BV32_ADD(BV32_MUL(local_id_x$1, 81bv32), BV32_ADD(local_id_y$1, BV32_MUL($i1.0, 8bv32)))]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data(true, BV32_ADD(BV32_MUL(local_id_x$2, 81bv32), BV32_ADD(local_id_y$2, BV32_MUL($i1.0, 8bv32))));
     assume {:do_not_predicate} {:check_id "check_state_3"} {:captureState "check_state_3"} {:sourceloc} {:sourceloc_num 14} true;
-    call {:check_id "check_state_3"} {:sourceloc} {:sourceloc_num 14} _CHECK_WRITE_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data(true, BV32_ADD(BV32_MUL(local_id_x$2, 81bv32), BV32_ADD(local_id_y$2, BV32_MUL($i16.0, 8bv32))), $cond$2);
+    call {:check_id "check_state_3"} {:sourceloc} {:sourceloc_num 14} _CHECK_WRITE_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data(true, BV32_ADD(BV32_MUL(local_id_x$2, 81bv32), BV32_ADD(local_id_y$2, BV32_MUL($i1.0, 8bv32))), $0$2);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data"} true;
-    $$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data[1bv1][BV32_ADD(BV32_MUL(local_id_x$1, 81bv32), BV32_ADD(local_id_y$1, BV32_MUL($i16.0, 8bv32)))] := $cond$1;
-    $$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(local_id_x$2, 81bv32), BV32_ADD(local_id_y$2, BV32_MUL($i16.0, 8bv32)))] := $cond$2;
-    $i16.0 := BV32_ADD($i16.0, 1bv32);
+    $$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data[1bv1][BV32_ADD(BV32_MUL(local_id_x$1, 81bv32), BV32_ADD(local_id_y$1, BV32_MUL($i1.0, 8bv32)))] := $0$1;
+    $$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(local_id_x$2, 81bv32), BV32_ADD(local_id_y$2, BV32_MUL($i1.0, 8bv32)))] := $0$2;
+    $i1.0 := BV32_ADD($i1.0, 1bv32);
     assume {:captureState "loop_back_edge_state_3_0"} true;
-    goto $for.cond.17;
+    goto $5;
 
   $truebb:
     assume {:partition} v4;
@@ -408,7 +408,7 @@ implementation {:source_name "convolutionColumnsKernel"} {:kernel} $_Z24convolut
     $$_ZZ24convolutionColumnsKernelPfS_iiiE6s_Data[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(local_id_x$2, 81bv32), BV32_ADD(local_id_y$2, BV32_MUL($i.0, 8bv32)))] := v5$2;
     $i.0 := BV32_ADD($i.0, 1bv32);
     assume {:captureState "loop_back_edge_state_4_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

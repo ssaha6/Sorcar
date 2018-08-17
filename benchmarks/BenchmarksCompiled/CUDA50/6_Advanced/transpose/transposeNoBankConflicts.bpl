@@ -114,22 +114,22 @@ implementation {:source_name "transposeNoBankConflicts"} {:kernel} $_Z24transpos
 {
   var $r.0: bv32;
   var $i.0: bv32;
-  var $i23.0: bv32;
-  var v2$1: bv32;
-  var v2$2: bv32;
-  var v4$1: bv32;
-  var v4$2: bv32;
+  var $i1.0: bv32;
   var v0: bool;
   var v1: bool;
+  var v2$1: bv32;
+  var v2$2: bv32;
   var v3: bool;
+  var v4$1: bv32;
+  var v4$2: bv32;
 
 
-  $entry:
+  $0:
     $r.0 := 0bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessBreak"} _b24 ==> _WRITE_HAS_OCCURRED_$$_ZZ24transposeNoBankConflictsPfS_iiiE4tile ==> local_id_y$1 == BV32_DIV(_WATCHED_OFFSET, 17bv32);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b23 ==> _WRITE_HAS_OCCURRED_$$_ZZ24transposeNoBankConflictsPfS_iiiE4tile ==> BV32_AND(BV32_SUB(BV32_MUL(16bv32, 17bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(16bv32, 17bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, local_id_y$1), 17bv32), local_id_x$1));
@@ -159,9 +159,9 @@ implementation {:source_name "transposeNoBankConflicts"} {:kernel} $_Z24transpos
     assume {:partition} v0;
     $i.0 := 0bv32;
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond.14;
+    goto $3;
 
-  $for.cond.14:
+  $3:
     assume {:captureState "loop_head_state_2"} true;
     assert {:tag "accessBreak"} _b26 ==> _WRITE_HAS_OCCURRED_$$_ZZ24transposeNoBankConflictsPfS_iiiE4tile ==> local_id_y$1 == BV32_DIV(_WATCHED_OFFSET, 17bv32);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b25 ==> _WRITE_HAS_OCCURRED_$$_ZZ24transposeNoBankConflictsPfS_iiiE4tile ==> BV32_AND(BV32_SUB(BV32_MUL(16bv32, 17bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(16bv32, 17bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, local_id_y$1), 17bv32), local_id_x$1));
@@ -184,11 +184,11 @@ implementation {:source_name "transposeNoBankConflicts"} {:kernel} $_Z24transpos
 
   __partitioned_block_$falsebb0_1:
     call {:sourceloc_num 12} $bugle_barrier_duplicated_0(1bv1, 1bv1);
-    $i23.0 := 0bv32;
+    $i1.0 := 0bv32;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.24;
+    goto $7;
 
-  $for.cond.24:
+  $7:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "accessBreak"} _b30 ==> _WRITE_HAS_OCCURRED_$$odata ==> local_id_y$1 == BV32_SUB(BV32_SUB(BV32_DIV(_WATCHED_OFFSET, $height), BV32_DIV(BV32_MUL(group_id_y$1, 16bv32), $height)), BV32_MUL(group_id_x$1, 16bv32));
     assert {:tag "accessBreak"} _b29 ==> _WRITE_HAS_OCCURRED_$$odata ==> group_id_x$1 == BV32_SUB(BV32_SUB(BV32_DIV(BV32_DIV(_WATCHED_OFFSET, $height), 16bv32), BV32_DIV(group_id_y$1, $height)), BV32_DIV(local_id_y$1, 16bv32));
@@ -197,14 +197,14 @@ implementation {:source_name "transposeNoBankConflicts"} {:kernel} $_Z24transpos
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ24transposeNoBankConflictsPfS_iiiE4tile ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ24transposeNoBankConflictsPfS_iiiE4tile ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$_ZZ24transposeNoBankConflictsPfS_iiiE4tile ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
-    assert {:tag "loopBound"} {:thread 1} _b16 ==> BV32_UGE($i23.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b15 ==> BV32_ULE($i23.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b14 ==> BV32_SGE($i23.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b13 ==> BV32_SLE($i23.0, 0bv32);
-    assert {:tag "guardNonNeg"} {:thread 1} _b12 ==> BV32_SLE(0bv32, $i23.0);
-    assert {:tag "loopCounterIsStrided"} {:thread 1} _b11 ==> BV32_AND(BV32_SUB(16bv32, 1bv32), $i23.0) == BV32_AND(BV32_SUB(16bv32, 1bv32), 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b16 ==> BV32_UGE($i1.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b15 ==> BV32_ULE($i1.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b14 ==> BV32_SGE($i1.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b13 ==> BV32_SLE($i1.0, 0bv32);
+    assert {:tag "guardNonNeg"} {:thread 1} _b12 ==> BV32_SLE(0bv32, $i1.0);
+    assert {:tag "loopCounterIsStrided"} {:thread 1} _b11 ==> BV32_AND(BV32_SUB(16bv32, 1bv32), $i1.0) == BV32_AND(BV32_SUB(16bv32, 1bv32), 0bv32);
     assert {:block_sourceloc} {:sourceloc_num 13} true;
-    v3 := BV32_SLT($i23.0, 16bv32);
+    v3 := BV32_SLT($i1.0, 16bv32);
     goto $truebb1, __partitioned_block_$falsebb1_0;
 
   __partitioned_block_$falsebb1_0:
@@ -215,23 +215,23 @@ implementation {:source_name "transposeNoBankConflicts"} {:kernel} $_Z24transpos
     call {:sourceloc_num 19} $bugle_barrier_duplicated_1(1bv1, 1bv1);
     $r.0 := BV32_ADD($r.0, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
   $truebb1:
     assume {:partition} v3;
     assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 15} true;
-    v4$1 := $$_ZZ24transposeNoBankConflictsPfS_iiiE4tile[1bv1][BV32_ADD(BV32_MUL(local_id_x$1, 17bv32), BV32_ADD(local_id_y$1, $i23.0))];
-    v4$2 := $$_ZZ24transposeNoBankConflictsPfS_iiiE4tile[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(local_id_x$2, 17bv32), BV32_ADD(local_id_y$2, $i23.0))];
-    call {:sourceloc} {:sourceloc_num 16} _LOG_WRITE_$$odata(true, BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(group_id_y$1, 16bv32), local_id_x$1), BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, 16bv32), local_id_y$1), $height)), BV32_MUL($i23.0, $height)), v4$1, $$odata[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(group_id_y$1, 16bv32), local_id_x$1), BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, 16bv32), local_id_y$1), $height)), BV32_MUL($i23.0, $height))]);
-    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$odata(true, BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(group_id_y$2, 16bv32), local_id_x$2), BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$2, 16bv32), local_id_y$2), $height)), BV32_MUL($i23.0, $height)));
+    v4$1 := $$_ZZ24transposeNoBankConflictsPfS_iiiE4tile[1bv1][BV32_ADD(BV32_MUL(local_id_x$1, 17bv32), BV32_ADD(local_id_y$1, $i1.0))];
+    v4$2 := $$_ZZ24transposeNoBankConflictsPfS_iiiE4tile[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(local_id_x$2, 17bv32), BV32_ADD(local_id_y$2, $i1.0))];
+    call {:sourceloc} {:sourceloc_num 16} _LOG_WRITE_$$odata(true, BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(group_id_y$1, 16bv32), local_id_x$1), BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, 16bv32), local_id_y$1), $height)), BV32_MUL($i1.0, $height)), v4$1, $$odata[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(group_id_y$1, 16bv32), local_id_x$1), BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, 16bv32), local_id_y$1), $height)), BV32_MUL($i1.0, $height))]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$odata(true, BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(group_id_y$2, 16bv32), local_id_x$2), BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$2, 16bv32), local_id_y$2), $height)), BV32_MUL($i1.0, $height)));
     assume {:do_not_predicate} {:check_id "check_state_1"} {:captureState "check_state_1"} {:sourceloc} {:sourceloc_num 16} true;
-    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 16} _CHECK_WRITE_$$odata(true, BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(group_id_y$2, 16bv32), local_id_x$2), BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$2, 16bv32), local_id_y$2), $height)), BV32_MUL($i23.0, $height)), v4$2);
+    call {:check_id "check_state_1"} {:sourceloc} {:sourceloc_num 16} _CHECK_WRITE_$$odata(true, BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(group_id_y$2, 16bv32), local_id_x$2), BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$2, 16bv32), local_id_y$2), $height)), BV32_MUL($i1.0, $height)), v4$2);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$odata"} true;
-    $$odata[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(group_id_y$1, 16bv32), local_id_x$1), BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, 16bv32), local_id_y$1), $height)), BV32_MUL($i23.0, $height))] := v4$1;
-    $$odata[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(group_id_y$2, 16bv32), local_id_x$2), BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$2, 16bv32), local_id_y$2), $height)), BV32_MUL($i23.0, $height))] := v4$2;
-    $i23.0 := BV32_ADD($i23.0, 16bv32);
+    $$odata[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(group_id_y$1, 16bv32), local_id_x$1), BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, 16bv32), local_id_y$1), $height)), BV32_MUL($i1.0, $height))] := v4$1;
+    $$odata[BV32_ADD(BV32_ADD(BV32_ADD(BV32_MUL(group_id_y$2, 16bv32), local_id_x$2), BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$2, 16bv32), local_id_y$2), $height)), BV32_MUL($i1.0, $height))] := v4$2;
+    $i1.0 := BV32_ADD($i1.0, 16bv32);
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.24;
+    goto $7;
 
   $truebb0:
     assume {:partition} v1;
@@ -245,7 +245,7 @@ implementation {:source_name "transposeNoBankConflicts"} {:kernel} $_Z24transpos
     $$_ZZ24transposeNoBankConflictsPfS_iiiE4tile[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(BV32_ADD(local_id_y$2, $i.0), 17bv32), local_id_x$2)] := v2$2;
     $i.0 := BV32_ADD($i.0, 16bv32);
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond.14;
+    goto $3;
 }
 
 

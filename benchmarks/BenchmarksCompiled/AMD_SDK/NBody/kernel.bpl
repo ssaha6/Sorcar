@@ -147,64 +147,64 @@ implementation {:source_name "nbody_sim"} {:kernel} $nbody_sim($numBodies: bv32,
   var $j.0: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
-  var v7: bool;
-  var v12: bool;
   var v1$1: bv32;
   var v1$2: bv32;
-  var v9$1: bv32;
-  var v9$2: bv32;
-  var v14$1: bv32;
-  var v14$2: bv32;
-  var v16$1: bv32;
-  var v16$2: bv32;
-  var v10$1: bv32;
-  var v10$2: bv32;
-  var v21$1: bv32;
-  var v21$2: bv32;
-  var v15$1: bv32;
-  var v15$2: bv32;
-  var v11$1: bv32;
-  var v11$2: bv32;
-  var v13$1: bv32;
-  var v13$2: bv32;
-  var v27$1: bv32;
-  var v27$2: bv32;
-  var v22$1: bv32;
-  var v22$2: bv32;
-  var v26$1: bv32;
-  var v26$2: bv32;
-  var v28$1: bv32;
-  var v28$2: bv32;
-  var v24$1: bv32;
-  var v24$2: bv32;
-  var v29$1: bv32;
-  var v29$2: bv32;
-  var v23$1: bv32;
-  var v23$2: bv32;
-  var v6$1: bv32;
-  var v6$2: bv32;
+  var v2: bv32;
   var v3$1: bv32;
   var v3$2: bv32;
-  var v8$1: bv32;
-  var v8$2: bv32;
   var v4$1: bv32;
   var v4$2: bv32;
   var v5$1: bv32;
   var v5$2: bv32;
-  var v2: bv32;
-  var v25$1: bv32;
-  var v25$2: bv32;
-  var v20$1: bv32;
-  var v20$2: bv32;
-  var v19$1: bv32;
-  var v19$2: bv32;
-  var v18$1: bv32;
-  var v18$2: bv32;
+  var v6$1: bv32;
+  var v6$2: bv32;
+  var v7: bool;
+  var v8$1: bv32;
+  var v8$2: bv32;
+  var v9$1: bv32;
+  var v9$2: bv32;
+  var v10$1: bv32;
+  var v10$2: bv32;
+  var v11$1: bv32;
+  var v11$2: bv32;
+  var v12: bool;
+  var v13$1: bv32;
+  var v13$2: bv32;
+  var v14$1: bv32;
+  var v14$2: bv32;
+  var v15$1: bv32;
+  var v15$2: bv32;
+  var v16$1: bv32;
+  var v16$2: bv32;
   var v17$1: bv32;
   var v17$2: bv32;
+  var v18$1: bv32;
+  var v18$2: bv32;
+  var v19$1: bv32;
+  var v19$2: bv32;
+  var v20$1: bv32;
+  var v20$2: bv32;
+  var v21$1: bv32;
+  var v21$2: bv32;
+  var v22$1: bv32;
+  var v22$2: bv32;
+  var v23$1: bv32;
+  var v23$2: bv32;
+  var v24$1: bv32;
+  var v24$2: bv32;
+  var v25$1: bv32;
+  var v25$2: bv32;
+  var v26$1: bv32;
+  var v26$2: bv32;
+  var v27$1: bv32;
+  var v27$2: bv32;
+  var v28$1: bv32;
+  var v28$2: bv32;
+  var v29$1: bv32;
+  var v29$2: bv32;
 
 
-  $entry:
+  $0:
     v0$1 := local_id_x$1;
     v0$2 := local_id_x$2;
     v1$1 := BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
@@ -217,9 +217,9 @@ implementation {:source_name "nbody_sim"} {:kernel} $nbody_sim($numBodies: bv32,
     $acc.0$1, $i.0 := 0bv128, 0bv32;
     $acc.0$2 := 0bv128;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b9 ==> _WRITE_HAS_OCCURRED_$$localPos ==> _WATCHED_OFFSET == BV32_MUL(local_id_x$1, 4bv32) || _WATCHED_OFFSET == BV32_ADD(BV32_MUL(local_id_x$1, 4bv32), 1bv32) || _WATCHED_OFFSET == BV32_ADD(BV32_MUL(local_id_x$1, 4bv32), 2bv32) || _WATCHED_OFFSET == BV32_ADD(BV32_MUL(local_id_x$1, 4bv32), 3bv32);
     assert {:tag "nowrite"} _b8 ==> !_WRITE_HAS_OCCURRED_$$localPos;
@@ -339,9 +339,9 @@ implementation {:source_name "nbody_sim"} {:kernel} $nbody_sim($numBodies: bv32,
     $acc.1$1, $j.0 := $acc.0$1, 0bv32;
     $acc.1$2 := $acc.0$2;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.5;
+    goto $3;
 
-  $for.cond.5:
+  $3:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$localPos ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$localPos ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -363,7 +363,7 @@ implementation {:source_name "nbody_sim"} {:kernel} $nbody_sim($numBodies: bv32,
     $acc.0$1, $i.0 := $acc.1$1, BV32_ADD($i.0, 1bv32);
     $acc.0$2 := $acc.1$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
   $truebb0:
     assume {:partition} v12;
@@ -401,10 +401,10 @@ implementation {:source_name "nbody_sim"} {:kernel} $nbody_sim($numBodies: bv32,
     v24$2 := $$localPos[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($j.0, 4bv32), 3bv32)];
     v25$1 := FMUL32(v24$1, FMUL32(FMUL32(v20$1, v20$1), v20$1));
     v25$2 := FMUL32(v24$2, FMUL32(FMUL32(v20$2, v20$2), v20$2));
-    $acc.1$1, $j.0 := FADD32($acc.1$1[128:96], FMUL32(v25$1, FSUB32(v16$1, v6$1))) ++ FADD32($acc.1$1[96:64], FMUL32(v25$1, v19$1)) ++ FADD32($acc.1$1[64:32], FMUL32(v25$1, v18$1)) ++ FADD32($acc.1$1[32:0], FMUL32(v25$1, v17$1)), BV32_ADD($j.0, 1bv32);
-    $acc.1$2 := FADD32($acc.1$2[128:96], FMUL32(v25$2, FSUB32(v16$2, v6$2))) ++ FADD32($acc.1$2[96:64], FMUL32(v25$2, v19$2)) ++ FADD32($acc.1$2[64:32], FMUL32(v25$2, v18$2)) ++ FADD32($acc.1$2[32:0], FMUL32(v25$2, v17$2));
+    $acc.1$1, $j.0 := FADD32(FMUL32(v25$1, FSUB32(v16$1, v6$1)), $acc.1$1[128:96]) ++ FADD32(FMUL32(v25$1, v19$1), $acc.1$1[96:64]) ++ FADD32(FMUL32(v25$1, v18$1), $acc.1$1[64:32]) ++ FADD32(FMUL32(v25$1, v17$1), $acc.1$1[32:0]), BV32_ADD($j.0, 1bv32);
+    $acc.1$2 := FADD32(FMUL32(v25$2, FSUB32(v16$2, v6$2)), $acc.1$2[128:96]) ++ FADD32(FMUL32(v25$2, v19$2), $acc.1$2[96:64]) ++ FADD32(FMUL32(v25$2, v18$2), $acc.1$2[64:32]) ++ FADD32(FMUL32(v25$2, v17$2), $acc.1$2[32:0]);
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.5;
+    goto $3;
 }
 
 

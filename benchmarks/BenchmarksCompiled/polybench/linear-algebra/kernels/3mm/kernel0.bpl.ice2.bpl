@@ -129,7 +129,6 @@ procedure {:source_name "kernel0"} {:kernel} $kernel0($nl: bv32, $nj: bv32, $nm:
   requires {:sourceloc_num 3} {:thread 1} (if $nk == 512bv32 then 1bv1 else 0bv1) != 0bv1;
   requires {:sourceloc_num 4} {:thread 1} (if $ni == 512bv32 then 1bv1 else 0bv1) != 0bv1;
   requires {:sourceloc_num 5} {:thread 1} (if BV32_AND(BV32_AND(BV32_AND(BV32_AND(BV32_AND(BV32_AND(BV32_AND(BV32_AND(BV32_AND(BV1_ZEXT32((if BV32_SGE($nl, 1bv32) then 1bv1 else 0bv1)), BV1_ZEXT32((if BV32_SLE($nl, 2147483647bv32) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV32_SGE($nj, 1bv32) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV32_SLE($nj, 2147483647bv32) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV32_SGE($nm, 0bv32) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV32_SLE($nm, 2147483647bv32) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV32_SGE($nk, 0bv32) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV32_SLE($nk, 2147483647bv32) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV32_SLE($ni, 2147483647bv32) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV64_SGE(BV32_SEXT64($ni), 18446744071562067968bv64) then 1bv1 else 0bv1))) != 0bv32 then 1bv1 else 0bv1) != 0bv1;
-  requires {:procedure_wide_invariant} {:do_not_predicate} {:sourceloc_num 6} {:thread 1} (if _WRITE_HAS_OCCURRED_$$F ==> BV32_AND(BV32_AND(BV32_AND(BV32_AND(BV32_AND(BV32_AND(BV32_AND(BV32_AND(BV32_AND(BV1_ZEXT32((if BV64_SGE(BV64_ADD(BV64_MUL(32bv64, BV32_ZEXT64(group_id_x$1)), BV32_ZEXT64(local_id_x$1)), 0bv64) then 1bv1 else 0bv1)), BV1_ZEXT32((if BV64_SLE(BV64_ADD(BV64_MUL(32bv64, BV32_ZEXT64(group_id_x$1)), BV32_ZEXT64(local_id_x$1)), 8191bv64) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV32_UGE($nj, BV32_ADD(BV32_UREM(BV32_UDIV(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $nl), $nj), 1bv32)) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV32_UGE(BV32_UREM(BV32_UDIV(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $nl), $nj), 0bv32) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV32_UGE($nl, BV32_ADD(BV32_UREM(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $nl), 1bv32)) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV32_UGE(BV32_UREM(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $nl), 0bv32) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV64_SGE(BV32_ZEXT64(BV32_UREM(BV32_UREM(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $nl), 8192bv32)), BV64_MUL(32bv64, BV32_ZEXT64(group_id_y$1))) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV64_SGE(BV64_ADD(BV64_MUL(32bv64, BV32_ZEXT64(group_id_y$1)), 31bv64), BV32_ZEXT64(BV32_UREM(BV32_UREM(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $nl), 8192bv32))) then 1bv1 else 0bv1))), BV1_ZEXT32((if BV64_SREM(BV64_SUB(BV64_ADD(BV64_MUL(32bv64, BV32_ZEXT64(group_id_x$1)), BV32_ZEXT64(local_id_x$1)), BV32_ZEXT64(BV32_UREM(BV32_UDIV(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $nl), $nj))), 8192bv64) == 0bv64 then 1bv1 else 0bv1))), BV1_ZEXT32((if BV64_SREM(BV64_SUB(BV32_ZEXT64(local_id_y$1), BV32_ZEXT64(BV32_UREM(BV32_UDIV(BV32_MUL(8bv32, _WATCHED_OFFSET), 8bv32), $nl))), 16bv64) == 0bv64 then 1bv1 else 0bv1))) != 0bv32 then 1bv1 else 0bv1) != 0bv1;
   requires !_READ_HAS_OCCURRED_$$F && !_WRITE_HAS_OCCURRED_$$F && !_ATOMIC_HAS_OCCURRED_$$F;
   requires BV32_SGT(group_size_x, 0bv32);
   requires BV32_SGT(num_groups_x, 0bv32);
@@ -176,14 +175,14 @@ implementation {:source_name "kernel0"} {:kernel} $kernel0($nl: bv32, $nj: bv32,
   var $c3.0$2: bv64;
   var $0$1: bv64;
   var $0$2: bv64;
-  var v3$1: bv64;
-  var v3$2: bv64;
   var v0$1: bv64;
   var v0$2: bv64;
   var v1$1: bv64;
   var v1$2: bv64;
   var v2$1: bv64;
   var v2$2: bv64;
+  var v3$1: bv64;
+  var v3$2: bv64;
   var v4$1: bool;
   var v4$2: bool;
   var v5$1: bool;

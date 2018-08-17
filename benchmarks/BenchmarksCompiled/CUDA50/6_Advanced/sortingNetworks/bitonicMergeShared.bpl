@@ -147,42 +147,22 @@ procedure {:source_name "bitonicMergeShared"} {:kernel} $_Z18bitonicMergeSharedP
 implementation {:source_name "bitonicMergeShared"} {:kernel} $_Z18bitonicMergeSharedPjS_S_S_jjj($arrayLength: bv32, $size: bv32, $dir: bv32)
 {
   var $stride.0: bv32;
-  var v4$1: bv32;
-  var v4$2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
-  var v3$1: bv32;
-  var v3$2: bv32;
   var v2$1: bv32;
   var v2$2: bv32;
+  var v3$1: bv32;
+  var v3$2: bv32;
+  var v4$1: bv32;
+  var v4$2: bv32;
   var v5$1: bv32;
   var v5$2: bv32;
-  var v13$1: bv32;
-  var v13$2: bv32;
   var v6$1: bv32;
   var v6$2: bv32;
   var v7$1: bv32;
   var v7$2: bv32;
-  var v12$1: bv32;
-  var v12$2: bv32;
-  var v15$1: bv32;
-  var v15$2: bv32;
-  var v21$1: bv32;
-  var v21$2: bv32;
-  var v19$1: bv32;
-  var v19$2: bv32;
-  var v17$1: bv32;
-  var v17$2: bv32;
-  var v20$1: bv32;
-  var v20$2: bv32;
-  var v16$1: bv32;
-  var v16$2: bv32;
-  var v22$1: bv32;
-  var v22$2: bv32;
-  var v18$1: bv32;
-  var v18$2: bv32;
   var v8: bool;
   var v9$1: bv32;
   var v9$2: bv32;
@@ -190,15 +170,35 @@ implementation {:source_name "bitonicMergeShared"} {:kernel} $_Z18bitonicMergeSh
   var v10$2: bv32;
   var v11$1: bv32;
   var v11$2: bv32;
+  var v12$1: bv32;
+  var v12$2: bv32;
+  var v13$1: bv32;
+  var v13$2: bv32;
   var v14$1: bool;
   var v14$2: bool;
+  var v15$1: bv32;
+  var v15$2: bv32;
+  var v16$1: bv32;
+  var v16$2: bv32;
+  var v17$1: bv32;
+  var v17$2: bv32;
+  var v18$1: bv32;
+  var v18$2: bv32;
+  var v19$1: bv32;
+  var v19$2: bv32;
+  var v20$1: bv32;
+  var v20$2: bv32;
+  var v21$1: bv32;
+  var v21$2: bv32;
+  var v22$1: bv32;
+  var v22$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
   var p1$2: bool;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, 1024bv32), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, 1024bv32), local_id_x$2);
     v1$1 := BV32_ADD(BV32_MUL(group_id_x$1, 1024bv32), local_id_x$1);
@@ -241,9 +241,9 @@ implementation {:source_name "bitonicMergeShared"} {:kernel} $_Z18bitonicMergeSh
     $$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_val[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(local_id_x$2, 512bv32)] := v7$2;
     $stride.0 := 512bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "nowrite"} _b9 ==> !_WRITE_HAS_OCCURRED_$$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_val;
     assert {:tag "noread"} _b8 ==> !_READ_HAS_OCCURRED_$$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_val;
@@ -399,7 +399,7 @@ implementation {:source_name "bitonicMergeShared"} {:kernel} $_Z18bitonicMergeSh
     $$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_val[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v11$2] := (if p1$2 then v17$2 else $$_ZZ18bitonicMergeSharedPjS_S_S_jjjE5s_val[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v11$2]);
     $stride.0 := BV32_LSHR($stride.0, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

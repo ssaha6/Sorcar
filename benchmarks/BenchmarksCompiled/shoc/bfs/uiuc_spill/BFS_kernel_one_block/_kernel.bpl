@@ -184,74 +184,74 @@ implementation {:source_name "BFS_kernel_one_block"} {:kernel} $BFS_kernel_one_b
   var $f_len.0$2: bv32;
   var $offset.0$1: bv32;
   var $offset.0$2: bv32;
-  var v0$1: bv32;
-  var v0$2: bv32;
+  var v18$1: bv32;
+  var v18$2: bv32;
   var v11$1: bv32;
   var v11$2: bv32;
   var v16$1: bv32;
   var v16$2: bv32;
   var v14$1: bv32;
   var v14$2: bv32;
+  var v0$1: bv32;
+  var v0$2: bv32;
+  var v1$1: bool;
+  var v1$2: bool;
   var v2$1: bv32;
   var v2$2: bv32;
   var v3$1: bool;
   var v3$2: bool;
   var v4$1: bool;
   var v4$2: bool;
-  var v1$1: bool;
-  var v1$2: bool;
-  var v9$1: bv32;
-  var v9$2: bv32;
   var v5$1: bv32;
   var v5$2: bv32;
-  var v7$1: bv32;
-  var v7$2: bv32;
   var v6$1: bv32;
   var v6$2: bv32;
+  var v7$1: bv32;
+  var v7$2: bv32;
+  var v8$1: bool;
+  var v8$2: bool;
+  var v9$1: bv32;
+  var v9$2: bv32;
   var v10$1: bv32;
   var v10$2: bv32;
+  var v12$1: bv32;
+  var v12$2: bv32;
+  var v13$1: bool;
+  var v13$2: bool;
+  var v15$1: bool;
+  var v15$2: bool;
+  var v17$1: bool;
+  var v17$2: bool;
+  var v19$1: bool;
+  var v19$2: bool;
   var v20$1: bv32;
   var v20$2: bv32;
   var v21$1: bv32;
   var v21$2: bv32;
-  var v12$1: bv32;
-  var v12$2: bv32;
-  var v31$1: bv32;
-  var v31$2: bv32;
-  var v29$1: bv32;
-  var v29$2: bv32;
-  var v24$1: bv32;
-  var v24$2: bv32;
-  var v26$1: bv32;
-  var v26$2: bv32;
-  var v32$1: bv32;
-  var v32$2: bv32;
-  var v28$1: bv32;
-  var v28$2: bv32;
-  var v13$1: bool;
-  var v13$2: bool;
-  var v8$1: bool;
-  var v8$2: bool;
-  var v17$1: bool;
-  var v17$2: bool;
-  var v15$1: bool;
-  var v15$2: bool;
   var v22$1: bool;
   var v22$2: bool;
-  var v19$1: bool;
-  var v19$2: bool;
-  var v25$1: bool;
-  var v25$2: bool;
   var v23$1: bool;
   var v23$2: bool;
+  var v24$1: bv32;
+  var v24$2: bv32;
+  var v25$1: bool;
+  var v25$2: bool;
+  var v26$1: bv32;
+  var v26$2: bv32;
   var v27$1: bool;
   var v27$2: bool;
-  var v18$1: bv32;
-  var v18$2: bv32;
-  var v33$1: bool;
-  var v33$2: bool;
+  var v28$1: bv32;
+  var v28$2: bv32;
+  var v29$1: bv32;
+  var v29$2: bv32;
   var v30$1: bool;
   var v30$2: bool;
+  var v31$1: bv32;
+  var v31$2: bv32;
+  var v32$1: bv32;
+  var v32$2: bv32;
+  var v33$1: bool;
+  var v33$2: bool;
   var v34$1: bv32;
   var v34$2: bv32;
   var v35$1: bv32;
@@ -364,16 +364,16 @@ implementation {:source_name "BFS_kernel_one_block"} {:kernel} $BFS_kernel_one_b
   var p29$2: bool;
   var _HAVOC_bv32$1: bv32;
   var _HAVOC_bv32$2: bv32;
-  var _WRITE_HAS_OCCURRED_$$frontier$ghost$$while.cond.13: bool;
-  var _ATOMIC_HAS_OCCURRED_$$visited$ghost$$while.cond.13: bool;
-  var _READ_HAS_OCCURRED_$$cost$ghost$$while.cond.13: bool;
-  var _ATOMIC_HAS_OCCURRED_$$cost$ghost$$while.cond.13: bool;
-  var _WRITE_HAS_OCCURRED_$$b_q2$ghost$$while.cond.13: bool;
-  var _ATOMIC_HAS_OCCURRED_$$BFS_kernel_one_block.b_q_length$ghost$$while.cond.13: bool;
-  var _ATOMIC_HAS_OCCURRED_$$BFS_kernel_one_block.b_offset$ghost$$while.cond.13: bool;
+  var _WRITE_HAS_OCCURRED_$$frontier$ghost$$7: bool;
+  var _ATOMIC_HAS_OCCURRED_$$visited$ghost$$7: bool;
+  var _READ_HAS_OCCURRED_$$cost$ghost$$7: bool;
+  var _ATOMIC_HAS_OCCURRED_$$cost$ghost$$7: bool;
+  var _WRITE_HAS_OCCURRED_$$b_q2$ghost$$7: bool;
+  var _ATOMIC_HAS_OCCURRED_$$BFS_kernel_one_block.b_q_length$ghost$$7: bool;
+  var _ATOMIC_HAS_OCCURRED_$$BFS_kernel_one_block.b_offset$ghost$$7: bool;
 
 
-  __partitioned_block_$entry_0:
+  __partitioned_block_$0_0:
     v0$1 := local_id_x$1;
     v0$2 := local_id_x$2;
     v1$1 := BV32_ULT(v0$1, $frontier_len);
@@ -399,18 +399,18 @@ implementation {:source_name "BFS_kernel_one_block"} {:kernel} $BFS_kernel_one_b
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$b_q"} true;
     $$b_q[1bv1][v0$1] := (if p0$1 then v2$1 else $$b_q[1bv1][v0$1]);
     $$b_q[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v0$2] := (if p0$2 then v2$2 else $$b_q[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v0$2]);
-    goto __partitioned_block_$entry_1;
+    goto __partitioned_block_$0_1;
 
-  __partitioned_block_$entry_1:
+  __partitioned_block_$0_1:
     call {:sourceloc_num 7} $bugle_barrier_duplicated_0(1bv1, 1bv1);
     $f_len.0$1 := $frontier_len;
     $f_len.0$2 := $frontier_len;
     p2$1 := true;
     p2$2 := true;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto __partitioned_block_$while.body_0;
+    goto __partitioned_block_$3_0;
 
-  __partitioned_block_$while.body_0:
+  __partitioned_block_$3_0:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b83 ==> _ATOMIC_HAS_OCCURRED_$$BFS_kernel_one_block.b_offset ==> _WATCHED_OFFSET == 0bv32;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b82 ==> _WRITE_HAS_OCCURRED_$$BFS_kernel_one_block.b_offset ==> _WATCHED_OFFSET == 0bv32;
@@ -452,30 +452,30 @@ implementation {:source_name "BFS_kernel_one_block"} {:kernel} $BFS_kernel_one_b
     assert {:tag "predicatedEquality"} _b46 ==> p2$1 && p2$2 ==> _abstracted_call_arg_1$1 == _abstracted_call_arg_1$2;
     assert {:tag "predicatedEquality"} _b45 ==> p2$1 && p2$2 ==> _abstracted_call_arg_0$1 == _abstracted_call_arg_0$2;
     assert {:tag "predicatedEquality"} _b44 ==> p2$1 && p2$2 ==> v35$1 == v35$2;
-    assert {:tag "predicatedEquality"} _b43 ==> p2$1 && p2$2 ==> v18$1 == v18$2;
-    assert {:tag "predicatedEquality"} _b42 ==> p2$1 && p2$2 ==> v27$1 == v27$2;
+    assert {:tag "predicatedEquality"} _b43 ==> p2$1 && p2$2 ==> v27$1 == v27$2;
+    assert {:tag "predicatedEquality"} _b42 ==> p2$1 && p2$2 ==> v26$1 == v26$2;
     assert {:tag "predicatedEquality"} _b41 ==> p2$1 && p2$2 ==> v25$1 == v25$2;
-    assert {:tag "predicatedEquality"} _b40 ==> p2$1 && p2$2 ==> v19$1 == v19$2;
+    assert {:tag "predicatedEquality"} _b40 ==> p2$1 && p2$2 ==> v24$1 == v24$2;
     assert {:tag "predicatedEquality"} _b39 ==> p2$1 && p2$2 ==> v22$1 == v22$2;
-    assert {:tag "predicatedEquality"} _b38 ==> p2$1 && p2$2 ==> v15$1 == v15$2;
-    assert {:tag "predicatedEquality"} _b37 ==> p2$1 && p2$2 ==> v17$1 == v17$2;
-    assert {:tag "predicatedEquality"} _b36 ==> p2$1 && p2$2 ==> v8$1 == v8$2;
-    assert {:tag "predicatedEquality"} _b35 ==> p2$1 && p2$2 ==> v13$1 == v13$2;
-    assert {:tag "predicatedEquality"} _b34 ==> p2$1 && p2$2 ==> v26$1 == v26$2;
-    assert {:tag "predicatedEquality"} _b33 ==> p2$1 && p2$2 ==> v24$1 == v24$2;
+    assert {:tag "predicatedEquality"} _b38 ==> p2$1 && p2$2 ==> v21$1 == v21$2;
+    assert {:tag "predicatedEquality"} _b37 ==> p2$1 && p2$2 ==> v20$1 == v20$2;
+    assert {:tag "predicatedEquality"} _b36 ==> p2$1 && p2$2 ==> v19$1 == v19$2;
+    assert {:tag "predicatedEquality"} _b35 ==> p2$1 && p2$2 ==> v17$1 == v17$2;
+    assert {:tag "predicatedEquality"} _b34 ==> p2$1 && p2$2 ==> v15$1 == v15$2;
+    assert {:tag "predicatedEquality"} _b33 ==> p2$1 && p2$2 ==> v13$1 == v13$2;
     assert {:tag "predicatedEquality"} _b32 ==> p2$1 && p2$2 ==> v12$1 == v12$2;
-    assert {:tag "predicatedEquality"} _b31 ==> p2$1 && p2$2 ==> v21$1 == v21$2;
-    assert {:tag "predicatedEquality"} _b30 ==> p2$1 && p2$2 ==> v20$1 == v20$2;
-    assert {:tag "predicatedEquality"} _b29 ==> p2$1 && p2$2 ==> v10$1 == v10$2;
-    assert {:tag "predicatedEquality"} _b28 ==> p2$1 && p2$2 ==> v6$1 == v6$2;
-    assert {:tag "predicatedEquality"} _b27 ==> p2$1 && p2$2 ==> v7$1 == v7$2;
+    assert {:tag "predicatedEquality"} _b31 ==> p2$1 && p2$2 ==> v10$1 == v10$2;
+    assert {:tag "predicatedEquality"} _b30 ==> p2$1 && p2$2 ==> v9$1 == v9$2;
+    assert {:tag "predicatedEquality"} _b29 ==> p2$1 && p2$2 ==> v8$1 == v8$2;
+    assert {:tag "predicatedEquality"} _b28 ==> p2$1 && p2$2 ==> v7$1 == v7$2;
+    assert {:tag "predicatedEquality"} _b27 ==> p2$1 && p2$2 ==> v6$1 == v6$2;
     assert {:tag "predicatedEquality"} _b26 ==> p2$1 && p2$2 ==> v5$1 == v5$2;
-    assert {:tag "predicatedEquality"} _b25 ==> p2$1 && p2$2 ==> v9$1 == v9$2;
-    assert {:tag "predicatedEquality"} _b24 ==> p2$1 && p2$2 ==> v4$1 == v4$2;
-    assert {:tag "predicatedEquality"} _b23 ==> p2$1 && p2$2 ==> v3$1 == v3$2;
-    assert {:tag "predicatedEquality"} _b22 ==> p2$1 && p2$2 ==> v14$1 == v14$2;
-    assert {:tag "predicatedEquality"} _b21 ==> p2$1 && p2$2 ==> v16$1 == v16$2;
-    assert {:tag "predicatedEquality"} _b20 ==> p2$1 && p2$2 ==> v11$1 == v11$2;
+    assert {:tag "predicatedEquality"} _b25 ==> p2$1 && p2$2 ==> v4$1 == v4$2;
+    assert {:tag "predicatedEquality"} _b24 ==> p2$1 && p2$2 ==> v3$1 == v3$2;
+    assert {:tag "predicatedEquality"} _b23 ==> p2$1 && p2$2 ==> v14$1 == v14$2;
+    assert {:tag "predicatedEquality"} _b22 ==> p2$1 && p2$2 ==> v16$1 == v16$2;
+    assert {:tag "predicatedEquality"} _b21 ==> p2$1 && p2$2 ==> v11$1 == v11$2;
+    assert {:tag "predicatedEquality"} _b20 ==> p2$1 && p2$2 ==> v18$1 == v18$2;
     assert {:tag "predicatedEquality"} _b19 ==> p2$1 && p2$2 ==> $offset.0$1 == $offset.0$2;
     assert {:tag "predicatedEquality"} _b18 ==> p2$1 && p2$2 ==> $f_len.0$1 == $f_len.0$2;
     assert {:tag "loopPredicateEquality"} _b17 ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 ==> p2$1 == p2$2;
@@ -567,9 +567,9 @@ implementation {:source_name "BFS_kernel_one_block"} {:kernel} $BFS_kernel_one_b
     assume {:do_not_predicate} {:check_id "check_state_25"} {:captureState "check_state_25"} {:sourceloc} {:sourceloc_num 11} true;
     call {:check_id "check_state_25"} {:sourceloc} {:sourceloc_num 11} _CHECK_WRITE_$$BFS_kernel_one_block.b_offset(p4$2, 0bv32, 0bv32);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$BFS_kernel_one_block.b_offset"} true;
-    goto __partitioned_block_$while.body_1;
+    goto __partitioned_block_$3_1;
 
-  __partitioned_block_$while.body_1:
+  __partitioned_block_$3_1:
     call {:sourceloc_num 13} $bugle_barrier_duplicated_1(1bv1, 1bv1, p2$1, p2$2);
     v4$1 := (if p2$1 then BV32_ULT(v0$1, $f_len.0$1) else v4$1);
     v4$2 := (if p2$2 then BV32_ULT(v0$2, $f_len.0$2) else v4$2);
@@ -597,28 +597,28 @@ implementation {:source_name "BFS_kernel_one_block"} {:kernel} $BFS_kernel_one_b
     $offset.0$2 := (if p6$2 then v6$2 else $offset.0$2);
     p7$1 := (if p6$1 then true else p7$1);
     p7$2 := (if p6$2 then true else p7$2);
-    _WRITE_HAS_OCCURRED_$$frontier$ghost$$while.cond.13 := _WRITE_HAS_OCCURRED_$$frontier;
-    _ATOMIC_HAS_OCCURRED_$$visited$ghost$$while.cond.13 := _ATOMIC_HAS_OCCURRED_$$visited;
-    _READ_HAS_OCCURRED_$$cost$ghost$$while.cond.13 := _READ_HAS_OCCURRED_$$cost;
-    _ATOMIC_HAS_OCCURRED_$$cost$ghost$$while.cond.13 := _ATOMIC_HAS_OCCURRED_$$cost;
-    _WRITE_HAS_OCCURRED_$$b_q2$ghost$$while.cond.13 := _WRITE_HAS_OCCURRED_$$b_q2;
-    _ATOMIC_HAS_OCCURRED_$$BFS_kernel_one_block.b_q_length$ghost$$while.cond.13 := _ATOMIC_HAS_OCCURRED_$$BFS_kernel_one_block.b_q_length;
-    _ATOMIC_HAS_OCCURRED_$$BFS_kernel_one_block.b_offset$ghost$$while.cond.13 := _ATOMIC_HAS_OCCURRED_$$BFS_kernel_one_block.b_offset;
+    _WRITE_HAS_OCCURRED_$$frontier$ghost$$7 := _WRITE_HAS_OCCURRED_$$frontier;
+    _ATOMIC_HAS_OCCURRED_$$visited$ghost$$7 := _ATOMIC_HAS_OCCURRED_$$visited;
+    _READ_HAS_OCCURRED_$$cost$ghost$$7 := _READ_HAS_OCCURRED_$$cost;
+    _ATOMIC_HAS_OCCURRED_$$cost$ghost$$7 := _ATOMIC_HAS_OCCURRED_$$cost;
+    _WRITE_HAS_OCCURRED_$$b_q2$ghost$$7 := _WRITE_HAS_OCCURRED_$$b_q2;
+    _ATOMIC_HAS_OCCURRED_$$BFS_kernel_one_block.b_q_length$ghost$$7 := _ATOMIC_HAS_OCCURRED_$$BFS_kernel_one_block.b_q_length;
+    _ATOMIC_HAS_OCCURRED_$$BFS_kernel_one_block.b_offset$ghost$$7 := _ATOMIC_HAS_OCCURRED_$$BFS_kernel_one_block.b_offset;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $while.cond.13;
+    goto $7;
 
-  $while.cond.13:
+  $7:
     assume {:captureState "loop_head_state_1"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b94 ==> !p6$1 ==> _ATOMIC_HAS_OCCURRED_$$BFS_kernel_one_block.b_offset$ghost$$while.cond.13 == _ATOMIC_HAS_OCCURRED_$$BFS_kernel_one_block.b_offset;
+    assert {:tag "disabledMaintainsInstrumentation"} _b94 ==> !p6$1 ==> _ATOMIC_HAS_OCCURRED_$$BFS_kernel_one_block.b_offset$ghost$$7 == _ATOMIC_HAS_OCCURRED_$$BFS_kernel_one_block.b_offset;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b93 ==> _ATOMIC_HAS_OCCURRED_$$BFS_kernel_one_block.b_offset ==> _WATCHED_OFFSET == 0bv32;
-    assert {:tag "disabledMaintainsInstrumentation"} _b92 ==> !p6$1 ==> _ATOMIC_HAS_OCCURRED_$$BFS_kernel_one_block.b_q_length$ghost$$while.cond.13 == _ATOMIC_HAS_OCCURRED_$$BFS_kernel_one_block.b_q_length;
+    assert {:tag "disabledMaintainsInstrumentation"} _b92 ==> !p6$1 ==> _ATOMIC_HAS_OCCURRED_$$BFS_kernel_one_block.b_q_length$ghost$$7 == _ATOMIC_HAS_OCCURRED_$$BFS_kernel_one_block.b_q_length;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b91 ==> _ATOMIC_HAS_OCCURRED_$$BFS_kernel_one_block.b_q_length ==> _WATCHED_OFFSET == 0bv32;
-    assert {:tag "disabledMaintainsInstrumentation"} _b90 ==> !p6$1 ==> _WRITE_HAS_OCCURRED_$$b_q2$ghost$$while.cond.13 == _WRITE_HAS_OCCURRED_$$b_q2;
+    assert {:tag "disabledMaintainsInstrumentation"} _b90 ==> !p6$1 ==> _WRITE_HAS_OCCURRED_$$b_q2$ghost$$7 == _WRITE_HAS_OCCURRED_$$b_q2;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b89 ==> _WRITE_HAS_OCCURRED_$$b_q2 ==> _WATCHED_OFFSET == v16$1;
-    assert {:tag "disabledMaintainsInstrumentation"} _b88 ==> !p6$1 ==> _ATOMIC_HAS_OCCURRED_$$cost$ghost$$while.cond.13 == _ATOMIC_HAS_OCCURRED_$$cost;
-    assert {:tag "disabledMaintainsInstrumentation"} _b87 ==> !p6$1 ==> _READ_HAS_OCCURRED_$$cost$ghost$$while.cond.13 == _READ_HAS_OCCURRED_$$cost;
-    assert {:tag "disabledMaintainsInstrumentation"} _b86 ==> !p6$1 ==> _ATOMIC_HAS_OCCURRED_$$visited$ghost$$while.cond.13 == _ATOMIC_HAS_OCCURRED_$$visited;
-    assert {:tag "disabledMaintainsInstrumentation"} _b85 ==> !p6$1 ==> _WRITE_HAS_OCCURRED_$$frontier$ghost$$while.cond.13 == _WRITE_HAS_OCCURRED_$$frontier;
+    assert {:tag "disabledMaintainsInstrumentation"} _b88 ==> !p6$1 ==> _ATOMIC_HAS_OCCURRED_$$cost$ghost$$7 == _ATOMIC_HAS_OCCURRED_$$cost;
+    assert {:tag "disabledMaintainsInstrumentation"} _b87 ==> !p6$1 ==> _READ_HAS_OCCURRED_$$cost$ghost$$7 == _READ_HAS_OCCURRED_$$cost;
+    assert {:tag "disabledMaintainsInstrumentation"} _b86 ==> !p6$1 ==> _ATOMIC_HAS_OCCURRED_$$visited$ghost$$7 == _ATOMIC_HAS_OCCURRED_$$visited;
+    assert {:tag "disabledMaintainsInstrumentation"} _b85 ==> !p6$1 ==> _WRITE_HAS_OCCURRED_$$frontier$ghost$$7 == _WRITE_HAS_OCCURRED_$$frontier;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b84 ==> _WRITE_HAS_OCCURRED_$$frontier ==> _WATCHED_OFFSET == v18$1;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$BFS_kernel_one_block.b_offset ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$BFS_kernel_one_block.b_offset ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -768,13 +768,13 @@ implementation {:source_name "BFS_kernel_one_block"} {:kernel} $BFS_kernel_one_b
     $offset.0$2 := (if p8$2 then BV32_ADD($offset.0$2, 1bv32) else $offset.0$2);
     p7$1 := (if p8$1 then true else p7$1);
     p7$2 := (if p8$2 then true else p7$2);
-    goto $while.cond.13.backedge, __partitioned_block_$while.cond.13.tail_0;
+    goto $7.backedge, __partitioned_block_$7.tail_0;
 
-  __partitioned_block_$while.cond.13.tail_0:
+  __partitioned_block_$7.tail_0:
     assume !p7$1 && !p7$2;
-    goto __partitioned_block_$while.cond.13.tail_1;
+    goto __partitioned_block_$7.tail_1;
 
-  __partitioned_block_$while.cond.13.tail_1:
+  __partitioned_block_$7.tail_1:
     call {:sourceloc_num 39} $bugle_barrier_duplicated_2(1bv1, 1bv1, p2$1, p2$2);
     v19$1 := (if p2$1 then BV32_ULT(v0$1, $max_local_mem) else v19$1);
     v19$2 := (if p2$2 then BV32_ULT(v0$2, $max_local_mem) else v19$2);
@@ -793,9 +793,9 @@ implementation {:source_name "BFS_kernel_one_block"} {:kernel} $BFS_kernel_one_b
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$b_q"} true;
     $$b_q[1bv1][v0$1] := (if p16$1 then v20$1 else $$b_q[1bv1][v0$1]);
     $$b_q[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v0$2] := (if p16$2 then v20$2 else $$b_q[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v0$2]);
-    goto __partitioned_block_$while.cond.13.tail_2;
+    goto __partitioned_block_$7.tail_2;
 
-  __partitioned_block_$while.cond.13.tail_2:
+  __partitioned_block_$7.tail_2:
     call {:sourceloc_num 44} $bugle_barrier_duplicated_3(1bv1, 1bv1, p2$1, p2$2);
     havoc _HAVOC_bv32$1, _HAVOC_bv32$2;
     _abstracted_call_arg_0$1 := (if p2$1 then _HAVOC_bv32$1 else _abstracted_call_arg_0$1);
@@ -873,17 +873,17 @@ implementation {:source_name "BFS_kernel_one_block"} {:kernel} $BFS_kernel_one_b
     havoc _HAVOC_bv32$1, _HAVOC_bv32$2;
     v35$1 := (if p19$1 then _HAVOC_bv32$1 else v35$1);
     v35$2 := (if p19$2 then _HAVOC_bv32$2 else v35$2);
-    goto __partitioned_block_$while.cond.13.tail_3;
+    goto __partitioned_block_$7.tail_3;
 
-  __partitioned_block_$while.cond.13.tail_3:
+  __partitioned_block_$7.tail_3:
     call {:sourceloc_num 68} $bugle_barrier_duplicated_4(1bv1, 1bv1, p19$1, p19$2);
     $f_len.0$1 := (if p19$1 then v35$1 else $f_len.0$1);
     $f_len.0$2 := (if p19$2 then v35$2 else $f_len.0$2);
     p2$1 := (if p19$1 then true else p2$1);
     p2$2 := (if p19$2 then true else p2$2);
-    goto $while.body.backedge, $while.body.tail;
+    goto $3.backedge, $3.tail;
 
-  $while.body.tail:
+  $3.tail:
     assume !p2$1 && !p2$2;
     p22$1 := (if p20$1 then true else p22$1);
     p22$2 := (if p20$2 then true else p22$2);
@@ -982,15 +982,15 @@ implementation {:source_name "BFS_kernel_one_block"} {:kernel} $BFS_kernel_one_b
     $$frontier_length[0bv32] := (if p28$2 then 0bv32 else $$frontier_length[0bv32]);
     return;
 
-  $while.body.backedge:
+  $3.backedge:
     assume {:backedge} p2$1 || p2$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto __partitioned_block_$while.body_0;
+    goto __partitioned_block_$3_0;
 
-  $while.cond.13.backedge:
+  $7.backedge:
     assume {:backedge} p7$1 || p7$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $while.cond.13;
+    goto $7;
 }
 
 

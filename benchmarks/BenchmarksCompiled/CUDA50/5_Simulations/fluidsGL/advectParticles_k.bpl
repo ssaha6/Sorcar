@@ -121,86 +121,86 @@ implementation {:source_name "advectParticles_k"} {:kernel} $_Z17advectParticles
 {
   var $p.0$1: bv32;
   var $p.0$2: bv32;
-  var v14$1: bv8;
-  var v14$2: bv8;
-  var v1$1: bool;
-  var v1$2: bool;
   var v0$1: bv32;
   var v0$2: bv32;
-  var v8$1: bv32;
-  var v8$2: bv32;
-  var v6$1: bv32;
-  var v6$2: bv32;
-  var v9$1: bv32;
-  var v9$2: bv32;
-  var v12$1: bv8;
-  var v12$2: bv8;
-  var v7$1: bv32;
-  var v7$2: bv32;
-  var v10$1: bv8;
-  var v10$2: bv8;
-  var v13$1: bv8;
-  var v13$2: bv8;
-  var v11$1: bv8;
-  var v11$2: bv8;
-  var v2$1: bool;
-  var v2$2: bool;
-  var v5$1: bv32;
-  var v5$2: bv32;
+  var v18$1: bv8;
+  var v18$2: bv8;
+  var v19$1: bv8;
+  var v19$2: bv8;
+  var v20$1: bv8;
+  var v20$2: bv8;
+  var v21$1: bv8;
+  var v21$2: bv8;
+  var v22$1: bv32;
+  var v22$2: bv32;
+  var v23$1: bv32;
+  var v23$2: bv32;
+  var v24$1: bv32;
+  var v24$2: bv32;
   var v3$1: bv32;
   var v3$2: bv32;
   var v4$1: bool;
   var v4$2: bool;
-  var v37$1: bv32;
-  var v37$2: bv32;
-  var v34$1: bv32;
-  var v34$2: bv32;
-  var v39$1: bv32;
-  var v39$2: bv32;
-  var v33$1: bv32;
-  var v33$2: bv32;
-  var v36$1: bv32;
-  var v36$2: bv32;
-  var v32$1: bv32;
-  var v32$2: bv32;
-  var v38$1: bv32;
-  var v38$2: bv32;
-  var v35$1: bv32;
-  var v35$2: bv32;
+  var v2$1: bool;
+  var v2$2: bool;
+  var v9$1: bv32;
+  var v9$2: bv32;
+  var v10$1: bv8;
+  var v10$2: bv8;
+  var v11$1: bv8;
+  var v11$2: bv8;
+  var v12$1: bv8;
+  var v12$2: bv8;
+  var v13$1: bv8;
+  var v13$2: bv8;
+  var v14$1: bv8;
+  var v14$2: bv8;
   var v15$1: bv8;
   var v15$2: bv8;
-  var v17$1: bv8;
-  var v17$2: bv8;
-  var v18$1: bv8;
-  var v18$2: bv8;
-  var v22$1: bv32;
-  var v22$2: bv32;
   var v16$1: bv8;
   var v16$2: bv8;
-  var v20$1: bv8;
-  var v20$2: bv8;
-  var v19$1: bv8;
-  var v19$2: bv8;
-  var v24$1: bv32;
-  var v24$2: bv32;
-  var v21$1: bv8;
-  var v21$2: bv8;
-  var v23$1: bv32;
-  var v23$2: bv32;
-  var v27$1: bv32;
-  var v27$2: bv32;
-  var v31$1: bv8;
-  var v31$2: bv8;
-  var v30$1: bv8;
-  var v30$2: bv8;
+  var v17$1: bv8;
+  var v17$2: bv8;
+  var v25$1: bv32;
+  var v25$2: bv32;
   var v26$1: bv32;
   var v26$2: bv32;
+  var v27$1: bv32;
+  var v27$2: bv32;
   var v28$1: bv8;
   var v28$2: bv8;
   var v29$1: bv8;
   var v29$2: bv8;
-  var v25$1: bv32;
-  var v25$2: bv32;
+  var v30$1: bv8;
+  var v30$2: bv8;
+  var v31$1: bv8;
+  var v31$2: bv8;
+  var v32$1: bv32;
+  var v32$2: bv32;
+  var v33$1: bv32;
+  var v33$2: bv32;
+  var v34$1: bv32;
+  var v34$2: bv32;
+  var v35$1: bv32;
+  var v35$2: bv32;
+  var v36$1: bv32;
+  var v36$2: bv32;
+  var v37$1: bv32;
+  var v37$2: bv32;
+  var v5$1: bv32;
+  var v5$2: bv32;
+  var v6$1: bv32;
+  var v6$2: bv32;
+  var v7$1: bv32;
+  var v7$2: bv32;
+  var v8$1: bv32;
+  var v8$2: bv32;
+  var v1$1: bool;
+  var v1$2: bool;
+  var v38$1: bv32;
+  var v38$2: bv32;
+  var v39$1: bv32;
+  var v39$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -215,11 +215,11 @@ implementation {:source_name "advectParticles_k"} {:kernel} $_Z17advectParticles
   var p5$2: bool;
   var _HAVOC_bv8$1: bv8;
   var _HAVOC_bv8$2: bv8;
-  var _READ_HAS_OCCURRED_$$part$ghost$$for.cond: bool;
-  var _WRITE_HAS_OCCURRED_$$part$ghost$$for.cond: bool;
+  var _READ_HAS_OCCURRED_$$part$ghost$$2: bool;
+  var _WRITE_HAS_OCCURRED_$$part$ghost$$2: bool;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2);
     v1$1 := BV32_SLT(v0$1, $dx);
@@ -236,15 +236,15 @@ implementation {:source_name "advectParticles_k"} {:kernel} $_Z17advectParticles
     $p.0$2 := (if p0$2 then 0bv32 else $p.0$2);
     p1$1 := (if p0$1 then true else p1$1);
     p1$2 := (if p0$2 then true else p1$2);
-    _READ_HAS_OCCURRED_$$part$ghost$$for.cond := _READ_HAS_OCCURRED_$$part;
-    _WRITE_HAS_OCCURRED_$$part$ghost$$for.cond := _WRITE_HAS_OCCURRED_$$part;
+    _READ_HAS_OCCURRED_$$part$ghost$$2 := _READ_HAS_OCCURRED_$$part;
+    _WRITE_HAS_OCCURRED_$$part$ghost$$2 := _WRITE_HAS_OCCURRED_$$part;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond;
+    goto $2;
 
-  $for.cond:
+  $2:
     assume {:captureState "loop_head_state_0"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b20 ==> !p0$1 ==> _WRITE_HAS_OCCURRED_$$part$ghost$$for.cond == _WRITE_HAS_OCCURRED_$$part;
-    assert {:tag "disabledMaintainsInstrumentation"} _b19 ==> !p0$1 ==> _READ_HAS_OCCURRED_$$part$ghost$$for.cond == _READ_HAS_OCCURRED_$$part;
+    assert {:tag "disabledMaintainsInstrumentation"} _b20 ==> !p0$1 ==> _WRITE_HAS_OCCURRED_$$part$ghost$$2 == _WRITE_HAS_OCCURRED_$$part;
+    assert {:tag "disabledMaintainsInstrumentation"} _b19 ==> !p0$1 ==> _READ_HAS_OCCURRED_$$part$ghost$$2 == _READ_HAS_OCCURRED_$$part;
     assert {:tag "accessBreak"} _b18 ==> _WRITE_HAS_OCCURRED_$$part ==> local_id_x$1 == BV32_SUB(BV32_SUB(BV32_SUB(BV32_DIV(_WATCHED_OFFSET, 2bv32), BV32_MUL(BV32_MUL(BV32_MUL(group_id_y$1, $dx), $lb), group_size_y)), BV32_MUL(BV32_MUL(local_id_y$1, $dx), $lb)), BV32_MUL(group_id_x$1, group_size_x));
     assert {:tag "accessBreak"} _b17 ==> _WRITE_HAS_OCCURRED_$$part ==> group_id_x$1 == BV32_SUB(BV32_SUB(BV32_SUB(BV32_DIV(BV32_DIV(_WATCHED_OFFSET, 2bv32), group_size_x), BV32_DIV(BV32_MUL(BV32_MUL(BV32_MUL(group_id_y$1, $dx), $lb), group_size_y), group_size_x)), BV32_DIV(BV32_MUL(BV32_MUL(local_id_y$1, $dx), $lb), group_size_x)), BV32_DIV(local_id_x$1, group_size_x));
     assert {:tag "accessBreak"} _b16 ==> _WRITE_HAS_OCCURRED_$$part ==> local_id_y$1 == BV32_SUB(BV32_SUB(BV32_SUB(BV32_DIV(BV32_DIV(BV32_DIV(_WATCHED_OFFSET, 2bv32), $dx), $lb), BV32_DIV(BV32_MUL(BV32_MUL(group_id_y$1, $lb), group_size_y), $lb)), BV32_DIV(BV32_DIV(BV32_MUL(group_id_x$1, group_size_x), $dx), $lb)), BV32_DIV(BV32_DIV(local_id_x$1, $dx), $lb));
@@ -431,16 +431,16 @@ implementation {:source_name "advectParticles_k"} {:kernel} $_Z17advectParticles
     $p.0$2 := (if p2$2 then BV32_ADD($p.0$2, 1bv32) else $p.0$2);
     p1$1 := (if p2$1 then true else p1$1);
     p1$2 := (if p2$2 then true else p1$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $2.backedge, $2.tail;
 
-  $for.cond.tail:
+  $2.tail:
     assume !p1$1 && !p1$2;
     return;
 
-  $for.cond.backedge:
+  $2.backedge:
     assume {:backedge} p1$1 || p1$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond;
+    goto $2;
 }
 
 

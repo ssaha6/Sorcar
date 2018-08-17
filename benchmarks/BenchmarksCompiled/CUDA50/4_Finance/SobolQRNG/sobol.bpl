@@ -203,37 +203,37 @@ implementation {:source_name "sobolGPU_kernel"} {:kernel} $_Z15sobolGPU_kerneljj
   var $X.1$2: bv32;
   var $i.0$1: bv32;
   var $i.0$2: bv32;
-  var v3$1: bv32;
-  var v3$2: bv32;
-  var v8$1: bv32;
-  var v8$2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
-  var v2$1: bool;
-  var v2$2: bool;
   var v1$1: bv32;
   var v1$2: bv32;
-  var v6$1: bv32;
-  var v6$2: bv32;
-  var v5: bv32;
+  var v2$1: bool;
+  var v2$2: bool;
+  var v3$1: bv32;
+  var v3$2: bv32;
   var v4$1: bv32;
   var v4$2: bv32;
-  var v12$1: bool;
-  var v12$2: bool;
-  var v10$1: bv32;
-  var v10$2: bv32;
-  var v9$1: bool;
-  var v9$2: bool;
+  var v5: bv32;
+  var v6$1: bv32;
+  var v6$2: bv32;
   var v7$1: bool;
   var v7$2: bool;
+  var v8$1: bv32;
+  var v8$2: bv32;
+  var v9$1: bool;
+  var v9$2: bool;
+  var v10$1: bv32;
+  var v10$2: bv32;
   var v11$1: bv32;
   var v11$2: bv32;
-  var v15$1: bv32;
-  var v15$2: bv32;
-  var v14$1: bv32;
-  var v14$2: bv32;
+  var v12$1: bool;
+  var v12$2: bool;
   var v13$1: bv32;
   var v13$2: bv32;
+  var v14$1: bv32;
+  var v14$2: bv32;
+  var v15$1: bv32;
+  var v15$2: bv32;
   var v16$1: bv32;
   var v16$2: bv32;
   var p0$1: bool;
@@ -258,7 +258,7 @@ implementation {:source_name "sobolGPU_kernel"} {:kernel} $_Z15sobolGPU_kerneljj
   var _HAVOC_bv32$2: bv32;
 
 
-  __partitioned_block_$entry_0:
+  __partitioned_block_$0_0:
     v0$1 := BV32_MUL(32bv32, group_id_y$1);
     v0$2 := BV32_MUL(32bv32, group_id_y$2);
     v1$1 := BV32_MUL($n_vectors, group_id_y$1);
@@ -285,9 +285,9 @@ implementation {:source_name "sobolGPU_kernel"} {:kernel} $_Z15sobolGPU_kerneljj
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$_ZZ15sobolGPU_kerneljjPjPfE1v"} true;
     $$_ZZ15sobolGPU_kerneljjPjPfE1v[1bv1][local_id_x$1] := (if p0$1 then v3$1 else $$_ZZ15sobolGPU_kerneljjPjPfE1v[1bv1][local_id_x$1]);
     $$_ZZ15sobolGPU_kerneljjPjPfE1v[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2] := (if p0$2 then v3$2 else $$_ZZ15sobolGPU_kerneljjPjPfE1v[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2]);
-    goto __partitioned_block_$entry_1;
+    goto __partitioned_block_$0_1;
 
-  __partitioned_block_$entry_1:
+  __partitioned_block_$0_1:
     call {:sourceloc_num 7} $bugle_barrier_duplicated_0(1bv1, 1bv1);
     v4$1 := BV32_ADD(local_id_x$1, BV32_MUL(group_id_x$1, group_size_x));
     v4$2 := BV32_ADD(local_id_x$2, BV32_MUL(group_id_x$2, group_size_x));
@@ -297,9 +297,9 @@ implementation {:source_name "sobolGPU_kernel"} {:kernel} $_Z15sobolGPU_kerneljj
     p2$1 := true;
     p2$2 := true;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond;
+    goto $3;
 
-  $for.cond:
+  $3:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "pow2NotZero"} _b14 ==> $g.0$2 != 0bv32;
     assert {:tag "pow2"} _b13 ==> $g.0$2 == 0bv32 || BV32_AND($g.0$2, BV32_SUB($g.0$2, 1bv32)) == 0bv32;
@@ -342,9 +342,9 @@ implementation {:source_name "sobolGPU_kernel"} {:kernel} $_Z15sobolGPU_kerneljj
     $g.0$2, $X.0$2, $k.0$2 := (if p3$2 then BV32_LSHR($g.0$2, 1bv32) else $g.0$2), (if p3$2 then BV32_XOR($X.0$2, BV32_AND(BV32_SUB(0bv32, BV32_AND($g.0$2, 1bv32)), v8$2)) else $X.0$2), (if p3$2 then BV32_ADD($k.0$2, 1bv32) else $k.0$2);
     p2$1 := (if p3$1 then true else p2$1);
     p2$2 := (if p3$2 then true else p2$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $3.backedge, $3.tail;
 
-  $for.cond.tail:
+  $3.tail:
     assume !p2$1 && !p2$2;
     v9$1 := BV32_ULT(v4$1, $n_vectors);
     v9$2 := BV32_ULT(v4$2, $n_vectors);
@@ -367,9 +367,9 @@ implementation {:source_name "sobolGPU_kernel"} {:kernel} $_Z15sobolGPU_kerneljj
     p7$1 := true;
     p7$2 := true;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.24;
+    goto $9;
 
-  $for.cond.24:
+  $9:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessBreak"} _b18 ==> _WRITE_HAS_OCCURRED_$$d_output ==> group_id_y$1 == BV32_DIV(_WATCHED_OFFSET, $n_vectors);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b17 ==> _WRITE_HAS_OCCURRED_$$d_output ==> BV32_AND(BV32_SUB(BV32_MUL(num_groups_x, group_size_x), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(num_groups_x, group_size_x), 1bv32), BV32_ADD(BV32_ADD(v4$1, v5), BV32_MUL($n_vectors, group_id_y$1)));
@@ -419,21 +419,21 @@ implementation {:source_name "sobolGPU_kernel"} {:kernel} $_Z15sobolGPU_kerneljj
     $X.1$2, $i.0$2 := (if p8$2 then v16$2 else $X.1$2), (if p8$2 then BV32_ADD($i.0$2, v5) else $i.0$2);
     p7$1 := (if p8$1 then true else p7$1);
     p7$2 := (if p8$2 then true else p7$2);
-    goto $for.cond.24.backedge, $for.cond.24.tail;
+    goto $9.backedge, $9.tail;
 
-  $for.cond.24.tail:
+  $9.tail:
     assume !p7$1 && !p7$2;
     return;
 
-  $for.cond.24.backedge:
+  $9.backedge:
     assume {:backedge} p7$1 || p7$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.24;
+    goto $9;
 
-  $for.cond.backedge:
+  $3.backedge:
     assume {:backedge} p2$1 || p2$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond;
+    goto $3;
 }
 
 

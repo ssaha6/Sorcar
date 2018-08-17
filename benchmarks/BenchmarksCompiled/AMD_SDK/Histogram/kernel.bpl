@@ -120,31 +120,31 @@ procedure {:source_name "histogram256"} {:kernel} $histogram256();
 implementation {:source_name "histogram256"} {:kernel} $histogram256()
 {
   var $i.0: bv32;
-  var $i4.0: bv32;
-  var $i20.0: bv32;
+  var $i1.0: bv32;
+  var $i2.0: bv32;
   var $binCount.0$1: bv32;
   var $binCount.0$2: bv32;
   var $j.0: bv32;
-  var v2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
   var v1$1: bv32;
   var v1$2: bv32;
+  var v2: bv32;
+  var v3: bool;
+  var v4: bool;
   var v5$1: bv32;
   var v5$2: bv32;
-  var v7$1: bv8;
-  var v7$2: bv8;
   var v6$1: bv32;
   var v6$2: bv32;
+  var v7$1: bv8;
+  var v7$2: bv8;
   var v8: bool;
-  var v4: bool;
-  var v3: bool;
+  var v9: bool;
   var v10$1: bv8;
   var v10$2: bv8;
-  var v9: bool;
 
 
-  $entry:
+  $0:
     v0$1 := local_id_x$1;
     v0$2 := local_id_x$2;
     v1$1 := group_id_x$1;
@@ -152,9 +152,9 @@ implementation {:source_name "histogram256"} {:kernel} $histogram256()
     v2 := group_size_x;
     $i.0 := 0bv32;
     assume {:captureState "loop_entry_state_3_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_3"} true;
     assert {:tag "accessBreak"} _b18 ==> _WRITE_HAS_OCCURRED_$$sharedArray ==> local_id_x$1 == BV32_DIV(_WATCHED_OFFSET, 256bv32);
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$sharedArray ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -175,24 +175,24 @@ implementation {:source_name "histogram256"} {:kernel} $histogram256()
 
   __partitioned_block_$falsebb_1:
     call {:sourceloc_num 6} $bugle_barrier_duplicated_0(1bv1, 0bv1);
-    $i4.0 := 0bv32;
+    $i1.0 := 0bv32;
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond.5;
+    goto $5;
 
-  $for.cond.5:
+  $5:
     assume {:captureState "loop_head_state_2"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b20 ==> _WRITE_HAS_OCCURRED_$$sharedArray ==> _WATCHED_OFFSET == BV32_MUL(local_id_x$1, 256bv32);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b19 ==> _READ_HAS_OCCURRED_$$sharedArray ==> _WATCHED_OFFSET == BV32_MUL(local_id_x$1, 256bv32);
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$sharedArray ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$sharedArray ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$sharedArray ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
-    assert {:tag "loopBound"} {:thread 1} _b9 ==> BV32_UGE($i4.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b8 ==> BV32_ULE($i4.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b7 ==> BV32_SGE($i4.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b6 ==> BV32_SLE($i4.0, 0bv32);
-    assert {:tag "guardNonNeg"} {:thread 1} _b5 ==> BV32_SLE(0bv32, $i4.0);
+    assert {:tag "loopBound"} {:thread 1} _b9 ==> BV32_UGE($i1.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b8 ==> BV32_ULE($i1.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b7 ==> BV32_SGE($i1.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b6 ==> BV32_SLE($i1.0, 0bv32);
+    assert {:tag "guardNonNeg"} {:thread 1} _b5 ==> BV32_SLE(0bv32, $i1.0);
     assert {:block_sourceloc} {:sourceloc_num 7} true;
-    v4 := BV32_SLT($i4.0, 256bv32);
+    v4 := BV32_SLT($i1.0, 256bv32);
     goto $truebb0, __partitioned_block_$falsebb0_0;
 
   __partitioned_block_$falsebb0_0:
@@ -201,23 +201,23 @@ implementation {:source_name "histogram256"} {:kernel} $histogram256()
 
   __partitioned_block_$falsebb0_1:
     call {:sourceloc_num 14} $bugle_barrier_duplicated_1(1bv1, 0bv1);
-    $i20.0 := 0bv32;
+    $i2.0 := 0bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.21;
+    goto $9;
 
-  $for.cond.21:
+  $9:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessBreak"} _b22 ==> _WRITE_HAS_OCCURRED_$$binResult ==> group_id_x$1 == BV32_DIV(_WATCHED_OFFSET, 256bv32);
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b21 ==> _WRITE_HAS_OCCURRED_$$binResult ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, group_size_x), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, group_size_x), 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(0bv32, group_size_x), BV32_MUL(group_id_x$1, 256bv32)), local_id_x$1));
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$sharedArray ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$sharedArray ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$sharedArray ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
-    assert {:tag "loopBound"} {:thread 1} _b13 ==> BV32_UGE($i20.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b12 ==> BV32_ULE($i20.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b11 ==> BV32_SGE($i20.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b10 ==> BV32_SLE($i20.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b13 ==> BV32_UGE($i2.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b12 ==> BV32_ULE($i2.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b11 ==> BV32_SGE($i2.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b10 ==> BV32_SLE($i2.0, 0bv32);
     assert {:block_sourceloc} {:sourceloc_num 15} true;
-    v8 := BV32_ULT($i20.0, BV32_UDIV(256bv32, v2));
+    v8 := BV32_ULT($i2.0, BV32_UDIV(256bv32, v2));
     goto $truebb1, $falsebb1;
 
   $falsebb1:
@@ -229,9 +229,9 @@ implementation {:source_name "histogram256"} {:kernel} $histogram256()
     $binCount.0$1, $j.0 := 0bv32, 0bv32;
     $binCount.0$2 := 0bv32;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.24;
+    goto $11;
 
-  $for.cond.24:
+  $11:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$sharedArray ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$sharedArray ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -246,26 +246,26 @@ implementation {:source_name "histogram256"} {:kernel} $histogram256()
 
   $falsebb2:
     assume {:partition} !v9;
-    call {:sourceloc} {:sourceloc_num 22} _LOG_WRITE_$$binResult(true, BV32_ADD(BV32_ADD(BV32_MUL(v1$1, 256bv32), BV32_MUL($i20.0, v2)), v0$1), $binCount.0$1, $$binResult[BV32_ADD(BV32_ADD(BV32_MUL(v1$1, 256bv32), BV32_MUL($i20.0, v2)), v0$1)]);
-    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$binResult(true, BV32_ADD(BV32_ADD(BV32_MUL(v1$2, 256bv32), BV32_MUL($i20.0, v2)), v0$2));
+    call {:sourceloc} {:sourceloc_num 22} _LOG_WRITE_$$binResult(true, BV32_ADD(BV32_ADD(BV32_MUL(v1$1, 256bv32), BV32_MUL($i2.0, v2)), v0$1), $binCount.0$1, $$binResult[BV32_ADD(BV32_ADD(BV32_MUL(v1$1, 256bv32), BV32_MUL($i2.0, v2)), v0$1)]);
+    call _UPDATE_WRITE_READ_BENIGN_FLAG_$$binResult(true, BV32_ADD(BV32_ADD(BV32_MUL(v1$2, 256bv32), BV32_MUL($i2.0, v2)), v0$2));
     assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 22} true;
-    call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 22} _CHECK_WRITE_$$binResult(true, BV32_ADD(BV32_ADD(BV32_MUL(v1$2, 256bv32), BV32_MUL($i20.0, v2)), v0$2), $binCount.0$2);
+    call {:check_id "check_state_0"} {:sourceloc} {:sourceloc_num 22} _CHECK_WRITE_$$binResult(true, BV32_ADD(BV32_ADD(BV32_MUL(v1$2, 256bv32), BV32_MUL($i2.0, v2)), v0$2), $binCount.0$2);
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$binResult"} true;
-    $$binResult[BV32_ADD(BV32_ADD(BV32_MUL(v1$1, 256bv32), BV32_MUL($i20.0, v2)), v0$1)] := $binCount.0$1;
-    $$binResult[BV32_ADD(BV32_ADD(BV32_MUL(v1$2, 256bv32), BV32_MUL($i20.0, v2)), v0$2)] := $binCount.0$2;
-    $i20.0 := BV32_ADD($i20.0, 1bv32);
+    $$binResult[BV32_ADD(BV32_ADD(BV32_MUL(v1$1, 256bv32), BV32_MUL($i2.0, v2)), v0$1)] := $binCount.0$1;
+    $$binResult[BV32_ADD(BV32_ADD(BV32_MUL(v1$2, 256bv32), BV32_MUL($i2.0, v2)), v0$2)] := $binCount.0$2;
+    $i2.0 := BV32_ADD($i2.0, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.21;
+    goto $9;
 
   $truebb2:
     assume {:partition} v9;
     assume {:do_not_predicate} {:check_id "check_state_1"} {:captureState "check_state_1"} {:sourceloc} {:sourceloc_num 19} true;
-    v10$1 := $$sharedArray[1bv1][BV32_ADD(BV32_ADD(BV32_MUL($j.0, 256bv32), BV32_MUL($i20.0, v2)), v0$1)];
-    v10$2 := $$sharedArray[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_ADD(BV32_MUL($j.0, 256bv32), BV32_MUL($i20.0, v2)), v0$2)];
+    v10$1 := $$sharedArray[1bv1][BV32_ADD(BV32_ADD(BV32_MUL($j.0, 256bv32), BV32_MUL($i2.0, v2)), v0$1)];
+    v10$2 := $$sharedArray[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_ADD(BV32_MUL($j.0, 256bv32), BV32_MUL($i2.0, v2)), v0$2)];
     $binCount.0$1, $j.0 := BV32_ADD($binCount.0$1, BV8_ZEXT32(v10$1)), BV32_ADD($j.0, 1bv32);
     $binCount.0$2 := BV32_ADD($binCount.0$2, BV8_ZEXT32(v10$2));
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.24;
+    goto $11;
 
   $truebb0:
     assume {:partition} v4;
@@ -285,9 +285,9 @@ implementation {:source_name "histogram256"} {:kernel} $histogram256()
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$sharedArray"} true;
     $$sharedArray[1bv1][v6$1] := BV8_ADD(v7$1, 1bv8);
     $$sharedArray[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v6$2] := BV8_ADD(v7$2, 1bv8);
-    $i4.0 := BV32_ADD($i4.0, 1bv32);
+    $i1.0 := BV32_ADD($i1.0, 1bv32);
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond.5;
+    goto $5;
 
   $truebb:
     assume {:partition} v3;
@@ -300,7 +300,7 @@ implementation {:source_name "histogram256"} {:kernel} $histogram256()
     $$sharedArray[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL(v0$2, 256bv32), $i.0)] := 0bv8;
     $i.0 := BV32_ADD($i.0, 1bv32);
     assume {:captureState "loop_back_edge_state_3_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

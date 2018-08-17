@@ -282,10 +282,10 @@ implementation {:source_name "likelihood_kernel"} {:kernel} $likelihood_kernel($
 {
   var $y.0$1: bv32;
   var $y.0$2: bv32;
-  var $retval.i.0$1: bv32;
-  var $retval.i.0$2: bv32;
-  var $retval.i.173.0$1: bv32;
-  var $retval.i.173.0$2: bv32;
+  var $.01$1: bv32;
+  var $.01$2: bv32;
+  var $.0$1: bv32;
+  var $.0$2: bv32;
   var $likelihoodSum.i.0$1: bv32;
   var $likelihoodSum.i.0$2: bv32;
   var $x.i.0$1: bv32;
@@ -299,87 +299,87 @@ implementation {:source_name "likelihood_kernel"} {:kernel} $likelihood_kernel($
   var v2$2: bv32;
   var v3$1: bool;
   var v3$2: bool;
-  var v36$1: bv32;
-  var v36$2: bv32;
+  var v4$1: bv32;
+  var v4$2: bv32;
+  var v5$1: bv32;
+  var v5$2: bv32;
+  var v6$1: bv32;
+  var v6$2: bv32;
+  var v7$1: bv32;
+  var v7$2: bv32;
+  var v8$1: bv32;
+  var v8$2: bv32;
+  var v9$1: bv32;
+  var v9$2: bv32;
+  var v10$1: bv32;
+  var v10$2: bv32;
+  var v11$1: bv32;
+  var v11$2: bv32;
+  var v12$1: bv32;
+  var v12$2: bv32;
+  var v13$1: bv32;
+  var v13$2: bv32;
+  var v14$1: bv32;
+  var v14$2: bv32;
+  var v15$1: bv32;
+  var v15$2: bv32;
+  var v16$1: bool;
+  var v16$2: bool;
+  var v17$1: bool;
+  var v17$2: bool;
+  var v18$1: bv32;
+  var v18$2: bv32;
+  var v19$1: bv32;
+  var v19$2: bv32;
+  var v20$1: bool;
+  var v20$2: bool;
+  var v21$1: bv32;
+  var v21$2: bv32;
+  var v22$1: bv32;
+  var v22$2: bv32;
+  var v23$1: bv32;
+  var v23$2: bv32;
+  var v24$1: bool;
+  var v24$2: bool;
+  var v25$1: bv32;
+  var v25$2: bv32;
+  var v26$1: bv32;
+  var v26$2: bv32;
   var v27$1: bv32;
   var v27$2: bv32;
+  var v28$1: bool;
+  var v28$2: bool;
+  var v29$1: bool;
+  var v29$2: bool;
+  var v30$1: bv32;
+  var v30$2: bv32;
   var v31$1: bv8;
   var v31$2: bv8;
   var v32$1: bv32;
   var v32$2: bv32;
   var v33$1: bv8;
   var v33$2: bv8;
-  var v30$1: bv32;
-  var v30$2: bv32;
-  var v35$1: bv32;
-  var v35$2: bv32;
   var v34$1: bv32;
   var v34$2: bv32;
-  var v4$1: bv32;
-  var v4$2: bv32;
-  var v12$1: bv32;
-  var v12$2: bv32;
-  var v5$1: bv32;
-  var v5$2: bv32;
-  var v7$1: bv32;
-  var v7$2: bv32;
-  var v8$1: bv32;
-  var v8$2: bv32;
-  var v10$1: bv32;
-  var v10$2: bv32;
-  var v9$1: bv32;
-  var v9$2: bv32;
-  var v6$1: bv32;
-  var v6$2: bv32;
-  var v11$1: bv32;
-  var v11$2: bv32;
-  var v15$1: bv32;
-  var v15$2: bv32;
-  var v14$1: bv32;
-  var v14$2: bv32;
-  var v13$1: bv32;
-  var v13$2: bv32;
-  var v18$1: bv32;
-  var v18$2: bv32;
-  var v21$1: bv32;
-  var v21$2: bv32;
-  var v25$1: bv32;
-  var v25$2: bv32;
-  var v22$1: bv32;
-  var v22$2: bv32;
-  var v16$1: bool;
-  var v16$2: bool;
-  var v23$1: bv32;
-  var v23$2: bv32;
-  var v24$1: bool;
-  var v24$2: bool;
-  var v26$1: bv32;
-  var v26$2: bv32;
-  var v28$1: bool;
-  var v28$2: bool;
-  var v19$1: bv32;
-  var v19$2: bv32;
-  var v20$1: bool;
-  var v20$2: bool;
-  var v17$1: bool;
-  var v17$2: bool;
-  var v43$1: bool;
-  var v43$2: bool;
+  var v35$1: bv32;
+  var v35$2: bv32;
+  var v36$1: bv32;
+  var v36$2: bv32;
+  var v37$1: bool;
+  var v37$2: bool;
+  var v38$1: bv32;
+  var v38$2: bv32;
   var v39: bool;
   var v40$1: bool;
   var v40$2: bool;
-  var v29$1: bool;
-  var v29$2: bool;
-  var v37$1: bool;
-  var v37$2: bool;
-  var v44$1: bv32;
-  var v44$2: bv32;
   var v41$1: bv32;
   var v41$2: bv32;
-  var v38$1: bv32;
-  var v38$2: bv32;
   var v42$1: bv32;
   var v42$2: bv32;
+  var v43$1: bool;
+  var v43$2: bool;
+  var v44$1: bv32;
+  var v44$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -424,14 +424,14 @@ implementation {:source_name "likelihood_kernel"} {:kernel} $likelihood_kernel($
   var _HAVOC_bv32$2: bv32;
   var _HAVOC_bv8$1: bv8;
   var _HAVOC_bv8$2: bv8;
-  var _READ_HAS_OCCURRED_$$arrayX$ghost$$for.cond: bool;
-  var _READ_HAS_OCCURRED_$$arrayY$ghost$$for.cond: bool;
-  var _READ_HAS_OCCURRED_$$ind$ghost$$for.cond: bool;
-  var _WRITE_HAS_OCCURRED_$$ind$ghost$$for.cond: bool;
-  var _READ_HAS_OCCURRED_$$ind$ghost$$for.cond.i: bool;
+  var _READ_HAS_OCCURRED_$$arrayX$ghost$$4: bool;
+  var _READ_HAS_OCCURRED_$$arrayY$ghost$$4: bool;
+  var _READ_HAS_OCCURRED_$$ind$ghost$$4: bool;
+  var _WRITE_HAS_OCCURRED_$$ind$ghost$$4: bool;
+  var _READ_HAS_OCCURRED_$$ind$ghost$$14: bool;
 
 
-  __partitioned_block_$entry_0:
+  __partitioned_block_$0_0:
     v0$1 := group_id_x$1;
     v0$2 := group_id_x$2;
     v1$1 := local_id_x$1;
@@ -529,13 +529,13 @@ implementation {:source_name "likelihood_kernel"} {:kernel} $likelihood_kernel($
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$seed"} true;
     v10$1 := (if p0$1 then $$seed[v2$1] else v10$1);
     v10$2 := (if p0$2 then $$seed[v2$2] else v10$2);
-    call {:sourceloc} {:sourceloc_num 16} _LOG_WRITE_$$arrayX(p0$1, v2$1, FP64_CONV32(FADD64(FADD64(FP32_CONV64(v6$1), 4607182418800017408bv64), FMUL64(4617315517961601024bv64, FP32_CONV64(FMUL32(FSQRT32(FMUL32(3221225472bv32, FLOG32(FABS32(FDIV32(SI32_TO_FP32(v8$1), SI32_TO_FP32(2147483647bv32)))))), FCOS32(FMUL32(FMUL32(1073741824bv32, 1078530011bv32), FABS32(FDIV32(SI32_TO_FP32(v10$1), SI32_TO_FP32(2147483647bv32)))))))))), $$arrayX[v2$1]);
+    call {:sourceloc} {:sourceloc_num 16} _LOG_WRITE_$$arrayX(p0$1, v2$1, FP64_CONV32(FADD64(FMUL64(4617315517961601024bv64, FP32_CONV64(FMUL32(FSQRT32(FMUL32(3221225472bv32, FLOG32(FABS32(FDIV32(SI32_TO_FP32(v8$1), SI32_TO_FP32(2147483647bv32)))))), FCOS32(FMUL32(FMUL32(1073741824bv32, 1078530011bv32), FABS32(FDIV32(SI32_TO_FP32(v10$1), SI32_TO_FP32(2147483647bv32)))))))), FADD64(FP32_CONV64(v6$1), 4607182418800017408bv64))), $$arrayX[v2$1]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$arrayX(p0$2, v2$2);
     assume {:do_not_predicate} {:check_id "check_state_31"} {:captureState "check_state_31"} {:sourceloc} {:sourceloc_num 16} true;
-    call {:check_id "check_state_31"} {:sourceloc} {:sourceloc_num 16} _CHECK_WRITE_$$arrayX(p0$2, v2$2, FP64_CONV32(FADD64(FADD64(FP32_CONV64(v6$2), 4607182418800017408bv64), FMUL64(4617315517961601024bv64, FP32_CONV64(FMUL32(FSQRT32(FMUL32(3221225472bv32, FLOG32(FABS32(FDIV32(SI32_TO_FP32(v8$2), SI32_TO_FP32(2147483647bv32)))))), FCOS32(FMUL32(FMUL32(1073741824bv32, 1078530011bv32), FABS32(FDIV32(SI32_TO_FP32(v10$2), SI32_TO_FP32(2147483647bv32)))))))))));
+    call {:check_id "check_state_31"} {:sourceloc} {:sourceloc_num 16} _CHECK_WRITE_$$arrayX(p0$2, v2$2, FP64_CONV32(FADD64(FMUL64(4617315517961601024bv64, FP32_CONV64(FMUL32(FSQRT32(FMUL32(3221225472bv32, FLOG32(FABS32(FDIV32(SI32_TO_FP32(v8$2), SI32_TO_FP32(2147483647bv32)))))), FCOS32(FMUL32(FMUL32(1073741824bv32, 1078530011bv32), FABS32(FDIV32(SI32_TO_FP32(v10$2), SI32_TO_FP32(2147483647bv32)))))))), FADD64(FP32_CONV64(v6$2), 4607182418800017408bv64))));
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$arrayX"} true;
-    $$arrayX[v2$1] := (if p0$1 then FP64_CONV32(FADD64(FADD64(FP32_CONV64(v6$1), 4607182418800017408bv64), FMUL64(4617315517961601024bv64, FP32_CONV64(FMUL32(FSQRT32(FMUL32(3221225472bv32, FLOG32(FABS32(FDIV32(SI32_TO_FP32(v8$1), SI32_TO_FP32(2147483647bv32)))))), FCOS32(FMUL32(FMUL32(1073741824bv32, 1078530011bv32), FABS32(FDIV32(SI32_TO_FP32(v10$1), SI32_TO_FP32(2147483647bv32)))))))))) else $$arrayX[v2$1]);
-    $$arrayX[v2$2] := (if p0$2 then FP64_CONV32(FADD64(FADD64(FP32_CONV64(v6$2), 4607182418800017408bv64), FMUL64(4617315517961601024bv64, FP32_CONV64(FMUL32(FSQRT32(FMUL32(3221225472bv32, FLOG32(FABS32(FDIV32(SI32_TO_FP32(v8$2), SI32_TO_FP32(2147483647bv32)))))), FCOS32(FMUL32(FMUL32(1073741824bv32, 1078530011bv32), FABS32(FDIV32(SI32_TO_FP32(v10$2), SI32_TO_FP32(2147483647bv32)))))))))) else $$arrayX[v2$2]);
+    $$arrayX[v2$1] := (if p0$1 then FP64_CONV32(FADD64(FMUL64(4617315517961601024bv64, FP32_CONV64(FMUL32(FSQRT32(FMUL32(3221225472bv32, FLOG32(FABS32(FDIV32(SI32_TO_FP32(v8$1), SI32_TO_FP32(2147483647bv32)))))), FCOS32(FMUL32(FMUL32(1073741824bv32, 1078530011bv32), FABS32(FDIV32(SI32_TO_FP32(v10$1), SI32_TO_FP32(2147483647bv32)))))))), FADD64(FP32_CONV64(v6$1), 4607182418800017408bv64))) else $$arrayX[v2$1]);
+    $$arrayX[v2$2] := (if p0$2 then FP64_CONV32(FADD64(FMUL64(4617315517961601024bv64, FP32_CONV64(FMUL32(FSQRT32(FMUL32(3221225472bv32, FLOG32(FABS32(FDIV32(SI32_TO_FP32(v8$2), SI32_TO_FP32(2147483647bv32)))))), FCOS32(FMUL32(FMUL32(1073741824bv32, 1078530011bv32), FABS32(FDIV32(SI32_TO_FP32(v10$2), SI32_TO_FP32(2147483647bv32)))))))), FADD64(FP32_CONV64(v6$2), 4607182418800017408bv64))) else $$arrayX[v2$2]);
     call {:sourceloc} {:sourceloc_num 17} _LOG_READ_$$arrayY(p0$1, v2$1, $$arrayY[v2$1]);
     assume {:do_not_predicate} {:check_id "check_state_32"} {:captureState "check_state_32"} {:sourceloc} {:sourceloc_num 17} true;
     call {:check_id "check_state_32"} {:sourceloc} {:sourceloc_num 17} _CHECK_READ_$$arrayY(p0$2, v2$2, $$arrayY[v2$2]);
@@ -580,16 +580,16 @@ implementation {:source_name "likelihood_kernel"} {:kernel} $likelihood_kernel($
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$seed"} true;
     v15$1 := (if p0$1 then $$seed[v2$1] else v15$1);
     v15$2 := (if p0$2 then $$seed[v2$2] else v15$2);
-    call {:sourceloc} {:sourceloc_num 24} _LOG_WRITE_$$arrayY(p0$1, v2$1, FP64_CONV32(FADD64(FSUB64(FP32_CONV64(v11$1), 4611686018427387904bv64), FMUL64(4611686018427387904bv64, FP32_CONV64(FMUL32(FSQRT32(FMUL32(3221225472bv32, FLOG32(FABS32(FDIV32(SI32_TO_FP32(v13$1), SI32_TO_FP32(2147483647bv32)))))), FCOS32(FMUL32(FMUL32(1073741824bv32, 1078530011bv32), FABS32(FDIV32(SI32_TO_FP32(v15$1), SI32_TO_FP32(2147483647bv32)))))))))), $$arrayY[v2$1]);
+    call {:sourceloc} {:sourceloc_num 24} _LOG_WRITE_$$arrayY(p0$1, v2$1, FP64_CONV32(FADD64(FMUL64(4611686018427387904bv64, FP32_CONV64(FMUL32(FSQRT32(FMUL32(3221225472bv32, FLOG32(FABS32(FDIV32(SI32_TO_FP32(v13$1), SI32_TO_FP32(2147483647bv32)))))), FCOS32(FMUL32(FMUL32(1073741824bv32, 1078530011bv32), FABS32(FDIV32(SI32_TO_FP32(v15$1), SI32_TO_FP32(2147483647bv32)))))))), FSUB64(FP32_CONV64(v11$1), 4611686018427387904bv64))), $$arrayY[v2$1]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$arrayY(p0$2, v2$2);
     assume {:do_not_predicate} {:check_id "check_state_39"} {:captureState "check_state_39"} {:sourceloc} {:sourceloc_num 24} true;
-    call {:check_id "check_state_39"} {:sourceloc} {:sourceloc_num 24} _CHECK_WRITE_$$arrayY(p0$2, v2$2, FP64_CONV32(FADD64(FSUB64(FP32_CONV64(v11$2), 4611686018427387904bv64), FMUL64(4611686018427387904bv64, FP32_CONV64(FMUL32(FSQRT32(FMUL32(3221225472bv32, FLOG32(FABS32(FDIV32(SI32_TO_FP32(v13$2), SI32_TO_FP32(2147483647bv32)))))), FCOS32(FMUL32(FMUL32(1073741824bv32, 1078530011bv32), FABS32(FDIV32(SI32_TO_FP32(v15$2), SI32_TO_FP32(2147483647bv32)))))))))));
+    call {:check_id "check_state_39"} {:sourceloc} {:sourceloc_num 24} _CHECK_WRITE_$$arrayY(p0$2, v2$2, FP64_CONV32(FADD64(FMUL64(4611686018427387904bv64, FP32_CONV64(FMUL32(FSQRT32(FMUL32(3221225472bv32, FLOG32(FABS32(FDIV32(SI32_TO_FP32(v13$2), SI32_TO_FP32(2147483647bv32)))))), FCOS32(FMUL32(FMUL32(1073741824bv32, 1078530011bv32), FABS32(FDIV32(SI32_TO_FP32(v15$2), SI32_TO_FP32(2147483647bv32)))))))), FSUB64(FP32_CONV64(v11$2), 4611686018427387904bv64))));
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$arrayY"} true;
-    $$arrayY[v2$1] := (if p0$1 then FP64_CONV32(FADD64(FSUB64(FP32_CONV64(v11$1), 4611686018427387904bv64), FMUL64(4611686018427387904bv64, FP32_CONV64(FMUL32(FSQRT32(FMUL32(3221225472bv32, FLOG32(FABS32(FDIV32(SI32_TO_FP32(v13$1), SI32_TO_FP32(2147483647bv32)))))), FCOS32(FMUL32(FMUL32(1073741824bv32, 1078530011bv32), FABS32(FDIV32(SI32_TO_FP32(v15$1), SI32_TO_FP32(2147483647bv32)))))))))) else $$arrayY[v2$1]);
-    $$arrayY[v2$2] := (if p0$2 then FP64_CONV32(FADD64(FSUB64(FP32_CONV64(v11$2), 4611686018427387904bv64), FMUL64(4611686018427387904bv64, FP32_CONV64(FMUL32(FSQRT32(FMUL32(3221225472bv32, FLOG32(FABS32(FDIV32(SI32_TO_FP32(v13$2), SI32_TO_FP32(2147483647bv32)))))), FCOS32(FMUL32(FMUL32(1073741824bv32, 1078530011bv32), FABS32(FDIV32(SI32_TO_FP32(v15$2), SI32_TO_FP32(2147483647bv32)))))))))) else $$arrayY[v2$2]);
-    goto __partitioned_block_$entry_1;
+    $$arrayY[v2$1] := (if p0$1 then FP64_CONV32(FADD64(FMUL64(4611686018427387904bv64, FP32_CONV64(FMUL32(FSQRT32(FMUL32(3221225472bv32, FLOG32(FABS32(FDIV32(SI32_TO_FP32(v13$1), SI32_TO_FP32(2147483647bv32)))))), FCOS32(FMUL32(FMUL32(1073741824bv32, 1078530011bv32), FABS32(FDIV32(SI32_TO_FP32(v15$1), SI32_TO_FP32(2147483647bv32)))))))), FSUB64(FP32_CONV64(v11$1), 4611686018427387904bv64))) else $$arrayY[v2$1]);
+    $$arrayY[v2$2] := (if p0$2 then FP64_CONV32(FADD64(FMUL64(4611686018427387904bv64, FP32_CONV64(FMUL32(FSQRT32(FMUL32(3221225472bv32, FLOG32(FABS32(FDIV32(SI32_TO_FP32(v13$2), SI32_TO_FP32(2147483647bv32)))))), FCOS32(FMUL32(FMUL32(1073741824bv32, 1078530011bv32), FABS32(FDIV32(SI32_TO_FP32(v15$2), SI32_TO_FP32(2147483647bv32)))))))), FSUB64(FP32_CONV64(v11$2), 4611686018427387904bv64))) else $$arrayY[v2$2]);
+    goto __partitioned_block_$0_1;
 
-  __partitioned_block_$entry_1:
+  __partitioned_block_$0_1:
     call {:sourceloc_num 26} $bugle_barrier_duplicated_0(0bv1, 1bv1);
     v16$1 := BV32_SLT(v2$1, $Nparticles);
     v16$2 := BV32_SLT(v2$2, $Nparticles);
@@ -599,17 +599,17 @@ implementation {:source_name "likelihood_kernel"} {:kernel} $likelihood_kernel($
     $y.0$2 := (if p2$2 then 0bv32 else $y.0$2);
     p3$1 := (if p2$1 then true else p3$1);
     p3$2 := (if p2$2 then true else p3$2);
-    _READ_HAS_OCCURRED_$$arrayX$ghost$$for.cond := _READ_HAS_OCCURRED_$$arrayX;
-    _READ_HAS_OCCURRED_$$arrayY$ghost$$for.cond := _READ_HAS_OCCURRED_$$arrayY;
-    _READ_HAS_OCCURRED_$$ind$ghost$$for.cond := _READ_HAS_OCCURRED_$$ind;
-    _WRITE_HAS_OCCURRED_$$ind$ghost$$for.cond := _WRITE_HAS_OCCURRED_$$ind;
+    _READ_HAS_OCCURRED_$$arrayX$ghost$$4 := _READ_HAS_OCCURRED_$$arrayX;
+    _READ_HAS_OCCURRED_$$arrayY$ghost$$4 := _READ_HAS_OCCURRED_$$arrayY;
+    _READ_HAS_OCCURRED_$$ind$ghost$$4 := _READ_HAS_OCCURRED_$$ind;
+    _WRITE_HAS_OCCURRED_$$ind$ghost$$4 := _WRITE_HAS_OCCURRED_$$ind;
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond;
+    goto $4;
 
-  $for.cond:
+  $4:
     assume {:captureState "loop_head_state_2"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b36 ==> !p2$1 ==> _WRITE_HAS_OCCURRED_$$ind$ghost$$for.cond == _WRITE_HAS_OCCURRED_$$ind;
-    assert {:tag "disabledMaintainsInstrumentation"} _b35 ==> !p2$1 ==> _READ_HAS_OCCURRED_$$ind$ghost$$for.cond == _READ_HAS_OCCURRED_$$ind;
+    assert {:tag "disabledMaintainsInstrumentation"} _b36 ==> !p2$1 ==> _WRITE_HAS_OCCURRED_$$ind$ghost$$4 == _WRITE_HAS_OCCURRED_$$ind;
+    assert {:tag "disabledMaintainsInstrumentation"} _b35 ==> !p2$1 ==> _READ_HAS_OCCURRED_$$ind$ghost$$4 == _READ_HAS_OCCURRED_$$ind;
     assert {:tag "accessBreak"} _b34 ==> _READ_HAS_OCCURRED_$$ind ==> local_id_x$1 == BV32_SUB(BV32_DIV(_WATCHED_OFFSET, $countOnes), BV32_MUL(group_id_x$1, group_size_x));
     assert {:tag "accessBreak"} _b33 ==> _READ_HAS_OCCURRED_$$ind ==> group_id_x$1 == BV32_SUB(BV32_DIV(BV32_DIV(_WATCHED_OFFSET, $countOnes), group_size_x), BV32_DIV(local_id_x$1, group_size_x));
     assert {:tag "accessUpperBoundBlock"} _b32 ==> _WRITE_HAS_OCCURRED_$$ind ==> BV32_SLT(_WATCHED_OFFSET, BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(group_id_x$1, 1bv32), group_size_x), local_id_x$1), $countOnes));
@@ -618,9 +618,9 @@ implementation {:source_name "likelihood_kernel"} {:kernel} $likelihood_kernel($
     assert {:tag "accessLowerBoundBlock"} _b29 ==> _WRITE_HAS_OCCURRED_$$ind ==> BV32_SLE(BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), $countOnes), _WATCHED_OFFSET);
     assert {:tag "accessUpperBoundBlock"} _b28 ==> _READ_HAS_OCCURRED_$$ind ==> BV32_SLT(_WATCHED_OFFSET, BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(group_id_x$1, 1bv32), group_size_x), local_id_x$1), $countOnes));
     assert {:tag "accessLowerBoundBlock"} _b27 ==> _READ_HAS_OCCURRED_$$ind ==> BV32_SLE(BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), $countOnes), _WATCHED_OFFSET);
-    assert {:tag "disabledMaintainsInstrumentation"} _b26 ==> !p2$1 ==> _READ_HAS_OCCURRED_$$arrayY$ghost$$for.cond == _READ_HAS_OCCURRED_$$arrayY;
+    assert {:tag "disabledMaintainsInstrumentation"} _b26 ==> !p2$1 ==> _READ_HAS_OCCURRED_$$arrayY$ghost$$4 == _READ_HAS_OCCURRED_$$arrayY;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b25 ==> _READ_HAS_OCCURRED_$$arrayY ==> _WATCHED_OFFSET == BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
-    assert {:tag "disabledMaintainsInstrumentation"} _b24 ==> !p2$1 ==> _READ_HAS_OCCURRED_$$arrayX$ghost$$for.cond == _READ_HAS_OCCURRED_$$arrayX;
+    assert {:tag "disabledMaintainsInstrumentation"} _b24 ==> !p2$1 ==> _READ_HAS_OCCURRED_$$arrayX$ghost$$4 == _READ_HAS_OCCURRED_$$arrayX;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b23 ==> _READ_HAS_OCCURRED_$$arrayX ==> _WATCHED_OFFSET == BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$buffer ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$buffer ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -680,10 +680,10 @@ implementation {:source_name "likelihood_kernel"} {:kernel} $likelihood_kernel($
     p6$2 := (if p4$2 && v20$2 then v20$2 else p6$2);
     p5$1 := (if p4$1 && !v20$1 then !v20$1 else p5$1);
     p5$2 := (if p4$2 && !v20$2 then !v20$2 else p5$2);
-    $retval.i.0$1 := (if p5$1 then SI32_TO_FP32(v19$1) else $retval.i.0$1);
-    $retval.i.0$2 := (if p5$2 then SI32_TO_FP32(v19$2) else $retval.i.0$2);
-    $retval.i.0$1 := (if p6$1 then SI32_TO_FP32(v19$1) else $retval.i.0$1);
-    $retval.i.0$2 := (if p6$2 then SI32_TO_FP32(v19$2) else $retval.i.0$2);
+    $.01$1 := (if p5$1 then SI32_TO_FP32(v19$1) else $.01$1);
+    $.01$2 := (if p5$2 then SI32_TO_FP32(v19$2) else $.01$2);
+    $.01$1 := (if p6$1 then SI32_TO_FP32(v19$1) else $.01$1);
+    $.01$2 := (if p6$2 then SI32_TO_FP32(v19$2) else $.01$2);
     havoc _HAVOC_bv32$1, _HAVOC_bv32$2;
     v21$1 := (if p4$1 then _HAVOC_bv32$1 else v21$1);
     v21$2 := (if p4$2 then _HAVOC_bv32$2 else v21$2);
@@ -701,15 +701,15 @@ implementation {:source_name "likelihood_kernel"} {:kernel} $likelihood_kernel($
     p8$2 := (if p4$2 && v24$2 then v24$2 else p8$2);
     p7$1 := (if p4$1 && !v24$1 then !v24$1 else p7$1);
     p7$2 := (if p4$2 && !v24$2 then !v24$2 else p7$2);
-    $retval.i.173.0$1 := (if p7$1 then SI32_TO_FP32(v23$1) else $retval.i.173.0$1);
-    $retval.i.173.0$2 := (if p7$2 then SI32_TO_FP32(v23$2) else $retval.i.173.0$2);
-    $retval.i.173.0$1 := (if p8$1 then SI32_TO_FP32(v23$1) else $retval.i.173.0$1);
-    $retval.i.173.0$2 := (if p8$2 then SI32_TO_FP32(v23$2) else $retval.i.173.0$2);
+    $.0$1 := (if p7$1 then SI32_TO_FP32(v23$1) else $.0$1);
+    $.0$2 := (if p7$2 then SI32_TO_FP32(v23$2) else $.0$2);
+    $.0$1 := (if p8$1 then SI32_TO_FP32(v23$1) else $.0$1);
+    $.0$2 := (if p8$2 then SI32_TO_FP32(v23$2) else $.0$2);
     havoc _HAVOC_bv32$1, _HAVOC_bv32$2;
     v25$1 := (if p4$1 then _HAVOC_bv32$1 else v25$1);
     v25$2 := (if p4$2 then _HAVOC_bv32$2 else v25$2);
-    v26$1 := (if p4$1 then BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(FP32_TO_SI32(FADD32($retval.i.0$1, SI32_TO_FP32(v21$1))), $IszY), $Nfr), BV32_MUL(FP32_TO_SI32(FADD32($retval.i.173.0$1, SI32_TO_FP32(v25$1))), $Nfr)), $k) else v26$1);
-    v26$2 := (if p4$2 then BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(FP32_TO_SI32(FADD32($retval.i.0$2, SI32_TO_FP32(v21$2))), $IszY), $Nfr), BV32_MUL(FP32_TO_SI32(FADD32($retval.i.173.0$2, SI32_TO_FP32(v25$2))), $Nfr)), $k) else v26$2);
+    v26$1 := (if p4$1 then BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(FP32_TO_SI32(FADD32($.01$1, SI32_TO_FP32(v21$1))), $IszY), $Nfr), BV32_MUL(FP32_TO_SI32(FADD32($.0$1, SI32_TO_FP32(v25$1))), $Nfr)), $k) else v26$1);
+    v26$2 := (if p4$2 then BV32_ADD(BV32_ADD(BV32_MUL(BV32_MUL(FP32_TO_SI32(FADD32($.01$2, SI32_TO_FP32(v21$2))), $IszY), $Nfr), BV32_MUL(FP32_TO_SI32(FADD32($.0$2, SI32_TO_FP32(v25$2))), $Nfr)), $k) else v26$2);
     call {:sourceloc} {:sourceloc_num 41} _LOG_WRITE_$$ind(p4$1, BV32_ADD(BV32_MUL(v2$1, $countOnes), $y.0$1), (if BV32_SGT(v26$1, 0bv32) then v26$1 else BV32_SUB(0bv32, v26$1)), $$ind[BV32_ADD(BV32_MUL(v2$1, $countOnes), $y.0$1)]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$ind(p4$2, BV32_ADD(BV32_MUL(v2$2, $countOnes), $y.0$2));
     assume {:do_not_predicate} {:check_id "check_state_18"} {:captureState "check_state_18"} {:sourceloc} {:sourceloc_num 41} true;
@@ -738,21 +738,21 @@ implementation {:source_name "likelihood_kernel"} {:kernel} $likelihood_kernel($
     $y.0$2 := (if p4$2 then BV32_ADD($y.0$2, 1bv32) else $y.0$2);
     p3$1 := (if p4$1 then true else p3$1);
     p3$2 := (if p4$2 then true else p3$2);
-    goto $for.cond.backedge, $for.cond.tail;
+    goto $4.backedge, $4.tail;
 
-  $for.cond.tail:
+  $4.tail:
     assume !p3$1 && !p3$2;
     $likelihoodSum.i.0$1, $x.i.0$1 := (if p2$1 then 0bv32 else $likelihoodSum.i.0$1), (if p2$1 then 0bv32 else $x.i.0$1);
     $likelihoodSum.i.0$2, $x.i.0$2 := (if p2$2 then 0bv32 else $likelihoodSum.i.0$2), (if p2$2 then 0bv32 else $x.i.0$2);
     p11$1 := (if p2$1 then true else p11$1);
     p11$2 := (if p2$2 then true else p11$2);
-    _READ_HAS_OCCURRED_$$ind$ghost$$for.cond.i := _READ_HAS_OCCURRED_$$ind;
+    _READ_HAS_OCCURRED_$$ind$ghost$$14 := _READ_HAS_OCCURRED_$$ind;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.i;
+    goto $14;
 
-  $for.cond.i:
+  $14:
     assume {:captureState "loop_head_state_1"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b41 ==> !p2$1 ==> _READ_HAS_OCCURRED_$$ind$ghost$$for.cond.i == _READ_HAS_OCCURRED_$$ind;
+    assert {:tag "disabledMaintainsInstrumentation"} _b41 ==> !p2$1 ==> _READ_HAS_OCCURRED_$$ind$ghost$$14 == _READ_HAS_OCCURRED_$$ind;
     assert {:tag "accessUpperBoundBlock"} _b40 ==> _READ_HAS_OCCURRED_$$ind ==> BV32_SLT(_WATCHED_OFFSET, BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(group_id_x$1, 1bv32), group_size_x), local_id_x$1), $countOnes));
     assert {:tag "accessLowerBoundBlock"} _b39 ==> _READ_HAS_OCCURRED_$$ind ==> BV32_SLE(BV32_MUL(BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1), $countOnes), _WATCHED_OFFSET);
     assert {:tag "accessUpperBoundBlock"} _b38 ==> _READ_HAS_OCCURRED_$$ind ==> BV32_SLT(_WATCHED_OFFSET, BV32_MUL(BV32_ADD(BV32_MUL(BV32_ADD(group_id_x$1, 1bv32), group_size_x), local_id_x$1), $countOnes));
@@ -807,9 +807,9 @@ implementation {:source_name "likelihood_kernel"} {:kernel} $likelihood_kernel($
     $likelihoodSum.i.0$2, $x.i.0$2 := (if p12$2 then FP64_CONV32(FADD64(FP32_CONV64($likelihoodSum.i.0$2), FDIV64(FP32_CONV64(FSUB32(FPOW32(SI32_TO_FP32(BV32_SUB(BV8_ZEXT32(v31$2), 100bv32)), 1073741824bv32), FPOW32(SI32_TO_FP32(BV32_SUB(BV8_ZEXT32(v33$2), 228bv32)), 1073741824bv32))), 4632233691727265792bv64))) else $likelihoodSum.i.0$2), (if p12$2 then BV32_ADD($x.i.0$2, 1bv32) else $x.i.0$2);
     p11$1 := (if p12$1 then true else p11$1);
     p11$2 := (if p12$2 then true else p11$2);
-    goto $for.cond.i.backedge, __partitioned_block_$for.cond.i.tail_0;
+    goto $14.backedge, __partitioned_block_$14.tail_0;
 
-  __partitioned_block_$for.cond.i.tail_0:
+  __partitioned_block_$14.tail_0:
     assume !p11$1 && !p11$2;
     call {:sourceloc} {:sourceloc_num 55} _LOG_WRITE_$$likelihood(p2$1, v2$1, $likelihoodSum.i.0$1, $$likelihood[v2$1]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$likelihood(p2$2, v2$2);
@@ -857,9 +857,9 @@ implementation {:source_name "likelihood_kernel"} {:kernel} $likelihood_kernel($
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$buffer"} true;
     $$buffer[1bv1][v1$1] := 0bv32;
     $$buffer[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v1$2] := 0bv32;
-    goto __partitioned_block_$for.cond.i.tail_1;
+    goto __partitioned_block_$14.tail_1;
 
-  __partitioned_block_$for.cond.i.tail_1:
+  __partitioned_block_$14.tail_1:
     call {:sourceloc_num 63} $bugle_barrier_duplicated_1(1bv1, 1bv1);
     v37$1 := BV32_SLT(v2$1, $Nparticles);
     v37$2 := BV32_SLT(v2$2, $Nparticles);
@@ -878,15 +878,15 @@ implementation {:source_name "likelihood_kernel"} {:kernel} $likelihood_kernel($
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$buffer"} true;
     $$buffer[1bv1][v1$1] := (if p14$1 then v38$1 else $$buffer[1bv1][v1$1]);
     $$buffer[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v1$2] := (if p14$2 then v38$2 else $$buffer[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v1$2]);
-    goto __partitioned_block_$for.cond.i.tail_2;
+    goto __partitioned_block_$14.tail_2;
 
-  __partitioned_block_$for.cond.i.tail_2:
+  __partitioned_block_$14.tail_2:
     call {:sourceloc_num 68} $bugle_barrier_duplicated_2(1bv1, 0bv1);
     $s.0 := BV32_UDIV(group_size_x, 2bv32);
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.93;
+    goto $19;
 
-  $for.cond.93:
+  $19:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b47 ==> _WRITE_HAS_OCCURRED_$$buffer ==> _WATCHED_OFFSET == local_id_x$1;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b46 ==> _READ_HAS_OCCURRED_$$buffer ==> _WATCHED_OFFSET == local_id_x$1;
@@ -965,17 +965,17 @@ implementation {:source_name "likelihood_kernel"} {:kernel} $likelihood_kernel($
     call {:sourceloc_num 76} $bugle_barrier_duplicated_3(1bv1, 0bv1);
     $s.0 := BV32_LSHR($s.0, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.93;
+    goto $19;
 
-  $for.cond.i.backedge:
+  $14.backedge:
     assume {:backedge} p11$1 || p11$2;
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.i;
+    goto $14;
 
-  $for.cond.backedge:
+  $4.backedge:
     assume {:backedge} p3$1 || p3$2;
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond;
+    goto $4;
 }
 
 

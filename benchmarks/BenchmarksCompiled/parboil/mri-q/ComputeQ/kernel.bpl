@@ -174,61 +174,61 @@ implementation {:source_name "ComputeQ_GPU"} {:kernel} $ComputeQ_GPU($numK: bv32
 {
   var $tx.0: bv32;
   var $kIndex.0: bv32;
-  var $kGlobalIndex.addr.0: bv32;
+  var $.0: bv32;
   var $0: bv1;
-  var $tx21.0: bv32;
-  var $tx47.0: bv32;
-  var v4$1: bv32;
-  var v4$2: bv32;
+  var $tx1.0: bv32;
+  var $tx2.0: bv32;
+  var v0: bool;
+  var v1$1: bv32;
+  var v1$2: bv32;
   var v2$1: bv32;
   var v2$2: bv32;
-  var v5$1: bv32;
-  var v5$2: bv32;
   var v3$1: bv32;
   var v3$2: bv32;
+  var v4$1: bv32;
+  var v4$2: bv32;
+  var v5$1: bv32;
+  var v5$2: bv32;
   var v6$1: bv32;
   var v6$2: bv32;
+  var v7: bool;
+  var v8: bool;
   var v9$1: bv32;
   var v9$2: bv32;
   var v10$1: bv32;
   var v10$2: bv32;
   var v11$1: bv32;
   var v11$2: bv32;
-  var v1$1: bv32;
-  var v1$2: bv32;
-  var v0: bool;
-  var v7: bool;
-  var v8: bool;
+  var v12$1: bv32;
+  var v12$2: bv32;
   var v13: bool;
+  var v14$1: bv32;
+  var v14$2: bv32;
+  var v15$1: bv32;
+  var v15$2: bv32;
   var v16$1: bv32;
   var v16$2: bv32;
+  var v17$1: bv32;
+  var v17$2: bv32;
+  var v18$1: bv32;
+  var v18$2: bv32;
+  var v19$1: bv32;
+  var v19$2: bv32;
+  var v20: bool;
+  var v21$1: bv32;
+  var v21$2: bv32;
   var v22$1: bv32;
   var v22$2: bv32;
   var v23$1: bv32;
   var v23$2: bv32;
-  var v12$1: bv32;
-  var v12$2: bv32;
-  var v19$1: bv32;
-  var v19$2: bv32;
-  var v14$1: bv32;
-  var v14$2: bv32;
-  var v18$1: bv32;
-  var v18$2: bv32;
-  var v15$1: bv32;
-  var v15$2: bv32;
-  var v17$1: bv32;
-  var v17$2: bv32;
-  var v20: bool;
-  var v21$1: bv32;
-  var v21$2: bv32;
 
 
-  $entry:
+  $0:
     $tx.0 := 0bv32;
     assume {:captureState "loop_entry_state_3_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_3"} true;
     assert {:tag "accessBreak"} _b13 ==> _READ_HAS_OCCURRED_$$Qi ==> local_id_x$1 == BV32_SUB(BV32_DIV(_WATCHED_OFFSET, 4bv32), BV32_DIV(BV32_MUL(group_id_x$1, 256bv32), 4bv32));
     assert {:tag "accessBreak"} _b12 ==> _READ_HAS_OCCURRED_$$Qi ==> group_id_x$1 == BV32_SUB(BV32_DIV(_WATCHED_OFFSET, 256bv32), BV32_DIV(BV32_MUL(local_id_x$1, 4bv32), 256bv32));
@@ -245,11 +245,11 @@ implementation {:source_name "ComputeQ_GPU"} {:kernel} $ComputeQ_GPU($numK: bv32
 
   $falsebb:
     assume {:partition} !v0;
-    $kIndex.0, $kGlobalIndex.addr.0 := 0bv32, $kGlobalIndex;
+    $kIndex.0, $.0 := 0bv32, $kGlobalIndex;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.13;
+    goto $5;
 
-  $for.cond.13:
+  $5:
     assume {:captureState "loop_head_state_1"} true;
     assume {:invGenSkippedLoop} true;
     assert {:block_sourceloc} {:sourceloc_num 15} true;
@@ -259,31 +259,31 @@ implementation {:source_name "ComputeQ_GPU"} {:kernel} $ComputeQ_GPU($numK: bv32
   $falsebb0:
     assume {:partition} !v7;
     $0 := 0bv1;
-    goto $land.end;
+    goto $7;
 
-  $land.end:
+  $7:
     v8 := $0 == 1bv1;
     goto $truebb1, $falsebb1;
 
   $falsebb1:
     assume {:partition} !v8;
-    $tx47.0 := 0bv32;
+    $tx2.0 := 0bv32;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.48;
+    goto $15;
 
-  $for.cond.48:
+  $15:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessBreak"} _b17 ==> _WRITE_HAS_OCCURRED_$$Qi ==> local_id_x$1 == BV32_SUB(BV32_DIV(_WATCHED_OFFSET, 4bv32), BV32_DIV(BV32_MUL(group_id_x$1, 256bv32), 4bv32));
     assert {:tag "accessBreak"} _b16 ==> _WRITE_HAS_OCCURRED_$$Qi ==> group_id_x$1 == BV32_SUB(BV32_DIV(_WATCHED_OFFSET, 256bv32), BV32_DIV(BV32_MUL(local_id_x$1, 4bv32), 256bv32));
     assert {:tag "accessBreak"} _b15 ==> _WRITE_HAS_OCCURRED_$$Qr ==> local_id_x$1 == BV32_SUB(BV32_DIV(_WATCHED_OFFSET, 4bv32), BV32_DIV(BV32_MUL(group_id_x$1, 256bv32), 4bv32));
     assert {:tag "accessBreak"} _b14 ==> _WRITE_HAS_OCCURRED_$$Qr ==> group_id_x$1 == BV32_SUB(BV32_DIV(_WATCHED_OFFSET, 256bv32), BV32_DIV(BV32_MUL(local_id_x$1, 4bv32), 256bv32));
-    assert {:tag "loopBound"} {:thread 1} _b9 ==> BV32_UGE($tx47.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b8 ==> BV32_ULE($tx47.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b7 ==> BV32_SGE($tx47.0, 0bv32);
-    assert {:tag "loopBound"} {:thread 1} _b6 ==> BV32_SLE($tx47.0, 0bv32);
-    assert {:tag "guardNonNeg"} {:thread 1} _b5 ==> BV32_SLE(0bv32, $tx47.0);
+    assert {:tag "loopBound"} {:thread 1} _b9 ==> BV32_UGE($tx2.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b8 ==> BV32_ULE($tx2.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b7 ==> BV32_SGE($tx2.0, 0bv32);
+    assert {:tag "loopBound"} {:thread 1} _b6 ==> BV32_SLE($tx2.0, 0bv32);
+    assert {:tag "guardNonNeg"} {:thread 1} _b5 ==> BV32_SLE(0bv32, $tx2.0);
     assert {:block_sourceloc} {:sourceloc_num 36} true;
-    v20 := BV32_SLT($tx47.0, 4bv32);
+    v20 := BV32_SLT($tx2.0, 4bv32);
     goto $truebb3, $falsebb3;
 
   $falsebb3:
@@ -292,10 +292,10 @@ implementation {:source_name "ComputeQ_GPU"} {:kernel} $ComputeQ_GPU($numK: bv32
 
   $truebb3:
     assume {:partition} v20;
-    v21$1 := BV32_ADD(BV32_ADD(BV32_MUL(group_id_x$1, 256bv32), BV32_MUL(4bv32, local_id_x$1)), $tx47.0);
-    v21$2 := BV32_ADD(BV32_ADD(BV32_MUL(group_id_x$2, 256bv32), BV32_MUL(4bv32, local_id_x$2)), $tx47.0);
-    v22$1 := $$sQr$1[$tx47.0];
-    v22$2 := $$sQr$2[$tx47.0];
+    v21$1 := BV32_ADD(BV32_ADD(BV32_MUL(group_id_x$1, 256bv32), BV32_MUL(4bv32, local_id_x$1)), $tx2.0);
+    v21$2 := BV32_ADD(BV32_ADD(BV32_MUL(group_id_x$2, 256bv32), BV32_MUL(4bv32, local_id_x$2)), $tx2.0);
+    v22$1 := $$sQr$1[$tx2.0];
+    v22$2 := $$sQr$2[$tx2.0];
     call {:sourceloc} {:sourceloc_num 39} _LOG_WRITE_$$Qr(true, v21$1, v22$1, $$Qr[v21$1]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$Qr(true, v21$2);
     assume {:do_not_predicate} {:check_id "check_state_0"} {:captureState "check_state_0"} {:sourceloc} {:sourceloc_num 39} true;
@@ -303,8 +303,8 @@ implementation {:source_name "ComputeQ_GPU"} {:kernel} $ComputeQ_GPU($numK: bv32
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$Qr"} true;
     $$Qr[v21$1] := v22$1;
     $$Qr[v21$2] := v22$2;
-    v23$1 := $$sQi$1[$tx47.0];
-    v23$2 := $$sQi$2[$tx47.0];
+    v23$1 := $$sQi$1[$tx2.0];
+    v23$2 := $$sQi$2[$tx2.0];
     call {:sourceloc} {:sourceloc_num 41} _LOG_WRITE_$$Qi(true, v21$1, v23$1, $$Qi[v21$1]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$Qi(true, v21$2);
     assume {:do_not_predicate} {:check_id "check_state_1"} {:captureState "check_state_1"} {:sourceloc} {:sourceloc_num 41} true;
@@ -312,9 +312,9 @@ implementation {:source_name "ComputeQ_GPU"} {:kernel} $ComputeQ_GPU($numK: bv32
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$Qi"} true;
     $$Qi[v21$1] := v23$1;
     $$Qi[v21$2] := v23$2;
-    $tx47.0 := BV32_ADD($tx47.0, 1bv32);
+    $tx2.0 := BV32_ADD($tx2.0, 1bv32);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.48;
+    goto $15;
 
   $truebb1:
     assume {:partition} v8;
@@ -322,49 +322,49 @@ implementation {:source_name "ComputeQ_GPU"} {:kernel} $ComputeQ_GPU($numK: bv32
     havoc v10$1, v10$2;
     havoc v11$1, v11$2;
     havoc v12$1, v12$2;
-    $tx21.0 := 0bv32;
+    $tx1.0 := 0bv32;
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond.22;
+    goto $9;
 
-  $for.cond.22:
+  $9:
     assume {:captureState "loop_head_state_2"} true;
     assume {:invGenSkippedLoop} true;
     assert {:block_sourceloc} {:sourceloc_num 23} true;
-    v13 := BV32_SLT($tx21.0, 4bv32);
+    v13 := BV32_SLT($tx1.0, 4bv32);
     goto $truebb2, $falsebb2;
 
   $falsebb2:
     assume {:partition} !v13;
-    $kIndex.0, $kGlobalIndex.addr.0 := BV32_ADD($kIndex.0, 1bv32), BV32_ADD($kGlobalIndex.addr.0, 1bv32);
+    $kIndex.0, $.0 := BV32_ADD($kIndex.0, 1bv32), BV32_ADD($.0, 1bv32);
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.13;
+    goto $5;
 
   $truebb2:
     assume {:partition} v13;
-    v14$1 := $$sX$1[$tx21.0];
-    v14$2 := $$sX$2[$tx21.0];
-    v15$1 := $$sY$1[$tx21.0];
-    v15$2 := $$sY$2[$tx21.0];
-    v16$1 := $$sZ$1[$tx21.0];
-    v16$2 := $$sZ$2[$tx21.0];
+    v14$1 := $$sX$1[$tx1.0];
+    v14$2 := $$sX$2[$tx1.0];
+    v15$1 := $$sY$1[$tx1.0];
+    v15$2 := $$sY$2[$tx1.0];
+    v16$1 := $$sZ$1[$tx1.0];
+    v16$2 := $$sZ$2[$tx1.0];
     v17$1 := FMUL32(1086918619bv32, FADD32(FMUL32(v11$1, v16$1), FADD32(FMUL32(v9$1, v14$1), FMUL32(v10$1, v15$1))));
     v17$2 := FMUL32(1086918619bv32, FADD32(FMUL32(v11$2, v16$2), FADD32(FMUL32(v9$2, v14$2), FMUL32(v10$2, v15$2))));
-    v18$1 := $$sQr$1[$tx21.0];
-    v18$2 := $$sQr$2[$tx21.0];
-    $$sQr$1[$tx21.0] := FADD32(v18$1, FMUL32(v12$1, FCOS32(v17$1)));
-    $$sQr$2[$tx21.0] := FADD32(v18$2, FMUL32(v12$2, FCOS32(v17$2)));
-    v19$1 := $$sQi$1[$tx21.0];
-    v19$2 := $$sQi$2[$tx21.0];
-    $$sQi$1[$tx21.0] := FADD32(v19$1, FMUL32(v12$1, FSIN32(v17$1)));
-    $$sQi$2[$tx21.0] := FADD32(v19$2, FMUL32(v12$2, FSIN32(v17$2)));
-    $tx21.0 := BV32_ADD($tx21.0, 1bv32);
+    v18$1 := $$sQr$1[$tx1.0];
+    v18$2 := $$sQr$2[$tx1.0];
+    $$sQr$1[$tx1.0] := FADD32(FMUL32(v12$1, FCOS32(v17$1)), v18$1);
+    $$sQr$2[$tx1.0] := FADD32(FMUL32(v12$2, FCOS32(v17$2)), v18$2);
+    v19$1 := $$sQi$1[$tx1.0];
+    v19$2 := $$sQi$2[$tx1.0];
+    $$sQi$1[$tx1.0] := FADD32(FMUL32(v12$1, FSIN32(v17$1)), v19$1);
+    $$sQi$2[$tx1.0] := FADD32(FMUL32(v12$2, FSIN32(v17$2)), v19$2);
+    $tx1.0 := BV32_ADD($tx1.0, 1bv32);
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond.22;
+    goto $9;
 
   $truebb0:
     assume {:partition} v7;
-    $0 := (if BV32_SLT($kGlobalIndex.addr.0, $numK) then 1bv1 else 0bv1);
-    goto $land.end;
+    $0 := (if BV32_SLT($.0, $numK) then 1bv1 else 0bv1);
+    goto $7;
 
   $truebb:
     assume {:partition} v0;
@@ -397,7 +397,7 @@ implementation {:source_name "ComputeQ_GPU"} {:kernel} $ComputeQ_GPU($numK: bv32
     $$sQi$2[$tx.0] := v6$2;
     $tx.0 := BV32_ADD($tx.0, 1bv32);
     assume {:captureState "loop_back_edge_state_3_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

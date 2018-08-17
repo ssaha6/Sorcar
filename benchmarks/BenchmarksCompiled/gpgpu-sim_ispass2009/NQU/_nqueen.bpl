@@ -193,29 +193,43 @@ implementation {:source_name "solve_nqueen_cuda_kernel"} {:kernel} $_Z24solve_nq
   var $total.2$2: bv32;
   var $i.2$1: bv32;
   var $i.2$2: bv32;
-  var v6$1: bv32;
-  var v6$2: bv32;
   var v0$1: bv32;
   var v0$2: bv32;
-  var v1: bv32;
   var v2$1: bool;
   var v2$2: bool;
+  var v1: bv32;
   var v3$1: bv32;
   var v3$2: bv32;
-  var v5$1: bv32;
-  var v5$2: bv32;
   var v4$1: bv32;
   var v4$2: bv32;
+  var v5$1: bv32;
+  var v5$2: bv32;
+  var v6$1: bv32;
+  var v6$2: bv32;
+  var v7$1: bv32;
+  var v7$2: bv32;
+  var v8$1: bv32;
+  var v8$2: bv32;
+  var v9$1: bool;
+  var v9$2: bool;
+  var v10$1: bv32;
+  var v10$2: bv32;
+  var v11$1: bool;
+  var v11$2: bool;
   var v12$1: bv32;
   var v12$2: bv32;
-  var v15$1: bv32;
-  var v15$2: bv32;
   var v13$1: bv32;
   var v13$2: bv32;
+  var v14$1: bv32;
+  var v14$2: bv32;
+  var v15$1: bv32;
+  var v15$2: bv32;
+  var v16$1: bool;
+  var v16$2: bool;
+  var v17$1: bool;
+  var v17$2: bool;
   var v18$1: bv32;
   var v18$2: bv32;
-  var v23$1: bv32;
-  var v23$2: bv32;
   var v19$1: bv32;
   var v19$2: bv32;
   var v20$1: bv32;
@@ -224,70 +238,56 @@ implementation {:source_name "solve_nqueen_cuda_kernel"} {:kernel} $_Z24solve_nq
   var v21$2: bv32;
   var v22$1: bv32;
   var v22$2: bv32;
-  var v7$1: bv32;
-  var v7$2: bv32;
-  var v10$1: bv32;
-  var v10$2: bv32;
-  var v8$1: bv32;
-  var v8$2: bv32;
-  var v11$1: bool;
-  var v11$2: bool;
-  var v9$1: bool;
-  var v9$2: bool;
-  var v14$1: bv32;
-  var v14$2: bv32;
-  var v17$1: bool;
-  var v17$2: bool;
-  var v16$1: bool;
-  var v16$2: bool;
-  var v25$1: bool;
-  var v25$2: bool;
+  var v23$1: bv32;
+  var v23$2: bv32;
   var v24$1: bool;
   var v24$2: bool;
-  var v31$1: bool;
-  var v31$2: bool;
-  var v34$1: bool;
-  var v34$2: bool;
-  var v28$1: bool;
-  var v28$2: bool;
-  var v45$1: bv32;
-  var v45$2: bv32;
-  var v38$1: bv32;
-  var v38$2: bv32;
-  var v47$1: bv32;
-  var v47$2: bv32;
-  var v44$1: bv32;
-  var v44$2: bv32;
-  var v42$1: bv32;
-  var v42$2: bv32;
-  var v39$1: bv32;
-  var v39$2: bv32;
-  var v41$1: bv32;
-  var v41$2: bv32;
-  var v29$1: bv32;
-  var v29$2: bv32;
-  var v27$1: bv32;
-  var v27$2: bv32;
+  var v25$1: bool;
+  var v25$2: bool;
   var v26$1: bv32;
   var v26$2: bv32;
+  var v27$1: bv32;
+  var v27$2: bv32;
+  var v28$1: bool;
+  var v28$2: bool;
+  var v29$1: bv32;
+  var v29$2: bv32;
   var v30$1: bv32;
   var v30$2: bv32;
+  var v31$1: bool;
+  var v31$2: bool;
+  var v32$1: bv32;
+  var v32$2: bv32;
   var v33$1: bv32;
   var v33$2: bv32;
+  var v34$1: bool;
+  var v34$2: bool;
   var v35$1: bv32;
   var v35$2: bv32;
   var v36$1: bv32;
   var v36$2: bv32;
-  var v32$1: bv32;
-  var v32$2: bv32;
   var v37$1: bool;
   var v37$2: bool;
+  var v38$1: bv32;
+  var v38$2: bv32;
+  var v39$1: bv32;
+  var v39$2: bv32;
   var v40$1: bool;
   var v40$2: bool;
+  var v41$1: bv32;
+  var v41$2: bv32;
+  var v42$1: bv32;
+  var v42$2: bv32;
   var v43$1: bool;
   var v43$2: bool;
+  var v44$1: bv32;
+  var v44$2: bv32;
+  var v45$1: bv32;
+  var v45$2: bv32;
   var v46$1: bool;
   var v46$2: bool;
+  var v47$1: bv32;
+  var v47$2: bv32;
   var p0$1: bool;
   var p0$2: bool;
   var p1$1: bool;
@@ -346,17 +346,17 @@ implementation {:source_name "solve_nqueen_cuda_kernel"} {:kernel} $_Z24solve_nq
   var p27$2: bool;
   var _HAVOC_bv32$1: bv32;
   var _HAVOC_bv32$2: bv32;
-  var _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE4mask$ghost$$while.cond: bool;
-  var _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE4mask$ghost$$while.cond: bool;
-  var _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6l_mask$ghost$$while.cond: bool;
-  var _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6l_mask$ghost$$while.cond: bool;
-  var _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6r_mask$ghost$$while.cond: bool;
-  var _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6r_mask$ghost$$while.cond: bool;
-  var _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE1m$ghost$$while.cond: bool;
-  var _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE1m$ghost$$while.cond: bool;
+  var _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE4mask$ghost$$2: bool;
+  var _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE4mask$ghost$$2: bool;
+  var _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6l_mask$ghost$$2: bool;
+  var _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6l_mask$ghost$$2: bool;
+  var _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6r_mask$ghost$$2: bool;
+  var _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6r_mask$ghost$$2: bool;
+  var _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE1m$ghost$$2: bool;
+  var _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE1m$ghost$$2: bool;
 
 
-  $entry:
+  $0:
     v0$1 := BV32_ADD(BV32_MUL(group_id_x$1, group_size_x), local_id_x$1);
     v0$2 := BV32_ADD(BV32_MUL(group_id_x$2, group_size_x), local_id_x$2);
     v1 := BV32_SUB(BV32_SHL(1bv32, $n), 1bv32);
@@ -467,27 +467,27 @@ implementation {:source_name "solve_nqueen_cuda_kernel"} {:kernel} $_Z24solve_nq
     $total.0$2, $i.0$2 := (if p0$2 then 0bv32 else $total.0$2), (if p0$2 then 0bv32 else $i.0$2);
     p1$1 := (if p0$1 then true else p1$1);
     p1$2 := (if p0$2 then true else p1$2);
-    _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE4mask$ghost$$while.cond := _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE4mask;
-    _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE4mask$ghost$$while.cond := _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE4mask;
-    _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6l_mask$ghost$$while.cond := _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6l_mask;
-    _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6l_mask$ghost$$while.cond := _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6l_mask;
-    _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6r_mask$ghost$$while.cond := _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6r_mask;
-    _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6r_mask$ghost$$while.cond := _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6r_mask;
-    _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE1m$ghost$$while.cond := _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE1m;
-    _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE1m$ghost$$while.cond := _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE1m;
+    _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE4mask$ghost$$2 := _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE4mask;
+    _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE4mask$ghost$$2 := _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE4mask;
+    _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6l_mask$ghost$$2 := _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6l_mask;
+    _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6l_mask$ghost$$2 := _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6l_mask;
+    _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6r_mask$ghost$$2 := _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6r_mask;
+    _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6r_mask$ghost$$2 := _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6r_mask;
+    _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE1m$ghost$$2 := _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE1m;
+    _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE1m$ghost$$2 := _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE1m;
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $while.cond;
+    goto $2;
 
-  $while.cond:
+  $2:
     assume {:captureState "loop_head_state_0"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b22 ==> !p0$1 ==> _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE1m$ghost$$while.cond == _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE1m;
-    assert {:tag "disabledMaintainsInstrumentation"} _b21 ==> !p0$1 ==> _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE1m$ghost$$while.cond == _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE1m;
-    assert {:tag "disabledMaintainsInstrumentation"} _b20 ==> !p0$1 ==> _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6r_mask$ghost$$while.cond == _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6r_mask;
-    assert {:tag "disabledMaintainsInstrumentation"} _b19 ==> !p0$1 ==> _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6r_mask$ghost$$while.cond == _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6r_mask;
-    assert {:tag "disabledMaintainsInstrumentation"} _b18 ==> !p0$1 ==> _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6l_mask$ghost$$while.cond == _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6l_mask;
-    assert {:tag "disabledMaintainsInstrumentation"} _b17 ==> !p0$1 ==> _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6l_mask$ghost$$while.cond == _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6l_mask;
-    assert {:tag "disabledMaintainsInstrumentation"} _b16 ==> !p0$1 ==> _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE4mask$ghost$$while.cond == _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE4mask;
-    assert {:tag "disabledMaintainsInstrumentation"} _b15 ==> !p0$1 ==> _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE4mask$ghost$$while.cond == _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE4mask;
+    assert {:tag "disabledMaintainsInstrumentation"} _b22 ==> !p0$1 ==> _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE1m$ghost$$2 == _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE1m;
+    assert {:tag "disabledMaintainsInstrumentation"} _b21 ==> !p0$1 ==> _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE1m$ghost$$2 == _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE1m;
+    assert {:tag "disabledMaintainsInstrumentation"} _b20 ==> !p0$1 ==> _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6r_mask$ghost$$2 == _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6r_mask;
+    assert {:tag "disabledMaintainsInstrumentation"} _b19 ==> !p0$1 ==> _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6r_mask$ghost$$2 == _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6r_mask;
+    assert {:tag "disabledMaintainsInstrumentation"} _b18 ==> !p0$1 ==> _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6l_mask$ghost$$2 == _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6l_mask;
+    assert {:tag "disabledMaintainsInstrumentation"} _b17 ==> !p0$1 ==> _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6l_mask$ghost$$2 == _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE6l_mask;
+    assert {:tag "disabledMaintainsInstrumentation"} _b16 ==> !p0$1 ==> _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE4mask$ghost$$2 == _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE4mask;
+    assert {:tag "disabledMaintainsInstrumentation"} _b15 ==> !p0$1 ==> _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE4mask$ghost$$2 == _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE4mask;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _READ_HAS_OCCURRED_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -678,9 +678,9 @@ implementation {:source_name "solve_nqueen_cuda_kernel"} {:kernel} $_Z24solve_nq
     $total.0$2, $i.0$2 := (if p2$2 then $total.3$2 else $total.0$2), (if p2$2 then $i.3$2 else $i.0$2);
     p1$1 := (if p2$1 then true else p1$1);
     p1$2 := (if p2$2 then true else p1$2);
-    goto $while.cond.backedge, __partitioned_block_$while.cond.tail_0;
+    goto $2.backedge, __partitioned_block_$2.tail_0;
 
-  __partitioned_block_$while.cond.tail_0:
+  __partitioned_block_$2.tail_0:
     assume !p1$1 && !p1$2;
     call {:sourceloc} {:sourceloc_num 38} _LOG_WRITE_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum(p0$1, local_id_x$1, $total.0$1, $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[1bv1][local_id_x$1]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum(p0$2, local_id_x$2);
@@ -696,9 +696,9 @@ implementation {:source_name "solve_nqueen_cuda_kernel"} {:kernel} $_Z24solve_nq
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum"} true;
     $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[1bv1][local_id_x$1] := (if p9$1 then 0bv32 else $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[1bv1][local_id_x$1]);
     $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2] := (if p9$2 then 0bv32 else $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2]);
-    goto __partitioned_block_$while.cond.tail_1;
+    goto __partitioned_block_$2.tail_1;
 
-  __partitioned_block_$while.cond.tail_1:
+  __partitioned_block_$2.tail_1:
     call {:sourceloc_num 42} $bugle_barrier_duplicated_0(1bv1, 1bv1);
     v24$1 := BV32_SLT(local_id_x$1, 64bv32);
     v24$2 := BV32_SLT(local_id_x$2, 64bv32);
@@ -727,9 +727,9 @@ implementation {:source_name "solve_nqueen_cuda_kernel"} {:kernel} $_Z24solve_nq
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum"} true;
     $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[1bv1][local_id_x$1] := (if p11$1 then BV32_ADD(v27$1, v26$1) else $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[1bv1][local_id_x$1]);
     $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2] := (if p11$2 then BV32_ADD(v27$2, v26$2) else $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2]);
-    goto __partitioned_block_$while.cond.tail_2;
+    goto __partitioned_block_$2.tail_2;
 
-  __partitioned_block_$while.cond.tail_2:
+  __partitioned_block_$2.tail_2:
     call {:sourceloc_num 49} $bugle_barrier_duplicated_1(1bv1, 1bv1);
     v28$1 := BV32_SLT(local_id_x$1, 32bv32);
     v28$2 := BV32_SLT(local_id_x$2, 32bv32);
@@ -754,9 +754,9 @@ implementation {:source_name "solve_nqueen_cuda_kernel"} {:kernel} $_Z24solve_nq
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum"} true;
     $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[1bv1][local_id_x$1] := (if p14$1 then BV32_ADD(v30$1, v29$1) else $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[1bv1][local_id_x$1]);
     $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2] := (if p14$2 then BV32_ADD(v30$2, v29$2) else $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2]);
-    goto __partitioned_block_$while.cond.tail_3;
+    goto __partitioned_block_$2.tail_3;
 
-  __partitioned_block_$while.cond.tail_3:
+  __partitioned_block_$2.tail_3:
     call {:sourceloc_num 55} $bugle_barrier_duplicated_2(1bv1, 1bv1);
     v31$1 := BV32_SLT(local_id_x$1, 16bv32);
     v31$2 := BV32_SLT(local_id_x$2, 16bv32);
@@ -781,9 +781,9 @@ implementation {:source_name "solve_nqueen_cuda_kernel"} {:kernel} $_Z24solve_nq
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum"} true;
     $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[1bv1][local_id_x$1] := (if p16$1 then BV32_ADD(v33$1, v32$1) else $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[1bv1][local_id_x$1]);
     $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2] := (if p16$2 then BV32_ADD(v33$2, v32$2) else $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2]);
-    goto __partitioned_block_$while.cond.tail_4;
+    goto __partitioned_block_$2.tail_4;
 
-  __partitioned_block_$while.cond.tail_4:
+  __partitioned_block_$2.tail_4:
     call {:sourceloc_num 61} $bugle_barrier_duplicated_3(1bv1, 1bv1);
     v34$1 := BV32_SLT(local_id_x$1, 8bv32);
     v34$2 := BV32_SLT(local_id_x$2, 8bv32);
@@ -808,9 +808,9 @@ implementation {:source_name "solve_nqueen_cuda_kernel"} {:kernel} $_Z24solve_nq
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum"} true;
     $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[1bv1][local_id_x$1] := (if p18$1 then BV32_ADD(v36$1, v35$1) else $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[1bv1][local_id_x$1]);
     $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2] := (if p18$2 then BV32_ADD(v36$2, v35$2) else $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2]);
-    goto __partitioned_block_$while.cond.tail_5;
+    goto __partitioned_block_$2.tail_5;
 
-  __partitioned_block_$while.cond.tail_5:
+  __partitioned_block_$2.tail_5:
     call {:sourceloc_num 67} $bugle_barrier_duplicated_4(1bv1, 1bv1);
     v37$1 := BV32_SLT(local_id_x$1, 4bv32);
     v37$2 := BV32_SLT(local_id_x$2, 4bv32);
@@ -835,9 +835,9 @@ implementation {:source_name "solve_nqueen_cuda_kernel"} {:kernel} $_Z24solve_nq
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum"} true;
     $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[1bv1][local_id_x$1] := (if p20$1 then BV32_ADD(v39$1, v38$1) else $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[1bv1][local_id_x$1]);
     $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2] := (if p20$2 then BV32_ADD(v39$2, v38$2) else $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2]);
-    goto __partitioned_block_$while.cond.tail_6;
+    goto __partitioned_block_$2.tail_6;
 
-  __partitioned_block_$while.cond.tail_6:
+  __partitioned_block_$2.tail_6:
     call {:sourceloc_num 73} $bugle_barrier_duplicated_5(1bv1, 1bv1);
     v40$1 := BV32_SLT(local_id_x$1, 2bv32);
     v40$2 := BV32_SLT(local_id_x$2, 2bv32);
@@ -862,9 +862,9 @@ implementation {:source_name "solve_nqueen_cuda_kernel"} {:kernel} $_Z24solve_nq
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum"} true;
     $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[1bv1][local_id_x$1] := (if p22$1 then BV32_ADD(v42$1, v41$1) else $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[1bv1][local_id_x$1]);
     $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2] := (if p22$2 then BV32_ADD(v42$2, v41$2) else $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2]);
-    goto __partitioned_block_$while.cond.tail_7;
+    goto __partitioned_block_$2.tail_7;
 
-  __partitioned_block_$while.cond.tail_7:
+  __partitioned_block_$2.tail_7:
     call {:sourceloc_num 79} $bugle_barrier_duplicated_6(1bv1, 1bv1);
     v43$1 := BV32_SLT(local_id_x$1, 1bv32);
     v43$2 := BV32_SLT(local_id_x$2, 1bv32);
@@ -889,9 +889,9 @@ implementation {:source_name "solve_nqueen_cuda_kernel"} {:kernel} $_Z24solve_nq
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum"} true;
     $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[1bv1][local_id_x$1] := (if p24$1 then BV32_ADD(v45$1, v44$1) else $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[1bv1][local_id_x$1]);
     $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2] := (if p24$2 then BV32_ADD(v45$2, v44$2) else $$_ZZ24solve_nqueen_cuda_kerneliiPjS_S_S_iE3sum[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][local_id_x$2]);
-    goto __partitioned_block_$while.cond.tail_8;
+    goto __partitioned_block_$2.tail_8;
 
-  __partitioned_block_$while.cond.tail_8:
+  __partitioned_block_$2.tail_8:
     call {:sourceloc_num 85} $bugle_barrier_duplicated_7(1bv1, 1bv1);
     v46$1 := local_id_x$1 == 0bv32;
     v46$2 := local_id_x$2 == 0bv32;
@@ -909,10 +909,10 @@ implementation {:source_name "solve_nqueen_cuda_kernel"} {:kernel} $_Z24solve_nq
     $$results[group_id_x$2] := (if p26$2 then v47$2 else $$results[group_id_x$2]);
     return;
 
-  $while.cond.backedge:
+  $2.backedge:
     assume {:backedge} p1$1 || p1$2;
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $while.cond;
+    goto $2;
 }
 
 

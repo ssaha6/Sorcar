@@ -48,6 +48,8 @@ const {:num_groups_y} num_groups_y: bv32;
 
 const {:num_groups_z} num_groups_z: bv32;
 
+function FADD32(bv32, bv32) : bv32;
+
 function FDIV32(bv32, bv32) : bv32;
 
 function FMUL32(bv32, bv32) : bv32;
@@ -130,39 +132,39 @@ implementation {:source_name "lud_diagonal"} {:kernel} $lud_diagonal($matrix_dim
   var v0$1: bv32;
   var v0$2: bv32;
   var v1: bool;
-  var v9$1: bv32;
-  var v9$2: bv32;
+  var v2$1: bv32;
+  var v2$2: bv32;
+  var v3: bool;
+  var v4$1: bool;
+  var v4$2: bool;
+  var v5$1: bool;
+  var v5$2: bool;
   var v6$1: bv32;
   var v6$2: bv32;
   var v7$1: bv32;
   var v7$2: bv32;
-  var v2$1: bv32;
-  var v2$2: bv32;
-  var v16$1: bv32;
-  var v16$2: bv32;
-  var v18$1: bv32;
-  var v18$2: bv32;
-  var v10$1: bv32;
-  var v10$2: bv32;
-  var v12$1: bv32;
-  var v12$2: bv32;
-  var v15$1: bv32;
-  var v15$2: bv32;
-  var v4$1: bool;
-  var v4$2: bool;
-  var v3: bool;
-  var v5$1: bool;
-  var v5$2: bool;
   var v8$1: bv32;
   var v8$2: bv32;
-  var v13$1: bool;
-  var v13$2: bool;
+  var v9$1: bv32;
+  var v9$2: bv32;
+  var v10$1: bv32;
+  var v10$2: bv32;
   var v11$1: bv32;
   var v11$2: bv32;
-  var v17$1: bv32;
-  var v17$2: bv32;
+  var v12$1: bv32;
+  var v12$2: bv32;
+  var v13$1: bool;
+  var v13$2: bool;
   var v14$1: bool;
   var v14$2: bool;
+  var v15$1: bv32;
+  var v15$2: bv32;
+  var v16$1: bv32;
+  var v16$2: bv32;
+  var v17$1: bv32;
+  var v17$2: bv32;
+  var v18$1: bv32;
+  var v18$2: bv32;
   var v19: bool;
   var v20$1: bv32;
   var v20$2: bv32;
@@ -182,20 +184,20 @@ implementation {:source_name "lud_diagonal"} {:kernel} $lud_diagonal($matrix_dim
   var p6$2: bool;
   var p7$1: bool;
   var p7$2: bool;
-  var _READ_HAS_OCCURRED_$$shadow$ghost$$for.cond.12: bool;
-  var _WRITE_HAS_OCCURRED_$$shadow$ghost$$for.cond.12: bool;
-  var _READ_HAS_OCCURRED_$$shadow$ghost$$for.cond.51: bool;
-  var _WRITE_HAS_OCCURRED_$$shadow$ghost$$for.cond.51: bool;
+  var _READ_HAS_OCCURRED_$$shadow$ghost$$8: bool;
+  var _WRITE_HAS_OCCURRED_$$shadow$ghost$$8: bool;
+  var _READ_HAS_OCCURRED_$$shadow$ghost$$14: bool;
+  var _WRITE_HAS_OCCURRED_$$shadow$ghost$$14: bool;
 
 
-  $entry:
+  $0:
     v0$1 := local_id_x$1;
     v0$2 := local_id_x$2;
     $i.0, $array_offset.0 := 0bv32, BV32_ADD(BV32_MUL($offset, $matrix_dim), $offset);
     assume {:captureState "loop_entry_state_4_0"} true;
-    goto $for.cond;
+    goto $1;
 
-  $for.cond:
+  $1:
     assume {:captureState "loop_head_state_4"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b40 ==> _WRITE_HAS_OCCURRED_$$shadow ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 16bv32), local_id_x$1));
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b39 ==> _READ_HAS_OCCURRED_$$m ==> BV32_AND(BV32_SUB($matrix_dim, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB($matrix_dim, 1bv32), BV32_ADD(BV32_ADD(BV32_MUL($offset, $matrix_dim), $offset), local_id_x$1));
@@ -220,9 +222,9 @@ implementation {:source_name "lud_diagonal"} {:kernel} $lud_diagonal($matrix_dim
     call {:sourceloc_num 9} $bugle_barrier_duplicated_0(1bv1, 0bv1);
     $i.1 := 0bv32;
     assume {:captureState "loop_entry_state_1_0"} true;
-    goto $for.cond.8;
+    goto $5;
 
-  $for.cond.8:
+  $5:
     assume {:captureState "loop_head_state_1"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b44 ==> _WRITE_HAS_OCCURRED_$$shadow ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, 1bv32), 16bv32), local_id_x$1));
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b43 ==> _READ_HAS_OCCURRED_$$shadow ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 16bv32), local_id_x$1)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, 1bv32), 16bv32), local_id_x$1));
@@ -256,9 +258,9 @@ implementation {:source_name "lud_diagonal"} {:kernel} $lud_diagonal($matrix_dim
     assume {:partition} !v3;
     $i.2, $array_offset.1 := 1bv32, BV32_ADD(BV32_MUL(BV32_ADD($offset, 1bv32), $matrix_dim), $offset);
     assume {:captureState "loop_entry_state_0_0"} true;
-    goto $for.cond.96;
+    goto $21;
 
-  $for.cond.96:
+  $21:
     assume {:captureState "loop_head_state_0"} true;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b46 ==> _READ_HAS_OCCURRED_$$shadow ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 16bv32), local_id_x$1));
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b45 ==> _WRITE_HAS_OCCURRED_$$m ==> BV32_AND(BV32_SUB($matrix_dim, 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB($matrix_dim, 1bv32), BV32_ADD(BV32_ADD(BV32_MUL(BV32_ADD($offset, 1bv32), $matrix_dim), $offset), local_id_x$1));
@@ -296,7 +298,7 @@ implementation {:source_name "lud_diagonal"} {:kernel} $lud_diagonal($matrix_dim
     $$m[BV32_ADD($array_offset.1, v0$2)] := v20$2;
     $i.2, $array_offset.1 := BV32_ADD($i.2, 1bv32), BV32_ADD($array_offset.1, $matrix_dim);
     assume {:captureState "loop_back_edge_state_0_0"} true;
-    goto $for.cond.96;
+    goto $21;
 
   $truebb0:
     assume {:partition} v3;
@@ -308,15 +310,15 @@ implementation {:source_name "lud_diagonal"} {:kernel} $lud_diagonal($matrix_dim
     $j.0$2 := (if p1$2 then 0bv32 else $j.0$2);
     p2$1 := (if p1$1 then true else p2$1);
     p2$2 := (if p1$2 then true else p2$2);
-    _READ_HAS_OCCURRED_$$shadow$ghost$$for.cond.12 := _READ_HAS_OCCURRED_$$shadow;
-    _WRITE_HAS_OCCURRED_$$shadow$ghost$$for.cond.12 := _WRITE_HAS_OCCURRED_$$shadow;
+    _READ_HAS_OCCURRED_$$shadow$ghost$$8 := _READ_HAS_OCCURRED_$$shadow;
+    _WRITE_HAS_OCCURRED_$$shadow$ghost$$8 := _WRITE_HAS_OCCURRED_$$shadow;
     assume {:captureState "loop_entry_state_3_0"} true;
-    goto $for.cond.12;
+    goto $8;
 
-  $for.cond.12:
+  $8:
     assume {:captureState "loop_head_state_3"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b49 ==> !p1$1 ==> _WRITE_HAS_OCCURRED_$$shadow$ghost$$for.cond.12 == _WRITE_HAS_OCCURRED_$$shadow;
-    assert {:tag "disabledMaintainsInstrumentation"} _b48 ==> !p1$1 ==> _READ_HAS_OCCURRED_$$shadow$ghost$$for.cond.12 == _READ_HAS_OCCURRED_$$shadow;
+    assert {:tag "disabledMaintainsInstrumentation"} _b49 ==> !p1$1 ==> _WRITE_HAS_OCCURRED_$$shadow$ghost$$8 == _WRITE_HAS_OCCURRED_$$shadow;
+    assert {:tag "disabledMaintainsInstrumentation"} _b48 ==> !p1$1 ==> _READ_HAS_OCCURRED_$$shadow$ghost$$8 == _READ_HAS_OCCURRED_$$shadow;
     assert {:tag "accessBreak"} _b47 ==> _WRITE_HAS_OCCURRED_$$shadow ==> local_id_x$1 == BV32_DIV(_WATCHED_OFFSET, 16bv32);
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$shadow ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _WRITE_HAS_OCCURRED_$$shadow ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -370,20 +372,20 @@ implementation {:source_name "lud_diagonal"} {:kernel} $lud_diagonal($matrix_dim
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$shadow"} true;
     v9$1 := (if p3$1 then $$shadow[1bv1][v8$1] else v9$1);
     v9$2 := (if p3$2 then $$shadow[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v8$2] else v9$2);
-    call {:sourceloc} {:sourceloc_num 19} _LOG_WRITE_$$shadow(p3$1, v8$1, FSUB32(v9$1, FMUL32(v6$1, v7$1)), $$shadow[1bv1][v8$1]);
+    call {:sourceloc} {:sourceloc_num 19} _LOG_WRITE_$$shadow(p3$1, v8$1, FADD32(FMUL32(FSUB32(2147483648bv32, v6$1), v7$1), v9$1), $$shadow[1bv1][v8$1]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$shadow(p3$2, v8$2);
     assume {:do_not_predicate} {:check_id "check_state_12"} {:captureState "check_state_12"} {:sourceloc} {:sourceloc_num 19} true;
-    call {:check_id "check_state_12"} {:sourceloc} {:sourceloc_num 19} _CHECK_WRITE_$$shadow(p3$2, v8$2, FSUB32(v9$2, FMUL32(v6$2, v7$2)));
+    call {:check_id "check_state_12"} {:sourceloc} {:sourceloc_num 19} _CHECK_WRITE_$$shadow(p3$2, v8$2, FADD32(FMUL32(FSUB32(2147483648bv32, v6$2), v7$2), v9$2));
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$shadow"} true;
-    $$shadow[1bv1][v8$1] := (if p3$1 then FSUB32(v9$1, FMUL32(v6$1, v7$1)) else $$shadow[1bv1][v8$1]);
-    $$shadow[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v8$2] := (if p3$2 then FSUB32(v9$2, FMUL32(v6$2, v7$2)) else $$shadow[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v8$2]);
+    $$shadow[1bv1][v8$1] := (if p3$1 then FADD32(FMUL32(FSUB32(2147483648bv32, v6$1), v7$1), v9$1) else $$shadow[1bv1][v8$1]);
+    $$shadow[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v8$2] := (if p3$2 then FADD32(FMUL32(FSUB32(2147483648bv32, v6$2), v7$2), v9$2) else $$shadow[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v8$2]);
     $j.0$1 := (if p3$1 then BV32_ADD($j.0$1, 1bv32) else $j.0$1);
     $j.0$2 := (if p3$2 then BV32_ADD($j.0$2, 1bv32) else $j.0$2);
     p2$1 := (if p3$1 then true else p2$1);
     p2$2 := (if p3$2 then true else p2$2);
-    goto $for.cond.12.backedge, __partitioned_block_$for.cond.12.tail_0;
+    goto $8.backedge, __partitioned_block_$8.tail_0;
 
-  __partitioned_block_$for.cond.12.tail_0:
+  __partitioned_block_$8.tail_0:
     assume !p2$1 && !p2$2;
     call {:sourceloc} {:sourceloc_num 22} _LOG_READ_$$shadow(p1$1, BV32_ADD(BV32_MUL($i.1, 16bv32), $i.1), $$shadow[1bv1][BV32_ADD(BV32_MUL($i.1, 16bv32), $i.1)]);
     assume {:do_not_predicate} {:check_id "check_state_6"} {:captureState "check_state_6"} {:sourceloc} {:sourceloc_num 22} true;
@@ -406,9 +408,9 @@ implementation {:source_name "lud_diagonal"} {:kernel} $lud_diagonal($matrix_dim
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$shadow"} true;
     $$shadow[1bv1][v11$1] := (if p1$1 then FDIV32(v12$1, v10$1) else $$shadow[1bv1][v11$1]);
     $$shadow[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v11$2] := (if p1$2 then FDIV32(v12$2, v10$2) else $$shadow[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v11$2]);
-    goto __partitioned_block_$for.cond.12.tail_1;
+    goto __partitioned_block_$8.tail_1;
 
-  __partitioned_block_$for.cond.12.tail_1:
+  __partitioned_block_$8.tail_1:
     call {:sourceloc_num 26} $bugle_barrier_duplicated_1(1bv1, 0bv1);
     v13$1 := BV32_SGT(v0$1, $i.1);
     v13$2 := BV32_SGT(v0$2, $i.1);
@@ -418,15 +420,15 @@ implementation {:source_name "lud_diagonal"} {:kernel} $lud_diagonal($matrix_dim
     $j.1$2 := (if p5$2 then 0bv32 else $j.1$2);
     p6$1 := (if p5$1 then true else p6$1);
     p6$2 := (if p5$2 then true else p6$2);
-    _READ_HAS_OCCURRED_$$shadow$ghost$$for.cond.51 := _READ_HAS_OCCURRED_$$shadow;
-    _WRITE_HAS_OCCURRED_$$shadow$ghost$$for.cond.51 := _WRITE_HAS_OCCURRED_$$shadow;
+    _READ_HAS_OCCURRED_$$shadow$ghost$$14 := _READ_HAS_OCCURRED_$$shadow;
+    _WRITE_HAS_OCCURRED_$$shadow$ghost$$14 := _WRITE_HAS_OCCURRED_$$shadow;
     assume {:captureState "loop_entry_state_2_0"} true;
-    goto $for.cond.51;
+    goto $14;
 
-  $for.cond.51:
+  $14:
     assume {:captureState "loop_head_state_2"} true;
-    assert {:tag "disabledMaintainsInstrumentation"} _b53 ==> !p5$1 ==> _WRITE_HAS_OCCURRED_$$shadow$ghost$$for.cond.51 == _WRITE_HAS_OCCURRED_$$shadow;
-    assert {:tag "disabledMaintainsInstrumentation"} _b52 ==> !p5$1 ==> _READ_HAS_OCCURRED_$$shadow$ghost$$for.cond.51 == _READ_HAS_OCCURRED_$$shadow;
+    assert {:tag "disabledMaintainsInstrumentation"} _b53 ==> !p5$1 ==> _WRITE_HAS_OCCURRED_$$shadow$ghost$$14 == _WRITE_HAS_OCCURRED_$$shadow;
+    assert {:tag "disabledMaintainsInstrumentation"} _b52 ==> !p5$1 ==> _READ_HAS_OCCURRED_$$shadow$ghost$$14 == _READ_HAS_OCCURRED_$$shadow;
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b51 ==> _WRITE_HAS_OCCURRED_$$shadow ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, 1bv32), 16bv32), local_id_x$1));
     assert {:tag "accessedOffsetsSatisfyPredicates"} _b50 ==> _READ_HAS_OCCURRED_$$shadow ==> BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), BV32_ADD(BV32_MUL(0bv32, 16bv32), local_id_x$1)) || BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), _WATCHED_OFFSET) == BV32_AND(BV32_SUB(BV32_MUL(1bv32, 16bv32), 1bv32), BV32_ADD(BV32_MUL(BV32_ADD(0bv32, 1bv32), 16bv32), local_id_x$1));
     assert {:tag "groupSharedArraysDisjointAcrossGroups"} _ATOMIC_HAS_OCCURRED_$$shadow ==> group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2;
@@ -481,38 +483,38 @@ implementation {:source_name "lud_diagonal"} {:kernel} $lud_diagonal($matrix_dim
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_READ_$$shadow"} true;
     v18$1 := (if p7$1 then $$shadow[1bv1][v17$1] else v18$1);
     v18$2 := (if p7$2 then $$shadow[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v17$2] else v18$2);
-    call {:sourceloc} {:sourceloc_num 34} _LOG_WRITE_$$shadow(p7$1, v17$1, FSUB32(v18$1, FMUL32(v15$1, v16$1)), $$shadow[1bv1][v17$1]);
+    call {:sourceloc} {:sourceloc_num 34} _LOG_WRITE_$$shadow(p7$1, v17$1, FADD32(FMUL32(FSUB32(2147483648bv32, v15$1), v16$1), v18$1), $$shadow[1bv1][v17$1]);
     call _UPDATE_WRITE_READ_BENIGN_FLAG_$$shadow(p7$2, v17$2);
     assume {:do_not_predicate} {:check_id "check_state_5"} {:captureState "check_state_5"} {:sourceloc} {:sourceloc_num 34} true;
-    call {:check_id "check_state_5"} {:sourceloc} {:sourceloc_num 34} _CHECK_WRITE_$$shadow(p7$2, v17$2, FSUB32(v18$2, FMUL32(v15$2, v16$2)));
+    call {:check_id "check_state_5"} {:sourceloc} {:sourceloc_num 34} _CHECK_WRITE_$$shadow(p7$2, v17$2, FADD32(FMUL32(FSUB32(2147483648bv32, v15$2), v16$2), v18$2));
     assume {:captureState "call_return_state_0"} {:procedureName "_CHECK_WRITE_$$shadow"} true;
-    $$shadow[1bv1][v17$1] := (if p7$1 then FSUB32(v18$1, FMUL32(v15$1, v16$1)) else $$shadow[1bv1][v17$1]);
-    $$shadow[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v17$2] := (if p7$2 then FSUB32(v18$2, FMUL32(v15$2, v16$2)) else $$shadow[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v17$2]);
+    $$shadow[1bv1][v17$1] := (if p7$1 then FADD32(FMUL32(FSUB32(2147483648bv32, v15$1), v16$1), v18$1) else $$shadow[1bv1][v17$1]);
+    $$shadow[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v17$2] := (if p7$2 then FADD32(FMUL32(FSUB32(2147483648bv32, v15$2), v16$2), v18$2) else $$shadow[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][v17$2]);
     $j.1$1 := (if p7$1 then BV32_ADD($j.1$1, 1bv32) else $j.1$1);
     $j.1$2 := (if p7$2 then BV32_ADD($j.1$2, 1bv32) else $j.1$2);
     p6$1 := (if p7$1 then true else p6$1);
     p6$2 := (if p7$2 then true else p6$2);
-    goto $for.cond.51.backedge, __partitioned_block_$for.cond.51.tail_0;
+    goto $14.backedge, __partitioned_block_$14.tail_0;
 
-  __partitioned_block_$for.cond.51.tail_0:
+  __partitioned_block_$14.tail_0:
     assume !p6$1 && !p6$2;
-    goto __partitioned_block_$for.cond.51.tail_1;
+    goto __partitioned_block_$14.tail_1;
 
-  __partitioned_block_$for.cond.51.tail_1:
+  __partitioned_block_$14.tail_1:
     call {:sourceloc_num 38} $bugle_barrier_duplicated_2(1bv1, 0bv1);
     $i.1 := BV32_ADD($i.1, 1bv32);
     assume {:captureState "loop_back_edge_state_1_0"} true;
-    goto $for.cond.8;
+    goto $5;
 
-  $for.cond.51.backedge:
+  $14.backedge:
     assume {:backedge} p6$1 || p6$2;
     assume {:captureState "loop_back_edge_state_2_0"} true;
-    goto $for.cond.51;
+    goto $14;
 
-  $for.cond.12.backedge:
+  $8.backedge:
     assume {:backedge} p2$1 || p2$2;
     assume {:captureState "loop_back_edge_state_3_0"} true;
-    goto $for.cond.12;
+    goto $8;
 
   $truebb:
     assume {:partition} v1;
@@ -531,7 +533,7 @@ implementation {:source_name "lud_diagonal"} {:kernel} $lud_diagonal($matrix_dim
     $$shadow[(if group_id_x$1 == group_id_x$2 && group_id_y$1 == group_id_y$2 && group_id_z$1 == group_id_z$2 then 1bv1 else 0bv1)][BV32_ADD(BV32_MUL($i.0, 16bv32), v0$2)] := v2$2;
     $i.0, $array_offset.0 := BV32_ADD($i.0, 1bv32), BV32_ADD($array_offset.0, $matrix_dim);
     assume {:captureState "loop_back_edge_state_4_0"} true;
-    goto $for.cond;
+    goto $1;
 }
 
 

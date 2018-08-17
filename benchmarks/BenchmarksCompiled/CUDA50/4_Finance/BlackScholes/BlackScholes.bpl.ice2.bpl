@@ -160,8 +160,6 @@ implementation {:source_name "BlackScholesGPU"} {:kernel} $_Z15BlackScholesGPUPf
   var v0$1: bv32;
   var v0$2: bv32;
   var v1: bv32;
-  var v12$1: bv32;
-  var v12$2: bv32;
   var v2$1: bool;
   var v2$2: bool;
   var v3$1: bv32;
@@ -182,6 +180,8 @@ implementation {:source_name "BlackScholesGPU"} {:kernel} $_Z15BlackScholesGPUPf
   var v10$2: bv32;
   var v11$1: bv32;
   var v11$2: bv32;
+  var v12$1: bv32;
+  var v12$2: bv32;
   var v13$1: bv32;
   var v13$2: bv32;
   var v14$1: bool;
