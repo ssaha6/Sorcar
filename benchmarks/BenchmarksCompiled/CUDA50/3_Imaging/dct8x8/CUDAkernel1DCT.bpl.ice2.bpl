@@ -103,7 +103,7 @@ type arrayId = bv3;
 
 function {:inline true} MKPTR(base: arrayId, offset: bv32) : ptr
 {
-  base ++ offset[29:0]
+  base[3:0] ++ offset[29:0]
 }
 
 function {:inline true} base#MKPTR(p: ptr) : arrayId
