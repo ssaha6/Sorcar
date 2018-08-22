@@ -19,4 +19,10 @@ benchmarks/**/*.loc
 benchmarks/**/*.json
 benchmarks/**/*.statistics
 .vscode
+.vs
 houdiniCexTrace*.*
+
+*.xlsx
+/**/variants2/*
+/**/variants3/*
+vanila_gpuverify.txt
