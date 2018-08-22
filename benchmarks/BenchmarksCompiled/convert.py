@@ -119,9 +119,15 @@ with open (file, 'r' ) as f:
     # remove all bxx declarations
     new_content = re.sub('const {:existential true} _b[0-9]{0,4}: bool(.*);', '' , content)
     
-        
+    # Type conversion error in 'base ++ offset[29:0]'  ==> 'base[3:0] ++ offset[29:0]'
+    bitvec = re.search('base\s*\+\+\s*offset\[([0-9]{1,2})\:0\]', new_content, re.IGNORECASE)
+    if bitvec:
+        bitsize = int(bitvec.group(1))
+        if bitsize <= 0 or bitsize >=32:
+            raise ValueError('bitsize offrange')
+        new_content = re.sub('base\s*\+\+\s*offset\[' + str(bitsize) + '\:0\]', 'base[' + str(32 - bitsize) + ':0] ++ offset[' + str(bitsize) + ':0]', new_content)
     
-      
+
     #substitute invariant definitions
     for i in range(len(groups)):            
         
