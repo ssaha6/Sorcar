@@ -7,7 +7,7 @@ SOURCEDIR="$PREFIX/benchmarks/BenchmarksCompiled"
 
 
 OUTPUT="$PREFIX/results/vanila_gpuverify.txt"
-TIMEOUT="600s" 
+TIMEOUT="1200s" 
 
 # ------------------------------------------------- #
 

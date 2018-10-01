@@ -2,6 +2,10 @@
 
 # call using: sh run.sh "-a sorcar -f -t -r" 
 SORCAR_OPTION=$1
+if [ -z "$SORCAR_OPTION" ];  then
+    exit
+fi
+
 OPTION_KEY=`echo $SORCAR_OPTION | sed -e 's/[ -]//g'`
 
 # ------------------------------------------------- #
@@ -13,7 +17,7 @@ BOOGIE_DIR="$PREFIX/boogie_horn_sorcar_false/Binaries/"
 Z3_BIN="$PREFIX/z3/bin/z3"
 
 OUTPUT="$PREFIX/results/variants2/$OPTION_KEY.txt"
-TIMEOUT="600s" 
+TIMEOUT="1200s" 
 
 # ------------------------------------------------- #
 

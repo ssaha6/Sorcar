@@ -17,7 +17,7 @@ BOOGIE_DIR="$PREFIX/boogie_horn_sorcar_false/Binaries/"
 Z3_BIN="$PREFIX/z3/bin/z3"
 
 OUTPUT="$PREFIX/results/dryad/$OPTION_KEY.txt"
-TIMEOUT="600s" 
+TIMEOUT="1200s" 
 
 # ------------------------------------------------- #
 
