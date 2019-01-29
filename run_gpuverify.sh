@@ -6,7 +6,7 @@ SOURCELIST="$PREFIX/benchmarks/BenchmarksCompiled/inv_source_files"
 SOURCEDIR="$PREFIX/benchmarks/BenchmarksCompiled"
 
 
-OUTPUT="$PREFIX/results/vanila_gpuverify.txt"
+OUTPUT="$PREFIX/results/gpuverify/vanila_gpuverify.txt"
 TIMEOUT="1200s" 
 
 # ------------------------------------------------- #
