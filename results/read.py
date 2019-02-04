@@ -14,6 +14,7 @@ import pickle
 import warnings
 import xlsxwriter
 from collections import OrderedDict
+from numpy import median
 
 POSIX_time = True
 
@@ -83,7 +84,7 @@ class time_related:
 
 
 def read_gpuverify_file(file, timeout):
-    tr = time_related(mins=timeout, POSIX_time=True)
+    tr = time_related(mins=timeout, POSIX_time=False)
     all_result = {}
 
     with open (file, "r" ) as f:
@@ -146,7 +147,7 @@ def read_gpuverify_file(file, timeout):
 
 
 def read_boogie_file(file, timeout, benchmark_pattern):
-    tr = time_related(mins = timeout, POSIX_time = True)
+    tr = time_related(mins = timeout, POSIX_time = False)
     all_result = {}
 
     with open(file, "r") as f:
