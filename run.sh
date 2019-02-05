@@ -52,13 +52,13 @@ done
 
 # ------------------------------------------------- #
 
-BOOGIE_OPT=" /doNotUseLabels  /z3opt:smt.relevancy=0  /doModSetAnalysis  /proverOpt:OPTIMIZE_FOR_BV=true "
+BOOGIE_OPT=" /doNotUseLabels  /z3opt:smt.relevancy=0  /doModSetAnalysis  /proverOpt:OPTIMIZE_FOR_BV=true  /errorLimit:1  "
 
 # #Abstract Houdini Boogie flags
 # BOOGIE_OPT+=" /doNotUseLabels /z3opt:smt.relevancy=0  /doModSetAnalysis "
 # BOOGIE_OPT+=" /proverOpt:OPTIMIZE_FOR_BV=true "
 # BOOGIE_OPT+=" /abstractHoudini:IA[HoudiniConst]  "
-BOOGIE_OPT+=" /errorLimit:1 "
+# BOOGIE_OPT+=" /errorLimit:1 "
 
 
 # # #Gpuverify Sorcar Boogie flags

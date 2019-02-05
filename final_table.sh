@@ -1,7 +1,8 @@
 
 
-
-rm results/gpuverify/asorcargreedy.txt
+mkdir -p results/gpuverify
+mkdir -p results/dryad
+rm results/gpuverify/asorcargreedy.txt || true
 sh run.sh "-a sorcar-greedy "    
 
 
