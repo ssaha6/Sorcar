@@ -48,7 +48,7 @@ cp $ORIGPRELUDEFILE $PRELUDEFILE
 
 # ------------------------------------------------- #
 
-BOOGIE_OPT="" #" /doNotUseLabels  /z3opt:smt.relevancy=0  /doModSetAnalysis "  #" /proverOpt:OPTIMIZE_FOR_BV=true "
+BOOGIE_OPT=" /errorLimit:1 " #" /doNotUseLabels  /z3opt:smt.relevancy=0  /doModSetAnalysis "  #" /proverOpt:OPTIMIZE_FOR_BV=true "
  
  # #Abstract Houdini Boogie flags
 # BOOGIE_OPT+=" /doNotUseLabels /z3opt:smt.relevancy=0  /doModSetAnalysis "
