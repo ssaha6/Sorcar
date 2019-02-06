@@ -2094,6 +2094,12 @@ Contract.Requires(that != null);
       Contract.Requires(t != null);
       Contract.Requires(t.IsBv);
       Contract.Ensures(0 <= Contract.Result<int>());
+      
+    //Shambo: Patched      
+      if (t is TypeSynonymAnnotation) {
+        return MinBitsFor(((TypeSynonymAnnotation)t).ExpandedType);
+      }
+
       if (t is BvType) {
         return t.BvBits;
       } else {
@@ -2195,6 +2201,12 @@ Contract.Requires(that != null);
       Contract.Requires(t != null);
       Contract.Requires(t.IsBv && 0 <= to && MinBitsFor(t) <= to);
       Contract.Ensures(0 <= Contract.Result<int>() && Contract.Result<int>() <= to);
+
+    //Shambo: Patched       
+      if(t is TypeSynonymAnnotation) {
+        return IncreaseBits(((TypeSynonymAnnotation)t).ExpandedType, to);
+      }
+
       t = FollowProxy(t);
       if (t is BvType) {
         return to - t.BvBits;
