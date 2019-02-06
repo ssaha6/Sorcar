@@ -82,6 +82,13 @@ class time_related:
         return time
 
 
+def gpuverify_cruncher_time(output):
+    # - gpuverifycruncher     : 125.014 secs
+    # - gpuverifyboogiedriver :  20.364 secs
+    t1 = float(re.search("gpuverifycruncher\s*\:\s*([0-9.]+)\s+sec", output, re.IGNORECASE).group(1).strip())
+    t2 = float(re.search("gpuverifyboogiedriver\s*\:\s*([0-9.]+)\s+sec", output, re.IGNORECASE).group(1).strip())
+    return round(t1 + t2, 2)
+
 
 def read_gpuverify_file(file, timeout):
     tr = time_related(mins=timeout, POSIX_time=False)
@@ -108,9 +115,11 @@ def read_gpuverify_file(file, timeout):
             #GPUVerify kernel analyser finished with 1 verified, 0 errors
             if se.check_exists("GPUVerify kernel analyser finished with [1-9]+ verified, 0 error"):
                 status = "nontrivialsuccess"
+                time = gpuverify_cruncher_time(output)
 
             elif se.check_exists("GPUVerify kernel analyser finished with 0 verified"):
                 status = "nontrivialfailure"
+                time = gpuverify_cruncher_time(output)
 
             elif se.check_exists(tr.get_timeout_pattern()):
                 status = "timeout"
@@ -162,7 +171,7 @@ def read_boogie_file(file, timeout, benchmark_pattern):
             se = search_extract(output)
 
             # /dev/shm/gv/benchmarks/BenchmarksDryad/boogie/phase3/dl_concat.bpl
-            filename = se.extract_info(benchmark_pattern, "")
+            filename = se.extract_info(benchmark_pattern, "").replace(".bpl.ice2", "")
             if not filename:
                 continue
 
@@ -229,7 +238,7 @@ def read_file(file, timeout, benchmark_pattern):
             se = search_extract(output)
 
 
-            filename = se.extract_info(benchmark_pattern, "")
+            filename = se.extract_info(benchmark_pattern, "").replace(".bpl.ice2", "")
             if not filename:
                 continue
 
@@ -297,7 +306,11 @@ def read_file(file, timeout, benchmark_pattern):
             num_neg_example = se.extract_info("Number of negative examples\s*:\s*([0-9]+)", 0)
             num_horn_example = se.extract_info("Number of Horn clauses\s*:\s*([0-9]+)", 0)
 
-
+            if len(all_pred) == 0 and status == "timeout":
+                st = 1
+            else:
+                st = 0
+            
             all_result[filename.strip()] = {"status": status,
                                             "time": time,
                                             "num_predicates":num_predicates,
@@ -306,7 +319,8 @@ def read_file(file, timeout, benchmark_pattern):
                                             "prover_time":prover_time ,
                                             "num_pos": num_pos_example,
                                             "num_neg": num_neg_example,
-                                            "num_horn": num_horn_example
+                                            "num_horn": num_horn_example,
+                                            "stuck_true" : st
                                             }
 
     return all_result
@@ -354,7 +368,7 @@ def print_result(read_list, union_of_files, file_list):
     worksheet.write(1, col, "file")
 
     # attributes = read_list[next(iter(read_list))][union_of_files[0]].keys()
-    attributes = ["status", "num_pos", "num_neg", "num_horn", "num_predicates", "final_pred", "num_rounds", "prover_time", "time" ]
+    attributes = ["status", "num_pos", "num_neg", "num_horn", "num_predicates", "final_pred", "num_rounds", "prover_time", "time" , "stuck_true"]
 
     for file_name in file_list:
         for attr in attributes:
@@ -422,13 +436,26 @@ def analyze(read_list, union_of_files, file_list, write_workbook=False):
         timeout_succ_time = 0.0
         avg_timeout_succ_time = 0.0
         avg_time = 0.0
+        stuck_true = 0
 
         combined_status = {}
 
+
+        dryad_skip_files = [
+            "dl_remove",
+            "SLL-create",
+            "SLL-delete-all",
+            "SLL-delete",
+            "dl_insert"
+            ]
+
         for file in read_list[variants].keys():
 
+            if file in dryad_skip_files:
+                continue
+
             status = read_list[variants][file]["status"]
-            total_time += read_list[variants][file]["time"]
+            total_time += float(read_list[variants][file]["time"])
             num_neg = num_neg + read_list[variants][file]["num_neg"]
 
             if status == "timeout":
@@ -437,16 +464,16 @@ def analyze(read_list, union_of_files, file_list, write_workbook=False):
 
             elif status == "trivialsuccess" or status == "nontrivialsuccess" :
                 num_success = num_success + 1
-                total_time_success = total_time_success + read_list[variants][file]["time"]
+                total_time_success = total_time_success + float(read_list[variants][file]["time"])
                 total_pred_success = total_pred_success + read_list[variants][file]["final_pred"]
                 combined_status[file] = "success"
 
-            elif status == "nontrivialfailure" or status == "exception" or status == "error" or status == "runtime" or status == "unknown":
+            elif status == "nontrivialfailure" or status == "exception" or status == "runtime"  :
                 num_failure = num_failure + 1
                 combined_status[file] = "failure"
-
+            
             #added error
-            elif status == "error" or status == "unknown":
+            elif  status == "unknown" or status == "error":
                 num_error = num_error + 1
                 combined_status[file] = "error"
 
@@ -456,6 +483,12 @@ def analyze(read_list, union_of_files, file_list, write_workbook=False):
 
             if status == "timeout" or status == "trivialsuccess" or status == "nontrivialsuccess":
                 timeout_succ_time = timeout_succ_time + read_list[variants][file]["time"]
+
+
+            if "stuck_true" in read_list[variants][file]:
+                if read_list[variants][file]["stuck_true"] == 1:
+                    stuck_true = stuck_true + 1
+
 
 
         avg_time_success = round(total_time_success / num_success, 1)
@@ -475,7 +508,9 @@ def analyze(read_list, union_of_files, file_list, write_workbook=False):
                             "total_time_succ_timeout": timeout_succ_time,
                             "avg_time_succ_timeout": avg_timeout_succ_time,
                             "total_time": total_time,
-                            "avg_time": avg_time
+                            "avg_time": avg_time,
+                            "stuck_true": stuck_true
+
                             }
 
     sorted_files = map(lambda y: y[0], sorted(result.items(), key= lambda x: x[1]["avg_time_success"]))
@@ -496,7 +531,7 @@ def analyze(read_list, union_of_files, file_list, write_workbook=False):
             row += 1
             worksheet.write(row, col, key)
             # for item in result[key]:
-            for item in ["num_success", "num_failure", "num_timeout", "num_error", "total_pred_success", "avg_pred_success", "num_neg", "total_time_success", "avg_time_success", "total_time_succ_timeout", "avg_time_succ_timeout", "total_time", "avg_time"]:
+            for item in ["num_success", "num_failure", "num_timeout", "num_error", "total_pred_success", "avg_pred_success", "num_neg", "total_time_success", "avg_time_success", "total_time_succ_timeout", "avg_time_succ_timeout", "total_time", "avg_time", "stuck_true"]:
                 col += 1
                 if header:
                     worksheet.write(row-1, col, item)
@@ -508,29 +543,85 @@ def analyze(read_list, union_of_files, file_list, write_workbook=False):
     return sorted_files
 
 
+def combine_variants(read_list, modified_read_list, originalfiles, escaped_functions):
+    combined_read_list = read_list
+    for file, all_benchmarks in read_list.iteritems():
+        if file in originalfiles :
+            for benchmark, value in all_benchmarks.iteritems():
+                if benchmark in escaped_functions:
+                    combined_read_list[file][benchmark] = modified_read_list["gpuverify/boogiefixed.txt"][benchmark]
+
+    return combined_read_list
+
+
+
 
 
 #############GPUVERIFY##############
 def read_gpuverify():
 
-    files = ["gpuverify/ahorndini.txt",
+    files = [
+            "gpuverify/ahorndini.txt",
             "gpuverify/asorcar.txt",
             "gpuverify/asorcarfirst.txt",
             "gpuverify/asorcargreedy.txt",
+            "gpuverify/asorcargreedyerrorlimit.txt",
             "gpuverify/asorcarminimal.txt",
             "gpuverify/boogie.txt",
             "gpuverify/vanila_gpuverify.txt"
             ]
 
+    originalfile = "gpuverify/boogie.txt"
+    patchedfile = "gpuverify/boogiefixed.txt"
+    
+    escaped_functions = [ 
+        "CUDA50/0_Simple/simpleCubemapTexture/simpleCubemapTexture",
+        "CUDA50/2_Graphics/marchingCubes/_generateTriangles",
+        "CUDA50/2_Graphics/marchingCubes/_generateTriangles2",
+        "CUDA50/3_Imaging/SobelFilter/SobelCopyImage",
+        "CUDA50/3_Imaging/SobelFilter/SobelShared",
+        "CUDA50/3_Imaging/SobelFilter/SobelTex",
+        "CUDA50/3_Imaging/boxFilter/d_boxfilter_rgba_x",
+        "CUDA50/3_Imaging/boxFilter/d_boxfilter_x_tex",
+        "CUDA50/3_Imaging/boxFilter/d_boxfilter_y_tex",
+        "CUDA50/3_Imaging/dct8x8/CUDAkernel1DCT",
+        "CUDA50/3_Imaging/dct8x8/CUDAkernel1IDCT",
+        "CUDA50/3_Imaging/imageDenoising/imageDenoising_nlm2_kernel",
+        "CUDA50/3_Imaging/postProcessGL/postProcessGL",
+        "CUDA50/3_Imaging/stereoDisparity/_stereoDisparity",
+        "CUDA50/4_Finance/quasirandomGenerator/inverseCNDKernel",
+        "CUDA50/5_Simulations/fluidsGL/advectVelocity_k",
+        "CUDA50/6_Advanced/FunctionPointers/SobelCopyImage",
+        "CUDA50/6_Advanced/FunctionPointers/SobelShared",
+        "CUDA50/6_Advanced/FunctionPointers/SobelTex",
+        "gpgpu-sim_ispass2009/AES/aesEncrypt128_kernel/kernel",
+        "gpgpu-sim_ispass2009/AES/aesEncrypt256_kernel/kernel",
+        "gpgpu-sim_ispass2009/DG/MaxwellsGPU_SURF_Kernel3D/kernel",
+        "gpgpu-sim_ispass2009/DG/MaxwellsGPU_VOL_Kernel3D/kernel",
+        "gpgpu-sim_ispass2009/MUM/_mummergpuKernel",
+        "gpgpu-sim_ispass2009/MUM/_mummergpuRCKernel",
+        "gpgpu-sim_ispass2009/RAY/renderPixel",
+        "parboil/sad/larger_sad_calc_8/kernel",
+        "polybench/linear-algebra/solvers/cholesky/kernel2"        
+    ]
+    
+    
     timeout = 20
     benchmark_pattern = "Parsing (?:.+)BenchmarksCompiled\/(?:boogie|a(?:sorcar|sorcarfirst|horndini|sorcargreedy|sorcarminimal)(?:(?:f|t|r)*))\/(.*)(?:\.bpl\.ice2\.bpl|\.bpl)"
 
     read_list = read_all_files(files, timeout, benchmark_pattern, write_pickle=False)
     union_of_files = compute_union_of_files(read_list,  write_pickle=False)
 
-    sorted_files = analyze(read_list, union_of_files, files, write_workbook=True)
-    print_result(read_list, union_of_files, sorted_files)
+    # sorted_files = analyze(read_list, union_of_files, files, write_workbook=True)
+    # print_result(read_list, union_of_files, sorted_files)
 
+    
+    modified_read_list = read_all_files([patchedfile], timeout, benchmark_pattern, write_pickle=False)
+    combined_read_list = combine_variants(read_list, modified_read_list, [originalfile], escaped_functions)
+    
+    sorted_files = analyze(combined_read_list, union_of_files, files, write_workbook=True)
+    print_result(combined_read_list, union_of_files, sorted_files)
+    
 
 
 
@@ -549,7 +640,7 @@ def read_dryad():
     
     # /dev/shm/gv/benchmarks/BenchmarksDryad/boogie/phase3/dl_concat.bpl
     # /dev/shm/gv/benchmarks/BenchmarksDryad/ahorndinif/phase3/dl_concat.bpl.ice2.bpl
-    benchmark_pattern = 'Parsing (?:.+)BenchmarksDryad\/(?:boogie|a(?:sorcar|sorcarfirst|horndini|sorcargreedy|sorcarminimal)(?:(?:f|t|r)*))\/phase3\/(.*?)(?:\.bpl\.ice2\.bpl|\.bpl)'
+    benchmark_pattern = 'Parsing (?:.+)BenchmarksDryad\/(?:boogie|a(?:sorcar|sorcarfirst|horndini|sorcargreedy|sorcarminimal)(?:(?:f|t|r)*))\/phase3\/(.*?)(?:\.bpl\.ice2\.bpl|\.bpl)?(?:\.bpl)'
 
     timeout = 20
     read_list = read_all_files(dryad_files, timeout, benchmark_pattern, write_pickle=False)
@@ -561,6 +652,8 @@ def read_dryad():
 
 
 
+
+# TODO MEDIAN
 
 def main():
     read_gpuverify()
@@ -652,10 +745,6 @@ if __name__ == "__main__":
     #       "gpgpu-sim_ispass2009/RAY/renderPixel.bpl.ice2.bpl",
     #       "parboil/sad/larger_sad_calc_8/kernel.bpl.ice2.bpl",
     # ]
-
-
-
-
 
 
 
