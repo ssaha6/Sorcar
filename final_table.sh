@@ -2,9 +2,8 @@
 
 mkdir -p results/gpuverify
 mkdir -p results/dryad
-rm results/gpuverify/asorcargreedy.txt || true
-sh run.sh "-a sorcar-greedy "    
-
+rm results/gpuverify/boogie.txt || true
+sh run_boogie.sh 
 
 
 # Remove old results folder
