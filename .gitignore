@@ -22,7 +22,6 @@ benchmarks/**/*.statistics
 .vs
 houdiniCexTrace*.*
 
-*.xlsx
 /**/variants2/*
 /**/variants3/*
 vanila_gpuverify.txt
