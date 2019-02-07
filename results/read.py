@@ -564,6 +564,7 @@ def read_gpuverify():
             "gpuverify/ahorndini.txt",
             "gpuverify/asorcar.txt",
             "gpuverify/asorcarfirst.txt",
+            "gpuverify/asorcarerrorlimit.txt",
             "gpuverify/asorcargreedy.txt",
             "gpuverify/asorcargreedyerrorlimit.txt",
             "gpuverify/asorcarminimal.txt",
@@ -631,8 +632,10 @@ def read_dryad():
 
     dryad_files = [ "dryad/ahorndini.txt",
                     "dryad/asorcar.txt",
+                    "dryad/asorcarerrorlimit.txt",
                     "dryad/asorcarfirst.txt",
                     "dryad/asorcargreedy.txt",
+                    "dryad/asorcargreedyerrorlimit.txt",
                     "dryad/asorcarminimal.txt",
                     "dryad/boogie.txt"
                     ]
