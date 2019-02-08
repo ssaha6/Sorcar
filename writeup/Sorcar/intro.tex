@@ -1,0 +1,88 @@
+% !Tex root=main.tex
+
+\section{Introduction}
+\label{sec:intro}
+
+The deductive verification approach for proving imperative programs correct is one of the most well-established and effective methods, and automating program verification using this method has been studied extensively. This approach can be seen as consisting of two parts:
+\begin{enumerate*}[label={(\alph*)}]
+    \item writing inductive invariants in terms of loop invariants, class invariants, and method contracts, and
+    \item proving that these annotations are indeed correct using theorem proving.
+\end{enumerate*} 
+Automation of the latter has seem tremendous progress in the last two decades through the identification of decidable logical theories, theory combinations, heuristics for automatically reasoning with quantified theories, and their realization using efficient SMT solvers~\cite{DBLP:conf/cav/BarrettCDHJKRT11,DBLP:conf/tacas/MouraB08}.
+There has also been significant progress on automating the former problem of discovering inductive invariants~\cite{DBLP:conf/pldi/BallMMR01,DBLP:conf/vmcai/Bradley11,DBLP:conf/tacas/ChampionC0S18,DBLP:conf/cav/ColonSS03,DBLP:conf/popl/CousotC77,DBLP:conf/oopsla/DilligDLM13,DBLP:conf/icse/ErnstCGN00,DBLP:journals/pacmpl/EzudheenND0M18,DBLP:conf/fm/FlanaganL01,DBLP:conf/fmcad/FedyukovichKB17,DBLP:conf/cav/0001LMN13,DBLP:conf/cav/0001LMN14,DBLP:conf/pldi/GulwaniSV08,DBLP:conf/cav/GuptaR09,DBLP:journals/corr/KrishnaPW15,DBLP:conf/cav/McMillan03,DBLP:conf/cav/0001A14,DBLP:conf/esop/0001GHALN13,DBLP:conf/sas/0001GHAN13,DBLP:conf/cav/SharmaNA12,DBLP:conf/pldi/ZhuMJ18}, with varying degrees of success. 
+
+In this paper, we are interested in a class of \emph{black-box} or \emph{learning-based} techniques for invariant generation~\cite{DBLP:conf/tacas/ChampionC0S18,DBLP:journals/pacmpl/EzudheenND0M18,DBLP:conf/cav/0001LMN14,DBLP:conf/pldi/ZhuMJ18}. In this context, the invariant synthesis engine is split into two components, a learner and a teacher, who work in rounds. In each round, the teacher examines the invariant produced by the learner and produces counterexamples that consist of concrete program configurations that show why the proposed formulas are not inductive invariants. The learner then uses these concrete program configurations to synthesize new proposals for the invariant, \emph{without} looking at the program. The teacher, on the other hand, does look at the program and essentially produces counterexamples using failed verification attempts of the program.
+
+The choice to separate the learner and teacher---and not give the learner access to the program---may seem strange at first.
+However, a rationale for this choice has emerged over the years, and the above choice is in fact the \textit{de~facto} approach for synthesis in various other domains, including program synthesis, where it is usually called counter-example guided inductive synthesis~\cite{DBLP:series/natosec/AlurBDF0JKMMRSSSSTU15,cegis,DBLP:conf/asplos/Solar-LezamaTBSS06}.
+
+%Intuitively, synthesis problems, including invariant synthesis, can be seen as solving $\exists^\ast \forall^\ast$ problems (does there exists an invariant/expression $E$ such that for every valuation of variables, a specification $\varphi(E)$ holds).
+%Such problems are hard to solve, and the split into two components reduces it to an iterative scenario where each component is solving a problem that has no quantifier alternation.
+%In the invariant synthesis setting, for instance, the learner is solving the problem of whether there exists an expression that satisfies all the concrete counterexamples, while the teacher is solving the problem of whether there exists a counterexample that shows the proposed formula is not an inductive invariant, both being $\exists^\ast$ problems.
+
+\paragraph{\bfseries Horn-ICE Learning}
+In a paper at CAV 2014, Garg et al.~\cite{DBLP:conf/cav/0001LMN14} studied the above learning model and identified the precise form of counterexamples needed for synthesizing invariants---contrary to usual classification learning where one is given positive and negative examples only, the authors argued that implication counterexamples (ICE) are needed, and coined the term \emph{ICE learning} for such a learning model.
+More recently, it has been recognized that program verification problems can be cast as solving \emph{Horn implication constraints}.
+Consequently, the implication counterexamples returned by the teacher are naturally Horn implications (\emph{Horn-ICE}), involving concrete program configurations, and new learning algorithms for learning from such Horn counterexamples have recently been studied~\cite{DBLP:conf/tacas/ChampionC0S18,DBLP:journals/pacmpl/EzudheenND0M18}.
+ 
+\paragraph{\bfseries Learning Conjunctions}
+While one can potentially learn/synthesize invariants in over complex logics, one technique that has been particularly effective and scalable is to fix a finite set of predicates $\mathcal P$ over the program configurations and only learn invariants that can be expressed as a conjunction of a subset of these predicates.
+For programs over particular domains and particular classes of specifications, where the typical class of predicates needed is known, these techniques often work very well. 
+
+We are motivated by two such domains. The first is the class of programs handled by GPUVerify~\cite{DBLP:conf/oopsla/BettsCDQT12,DBLP:conf/oopsla/ChongDKKQ13}, which considers GPU programs with parallelism, reduces the problem to a sequential verification problem (by simulating two threads at each parallel fork), and proceeds to find inductive invariants over a fixed class $\mathcal P$ to prove the resulting sequential program correct.
+The second class is the class of programs considered by Neider et al.~\cite{DBLP:conf/tacas/Neider0MS018}, where the authors synthesize invariants that express properties of heaps in order to prove programs that dynamically update heaps correct against separation logic specifications.
+The verification engine in the former is an SMT solver that returns concrete Horn-ICE counterexamples and in the latter is an incomplete verification engines that returns abstract counterexamples that can be interpreted to be Horn-ICE counterexamples. 
+In both domains, the set $\mathcal P$ consists of hundreds of predicates, which makes invariant synthesis challenging.
+
+\paragraph{\bfseries \houdini and \sorcar}
+The classical algorithm for learning conjunctive invariants over a finite class of predicates is the \houdini algorithm~\cite{DBLP:conf/fm/FlanaganL01}, which mimics the \emph{elimination algorithm} for learning conjuncts in classical machine learning~\cite{Kearns:1994:ICL:200548}.
+\houdini starts with a conjectured invariant that contains \emph{all} predicates and, in each round, uses counterexamples to remove predicates.
+On the positive side, the algorithm is guaranteed to construct the \emph{minimal} inductive invariant expressible as a conjunction over $\mathcal P$ and takes at most $n=|\mathcal P|$ rounds to converge to such an inductive invariant, if one exists. 
+
+However, the \houdini algorithm has disadvantages as well.
+First, it is not property driven (i.e., it does not consider the assertions that occur in the program).
+Secondly, as a consequence, it synthesizes invariants that have the \emph{largest} number of conjuncts (i.e., the semantically smallest sets of program configurations expressible as a conjunctive formula).
+
+\emph{In this paper, we develop a new class of algorithms, which we call \sorcar\footnote{Houdini and Sorcar were both magicians!}, that is \emph{property-driven} and aims to learn \emph{small conjunctions}.} 
+
+%Unfortunately, learning small conjunctions efficiently in an online setting interacting with a teacher is hard.
+%When only positive and negative samples are present, there is a beautiful algorithm called the Winnow algorithms that can learn conjunctive formula in $O(r \log n)$ rounds where $r$ is the number of conjuncts in the smallest formula consistent with the eventually learned formula.
+%However, an extension of this algorithm to the ICE/Horn-ICE setting seems very difficult (more precisely, has not yielded to the efforts of the authors of this paper in consultation with machine language theory people for more than a year). 
+
+\begin{table}[t]
+	\caption{Comparison of \houdini~\cite{DBLP:conf/fm/FlanaganL01} and \sorcar} \label{tab:learners_comparison}
+	\centering
+	%\footnotesize
+	\begin{tabular}{l@{\hskip 1em}c@{\hskip 1em}c@{\hskip 1em}c@{\hskip 1em}m{35mm}}
+		\toprule
+		\multicolumn{1}{c}{\textbf{Learning}} & \textbf{Property} & \textbf{Complexity} & \textbf{Maximum} & \multicolumn{1}{c}{\textbf{Final conjunct}} \\
+		\multicolumn{1}{c}{\textbf{algorithm}} & \textbf{driven?} & \textbf{per round} & \textbf{\# rounds} & \\
+		\midrule
+		\houdini & No & Polynomial & $|\mathcal P|$ & Largest set \\\addlinespace
+		\midrule
+		\sorcar & Yes & Polynomial & $2 \cdot |\mathcal P|$ & Bias towards smaller sets involving only relevant predicates \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+The \sorcar algorithm presented in this paper has the following features (see Table~\ref{tab:learners_comparison}).
+First, it guarantees that the number of rounds of interaction with the teacher is still linear ($2n$ rounds compared to Houdini's promise of $n$ rounds).
+Second, it is property-driven---in other words, the algorithm tries to find the smallest conjunctive inductive invariant that satisfies the assertions in the program. There is no guarantee though on how small the invariant will be (in experiments, we show how it achieves small invariants).
+Third, it promises to do only polynomial amount of work in each round (i.e., polynomial in $n$ and in the number of current counterexamples), similar to \houdini. 
+
+We believe that the \sorcar algorithm is a new learning algorithm with interesting properties and guarantees for learning conjunctive invariants. 
+
+\paragraph{\bfseries Experimental evaluation}
+The \sorcar algorithm is certainly well suited for applications where property-driven invariants are expected to be small and one wishes to learn small invariants.
+Learning small invariants can be particularly useful in applications where these algorithms are used to \emph{mine specifications} that a user may read.
+For example, if we use \sorcar to mine provable contracts for methods, then contracts would be easier to read if they are smaller (i.e., contain less predicates).
+However, even when invariants are not required to be small, \sorcar is a new algorithm that, being property-driven, can be more effective. 
+
+We have implemented \sorcar as a Horn-ICE learning algorithm interacting with the \boogie program verifier and have applied it to verify both GPU programs for data races~\cite{DBLP:conf/oopsla/BettsCDQT12,DBLP:conf/oopsla/ChongDKKQ13} and heap manipulating programs against separation logic specifications~\cite{DBLP:conf/tacas/Neider0MS018}, and compare them with the current state-of-the-art for these tools that use the \houdini algorithm.
+Using large classes of programs, we show that
+\begin{enumerate*}[label={(\alph*)}]
+    \item \sorcar produces much smaller invariants %\textcolor{orange}{(...)},
+    \item works faster overall in verifying these programs, and
+    \item verifies more programs than \houdini does.
+\end{enumerate*}
+\sorcar does not, of course, perform faster on all programs or always produce small invariants---however, it certainly emerges as a new competitive algorithm that shows significant advantages in all fronts for many programs.

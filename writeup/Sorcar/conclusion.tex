@@ -1,0 +1,15 @@
+% 
+
+\section{Conclusion}
+\label{sec:conclusion}
+Learning algorithms typically learn the simplest concepts that explain data.
+\houdini is unusual in that it learns instead the \emph{largest} formulas that explain the data.
+However, it has the nice property that it learns the invariant in a linear number of rounds.
+In this paper, we have explored a new class of learning algorithms, \sorcar, that is parameterized by functions that add relevant predicates, and that are biased towards learning small invariants by being property-driven.
+We have shown that these algorithms learn smaller invariants and prove programs correct significantly faster than state-of-the-art \houdini-based tools.
+
+There are several future directions to pursue. First, we believe that further algorithms for learning conjunctions need to be explored. 
+For instance, the Winnow algorithm~\cite{DBLP:journals/ml/Littlestone87} learns from positive and negative samples in time $\mathcal O(r \log n)$, where $r$ is the size of the final formula and $n$ is the number of predicates.
+Finding Horn-ICE learning algorithms that have such sublinear round guarantees can be very interesting as $r$ is often much smaller than $n$ in verification examples.
+Second, we would like to use the new \sorcar algorithms in specification mining settings where smaller invariants are valuable as they are read by humans.
+Third, there are several type inference algorithms similar to \houdini (see~\cite{DBLP:conf/pldi/RondonKJ08}), and it would be interesting to explore how well \sorcar performs in such settings. 

@@ -1,0 +1,20 @@
+% !Tex root=main.tex
+
+\subsection*{Related Work}
+Invariant synthesis lies at the heart of automated program verification.
+Over the years, various techniques have been proposed, including abstract interpretation~\cite{DBLP:conf/popl/CousotC77}, interpolation~\cite{DBLP:conf/cav/McMillan03}, IC3~\cite{DBLP:conf/vmcai/Bradley11}, predicate abstraction~\cite{DBLP:conf/pldi/BallMMR01}, abductive inference~\cite{DBLP:conf/oopsla/DilligDLM13}, as well as synthesis algorithms that rely on constraint solving~\cite{DBLP:conf/cav/ColonSS03,DBLP:conf/fmcad/FedyukovichKB17,DBLP:conf/pldi/GulwaniSV08,DBLP:conf/cav/GuptaR09}.
+Complementing these techniques are data-driven approaches that are based on machine learning.
+Examples include \textsc{Daikon}~\cite{DBLP:conf/icse/ErnstCGN00} and \houdini~\cite{DBLP:conf/fm/FlanaganL01}, the ICE learning framework~\cite{DBLP:conf/cav/0001LMN14} and its successor Horn-ICE learning~\cite{DBLP:conf/tacas/ChampionC0S18,DBLP:journals/pacmpl/EzudheenND0M18}, as well as numerous other techniques that employ machine learning to synthesize inductive invariants~\cite{DBLP:conf/cav/0001LMN13,DBLP:journals/corr/KrishnaPW15,DBLP:conf/cav/0001A14,DBLP:conf/esop/0001GHALN13,DBLP:conf/sas/0001GHAN13,DBLP:conf/cav/SharmaNA12,DBLP:conf/pldi/ZhuMJ18}.
+
+%\textcolor{red}{Why conjunctive invariants?}
+%Focusing on conjunctive invariants has proven to be an effective strategy in practice.
+% Two exmples hwere ristricting the class of 
+% Some require richer conept classes. Recently decision trees (move to end of section?).
+
+Learning of conjunctive formulas has a long history.
+An early example is the so-called elimination algorithm~\cite{Kearns:1994:ICL:200548}, which operates in the Probably Approximately Correct Learning model (PAC).
+\textsc{Daikon}~\cite{DBLP:conf/icse/ErnstCGN00} was the first technique to apply the elimination algorithm in a software setting, learning likely invariants from dynamic traces.
+Later, the popular \houdini~\cite{DBLP:conf/fm/FlanaganL01} algorithm built on top of the elimination algorithm to learn inductive invariants in a fully automated manner.
+In fact, as Garg et al.~\cite{Garg:2016} and later Ezudheen et al.~\cite{DBLP:journals/pacmpl/EzudheenND0M18} argued, \houdini can be seen as a learning algorithm for conjunctive formulas in both the ICE and the Horn-ICE learning framework.
+However, a drawback of \houdini is that it is not property-driven and does not consider the annotations in the program; instead, \houdini always computes the largest inductive invariant in terms of the number of conjuncts. 
+Our novel \sorcar algorithm addresses this shortcoming of \houdini and is designed to learn smaller conjunctive invariants by explicitly taking the assertions in a program into account.

@@ -1,0 +1,210 @@
+% !TeX root = main.tex
+
+%---------- Sorcar ----------
+\section{The \sorcar Horn-ICE Learning Algorithm}
+\label{sec:sorcar}
+
+One major disadvantage of \houdini is that it learns in each round the largest set of conjuncts, \emph{independent} of negative counterexamples, and hence independent of the assertions and specifications in a program--- it learns the semantically smallest inductive invariant expressible as a set of conjuncts over $\mathcal P$.
+This motivates the development of our novel \sorcar Horn-ICE learning algorithm for conjuncts, which is property-driven (i.e., it also considers the assertions in the program) and has a bias towards learning small invariants.
+%However, the \sorcar algorithm is more complex and subtle than \houdini, and its correctness proof is more involved.
+
+The salient feature of \sorcar is that it always learns invariants involving what we call \emph{relevant} predicates, which are predicates that have shown some evidence to affect the assertions in the program.
+More precisely, we say that a predicate is \emph{relevant} if it evaluates to \textit{false} on some negative counterexample or on a program configuration appearing on the left-hand-side of a Horn counterexample.
+This indicates that \emph{not} assuming this predicate leads to an assertion violation or the invariant not being inductive, and is hence deemed important as a candidate predicate in the synthesized invariant.
+However, naively choosing relevant predicates does in general lead to an exponential number of rounds.
+Thus, \sorcar is designed to select relevant predicates carefully and requires at most $2 |\mathcal P|$ rounds to converge to an invariant (which is twice the number that \houdini guarantees).
+Moreover, the set of predicates learned by \sorcar is always a subset of those learned by \houdini.
+
+Algorithm~\ref{alg:sorcar} presents the \sorcar Horn-ICE learner in pseudo code.
+In contrast to \houdini, it is not a purely passive learning algorithm but is divided into a passive part (\SorcarPassive) and an iterative part (\SorcarIterative), the latter being invoked in every round of the Horn-ICE framework.
+More precisely, \SorcarIterative maintains a state in form of a set $R \subseteq \mathcal P$ in the course of the iterative learning, which is empty in the beginning and used to accumulate \emph{relevant predicates} (Line~\ref{sorcar:line:initialize-R}).
+The exact choice of relevant predicates, however, is delegated to an external function \RelevantPredicates.
+We treat this function as a parameter for the \sorcar algorithm and discuss four possible implementations at the end of this section.
+%The conjunction \sorcar returns is always a subset of these relevant predicates, which is guaranteed to be consistent with the Horn-ICE sample.
+%In the beginning of the iterative learning, when the Horn-ICE sample $\mathcal S$ is empty, $R$ is also empty.
+Let us now present \sorcar in detail.
+
+\begin{algorithm}[t]
+
+    % Choose relevant predicates
+    \label{sorcar:line:relevant-predicates-start}
+    %\MultilineComment{\color{gray!75}Computes a set of relevant predicates for a set $N$ of negative counterexamples and a set $H$ of Horn counterexamples}
+    \Fn{\RelevantPredicates{$N$, $H$, $X$, $R$}}
+    {
+        \Return{a set of $R' \subseteq \mathcal P$ of relevant predicates such that $R'\setminus R \neq \emptyset$}\;
+    }
+    \label{sorcar:line:relevant-predicates-end}
+
+    \BlankLine
+    \BlankLine
+
+    % Sorcar passive
+    \Pr{\SorcarPassive{$\mathcal S = (S_+, S_-, S_H)$, $R$}}
+    {
+        $X \gets \{ p_1, \ldots, p_n \}$ such that $\bigwedge_{i=1}^n p_i$ is the largest conjunctive formula over $\mathcal P$ that is consistent with $\mathcal S$ (\KwSty{abort} if no such formula exists)\;
+        \label{sorcar:line:largest-conjunction}
+
+        \BlankLine
+
+        \While{$X \cap R$ is not consistent with $\mathcal S$ \label{sorcar:line:loop-head}}
+        {
+
+            $N \gets \emptyset$%
+            \InlineComment*[r]{\color{gray}Stores inconsistent negative counterexamples}
+            \label{sorcar:line:inconsistent-collextion-start}
+            $H \gets \emptyset$%
+            \InlineComment*[r]{\color{gray}Stores inconsistent Horn counterexamples}
+        
+            \BlankLine
+    
+
+            \ForEach{negative counterexample $c \in S_-$ not consistent with $X \cap R$}
+            {
+  	        	$N \gets N \cup \{ c \}$\;
+            }
+            \ForEach{Horn counterexample $(L, c) \in S_H$ not consistent with $X \cap R$}
+            {
+  	        	$H \gets H \cup \{ (L, c) \}$\;
+            }
+            \label{sorcar:line:inconsistent-collextion-end}
+        
+            \BlankLine
+        
+            $R \gets R \cup {}$\RelevantPredicates{$N$, $H$, $X$, $R$}\;
+            \label{sorcar:line:extend-R}
+
+        }
+        \label{sorcar:line:loop-end}
+
+        \BlankLine
+        
+        \Return{$(X \cap R, R)$}\;
+    }
+
+    \BlankLine
+    \BlankLine
+
+    % Sorcar iterative
+    \KwSty{static} $R \gets \emptyset$%
+    \InlineComment*[r]{\color{gray!75}Stores relevant predicates across rounds}
+    \label{sorcar:line:initialize-R}
+    
+    \BlankLine
+    
+    \Pr{\SorcarIterative{$\mathcal S$}}
+    {
+        
+        $(Y, R) \gets {}$\SorcarPassive{$\mathcal S, R$}\;
+        \Return{$Y$}\;
+        
+    }
+    
+    \caption{The \sorcar Horn-ICE learning algorithm}
+    \label{alg:sorcar}
+    
+\end{algorithm}
+
+
+%---------- Sorcar Passive ----------
+\paragraph{\bf The Passive \sorcar Algorithm}
+Given a Horn-ICE sample $\mathcal S$ and the set $R$, \SorcarPassive first constructs the largest conjunction $X \subseteq \mathcal P$ that is consistent with $\mathcal S$ (Line~\ref{sorcar:line:largest-conjunction}).
+This construction follows the \houdini algorithm described in Section~\ref{sec:houdini} and ensures that $X$ is consistent with all counterexamples in $\mathcal S$.
+Since $X$ is the largest set of predicates consistent with $\mathcal S$, it represents the smallest consistent set of program configurations expressible as a conjunction over $\mathcal P$.
+As a consequence, it follows that $X \cap R$---in fact, any subset of $X$---is consistent with $S_+$.
+However, $X \cap R$ might not be consistent with $S_-$ or $S_H$.
+To fix this problem, \SorcarPassive collects all inconsistent negative counterexamples in a set $N$ and all inconsistent Horn counterexamples in a set $H$ (Lines~\ref{sorcar:line:inconsistent-collextion-start} to \ref{sorcar:line:inconsistent-collextion-end}).
+Based on these two sets, \SorcarPassive then computes a set of relevant predicates, which it adds to $R$ (Line~\ref{sorcar:line:extend-R}).
+As mentioned above, the exact computation is delegated to a function \RelevantPredicates, which we treat as a parameter. % to the \sorcar algorithm.
+The result of this function is a set $R'\subseteq \mathcal P$ of relevant predicates that needs to contain at least one new predicate that is not yet present in $R$.
+Once such a set has been computed and added to $R$, the process repeats ($R$ grows monotonically larger) until a consistent conjunctive formula is found.
+Then, \SorcarPassive returns both the conjunction $X\cap R$ as well as the new set $R$ of relevant predicates.
+Note that the resulting set is always a subset of the relevant predicates.
+
+The condition of the loop in Line~\ref{sorcar:line:loop-head} immediately shows that the set $X \cap R$ is consistent with the Horn-ICE sample $\mathcal S$ once \SorcarPassive terminates.
+The termination argument, however, is less obvious.
+To argue termination, we first observe that $X$ is consistent with each positive counterexample in $S_+$ and, hence, $X \cap R$ remains consistent with all positive counterexamples during the run of \SorcarPassive.
+%thus, as soon as $X \cap R$ becomes consistent with $S_-$ and $S_H$, it is guaranteed to be consistent with the whole sample $\mathcal S$.
+Next, we observe that the termination argument is independent of the exact choice of predicates added to $R$---in fact, the predicates need not even be relevant in order to prove termination of \SorcarPassive.
+More precisely, since the function \RelevantPredicates is required to return a set $R' \subseteq \mathcal P$ that contains at least one new (relevant) predicate not currently present in $R$, we know that $R$ grows strictly monotonically.
+In the worst case, the loop in Lines~\ref{sorcar:line:loop-head} to \ref{sorcar:line:loop-end} repeats $|\mathcal P|$ times until $R = \mathcal P$:
+then, $X \cap R = X$, which is guaranteed to be consistent with $\mathcal S$ by construction of $X$ (see Line~\ref{sorcar:line:largest-conjunction}).
+Depending on the implementation of \RelevantPredicates, however, \SorcarPassive can terminate earlier with a much smaller consistent set $X \cap R \subsetneqq X$.
+Since the time spent in each iteration of the loop in Lines~\ref{sorcar:line:loop-head} to \ref{sorcar:line:loop-end} is proportional to $|\mathcal P| \cdot |\mathcal S| + f(|\mathcal S|)$, where $f$ is a function capturing the complexity of \RelevantPredicates, the overall runtime of \SorcarPassive is in $\mathcal O \bigl( |\mathcal P|^2 \cdot |\mathcal S| + |\mathcal P| \cdot f(|\mathcal S|) \bigr)$.
+This is summarized in the following theorem.
+
+\begin{theorem}[passive \sorcar algorithm] \label{thm:passive_sorcar}
+Given a Horn-ICE sample $\mathcal S$ and a set $R \subseteq \mathcal P$ of relevant predicates, the passive \sorcar algorithm learns a consistent set of predicates (i.e., a consistent conjunction over $\mathcal P$) in time $\mathcal O \bigl( |\mathcal P|^2 \cdot |\mathcal S| + |\mathcal P| \cdot f(|\mathcal S|) \bigr)$ where $f$ is a function capturing the complexity of the function \RelevantPredicates.
+%polynomial in $|\mathcal P|$ and $f(|\mathcal S|)$ where $f$ is a function capturing the complexity of the function \RelevantPredicates. %
+\end{theorem}
+
+Before we continue, let us briefly mention that the set of predicates returned by \sorcar is always a subset of those returned by \houdini.
+
+
+%---------- Sorcar Iterative ----------
+\subsubsection{The Iterative \sorcar Algorithm}
+
+\SorcarIterative maintains a state in form of a set $R \subseteq \mathcal P$ of relevant predicates in the course of the learning process (Line~\ref{sorcar:line:initialize-R}).
+In each round of the Horn-ICE learning framework, the learner invokes \SorcarIterative with the current Horn-ICE sample $\mathcal S$ as input, which contains all counterexamples that the learner has received thus far.
+Internally, \SorcarIterative calls \SorcarPassive, updates the set $R$, and returns a new conjunctive formula, which the learner then proposes as new candidate invariant to the teacher.
+If \SorcarPassive aborts (because no conjunctive formula over $\mathcal P$ that is consistent with $\mathcal S$ exists), so does \SorcarIterative.
+
+To ease the presentation in the remainder of this section, let us assume that the program under consideration can be proven correct using an inductive invariant expressible as a conjunctive formula over $\mathcal P$.
+Under this assumption, the iterative \sorcar algorithm identifies such an indicative invariant in at most $2 |\mathcal P|$ rounds, as stated in the following theorem.
+
+\begin{theorem}[iterative \sorcar algorithm] \label{thm:iterative_sorcar}
+Let $P$ be a program and $\mathcal P$ a finite set of predicates over the configurations of $P$.
+When paired with an honest teacher that enables progress, the iterative \sorcar algorithm learns an inductive invariant in form of a conjunctive formula over $\mathcal P$ in at most $2 |\mathcal P|$ rounds (provided that such an invariant exists).
+\end{theorem}
+
+% Theorem is proven in Appendix~\ref{}.
+%The proof of Theorem~\ref{thm:iterative_sorcar} relies on 
+%a careful examination the updates of $X$ and $R$ as counterexamples are added to the Horn-ICE sample $\mathcal S$.
+%This examination shows that \SorcarIterative terminates after at most $2 |\mathcal P|$ iterations
+
+
+\begin{proof}[of Theoem~\ref{thm:iterative_sorcar}]
+We first observe that the computation of the set $X$ in Line~\ref{sorcar:line:largest-conjunction} of \SorcarPassive always succeeds.
+This is a direct consequence of the honesty of the teacher (see Section~\ref{sec:horn-ICE}) and the assumption that at least one inductive invariant exists that is expressible as a conjunction over $\mathcal P$.
+This observation is essential as it shows that \SorcarIterative does not abort.
+
+Next, recall that the teacher enables progress in the sense that every counterexample is inconsistent with the current conjecture (see Section~\ref{sec:horn-ICE}).
+We use this property to argue that the number of iterations of \SorcarIterative has an upper bound of at most $2|\mathcal P|$, which can be verified by carefully examining the updates of $X$ and $R$ as counterexamples are added to the Horn-ICE sample $\mathcal S$:
+\begin{itemize}
+	\item If a positive counterexample $c$ is added to $\mathcal S$, then because $c \not\models X \cap R$ (the teacher enforces progress).
+	This implies $c \not\models X$, which in turn means that there exists a predicate $p \in X$ with $c \not\models p$.
+	In the subsequent round of the passive \sorcar algorithm, $p$ is no longer present in $X$ (see Line~\ref{sorcar:line:largest-conjunction}) and $|X|$ decreases by at least one as a result.
+	%
+	\item If a negative counterexample $c$ is added to $\mathcal S$, then because $c \models X \cap R$ (the teacher enforces progress).
+	This means that the set $X$ remains unchanged in the next iteration but at least one relevant predicate is added to $R$ in order to account for the new negative counterexample (Line~\ref{sorcar:line:extend-R}). This increases $|R|$ by at least one.
+	%
+	\item If an Horn counterexample $(\{ c_1, \ldots, c_n \}, c)$ is added to $\mathcal S$, then because $c_i \models X \cap R$ for each $i \in \{ 1, \ldots, n \}$ but $c \not\models X \cap R$ (the teacher enforces progress).
+	In this situation, two distinct cases can arise:
+	\begin{enumerate}
+	    \item If $(\{ c_1, \ldots, c_n \}, c)$ is not consistent with $X$ (i.e., $c_i \models X$ for each $i \in \{ 1, \ldots, n \}$ but $c \not\models X$), the computation in Line~\ref{sorcar:line:largest-conjunction} identifies and removes a predicate $p \in X$ with $c \not\models X$ in order to make $X$ consistent with $\mathcal S$.
+	    This means that $|X|$ decreases by at least one.
+        %
+        \item If $(\{ c_1, \ldots, c_n \}, c)$ is consistent with $X$ but not with $X \cap R$, then
+        $X$ remains unchanged.
+        However, at least one new relevant predicate is added to $R$ in order to account for the new Horn counterexample (Line~\ref{sorcar:line:extend-R}).
+        This means that $|R|$ increases by at least one.
+	\end{enumerate}
+	Thus, either $|X|$ decreases or $|R|$ increases by at least one.
+\end{itemize}
+In the worst case, \SorcarIterative arrives at a state with $X = \emptyset$ and $R = \mathcal P$ (if it does not find an inductive invariant earlier).
+Since the algorithm starts with $X = \mathcal P$ and $R = \emptyset$, this worst-case situation occurs after at most $2 |\mathcal P|$ iterations.
+
+Let us now assume that \SorcarIterative indeed arrives at a state with $X = \emptyset$ and $R = \mathcal P$. 
+Then, we claim that the the result of \SorcarIterative, namely $X \cap R = \emptyset$, is an inductive invariant.
+To prove this claim, first recall that Theorem~\ref{thm:passive_sorcar} shows that \SorcarPassive always learns a set of predicates that is consistent with the given Horn-ICE sample $\mathcal S$.
+In particular, Line~\ref{sorcar:line:largest-conjunction} of \SorcarPassive computes the (unique) largest set $X \subseteq \mathcal P$ that is consistent with $\mathcal S$.
+Second, we know that every inductive invariant $X^\star$ is consistent with $\mathcal S$ because the teacher is honest.
+Thus, we obtain $X^\star \subseteq X = \emptyset$ and, hence, $X^\star = X$ because both $X$ and $X^\star$ are consistent with $\mathcal S$ and $X$ is the largest consistent set.
+This means that $X$ is an inductive invariant because $X^\star$ is one.
+
+Note, however, that \SorcarIterative might terminate earlier, in which case the current conjecture is an inductive invariant by definition of the Horn-ICE framework
+In summary, we have shown that \SorcarIterative terminates in at most $2 |\mathcal P|$ iterations with an inductive invariant (if one is expressible as an conjunctive formula over $\mathcal P$).
+\qed
+\end{proof}
+
+Finally, let us note that \SorcarIterative can also detect if no inductive invariant exists that is expressible as a conjunction over $\mathcal P$.
+In this case, the computation of $X$ in Line~\ref{sorcar:line:largest-conjunction} of \SorcarPassive fails and the algorithm aborts.
