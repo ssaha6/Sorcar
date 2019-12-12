@@ -91,7 +91,7 @@ def gpuverify_cruncher_time(output):
 
 
 def read_gpuverify_file(file, timeout):
-    tr = time_related(mins=timeout, POSIX_time=False)
+    tr = time_related(mins=timeout, POSIX_time=True)
     all_result = {}
 
     with open (file, "r" ) as f:
@@ -394,7 +394,78 @@ def print_result(read_list, union_of_files, file_list):
 
 
 
+def print_result_artifact(read_list, union_of_files, file_list):
 
+    workbook = xlsxwriter.Workbook("Artifact.xlsx")
+    worksheet = workbook.add_worksheet()
+    row = 0
+    col = 0
+
+    #create headings
+    worksheet.write(0, col, "file")
+    worksheet.write(1, col, "file")
+
+    # attributes = read_list[next(iter(read_list))][union_of_files[0]].keys()
+    attributes = ["status", "num_predicates", "final_pred", "num_rounds", "time" ]
+
+    for file_name in file_list:
+        for attr in attributes:
+            col += 1
+            worksheet.write(1, col, attr)
+            if attr == "status":
+                worksheet.write(0, col, file_name)
+
+    row = 1
+    for benchmark in union_of_files:
+        row += 1
+        col = 0
+        worksheet.write(row, col, benchmark)
+        for file_name in file_list:
+            status_print = ""
+            for attr in attributes:
+                
+                col += 1
+                try:
+                    if attr == "status":
+                        status = read_list[file_name][benchmark][attr]
+                        if status == "trivialsuccess" or status == "nontrivialsuccess":
+                            status_print = "Verified"
+
+                        elif status == "nontrivialfailure" or status == "exception" or status == "runtime": 
+                            status_print = "Term-NoConjInv"
+
+                        elif status == "timeout":
+                            status_print = "Timeout"
+                                            
+                        worksheet.write(row, col, status_print)
+                        
+                        
+                    if attr == "final_pred" or attr == "num_rounds":
+                        if status_print == "Term-NoConjInv":
+                            worksheet.write(row, col, "-")
+                        else:
+                            worksheet.write(row, col, read_list[file_name][benchmark][attr])
+                        
+                        
+                    if attr == "time":
+                        # if status == "Timeout":
+                        #     worksheet.write(row, col, "1200.0")
+                        # else:
+                        worksheet.write(row, col,  round(read_list[file_name][benchmark][attr], 1))
+                        
+                        
+                    if attr == "num_predicates":
+                        try: 
+                            worksheet.write(row, col, read_list[file_name][benchmark][attr])
+                        except: 
+                            pass
+                except:
+                    pass                    
+                    
+    workbook.close()
+                
+
+            
 
 # Status
 # --------------------
@@ -490,28 +561,32 @@ def analyze(read_list, union_of_files, file_list, write_workbook=False):
                     stuck_true = stuck_true + 1
 
 
+        try:
+            avg_time_success = round(total_time_success / num_success, 1)
+            avg_pred_success = round(float(total_pred_success) / num_success, 1)
+            avg_timeout_succ_time = round( timeout_succ_time / (num_timeout + num_success ), 1)
+            avg_time = round( total_time / (num_timeout + num_success + num_failure), 1)
 
-        avg_time_success = round(total_time_success / num_success, 1)
-        avg_pred_success = round(float(total_pred_success) / num_success, 1)
-        avg_timeout_succ_time = round( timeout_succ_time / (num_timeout + num_success ), 1)
-        avg_time = round( total_time / (num_timeout + num_success + num_failure), 1)
-
-        result[variants] = {"num_timeout": num_timeout,
-                            "num_success": num_success,
-                            "num_failure": num_failure,
+            result[variants] = {"num_timeout": num_timeout,
+                                "num_success": num_success,
+                                "num_failure": num_failure,
+                                "num_error": num_error, 
                             "num_error": num_error, 
-                            "total_pred_success": total_pred_success,
-                            "avg_pred_success": avg_pred_success,
-                            "num_neg": num_neg,
-                            "total_time_success": total_time_success,
-                            "avg_time_success": avg_time_success,
-                            "total_time_succ_timeout": timeout_succ_time,
-                            "avg_time_succ_timeout": avg_timeout_succ_time,
-                            "total_time": total_time,
-                            "avg_time": avg_time,
-                            "stuck_true": stuck_true
+                                "num_error": num_error, 
+                                "total_pred_success": total_pred_success,
+                                "avg_pred_success": avg_pred_success,
+                                "num_neg": num_neg,
+                                "total_time_success": total_time_success,
+                                "avg_time_success": avg_time_success,
+                                "total_time_succ_timeout": timeout_succ_time,
+                                "avg_time_succ_timeout": avg_timeout_succ_time,
+                                "total_time": total_time,
+                                "avg_time": avg_time,
+                                "stuck_true": stuck_true
 
-                            }
+                                }
+        except:
+            pass
 
     sorted_files = map(lambda y: y[0], sorted(result.items(), key= lambda x: x[1]["avg_time_success"]))
 
@@ -557,6 +632,46 @@ def combine_variants(read_list, modified_read_list, originalfiles, escaped_funct
 
 
 
+def read_gpuverify_artifact():
+    files = [
+        "gpuverify/vanila_gpuverify.txt",
+        "gpuverify/asorcarerrorlimit.txt",
+        "gpuverify/asorcargreedyerrorlimit.txt",
+        "gpuverify/asorcarfirst.txt",
+        "gpuverify/asorcarminimal.txt",
+        ]
+    
+    timeout = 20
+    benchmark_pattern = "Parsing (?:.+)BenchmarksCompiled\/(?:boogie|a(?:sorcar|sorcarfirst|horndini|sorcargreedy|sorcarminimal)(?:(?:f|t|r)*))\/(.*)(?:\.bpl\.ice2\.bpl|\.bpl)"
+
+    read_list = read_all_files(files, timeout, benchmark_pattern, write_pickle=False)
+    union_of_files = compute_union_of_files(read_list, write_pickle=False)
+        
+    sorted_files = analyze(read_list, union_of_files, files, write_workbook=True)
+    print_result_artifact(read_list, union_of_files, sorted_files)
+    
+    
+
+
+def read_gpuverify_wo_timeout():
+    files = [
+        "gpuverify/vanila_gpuverify.txt",
+        "gpuverify/asorcarerrorlimit.txt",
+        ]
+    
+    timeout = 60
+    benchmark_pattern = "Parsing (?:.+)BenchmarksCompiled\/(?:boogie|a(?:sorcar|sorcarfirst|horndini|sorcargreedy|sorcarminimal)(?:(?:f|t|r)*))\/(.*)(?:\.bpl\.ice2\.bpl|\.bpl)"
+
+    read_list = read_all_files(files, timeout, benchmark_pattern, write_pickle=False)
+    union_of_files = compute_union_of_files(read_list, write_pickle=False)
+        
+    sorted_files = analyze(read_list, union_of_files, files, write_workbook=True)
+    print_result_artifact(read_list, union_of_files, sorted_files)
+    
+    
+
+
+
 #############GPUVERIFY##############
 def read_gpuverify():
 
@@ -571,7 +686,7 @@ def read_gpuverify():
             "gpuverify/boogie.txt",
             "gpuverify/vanila_gpuverify.txt"
             ]
-
+            
     originalfile = "gpuverify/boogie.txt"
     patchedfile = "gpuverify/boogiefixed.txt"
     
@@ -621,7 +736,8 @@ def read_gpuverify():
     combined_read_list = combine_variants(read_list, modified_read_list, [originalfile], escaped_functions)
     
     sorted_files = analyze(combined_read_list, union_of_files, files, write_workbook=True)
-    print_result(combined_read_list, union_of_files, sorted_files)
+    # print_result(combined_read_list, union_of_files, sorted_files)
+    print_result_artifact(combined_read_list, union_of_files, sorted_files)
     
 
 
@@ -631,6 +747,7 @@ def read_dryad():
 
 
     dryad_files = [ "dryad/ahorndini.txt",
+                    "dryad/ahorndinierrorlimit.txt",
                     "dryad/asorcar.txt",
                     "dryad/asorcarerrorlimit.txt",
                     "dryad/asorcarfirst.txt",
@@ -639,7 +756,7 @@ def read_dryad():
                     "dryad/asorcarminimal.txt",
                     "dryad/boogie.txt"
                     ]
-                
+
     
     # /dev/shm/gv/benchmarks/BenchmarksDryad/boogie/phase3/dl_concat.bpl
     # /dev/shm/gv/benchmarks/BenchmarksDryad/ahorndinif/phase3/dl_concat.bpl.ice2.bpl
@@ -653,14 +770,69 @@ def read_dryad():
     print_result(read_list, union_of_files, sorted_files)
 
 
+def read_gpuverify_error_limit():
+    files = [
+            "gpuverify/ahorndini.txt",
+            "gpuverify/ahorndinierrorlimit.txt",
+            "gpuverify/asorcar.txt",
+            "gpuverify/asorcarerrorlimit.txt",
+            # "gpuverify/asorcarfirst.txt",
+            "gpuverify/asorcargreedy.txt",
+            "gpuverify/asorcargreedyerrorlimit.txt",
+            "gpuverify/asorcarminimal.txt",
+            "gpuverify/boogie.txt",
+            "gpuverify/vanila_gpuverify.txt"
+            
+        ]
+    
+    timeout = 20
+    benchmark_pattern = "Parsing (?:.+)BenchmarksCompiled\/(?:boogie|a(?:sorcar|sorcarfirst|horndini|sorcargreedy|sorcarminimal)(?:(?:f|t|r)*))\/(.*)(?:\.bpl\.ice2\.bpl|\.bpl)"
+
+    read_list = read_all_files(files, timeout, benchmark_pattern, write_pickle=False)
+    union_of_files = compute_union_of_files(read_list, write_pickle=False)
+        
+    sorted_files = analyze(read_list, union_of_files, files, write_workbook=True)
+    print_result_artifact(read_list, union_of_files, sorted_files)
+    
+    
+
+
+
+
+def read_dryad_artifact():
+    
+    dryad_files = [
+                    "dryad/boogie.txt",
+                    "dryad/asorcarerrorlimit.txt",
+                    "dryad/asorcargreedyerrorlimit.txt",
+                    "dryad/asorcarfirst.txt",
+                    "dryad/asorcarminimal.txt",
+                    ]
+                
+    
+    # /dev/shm/gv/benchmarks/BenchmarksDryad/boogie/phase3/dl_concat.bpl
+    # /dev/shm/gv/benchmarks/BenchmarksDryad/ahorndinif/phase3/dl_concat.bpl.ice2.bpl
+    benchmark_pattern = 'Parsing (?:.+)BenchmarksDryad\/(?:boogie|a(?:sorcar|sorcarfirst|horndini|sorcargreedy|sorcarminimal)(?:(?:f|t|r)*))\/phase3\/(.*?)(?:\.bpl\.ice2\.bpl|\.bpl)?(?:\.bpl)'
+
+    timeout = 20
+    read_list = read_all_files(dryad_files, timeout, benchmark_pattern, write_pickle=False)
+    union_of_files = compute_union_of_files(read_list, write_pickle=False)
+
+    sorted_files = analyze(read_list, union_of_files, dryad_files, write_workbook=True)
+    print_result_artifact(read_list, union_of_files, sorted_files)
+
 
 
 
 # TODO MEDIAN
 
 def main():
-    read_gpuverify()
+    # read_gpuverify_artifact()
+    # read_gpuverify()
+    read_gpuverify_error_limit()
     # read_dryad()
+    # read_dryad_artifact()
+    # read_gpuverify_wo_timeout()
 
 
 
