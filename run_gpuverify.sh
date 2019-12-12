@@ -7,7 +7,7 @@ SOURCEDIR="$PREFIX/benchmarks/BenchmarksCompiled"
 
 
 OUTPUT="$PREFIX/results/gpuverify/vanila_gpuverify.txt"
-TIMEOUT="1200s" 
+TIMEOUT="3600s" 
 
 # ------------------------------------------------- #
 
@@ -127,4 +127,5 @@ done 2>&1 | tee $OUTPUT
 # for file in all_files:
 # 	output = evaluate(GPUVERIFY_BINARY, GPUVERIFY_FLAG, source_name_mapping[file], source_flag_mapping[file])
 # 
+
 
